@@ -6,6 +6,8 @@
 
 ## リンク
 https://homingsoft.net/vidcomp/
+
+https://twitter.com/homing_fd2/status/1340095765180379136?s=20
 <br>
 <br>
 
