@@ -5,9 +5,13 @@
 <br>
 
 ## リンク
-https://homingsoft.net/vidcomp/
-
-https://twitter.com/homing_fd2/status/1340095765180379136?s=20
+https://homingsoft.net/vidcomp/ <br>
+<br>
+動作サンプル<br>
+https://t.co/GYaNkPM9b4?amp=1<br>
+<br>
+ニッチなアプリですが使ってくれている人います<br>
+https://twitter.com/homing_fd2/status/1340095765180379136?s=20<br>
 <br>
 <br>
 
