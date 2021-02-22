@@ -20,7 +20,7 @@ https://twitter.com/homing_fd2/status/1340095765180379136?s=20<br>
 - youtubeとlocalの比較
 - localとlocalの比較
 - 比較詳細の保存
-- 比較結果のSNS共有
+- 比較詳細のSNS共有
 
 ## 使用画面
 
