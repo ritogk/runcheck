@@ -10,7 +10,6 @@ https://homingsoft.net/vidcomp/ <br>
 動作サンプル<br>
 https://t.co/GYaNkPM9b4?amp=1<br>
 <br>
-ニッチなアプリですが使ってくれているが人います<br>
 https://twitter.com/homing_fd2/status/1340095765180379136?s=20<br>
 <br>
 <br>
