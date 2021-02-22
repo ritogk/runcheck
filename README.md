@@ -10,16 +10,17 @@ https://homingsoft.net/vidcomp/ <br>
 動作サンプル<br>
 https://t.co/GYaNkPM9b4?amp=1<br>
 <br>
-ニッチなアプリですが使ってくれている人います<br>
+ニッチなアプリですが使ってくれているが人います<br>
 https://twitter.com/homing_fd2/status/1340095765180379136?s=20<br>
 <br>
 <br>
 
 ## 機能一覧
-- youtube動画とyoutube動画の比較
-- youtube動画とlocal動画の比較
-- local動画とlocal動画の比較
+- youtubeとyoutubeの比較
+- youtubeとlocalの比較
+- localとlocalの比較
 - 比較詳細の保存
+- 比較結果のSNS共有
 
 ## 使用画面
 
