@@ -7,7 +7,7 @@
 ## リンク
 https://homingsoft.net/vidcomp/ <br>
 <br>
-動作サンプル<br>
+動作サンプル(画面幅をスマホサイズにして下さい)<br>
 https://t.co/GYaNkPM9b4?amp=1<br>
 <br>
 https://twitter.com/homing_fd2/status/1340095765180379136?s=20<br>
