@@ -211,7 +211,7 @@
     </script>
     {{-- <script src="{{ asset('js/scriptYoutube.js') }}" defer></script>
     <script src="{{ asset('js/top_script.js') }}" defer></script> --}}
-    <script src="{{ asset('js/youyYou.js') }}" defer></script>
+    <script src="{{ asset('js/youYou.js') }}" defer></script>
 @endsection
 
 @section('childCss')
