@@ -210,7 +210,11 @@
        $('.js-example-basic-single').select2();
 
        function dlImage() {
-        html2canvas(document.querySelector("#canvas-box")).then(canvas => { 
+        html2canvas(document.querySelector("#canvas-box"), {
+            scale:2,
+            useCORS: true,
+            allowTaint: false,
+        }).then(canvas => { 
             debugger
             let downloadEle = document.createElement("a");
             downloadEle.href = canvas.toDataURL("image/png");
