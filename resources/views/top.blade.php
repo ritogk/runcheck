@@ -31,7 +31,7 @@
            </div>
         </div>
         
-        <div id = canvas-box>
+        <div id ="canvas-box">
             <!-- ビデオエリア1 -->
             <div id='youtubeBoard'>
                 <div id='buttonsYou'>
