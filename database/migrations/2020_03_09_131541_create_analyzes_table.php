@@ -30,6 +30,7 @@ class CreateAnalyzesTable extends Migration
             $table->bigInteger('home_tweat')->default(0);
             $table->bigInteger('home_delete')->default(0);
             $table->timestamps();
+            $table->softDeletes()->index();
         });
     }
 

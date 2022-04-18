@@ -26,6 +26,7 @@ class CreateComparisonsTable extends Migration
             $table->Integer('release_kbn');
             $table->Integer('video_type');
             $table->timestamps();
+            $table->softDeletes()->index();
         });
     }
 
