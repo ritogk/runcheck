@@ -213,8 +213,8 @@
         html2canvas(document.querySelector("#canvas-box")).then(canvas => { 
             debugger
             let downloadEle = document.createElement("a");
-            donwloadEle.href = canvas.toDataURL("image/png");
-            donloadEle.download = "canvas.png";
+            downloadEle.href = canvas.toDataURL("image/png");
+            downloadEle.download = "canvas.png";
             downloadEle.click();
         })
        }
