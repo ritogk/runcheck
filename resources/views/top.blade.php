@@ -209,8 +209,9 @@
     <script type="text/javascript">
        var global_read_id = "{{ !empty($comparsion_data) ? $comparsion_data->id : ''}}";
     </script>
-    <script src="{{ asset('js/scriptYoutube.js') }}" defer></script>
-    <script src="{{ asset('js/top_script.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/scriptYoutube.js') }}" defer></script>
+    <script src="{{ asset('js/top_script.js') }}" defer></script> --}}
+    <script src="{{ asset('js/top.js') }}" defer></script>
 @endsection
 
 @section('childCss')

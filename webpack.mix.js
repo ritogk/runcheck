@@ -27,15 +27,13 @@ mix
   .version()
 
 mix
+  .scripts(["resources/js/select2.min.js"], "public/js/all.js")
   .scripts(
     [
-      //'resources/js/scriptYoutube.js',
-      //'resources/js/scriptSelVideo.js',
-      //'resources/js/smartScaling.js',
+      "resources/js/scriptYoutube.js",
       "resources/js/select2.min.js",
-      //"resources/js/top_script.js",
-      //'resources/js/jquery-3.4.1.min.js',
+      "resources/js/top_script.js",
     ],
-    "public/js/all.js"
+    "public/js/top.js"
   )
   .version()
