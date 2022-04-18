@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-     <div class="title">Youtube - Youtube</div>
+     <div class="title">比較対象[Youtube - Youtube]</div>
      <div id="container" style="margin-left: 0px;margin-right: 0px;">
         <div id='memoPanel' style="display: none;">
            <div id='captionMemo'>動画詳細</div>
