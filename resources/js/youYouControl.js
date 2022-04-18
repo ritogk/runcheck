@@ -10,7 +10,6 @@ window.onload = function () {
   })
   $("#select2_save_category").select2({
     tags: true,
-    dropdownAutoWidth: true,
     width: "100%",
     placeholder: "選択してください。",
   })

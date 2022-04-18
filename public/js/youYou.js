@@ -8,7 +8,11 @@ window.onload = function () {
     width: "100%",
     placeholder: "選択してください。",
   })
-  $("#select2_save_category").select2()
+  $("#select2_save_category").select2({
+    tags: true,
+    width: "100%",
+    placeholder: "選択してください。",
+  })
   // 読み込み
   if (global_read_id) read(global_read_id)
   // Apple端末Chrome以外の時「倍速」ボタンを非活性
