@@ -2,7 +2,7 @@ version: "3"
 
 services:
   php:
-    container_name: vidcomp_php
+    container_name: runcheck_php
     build: ./docker/php
     volumes:
       - ./project:/var/www/html
@@ -12,11 +12,11 @@ services:
     ports:
       - 8000:8000
     networks:
-      - vidcomp
+      - runcheck
 
   db:
     image: mysql:5.7
-    container_name: vidcomp_db
+    container_name: runcheck_db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel
@@ -31,7 +31,7 @@ services:
     ports:
       - 53306:3306
     networks:
-      - vidcomp
+      - runcheck
 
 networks:
-  vidcomp:
+  runcheck:
