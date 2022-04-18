@@ -16,7 +16,12 @@ mix
   .sass("resources/sass/app.scss", "public/css")
 
 mix.styles(["resources/sass/select2.min.css"], "public/css/all.css").version()
-mix.scripts(["resources/js/select2.min.js"], "public/js/all.js").version()
+mix
+  .scripts(
+    ["resources/js/select2.min.js", "resources/js/analytics.js"],
+    "public/js/all.js"
+  )
+  .version()
 
 mix
   .scripts(["resources/js/select2.min.js"], "public/js/all.js")
