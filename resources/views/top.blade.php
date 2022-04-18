@@ -11,11 +11,6 @@
            <span id="title_disp"></span><br>
            <span id="memo_disp"></span>
         </div>
-
-        <select class="js-example-basic-single" name="state">
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
-        </select>
         
         <div id='buttonMulti'>
            <div id='captionMulti'>同時制御</div>
@@ -134,6 +129,12 @@
                             {{ Form::select('category', $save_data, ['placeholder' => 'null'], ['class' => 'form-control', 'id' => 'select2_save_category']) }}
                         </div>
                     </div>
+                    
+                    <select class="js-example-basic-single" name="state">
+                        <option value="AL">Alabama</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+
                     <div class="form-group row" style="display:none;">
                         <label for="release_kbn" class="col-md-2 col-form-label text-md-right">{{ __('公開状態') }}</label>
                         <div class="col-md-10">
