@@ -6,6 +6,10 @@
 
 require("./bootstrap")
 
+require("select2")
+
+//import select2 from "select2"
+
 // window.Vue = require('vue');
 
 /**
