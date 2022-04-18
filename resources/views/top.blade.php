@@ -11,6 +11,11 @@
            <span id="title_disp"></span><br>
            <span id="memo_disp"></span>
         </div>
+
+        <select class="js-example-basic-single" name="state">
+            <option value="AL">Alabama</option>
+            <option value="WY">Wyoming</option>
+        </select>
         
         <div id='buttonMulti'>
            <div id='captionMulti'>同時制御</div>
@@ -208,6 +213,7 @@
 @section('childScripts')
     <script type="text/javascript">
        var global_read_id = "{{ !empty($comparsion_data) ? $comparsion_data->id : ''}}";
+       $('.js-example-basic-single').select2();
     </script>
     <script src="{{ mix('js/youYou.js') }}" defer></script>
 @endsection
