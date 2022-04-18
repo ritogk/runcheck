@@ -15,25 +15,25 @@ mix
   .js("resources/js/app.js", "public/js")
   .sass("resources/sass/app.scss", "public/css")
 
-mix
-  .styles(
-    [
-      //'resources/sass/style.css',
-      "resources/sass/select2.min.css",
-      //    'resources/css/fontawesome-all.min.css',
-    ],
-    "public/css/all.css"
-  )
-  .version()
+mix.styles(["resources/sass/select2.min.css"], "public/css/all.css").version()
+mix.scripts(["resources/js/select2.min.js"], "public/js/all.js").version()
 
 mix
   .scripts(["resources/js/select2.min.js"], "public/js/all.js")
+  .scripts(["resources/js/home.js"], "public/js/home.js")
+  .version()
   .scripts(
-    [
-      "resources/js/youYouControl.js",
-      "resources/js/youYouVideo.js",
-      "resources/js/select2.min.js",
-    ],
+    ["resources/js/youYouControl.js", "resources/js/youYouVideo.js"],
     "public/js/youYou.js"
+  )
+  .version()
+  .scripts(
+    ["resources/js/youlocalControl.js", "resources/js/youLocalVideo.js"],
+    "public/js/youLocal.js"
+  )
+  .version()
+  .scripts(
+    ["resources/js/localLocalControl.js", "resources/js/localLocalVideo.js"],
+    "public/js/localLocal.js"
   )
   .version()

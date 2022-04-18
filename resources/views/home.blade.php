@@ -52,7 +52,7 @@
 @endsection
 
 @section('childScripts')
-    <script src="{{ asset('js/home_script.js') }}" defer></script>
+    <script src="{{ mix('js/home.js') }}" defer></script>
 @endsection
 
 <?php
