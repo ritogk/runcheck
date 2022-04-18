@@ -30,10 +30,10 @@ mix
   .scripts(["resources/js/select2.min.js"], "public/js/all.js")
   .scripts(
     [
-      "resources/js/scriptYoutube.js",
+      "resources/js/youYouControl.js",
+      "resources/js/youYouVideo.js",
       "resources/js/select2.min.js",
-      "resources/js/top_script.js",
     ],
-    "public/js/top.js"
+    "public/js/youYou.js"
   )
   .version()
