@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://homisoft.com/'),
+    'url' => env('APP_URL', null),
 
     'asset_url' => env('ASSET_URL', null),
 

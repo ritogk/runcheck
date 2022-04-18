@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url)
     {
-        // Laravelで生成するURLをHTTPS強制にする
-        $url->forceScheme('https');
+        // // Laravelで生成するURLをHTTPS強制にする
+        // $url->forceScheme('https');
     }
 }
