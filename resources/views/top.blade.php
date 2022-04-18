@@ -210,7 +210,7 @@
        $('.js-example-basic-single').select2();
 
        function dlImage() {
-        html2canvas(document.querySelector("#canvas-box"), {
+        html2canvas(document.querySelector("#app"), {
             scale:2,
             useCORS: true,
             allowTaint: false,
