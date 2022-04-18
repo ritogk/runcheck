@@ -11,11 +11,6 @@
            <span id="title_disp"></span><br>
            <span id="memo_disp"></span>
         </div>
-
-        <select class="js-example-basic-single" name="state">
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
-        </select>
         
         <div id='buttonMulti'>
            <div id='captionMulti'>同時制御</div>
