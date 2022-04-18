@@ -215,5 +215,5 @@
 @endsection
 
 @section('childCss')
-    {{-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
+    <link href="{{ mix('css/video.css') }}" rel="stylesheet">
 @endsection

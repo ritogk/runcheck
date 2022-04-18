@@ -18,6 +18,8 @@ mix
 
 mix.scripts(["resources/js/analytics.js"], "public/js/analytics.js").version()
 
+mix.sass("resources/sass/video.scss", "public/css").version()
+
 mix.scripts(["resources/js/home.js"], "public/js/home.js").version()
 mix
   .scripts(
