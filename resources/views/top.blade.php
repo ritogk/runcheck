@@ -31,57 +31,55 @@
            </div>
         </div>
         
-        <canvas id="canvas"></canvas>
-        <div id="canvas-area"></div>
-            <!-- ビデオエリア1 -->
-            <div id='youtubeBoard'>
-                <div id='buttonsYou'>
-                    <button class="btn btn-outline-dark button-style" id="play">再生</button>
-                    <button class="btn btn-outline-dark button-style" id="pause">停止</button><br>
-                    <button class="btn btn-outline-dark button-style" id="next100">1秒先</button>
-                    <button class="btn btn-outline-dark button-style" id="next050">0.5秒先</button>
-                    <button class="btn btn-outline-dark button-style" id="next010">0.1秒先</button>
-                    <button class="btn btn-outline-dark button-style" id="next005">0.05秒先</button><br>
-                    <button class="btn btn-outline-dark button-style" id="prev100">1秒前</button>
-                    <button class="btn btn-outline-dark button-style" id="prev050">0.5秒前</button>
-                    <button class="btn btn-outline-dark button-style" id="prev010">0.1秒前</button>
-                    <button class="btn btn-outline-dark button-style" id="prev005">0.05秒前</button><br>
-                </div>
-                <div>
-                    <div class="form-inline">
-                        <span>Youtube[URL]：</span>
-                        <input type="text" class="form-control" id="idYou1" style="width:48%"></input>
-                        <button class="btn btn-outline-dark button-style" id="videoSelct">確定</button>
-                        <button class="btn btn-outline-dark button-style" onclick="youBtnDispChange(buttonsYou)" style="background: #ffe4ce;">切替</button>
-                    </div>
-                </div>
-                <div id="sampleVideo1"><p></p></div>
-                <span id="timer" style="display: none">00:00.000</span>
+        <!-- ビデオエリア1 -->
+        <div id='youtubeBoard'>
+            <div id='buttonsYou'>
+                <button class="btn btn-outline-dark button-style" id="play">再生</button>
+                <button class="btn btn-outline-dark button-style" id="pause">停止</button><br>
+                <button class="btn btn-outline-dark button-style" id="next100">1秒先</button>
+                <button class="btn btn-outline-dark button-style" id="next050">0.5秒先</button>
+                <button class="btn btn-outline-dark button-style" id="next010">0.1秒先</button>
+                <button class="btn btn-outline-dark button-style" id="next005">0.05秒先</button><br>
+                <button class="btn btn-outline-dark button-style" id="prev100">1秒前</button>
+                <button class="btn btn-outline-dark button-style" id="prev050">0.5秒前</button>
+                <button class="btn btn-outline-dark button-style" id="prev010">0.1秒前</button>
+                <button class="btn btn-outline-dark button-style" id="prev005">0.05秒前</button><br>
             </div>
-            
-            <!-- ビデオエリア2 -->
-            <div id='youtubeBoard2'>
-                <div id="sampleVideo2"><p></p></div>
-                    <div class="form-inline">
+            <div>
+                <div class="form-inline">
                     <span>Youtube[URL]：</span>
-                    <input class="form-control" type="text" id="idYou2" style="width:48%"></input>
-                    <button class="btn btn-outline-dark button-style" id="videoSelct2">確定</button>
-                    <button class="btn btn-outline-dark button-style" onclick="youBtnDispChange(buttonsYou2)" style="background: #ffe4ce;">切替</button>
-                </div>   
-                <div id='buttonsYou2'>
-                    <button class="btn btn-outline-dark button-style" id="play_2">再生</button>
-                    <button class="btn btn-outline-dark button-style" id="pause_2">停止</button><br>
-                    <button class="btn btn-outline-dark button-style" id="next100_2">1秒先</button>
-                    <button class="btn btn-outline-dark button-style" id="next050_2">0.5秒先</button>
-                    <button class="btn btn-outline-dark button-style" id="next010_2">0.1秒先</button>
-                    <button class="btn btn-outline-dark button-style" id="next005_2">0.05秒先</button><br>
-                    <button class="btn btn-outline-dark button-style" id="prev100_2">1秒前</button>
-                    <button class="btn btn-outline-dark button-style" id="prev050_2">0.5秒前</button>
-                    <button class="btn btn-outline-dark button-style" id="prev010_2">0.1秒前</button>
-                    <button class="btn btn-outline-dark button-style" id="prev005_2">0.05秒前</button><br>
+                    <input type="text" class="form-control" id="idYou1" style="width:48%"></input>
+                    <button class="btn btn-outline-dark button-style" id="videoSelct">確定</button>
+                    <button class="btn btn-outline-dark button-style" onclick="youBtnDispChange(buttonsYou)" style="background: #ffe4ce;">切替</button>
                 </div>
+            </div>
+            <div id="sampleVideo1"><p></p></div>
+            <span id="timer" style="display: none">00:00.000</span>
+        </div>
+        
+        <!-- ビデオエリア2 -->
+        <div id='youtubeBoard2'>
+            <div id="sampleVideo2"><p></p></div>
+                <div class="form-inline">
+                <span>Youtube[URL]：</span>
+                <input class="form-control" type="text" id="idYou2" style="width:48%"></input>
+                <button class="btn btn-outline-dark button-style" id="videoSelct2">確定</button>
+                <button class="btn btn-outline-dark button-style" onclick="youBtnDispChange(buttonsYou2)" style="background: #ffe4ce;">切替</button>
+            </div>   
+            <div id='buttonsYou2'>
+                <button class="btn btn-outline-dark button-style" id="play_2">再生</button>
+                <button class="btn btn-outline-dark button-style" id="pause_2">停止</button><br>
+                <button class="btn btn-outline-dark button-style" id="next100_2">1秒先</button>
+                <button class="btn btn-outline-dark button-style" id="next050_2">0.5秒先</button>
+                <button class="btn btn-outline-dark button-style" id="next010_2">0.1秒先</button>
+                <button class="btn btn-outline-dark button-style" id="next005_2">0.05秒先</button><br>
+                <button class="btn btn-outline-dark button-style" id="prev100_2">1秒前</button>
+                <button class="btn btn-outline-dark button-style" id="prev050_2">0.5秒前</button>
+                <button class="btn btn-outline-dark button-style" id="prev010_2">0.1秒前</button>
+                <button class="btn btn-outline-dark button-style" id="prev005_2">0.05秒前</button><br>
             </div>
         </div>
+        
 
         <div id='otherLink'>
            <div id='captionLink'>比較対象</div>
@@ -209,27 +207,6 @@
     <script type="text/javascript">
        var global_read_id = "{{ !empty($comparsion_data) ? $comparsion_data->id : ''}}";
        $('.js-example-basic-single').select2();
-
-       function dlImage() {
-        var video = document.getElementById('canvas-area');
-        var $canvas = $('#canvas');
-        
-        $canvas.attr('width', video.videoWidth);
-        $canvas.attr('height', video.videoHeight);
-        $canvas[0].getContext('2d').drawImage(video, 0, 0, $canvas.width(), $canvas.height());
-
-        // html2canvas(document.querySelector("#app"), {
-        //     scale:2,
-        //     useCORS: true,
-        //     allowTaint: false,
-        // }).then(canvas => { 
-        //     debugger
-        //     let downloadEle = document.createElement("a");
-        //     downloadEle.href = canvas.toDataURL("image/png");
-        //     downloadEle.download = "canvas.png";
-        //     downloadEle.click();
-        // })
-       }
     </script>
     <script src="{{ mix('js/youYou.js') }}" defer></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.js" defer></script>
