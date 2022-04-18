@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-     <h1>Local - Local</div>
+    <div class="title">Local - Local</div>
      <div id="container" style="margin-left: 0px;margin-right: 0px;">
         <div id='memoPanel' style="display: none;">
            <div id='captionMemo'>動画詳細</div>
