@@ -12,6 +12,8 @@ window.onload = function () {
     tags: true,
     width: "100%",
     placeholder: "選択してください。",
+    dropdownAutoWidth: true,
+    dropdownParent: $("#saveModal .modal-content"),
   })
   // 読み込み
   if (global_read_id) read(global_read_id)

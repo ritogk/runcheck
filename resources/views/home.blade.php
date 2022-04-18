@@ -53,7 +53,6 @@
 
 @section('childScripts')
     <script src="{{ mix('js/home.js') }}" defer></script>
-    <script src="{{ mix('js/analytics.js') }}" defer></script>
 @endsection
 
 <?php
