@@ -209,11 +209,9 @@
     <script type="text/javascript">
        var global_read_id = "{{ !empty($comparsion_data) ? $comparsion_data->id : ''}}";
     </script>
-    <script src="{{ asset('js/select2.js') }}" defer></script>
     <script src="{{ mix('js/youYou.js') }}" defer></script>
 @endsection
 
 @section('childCss')
-    <link href="{{ asset('css/select2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 @endsection
