@@ -31,7 +31,8 @@
            </div>
         </div>
         
-        <div id ="canvas-box">
+        <canvas id="canvas"></canvas>
+        <div id="canvas-area"></div>
             <!-- ビデオエリア1 -->
             <div id='youtubeBoard'>
                 <div id='buttonsYou'>
@@ -210,17 +211,24 @@
        $('.js-example-basic-single').select2();
 
        function dlImage() {
-        html2canvas(document.querySelector("#app"), {
-            scale:2,
-            useCORS: true,
-            allowTaint: false,
-        }).then(canvas => { 
-            debugger
-            let downloadEle = document.createElement("a");
-            downloadEle.href = canvas.toDataURL("image/png");
-            downloadEle.download = "canvas.png";
-            downloadEle.click();
-        })
+        var video = document.getElementById('canvas-area');
+        var $canvas = $('#canvas');
+        
+        $canvas.attr('width', video.videoWidth);
+        $canvas.attr('height', video.videoHeight);
+        $canvas[0].getContext('2d').drawImage(video, 0, 0, $canvas.width(), $canvas.height());
+
+        // html2canvas(document.querySelector("#app"), {
+        //     scale:2,
+        //     useCORS: true,
+        //     allowTaint: false,
+        // }).then(canvas => { 
+        //     debugger
+        //     let downloadEle = document.createElement("a");
+        //     downloadEle.href = canvas.toDataURL("image/png");
+        //     downloadEle.download = "canvas.png";
+        //     downloadEle.click();
+        // })
        }
     </script>
     <script src="{{ mix('js/youYou.js') }}" defer></script>
