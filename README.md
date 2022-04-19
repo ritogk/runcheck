@@ -14,12 +14,12 @@ youtube 上の他人の車載動画とも比較できて便利なのではと思
 
 ## リンク
 
-https://homingsoft.net/vidcomp/ <br>
+https://runcheck.homisoftware.net/ <br>
 <br>
 動作サンプル(画面幅をスマホサイズにして下さい)<br>
-https://t.co/GYaNkPM9b4?amp=1<br>
+https://runcheck.homisoftware.net/youyou-tweat?id=10<br>
 <br>
-https://twitter.com/homing_fd2/status/1340095765180379136?s=20<br>
+https://twitter.com/homing_fd2/status/1516361339748319235?s=20&t=m7lv_Mh4W78hdyT9CsLSYQ<br>
 <br>
 <br>
 
