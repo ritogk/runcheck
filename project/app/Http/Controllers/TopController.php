@@ -30,8 +30,8 @@ class TopController extends Controller
     public function store(Request $request)
     {
         $data = new Comparison;
-        $data->create($request->all());
-        return redirect('/top');
+        $comparison = $data->create($request->all());
+        return redirect(route('top.read', ['id' => $comparison->id]));
     }
 
     /**

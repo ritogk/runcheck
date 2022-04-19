@@ -39,8 +39,8 @@ class LocalLocalController extends Controller
     public function store(Request $request)
     {
         $data = new Comparison;
-        $data->create($request->all());
-        return redirect('/locallocal');
+        $comparison = $data->create($request->all());
+        return redirect(route('locallocal.read', ['id' => $comparison->id]));
     }
 
     /**

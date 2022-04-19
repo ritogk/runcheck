@@ -39,8 +39,8 @@ class YouLocalController extends Controller
     public function store(Request $request)
     {
         $data = new Comparison;
-        $data->create($request->all());
-        return redirect('/youlocal');
+        $comparison = $data->create($request->all());
+        return redirect(route('youlocal.read', ['id' => $comparison->id]));
     }
 
     /**
