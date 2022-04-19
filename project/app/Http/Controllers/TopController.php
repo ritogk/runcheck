@@ -88,8 +88,8 @@ class TopController extends Controller
     public function read_disp_data()
     {
         $twitterCardModel = new TwitterCard(
-            'RunCheck',
-            'ここをクリックで再生!!',
+            'RunCheck(ここをクリックで再生)',
+            '完全無料',
             config('app.url') . \Storage::url('site/icon.png')
         );
         return [
