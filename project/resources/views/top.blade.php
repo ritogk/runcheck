@@ -24,7 +24,7 @@
               <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ebffe7" id="multiReload" onclick="btnClick_MultiAgain()">再読込</button>
               @auth
                  <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ffeff8" id="multiRead" data-toggle="modal" data-target="#readModal" data-whatever="@fat">開く</button>
-                 <button class="btn btn-outline-dark button-style" style="background-color: #ffeff8;display:none;" id="multiSave" onclick="btnClick_MultiSave()" data-toggle="modal" data-target="#saveModal" data-whatever="@fat">保存</button>
+                 <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ffeff8;display:none;" id="multiSave" onclick="btnClick_MultiSave()" data-toggle="modal" data-target="#saveModal" data-whatever="@fat">保存</button>
               @endauth
            </div>
            <div>
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="category" class="col-md-2 col-form-label text-md-right">{{ __('カテゴリ') }}</label>
+                        <label for="category" class="col-md-2 col-form-label text-md-right">{{ __('タグ') }}</label>
                         <div class="col-md-10">
                             {{ Form::select('category', $save_data, ['placeholder' => 'null'], ['class' => 'form-control', 'id' => 'select2_save_category']) }}
                         </div>
@@ -207,7 +207,7 @@
         </div>
      </div>
      <div id="footer">
-        <p>Copyright (c) 2019 homing All Rights Reserved.</p>
+        <p>Copyright (c) 2022 RunCheck All Rights Reserved.</p>
      </div>
 @endsection
 

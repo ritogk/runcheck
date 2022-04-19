@@ -29,7 +29,7 @@ $(function ($) {
 
   function home_change() {
     jQuery(".comparison_group").each(function (i) {
-      category = jQuery(this).find(".card-text").html()
+      category = jQuery(this).find(".card-text").val()
       video_type = jQuery(this).find(".video_type_value").val()
       if (
         category.indexOf($("#serach_category").val()) > -1 &&

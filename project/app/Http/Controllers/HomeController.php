@@ -28,41 +28,43 @@ class HomeController extends Controller
     {
         $user_id = Auth::id();
         $comparsion_data = Comparison::where("user_id", "=", $user_id)
-                                        ->orderBy('category')
-                                        ->orderBy('video_type')
-                                        ->get();
+            ->orderBy('category')
+            ->orderBy('video_type')
+            ->get();
         $category_data = Comparison::select('category')
-                                        ->where("user_id", "=", $user_id)
-                                        ->groupBy('category')
-                                        ->pluck('category', 'category')->toArray();
-        $category_data += array(""=>"");
-        return view('/home', ['comparsion_data' => $comparsion_data, 'category_data' => $category_data]);
+            ->where("user_id", "=", $user_id)
+            ->groupBy('category')
+            ->pluck('category', 'category')->toArray();
+        return view('/home', ['comparsion_data' => $comparsion_data, 'category_data' => array_merge(['' => ''], $category_data)]);
     }
-    
+
     // ツイートから飛んできた用
-    public function tweat($id){
+    public function tweat($id)
+    {
         return view('/top');
         $comparsion_data = Comparison::find($id);
         // 非公開データ
-        if($comparsion_data->release_kbn == 1){
+        if ($comparsion_data->release_kbn == 1) {
             return view('/top');
-        }else{
+        } else {
             return view('/top', ['comparsion_data' => $comparsion_data]);
-        } 
+        }
     }
-    
+
     // 削除
-    public function destroy($id){
+    public function destroy($id)
+    {
         $data = Comparison::find($id);
         $data->delete();
         return redirect('/home');
     }
-    
+
     // 削除
-    public function release_update($id){
+    public function release_update($id)
+    {
         $user_id = Auth::id();
         $data = Comparison::find($id);
-        if($user_id == $data->user_id){
+        if ($user_id == $data->user_id) {
             $data->release_kbn = 2;
             $data->save();
         }
