@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
 @section('twitterCard')
-    @if(!empty($twitter_card))
-        <meta name="twitter:card" content="{{$twitter_card->card}}" />
-        <meta name="twitter:domain" content="{{$twitter_card->domain}}" />
-        <meta name="twitter:title" content="{{$twitter_card->title}}" />
-        <meta name="twitter:description" content="{{$twitter_card->description}}" />
-        <meta name="twitter:image" content="{{$twitter_card->image}}" />
-    @endif
+    <meta name="twitter:card" content="{{$read_data['twitter_card']->card}}" />
+    <meta name="twitter:domain" content="{{$read_data['twitter_card']->domain}}" />
+    <meta name="twitter:title" content="{{$read_data['twitter_card']->title}}" />
+    <meta name="twitter:description" content="{{$read_data['twitter_card']->description}}" />
+    <meta name="twitter:image" content="{{$read_data['twitter_card']->image}}" />
 @endsection
 
 @section('content')
@@ -197,7 +195,7 @@
                 <div class="form-group row">
                   <label for="comparison" class="col-md-2 col-form-label text-md-right">{{ __('対象') }}</label>
                   <div class="col-md-10">
-                      {{ Form::select('comparison', $read_data, ['placeholder' => 'null'], ['id' => 'select2_read_category']) }}
+                      {{ Form::select('comparison', $read_data['select2_comparison_data'], ['placeholder' => 'null'], ['id' => 'select2_read_category']) }}
                   </div>
                 </div>
             </div>

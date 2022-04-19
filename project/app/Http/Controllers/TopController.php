@@ -16,13 +16,10 @@ class TopController extends Controller
      */
     public function index()
     {
-        $twitterCardModel = new TwitterCard(
-            'RunCheck',
-            '比較しようぜ',
-            config('app.url') . \Storage::url('site/icon.png')
-        );
         $user_id = Auth::id();
-        return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data(), 'twitter_card' => $twitterCardModel->get_object()]);
+        return view('/top', [
+            'read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()
+        ]);
     }
 
     /**
@@ -51,28 +48,21 @@ class TopController extends Controller
         return redirect('/top');
     }
 
-    // １件取得(ajax用)
-    public function on_data_get($id)
-    {
-        return Comparison::where("id", "=", $id)->first();
-    }
-
-    // ツイートから飛んできた用
+    /**
+     * ツイートから遷移してきた場合の処理
+     *
+     * @param Request $request
+     * @return void
+     */
     public function tweat(Request $request)
     {
         $comparsion_data = Comparison::find($request->id);
-        $user_id = Auth::id();
 
-        $twitterCardModel = new TwitterCard(
-            'RunCheck',
-            '比較しようぜ',
-            config('app.url') . \Storage::url('site/icon.png')
-        );
         // 非公開データ
         if ($comparsion_data->release_kbn == 1) {
-            return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data(), 'twitter_card' => $twitterCardModel->get_object()]);
+            return view('/top', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()]);
         } else {
-            return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data, 'twitter_card' => $twitterCardModel->get_object()]);
+            return view('/top', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data]);
         }
     }
 
@@ -84,16 +74,24 @@ class TopController extends Controller
 
         // 登録したユーザーと違う場合は、トップページへ飛ぶ
         if ($user_id != $comparsion_data->user_id) {
-            return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data()]);
+            return view('/top', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()]);
         } else {
-            return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data]);
+            return view('/top', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data]);
         }
     }
 
-    // 読み込みデータ
-    public function read_data()
+    // 画面の表示で使用するデータ
+    public function read_disp_data()
     {
-        return Comparison::select2DataGet(Auth::id(), 1);
+        $twitterCardModel = new TwitterCard(
+            'RunCheck',
+            'ここをクリックで再生!!',
+            config('app.url') . \Storage::url('site/icon.png')
+        );
+        return [
+            'twitter_card' => $twitterCardModel->get_object(),
+            'select2_comparison_data' => Comparison::getSelect2Data(Auth::id(), 1)
+        ];
     }
 
     // 保存データ
@@ -103,5 +101,11 @@ class TopController extends Controller
             ->where("user_id", "=", Auth::id())
             ->groupBy('category')
             ->pluck('category', 'category');
+    }
+
+    // １件取得(ajax用)
+    public function find_comparsion($id)
+    {
+        return Comparison::where("id", "=", $id)->first();
     }
 }
