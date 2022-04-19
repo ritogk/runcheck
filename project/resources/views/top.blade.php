@@ -23,7 +23,7 @@
               <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ebffe7" id="multiSet" onclick="btnClick_MultiSet()">セット</button>
               <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ebffe7" id="multiReload" onclick="btnClick_MultiAgain()">再読込</button>
               @auth
-                 <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ffeff8" id="multiRead" data-toggle="modal" data-target="#readModal" data-whatever="@fat">読込</button>
+                 <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ffeff8" id="multiRead" data-toggle="modal" data-target="#readModal" data-whatever="@fat">開く</button>
                  <button class="btn btn-outline-dark button-style" style="background-color: #ffeff8;display:none;" id="multiSave" onclick="btnClick_MultiSave()" data-toggle="modal" data-target="#saveModal" data-whatever="@fat">保存</button>
               @endauth
            </div>
