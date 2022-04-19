@@ -22,7 +22,8 @@ Route::get('/', 'TopController@index');
 Route::get('/top', 'TopController@index')->name('top');
 Route::match(['get', 'post'], '/top_store', 'TopController@store')->name('top.store');
 Route::get('/top_destroy/{id}', 'TopController@destroy')->name('top.destroy');
-Route::get('/top_tweat/{id}', 'TopController@tweat')->name('top.tweat');
+// twittercardの関係でidはクエリパラメーターで渡す
+Route::get('/top_tweat', 'TopController@tweat')->name('top.tweat');
 Route::get('/top_read/{id}', 'TopController@read')->name('top.read');
 Route::get('/on_data_get/{id}', 'TopController@on_data_get')->name('top.on_data_get');
 

@@ -53,9 +53,9 @@ class TopController extends Controller
     }
 
     // ツイートから飛んできた用
-    public function tweat($id)
+    public function tweat(Request $request)
     {
-        $comparsion_data = Comparison::find($id);
+        $comparsion_data = Comparison::find($request->id);
         $user_id = Auth::id();
 
         $twitterCardModel = new TwitterCard(
