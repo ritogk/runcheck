@@ -26,8 +26,6 @@ Route::get('/top_destroy/{id}', 'TopController@destroy')->name('top.destroy');
 Route::get('/top-tweat', 'TopController@tweat')->name('top.tweat');
 Route::get('/top-read/{id}', 'TopController@read')->name('top.read');
 
-Route::get('/find-comparsion/{id}', 'ComparsionController@find_comparsion');
-
 // LocalLocal
 Route::get('/locallocal', 'LocalLocalController@index')->name('locallocal');
 Route::match(['get', 'post'], '/local_store', 'LocalLocalController@store')->name('locallocal.store');
@@ -42,6 +40,7 @@ Route::get('/youlocal_read/{id}', 'YouLocalController@read')->name('youlocal.rea
 
 // ajax
 Route::get('/ajax/select2_comparison/{id}', 'Ajax\Select2Controller@select2_comparison')->name('ajax.select2.comparison');
+Route::get('/ajax/find-comparsion/{id}', 'Ajax\ComparsionController@find_comparsion');
 Route::get('/analysis/set/', 'Ajax\AnalysisController@set');
 Route::get('/analysis/reload/', 'Ajax\AnalysisController@reload');
 Route::get('/analysis/read/', 'Ajax\AnalysisController@read');
