@@ -133,10 +133,4 @@ return [
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
 
-
-    /**
-     * 問い合わせの文面を送信するメールアドレス
-     */
-    'cotact' => env('MAIL_CONTACT'),
-
 ];
