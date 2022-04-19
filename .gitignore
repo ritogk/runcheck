@@ -3,7 +3,6 @@ project/Homestead.yaml
 project/Homestead.json
 project/.vagrant
 project/.phpunit.result.cache
-project/public/mix-manifest.json
 project/.scribe
 project/resources/docs
 project/public/docs
