@@ -16,7 +16,6 @@ class TopController extends Controller
      */
     public function index()
     {
-        $a = 1 + 'asdd';
         return view('/top', [
             'read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()
         ]);
