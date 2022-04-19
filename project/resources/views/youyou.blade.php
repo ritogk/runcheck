@@ -47,11 +47,11 @@
                 <button class="btn btn-outline-dark button-style button-wide" id="next100">1秒先</button>
                 <button class="btn btn-outline-dark button-style button-wide" id="next050">0.5秒先</button>
                 <button class="btn btn-outline-dark button-style button-wide" id="next010">0.1秒先</button>
-                <button class="btn btn-outline-dark button-style button-wide" id="next005">0.05秒先</button><br>
+                <button class="btn btn-outline-dark button-style" style="width:82px" id="next005">0.05秒先</button><br>
                 <button class="btn btn-outline-dark button-style button-wide" id="prev100">1秒前</button>
                 <button class="btn btn-outline-dark button-style button-wide" id="prev050">0.5秒前</button>
                 <button class="btn btn-outline-dark button-style button-wide" id="prev010">0.1秒前</button>
-                <button class="btn btn-outline-dark button-style button-wide" id="prev005">0.05秒前</button><br>
+                <button class="btn btn-outline-dark button-style" style="width:82px" id="prev005">0.05秒前</button><br>
             </div>
             <div>
                 <div class="form-inline">
@@ -80,11 +80,11 @@
                 <button class="btn btn-outline-dark button-style button-wide" id="next100_2">1秒先</button>
                 <button class="btn btn-outline-dark button-style button-wide" id="next050_2">0.5秒先</button>
                 <button class="btn btn-outline-dark button-style button-wide" id="next010_2">0.1秒先</button>
-                <button class="btn btn-outline-dark button-style button-wide" id="next005_2">0.05秒先</button><br>
+                <button class="btn btn-outline-dark button-style" style="width:82px" id="next005_2">0.05秒先</button><br>
                 <button class="btn btn-outline-dark button-style button-wide" id="prev100_2">1秒前</button>
                 <button class="btn btn-outline-dark button-style button-wide" id="prev050_2">0.5秒前</button>
                 <button class="btn btn-outline-dark button-style button-wide" id="prev010_2">0.1秒前</button>
-                <button class="btn btn-outline-dark button-style button-wide" id="prev005_2">0.05秒前</button><br>
+                <button class="btn btn-outline-dark button-style" style="width:82px" id="prev005_2">0.05秒前</button><br>
             </div>
         </div>
         

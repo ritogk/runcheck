@@ -39,11 +39,11 @@
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime+=1" id="next100Local1">1秒先</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime+=0.5" id="next050Local1">0.5秒先</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime+=0.1" id="next010Local1">0.1秒先</button>
-               <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime+=0.05" id="next005Local1">0.05秒先</button><br>
+               <button class="btn btn-outline-dark button-style" style="width:82px" onclick="getVideo().currentTime+=0.05" id="next005Local1">0.05秒先</button><br>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime-=1" id="prev100Local1">1秒前</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime-=0.5" id="prev050Local1">0.5秒前</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime-=0.1" id="prev010Local1">0.1秒前</button>
-               <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime-=0.05" id="prev005Local1">0.05秒前</button><br>
+               <button class="btn btn-outline-dark button-style" style="width:82px" onclick="getVideo().currentTime-=0.05" id="prev005Local1">0.05秒前</button><br>
            </div>
            <div><span id="fileSelLocal1_label" style="color:red;display:none;">↓保存時の動画を選択して再読込を押してください。</span></div>
            <input type="file" id="fileSelLocal1" accept="video/*"/></input>
@@ -63,11 +63,11 @@
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime+=1" id="next100Local2">1秒先</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime+=0.5" id="next050Local2">0.5秒先</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime+=0.1" id="next010Local2">0.1秒先</button>
-               <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime+=0.05" id="next005Local2">0.05秒先</button><br>
+               <button class="btn btn-outline-dark button-style" style="width:82px" onclick="getVideo().currentTime+=0.05" id="next005Local2">0.05秒先</button><br>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime-=1" id="prev100Local2">1秒前</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime-=0.5" id="prev050Local2">0.5秒前</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime-=0.1" id="prev010Local2">0.1秒前</button>
-               <button class="btn btn-outline-dark button-style button-wide" onclick="getVideo().currentTime-=0.05" id="prev005Local2">0.05秒前</button><br>
+               <button class="btn btn-outline-dark button-style" style="width:82px" onclick="getVideo().currentTime-=0.05" id="prev005Local2">0.05秒前</button><br>
            </div>
         </div>
         <!-- <script src="scriptYoutube.js"></script> -->

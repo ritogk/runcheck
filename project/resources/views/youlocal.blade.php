@@ -39,11 +39,11 @@
                <button class="btn btn-outline-dark button-style button-wide" id="next100">1秒先</button>
                <button class="btn btn-outline-dark button-style button-wide" id="next050">0.5秒先</button>
                <button class="btn btn-outline-dark button-style button-wide" id="next010">0.1秒先</button>
-               <button class="btn btn-outline-dark button-style button-wide" id="next005">0.05秒先</button><br>
+               <button class="btn btn-outline-dark button-style" style="width:82px" id="next005">0.05秒先</button><br>
                <button class="btn btn-outline-dark button-style button-wide" id="prev100">1秒前</button>
                <button class="btn btn-outline-dark button-style button-wide" id="prev050">0.5秒前</button>
                <button class="btn btn-outline-dark button-style button-wide" id="prev010">0.1秒前</button>
-               <button class="btn btn-outline-dark button-style button-wide" id="prev005">0.05秒前</button><br>
+               <button class="btn btn-outline-dark button-style" style="width:82px" id="prev005">0.05秒前</button><br>
            </div>
            <div>
               <div class="form-inline">
@@ -69,11 +69,11 @@
                <button class="btn btn-outline-dark button-style button-wide" onclick="getLocalVideo().currentTime+=1" id="next100Local2">1秒先</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getLocalVideo().currentTime+=0.5" id="next050Local2">0.5秒先</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getLocalVideo().currentTime+=0.1" id="next010Local2">0.1秒先</button>
-               <button class="btn btn-outline-dark button-style button-wide" onclick="getLocalVideo().currentTime+=0.05" id="next005Local2">0.05秒先</button><br>
+               <button class="btn btn-outline-dark button-style" style="width:82px" onclick="getLocalVideo().currentTime+=0.05" id="next005Local2">0.05秒先</button><br>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getLocalVideo().currentTime-=1" id="prev100Local2">1秒前</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getLocalVideo().currentTime-=0.5" id="prev050Local2">0.5秒前</button>
                <button class="btn btn-outline-dark button-style button-wide" onclick="getLocalVideo().currentTime-=0.1" id="prev010Local2">0.1秒前</button>
-               <button class="btn btn-outline-dark button-style button-wide" onclick="getLocalVideo().currentTime-=0.05" id="prev005Local2">0.05秒前</button><br>
+               <button class="btn btn-outline-dark button-style" style="width:82px" onclick="getLocalVideo().currentTime-=0.05" id="prev005Local2">0.05秒前</button><br>
            </div>
         </div>
         <!-- <script src="scriptYoutube.js"></script> -->
