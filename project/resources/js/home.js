@@ -5,7 +5,7 @@ function btnClick_ReadTweat(id, title) {
     url: "/home_release_update/" + id,
   })
     .done(function (data, textStatus, jqXHR) {
-      url = "https://runcheck.homisoftware.net/top-tweat?id=" + id
+      url = "https://runcheck.homisoftware.net/youyou-tweat?id=" + id
       window.location.href =
         "https://twitter.com/intent/tweet?text=" + title + " " + url
     })

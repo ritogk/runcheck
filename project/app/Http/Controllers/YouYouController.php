@@ -7,7 +7,7 @@ use App\Libs\Model\TwitterCard;
 use App\Model\Comparison;
 use Auth;
 
-class TopController extends Controller
+class YouYouController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class TopController extends Controller
      */
     public function index()
     {
-        return view('/top', [
+        return view('/youyou', [
             'read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()
         ]);
     }
@@ -31,7 +31,7 @@ class TopController extends Controller
     {
         $data = new Comparison;
         $comparison = $data->create($request->all());
-        return redirect(route('top.read', ['id' => $comparison->id]));
+        return redirect(route('youyou.read', ['id' => $comparison->id]));
     }
 
     /**
@@ -44,7 +44,7 @@ class TopController extends Controller
     {
         $data = Comparison::find($id);
         $data->delete();
-        return redirect('/top');
+        return redirect('/youyou');
     }
 
     /**
@@ -64,9 +64,9 @@ class TopController extends Controller
 
 
         if ($comparsion_data->release_kbn == 1) {
-            return view('/top', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()]);
+            return view('/youyou', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()]);
         } else {
-            return view('/top', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data]);
+            return view('/youyou', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data]);
         }
     }
 
@@ -78,9 +78,9 @@ class TopController extends Controller
 
         // 登録したユーザーと違う場合は、トップページへ飛ぶ
         if ($user_id != $comparsion_data->user_id) {
-            return view('/top', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()]);
+            return view('/youyou', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()]);
         } else {
-            return view('/top', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data]);
+            return view('/youyou', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data]);
         }
     }
 

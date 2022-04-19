@@ -74,7 +74,7 @@
 
         <div id='otherLink'>
            <div id='captionLink'>比較対象</div>
-           <button class="btn btn-outline-dark button-style" id="linkYouYou" onclick="location.href='{{ route('top') }}'">Youtube - Youtube</button>
+           <button class="btn btn-outline-dark button-style" id="linkYouYou" onclick="location.href='{{ route('youyou') }}'">Youtube - Youtube</button>
            <button class="btn btn-outline-dark button-style" id="linkYouLocal" onclick="location.href='{{ route('youlocal') }}'">Youtube - Local</button>           
            <button class="btn btn-outline-dark button-style" id="linkLocalLocal" onclick="location.href='{{ route('locallocal') }}'">Local - Local</button>
         </div>

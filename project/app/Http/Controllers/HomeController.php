@@ -41,13 +41,13 @@ class HomeController extends Controller
     // ツイートから飛んできた用
     public function tweat($id)
     {
-        return view('/top');
+        return view('/youyou');
         $comparsion_data = Comparison::find($id);
         // 非公開データ
         if ($comparsion_data->release_kbn == 1) {
-            return view('/top');
+            return view('/youyou');
         } else {
-            return view('/top', ['comparsion_data' => $comparsion_data]);
+            return view('/youyou', ['comparsion_data' => $comparsion_data]);
         }
     }
 

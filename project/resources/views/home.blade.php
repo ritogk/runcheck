@@ -23,7 +23,7 @@
         <div class="card comparison_group shadow my-2" style="width:100%;">
             <div class="card-body">
                 @if ($record->video_type == 1)
-                <h5 class="card-title font-weight-bold"><a href="{{ route('top.read', [$record->id]) }}">{{ $record->title }}</a></h5>
+                <h5 class="card-title font-weight-bold"><a href="{{ route('youyou.read', [$record->id]) }}">{{ $record->title }}</a></h5>
                 @elseif ($record->video_type == 2)
                 <h5 class="card-title font-weight-bold"><a href="{{ route('locallocal.read', [$record->id]) }}">{{ $record->title }}</a></h5>
                 @elseif ($record->video_type == 3)

@@ -91,7 +91,7 @@
 
         <div id='otherLink'>
            <div id='captionLink'>比較対象</div>
-           <button class="btn btn-outline-dark button-style" id="linkYouYou" onclick="location.href='{{ route('top') }}'">Youtube - Youtube</button>
+           <button class="btn btn-outline-dark button-style" id="linkYouYou" onclick="location.href='{{ route('youyou') }}'">Youtube - Youtube</button>
            <button class="btn btn-outline-dark button-style" id="linkYouLocal" onclick="location.href='{{ route('youlocal') }}'">Youtube - Local</button>           
            <button class="btn btn-outline-dark button-style" id="linkLocalLocal" onclick="location.href='{{ route('locallocal') }}'">Local - Local</button>
         </div>
@@ -107,7 +107,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form id="save-form" method="POST" action="{{ route('top.store') }}">
+            <form id="save-form" method="POST" action="{{ route('youyou.store') }}">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group row" style="display:none;">

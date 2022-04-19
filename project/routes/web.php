@@ -11,20 +11,16 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('/top');
-//});
-
 Auth::routes();
 
 // youyou
-Route::get('/', 'TopController@index');
-Route::get('/top', 'TopController@index')->name('top');
-Route::match(['get', 'post'], '/top_store', 'TopController@store')->name('top.store');
-Route::get('/top-destroy/{id}', 'TopController@destroy')->name('top.destroy');
+Route::get('/', 'YouYouController@index');
+Route::get('/youyou', 'YouYouController@index')->name('youyou');
+Route::match(['get', 'post'], '/youyou_store', 'YouYouController@store')->name('youyou.store');
+Route::get('/youyou-destroy/{id}', 'YouYouController@destroy')->name('youyou.destroy');
 // twittercardの関係でidはクエリパラメーターで渡す
-Route::get('/top-tweat', 'TopController@tweat')->name('top.tweat');
-Route::get('/top-read/{id}', 'TopController@read')->name('top.read');
+Route::get('/youyou-tweat', 'YouYouController@tweat')->name('youyou.tweat');
+Route::get('/youyou-read/{id}', 'YouYouController@read')->name('youyou.read');
 
 // LocalLocal
 Route::get('/locallocal', 'LocalLocalController@index')->name('locallocal');
