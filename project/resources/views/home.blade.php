@@ -37,7 +37,7 @@
                               @endif
                               <h6 class="card-subtitle text-muted">{{ $record->memo }}</h6>
                               <h6 hidden>{{ $record->created_at }}</h6>
-                              <h6 class="video_type_disp"><?= videoTypeNmGet($record->video_type) ?></h6>
+                              <h6 class="video_type_disp"><?= getVideoTypeNm($record->video_type) ?></h6>
                               <input type="text" class="video_type_value" hidden value="{{ $record->video_type }}">
                               <button type="button" id="home_tweat"class="btn btn-info" onclick="btnClick_ReadTweat({{ $record->id }}, '{{ $record->title }}')" style="color:#fff" {{ $record->video_type == 1 ?: 'hidden'}}>ツイート</button>
                               <button type="button" id="home_delete" class="btn btn-danger" onclick="if(deleteConfirm('{{ $record->title }}')) btnClick_ReadDelete({{ $record->id }})">削除</button>
@@ -57,7 +57,7 @@
 
 <?php
     // 対象動画名称取得
-    function videoTypeNmGet($id){
+    function getVideoTypeNm($id){
         $nm = "";
         switch ($id) {
             case 1:

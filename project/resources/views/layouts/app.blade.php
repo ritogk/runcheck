@@ -11,17 +11,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
     <!-- twitter card -->
-    <meta name="twitter:card" content=summary />
-    <meta name="twitter:domain" content="runcheck.homisoftware.net" />
-    <meta name="twitter:title" content="SNSマーケティングを企業が導入すべき理由！ソーシャルメディアを活用したマーケティング" />
-    <meta name="twitter:description" content="日本国内におけるソーシャルメディアの利用者は、8,300万人（2020年3月現在）を数え、いまや日本の人口のおよそ65%以上が月に一回以上は何かしらのソーシャルメディアを利用し、知人と繋がり、日々さまざまな情報を収集して […]" />
-    <meta name="twitter:image" content="https://www.webcartop.jp/wp-content/uploads/2020/03/DSC_0202-680x454.jpg" />
+    @yield('twitterCard')
     
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="{{ mix('js/analytics.js') }}" defer></script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160164762-1"></script>
     <script>
@@ -34,6 +31,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- ファビコン -->
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">

@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('twitterCard')
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:domain" content="{{Config::get('app.APP_DOMAIN')}}" />
+    <meta name="twitter:title" content="SNSマーケティングを企業が導入すべき理由！ソーシャルメディアを活用したマーケティング" />
+    <meta name="twitter:description" content="日本国内におけるソーシャルメディアの利用者は、8,300万人（2020年3月現在）を数え、いまや日本の人口のおよそ65%以上が月に一回以上は何かしらのソーシャルメディアを利用し、知人と繋がり、日々さまざまな情報を収集して […]" />
+    <meta name="twitter:image" content="{{env('APP_URL') . Storage::url('site/icon.png')}}" />
+@endsection
+
 @section('content')
      <div class="title">比較対象[Youtube - Youtube]</div>
      <div id="container" style="margin-left: 0px;margin-right: 0px;">
@@ -206,7 +214,6 @@
 @section('childScripts')
     <script type="text/javascript">
        var global_read_id = "{{ !empty($comparsion_data) ? $comparsion_data->id : ''}}";
-       $('.js-example-basic-single').select2();
     </script>
     <script src="{{ mix('js/youYou.js') }}" defer></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.js" defer></script>
