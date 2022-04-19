@@ -130,7 +130,7 @@ function read(comparison_id) {
   setTimeout(function () {
     $.ajax({
       type: "GET",
-      url: "/find-comparsion/" + comparison_id,
+      url: "/ajax/find-comparsion/" + comparison_id,
     })
       .done(function (data, textStatus, jqXHR) {
         // video1

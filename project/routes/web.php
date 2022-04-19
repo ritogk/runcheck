@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/', 'TopController@index');
 Route::get('/top', 'TopController@index')->name('top');
 Route::match(['get', 'post'], '/top_store', 'TopController@store')->name('top.store');
-Route::get('/top_destroy/{id}', 'TopController@destroy')->name('top.destroy');
+Route::get('/top-destroy/{id}', 'TopController@destroy')->name('top.destroy');
 // twittercardの関係でidはクエリパラメーターで渡す
 Route::get('/top-tweat', 'TopController@tweat')->name('top.tweat');
 Route::get('/top-read/{id}', 'TopController@read')->name('top.read');

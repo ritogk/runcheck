@@ -20,17 +20,17 @@
         <div id='buttonMulti'>
            <div id='captionMulti'>同時制御</div>
            <div>
-              <button class="btn btn-outline-dark button-style" style="background-color: #ebffe7" id="multiSet" onclick="btnClick_MultiSet()">セット</button>
-              <button class="btn btn-outline-dark button-style" style="background-color: #ebffe7" id="multiReload" onclick="btnClick_MultiAgain()">再読込</button>
+              <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ebffe7" id="multiSet" onclick="btnClick_MultiSet()">セット</button>
+              <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ebffe7" id="multiReload" onclick="btnClick_MultiAgain()">再読込</button>
               @auth
-                 <button class="btn btn-outline-dark button-style" style="background-color: #ffeff8" id="multiRead" data-toggle="modal" data-target="#readModal" data-whatever="@fat">読込</button>
+                 <button class="btn btn-outline-dark button-style button-wide" style="background-color: #ffeff8" id="multiRead" data-toggle="modal" data-target="#readModal" data-whatever="@fat">読込</button>
                  <button class="btn btn-outline-dark button-style" style="background-color: #ffeff8;display:none;" id="multiSave" onclick="btnClick_MultiSave()" data-toggle="modal" data-target="#saveModal" data-whatever="@fat">保存</button>
               @endauth
            </div>
            <div>
-              <button class="btn btn-outline-dark button-style" style="background-color: #e0ffff" id="multiPlay" onclick="btnClick_MultiPlay()">再生</button>
-              <button class="btn btn-outline-dark button-style" style="background-color: #e0ffff" id="multiPause" onclick="btnClick_MultiPause()">停止</button>
-              <button class="btn btn-outline-dark button-style" style="background-color: #e0ffff" id="multiSlow" onclick="btnClick_MultiSlow()">倍速(-)</button>
+              <button class="btn btn-outline-dark button-style button-wide" style="background-color: #e0ffff" id="multiPlay" onclick="btnClick_MultiPlay()">再生</button>
+              <button class="btn btn-outline-dark button-style button-wide" style="background-color: #e0ffff" id="multiPause" onclick="btnClick_MultiPause()">停止</button>
+              <button class="btn btn-outline-dark button-style button-wide" style="background-color: #e0ffff" id="multiSlow" onclick="btnClick_MultiSlow()">倍速(-)</button>
               <button class="btn btn-outline-dark button-style" style="background-color: #e0ffff" id="multiFast" onclick="btnClick_MultiFast()">倍速(+)</button>
               <button class="btn btn-outline-dark button-style" style="background-color: #e0ffff" id="multiMuteRe" onclick="btnClick_MultiMuteRe()">ﾐｭｰﾄ解除</button>
            </div>
@@ -42,16 +42,16 @@
         <!-- ビデオエリア1 -->
         <div id='youtubeBoard'>
             <div id='buttonsYou'>
-                <button class="btn btn-outline-dark button-style" id="play">再生</button>
-                <button class="btn btn-outline-dark button-style" id="pause">停止</button><br>
-                <button class="btn btn-outline-dark button-style" id="next100">1秒先</button>
-                <button class="btn btn-outline-dark button-style" id="next050">0.5秒先</button>
-                <button class="btn btn-outline-dark button-style" id="next010">0.1秒先</button>
-                <button class="btn btn-outline-dark button-style" id="next005">0.05秒先</button><br>
-                <button class="btn btn-outline-dark button-style" id="prev100">1秒前</button>
-                <button class="btn btn-outline-dark button-style" id="prev050">0.5秒前</button>
-                <button class="btn btn-outline-dark button-style" id="prev010">0.1秒前</button>
-                <button class="btn btn-outline-dark button-style" id="prev005">0.05秒前</button><br>
+                <button class="btn btn-outline-dark button-style button-wide" id="play">再生</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="pause">停止</button><br>
+                <button class="btn btn-outline-dark button-style button-wide" id="next100">1秒先</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="next050">0.5秒先</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="next010">0.1秒先</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="next005">0.05秒先</button><br>
+                <button class="btn btn-outline-dark button-style button-wide" id="prev100">1秒前</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="prev050">0.5秒前</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="prev010">0.1秒前</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="prev005">0.05秒前</button><br>
             </div>
             <div>
                 <div class="form-inline">
@@ -75,16 +75,16 @@
                 <button class="btn btn-outline-dark button-style" onclick="youBtnDispChange(buttonsYou2)" style="background: #ffe4ce;">切替</button>
             </div>   
             <div id='buttonsYou2'>
-                <button class="btn btn-outline-dark button-style" id="play_2">再生</button>
-                <button class="btn btn-outline-dark button-style" id="pause_2">停止</button><br>
-                <button class="btn btn-outline-dark button-style" id="next100_2">1秒先</button>
-                <button class="btn btn-outline-dark button-style" id="next050_2">0.5秒先</button>
-                <button class="btn btn-outline-dark button-style" id="next010_2">0.1秒先</button>
-                <button class="btn btn-outline-dark button-style" id="next005_2">0.05秒先</button><br>
-                <button class="btn btn-outline-dark button-style" id="prev100_2">1秒前</button>
-                <button class="btn btn-outline-dark button-style" id="prev050_2">0.5秒前</button>
-                <button class="btn btn-outline-dark button-style" id="prev010_2">0.1秒前</button>
-                <button class="btn btn-outline-dark button-style" id="prev005_2">0.05秒前</button><br>
+                <button class="btn btn-outline-dark button-style button-wide" id="play_2">再生</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="pause_2">停止</button><br>
+                <button class="btn btn-outline-dark button-style button-wide" id="next100_2">1秒先</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="next050_2">0.5秒先</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="next010_2">0.1秒先</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="next005_2">0.05秒先</button><br>
+                <button class="btn btn-outline-dark button-style button-wide" id="prev100_2">1秒前</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="prev050_2">0.5秒前</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="prev010_2">0.1秒前</button>
+                <button class="btn btn-outline-dark button-style button-wide" id="prev005_2">0.05秒前</button><br>
             </div>
         </div>
         
