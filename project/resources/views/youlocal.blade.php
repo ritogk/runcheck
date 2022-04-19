@@ -4,7 +4,7 @@
     <div class="title">比較対象[Youtube - Local]</div>
      <div id="container" style="margin-left: 0px;margin-right: 0px;">
         <div id='memoPanel' style="display: none;">
-           <div id='captionMemo'>動画詳細</div>
+           <div id='captionMemo'>メモ</div>
            <span id="title_disp"></span><br>
            <span id="memo_disp"></span>
         </div>
@@ -90,7 +90,7 @@
      <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-dark text-light">
               <h5 class="modal-title" id="saveModalLabel">保存</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -169,12 +169,12 @@
         </div>
       </div>
      
-     <!-- モーダル表示(読込)エリア -->
+     <!-- モーダル表示(開く)エリア -->
      <div class="modal fade" id="readModal" tabindex="-1" role="dialog" aria-labelledby="readModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="readModalLabel">読込</h5>
+            <div class="modal-header bg-dark text-light">
+              <h5 class="modal-title" id="readModalLabel">開く</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
