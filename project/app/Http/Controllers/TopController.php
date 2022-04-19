@@ -82,17 +82,11 @@ class TopController extends Controller
         $comparsion_data = Comparison::find($id);
         $user_id = Auth::id();
 
-        $twitterCardModel = new TwitterCard(
-            $comparsion_data->title,
-            $comparsion_data->memo,
-            config('app.url') . \Storage::url('site/icon.png')
-        );
-
         // 登録したユーザーと違う場合は、トップページへ飛ぶ
         if ($user_id != $comparsion_data->user_id) {
-            return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data(), 'twitter_card' => $twitterCardModel->get_object()]);
+            return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data()]);
         } else {
-            return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data, 'twitter_card' => $twitterCardModel->get_object()]);
+            return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data(), 'comparsion_data' => $comparsion_data]);
         }
     }
 
