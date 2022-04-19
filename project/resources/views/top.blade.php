@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('twitterCard')
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:domain" content="{{Config::get('app.domain')}}" />
-    <meta name="twitter:title" content="SNSマーケティングを企業が導入すべき理由！ソーシャルメディアを活用したマーケティング" />
-    <meta name="twitter:description" content="日本国内におけるソーシャルメディアの利用者は、8,300万人（2020年3月現在）を数え、いまや日本の人口のおよそ65%以上が月に一回以上は何かしらのソーシャルメディアを利用し、知人と繋がり、日々さまざまな情報を収集して […]" />
-    <meta name="twitter:image" content="{{env('APP_URL') . Storage::url('site/icon.png')}}" />
+    @if(!empty($twitter_card))
+        <meta name="twitter:card" content="{{$twitter_card->card}}" />
+        <meta name="twitter:domain" content="{{$twitter_card->domain}}" />
+        <meta name="twitter:title" content="{{$twitter_card->title}}" />
+        <meta name="twitter:description" content="{{$twitter_card->description}}" />
+        <meta name="twitter:image" content="{{$twitter_card->image}}" />
+    @endif
 @endsection
 
 @section('content')
