@@ -16,7 +16,6 @@ class TopController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::id();
         return view('/top', [
             'read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()
         ]);
@@ -58,7 +57,12 @@ class TopController extends Controller
     {
         $comparsion_data = Comparison::find($request->id);
 
-        // 非公開データ
+        // 「非公開」又は存在しないidの場合は初期ページを表示
+        if (empty($comparsion_data) || $comparsion_data->release_kbn == 1) {
+            return $this->index();
+        }
+
+
         if ($comparsion_data->release_kbn == 1) {
             return view('/top', ['read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()]);
         } else {
