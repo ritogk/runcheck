@@ -16,8 +16,13 @@ class TopController extends Controller
      */
     public function index()
     {
+        $twitterCardModel = new TwitterCard(
+            'RunCheck',
+            '比較しようぜ',
+            config('app.url') . \Storage::url('site/icon.png')
+        );
         $user_id = Auth::id();
-        return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data()]);
+        return view('/top', ['userid' => $user_id, 'read_data' => $this->read_data(), 'save_data' => $this->save_data(), 'twitter_card' => $twitterCardModel->get_object()]);
     }
 
     /**
@@ -59,8 +64,8 @@ class TopController extends Controller
         $user_id = Auth::id();
 
         $twitterCardModel = new TwitterCard(
-            $comparsion_data->title,
-            $comparsion_data->memo,
+            'RunCheck',
+            '比較しようぜ',
             config('app.url') . \Storage::url('site/icon.png')
         );
         // 非公開データ
