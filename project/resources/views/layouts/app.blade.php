@@ -18,16 +18,18 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="{{ mix('js/analytics.js') }}" defer></script>
+    @yield('childScripts')
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160164762-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y941S9T30J"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-160164762-1');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Y941S9T30J');
     </script>
-    @yield('childScripts')
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
