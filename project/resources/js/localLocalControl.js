@@ -108,10 +108,20 @@ function btnClick_MultiSave() {
 
 // [セット]ボタン押下
 function btnClick_MultiSet() {
+  const fileSelLocal1 = $("#fileSelLocal1").val()
+  if(fileSelLocal1 === ''){
+    alert('動画1を選択して下さい。')
+    return;
+  }
+  const fileSelLocal2 = $("#fileSelLocal2").val()
+  if(fileSelLocal2 === ''){
+    alert('動画2を選択して下さい。')
+    return;
+  }
   $("#video1_time_st").val(getPlayerIndex(0).currentTime)
-  $("#video1_url").val($("#fileSelLocal1").val())
+  $("#video1_url").val(fileSelLocal1)
   $("#video2_time_st").val(getPlayerIndex(1).currentTime)
-  $("#video2_url").val($("#fileSelLocal2").val())
+  $("#video2_url").val(fileSelLocal2)
   $("#range_filed").show()
   $("#multiSave").show()
   $("#buttonsLocal1").hide()

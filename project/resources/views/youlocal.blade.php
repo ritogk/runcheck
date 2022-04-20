@@ -120,7 +120,7 @@
                     <div class="form-group row">
                         <label for="category" class="col-md-2 col-form-label text-md-right">{{ __('タグ') }}</label>
                         <div class="col-md-10">
-                            {{ Form::select('category', $save_data, ['placeholder' => 'null'], ['class' => 'form-control', 'id' => 'select2_save_category']) }}
+                            {{ Form::select('category', $save_data, ['placeholder' => 'null'], ['class' => 'form-control', 'id' => 'select2_save_category', 'required']) }}
                         </div>
                     </div>
                     <div class="form-group row" style="display:none;">

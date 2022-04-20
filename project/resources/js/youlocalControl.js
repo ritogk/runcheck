@@ -103,10 +103,20 @@ function btnClick_MultiSave() {
 
 // [セット]ボタン押下
 function btnClick_MultiSet() {
+  const video1_url = $("#idYou1").val();
+  if(video1_url === ''){
+    alert('動画1のYoutube[URL]を入力して下さい。')
+    return;
+  }
+  const fileSelLocal2 = $("#fileSelLocal2").val()
+  if(fileSelLocal2 === ''){
+    alert('動画2を選択して下さい。')
+    return;
+  }
   $("#video1_time_st").val(getYouTubeVideo().getCurrentTime())
-  $("#video1_url").val($("#idYou1").val())
+  $("#video1_url").val(video1_url)
   $("#video2_time_st").val(getLocalVideo().currentTime)
-  $("#video2_url").val($("#fileSelLocal2").val())
+  $("#video2_url").val(fileSelLocal2)
   $("#range_filed").show()
   $("#multiSave").show()
   $("#buttonsYou").hide()
