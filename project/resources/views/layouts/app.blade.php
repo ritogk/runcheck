@@ -46,10 +46,21 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm" style="background-color:#e3f2fd;">
         <!-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm"> -->
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                    @yield('title')
-                </a>
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <a class="navbar-brand pb-0" href="{{ url('/') }}">
+                                {{ config('app.name', 'Laravel') }}
+                                @yield('title')
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-light" style="font-size:8px;">
+                            サーキットに特化した車載動画比較アプリ
+                        </div>
+                    </div>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
