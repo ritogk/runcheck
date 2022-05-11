@@ -14,7 +14,8 @@
 Auth::routes();
 
 // lp
-Route::get('/lp/ja', 'LPController@show_ja');
+Route::get('/lp/ja', 'LPController@show_ja')->name('lp.ja');
+Route::get('/lp/en', 'LPController@show_en')->name('lp.en');
 
 // youyou
 Route::get('/', 'YouYouController@index');

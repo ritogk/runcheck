@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <link rel=”alternate” hreflang=”ja” lang="ja" href="{{ route('youyou') }}">
-        <link rel="alternate" hreflang="en-gb" lang="en" href="{{ route('youyou') }}" />
-        <link rel="alternate" hreflang="en-us" lang="en" href="{{ route('youyou') }}" />
-        <link rel="alternate" hreflang="en-au" lang="en" href="{{ route('youyou') }}" />
+        <link rel=”alternate” hreflang=”ja” lang="ja" href="{{ route('lp.ja') }}">
+        <link rel="alternate" hreflang="en-gb" lang="en" href="{{ route('lp.en') }}" />
+        <link rel="alternate" hreflang="en-us" lang="en" href="{{ route('lp.en') }}" />
+        <link rel="alternate" hreflang="en-au" lang="en" href="{{ route('lp.en') }}" />
 
         <title>RunCheck LP</title>
         <link rel="icon" type="image/x-icon" href="lp/favicon.ico" />
@@ -31,10 +31,10 @@
                     <a class="navbar-brand fw-bold" href="#page-top">RunCheck</a>
                 </div>
                 <div class="ms-auto">
-                    <a class="border me-1" href="{{ route('youyou')}}"><img src="{{ App\Assets\Helpers::cacheBusting('/lp/img/flags/Japan.png') }}" alt="..." /></a>
+                    <a class="border me-1" href="{{ route('lp.ja')}}"><img src="{{ App\Assets\Helpers::cacheBusting('/lp/img/flags/Japan.png') }}" alt="..." /></a>
                 </div>
                 <div>
-                    <a class="border me-1" href="{{ route('youyou')}}"><img src="{{ App\Assets\Helpers::cacheBusting('/lp/img/flags/United-States.png') }}" alt="..." /></a>
+                    <a class="border me-1" href="{{ route('lp.en')}}"><img src="{{ App\Assets\Helpers::cacheBusting('/lp/img/flags/United-States.png') }}" alt="..." /></a>
                     
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,11 +43,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="#features">基本機能</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="#demo">デモ</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="#howtouse">使い方</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="#screenshot">スクリーンショット</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="https://twitter.com/homing_fd2">お問い合わせ</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="#features">{{__('lp.基本機能')}}</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="#demo">{{__('lp.デモ')}}</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="#howtouse">{{__('lp.使い方')}}</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="#screenshot">{{__('lp.スクリーンショット')}}</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="#startnow">{{__('lp.今すぐ起動')}}</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="https://twitter.com/homing_fd2">{{__('lp.お問い合わせ')}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -60,8 +61,8 @@
                     <div class="col-lg-6">
                         <!-- Mashead text and app badges-->
                         <div class="mb-5 mb-lg-0 text-center text-lg-start">
-                            <h1 class="display-1 lh-1 mb-3">サーキットに特化した車載動画比較アプリ</h1>
-                            <p class="lead fw-normal text-muted mb-4">気になるあの人やベストラップとセカンドラップ等の比較が無料で簡単に行えます。youtubeで公開されている全ての車載動画と比較が行えるので比較対象は無限大！！</p>
+                            <h1 class="display-1 lh-1 mb-3">{{__('lp.サーキットに特化した車載動画比較アプリ')}}</h1>
+                            <p class="lead fw-normal text-muted mb-4">{{__('lp.気になるあの人やベストラップとセカンドラップ等の比較が無料で簡単に行えます。youtubeで公開されている全ての車載動画と比較が行えるので比較対象は無限大！！')}}</p>
                             <div class="d-flex flex-column flex-lg-row align-items-center">
                                 <a class="me-lg-3 mb-1 mb-lg-0" href="{{ route('youyou')}}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
                             </div>
@@ -96,7 +97,7 @@
             <div class="container px-5">
                 <div class="row gx-5 justify-content-center">
                     <div class="col-xl-8">
-                        <div class="h2 fs-1 text-white mb-4">振り返りこそが学びと成長の鍵</div>
+                        <div class="h2 fs-1 text-white mb-4">{{__('lp.振り返りこそが学びと成長の鍵')}}</div>
                         <img src="{{ App\Assets\Helpers::cacheBusting('/lp/img/homisoftware-logo.svg') }}" alt="..." style="width:200px" />
                     </div>
                 </div>
@@ -113,16 +114,16 @@
                                     <!-- Feature item-->
                                     <div class="text-center">
                                         <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
-                                        <h3 class="font-alt">完全無料</h3>
-                                        <p class="text-muted mb-0">すべてのサービスを完全無料でご利用いただけます。</p>
+                                        <h3 class="font-alt">{{__('lp.完全無料')}}</h3>
+                                        <p class="text-muted mb-0">{{__('lp.すべてのサービスを完全無料でご利用いただけます。')}}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <!-- Feature item-->
                                     <div class="text-center">
                                         <i class="bi-speedometer icon-feature text-gradient d-block mb-3"></i>
-                                        <h3 class="font-alt">ｽﾎﾟｰﾂ走行に特化</h3>
-                                        <p class="text-muted mb-0">スポーツ走行向けに使いやすいよう調整しております。</p>
+                                        <h3 class="font-alt">{{__('lp.ｽﾎﾟｰﾂ走行に特化')}}</h3>
+                                        <p class="text-muted mb-0">{{__('lp.スポーツ走行向けに使いやすいよう調整しております。')}}</p>
                                     </div>
                                 </div>
                                 
@@ -132,16 +133,16 @@
                                     <!-- Feature item-->
                                     <div class="text-center">
                                         <i class="bi-camera-video icon-feature text-gradient d-block mb-3"></i>
-                                        <h3 class="font-alt">様々な動画に対応</h3>
-                                        <p class="text-muted mb-0">youtube又は端末内の全ての動画に対応</p>
+                                        <h3 class="font-alt">{{__('lp.様々な動画に対応')}}</h3>
+                                        <p class="text-muted mb-0">{{__('lp.youtube又は端末内の全ての動画に対応')}}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <!-- Feature item-->
                                     <div class="text-center">
                                         <i class="bi-emoji-smile icon-feature text-gradient d-block mb-3"></i>
-                                        <h3 class="font-alt">簡単操作</h3>
-                                        <p class="text-muted mb-0">複雑な操作はありません。</p>
+                                        <h3 class="font-alt">{{__('lp.簡単操作')}}</h3>
+                                        <p class="text-muted mb-0">{{__('lp.複雑な操作はありません。')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -150,8 +151,8 @@
                                     <!-- Feature item-->
                                     <div class="text-center">
                                         <i class="bi-twitter icon-feature text-gradient d-block mb-3"></i>
-                                        <h3 class="font-alt">SNS共有可能</h3>
-                                        <p class="text-muted mb-0">比較した内容をSNSで共有できます。</p>
+                                        <h3 class="font-alt">{{__('lp.SNS共有可能')}}</h3>
+                                        <p class="text-muted mb-0">{{__('lp.比較した内容をSNSで共有できます。')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -186,10 +187,10 @@
             <div class="container px-5">
                 <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
                     <div class="col-12">
-                        <h2 class="display-4 lh-1 mb-2">基本機能</h2>
-                        <p class="lead fw-normal text-muted mb-1">・youtube又は端末内の動画の比較</p>
-                        <p class="lead fw-normal text-muted mb-1">・比較した結果の保存(ユーザー登録する必要あり)</p>
-                        <p class="lead fw-normal text-muted mb-1">・比較した結果をツイッター等で共有(ユーザー登録する必要あり)</p>
+                        <h2 class="display-4 lh-1 mb-2">{{__('lp.基本機能')}}</h2>
+                        <p class="lead fw-normal text-muted mb-1">・{{__('lp.youtube又は端末内の動画の比較')}}</p>
+                        <p class="lead fw-normal text-muted mb-1">・{{__('lp.比較した結果の保存(ユーザー登録する必要あり)')}}</p>
+                        <p class="lead fw-normal text-muted mb-1">・{{__('lp.比較した結果をツイッター等で共有(ユーザー登録する必要あり)')}}</p>
                     </div>
                 </div>
             </div>
@@ -197,21 +198,21 @@
         <!-- App demo section-->
         <section id="demo" class="bg-white">
             <div class="container px-5">
-                <h2 class="display-4 lh-1 mb-2">デモ</h2>
+                <h2 class="display-4 lh-1 mb-2">{{__('lp.デモ')}}</h2>
                 <iframe style="aspect-ratio: 16 / 9;width: 100%;height: 400px;" src="https://www.youtube.com/embed/QD5WELzWhNY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
         <!-- App demo section-->
         <section id="howtouse" class="bg-light">
             <div class="container px-5">
-                <h2 class="display-4 lh-1 mb-2">使い方</h2>
+                <h2 class="display-4 lh-1 mb-2">{{__('lp.使い方')}}</h2>
                 <iframe style="aspect-ratio: 16 / 9;width: 100%;height: 400px;" src="https://www.youtube.com/embed/rem2jO5b7Hw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
         <!-- App demo section-->
         <section id="screenshot" class="bg-white">
             <div class="container px-5">
-                <h2 class="display-4 lh-1 mb-2">ｽｸﾘｰﾝｼｮｯﾄ</h2>
+                <h2 class="display-4 lh-1 mb-2">{{__('lp.スクリーンショット')}}</h2>
                 <div class="row">
                     <div class="col">
                         <img class="rounded img-fluid" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/screenshot1.jpg') }}" alt="..." />
@@ -227,9 +228,9 @@
         </section>
         <!-- Footer-->
         <!-- App badge section-->
-        <section class="bg-gradient-primary-to-secondary" id="download">
+        <section class="bg-gradient-primary-to-secondary" id="startnow">
             <div class="container px-5">
-                <h2 class="text-center text-white font-alt mb-4">今すぐ起動</h2>
+                <h2 class="text-center text-white font-alt mb-4">{{__('lp.今すぐ起動')}}</h2>
                 <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
                     <a class="me-lg-3 mb-4 mb-lg-0" href="{{ route('youyou')}}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
                 </div>
@@ -240,7 +241,7 @@
             <div class="container px-5">
                 <div class="text-white-50 small">
                     <div class="mb-2">Copyright (c) 2013-2022 Start Bootstrap LLC</div>
-                    <a href="https://twitter.com/homing_fd2">お問い合わせ</a>
+                    <a href="https://twitter.com/homing_fd2">{{__('lp.お問い合わせ')}}</a>
                     
                 </div>
             </div>
