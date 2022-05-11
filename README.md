@@ -14,7 +14,7 @@ youtube 上の他人の車載とも比較できて便利そうだと思って作
 
 ## リンク
 
-https://runcheck.homisoftware.net/ <br>
+http://runcheck.homisoftware.net/lp/ja <br>
 <br>
 動作サンプル(画面幅をスマホサイズにして下さい)<br>
 https://runcheck.homisoftware.net/youyou-tweat?id=10<br>
