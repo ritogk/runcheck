@@ -13,7 +13,7 @@
 http://runcheck.homisoftware.net/lp/ja <br>
 <br>
 動作サンプル(画面幅をスマホサイズにして下さい)<br>
-https://runcheck.homisoftware.net/youyou-tweat?id=10<br>
+https://runcheck.homisoftware.net/youyou-read/22<br>
 <br>
 https://twitter.com/homing_fd2/status/1516361339748319235?s=20&t=m7lv_Mh4W78hdyT9CsLSYQ<br>
 <br>
