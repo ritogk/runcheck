@@ -57,7 +57,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-light" style="font-size:8px;">
-                            サーキットに特化した車載動画比較アプリ
+                            車載動画でサーキットを攻略！タイムアップのための比較アプリ
                         </div>
                     </div>
                 </div>
