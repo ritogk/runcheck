@@ -2,6 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
+    <meta name="description" content="{{__('lp.html-description')}}" />
+    <meta name="author" content="ritogk" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
@@ -13,7 +15,7 @@
     <!-- twitter card -->
     @yield('twitterCard')
     
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{__('lp.html-title')}}</title>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>

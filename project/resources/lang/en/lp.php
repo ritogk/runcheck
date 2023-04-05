@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'html-title' => 'Runcheck - Circuit on the track with in-car videos! Comparison app for improving times',
+    'html-description' => 'On-board video comparison app for circuit use. Free and easy comparison of best lap, second lap, etc., with YouTube in-car videos and endless comparison options.',
     '基本機能' => 'Basic Functions',
     'デモ' => 'Demo',
     '使い方' => 'How to use',
