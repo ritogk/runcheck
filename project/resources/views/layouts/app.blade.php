@@ -89,7 +89,7 @@
                                 </li>
                             @endif
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('contact') }}">{{ __('お問い合わせ') }}</a>
+                                <a class="nav-link" href="https://twitter.com/homing_fd2">{{ __('お問い合わせ') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
