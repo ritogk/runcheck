@@ -30,7 +30,9 @@ class YouYouController extends Controller
     public function store(Request $request)
     {
         $data = new Comparison;
-        $comparison = $data->create($request->all());
+        $request_data = $request->all();
+        $request_data['user_id'] = Auth::id();
+        $comparison = $data->create($request_data);
         return redirect(route('youyou.read', ['id' => $comparison->id]));
     }
 
