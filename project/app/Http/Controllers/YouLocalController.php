@@ -39,7 +39,9 @@ class YouLocalController extends Controller
     public function store(Request $request)
     {
         $data = new Comparison;
-        $comparison = $data->create($request->all());
+        $request_data = $request->all();
+        $request_data['user_id'] = Auth::id();
+        $comparison = $data->create($request_data);
         return redirect(route('youlocal.read', ['id' => $comparison->id]));
     }
 
@@ -75,19 +77,6 @@ class YouLocalController extends Controller
     public function update(Request $request, $id)
     {
         //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $data = Comparison::find($id);
-        $data->delete();
-        return redirect('/youlocal');
     }
 
     // 読み込み用
