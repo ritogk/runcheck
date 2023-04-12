@@ -35,19 +35,6 @@ class YouYouController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $data = Comparison::find($id);
-        $data->delete();
-        return redirect('/youyou');
-    }
-
-    /**
      * ツイートから遷移してきた場合の処理
      *
      * @param Request $request

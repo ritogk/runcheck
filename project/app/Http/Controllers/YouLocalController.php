@@ -77,19 +77,6 @@ class YouLocalController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $data = Comparison::find($id);
-        $data->delete();
-        return redirect('/youlocal');
-    }
-
     // 読み込み用
     public function read($id)
     {
