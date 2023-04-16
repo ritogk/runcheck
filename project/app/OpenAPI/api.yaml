@@ -262,6 +262,21 @@ components:
         - id
         - hundleName
 
+    Video:
+      description: 動画情報
+      type: object
+      properties:
+        url:
+          type: string
+        timeSt:
+          type: string
+        videoType:
+          $ref: "#/components/schemas/videoType"
+      required:
+        - url
+        - timeSt
+        - videoType
+
     videoComparison:
       description: 動画比較情報
       type: object
@@ -273,31 +288,9 @@ components:
         title:
           type: string
         video1:
-          type: object
-          properties:
-            url:
-              type: string
-            timeSt:
-              type: string
-            videoType:
-              $ref: "#/components/schemas/videoType"
-          required:
-            - url
-            - timeSt
-            - videoType
+          $ref: "#/components/schemas/Video"
         video2:
-          type: object
-          properties:
-            url:
-              type: string
-            timeSt:
-              type: string
-            videoType:
-              $ref: "#/components/schemas/videoType"
-          required:
-            - url
-            - timeSt
-            - videoType
+          $ref: "#/components/schemas/Video"
       required:
         - video1
         - video2

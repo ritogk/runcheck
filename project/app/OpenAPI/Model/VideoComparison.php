@@ -61,8 +61,8 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
         'userId' => 'float',
         'memo' => 'string',
         'title' => 'string',
-        'video1' => '\App\OpenAPI\Model\VideoComparisonVideo1',
-        'video2' => '\App\OpenAPI\Model\VideoComparisonVideo1'
+        'video1' => '\App\OpenAPI\Model\Video',
+        'video2' => '\App\OpenAPI\Model\Video'
     ];
 
     /**
@@ -408,7 +408,7 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets video1
      *
-     * @return \App\OpenAPI\Model\VideoComparisonVideo1
+     * @return \App\OpenAPI\Model\Video
      */
     public function getVideo1()
     {
@@ -418,7 +418,7 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video1
      *
-     * @param \App\OpenAPI\Model\VideoComparisonVideo1 $video1 video1
+     * @param \App\OpenAPI\Model\Video $video1 video1
      *
      * @return self
      */
@@ -435,7 +435,7 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets video2
      *
-     * @return \App\OpenAPI\Model\VideoComparisonVideo1
+     * @return \App\OpenAPI\Model\Video
      */
     public function getVideo2()
     {
@@ -445,7 +445,7 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets video2
      *
-     * @param \App\OpenAPI\Model\VideoComparisonVideo1 $video2 video2
+     * @param \App\OpenAPI\Model\Video $video2 video2
      *
      * @return self
      */

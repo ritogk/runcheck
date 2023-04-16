@@ -1,6 +1,6 @@
 <?php
 /**
- * VideoComparisonVideo1
+ * Video
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * VideoComparisonVideo1 Class Doc Comment
+ * Video Class Doc Comment
  *
  * @category Class
+ * @description 動画情報
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class VideoComparisonVideo1 implements ModelInterface, ArrayAccess, \JsonSerializable
+class Video implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class VideoComparisonVideo1 implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'videoComparison_video1';
+    protected static $openAPIModelName = 'Video';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
