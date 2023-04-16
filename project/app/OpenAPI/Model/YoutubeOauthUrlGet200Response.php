@@ -1,6 +1,6 @@
 <?php
 /**
- * RegisterPostRequest
+ * YoutubeOauthUrlGet200Response
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * RegisterPostRequest Class Doc Comment
+ * YoutubeOauthUrlGet200Response Class Doc Comment
  *
  * @category Class
  * @package  App\OpenAPI
@@ -40,7 +40,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class YoutubeOauthUrlGet200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = '_register_post_request';
+    protected static $openAPIModelName = '_youtube_oauth_url_get_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,7 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'handleName' => 'string',
-        'carType' => 'string',
-        'email' => 'string',
-        'password' => 'string'
+        'redirectUrl' => 'string'
     ];
 
     /**
@@ -71,10 +68,7 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'handleName' => null,
-        'carType' => null,
-        'email' => null,
-        'password' => null
+        'redirectUrl' => null
     ];
 
     /**
@@ -83,10 +77,7 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'handleName' => false,
-		'carType' => false,
-		'email' => false,
-		'password' => false
+        'redirectUrl' => false
     ];
 
     /**
@@ -175,10 +166,7 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'handleName' => 'handleName',
-        'carType' => 'carType',
-        'email' => 'email',
-        'password' => 'password'
+        'redirectUrl' => 'redirectUrl'
     ];
 
     /**
@@ -187,10 +175,7 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'handleName' => 'setHandleName',
-        'carType' => 'setCarType',
-        'email' => 'setEmail',
-        'password' => 'setPassword'
+        'redirectUrl' => 'setRedirectUrl'
     ];
 
     /**
@@ -199,10 +184,7 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'handleName' => 'getHandleName',
-        'carType' => 'getCarType',
-        'email' => 'getEmail',
-        'password' => 'getPassword'
+        'redirectUrl' => 'getRedirectUrl'
     ];
 
     /**
@@ -262,10 +244,7 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('handleName', $data ?? [], null);
-        $this->setIfExists('carType', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('redirectUrl', $data ?? [], null);
     }
 
     /**
@@ -295,17 +274,8 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['handleName'] === null) {
-            $invalidProperties[] = "'handleName' can't be null";
-        }
-        if ($this->container['carType'] === null) {
-            $invalidProperties[] = "'carType' can't be null";
-        }
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
-        }
-        if ($this->container['password'] === null) {
-            $invalidProperties[] = "'password' can't be null";
+        if ($this->container['redirectUrl'] === null) {
+            $invalidProperties[] = "'redirectUrl' can't be null";
         }
         return $invalidProperties;
     }
@@ -323,109 +293,28 @@ class RegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets handleName
+     * Gets redirectUrl
      *
      * @return string
      */
-    public function getHandleName()
+    public function getRedirectUrl()
     {
-        return $this->container['handleName'];
+        return $this->container['redirectUrl'];
     }
 
     /**
-     * Sets handleName
+     * Sets redirectUrl
      *
-     * @param string $handleName handleName
+     * @param string $redirectUrl 認可画面のリダイレクト用URL
      *
      * @return self
      */
-    public function setHandleName($handleName)
+    public function setRedirectUrl($redirectUrl)
     {
-        if (is_null($handleName)) {
-            throw new \InvalidArgumentException('non-nullable handleName cannot be null');
+        if (is_null($redirectUrl)) {
+            throw new \InvalidArgumentException('non-nullable redirectUrl cannot be null');
         }
-        $this->container['handleName'] = $handleName;
-
-        return $this;
-    }
-
-    /**
-     * Gets carType
-     *
-     * @return string
-     */
-    public function getCarType()
-    {
-        return $this->container['carType'];
-    }
-
-    /**
-     * Sets carType
-     *
-     * @param string $carType carType
-     *
-     * @return self
-     */
-    public function setCarType($carType)
-    {
-        if (is_null($carType)) {
-            throw new \InvalidArgumentException('non-nullable carType cannot be null');
-        }
-        $this->container['carType'] = $carType;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string $email email
-     *
-     * @return self
-     */
-    public function setEmail($email)
-    {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
-        }
-        $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
-     * Gets password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->container['password'];
-    }
-
-    /**
-     * Sets password
-     *
-     * @param string $password password
-     *
-     * @return self
-     */
-    public function setPassword($password)
-    {
-        if (is_null($password)) {
-            throw new \InvalidArgumentException('non-nullable password cannot be null');
-        }
-        $this->container['password'] = $password;
+        $this->container['redirectUrl'] = $redirectUrl;
 
         return $this;
     }

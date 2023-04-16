@@ -1,6 +1,6 @@
 <?php
 /**
- * OauthYoutubePostRequest
+ * UsersRegisterPostRequest
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * OauthYoutubePostRequest Class Doc Comment
+ * UsersRegisterPostRequest Class Doc Comment
  *
  * @category Class
  * @package  App\OpenAPI
@@ -40,7 +40,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class UsersRegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = '_oauth_youtube_post_request';
+    protected static $openAPIModelName = '_users_register_post_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,10 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'code' => 'string'
+        'handleName' => 'string',
+        'carType' => 'string',
+        'email' => 'string',
+        'password' => 'string'
     ];
 
     /**
@@ -68,7 +71,10 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'code' => null
+        'handleName' => null,
+        'carType' => null,
+        'email' => null,
+        'password' => null
     ];
 
     /**
@@ -77,7 +83,10 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'code' => false
+        'handleName' => false,
+		'carType' => false,
+		'email' => false,
+		'password' => false
     ];
 
     /**
@@ -166,7 +175,10 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'code' => 'code'
+        'handleName' => 'handleName',
+        'carType' => 'carType',
+        'email' => 'email',
+        'password' => 'password'
     ];
 
     /**
@@ -175,7 +187,10 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'code' => 'setCode'
+        'handleName' => 'setHandleName',
+        'carType' => 'setCarType',
+        'email' => 'setEmail',
+        'password' => 'setPassword'
     ];
 
     /**
@@ -184,7 +199,10 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'code' => 'getCode'
+        'handleName' => 'getHandleName',
+        'carType' => 'getCarType',
+        'email' => 'getEmail',
+        'password' => 'getPassword'
     ];
 
     /**
@@ -244,7 +262,10 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('handleName', $data ?? [], null);
+        $this->setIfExists('carType', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('password', $data ?? [], null);
     }
 
     /**
@@ -274,8 +295,17 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['code'] === null) {
-            $invalidProperties[] = "'code' can't be null";
+        if ($this->container['handleName'] === null) {
+            $invalidProperties[] = "'handleName' can't be null";
+        }
+        if ($this->container['carType'] === null) {
+            $invalidProperties[] = "'carType' can't be null";
+        }
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
+        }
+        if ($this->container['password'] === null) {
+            $invalidProperties[] = "'password' can't be null";
         }
         return $invalidProperties;
     }
@@ -293,28 +323,109 @@ class OauthYoutubePostRequest implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets code
+     * Gets handleName
      *
      * @return string
      */
-    public function getCode()
+    public function getHandleName()
     {
-        return $this->container['code'];
+        return $this->container['handleName'];
     }
 
     /**
-     * Sets code
+     * Sets handleName
      *
-     * @param string $code code
+     * @param string $handleName handleName
      *
      * @return self
      */
-    public function setCode($code)
+    public function setHandleName($handleName)
     {
-        if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        if (is_null($handleName)) {
+            throw new \InvalidArgumentException('non-nullable handleName cannot be null');
         }
-        $this->container['code'] = $code;
+        $this->container['handleName'] = $handleName;
+
+        return $this;
+    }
+
+    /**
+     * Gets carType
+     *
+     * @return string
+     */
+    public function getCarType()
+    {
+        return $this->container['carType'];
+    }
+
+    /**
+     * Sets carType
+     *
+     * @param string $carType carType
+     *
+     * @return self
+     */
+    public function setCarType($carType)
+    {
+        if (is_null($carType)) {
+            throw new \InvalidArgumentException('non-nullable carType cannot be null');
+        }
+        $this->container['carType'] = $carType;
+
+        return $this;
+    }
+
+    /**
+     * Gets email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->container['email'];
+    }
+
+    /**
+     * Sets email
+     *
+     * @param string $email email
+     *
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        if (is_null($email)) {
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
+        }
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->container['password'];
+    }
+
+    /**
+     * Sets password
+     *
+     * @param string $password password
+     *
+     * @return self
+     */
+    public function setPassword($password)
+    {
+        if (is_null($password)) {
+            throw new \InvalidArgumentException('non-nullable password cannot be null');
+        }
+        $this->container['password'] = $password;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * LoginPostRequest
+ * YoutubeOauthPostRequest
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * LoginPostRequest Class Doc Comment
+ * YoutubeOauthPostRequest Class Doc Comment
  *
  * @category Class
  * @package  App\OpenAPI
@@ -40,7 +40,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class YoutubeOauthPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = '_login_post_request';
+    protected static $openAPIModelName = '_youtube_oauth_post_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'email' => 'string',
-        'password' => 'string'
+        'code' => 'string'
     ];
 
     /**
@@ -69,8 +68,7 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'email' => null,
-        'password' => null
+        'code' => null
     ];
 
     /**
@@ -79,8 +77,7 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'email' => false,
-		'password' => false
+        'code' => false
     ];
 
     /**
@@ -169,8 +166,7 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'email' => 'email',
-        'password' => 'password'
+        'code' => 'code'
     ];
 
     /**
@@ -179,8 +175,7 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'email' => 'setEmail',
-        'password' => 'setPassword'
+        'code' => 'setCode'
     ];
 
     /**
@@ -189,8 +184,7 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'email' => 'getEmail',
-        'password' => 'getPassword'
+        'code' => 'getCode'
     ];
 
     /**
@@ -250,8 +244,7 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
     }
 
     /**
@@ -281,11 +274,8 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
-        }
-        if ($this->container['password'] === null) {
-            $invalidProperties[] = "'password' can't be null";
+        if ($this->container['code'] === null) {
+            $invalidProperties[] = "'code' can't be null";
         }
         return $invalidProperties;
     }
@@ -303,55 +293,28 @@ class LoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets email
+     * Gets code
      *
      * @return string
      */
-    public function getEmail()
+    public function getCode()
     {
-        return $this->container['email'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets email
+     * Sets code
      *
-     * @param string $email email
+     * @param string $code code
      *
      * @return self
      */
-    public function setEmail($email)
+    public function setCode($code)
     {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
-        $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
-     * Gets password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->container['password'];
-    }
-
-    /**
-     * Sets password
-     *
-     * @param string $password password
-     *
-     * @return self
-     */
-    public function setPassword($password)
-    {
-        if (is_null($password)) {
-            throw new \InvalidArgumentException('non-nullable password cannot be null');
-        }
-        $this->container['password'] = $password;
+        $this->container['code'] = $code;
 
         return $this;
     }

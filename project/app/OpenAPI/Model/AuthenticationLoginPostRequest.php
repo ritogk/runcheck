@@ -1,6 +1,6 @@
 <?php
 /**
- * OauthYoutubeUrlGet200Response
+ * AuthenticationLoginPostRequest
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * OauthYoutubeUrlGet200Response Class Doc Comment
+ * AuthenticationLoginPostRequest Class Doc Comment
  *
  * @category Class
  * @package  App\OpenAPI
@@ -40,7 +40,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = '_oauth_youtube_url_get_200_response';
+    protected static $openAPIModelName = '_authentication_login_post_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,8 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'redirectUrl' => 'string'
+        'email' => 'string',
+        'password' => 'string'
     ];
 
     /**
@@ -68,7 +69,8 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'redirectUrl' => null
+        'email' => null,
+        'password' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'redirectUrl' => false
+        'email' => false,
+		'password' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'redirectUrl' => 'redirectUrl'
+        'email' => 'email',
+        'password' => 'password'
     ];
 
     /**
@@ -175,7 +179,8 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'redirectUrl' => 'setRedirectUrl'
+        'email' => 'setEmail',
+        'password' => 'setPassword'
     ];
 
     /**
@@ -184,7 +189,8 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'redirectUrl' => 'getRedirectUrl'
+        'email' => 'getEmail',
+        'password' => 'getPassword'
     ];
 
     /**
@@ -244,7 +250,8 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('redirectUrl', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('password', $data ?? [], null);
     }
 
     /**
@@ -274,8 +281,11 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
-        if ($this->container['redirectUrl'] === null) {
-            $invalidProperties[] = "'redirectUrl' can't be null";
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
+        }
+        if ($this->container['password'] === null) {
+            $invalidProperties[] = "'password' can't be null";
         }
         return $invalidProperties;
     }
@@ -293,28 +303,55 @@ class OauthYoutubeUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets redirectUrl
+     * Gets email
      *
      * @return string
      */
-    public function getRedirectUrl()
+    public function getEmail()
     {
-        return $this->container['redirectUrl'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets redirectUrl
+     * Sets email
      *
-     * @param string $redirectUrl 認可画面のリダイレクト用URL
+     * @param string $email email
      *
      * @return self
      */
-    public function setRedirectUrl($redirectUrl)
+    public function setEmail($email)
     {
-        if (is_null($redirectUrl)) {
-            throw new \InvalidArgumentException('non-nullable redirectUrl cannot be null');
+        if (is_null($email)) {
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
-        $this->container['redirectUrl'] = $redirectUrl;
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->container['password'];
+    }
+
+    /**
+     * Sets password
+     *
+     * @param string $password password
+     *
+     * @return self
+     */
+    public function setPassword($password)
+    {
+        if (is_null($password)) {
+            throw new \InvalidArgumentException('non-nullable password cannot be null');
+        }
+        $this->container['password'] = $password;
 
         return $this;
     }

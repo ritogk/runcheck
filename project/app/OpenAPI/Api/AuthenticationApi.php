@@ -71,16 +71,13 @@ class AuthenticationApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'loginPost' => [
+        'authenticationLoginPost' => [
             'application/json',
         ],
-        'logoutPost' => [
+        'authenticationLogoutPost' => [
             'application/json',
         ],
-        'meGet' => [
-            'application/json',
-        ],
-        'registerPost' => [
+        'authenticationMeGet' => [
             'application/json',
         ],
     ];
@@ -132,38 +129,38 @@ class AuthenticationApi
     }
 
     /**
-     * Operation loginPost
+     * Operation authenticationLoginPost
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\LoginPostRequest $loginPostRequest loginPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\AuthenticationLoginPostRequest $authenticationLoginPostRequest authenticationLoginPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLoginPost'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\User
      */
-    public function loginPost($loginPostRequest, string $contentType = self::contentTypes['loginPost'][0])
+    public function authenticationLoginPost($authenticationLoginPostRequest, string $contentType = self::contentTypes['authenticationLoginPost'][0])
     {
-        list($response) = $this->loginPostWithHttpInfo($loginPostRequest, $contentType);
+        list($response) = $this->authenticationLoginPostWithHttpInfo($authenticationLoginPostRequest, $contentType);
         return $response;
     }
 
     /**
-     * Operation loginPostWithHttpInfo
+     * Operation authenticationLoginPostWithHttpInfo
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\LoginPostRequest $loginPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\AuthenticationLoginPostRequest $authenticationLoginPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLoginPost'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\User, HTTP status code, HTTP response headers (array of strings)
      */
-    public function loginPostWithHttpInfo($loginPostRequest, string $contentType = self::contentTypes['loginPost'][0])
+    public function authenticationLoginPostWithHttpInfo($authenticationLoginPostRequest, string $contentType = self::contentTypes['authenticationLoginPost'][0])
     {
-        $request = $this->loginPostRequest($loginPostRequest, $contentType);
+        $request = $this->authenticationLoginPostRequest($authenticationLoginPostRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -250,19 +247,19 @@ class AuthenticationApi
     }
 
     /**
-     * Operation loginPostAsync
+     * Operation authenticationLoginPostAsync
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\LoginPostRequest $loginPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\AuthenticationLoginPostRequest $authenticationLoginPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLoginPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function loginPostAsync($loginPostRequest, string $contentType = self::contentTypes['loginPost'][0])
+    public function authenticationLoginPostAsync($authenticationLoginPostRequest, string $contentType = self::contentTypes['authenticationLoginPost'][0])
     {
-        return $this->loginPostAsyncWithHttpInfo($loginPostRequest, $contentType)
+        return $this->authenticationLoginPostAsyncWithHttpInfo($authenticationLoginPostRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -271,20 +268,20 @@ class AuthenticationApi
     }
 
     /**
-     * Operation loginPostAsyncWithHttpInfo
+     * Operation authenticationLoginPostAsyncWithHttpInfo
      *
      * ログイン
      *
-     * @param  \App\OpenAPI\Model\LoginPostRequest $loginPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\AuthenticationLoginPostRequest $authenticationLoginPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLoginPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function loginPostAsyncWithHttpInfo($loginPostRequest, string $contentType = self::contentTypes['loginPost'][0])
+    public function authenticationLoginPostAsyncWithHttpInfo($authenticationLoginPostRequest, string $contentType = self::contentTypes['authenticationLoginPost'][0])
     {
         $returnType = '\App\OpenAPI\Model\User';
-        $request = $this->loginPostRequest($loginPostRequest, $contentType);
+        $request = $this->authenticationLoginPostRequest($authenticationLoginPostRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -323,26 +320,26 @@ class AuthenticationApi
     }
 
     /**
-     * Create request for operation 'loginPost'
+     * Create request for operation 'authenticationLoginPost'
      *
-     * @param  \App\OpenAPI\Model\LoginPostRequest $loginPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['loginPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\AuthenticationLoginPostRequest $authenticationLoginPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLoginPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function loginPostRequest($loginPostRequest, string $contentType = self::contentTypes['loginPost'][0])
+    public function authenticationLoginPostRequest($authenticationLoginPostRequest, string $contentType = self::contentTypes['authenticationLoginPost'][0])
     {
 
-        // verify the required parameter 'loginPostRequest' is set
-        if ($loginPostRequest === null || (is_array($loginPostRequest) && count($loginPostRequest) === 0)) {
+        // verify the required parameter 'authenticationLoginPostRequest' is set
+        if ($authenticationLoginPostRequest === null || (is_array($authenticationLoginPostRequest) && count($authenticationLoginPostRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $loginPostRequest when calling loginPost'
+                'Missing the required parameter $authenticationLoginPostRequest when calling authenticationLoginPost'
             );
         }
 
 
-        $resourcePath = '/login';
+        $resourcePath = '/authentication/login';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -360,12 +357,12 @@ class AuthenticationApi
         );
 
         // for model (json/xml)
-        if (isset($loginPostRequest)) {
+        if (isset($authenticationLoginPostRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($loginPostRequest));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($authenticationLoginPostRequest));
             } else {
-                $httpBody = $loginPostRequest;
+                $httpBody = $authenticationLoginPostRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -414,35 +411,35 @@ class AuthenticationApi
     }
 
     /**
-     * Operation logoutPost
+     * Operation authenticationLogoutPost
      *
      * ログアウト
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['logoutPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLogoutPost'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function logoutPost(string $contentType = self::contentTypes['logoutPost'][0])
+    public function authenticationLogoutPost(string $contentType = self::contentTypes['authenticationLogoutPost'][0])
     {
-        $this->logoutPostWithHttpInfo($contentType);
+        $this->authenticationLogoutPostWithHttpInfo($contentType);
     }
 
     /**
-     * Operation logoutPostWithHttpInfo
+     * Operation authenticationLogoutPostWithHttpInfo
      *
      * ログアウト
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['logoutPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLogoutPost'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function logoutPostWithHttpInfo(string $contentType = self::contentTypes['logoutPost'][0])
+    public function authenticationLogoutPostWithHttpInfo(string $contentType = self::contentTypes['authenticationLogoutPost'][0])
     {
-        $request = $this->logoutPostRequest($contentType);
+        $request = $this->authenticationLogoutPostRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -489,18 +486,18 @@ class AuthenticationApi
     }
 
     /**
-     * Operation logoutPostAsync
+     * Operation authenticationLogoutPostAsync
      *
      * ログアウト
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['logoutPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLogoutPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function logoutPostAsync(string $contentType = self::contentTypes['logoutPost'][0])
+    public function authenticationLogoutPostAsync(string $contentType = self::contentTypes['authenticationLogoutPost'][0])
     {
-        return $this->logoutPostAsyncWithHttpInfo($contentType)
+        return $this->authenticationLogoutPostAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -509,19 +506,19 @@ class AuthenticationApi
     }
 
     /**
-     * Operation logoutPostAsyncWithHttpInfo
+     * Operation authenticationLogoutPostAsyncWithHttpInfo
      *
      * ログアウト
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['logoutPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLogoutPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function logoutPostAsyncWithHttpInfo(string $contentType = self::contentTypes['logoutPost'][0])
+    public function authenticationLogoutPostAsyncWithHttpInfo(string $contentType = self::contentTypes['authenticationLogoutPost'][0])
     {
         $returnType = '';
-        $request = $this->logoutPostRequest($contentType);
+        $request = $this->authenticationLogoutPostRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -547,18 +544,18 @@ class AuthenticationApi
     }
 
     /**
-     * Create request for operation 'logoutPost'
+     * Create request for operation 'authenticationLogoutPost'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['logoutPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationLogoutPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function logoutPostRequest(string $contentType = self::contentTypes['logoutPost'][0])
+    public function authenticationLogoutPostRequest(string $contentType = self::contentTypes['authenticationLogoutPost'][0])
     {
 
 
-        $resourcePath = '/logout';
+        $resourcePath = '/authentication/logout';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -623,36 +620,36 @@ class AuthenticationApi
     }
 
     /**
-     * Operation meGet
+     * Operation authenticationMeGet
      *
      * ログイン済のユーザー情報を取得
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['meGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationMeGet'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\User
      */
-    public function meGet(string $contentType = self::contentTypes['meGet'][0])
+    public function authenticationMeGet(string $contentType = self::contentTypes['authenticationMeGet'][0])
     {
-        list($response) = $this->meGetWithHttpInfo($contentType);
+        list($response) = $this->authenticationMeGetWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation meGetWithHttpInfo
+     * Operation authenticationMeGetWithHttpInfo
      *
      * ログイン済のユーザー情報を取得
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['meGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationMeGet'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\User, HTTP status code, HTTP response headers (array of strings)
      */
-    public function meGetWithHttpInfo(string $contentType = self::contentTypes['meGet'][0])
+    public function authenticationMeGetWithHttpInfo(string $contentType = self::contentTypes['authenticationMeGet'][0])
     {
-        $request = $this->meGetRequest($contentType);
+        $request = $this->authenticationMeGetRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -739,18 +736,18 @@ class AuthenticationApi
     }
 
     /**
-     * Operation meGetAsync
+     * Operation authenticationMeGetAsync
      *
      * ログイン済のユーザー情報を取得
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['meGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationMeGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function meGetAsync(string $contentType = self::contentTypes['meGet'][0])
+    public function authenticationMeGetAsync(string $contentType = self::contentTypes['authenticationMeGet'][0])
     {
-        return $this->meGetAsyncWithHttpInfo($contentType)
+        return $this->authenticationMeGetAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -759,19 +756,19 @@ class AuthenticationApi
     }
 
     /**
-     * Operation meGetAsyncWithHttpInfo
+     * Operation authenticationMeGetAsyncWithHttpInfo
      *
      * ログイン済のユーザー情報を取得
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['meGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationMeGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function meGetAsyncWithHttpInfo(string $contentType = self::contentTypes['meGet'][0])
+    public function authenticationMeGetAsyncWithHttpInfo(string $contentType = self::contentTypes['authenticationMeGet'][0])
     {
         $returnType = '\App\OpenAPI\Model\User';
-        $request = $this->meGetRequest($contentType);
+        $request = $this->authenticationMeGetRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -810,18 +807,18 @@ class AuthenticationApi
     }
 
     /**
-     * Create request for operation 'meGet'
+     * Create request for operation 'authenticationMeGet'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['meGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['authenticationMeGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function meGetRequest(string $contentType = self::contentTypes['meGet'][0])
+    public function authenticationMeGetRequest(string $contentType = self::contentTypes['authenticationMeGet'][0])
     {
 
 
-        $resourcePath = '/me';
+        $resourcePath = '/authentication/me';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -879,288 +876,6 @@ class AuthenticationApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation registerPost
-     *
-     * 新規登録
-     *
-     * @param  \App\OpenAPI\Model\RegisterPostRequest $registerPostRequest registerPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerPost'] to see the possible values for this operation
-     *
-     * @throws \App\OpenAPI\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \App\OpenAPI\Model\User
-     */
-    public function registerPost($registerPostRequest, string $contentType = self::contentTypes['registerPost'][0])
-    {
-        list($response) = $this->registerPostWithHttpInfo($registerPostRequest, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation registerPostWithHttpInfo
-     *
-     * 新規登録
-     *
-     * @param  \App\OpenAPI\Model\RegisterPostRequest $registerPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerPost'] to see the possible values for this operation
-     *
-     * @throws \App\OpenAPI\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \App\OpenAPI\Model\User, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function registerPostWithHttpInfo($registerPostRequest, string $contentType = self::contentTypes['registerPost'][0])
-    {
-        $request = $this->registerPostRequest($registerPostRequest, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\App\OpenAPI\Model\User' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\App\OpenAPI\Model\User' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\App\OpenAPI\Model\User', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\App\OpenAPI\Model\User';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\App\OpenAPI\Model\User',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation registerPostAsync
-     *
-     * 新規登録
-     *
-     * @param  \App\OpenAPI\Model\RegisterPostRequest $registerPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function registerPostAsync($registerPostRequest, string $contentType = self::contentTypes['registerPost'][0])
-    {
-        return $this->registerPostAsyncWithHttpInfo($registerPostRequest, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation registerPostAsyncWithHttpInfo
-     *
-     * 新規登録
-     *
-     * @param  \App\OpenAPI\Model\RegisterPostRequest $registerPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function registerPostAsyncWithHttpInfo($registerPostRequest, string $contentType = self::contentTypes['registerPost'][0])
-    {
-        $returnType = '\App\OpenAPI\Model\User';
-        $request = $this->registerPostRequest($registerPostRequest, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'registerPost'
-     *
-     * @param  \App\OpenAPI\Model\RegisterPostRequest $registerPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['registerPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function registerPostRequest($registerPostRequest, string $contentType = self::contentTypes['registerPost'][0])
-    {
-
-        // verify the required parameter 'registerPostRequest' is set
-        if ($registerPostRequest === null || (is_array($registerPostRequest) && count($registerPostRequest) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $registerPostRequest when calling registerPost'
-            );
-        }
-
-
-        $resourcePath = '/register';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($registerPostRequest)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($registerPostRequest));
-            } else {
-                $httpBody = $registerPostRequest;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
