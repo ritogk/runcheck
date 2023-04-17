@@ -7,6 +7,8 @@ use App\Libs\Model\TwitterCard;
 use App\Model\Comparison;
 use Auth;
 
+use App\Services\AuthenticationService;
+
 class YouYouController extends Controller
 {
     /**
@@ -16,6 +18,9 @@ class YouYouController extends Controller
      */
     public function index()
     {
+        // $autentication = new AuthenticationService();
+        // $autentication->login('homing0321r4cfw@yahoo.co.jp', 'P@ssw0rd', false);
+
         return view('/youyou', [
             'read_data' => $this->read_disp_data(), 'save_data' => $this->save_data()
         ]);
