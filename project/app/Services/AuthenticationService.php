@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class Authentication
+class AuthenticationService
 {
   public function login(): void
   {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Youtube;
+namespace App\Services\YouTube;
 
-class FetchYoutubeMyList
+class OAuthService
 {
   public function get_redirect_url(): string
   {

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class OperationLog
+class OperationLogService
 {
   public function send(): void
   {
