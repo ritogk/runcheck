@@ -23,6 +23,10 @@ class OAuthService
     $client->setClientSecret($this->client_secret);
     $client->setScopes('https://www.googleapis.com/auth/youtube');
     $client->setRedirectUri($this->redirect_url);
+    $client->setAccessType('offline');    // リフレッシュトークンからアクセストークンを生成するために必要なオプション
+    $client->setApprovalPrompt('force');  // リフッシュトークンを取得するために必要
+    $client->setPrompt('consent');        // アプリとGoogleとを連携する時に毎回アクセス許可用の同意画面を表示させる
+
     $this->client = $client;
   }
 
@@ -36,9 +40,9 @@ class OAuthService
     return $this->client->createAuthUrl();
   }
 
-  public function fetch_token(string $code): string
+  public function fetch_token(string $code)
   {
     $result = $this->client->fetchAccessTokenWithAuthCode($code);
-    return $result['access_token'];
+    return $result;
   }
 }
