@@ -30,9 +30,52 @@ class AuthenticationController extends Controller
     {
         $requestBody = new OpenAPI\Model\AuthenticationLoginPostRequest($request->all());
         $user = $this->authentication_service->login($requestBody->getEmail(), $requestBody->getPassword(), $requestBody->getRemember());
+        if ($user) {
+            return response()->json(
+                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),
+                Response::HTTP_OK
+            );
+        }
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\AuthenticationLoginPostRequest::class, $user->toArray()),
+            [],
+            Response::HTTP_UNAUTHORIZED
+        );
+    }
+
+    /**
+     * ログアウト
+     *
+     * @param  Request $request
+     * @return JsonResponse
+     */
+    public function logout(Request $request): JsonResponse
+    {
+        $user = $this->authentication_service->logout();
+        return response()->json(
+            [],
             Response::HTTP_OK
+        );
+    }
+
+    /**
+     * ログイン中のユーザー情報を返す
+     *
+     * @param  Request $request
+     * @return JsonResponse
+     */
+    public function me(Request $request): JsonResponse
+    {
+        $user = $this->authentication_service->me();
+        \Log::debug($user);
+        if ($user) {
+            return response()->json(
+                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),
+                Response::HTTP_OK
+            );
+        }
+        return response()->json(
+            [],
+            Response::HTTP_NO_CONTENT
         );
     }
 }

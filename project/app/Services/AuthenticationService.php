@@ -20,7 +20,7 @@ class AuthenticationService
   {
     $credentials = ['email' => $email, 'password' => $password];
     if (Auth::guard()->attempt($credentials, $remeber)) {
-      $user = Auth::user();
+      $user = Auth::guard()->user();
       session()->regenerate(true);
       return $user;
     }
@@ -44,6 +44,6 @@ class AuthenticationService
    */
   public function me(): ?User
   {
-    return Auth::user();
+    return Auth::guard()->user();
   }
 }
