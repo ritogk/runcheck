@@ -18,11 +18,12 @@ class OAuthService
     $this->client_id = config('oauth.youtube.client_id');
     $this->client_secret = config('oauth.youtube.client_secret');
     $this->redirect_url = config('oauth.youtube.redirect_url');
-    $this->client = new Google_Client();
-    $this->client->setClientId($this->client_id);
-    $this->client->setClientSecret($this->client_secret);
-    $this->client->setScopes('https://www.googleapis.com/auth/youtube');
-    $this->client->setRedirectUri($this->redirect_url);
+    $client = new Google_Client();
+    $client->setClientId($this->client_id);
+    $client->setClientSecret($this->client_secret);
+    $client->setScopes('https://www.googleapis.com/auth/youtube');
+    $client->setRedirectUri($this->redirect_url);
+    $this->client = $client;
   }
 
   public function get_client(): Google_Client
@@ -35,9 +36,9 @@ class OAuthService
     return $this->client->createAuthUrl();
   }
 
-  public function fetch_token(string $code)
+  public function fetch_token(string $code): string
   {
     $result = $this->client->fetchAccessTokenWithAuthCode($code);
-    return $result;
+    return $result['access_token'];
   }
 }
