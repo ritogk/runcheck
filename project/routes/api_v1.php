@@ -18,12 +18,12 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/', [V1\UserController::class, 'create']);
 });
 
-// Route::group(['prefix' => 'authentication'], function () {
-//     Route::post('/login', [Controllers\YouLocalController::class, 'index']);
-//     Route::post('/logout', [Controllers\YouLocalController::class, 'index']);
-//     Route::get('/me', [Controllers\YouLocalController::class, 'index']);
-//     Route::get('/mea', [Controllers\YouLocalController::class, 'index']);
-// });
+Route::group(['prefix' => 'authentication'], function () {
+    Route::post('/login', [V1\AuthenticationController::class, 'login']);
+    // Route::post('/logout', [Controllers\YouLocalController::class, 'index']);
+    // Route::get('/me', [Controllers\YouLocalController::class, 'index']);
+    // Route::get('/mea', [Controllers\YouLocalController::class, 'index']);
+});
 
 // Route::group(['prefix' => 'comparisons'], function () {
 //     Route::get('/{id}', [Controllers\YouLocalController::class, 'index']);

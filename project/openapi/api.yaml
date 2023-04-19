@@ -57,9 +57,12 @@ paths:
                   type: string
                 password:
                   type: string
+                remember:
+                  type: boolean
               required:
                 - email
                 - password
+                - boolean
       responses:
         "200":
           description: OK
@@ -255,9 +258,9 @@ components:
         id:
           type: number
           description: "ユーザーID"
-        hundleName:
+        name:
           type: string
-          description: "ハンドルネーム"
+          description: "ネーム"
       required:
         - id
         - hundleName

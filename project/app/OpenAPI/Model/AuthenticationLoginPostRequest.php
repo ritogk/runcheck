@@ -58,7 +58,8 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPITypes = [
         'email' => 'string',
-        'password' => 'string'
+        'password' => 'string',
+        'remember' => 'bool'
     ];
 
     /**
@@ -70,7 +71,8 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPIFormats = [
         'email' => null,
-        'password' => null
+        'password' => null,
+        'remember' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
       */
     protected static array $openAPINullables = [
         'email' => false,
-		'password' => false
+		'password' => false,
+		'remember' => false
     ];
 
     /**
@@ -170,7 +173,8 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
      */
     protected static $attributeMap = [
         'email' => 'email',
-        'password' => 'password'
+        'password' => 'password',
+        'remember' => 'remember'
     ];
 
     /**
@@ -180,7 +184,8 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
      */
     protected static $setters = [
         'email' => 'setEmail',
-        'password' => 'setPassword'
+        'password' => 'setPassword',
+        'remember' => 'setRemember'
     ];
 
     /**
@@ -190,7 +195,8 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
      */
     protected static $getters = [
         'email' => 'getEmail',
-        'password' => 'getPassword'
+        'password' => 'getPassword',
+        'remember' => 'getRemember'
     ];
 
     /**
@@ -252,6 +258,7 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
     {
         $this->setIfExists('email', $data ?? [], null);
         $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('remember', $data ?? [], null);
     }
 
     /**
@@ -352,6 +359,33 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable password cannot be null');
         }
         $this->container['password'] = $password;
+
+        return $this;
+    }
+
+    /**
+     * Gets remember
+     *
+     * @return bool|null
+     */
+    public function getRemember()
+    {
+        return $this->container['remember'];
+    }
+
+    /**
+     * Sets remember
+     *
+     * @param bool|null $remember remember
+     *
+     * @return self
+     */
+    public function setRemember($remember)
+    {
+        if (is_null($remember)) {
+            throw new \InvalidArgumentException('non-nullable remember cannot be null');
+        }
+        $this->container['remember'] = $remember;
 
         return $this;
     }
