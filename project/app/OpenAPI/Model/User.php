@@ -59,7 +59,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'float',
-        'hundleName' => 'string'
+        'name' => 'string'
     ];
 
     /**
@@ -71,7 +71,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'hundleName' => null
+        'name' => null
     ];
 
     /**
@@ -81,7 +81,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
-		'hundleName' => false
+		'name' => false
     ];
 
     /**
@@ -171,7 +171,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'hundleName' => 'hundleName'
+        'name' => 'name'
     ];
 
     /**
@@ -181,7 +181,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'hundleName' => 'setHundleName'
+        'name' => 'setName'
     ];
 
     /**
@@ -191,7 +191,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'hundleName' => 'getHundleName'
+        'name' => 'getName'
     ];
 
     /**
@@ -252,7 +252,7 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('hundleName', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
     }
 
     /**
@@ -284,9 +284,6 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['hundleName'] === null) {
-            $invalidProperties[] = "'hundleName' can't be null";
         }
         return $invalidProperties;
     }
@@ -331,28 +328,28 @@ class User implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets hundleName
+     * Gets name
      *
-     * @return string
+     * @return string|null
      */
-    public function getHundleName()
+    public function getName()
     {
-        return $this->container['hundleName'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets hundleName
+     * Sets name
      *
-     * @param string $hundleName ハンドルネーム
+     * @param string|null $name ネーム
      *
      * @return self
      */
-    public function setHundleName($hundleName)
+    public function setName($name)
     {
-        if (is_null($hundleName)) {
-            throw new \InvalidArgumentException('non-nullable hundleName cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['hundleName'] = $hundleName;
+        $this->container['name'] = $name;
 
         return $this;
     }
