@@ -20,8 +20,8 @@ Route::group(['prefix' => 'users'], function () {
 
 Route::group(['prefix' => 'authentication'], function () {
     Route::post('/login', [V1\AuthenticationController::class, 'login']);
-    Route::post('/logout', [V1\AuthenticationController::class, 'logout']);
-    Route::get('/me', [V1\AuthenticationController::class, 'me']);
+    Route::post('/logout', [V1\AuthenticationController::class, 'logout'])->middleware(['auth']);
+    Route::get('/me', [V1\AuthenticationController::class, 'me'])->middleware(['auth']);
 });
 
 // Route::group(['prefix' => 'comparisons'], function () {
