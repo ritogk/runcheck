@@ -25,7 +25,7 @@ Route::group(['prefix' => 'authentication'], function () {
 });
 
 Route::group(['prefix' => 'comparisons'], function () {
-    Route::get('/{id}', [V1\CompoarionController::class, 'index']);
+    Route::get('/{id}', [V1\CompoarionController::class, 'find']);
     Route::post('/', [V1\CompoarionController::class, 'create']);
     // Route::post('/{id}/publish', [Controllers\YouLocalController::class, 'index']);
     // Route::delete('/', [Controllers\YouLocalController::class, 'index']);

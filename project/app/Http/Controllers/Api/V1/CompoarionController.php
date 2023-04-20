@@ -15,6 +15,35 @@ use App\Libs\OpenAPIUtility;
 
 class CompoarionController extends Controller
 {
+    private ComparisonService $comparison_service;
+    private AuthenticationService $authentication_service;
+    public function __construct()
+    {
+        $this->comparison_service = new ComparisonService();
+        $this->authentication_service = new AuthenticationService();
+    }
+    /**
+     * 1件取得
+     *
+     * @param  int $id
+     * @return JsonResponse
+     */
+    public function find(int $id): JsonResponse
+    {
+        $comparison = $this->comparison_service->find($id);
+        // 公開されている または 自身の情報のみ返す。
+        if ((!$comparison->release_kbn && $comparison->user_id == $this->authentication_service->me()->id) || $comparison->release_kbn) {
+            return response()->json(
+                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\VideoComparison::class, $comparison->toArray()),
+                Response::HTTP_CREATED
+            );
+        }
+        return response()->json(
+            [],
+            Response::HTTP_NO_CONTENT
+        );
+    }
+
     /**
      * 登録
      *
