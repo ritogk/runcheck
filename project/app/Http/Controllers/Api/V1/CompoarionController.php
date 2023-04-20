@@ -11,6 +11,7 @@ use App\Services\ComparisonService;
 use App\Services\AuthenticationService;
 // usecase
 use App\UseCase\Comparison\RegisterComparisonUseCase;
+use App\UseCase\Comparison\FindComparisonUseCase;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -28,9 +29,9 @@ class CompoarionController extends Controller
      * @param  int $id
      * @return JsonResponse
      */
-    public function find(int $id): JsonResponse
+    public function find(int $id, FindComparisonUseCase $action): JsonResponse
     {
-        $comparison = $this->comparison_service->find($id);
+        $comparison = $action->find($id);
         if ($comparison) {
             return response()->json(
                 OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\VideoComparison::class, $comparison->toArray()),
