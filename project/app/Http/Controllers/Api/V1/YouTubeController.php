@@ -8,6 +8,8 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 // core
 use App\Core\YouTube\OAuthYoutubeClient;
+//usecase
+use App\UseCase\YouTube\FetchAccessTokenAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -29,26 +31,20 @@ class YouTubeController extends Controller
         );
     }
 
-    // /**
-    //  * アクセストークンを取得
-    //  *
-    //  * @return JsonResponse
-    //  */
-    // public function access_token(Request $request): JsonResponse
-    // {
-    //     $requestBody = new OpenAPI\Model\YoutubeOauthPostRequest($request->all());
-    //     $token = $this->oauth_service->fetch_token($requestBody->getCode());
-    //     $this->session_service->put(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN, $token);
-    //     $user = $this->authentication_service->me();
-    //     if ($user) {
-    //         $this->token_service->save_refresh_token($user->id, $token['refresh_token']);
-    //     }
-
-    //     return response()->json(
-    //         [],
-    //         Response::HTTP_OK
-    //     );
-    // }
+    /**
+     * アクセストークンを取得
+     *
+     * @return JsonResponse
+     */
+    public function access_token(Request $request, FetchAccessTokenAction $action): JsonResponse
+    {
+        $requestBody = new OpenAPI\Model\YoutubeOauthPostRequest($request->all());
+        $token = $action->fetch($requestBody->getCode());
+        return response()->json(
+            [],
+            Response::HTTP_OK
+        );
+    }
 
     // /**
     //  * 動画一覧を取得
