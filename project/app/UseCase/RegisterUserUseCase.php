@@ -1,13 +1,18 @@
 <?php
 
-namespace App\Services;
+namespace App\UseCase;
 
 use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserService
+class RegisterUserUseCase
 {
-  public function create(string $handle_name, string $car_type, string $email, string $password): User
+  /**
+   * Undocumented function
+   *
+   * @return User|null
+   */
+  public function __invoke(string $handle_name, string $car_type, string $email, string $password): User
   {
     return User::create([
       'name' => $handle_name,
