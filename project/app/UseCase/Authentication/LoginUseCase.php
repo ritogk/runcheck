@@ -15,7 +15,7 @@ class LoginUseCase
    * @param boolean $remeber
    * @return User|null
    */
-  public function __invoke(string $email, string $password, bool $remeber): ?User
+  public function login(string $email, string $password, bool $remeber): ?User
   {
     $credentials = ['email' => $email, 'password' => $password];
     if (Auth::guard()->attempt($credentials, $remeber)) {

@@ -11,7 +11,7 @@ class LogoutUseCase
    *
    * @return void
    */
-  public function __invoke(): void
+  public function logout(): void
   {
     Auth::guard()->logout();
   }

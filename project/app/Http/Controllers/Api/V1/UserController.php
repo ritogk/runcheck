@@ -23,7 +23,7 @@ class UserController extends Controller
     public function create(Request $request, RegisterUserUseCase $action): JsonResponse
     {
         $requestBody = new OpenAPI\Model\UsersRegisterPostRequest($request->all());
-        $user = $action(
+        $user = $action->register(
             $requestBody->getHandleName(),
             $requestBody->getCarType(),
             $requestBody->getEmail(),

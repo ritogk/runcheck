@@ -25,7 +25,7 @@ class AuthenticationController extends Controller
     public function login(Request $request, LoginUseCase $acion): JsonResponse
     {
         $requestBody = new OpenAPI\Model\AuthenticationLoginPostRequest($request->all());
-        $user = $acion($requestBody->getEmail(), $requestBody->getPassword(), $requestBody->getRemember());
+        $user = $acion->login($requestBody->getEmail(), $requestBody->getPassword(), $requestBody->getRemember());
         if ($user) {
             return response()->json(
                 OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),
@@ -46,7 +46,7 @@ class AuthenticationController extends Controller
      */
     public function logout(Request $request, LogoutUseCase $action): JsonResponse
     {
-        $action();
+        $action->logout();
         return response()->json(
             [],
             Response::HTTP_OK

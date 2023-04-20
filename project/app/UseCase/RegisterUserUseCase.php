@@ -12,7 +12,7 @@ class RegisterUserUseCase
    *
    * @return User|null
    */
-  public function __invoke(string $handle_name, string $car_type, string $email, string $password): User
+  public function register(string $handle_name, string $car_type, string $email, string $password): User
   {
     return User::create([
       'name' => $handle_name,
