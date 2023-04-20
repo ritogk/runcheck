@@ -6,6 +6,7 @@ use Google_Client;
 use Google_Service_YouTube;
 use Google_Service_Exception;
 use Google_Exception;
+use App\Model\YoutubeToken;
 
 class OAuthService
 {
@@ -40,9 +41,16 @@ class OAuthService
     return $this->client->createAuthUrl();
   }
 
-  public function fetch_token(string $code)
+  public function fetch_token(string $code): array
   {
-    $result = $this->client->fetchAccessTokenWithAuthCode($code);
-    return $result;
+    $token = $this->client->fetchAccessTokenWithAuthCode($code);
+    return $token;
+  }
+
+  public function generate_token(int $user_id): array
+  {
+    $youtube_token = YoutubeToken::where('user_id', $user_id)->first();
+    $token = $this->client->fetchAccessTokenWithRefreshToken($youtube_token->refresh_token);
+    return $token;
   }
 }

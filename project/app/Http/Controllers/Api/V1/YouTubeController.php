@@ -54,8 +54,7 @@ class YouTubeController extends Controller
     {
         $requestBody = new OpenAPI\Model\YoutubeOauthPostRequest($request->all());
         $token = $this->oauth_service->fetch_token($requestBody->getCode());
-
-        $this->session_service->put(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN, $token['access_token']);
+        $this->session_service->put(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN, $token);
         $user = $this->authentication_service->me();
         if ($user) {
             $this->token_service->save_refresh_token($user->id, $token['refresh_token']);
@@ -74,11 +73,21 @@ class YouTubeController extends Controller
      */
     public function videos(): JsonResponse
     {
-        $access_token = $this->session_service->get(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN);
-        $videos = $this->fetch_service->fetch_my_videos($access_token);
+        $token = $this->session_service->get(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN);
+        $client = $this->oauth_service->get_client();
+        $client->setAccessToken($token);
+        if ($client->isAccessTokenExpired()) {
+            \Log::debug('トークン無効');
+            $user = $this->authentication_service->me();
+            $token = $this->oauth_service->generate_token($user->id);
+            $this->session_service->put(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN, $token);
+        } else {
+            \Log::debug('トークン有効');
+        }
+        $videos = $this->fetch_service->fetch_my_videos($token);
         return response()->json(
             OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\YoutubeVideosPost200ResponseInner::class, $videos),
-            Response::HTTP_CREATED
+            Response::HTTP_OK
         );
     }
 }

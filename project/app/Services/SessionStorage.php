@@ -11,10 +11,10 @@ class SessionStorage
    * セッションに値をセットする
    *
    * @param string $key
-   * @param string $value
+   * @param $value
    * @return void
    */
-  public function put(string $key, string $value)
+  public function put(string $key, $value)
   {
     session()->put($key, $value);
   }

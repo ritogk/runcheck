@@ -16,9 +16,9 @@ class FetcherService
     $this->client = $oauth_service->get_client();
   }
 
-  public function fetch_my_videos(string $access_token)
+  public function fetch_my_videos(array $token)
   {
-    $this->client->setAccessToken($access_token);
+    $this->client->setAccessToken($token['access_token']);
     $youtube = new Google_Service_YouTube($this->client);
     $channelsResponse = $youtube->channels->listChannels('contentDetails', array(
       'mine' => 'true',
