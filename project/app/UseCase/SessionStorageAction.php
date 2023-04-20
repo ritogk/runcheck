@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core;
+namespace App\UseCase;
 
-class SessionStorage
+class SessionStorageAction
 {
   // セッションのキー
   const KEY_YOUTUBE_ACCESS_TOKEN = 'YOUTUBE_ACCESS_TOKEN';

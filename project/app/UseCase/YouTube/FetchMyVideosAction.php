@@ -4,19 +4,19 @@ namespace App\UseCase\YouTube;
 
 // core
 use App\Core\YouTube\OAuthYoutubeClient;
-use App\Core\SessionStorage;
 // usecase
 use App\UseCase\Authentication\MeAction;
+use App\UseCase\SessionStorageAction;
 
 class FetchMyVideosAction
 {
   private OAuthYoutubeClient $client;
-  private SessionStorage $session;
+  private SessionStorageAction $session_action;
   private MeAction $me_action;
-  public function __construct(OAuthYoutubeClient $client, SessionStorage $session, MeAction $me_action)
+  public function __construct(OAuthYoutubeClient $client, SessionStorageAction $session_action, MeAction $me_action)
   {
     $this->client = $client;
-    $this->session = $session;
+    $this->session_action = $session_action;
     $this->me_action = $me_action;
   }
 
@@ -27,7 +27,7 @@ class FetchMyVideosAction
    */
   public function fetch(): array
   {
-    $token = $this->session->get(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN);
+    $token = $this->session_action->get(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN);
 
     $this->client->set_access_token($token);
     if ($this->client->is_access_token_expired()) {
@@ -35,7 +35,7 @@ class FetchMyVideosAction
       $user = $this->me_action->me();
       if (!$user) return [];
       $token = $this->client->generate_token($user->id);
-      $this->session->put(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN, $token);
+      $this->session_action->put(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN, $token);
     }
 
     $youtube = $this->client->generate_youtube_service();
