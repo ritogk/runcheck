@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 // service
 use App\Services\YouTube\OAuthService;
 use App\Services\YouTube\TokenService;
+use App\Services\YouTube\FetcherService;
 use App\Services\SessionStorage;
 use App\Services\AuthenticationService;
 // openapi
@@ -21,12 +22,14 @@ class YouTubeController extends Controller
     private TokenService $token_service;
     private SessionStorage $session_service;
     private AuthenticationService $authentication_service;
+    private FetcherService $fetch_service;
     public function __construct()
     {
         $this->oauth_service = new OAuthService();
         $this->session_service = new SessionStorage();
         $this->authentication_service = new AuthenticationService();
         $this->token_service = new TokenService();
+        $this->fetch_service = new FetcherService();
     }
     /**
      * 認可画面のURLを取得
@@ -61,6 +64,21 @@ class YouTubeController extends Controller
         return response()->json(
             [],
             Response::HTTP_OK
+        );
+    }
+
+    /**
+     * 動画一覧を取得
+     *
+     * @return JsonResponse
+     */
+    public function videos(): JsonResponse
+    {
+        $access_token = $this->session_service->get(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN);
+        $videos = $this->fetch_service->fetch_my_videos($access_token);
+        return response()->json(
+            OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\YoutubeVideosPost200ResponseInner::class, $videos),
+            Response::HTTP_CREATED
         );
     }
 }

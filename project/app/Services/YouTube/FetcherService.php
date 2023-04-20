@@ -16,7 +16,7 @@ class FetcherService
     $this->client = $oauth_service->get_client();
   }
 
-  public function fetchMyVideos(string $access_token)
+  public function fetch_my_videos(string $access_token)
   {
     $this->client->setAccessToken($access_token);
     $youtube = new Google_Service_YouTube($this->client);
@@ -39,9 +39,9 @@ class FetcherService
           $videos[] = array(
             'title' => $playlistItem['snippet']['title'],
             'description' => $playlistItem['snippet']['description'],
-            'thumbnails_url' => $playlistItem['snippet']['thumbnails']['default']['url'],
+            'thumbnail_url' => $playlistItem['snippet']['thumbnails']['default']['url'],
             'id' => $playlistItem['snippet']['resourceId']['videoId'],
-            'youtube_url' => sprintf("https://www.youtube.com/watch?v=%s", $playlistItem['snippet']['resourceId']['videoId'])
+            'url' => sprintf("https://www.youtube.com/watch?v=%s", $playlistItem['snippet']['resourceId']['videoId'])
           );
         }
         $nextPageToken = $playlistItemsResponse['nextPageToken'];
