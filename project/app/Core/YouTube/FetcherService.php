@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\YouTube;
+namespace App\Core\YouTube;
 
 use Google_Client;
 use Google_Service_YouTube;
