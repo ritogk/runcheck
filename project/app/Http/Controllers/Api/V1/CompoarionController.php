@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Services\ComparisonService;
 use App\Services\AuthenticationService;
 // usecase
-use App\UseCase\RegisterComparisonUseCase;
+use App\UseCase\Comparison\RegisterComparisonUseCase;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;

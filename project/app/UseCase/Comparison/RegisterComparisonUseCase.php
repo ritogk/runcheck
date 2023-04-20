@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UseCase;
+namespace App\UseCase\Comparison;
 
 use App\Model\User;
 use App\Model\Comparison;
