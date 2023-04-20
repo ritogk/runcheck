@@ -7,15 +7,6 @@ use App\Model\User;
 
 class AuthenticationService
 {
-  /**
-   * ログアウト
-   *
-   * @return void
-   */
-  public function logout(): void
-  {
-    Auth::guard()->logout();
-  }
 
   /**
    * ユーザー情報取得

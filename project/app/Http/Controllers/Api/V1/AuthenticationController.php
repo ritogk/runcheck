@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 // usecases
 use App\UseCase\Authentication\LoginUseCase;
+use App\UseCase\Authentication\LogoutUseCase;
 // service
 use App\Services\AuthenticationService;
 // openapi
@@ -50,9 +51,9 @@ class AuthenticationController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function logout(Request $request): JsonResponse
+    public function logout(Request $request, LogoutUseCase $action): JsonResponse
     {
-        $user = $this->authentication_service->logout();
+        $action();
         return response()->json(
             [],
             Response::HTTP_OK
