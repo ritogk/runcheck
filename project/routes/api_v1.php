@@ -31,10 +31,10 @@ Route::group(['prefix' => 'comparisons'], function () {
     Route::delete('/{id}', [V1\CompoarionController::class, 'delete']);
 });
 
-// Route::group(['prefix' => 'youtube'], function () {
-//     Route::get('/oauth/url', [Controllers\YouLocalController::class, 'index']);
-//     Route::post('/oauth', [Controllers\YouLocalController::class, 'index']);
-//     Route::get('/videos', [Controllers\YouLocalController::class, 'index']);
-// });
+Route::group(['prefix' => 'youtube'], function () {
+    Route::get('/oauth/url', [V1\YouTubeController::class, 'oauth_url']);
+    // Route::post('/oauth', [Controllers\YouLocalController::class, 'index']);
+    // Route::get('/videos', [Controllers\YouLocalController::class, 'index']);
+});
 
 // Route::post('/operationLog', [Controllers\YouLocalController::class, 'index']);
