@@ -28,7 +28,7 @@ Route::group(['prefix' => 'comparisons'], function () {
     Route::get('/{id}', [V1\CompoarionController::class, 'find']);
     Route::post('/', [V1\CompoarionController::class, 'create']);
     Route::post('/{id}/publish', [V1\CompoarionController::class, 'publish']);
-    // Route::delete('/', [Controllers\YouLocalController::class, 'index']);
+    Route::delete('/{id}', [V1\CompoarionController::class, 'delete']);
 });
 
 // Route::group(['prefix' => 'youtube'], function () {

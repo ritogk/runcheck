@@ -94,4 +94,19 @@ class CompoarionController extends Controller
             Response::HTTP_OK
         );
     }
+
+    /**
+     * 削除
+     *
+     * @param  int $id
+     * @return JsonResponse
+     */
+    public function delete(int $id): JsonResponse
+    {
+        $this->comparison_service->delete($id);
+        return response()->json(
+            [],
+            Response::HTTP_OK
+        );
+    }
 }
