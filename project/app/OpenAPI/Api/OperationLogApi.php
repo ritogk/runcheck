@@ -279,7 +279,7 @@ class OperationLogApi
         }
 
 
-        $resourcePath = '/operationLog';
+        $resourcePath = '/operation-log';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

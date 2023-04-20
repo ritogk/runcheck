@@ -37,4 +37,4 @@ Route::group(['prefix' => 'youtube'], function () {
     Route::get('/videos', [V1\YouTubeController::class, 'videos']);
 });
 
-// Route::post('/operationLog', [Controllers\YouLocalController::class, 'index']);
+Route::put('/operation-log', [V1\OperationLogController::class, 'create']);

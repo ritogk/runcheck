@@ -19,6 +19,7 @@ class CreateOperationLogs extends Migration
             $table->string('operation_nm')->comment('操作名');
             $table->biginteger('execution_cnt')->comment('実行回数');
             $table->timestamps();
+            $table->softDeletes()->index();
         });
     }
 

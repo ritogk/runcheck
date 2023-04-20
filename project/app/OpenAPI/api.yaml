@@ -232,7 +232,7 @@ paths:
                     - title
                     - description
                     - thumbnailUrl
-  /operationLog:
+  /operation-log:
     post:
       tags:
         - "operationLog"

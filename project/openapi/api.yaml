@@ -232,8 +232,8 @@ paths:
                     - title
                     - description
                     - thumbnailUrl
-  /operationLog:
-    post:
+  /operation-log:
+    put:
       tags:
         - "operationLog"
       summary: 操作ログを送信
