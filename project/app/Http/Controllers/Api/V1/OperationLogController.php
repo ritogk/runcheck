@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-// service
-use App\Services\OperationLogService;
+// usecase
+use App\UseCase\OperationLog\UpdateOperationLogUseCase;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -20,13 +20,10 @@ class OperationLogController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function create(Request $request): JsonResponse
+    public function create(Request $request, UpdateOperationLogUseCase $action): JsonResponse
     {
         $requestBody = new OpenAPI\Model\RequestOperationLog($request->all());
-        $operation_log_service = new OperationLogService();
-        $operation_log_service->update_log(
-            (int)$requestBody->getOperationCd()
-        );
+        $action->update((int)$requestBody->getOperationCd());
         return response()->json(
             [],
             Response::HTTP_CREATED
