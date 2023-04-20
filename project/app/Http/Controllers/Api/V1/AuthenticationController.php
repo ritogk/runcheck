@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+// usecases
+use App\UseCase\Authentication\LoginUseCase;
 // service
 use App\Services\AuthenticationService;
 // openapi
@@ -26,10 +28,10 @@ class AuthenticationController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function login(Request $request): JsonResponse
+    public function login(Request $request, LoginUseCase $acion): JsonResponse
     {
         $requestBody = new OpenAPI\Model\AuthenticationLoginPostRequest($request->all());
-        $user = $this->authentication_service->login($requestBody->getEmail(), $requestBody->getPassword(), $requestBody->getRemember());
+        $user = $acion($requestBody->getEmail(), $requestBody->getPassword(), $requestBody->getRemember());
         if ($user) {
             return response()->json(
                 OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),
