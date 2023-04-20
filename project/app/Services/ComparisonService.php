@@ -6,6 +6,12 @@ use App\Model\Comparison;
 
 class ComparisonService
 {
+  private AuthenticationService $authentication_service;
+  public function __construct()
+  {
+    $this->authentication_service = new AuthenticationService();
+  }
+
   /**
    * 新規作成
    *
@@ -35,6 +41,7 @@ class ComparisonService
     $comparison->video2_url = $video2_url;
     $comparison->video2_type = $video2_type;
     $comparison->release_kbn = false;
+    $comparison->anonymous = $this->authentication_service->me() ? false : true;
     $comparison->save();
     return $comparison;
   }
@@ -48,7 +55,10 @@ class ComparisonService
   public function delete(int $comparison_id): void
   {
     $comparison = Comparison::find($comparison_id);
-    $comparison->delete();
+    $user = $this->authentication_service->me();
+    if ($user->id == $comparison->user_id) {
+      $comparison->delete();
+    }
   }
 
   /**
@@ -60,7 +70,9 @@ class ComparisonService
   public function publish(int $comparison_id): void
   {
     $comparison = Comparison::find($comparison_id);
-    $comparison->release_kbn = true;
+    $user = $this->authentication_service->me();
+    if ($user->id)
+      $comparison->release_kbn = true;
     $comparison->save();
   }
 
@@ -73,6 +85,15 @@ class ComparisonService
   public function find(int $comparison_id): ?Comparison
   {
     $comparison = Comparison::find($comparison_id);
-    return $comparison;
+    $user = $this->authentication_service->me();
+    // 匿名情報は公開されている物だけ返す
+    if ($comparison->anonymous && $comparison->release_kbn) {
+      return $comparison;
+    }
+    // 自身の情報は公開フラグ関係なしに返す。
+    if ($user && $user->id == $comparison->user_id) {
+      return $comparison;
+    }
+    return null;
   }
 }
