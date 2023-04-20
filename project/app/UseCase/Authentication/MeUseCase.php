@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Services;
+namespace App\UseCase\Authentication;
 
 use Illuminate\Support\Facades\Auth;
 use App\Model\User;
 
-class AuthenticationService
+class MeUseCase
 {
-
   /**
-   * ユーザー情報取得
+   * Undocumented function
    *
    * @return User|null
    */
-  public function me(): ?User
+  public function __invoke(): ?User
   {
     return Auth::guard()->user();
   }
