@@ -33,11 +33,11 @@ class YouTubeController extends Controller
      *
      * @return JsonResponse
      */
-    public function oauth_url(): JsonResponse
+    public function authorize_url(): JsonResponse
     {
         $url = $this->oauth_service->get_redirect_url();
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\YoutubeOauthUrlGet200Response::class, ['redirect_url' => $url]),
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\YoutubeOauthAuthorizeGet200Response::class, ['redirect_url' => $url]),
             Response::HTTP_CREATED
         );
     }

@@ -159,7 +159,7 @@ paths:
         "200":
           description: OK
           content: {}
-  /youtube/oauth/url:
+  /youtube/oauth/authorize:
     get:
       tags:
         - "youtube"

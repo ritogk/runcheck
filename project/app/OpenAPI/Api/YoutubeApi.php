@@ -71,10 +71,10 @@ class YoutubeApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'youtubeOauthPost' => [
+        'youtubeOauthAuthorizeGet' => [
             'application/json',
         ],
-        'youtubeOauthUrlGet' => [
+        'youtubeOauthPost' => [
             'application/json',
         ],
         'youtubeVideosPost' => [
@@ -126,6 +126,269 @@ class YoutubeApi
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Operation youtubeOauthAuthorizeGet
+     *
+     * 認可画面のURLを取得
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthAuthorizeGet'] to see the possible values for this operation
+     *
+     * @throws \App\OpenAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \App\OpenAPI\Model\YoutubeOauthAuthorizeGet200Response
+     */
+    public function youtubeOauthAuthorizeGet(string $contentType = self::contentTypes['youtubeOauthAuthorizeGet'][0])
+    {
+        list($response) = $this->youtubeOauthAuthorizeGetWithHttpInfo($contentType);
+        return $response;
+    }
+
+    /**
+     * Operation youtubeOauthAuthorizeGetWithHttpInfo
+     *
+     * 認可画面のURLを取得
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthAuthorizeGet'] to see the possible values for this operation
+     *
+     * @throws \App\OpenAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \App\OpenAPI\Model\YoutubeOauthAuthorizeGet200Response, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function youtubeOauthAuthorizeGetWithHttpInfo(string $contentType = self::contentTypes['youtubeOauthAuthorizeGet'][0])
+    {
+        $request = $this->youtubeOauthAuthorizeGetRequest($contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\App\OpenAPI\Model\YoutubeOauthAuthorizeGet200Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\App\OpenAPI\Model\YoutubeOauthAuthorizeGet200Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\App\OpenAPI\Model\YoutubeOauthAuthorizeGet200Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\App\OpenAPI\Model\YoutubeOauthAuthorizeGet200Response';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\App\OpenAPI\Model\YoutubeOauthAuthorizeGet200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation youtubeOauthAuthorizeGetAsync
+     *
+     * 認可画面のURLを取得
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthAuthorizeGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function youtubeOauthAuthorizeGetAsync(string $contentType = self::contentTypes['youtubeOauthAuthorizeGet'][0])
+    {
+        return $this->youtubeOauthAuthorizeGetAsyncWithHttpInfo($contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation youtubeOauthAuthorizeGetAsyncWithHttpInfo
+     *
+     * 認可画面のURLを取得
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthAuthorizeGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function youtubeOauthAuthorizeGetAsyncWithHttpInfo(string $contentType = self::contentTypes['youtubeOauthAuthorizeGet'][0])
+    {
+        $returnType = '\App\OpenAPI\Model\YoutubeOauthAuthorizeGet200Response';
+        $request = $this->youtubeOauthAuthorizeGetRequest($contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'youtubeOauthAuthorizeGet'
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthAuthorizeGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function youtubeOauthAuthorizeGetRequest(string $contentType = self::contentTypes['youtubeOauthAuthorizeGet'][0])
+    {
+
+
+        $resourcePath = '/youtube/oauth/authorize';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
     }
 
     /**
@@ -350,269 +613,6 @@ class YoutubeApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation youtubeOauthUrlGet
-     *
-     * 認可画面のURLを取得
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthUrlGet'] to see the possible values for this operation
-     *
-     * @throws \App\OpenAPI\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \App\OpenAPI\Model\YoutubeOauthUrlGet200Response
-     */
-    public function youtubeOauthUrlGet(string $contentType = self::contentTypes['youtubeOauthUrlGet'][0])
-    {
-        list($response) = $this->youtubeOauthUrlGetWithHttpInfo($contentType);
-        return $response;
-    }
-
-    /**
-     * Operation youtubeOauthUrlGetWithHttpInfo
-     *
-     * 認可画面のURLを取得
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthUrlGet'] to see the possible values for this operation
-     *
-     * @throws \App\OpenAPI\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \App\OpenAPI\Model\YoutubeOauthUrlGet200Response, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function youtubeOauthUrlGetWithHttpInfo(string $contentType = self::contentTypes['youtubeOauthUrlGet'][0])
-    {
-        $request = $this->youtubeOauthUrlGetRequest($contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\App\OpenAPI\Model\YoutubeOauthUrlGet200Response' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\App\OpenAPI\Model\YoutubeOauthUrlGet200Response' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\App\OpenAPI\Model\YoutubeOauthUrlGet200Response', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\App\OpenAPI\Model\YoutubeOauthUrlGet200Response';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\App\OpenAPI\Model\YoutubeOauthUrlGet200Response',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation youtubeOauthUrlGetAsync
-     *
-     * 認可画面のURLを取得
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthUrlGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function youtubeOauthUrlGetAsync(string $contentType = self::contentTypes['youtubeOauthUrlGet'][0])
-    {
-        return $this->youtubeOauthUrlGetAsyncWithHttpInfo($contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation youtubeOauthUrlGetAsyncWithHttpInfo
-     *
-     * 認可画面のURLを取得
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthUrlGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function youtubeOauthUrlGetAsyncWithHttpInfo(string $contentType = self::contentTypes['youtubeOauthUrlGet'][0])
-    {
-        $returnType = '\App\OpenAPI\Model\YoutubeOauthUrlGet200Response';
-        $request = $this->youtubeOauthUrlGetRequest($contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'youtubeOauthUrlGet'
-     *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeOauthUrlGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function youtubeOauthUrlGetRequest(string $contentType = self::contentTypes['youtubeOauthUrlGet'][0])
-    {
-
-
-        $resourcePath = '/youtube/oauth/url';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

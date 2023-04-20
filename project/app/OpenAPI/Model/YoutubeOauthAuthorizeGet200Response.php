@@ -1,6 +1,6 @@
 <?php
 /**
- * YoutubeOauthUrlGet200Response
+ * YoutubeOauthAuthorizeGet200Response
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * YoutubeOauthUrlGet200Response Class Doc Comment
+ * YoutubeOauthAuthorizeGet200Response Class Doc Comment
  *
  * @category Class
  * @package  App\OpenAPI
@@ -40,7 +40,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class YoutubeOauthUrlGet200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class YoutubeOauthAuthorizeGet200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class YoutubeOauthUrlGet200Response implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = '_youtube_oauth_url_get_200_response';
+    protected static $openAPIModelName = '_youtube_oauth_authorize_get_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
