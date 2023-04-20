@@ -61,7 +61,7 @@ class AuthenticationController extends Controller
      */
     public function me(Request $request, MeUseCase $acion): JsonResponse
     {
-        $user = $acion();
+        $user = $acion->me();
         if ($user) {
             return response()->json(
                 OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),

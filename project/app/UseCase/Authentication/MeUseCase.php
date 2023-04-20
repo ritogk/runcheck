@@ -12,7 +12,7 @@ class MeUseCase
    *
    * @return User|null
    */
-  public function __invoke(): ?User
+  public function me(): ?User
   {
     return Auth::guard()->user();
   }

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 // service
 use App\Services\ComparisonService;
 use App\Services\AuthenticationService;
+// usecase
+use App\UseCase\RegisterComparisonUseCase;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -47,15 +49,10 @@ class CompoarionController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function create(Request $request): JsonResponse
+    public function create(Request $request, RegisterComparisonUseCase $action): JsonResponse
     {
         $requestBody = new OpenAPI\Model\VideoComparison($request->all());
-
-        $comparison_service = new ComparisonService();
-        $authentication_service = new AuthenticationService();
-        $me = $authentication_service->me();
-        $comparison = $comparison_service->create(
-            $me ? $me->id : null,
+        $comparison = $action->register(
             $requestBody->getCategory() ?? '',
             $requestBody->getTitle(),
             $requestBody->getMemo(),
@@ -64,7 +61,7 @@ class CompoarionController extends Controller
             (int)$requestBody->getVideo1VideoType(),
             $requestBody->getVideo2TimeSt(),
             $requestBody->getVideo2Url(),
-            (int)$requestBody->getVideo2VideoType(),
+            (int)$requestBody->getVideo2VideoType()
         );
 
         if ($comparison) {
