@@ -41,9 +41,16 @@ class CompoarionController extends Controller
             (int)$requestBody->getVideo2VideoType(),
         );
 
-        return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\VideoComparison::class, $comparison->toArray()),
-            Response::HTTP_CREATED
-        );
+        if ($comparison) {
+            return response()->json(
+                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\VideoComparison::class, $comparison->toArray()),
+                Response::HTTP_CREATED
+            );
+        } else {
+            return response()->json(
+                [],
+                Response::HTTP_NO_CONTENT
+            );
+        }
     }
 }
