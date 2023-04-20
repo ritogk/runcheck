@@ -32,8 +32,9 @@ Route::group(['prefix' => 'comparisons'], function () {
 });
 
 Route::group(['prefix' => 'youtube'], function () {
+    // authorize
     Route::get('/oauth/url', [V1\YouTubeController::class, 'oauth_url']);
-    // Route::post('/oauth', [Controllers\YouLocalController::class, 'index']);
+    Route::post('/oauth/access_token', [V1\YouTubeController::class, 'access_token']);
     // Route::get('/videos', [Controllers\YouLocalController::class, 'index']);
 });
 
