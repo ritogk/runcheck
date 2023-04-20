@@ -31,11 +31,6 @@ class OAuthYoutubeClient
     $this->client = $client;
   }
 
-  public function get_client(): Google_Client
-  {
-    return $this->client;
-  }
-
   public function get_redirect_url(): string
   {
     return $this->client->createAuthUrl();
@@ -70,10 +65,30 @@ class OAuthYoutubeClient
    * @param int $user_id
    * @return array{access_token: string, expires_in: int, refresh_token: string, scope: string}
    */
-  public function generate_access_token(int $user_id): array
+  public function generate_token(int $user_id): array
   {
     $youtube_token = YoutubeToken::where('user_id', $user_id)->first();
     $token = $this->client->fetchAccessTokenWithRefreshToken($youtube_token->refresh_token);
     return $token;
+  }
+
+  /**
+   * Youtubeサービス作成
+   *
+   * @return Google_Service_YouTube
+   */
+  public function generate_youtube_service(): Google_Service_YouTube
+  {
+    return new Google_Service_YouTube($this->client);
+  }
+
+  /**
+   * トークンの有効期限切れチェック
+   *
+   * @return boolean
+   */
+  public function is_access_token_expired(): bool
+  {
+    return $this->client->isAccessTokenExpired();
   }
 }

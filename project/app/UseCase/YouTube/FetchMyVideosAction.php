@@ -1,25 +1,44 @@
 <?php
 
-namespace App\Core\YouTube;
+namespace App\UseCase\YouTube;
 
-use Google_Client;
-use Google_Service_YouTube;
-use Google_Service_Exception;
-use Google_Exception;
+// core
+use App\Core\YouTube\OAuthYoutubeClient;
+use App\Core\SessionStorage;
+// usecase
+use App\UseCase\Authentication\MeAction;
 
-class FetcherService
+class FetchMyVideosAction
 {
-  private Google_Client $client;
-  public function __construct()
+  private OAuthYoutubeClient $client;
+  private SessionStorage $session;
+  private MeAction $me_action;
+  public function __construct(OAuthYoutubeClient $client, SessionStorage $session, MeAction $me_action)
   {
-    $oauth_service = new OAuthService();
-    $this->client = $oauth_service->get_client();
+    $this->client = $client;
+    $this->session = $session;
+    $this->me_action = $me_action;
   }
 
-  public function fetch_my_videos(array $token)
+  /**
+   * fetch
+   *
+   * @return array{title: string, description: int, thumbnail_url: string, id: int, string url}[]
+   */
+  public function fetch(): array
   {
-    $this->client->setAccessToken($token['access_token']);
-    $youtube = new Google_Service_YouTube($this->client);
+    $token = $this->session->get(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN);
+
+    $this->client->set_access_token($token);
+    if ($this->client->is_access_token_expired()) {
+      // 有効期限切れの場合はリフレッシュトークンを使って更新。
+      $user = $this->me_action->me();
+      if (!$user) return [];
+      $token = $this->client->generate_token($user->id);
+      $this->session->put(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN, $token);
+    }
+
+    $youtube = $this->client->generate_youtube_service();
     $channelsResponse = $youtube->channels->listChannels('contentDetails', array(
       'mine' => 'true',
     ));

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Core\YouTube\OAuthYoutubeClient;
 //usecase
 use App\UseCase\YouTube\FetchAccessTokenAction;
+use App\UseCase\YouTube\FetchMyVideosAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -46,28 +47,17 @@ class YouTubeController extends Controller
         );
     }
 
-    // /**
-    //  * 動画一覧を取得
-    //  *
-    //  * @return JsonResponse
-    //  */
-    // public function videos(): JsonResponse
-    // {
-    //     $token = $this->session_service->get(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN);
-    //     $client = $this->oauth_service->get_client();
-    //     $client->setAccessToken($token);
-    //     if ($client->isAccessTokenExpired()) {
-    //         \Log::debug('トークン無効');
-    //         $user = $this->authentication_service->me();
-    //         $token = $this->oauth_service->generate_token($user->id);
-    //         $this->session_service->put(SessionStorage::KEY_YOUTUBE_ACCESS_TOKEN, $token);
-    //     } else {
-    //         \Log::debug('トークン有効');
-    //     }
-    //     $videos = $this->fetch_service->fetch_my_videos($token);
-    //     return response()->json(
-    //         OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\YoutubeVideosPost200ResponseInner::class, $videos),
-    //         Response::HTTP_OK
-    //     );
-    // }
+    /**
+     * 動画一覧を取得
+     *
+     * @return JsonResponse
+     */
+    public function videos(FetchMyVideosAction $action): JsonResponse
+    {
+        $videos = $action->fetch();
+        return response()->json(
+            OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\YoutubeVideosPost200ResponseInner::class, $videos),
+            Response::HTTP_OK
+        );
+    }
 }
