@@ -31,7 +31,12 @@ class OAuthYoutubeClient
     $this->client = $client;
   }
 
-  public function get_redirect_url(): string
+  /**
+   * 認可画面のURLを取得
+   *
+   * @return string
+   */
+  public function get_authorize_url(): string
   {
     return $this->client->createAuthUrl();
   }

@@ -24,8 +24,8 @@ class YouTubeController extends Controller
      */
     public function authorize_url(): JsonResponse
     {
-        $oauth_client = new OAuthYoutubeClient();
-        $url = $oauth_client->get_redirect_url();
+        $client = new OAuthYoutubeClient();
+        $url = $client->get_authorize_url();
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\YoutubeOauthAuthorizeGet200Response::class, ['redirect_url' => $url]),
             Response::HTTP_CREATED
