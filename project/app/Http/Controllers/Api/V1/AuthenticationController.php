@@ -10,20 +10,12 @@ use Illuminate\Http\Request;
 use App\UseCase\Authentication\LoginUseCase;
 use App\UseCase\Authentication\LogoutUseCase;
 use App\UseCase\Authentication\MeUseCase;
-// service
-use App\Services\AuthenticationService;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
 
 class AuthenticationController extends Controller
 {
-    private AuthenticationService $authentication_service;
-    public function __construct()
-    {
-        $this->authentication_service = new AuthenticationService();
-    }
-
     /**
      * ログイン
      *
