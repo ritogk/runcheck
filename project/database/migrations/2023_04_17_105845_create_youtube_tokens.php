@@ -18,6 +18,7 @@ class CreateYoutubeTokens extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('refresh_token');
+            $table->softDeletes()->index();
             $table->timestamps();
         });
     }
