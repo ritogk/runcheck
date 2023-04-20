@@ -50,7 +50,7 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'videoComparison';
+    protected static $openAPIModelName = 'VideoComparison';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,15 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'userId' => 'float',
+        'category' => 'string',
         'memo' => 'string',
         'title' => 'string',
-        'video1' => '\App\OpenAPI\Model\Video',
-        'video2' => '\App\OpenAPI\Model\Video'
+        'video1Url' => 'string',
+        'video1TimeSt' => 'string',
+        'video1VideoType' => '\App\OpenAPI\Model\VideoType',
+        'video2Url' => 'string',
+        'video2TimeSt' => 'string',
+        'video2VideoType' => '\App\OpenAPI\Model\VideoType'
     ];
 
     /**
@@ -73,11 +77,15 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'userId' => null,
+        'category' => null,
         'memo' => null,
         'title' => null,
-        'video1' => null,
-        'video2' => null
+        'video1Url' => null,
+        'video1TimeSt' => null,
+        'video1VideoType' => null,
+        'video2Url' => null,
+        'video2TimeSt' => null,
+        'video2VideoType' => null
     ];
 
     /**
@@ -86,11 +94,15 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'userId' => false,
+        'category' => false,
 		'memo' => false,
 		'title' => false,
-		'video1' => false,
-		'video2' => false
+		'video1Url' => false,
+		'video1TimeSt' => false,
+		'video1VideoType' => false,
+		'video2Url' => false,
+		'video2TimeSt' => false,
+		'video2VideoType' => false
     ];
 
     /**
@@ -179,11 +191,15 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'userId' => 'userId',
+        'category' => 'category',
         'memo' => 'memo',
         'title' => 'title',
-        'video1' => 'video1',
-        'video2' => 'video2'
+        'video1Url' => 'video1Url',
+        'video1TimeSt' => 'video1TimeSt',
+        'video1VideoType' => 'video1VideoType',
+        'video2Url' => 'video2Url',
+        'video2TimeSt' => 'video2TimeSt',
+        'video2VideoType' => 'video2VideoType'
     ];
 
     /**
@@ -192,11 +208,15 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'userId' => 'setUserId',
+        'category' => 'setCategory',
         'memo' => 'setMemo',
         'title' => 'setTitle',
-        'video1' => 'setVideo1',
-        'video2' => 'setVideo2'
+        'video1Url' => 'setVideo1Url',
+        'video1TimeSt' => 'setVideo1TimeSt',
+        'video1VideoType' => 'setVideo1VideoType',
+        'video2Url' => 'setVideo2Url',
+        'video2TimeSt' => 'setVideo2TimeSt',
+        'video2VideoType' => 'setVideo2VideoType'
     ];
 
     /**
@@ -205,11 +225,15 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'userId' => 'getUserId',
+        'category' => 'getCategory',
         'memo' => 'getMemo',
         'title' => 'getTitle',
-        'video1' => 'getVideo1',
-        'video2' => 'getVideo2'
+        'video1Url' => 'getVideo1Url',
+        'video1TimeSt' => 'getVideo1TimeSt',
+        'video1VideoType' => 'getVideo1VideoType',
+        'video2Url' => 'getVideo2Url',
+        'video2TimeSt' => 'getVideo2TimeSt',
+        'video2VideoType' => 'getVideo2VideoType'
     ];
 
     /**
@@ -269,11 +293,15 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('userId', $data ?? [], null);
+        $this->setIfExists('category', $data ?? [], null);
         $this->setIfExists('memo', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('video1', $data ?? [], null);
-        $this->setIfExists('video2', $data ?? [], null);
+        $this->setIfExists('video1Url', $data ?? [], null);
+        $this->setIfExists('video1TimeSt', $data ?? [], null);
+        $this->setIfExists('video1VideoType', $data ?? [], null);
+        $this->setIfExists('video2Url', $data ?? [], null);
+        $this->setIfExists('video2TimeSt', $data ?? [], null);
+        $this->setIfExists('video2VideoType', $data ?? [], null);
     }
 
     /**
@@ -303,11 +331,23 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['video1'] === null) {
-            $invalidProperties[] = "'video1' can't be null";
+        if ($this->container['video1Url'] === null) {
+            $invalidProperties[] = "'video1Url' can't be null";
         }
-        if ($this->container['video2'] === null) {
-            $invalidProperties[] = "'video2' can't be null";
+        if ($this->container['video1TimeSt'] === null) {
+            $invalidProperties[] = "'video1TimeSt' can't be null";
+        }
+        if ($this->container['video1VideoType'] === null) {
+            $invalidProperties[] = "'video1VideoType' can't be null";
+        }
+        if ($this->container['video2Url'] === null) {
+            $invalidProperties[] = "'video2Url' can't be null";
+        }
+        if ($this->container['video2TimeSt'] === null) {
+            $invalidProperties[] = "'video2TimeSt' can't be null";
+        }
+        if ($this->container['video2VideoType'] === null) {
+            $invalidProperties[] = "'video2VideoType' can't be null";
         }
         return $invalidProperties;
     }
@@ -325,28 +365,28 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets userId
+     * Gets category
      *
-     * @return float|null
+     * @return string|null
      */
-    public function getUserId()
+    public function getCategory()
     {
-        return $this->container['userId'];
+        return $this->container['category'];
     }
 
     /**
-     * Sets userId
+     * Sets category
      *
-     * @param float|null $userId userId
+     * @param string|null $category category
      *
      * @return self
      */
-    public function setUserId($userId)
+    public function setCategory($category)
     {
-        if (is_null($userId)) {
-            throw new \InvalidArgumentException('non-nullable userId cannot be null');
+        if (is_null($category)) {
+            throw new \InvalidArgumentException('non-nullable category cannot be null');
         }
-        $this->container['userId'] = $userId;
+        $this->container['category'] = $category;
 
         return $this;
     }
@@ -406,55 +446,163 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets video1
+     * Gets video1Url
      *
-     * @return \App\OpenAPI\Model\Video
+     * @return string
      */
-    public function getVideo1()
+    public function getVideo1Url()
     {
-        return $this->container['video1'];
+        return $this->container['video1Url'];
     }
 
     /**
-     * Sets video1
+     * Sets video1Url
      *
-     * @param \App\OpenAPI\Model\Video $video1 video1
+     * @param string $video1Url video1Url
      *
      * @return self
      */
-    public function setVideo1($video1)
+    public function setVideo1Url($video1Url)
     {
-        if (is_null($video1)) {
-            throw new \InvalidArgumentException('non-nullable video1 cannot be null');
+        if (is_null($video1Url)) {
+            throw new \InvalidArgumentException('non-nullable video1Url cannot be null');
         }
-        $this->container['video1'] = $video1;
+        $this->container['video1Url'] = $video1Url;
 
         return $this;
     }
 
     /**
-     * Gets video2
+     * Gets video1TimeSt
      *
-     * @return \App\OpenAPI\Model\Video
+     * @return string
      */
-    public function getVideo2()
+    public function getVideo1TimeSt()
     {
-        return $this->container['video2'];
+        return $this->container['video1TimeSt'];
     }
 
     /**
-     * Sets video2
+     * Sets video1TimeSt
      *
-     * @param \App\OpenAPI\Model\Video $video2 video2
+     * @param string $video1TimeSt video1TimeSt
      *
      * @return self
      */
-    public function setVideo2($video2)
+    public function setVideo1TimeSt($video1TimeSt)
     {
-        if (is_null($video2)) {
-            throw new \InvalidArgumentException('non-nullable video2 cannot be null');
+        if (is_null($video1TimeSt)) {
+            throw new \InvalidArgumentException('non-nullable video1TimeSt cannot be null');
         }
-        $this->container['video2'] = $video2;
+        $this->container['video1TimeSt'] = $video1TimeSt;
+
+        return $this;
+    }
+
+    /**
+     * Gets video1VideoType
+     *
+     * @return \App\OpenAPI\Model\VideoType
+     */
+    public function getVideo1VideoType()
+    {
+        return $this->container['video1VideoType'];
+    }
+
+    /**
+     * Sets video1VideoType
+     *
+     * @param \App\OpenAPI\Model\VideoType $video1VideoType video1VideoType
+     *
+     * @return self
+     */
+    public function setVideo1VideoType($video1VideoType)
+    {
+        if (is_null($video1VideoType)) {
+            throw new \InvalidArgumentException('non-nullable video1VideoType cannot be null');
+        }
+        $this->container['video1VideoType'] = $video1VideoType;
+
+        return $this;
+    }
+
+    /**
+     * Gets video2Url
+     *
+     * @return string
+     */
+    public function getVideo2Url()
+    {
+        return $this->container['video2Url'];
+    }
+
+    /**
+     * Sets video2Url
+     *
+     * @param string $video2Url video2Url
+     *
+     * @return self
+     */
+    public function setVideo2Url($video2Url)
+    {
+        if (is_null($video2Url)) {
+            throw new \InvalidArgumentException('non-nullable video2Url cannot be null');
+        }
+        $this->container['video2Url'] = $video2Url;
+
+        return $this;
+    }
+
+    /**
+     * Gets video2TimeSt
+     *
+     * @return string
+     */
+    public function getVideo2TimeSt()
+    {
+        return $this->container['video2TimeSt'];
+    }
+
+    /**
+     * Sets video2TimeSt
+     *
+     * @param string $video2TimeSt video2TimeSt
+     *
+     * @return self
+     */
+    public function setVideo2TimeSt($video2TimeSt)
+    {
+        if (is_null($video2TimeSt)) {
+            throw new \InvalidArgumentException('non-nullable video2TimeSt cannot be null');
+        }
+        $this->container['video2TimeSt'] = $video2TimeSt;
+
+        return $this;
+    }
+
+    /**
+     * Gets video2VideoType
+     *
+     * @return \App\OpenAPI\Model\VideoType
+     */
+    public function getVideo2VideoType()
+    {
+        return $this->container['video2VideoType'];
+    }
+
+    /**
+     * Sets video2VideoType
+     *
+     * @param \App\OpenAPI\Model\VideoType $video2VideoType video2VideoType
+     *
+     * @return self
+     */
+    public function setVideo2VideoType($video2VideoType)
+    {
+        if (is_null($video2VideoType)) {
+            throw new \InvalidArgumentException('non-nullable video2VideoType cannot be null');
+        }
+        $this->container['video2VideoType'] = $video2VideoType;
 
         return $this;
     }

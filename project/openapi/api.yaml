@@ -104,7 +104,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/videoComparison"
+              $ref: "#/components/schemas/VideoComparison"
       responses:
         "200":
           description: OK
@@ -120,14 +120,14 @@ paths:
           name: comparisonId
           required: true
           schema:
-            type: number
+            type: integer
       responses:
         "200":
           description: アンケートの回答状態
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/videoComparison"
+                $ref: "#/components/schemas/VideoComparison"
     delete:
       tags:
         - "comparisons"
@@ -138,7 +138,7 @@ paths:
           name: comparisonId
           required: true
           schema:
-            type: number
+            type: integer
       responses:
         "200":
           description: OK
@@ -154,7 +154,7 @@ paths:
           name: comparisonId
           required: true
           schema:
-            type: number
+            type: integer
       responses:
         "200":
           description: OK
@@ -256,7 +256,7 @@ components:
       type: object
       properties:
         id:
-          type: number
+          type: integer
           description: "ユーザーID"
         name:
           type: string
@@ -280,23 +280,35 @@ components:
         - timeSt
         - videoType
 
-    videoComparison:
+    VideoComparison:
       description: 動画比較情報
       type: object
       properties:
-        userId:
-          type: number
+        category:
+          type: string
         memo:
           type: string
         title:
           type: string
-        video1:
-          $ref: "#/components/schemas/Video"
-        video2:
-          $ref: "#/components/schemas/Video"
+        video1Url:
+          type: string
+        video1TimeSt:
+          type: string
+        video1VideoType:
+          $ref: "#/components/schemas/videoType"
+        video2Url:
+          type: string
+        video2TimeSt:
+          type: string
+        video2VideoType:
+          $ref: "#/components/schemas/videoType"
       required:
-        - video1
-        - video2
+        - video1Url
+        - video1TimeSt
+        - video1VideoType
+        - video2Url
+        - video2TimeSt
+        - video2VideoType
     requestOperationLog:
       description: リクエスト 操作ログ
       type: object

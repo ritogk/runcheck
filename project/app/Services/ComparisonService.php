@@ -21,7 +21,7 @@ class ComparisonService
    * @param string $video2_type
    * @return Comparison|null
    */
-  public function create(int $user_id, string $category, ?string $title, ?string $memo, int $video1_time_st, string $video1_url, string $video1_type, float $video2_time_st, string $video2_url, string $video2_type): ?Comparison
+  public function create(?int $user_id, ?string $category, ?string $title, ?string $memo, int $video1_time_st, string $video1_url, int $video1_type, float $video2_time_st, string $video2_url, int $video2_type): ?Comparison
   {
     $comparison = new Comparison();
     $comparison->user_id = $user_id;

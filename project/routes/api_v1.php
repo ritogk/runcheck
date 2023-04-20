@@ -24,12 +24,12 @@ Route::group(['prefix' => 'authentication'], function () {
     Route::get('/me', [V1\AuthenticationController::class, 'me'])->middleware(['auth']);
 });
 
-// Route::group(['prefix' => 'comparisons'], function () {
-//     Route::get('/{id}', [Controllers\YouLocalController::class, 'index']);
-//     Route::post('/', [Controllers\YouLocalController::class, 'index']);
-//     Route::post('/{id}/publish', [Controllers\YouLocalController::class, 'index']);
-//     Route::delete('/', [Controllers\YouLocalController::class, 'index']);
-// });
+Route::group(['prefix' => 'comparisons'], function () {
+    // Route::get('/{id}', [Controllers\YouLocalController::class, 'index']);
+    Route::post('/', [V1\CompoarionController::class, 'create']);
+    // Route::post('/{id}/publish', [Controllers\YouLocalController::class, 'index']);
+    // Route::delete('/', [Controllers\YouLocalController::class, 'index']);
+});
 
 // Route::group(['prefix' => 'youtube'], function () {
 //     Route::get('/oauth/url', [Controllers\YouLocalController::class, 'index']);

@@ -136,7 +136,7 @@ class ComparisonsApi
      *
      * 比較情報を削除
      *
-     * @param  float $comparisonId comparisonId (required)
+     * @param  int $comparisonId comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdDelete'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
@@ -153,7 +153,7 @@ class ComparisonsApi
      *
      * 比較情報を削除
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdDelete'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
@@ -213,7 +213,7 @@ class ComparisonsApi
      *
      * 比較情報を削除
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdDelete'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -234,7 +234,7 @@ class ComparisonsApi
      *
      * 比較情報を削除
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdDelete'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -271,7 +271,7 @@ class ComparisonsApi
     /**
      * Create request for operation 'comparisonsComparisonIdDelete'
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdDelete'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -365,7 +365,7 @@ class ComparisonsApi
      *
      * 比較情報を取得
      *
-     * @param  float $comparisonId comparisonId (required)
+     * @param  int $comparisonId comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdGet'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
@@ -383,7 +383,7 @@ class ComparisonsApi
      *
      * 比較情報を取得
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdGet'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
@@ -483,7 +483,7 @@ class ComparisonsApi
      *
      * 比較情報を取得
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -504,7 +504,7 @@ class ComparisonsApi
      *
      * 比較情報を取得
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -554,7 +554,7 @@ class ComparisonsApi
     /**
      * Create request for operation 'comparisonsComparisonIdGet'
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -648,7 +648,7 @@ class ComparisonsApi
      *
      * 比較情報を公開状態にする
      *
-     * @param  float $comparisonId comparisonId (required)
+     * @param  int $comparisonId comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
@@ -665,7 +665,7 @@ class ComparisonsApi
      *
      * 比較情報を公開状態にする
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
@@ -725,7 +725,7 @@ class ComparisonsApi
      *
      * 比較情報を公開状態にする
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -746,7 +746,7 @@ class ComparisonsApi
      *
      * 比較情報を公開状態にする
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -783,7 +783,7 @@ class ComparisonsApi
     /**
      * Create request for operation 'comparisonsComparisonIdPublishPost'
      *
-     * @param  float $comparisonId (required)
+     * @param  int $comparisonId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
