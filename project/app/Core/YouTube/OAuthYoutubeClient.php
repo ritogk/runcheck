@@ -20,6 +20,7 @@ class OAuthYoutubeClient
     $this->client_secret = config('oauth.youtube.client_secret');
     $this->redirect_url = config('oauth.youtube.redirect_url');
     $client = new Google_Client();
+    $client->getCache()->clear();         // トークンがメモリ？にキャッシュされてしまうのでリセットする
     $client->setClientId($this->client_id);
     $client->setClientSecret($this->client_secret);
     $client->setScopes('https://www.googleapis.com/auth/youtube');
@@ -27,7 +28,6 @@ class OAuthYoutubeClient
     $client->setAccessType('offline');    // リフレッシュトークンからアクセストークンを生成するために必要なオプション
     $client->setApprovalPrompt('force');  // リフッシュトークンを取得するために必要
     $client->setPrompt('consent');        // アプリとGoogleとを連携する時に毎回アクセス許可用の同意画面を表示させる
-
     $this->client = $client;
   }
 
