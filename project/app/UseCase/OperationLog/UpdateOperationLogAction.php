@@ -4,7 +4,7 @@ namespace App\UseCase\OperationLog;
 
 use App\Model\OperationLog;
 
-class UpdateOperationLogUseCase
+class UpdateOperationLogAction
 {
   /**
    * update

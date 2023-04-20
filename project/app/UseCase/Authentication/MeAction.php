@@ -3,16 +3,17 @@
 namespace App\UseCase\Authentication;
 
 use Illuminate\Support\Facades\Auth;
+use App\Model\User;
 
-class LogoutUseCase
+class MeAction
 {
   /**
    * Undocumented function
    *
-   * @return void
+   * @return User|null
    */
-  public function logout(): void
+  public function me(): ?User
   {
-    Auth::guard()->logout();
+    return Auth::guard()->user();
   }
 }

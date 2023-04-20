@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 // usecase
-use App\UseCase\RegisterUserUseCase;
+use App\UseCase\RegisterUserAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -20,7 +20,7 @@ class UserController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function create(Request $request, RegisterUserUseCase $action): JsonResponse
+    public function create(Request $request, RegisterUserAction $action): JsonResponse
     {
         $requestBody = new OpenAPI\Model\UsersRegisterPostRequest($request->all());
         $user = $action->register(

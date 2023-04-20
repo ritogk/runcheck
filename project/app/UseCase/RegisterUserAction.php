@@ -5,7 +5,7 @@ namespace App\UseCase;
 use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterUserUseCase
+class RegisterUserAction
 {
   /**
    * Undocumented function

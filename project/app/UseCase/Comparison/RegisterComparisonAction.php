@@ -5,12 +5,12 @@ namespace App\UseCase\Comparison;
 use App\Model\User;
 use App\Model\Comparison;
 // usecase
-use App\UseCase\Authentication\MeUseCase;
+use App\UseCase\Authentication\MeAction;
 
-class RegisterComparisonUseCase
+class RegisterComparisonAction
 {
-  private MeUseCase $action;
-  public function __construct(MeUseCase $action)
+  private MeAction $action;
+  public function __construct(MeAction $action)
   {
     $this->action = $action;
   }

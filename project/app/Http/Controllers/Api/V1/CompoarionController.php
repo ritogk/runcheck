@@ -7,10 +7,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 // usecase
-use App\UseCase\Comparison\RegisterComparisonUseCase;
-use App\UseCase\Comparison\FindComparisonUseCase;
-use App\UseCase\Comparison\DeleteComparisonUseCase;
-use App\UseCase\Comparison\PublishComparisonUseCase;
+use App\UseCase\Comparison\RegisterComparisonAction;
+use App\UseCase\Comparison\FindComparisonAction;
+use App\UseCase\Comparison\DeleteComparisonAction;
+use App\UseCase\Comparison\PublishComparisonAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -23,7 +23,7 @@ class CompoarionController extends Controller
      * @param  int $id
      * @return JsonResponse
      */
-    public function find(int $id, FindComparisonUseCase $action): JsonResponse
+    public function find(int $id, FindComparisonAction $action): JsonResponse
     {
         $comparison = $action->find($id);
         if ($comparison) {
@@ -44,7 +44,7 @@ class CompoarionController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function create(Request $request, RegisterComparisonUseCase $action): JsonResponse
+    public function create(Request $request, RegisterComparisonAction $action): JsonResponse
     {
         $requestBody = new OpenAPI\Model\VideoComparison($request->all());
         $comparison = $action->register(
@@ -78,7 +78,7 @@ class CompoarionController extends Controller
      * @param  int $id
      * @return JsonResponse
      */
-    public function publish(int $id, PublishComparisonUseCase $action): JsonResponse
+    public function publish(int $id, PublishComparisonAction $action): JsonResponse
     {
         $action->publish($id);
         return response()->json(
@@ -93,7 +93,7 @@ class CompoarionController extends Controller
      * @param  int $id
      * @return JsonResponse
      */
-    public function delete(int $id, DeleteComparisonUseCase $action): JsonResponse
+    public function delete(int $id, DeleteComparisonAction $action): JsonResponse
     {
         $action->delete($id);
         return response()->json(

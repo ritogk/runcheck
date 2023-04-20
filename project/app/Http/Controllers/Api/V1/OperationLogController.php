@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 // usecase
-use App\UseCase\OperationLog\UpdateOperationLogUseCase;
+use App\UseCase\OperationLog\UpdateOperationLogAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -20,7 +20,7 @@ class OperationLogController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function create(Request $request, UpdateOperationLogUseCase $action): JsonResponse
+    public function create(Request $request, UpdateOperationLogAction $action): JsonResponse
     {
         $requestBody = new OpenAPI\Model\RequestOperationLog($request->all());
         $action->update((int)$requestBody->getOperationCd());
