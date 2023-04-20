@@ -6,23 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-// service
-use App\Services\ComparisonService;
-use App\Services\AuthenticationService;
 // usecase
 use App\UseCase\Comparison\RegisterComparisonUseCase;
 use App\UseCase\Comparison\FindComparisonUseCase;
+use App\UseCase\Comparison\DeleteComparisonUseCase;
+use App\UseCase\Comparison\PublishComparisonUseCase;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
 
 class CompoarionController extends Controller
 {
-    private ComparisonService $comparison_service;
-    public function __construct()
-    {
-        $this->comparison_service = new ComparisonService();
-    }
     /**
      * 1件取得
      *
@@ -84,9 +78,9 @@ class CompoarionController extends Controller
      * @param  int $id
      * @return JsonResponse
      */
-    public function publish(int $id): JsonResponse
+    public function publish(int $id, PublishComparisonUseCase $action): JsonResponse
     {
-        $this->comparison_service->publish($id);
+        $action->publish($id);
         return response()->json(
             [],
             Response::HTTP_OK
@@ -99,9 +93,9 @@ class CompoarionController extends Controller
      * @param  int $id
      * @return JsonResponse
      */
-    public function delete(int $id): JsonResponse
+    public function delete(int $id, DeleteComparisonUseCase $action): JsonResponse
     {
-        $this->comparison_service->delete($id);
+        $action->delete($id);
         return response()->json(
             [],
             Response::HTTP_OK
