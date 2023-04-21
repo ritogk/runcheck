@@ -34,11 +34,13 @@ class FetchAccessTokenAction
   public function fetch(string $code): array
   {
     $token = $this->client->fetch_token($code);
-    $this->session_action->put(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN, $token);
     $user = $this->me_action->me();
     if ($user) {
       $this->save_token_action->save($user->id, $token['refresh_token']);
     }
+    // リフレッシュトークンは消してセッションに保存する
+    unset($token['refresh_token']);
+    $this->session_action->put(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN, $token);
     return $token;
   }
 }
