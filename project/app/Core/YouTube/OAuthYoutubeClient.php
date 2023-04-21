@@ -6,7 +6,6 @@ use Google_Client;
 use Google_Service_YouTube;
 use Google_Service_Exception;
 use Google_Exception;
-use App\Model\YoutubeToken;
 
 class OAuthYoutubeClient
 {
@@ -67,13 +66,12 @@ class OAuthYoutubeClient
   /**
    * アクセストークンの更新
    *
-   * @param int $user_id
+   * @param string $refresh_token
    * @return array{access_token: string, expires_in: int, refresh_token: string, scope: string}
    */
-  public function generate_token(int $user_id): array
+  public function generate_token(string $refresh_token): array
   {
-    $youtube_token = YoutubeToken::where('user_id', $user_id)->first();
-    $token = $this->client->fetchAccessTokenWithRefreshToken($youtube_token->refresh_token);
+    $token = $this->client->fetchAccessTokenWithRefreshToken($refresh_token);
     return $token;
   }
 
