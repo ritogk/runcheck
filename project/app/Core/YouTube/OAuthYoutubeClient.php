@@ -7,6 +7,8 @@ use Google_Service_YouTube;
 use Google_Service_Exception;
 use Google_Exception;
 
+use App\Exceptions\OAuthException;
+
 class OAuthYoutubeClient
 {
   private string $client_id;
@@ -68,10 +70,15 @@ class OAuthYoutubeClient
    *
    * @param string $refresh_token
    * @return array{access_token: string, expires_in: int, refresh_token: string, scope: string}
+   * @throws OAuthException
    */
   public function generate_token(string $refresh_token): array
   {
-    $token = $this->client->fetchAccessTokenWithRefreshToken($refresh_token);
+    try {
+      $token = $this->client->fetchAccessTokenWithRefreshToken($refresh_token);
+    } catch (\Exception $th) {
+      throw new OAuthException();
+    }
     return $token;
   }
 

@@ -4,6 +4,9 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Response;
+use App\Exceptions\OAuthException;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +53,25 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof OAuthException) {
+            return response()->json([
+                'errMsg'   => 'OAuthでエラーが発生しました。'
+            ], Response::HTTP_UNAUTHORIZED);
+        }
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $request
+     * @param AuthenticationException $exception
+     * @return void
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return response()->json([
+            'errMsg'   => '認証でエラーが発生しました。'
+        ], Response::HTTP_UNAUTHORIZED);
     }
 }
