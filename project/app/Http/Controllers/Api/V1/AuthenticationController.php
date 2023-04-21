@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+
 // usecases
 use App\UseCase\Authentication\LoginAction;
 use App\UseCase\Authentication\LogoutAction;
@@ -26,15 +27,9 @@ class AuthenticationController extends Controller
     {
         $requestBody = new OpenAPI\Model\AuthenticationLoginPostRequest($request->all());
         $user = $acion->login($requestBody->getEmail(), $requestBody->getPassword(), $requestBody->getRemember());
-        if ($user) {
-            return response()->json(
-                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),
-                Response::HTTP_OK
-            );
-        }
         return response()->json(
-            [],
-            Response::HTTP_UNAUTHORIZED
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),
+            Response::HTTP_OK
         );
     }
 
@@ -62,15 +57,9 @@ class AuthenticationController extends Controller
     public function me(Request $request, MeAction $acion): JsonResponse
     {
         $user = $acion->me();
-        if ($user) {
-            return response()->json(
-                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),
-                Response::HTTP_OK
-            );
-        }
         return response()->json(
-            [],
-            Response::HTTP_NO_CONTENT
+            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),
+            Response::HTTP_OK
         );
     }
 }

@@ -47,10 +47,15 @@ class OAuthYoutubeClient
    *
    * @param array{access_token: string, expires_in: int, refresh_token: string, scope: string}
    * @return void
+   * @throws OAuthException
    */
   public function set_access_token(array $token): void
   {
-    $this->client->setAccessToken($token);
+    try {
+      $this->client->setAccessToken($token);
+    } catch (\Exception $th) {
+      throw new OAuthException();
+    }
   }
 
   /**
