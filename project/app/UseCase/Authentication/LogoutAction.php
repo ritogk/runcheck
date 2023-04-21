@@ -13,6 +13,7 @@ class LogoutAction
    */
   public function logout(): void
   {
+    session()->flush();
     Auth::guard()->logout();
   }
 }
