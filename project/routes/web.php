@@ -13,6 +13,15 @@
 
 Auth::routes();
 
+Route::get('/', function () {
+  return redirect('/app');
+});
+
+// spaのルーティング
+Route::get('/app/{any}', function () {
+  return view('app');
+})->where('any', '.*');
+
 // lp
 Route::get('/lp/ja', 'LPController@show_ja')->name('lp.ja');
 Route::get('/lp/en', 'LPController@show_en')->name('lp.en');
