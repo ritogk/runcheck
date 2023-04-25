@@ -5,8 +5,11 @@ import { IVideoPlayer } from "./IVideoPlayer"
  * @returns
  */
 interface SyncVideoStateType {
-  startSync(): void
-  stopSync(): void
+  switchMute(): void
+  switchRepeat(): void
+  adjustSpeed(speed: number): void
+  reload(): void
+  switchSync(): void
   setCurrentPosition(progres: number): void
   getCurrentPosition(): ComputedRef<number>
   setVideo1(videoPlayer: any): void
@@ -17,6 +20,9 @@ interface SyncVideoStateType {
 
 class SyncVideoState implements SyncVideoStateType {
   private currentPosition = ref(0)
+  private muted = false
+  private repeated = false
+  private speed = 1
   private synced = false
   private video1Player
   private video2Player
@@ -26,23 +32,30 @@ class SyncVideoState implements SyncVideoStateType {
     setInterval(this.sync, 500)
   }
 
-  /**
-   * 同期
-   */
-  sync = () => {
+  switchMute = (): void => {
+    this.muted = !this.muted
+  }
+
+  switchRepeat = (): void => {
+    this.repeated = !this.repeated
+  }
+
+  adjustSpeed = (speed: number): void => {
+    this.speed = speed
+  }
+
+  reload = (): void => {}
+
+  switchSync = () => {
+    this.synced = !this.synced
+  }
+
+  private sync = () => {
     if (!this.synced) return
     // 動画の進捗値を取得
     const video1CurrentPosition = 1
     const video2CurrentPosition = 2
     // ズレを補正する
-  }
-
-  startSync = () => {
-    this.synced = true
-  }
-
-  stopSync = () => {
-    this.synced = false
   }
 
   setCurrentPosition = (progres: number) => {
