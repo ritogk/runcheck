@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "watch": "vue-cli-service build --watch",
     "lint": "vue-cli-service lint",
     "tailwind:build": "NODE_ENV=production npx tailwindcss build ./src/tailwind.css -o ./dist/output.css",
     "tailwind:watch": "npx tailwindcss build ./src/tailwind.css -o ./dist/output.css --watch"
@@ -15,7 +16,8 @@
     "@tailwindcss/forms": "^0.5.3",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
-    "vue-class-component": "^8.0.0-0"
+    "vue-class-component": "^8.0.0-0",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

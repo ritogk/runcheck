@@ -1,7 +1,7 @@
 const { defineConfig } = require("@vue/cli-service")
 module.exports = defineConfig({
-  outputDir: "../public/app",
-  publicPath: "/app",
+  outputDir: "../public/spa",
+  publicPath: "/spa",
 
   devServer: {
     port: 8080,

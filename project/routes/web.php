@@ -11,10 +11,10 @@
 |
 */
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/', function () {
-  return redirect('/app');
+  return redirect('/app/index');
 });
 
 // spaのルーティング
@@ -62,11 +62,11 @@ Route::get('/analysis/access_youyou/', 'Ajax\AnalysisController@access_youyou');
 Route::get('/analysis/access_locallocal/', 'Ajax\AnalysisController@access_locallocal');
 Route::get('/analysis/access_youlocal/', 'Ajax\AnalysisController@access_youlocal');
 
-// ホーム
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home_tweat/{id}', 'HomeController@tweat')->name('home.tweat');
-Route::get('/home_destroy/{id}', 'HomeController@destroy')->name('home.destroy');
-Route::get('/home_release_update/{id}', 'HomeController@release_update')->name('home.release_update');
+// // ホーム
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home_tweat/{id}', 'HomeController@tweat')->name('home.tweat');
+// Route::get('/home_destroy/{id}', 'HomeController@destroy')->name('home.destroy');
+// Route::get('/home_release_update/{id}', 'HomeController@release_update')->name('home.release_update');
 
 // お問い合わせ
 Route::get('contact', 'ContactsController@index')->name('contact');

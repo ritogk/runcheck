@@ -188,7 +188,7 @@
     <main class="lg:pl-72">
       <div class="sm:px-1 lg:px-8 bg-gray-100">
         <!-- Your content -->
-        <Main></Main>
+        <router-view></router-view>
       </div>
     </main>
   </div>
@@ -213,7 +213,6 @@ import {
   ArrowLeftOnRectangleIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/vue/24/outline"
-import Main from "@/components/Main.vue"
 
 const navigation = [
   { name: "ritogk", href: "#", icon: UserIcon, current: true },

@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component"
-import Dashboard from "./components/Dashboard.vue"
+import Dashboard from "./pages/Dashboard.vue"
 import "./tailwind.css"
 
 @Options({
