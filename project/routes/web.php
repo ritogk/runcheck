@@ -27,7 +27,7 @@ Route::get('/lp/ja', 'LPController@show_ja')->name('lp.ja');
 Route::get('/lp/en', 'LPController@show_en')->name('lp.en');
 
 // youyou
-Route::get('/', 'YouYouController@index');
+// Route::get('/', 'YouYouController@index');
 Route::get('/youyou', 'YouYouController@index')->name('youyou');
 Route::post('/youyou_store', 'YouYouController@store')->name('youyou.store');
 // twittercardの関係でidはクエリパラメーターで渡す
