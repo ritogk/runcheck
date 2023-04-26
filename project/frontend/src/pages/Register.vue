@@ -1,6 +1,12 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, inject } from "vue"
+import {
+  useMessageStateKey,
+  useMessageStateType,
+} from "@/components/useMessageState"
 import { UsersApi } from "@/core/openapiClient/apis/UsersApi"
+
+const useMessageState = inject(useMessageStateKey) as useMessageStateType
 
 const form = {
   hanndleName: ref<HTMLInputElement | null>(null),
@@ -37,8 +43,9 @@ const onSubmit = async () => {
   }
 
   const usersApi = new UsersApi()
+
   try {
-    const response = await usersApi.usersPost({
+    await usersApi.usersPost({
       inlineObject: {
         handleName: form.hanndleName.value.value,
         carType: form.carType.value.value,
@@ -47,7 +54,7 @@ const onSubmit = async () => {
       },
     })
   } catch {
-    console.log(1)
+    useMessageState.addMessage("エラーが発生しました。")
   }
 }
 </script>
