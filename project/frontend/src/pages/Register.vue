@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
+import { UsersApi } from "@/core/openapiClient/apis/UsersApi"
 
 const form = {
   hanndleName: ref<HTMLInputElement | null>(null),
@@ -9,7 +10,7 @@ const form = {
   passwordConfirm: ref<HTMLInputElement | null>(null),
 }
 
-const onSubmit = () => {
+const onSubmit = async () => {
   if (
     form.hanndleName.value === null ||
     form.carType.value === null ||
@@ -34,11 +35,20 @@ const onSubmit = () => {
     form.passwordConfirm.value.reportValidity()
     return
   }
-  console.log(form.password.value.value)
-  console.log(form.passwordConfirm.value.value)
-  console.log(form.carType.value.value)
-  console.log(form.email.value.value)
-  console.log(form.hanndleName.value.value)
+
+  const usersApi = new UsersApi()
+  try {
+    const response = await usersApi.usersPost({
+      inlineObject: {
+        handleName: form.hanndleName.value.value,
+        carType: form.carType.value.value,
+        email: form.email.value.value,
+        password: form.password.value.value,
+      },
+    })
+  } catch {
+    console.log(1)
+  }
 }
 </script>
 
