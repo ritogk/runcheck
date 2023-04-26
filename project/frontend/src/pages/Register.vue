@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, inject } from "vue"
 import {
-  useMessageStateKey,
-  useMessageStateType,
-} from "@/components/useMessageState"
+  useAlretListStateKey,
+  useAlretListStateType,
+} from "@/components/AlretList/useAlretListState"
 import { UsersApi } from "@/core/openapiClient/apis/UsersApi"
 
-const useMessageState = inject(useMessageStateKey) as useMessageStateType
+const useAlertListState = inject(useAlretListStateKey) as useAlretListStateType
 
 const form = {
   hanndleName: ref<HTMLInputElement | null>(null),
@@ -54,7 +54,7 @@ const onSubmit = async () => {
       },
     })
   } catch {
-    useMessageState.addMessage("エラーが発生しました。")
+    useAlertListState.add("エラーが発生しました。")
   }
 }
 </script>

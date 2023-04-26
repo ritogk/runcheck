@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { inject } from "vue"
 import {
-  useMessageStateKey,
-  useMessageStateType,
-} from "@/components/useMessageState"
+  useAlretListStateKey,
+  useAlretListStateType,
+} from "@/components/AlretList/useAlretListState"
 
-const useMessageState = inject(useMessageStateKey) as useMessageStateType
+const useAlertListState = inject(useAlretListStateKey) as useAlretListStateType
 </script>
 
 <template>
   <div
-    class="rounded-md bg-red-50 py-2 px-3 lg:pl-80"
-    v-for="(message, index) in useMessageState.stateRefs.messages.value"
+    class="rounded-md bg-red-50 py-2 px-4"
+    v-for="(message, index) in useAlertListState.stateRefs.messages.value"
     :key="index"
   >
     <div class="flex">
-      <div class="flex-shrink-0" @click="useMessageState.deleteMessage(index)">
+      <div class="flex-shrink-0" @click="useAlertListState.remove(index)">
         <svg
           class="h-5 w-5 text-red-400"
           viewBox="0 0 20 20"
@@ -37,7 +37,7 @@ const useMessageState = inject(useMessageStateKey) as useMessageStateType
           <button
             type="button"
             class="inline-flex rounded-md bg-red-50 p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
-            @click="useMessageState.deleteMessage(index)"
+            @click="useAlertListState.remove(index)"
           >
             <span class="sr-only">Dismiss</span>
             <svg

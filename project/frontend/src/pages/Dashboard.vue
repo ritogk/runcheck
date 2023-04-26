@@ -167,7 +167,7 @@
     </div>
 
     <main class="lg:pl-72">
-      <Message></Message>
+      <AlretList></AlretList>
       <div class="sm:px-1 lg:px-8 bg-gray-100">
         <!-- Your content -->
         <router-view></router-view>
@@ -195,13 +195,13 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/vue/24/outline"
 
-import Message from "@/components/Message.vue"
+import AlretList from "@/components/AlretList/AlretList.vue"
 import {
-  useMessageState,
-  useMessageStateKey,
-} from "@/components/useMessageState"
-const messageState = useMessageState()
-provide(useMessageStateKey, messageState)
+  useAlretListState,
+  useAlretListStateKey,
+} from "@/components/AlretList/useAlretListState"
+const alretListState = useAlretListState()
+provide(useAlretListStateKey, alretListState)
 const navigation = [
   { name: "ritogk", href: "#", icon: UserIcon, current: true },
   {
