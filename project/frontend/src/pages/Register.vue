@@ -20,7 +20,12 @@
             <label
               for="hundle-name"
               class="block text-sm font-medium leading-6 text-gray-900"
-              >ハンドルネーム</label
+              required
+              >ハンドルネーム<span
+                class="text-red-400 text-lg leading-none"
+                title="このフィールドは必須です"
+                >*</span
+              ></label
             >
             <div class="mt-2">
               <input
@@ -38,7 +43,11 @@
             <label
               for="car-type"
               class="block text-sm font-medium leading-6 text-gray-900"
-              >車種</label
+              >車種<span
+                class="text-red-400 text-lg leading-none"
+                title="このフィールドは必須です"
+                >*</span
+              ></label
             >
             <div class="mt-2">
               <input
@@ -56,7 +65,11 @@
             <label
               for="email"
               class="block text-sm font-medium leading-6 text-gray-900"
-              >メールアドレス</label
+              >メールアドレス<span
+                class="text-red-400 text-lg leading-none"
+                title="このフィールドは必須です"
+                >*</span
+              ></label
             >
             <div class="mt-2">
               <input
@@ -74,7 +87,11 @@
             <label
               for="password"
               class="block text-sm font-medium leading-6 text-gray-900"
-              >パスワード</label
+              >パスワード<span
+                class="text-red-400 text-lg leading-none"
+                title="このフィールドは必須です"
+                >*</span
+              ></label
             >
             <div class="mt-2">
               <input
