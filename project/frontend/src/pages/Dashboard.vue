@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, provide, inject } from "vue"
+import { useRouter } from "vue-router"
 import {
   Dialog,
   DialogPanel,
@@ -30,6 +31,8 @@ provide(useAlretListStateKey, alretListState)
 const useUserState = inject(useUserStateKey) as useUserStateType
 const userState = useUserState.subscription
 
+const router = useRouter()
+
 const navigation = [
   {
     name: "問い合わせ",
@@ -43,15 +46,20 @@ const navigation = [
     href: "#",
     icon: ArrowRightOnRectangleIcon,
     current: false,
-    action: () => {},
+    action: () => {
+      sidebarOpen.value = false
+      router.push({ name: "login" })
+    },
   },
   {
     name: "ログアウト",
     href: "#",
     icon: ArrowLeftOnRectangleIcon,
     current: false,
-    action: () => {
+    action: async () => {
+      sidebarOpen.value = false
       useUserState.logout()
+      router.push({ name: "index" })
     },
   },
   { name: "新規登録", href: "#", icon: UserPlusIcon, current: false },
