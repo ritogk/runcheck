@@ -36,7 +36,7 @@ export interface InlineObject1 {
      * @type {boolean}
      * @memberof InlineObject1
      */
-    remember?: boolean;
+    remember: boolean;
 }
 
 export function InlineObject1FromJSON(json: any): InlineObject1 {
@@ -51,7 +51,7 @@ export function InlineObject1FromJSONTyped(json: any, ignoreDiscriminator: boole
         
         'email': json['email'],
         'password': json['password'],
-        'remember': !exists(json, 'remember') ? undefined : json['remember'],
+        'remember': json['remember'],
     };
 }
 

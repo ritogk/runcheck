@@ -294,6 +294,9 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
         if ($this->container['password'] === null) {
             $invalidProperties[] = "'password' can't be null";
         }
+        if ($this->container['remember'] === null) {
+            $invalidProperties[] = "'remember' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -366,7 +369,7 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets remember
      *
-     * @return bool|null
+     * @return bool
      */
     public function getRemember()
     {
@@ -376,7 +379,7 @@ class AuthenticationLoginPostRequest implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets remember
      *
-     * @param bool|null $remember remember
+     * @param bool $remember remember
      *
      * @return self
      */

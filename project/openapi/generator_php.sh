@@ -11,7 +11,6 @@ OUTPUT_PATH='../app/OpenAPI'
 rm -rf ${OUTPUT_PATH}
 mkdir -p ${OUTPUT_PATH}
 cp -r .${WORK_PATH}/lib/* ${OUTPUT_PATH}
-cp api.yaml ${OUTPUT_PATH}
 
 # 作業ディレクトリ削除
 rm -rf ./out

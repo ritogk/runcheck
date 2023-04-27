@@ -71,7 +71,7 @@ class UsersApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'usersRegisterPost' => [
+        'usersPost' => [
             'application/json',
         ],
     ];
@@ -123,38 +123,38 @@ class UsersApi
     }
 
     /**
-     * Operation usersRegisterPost
+     * Operation usersPost
      *
      * 新規登録
      *
-     * @param  \App\OpenAPI\Model\UsersRegisterPostRequest $usersRegisterPostRequest usersRegisterPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersRegisterPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\UsersPostRequest $usersPostRequest usersPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersPost'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \App\OpenAPI\Model\User
      */
-    public function usersRegisterPost($usersRegisterPostRequest, string $contentType = self::contentTypes['usersRegisterPost'][0])
+    public function usersPost($usersPostRequest, string $contentType = self::contentTypes['usersPost'][0])
     {
-        list($response) = $this->usersRegisterPostWithHttpInfo($usersRegisterPostRequest, $contentType);
+        list($response) = $this->usersPostWithHttpInfo($usersPostRequest, $contentType);
         return $response;
     }
 
     /**
-     * Operation usersRegisterPostWithHttpInfo
+     * Operation usersPostWithHttpInfo
      *
      * 新規登録
      *
-     * @param  \App\OpenAPI\Model\UsersRegisterPostRequest $usersRegisterPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersRegisterPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\UsersPostRequest $usersPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersPost'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \App\OpenAPI\Model\User, HTTP status code, HTTP response headers (array of strings)
      */
-    public function usersRegisterPostWithHttpInfo($usersRegisterPostRequest, string $contentType = self::contentTypes['usersRegisterPost'][0])
+    public function usersPostWithHttpInfo($usersPostRequest, string $contentType = self::contentTypes['usersPost'][0])
     {
-        $request = $this->usersRegisterPostRequest($usersRegisterPostRequest, $contentType);
+        $request = $this->usersPostRequest($usersPostRequest, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -241,19 +241,19 @@ class UsersApi
     }
 
     /**
-     * Operation usersRegisterPostAsync
+     * Operation usersPostAsync
      *
      * 新規登録
      *
-     * @param  \App\OpenAPI\Model\UsersRegisterPostRequest $usersRegisterPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersRegisterPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\UsersPostRequest $usersPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function usersRegisterPostAsync($usersRegisterPostRequest, string $contentType = self::contentTypes['usersRegisterPost'][0])
+    public function usersPostAsync($usersPostRequest, string $contentType = self::contentTypes['usersPost'][0])
     {
-        return $this->usersRegisterPostAsyncWithHttpInfo($usersRegisterPostRequest, $contentType)
+        return $this->usersPostAsyncWithHttpInfo($usersPostRequest, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -262,20 +262,20 @@ class UsersApi
     }
 
     /**
-     * Operation usersRegisterPostAsyncWithHttpInfo
+     * Operation usersPostAsyncWithHttpInfo
      *
      * 新規登録
      *
-     * @param  \App\OpenAPI\Model\UsersRegisterPostRequest $usersRegisterPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersRegisterPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\UsersPostRequest $usersPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function usersRegisterPostAsyncWithHttpInfo($usersRegisterPostRequest, string $contentType = self::contentTypes['usersRegisterPost'][0])
+    public function usersPostAsyncWithHttpInfo($usersPostRequest, string $contentType = self::contentTypes['usersPost'][0])
     {
         $returnType = '\App\OpenAPI\Model\User';
-        $request = $this->usersRegisterPostRequest($usersRegisterPostRequest, $contentType);
+        $request = $this->usersPostRequest($usersPostRequest, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -314,26 +314,26 @@ class UsersApi
     }
 
     /**
-     * Create request for operation 'usersRegisterPost'
+     * Create request for operation 'usersPost'
      *
-     * @param  \App\OpenAPI\Model\UsersRegisterPostRequest $usersRegisterPostRequest (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersRegisterPost'] to see the possible values for this operation
+     * @param  \App\OpenAPI\Model\UsersPostRequest $usersPostRequest (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['usersPost'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function usersRegisterPostRequest($usersRegisterPostRequest, string $contentType = self::contentTypes['usersRegisterPost'][0])
+    public function usersPostRequest($usersPostRequest, string $contentType = self::contentTypes['usersPost'][0])
     {
 
-        // verify the required parameter 'usersRegisterPostRequest' is set
-        if ($usersRegisterPostRequest === null || (is_array($usersRegisterPostRequest) && count($usersRegisterPostRequest) === 0)) {
+        // verify the required parameter 'usersPostRequest' is set
+        if ($usersPostRequest === null || (is_array($usersPostRequest) && count($usersPostRequest) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $usersRegisterPostRequest when calling usersRegisterPost'
+                'Missing the required parameter $usersPostRequest when calling usersPost'
             );
         }
 
 
-        $resourcePath = '/users/register';
+        $resourcePath = '/users';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -351,12 +351,12 @@ class UsersApi
         );
 
         // for model (json/xml)
-        if (isset($usersRegisterPostRequest)) {
+        if (isset($usersPostRequest)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($usersRegisterPostRequest));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($usersPostRequest));
             } else {
-                $httpBody = $usersRegisterPostRequest;
+                $httpBody = $usersPostRequest;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

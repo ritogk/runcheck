@@ -62,7 +62,7 @@ paths:
               required:
                 - email
                 - password
-                - boolean
+                - remember
       responses:
         "200":
           description: OK

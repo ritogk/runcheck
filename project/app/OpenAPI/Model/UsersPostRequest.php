@@ -1,6 +1,6 @@
 <?php
 /**
- * UsersRegisterPostRequest
+ * UsersPostRequest
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * UsersRegisterPostRequest Class Doc Comment
+ * UsersPostRequest Class Doc Comment
  *
  * @category Class
  * @package  App\OpenAPI
@@ -40,7 +40,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UsersRegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class UsersPostRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class UsersRegisterPostRequest implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = '_users_register_post_request';
+    protected static $openAPIModelName = '_users_post_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

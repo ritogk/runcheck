@@ -71,7 +71,7 @@ class OperationLogApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'operationLogPost' => [
+        'operationLogPut' => [
             'application/json',
         ],
     ];
@@ -123,37 +123,37 @@ class OperationLogApi
     }
 
     /**
-     * Operation operationLogPost
+     * Operation operationLogPut
      *
      * 操作ログを送信
      *
      * @param  \App\OpenAPI\Model\RequestOperationLog $requestOperationLog requestOperationLog (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPut'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function operationLogPost($requestOperationLog, string $contentType = self::contentTypes['operationLogPost'][0])
+    public function operationLogPut($requestOperationLog, string $contentType = self::contentTypes['operationLogPut'][0])
     {
-        $this->operationLogPostWithHttpInfo($requestOperationLog, $contentType);
+        $this->operationLogPutWithHttpInfo($requestOperationLog, $contentType);
     }
 
     /**
-     * Operation operationLogPostWithHttpInfo
+     * Operation operationLogPutWithHttpInfo
      *
      * 操作ログを送信
      *
      * @param  \App\OpenAPI\Model\RequestOperationLog $requestOperationLog (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPut'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function operationLogPostWithHttpInfo($requestOperationLog, string $contentType = self::contentTypes['operationLogPost'][0])
+    public function operationLogPutWithHttpInfo($requestOperationLog, string $contentType = self::contentTypes['operationLogPut'][0])
     {
-        $request = $this->operationLogPostRequest($requestOperationLog, $contentType);
+        $request = $this->operationLogPutRequest($requestOperationLog, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -200,19 +200,19 @@ class OperationLogApi
     }
 
     /**
-     * Operation operationLogPostAsync
+     * Operation operationLogPutAsync
      *
      * 操作ログを送信
      *
      * @param  \App\OpenAPI\Model\RequestOperationLog $requestOperationLog (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPut'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationLogPostAsync($requestOperationLog, string $contentType = self::contentTypes['operationLogPost'][0])
+    public function operationLogPutAsync($requestOperationLog, string $contentType = self::contentTypes['operationLogPut'][0])
     {
-        return $this->operationLogPostAsyncWithHttpInfo($requestOperationLog, $contentType)
+        return $this->operationLogPutAsyncWithHttpInfo($requestOperationLog, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -221,20 +221,20 @@ class OperationLogApi
     }
 
     /**
-     * Operation operationLogPostAsyncWithHttpInfo
+     * Operation operationLogPutAsyncWithHttpInfo
      *
      * 操作ログを送信
      *
      * @param  \App\OpenAPI\Model\RequestOperationLog $requestOperationLog (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPut'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function operationLogPostAsyncWithHttpInfo($requestOperationLog, string $contentType = self::contentTypes['operationLogPost'][0])
+    public function operationLogPutAsyncWithHttpInfo($requestOperationLog, string $contentType = self::contentTypes['operationLogPut'][0])
     {
         $returnType = '';
-        $request = $this->operationLogPostRequest($requestOperationLog, $contentType);
+        $request = $this->operationLogPutRequest($requestOperationLog, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -260,21 +260,21 @@ class OperationLogApi
     }
 
     /**
-     * Create request for operation 'operationLogPost'
+     * Create request for operation 'operationLogPut'
      *
      * @param  \App\OpenAPI\Model\RequestOperationLog $requestOperationLog (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['operationLogPut'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function operationLogPostRequest($requestOperationLog, string $contentType = self::contentTypes['operationLogPost'][0])
+    public function operationLogPutRequest($requestOperationLog, string $contentType = self::contentTypes['operationLogPut'][0])
     {
 
         // verify the required parameter 'requestOperationLog' is set
         if ($requestOperationLog === null || (is_array($requestOperationLog) && count($requestOperationLog) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $requestOperationLog when calling operationLogPost'
+                'Missing the required parameter $requestOperationLog when calling operationLogPut'
             );
         }
 
@@ -343,7 +343,7 @@ class OperationLogApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
