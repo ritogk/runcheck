@@ -58,7 +58,6 @@ const onSubmit = async () => {
   }
 
   const usersApi = new UsersApi()
-
   try {
     await usersApi.usersPost({
       inlineObject: {
@@ -182,7 +181,7 @@ const onSubmit = async () => {
                   :ref="form.password"
                   required
                   pattern="^(?=.*\d)(?=.*[a-zA-Z]).{8,}$"
-                  title="半角英数字と半角数字を組み合わせて8文字以上で入力してください。"
+                  title="半角英字と半角数字を組み合わせて8文字以上で入力してください。"
                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="パスワード"
                 />
@@ -215,7 +214,7 @@ const onSubmit = async () => {
                   :ref="form.passwordConfirm"
                   required
                   pattern="^(?=.*\d)(?=.*[a-zA-Z]).{8,}$"
-                  title="半角英数字と半角数字を組み合わせて8文字以上で入力してください。"
+                  title="半角英字と半角数字を組み合わせて8文字以上で入力してください。"
                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="確認"
                 />
