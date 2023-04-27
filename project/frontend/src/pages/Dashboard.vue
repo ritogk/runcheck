@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, provide, inject } from "vue"
+import { ref, provide, inject, computed } from "vue"
 import { useRouter } from "vue-router"
 import {
   Dialog,
@@ -40,6 +40,15 @@ const navigation = [
     icon: ChatBubbleOvalLeftEllipsisIcon,
     current: false,
     action: () => {},
+    show: computed(() => true),
+  },
+  {
+    name: "問い合わせ",
+    href: "#",
+    icon: ChatBubbleOvalLeftEllipsisIcon,
+    current: false,
+    action: () => {},
+    show: computed(() => true),
   },
   {
     name: "ログイン",
@@ -50,6 +59,7 @@ const navigation = [
       sidebarOpen.value = false
       router.push({ name: "login" })
     },
+    show: computed(() => !userState.value.logined),
   },
   {
     name: "ログアウト",
@@ -61,14 +71,27 @@ const navigation = [
       useUserState.logout()
       router.push({ name: "index" })
     },
+    show: computed(() => userState.value.logined),
   },
-  { name: "新規登録", href: "#", icon: UserPlusIcon, current: false },
+  {
+    name: "新規登録",
+    href: "#",
+    icon: UserPlusIcon,
+    current: false,
+    action: async () => {
+      sidebarOpen.value = false
+      useUserState.logout()
+      router.push({ name: "index" })
+    },
+    show: computed(() => !userState.value.logined),
+  },
   {
     name: "このアプリについて",
     href: "#",
     icon: QuestionMarkCircleIcon,
     current: false,
     action: () => {},
+    show: computed(() => true),
   },
 ]
 
@@ -157,9 +180,9 @@ const sidebarOpen = ref(false)
                               {{ userState.user.name }}
                             </a>
                           </li>
-
                           <li v-for="item in navigation" :key="item.name">
                             <a
+                              v-if="item.show.value"
                               :href="item.href"
                               :class="[
                                 item.current
