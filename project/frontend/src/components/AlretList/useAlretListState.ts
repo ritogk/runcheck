@@ -12,6 +12,7 @@ const useAlretListState = (): useAlretListStateType => {
 
   const add = (message: string) => {
     state.messages.push(message)
+    window.scroll({ top: 0, behavior: "smooth" })
   }
 
   const remove = (index: number) => {
