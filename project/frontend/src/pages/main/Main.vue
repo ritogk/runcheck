@@ -16,6 +16,7 @@ import {
 
 const useYoutubeSelectModalState = UseYoutubeSelectModalState()
 provide(UseYoutubeSelectModalStateKey, useYoutubeSelectModalState)
+useYoutubeSelectModalState.load()
 </script>
 
 <template>
