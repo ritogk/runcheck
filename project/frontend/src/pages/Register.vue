@@ -40,8 +40,9 @@ const onSubmit = async () => {
     form.passwordConfirm.value === null
   )
     return
-
+  // 独自エラーの初期化
   form.passwordConfirm.value.setCustomValidity("")
+  // エラーチェック
   if (
     !form.hanndleName.value.reportValidity() ||
     !form.carType.value.reportValidity() ||
@@ -51,12 +52,14 @@ const onSubmit = async () => {
   )
     return
 
+  // パスワードチェック
   if (form.password.value.value !== form.passwordConfirm.value.value) {
     form.passwordConfirm.value.setCustomValidity("パスワードが一致しません。")
     form.passwordConfirm.value.reportValidity()
     return
   }
 
+  // 登録処理
   const usersApi = new UsersApi()
   try {
     await usersApi.usersPost({
