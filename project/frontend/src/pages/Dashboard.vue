@@ -81,7 +81,9 @@ const navigation = [
     href: "#",
     icon: ChatBubbleOvalLeftEllipsisIcon,
     current: false,
-    action: () => {},
+    action: () => {
+      location.href = "https://twitter.com/homing_fd2"
+    },
     show: computed(() => true),
   },
 ]
