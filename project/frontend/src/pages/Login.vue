@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue"
-import { AuthenticationApi } from "@/core/openapiClient/apis"
+import { ref, inject } from "vue"
+import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 import { useRouter } from "vue-router"
 
 const router = useRouter()
-const authenticationApi = new AuthenticationApi()
+const userState = inject(useUserStateKey) as useUserStateType
 
 const form = {
   email: ref<HTMLInputElement | null>(null),
@@ -19,14 +19,16 @@ const onSubmit = async () => {
     form.remember.value === null
   )
     return
-  await authenticationApi.authenticationLoginPost({
-    inlineObject1: {
-      email: form.email.value.value,
-      password: form.password.value.value,
-      remember: form.remember.value.checked,
-    },
-  })
-  router.push({ name: "index" })
+
+  if (
+    await userState.login(
+      form.email.value.value,
+      form.password.value.value,
+      form.remember.value.checked
+    )
+  ) {
+    router.push({ name: "index" })
+  }
 }
 </script>
 

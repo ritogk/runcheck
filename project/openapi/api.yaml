@@ -263,7 +263,7 @@ components:
           description: "ネーム"
       required:
         - id
-        - hundleName
+        - name
 
     Video:
       description: 動画情報

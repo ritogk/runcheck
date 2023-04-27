@@ -30,7 +30,7 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    name?: string;
+    name: string;
 }
 
 export function UserFromJSON(json: any): User {
@@ -44,7 +44,7 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
     return {
         
         'id': json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
+        'name': json['name'],
     };
 }
 
