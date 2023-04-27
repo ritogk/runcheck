@@ -1,18 +1,52 @@
 import { InjectionKey, reactive, computed, ComputedRef } from "vue"
-import { AuthenticationApi } from "@/core/openapiClient/apis"
+import { AuthenticationApi, UsersApi } from "@/core/openapiClient/apis"
 
 type useUserStateType = {
   subscription: ComputedRef<{
     logined: boolean
     user: { id: number; name: string }
   }>
+  register(
+    handleName: string,
+    carType: string,
+    email: string,
+    password: string
+  ): Promise<boolean>
   login(email: string, password: string, remember: boolean): Promise<boolean>
   logout(): Promise<boolean>
 }
 
 const useUserState = (): useUserStateType => {
   const authenticationApi = new AuthenticationApi()
+  const usersApi = new UsersApi()
   const state = reactive({ logined: false, user: { id: 0, name: "" } })
+
+  const register = async (
+    handleName: string,
+    carType: string,
+    email: string,
+    password: string
+  ): Promise<boolean> => {
+    try {
+      const response = await usersApi.usersPost({
+        inlineObject: {
+          handleName: handleName,
+          carType: carType,
+          email: email,
+          password: password,
+        },
+      })
+
+      if (await login(email, password, true)) {
+        state.user.id = response.id
+        state.user.name = response.name
+        state.logined = true
+      }
+      return true
+    } catch {
+      return false
+    }
+  }
 
   const login = async (email: string, password: string, remember: boolean) => {
     try {
@@ -48,6 +82,7 @@ const useUserState = (): useUserStateType => {
 
   return {
     subscription: computed(() => state),
+    register: register,
     login: login,
     logout: logout,
   }

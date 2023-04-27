@@ -4,13 +4,12 @@ import {
   useAlretListStateKey,
   useAlretListStateType,
 } from "@/components/AlretList/useAlretListState"
-import { UsersApi } from "@/core/openapiClient/apis"
 import { useRouter } from "vue-router"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 
 const router = useRouter()
 const useAlertListState = inject(useAlretListStateKey) as useAlretListStateType
-const usersApi = new UsersApi()
+
 const userState = inject(useUserStateKey) as useUserStateType
 
 const form = {
@@ -64,29 +63,20 @@ const onSubmit = async () => {
     return
   }
 
-  // 登録処理
   try {
-    await usersApi.usersPost({
-      inlineObject: {
-        handleName: form.hanndleName.value.value,
-        carType: form.carType.value.value,
-        email: form.email.value.value,
-        password: form.password.value.value,
-      },
-    })
+    if (
+      await userState.register(
+        form.hanndleName.value.value,
+        form.carType.value.value,
+        form.email.value.value,
+        form.password.value.value
+      )
+    ) {
+      router.push({ name: "index" })
+    }
   } catch {
     useAlertListState.add("エラーが発生しました。")
     return
-  }
-  // ログイン
-  if (
-    await userState.login(
-      form.email.value.value,
-      form.password.value.value,
-      true
-    )
-  ) {
-    router.push({ name: "index" })
   }
 }
 </script>
