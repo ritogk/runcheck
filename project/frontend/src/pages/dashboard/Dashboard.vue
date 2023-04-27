@@ -18,11 +18,11 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/vue/24/outline"
 
-import AlretList from "@/pages/dashboard/states/AlretList/AlretList.vue"
+import AlretList from "@/pages/dashboard/parts/AlretList/AlretList.vue"
 import {
   useAlretListState,
   useAlretListStateKey,
-} from "@/pages/dashboard/states/AlretList/useAlretListState"
+} from "@/pages/dashboard/parts/AlretList/useAlretListState"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 
 const alretListState = useAlretListState()

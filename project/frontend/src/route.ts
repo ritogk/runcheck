@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
-import Main from "@/pages/dashboard/parts/Main.vue"
-import Register from "@/pages/dashboard/parts/Register.vue"
-import Login from "@/pages/dashboard/parts/Login.vue"
-import Home from "@/pages/dashboard/parts/Home.vue"
+import Main from "@/pages/Main.vue"
+import Register from "@/pages/Register.vue"
+import Login from "@/pages/Login.vue"
+import Home from "@/pages/Home.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {

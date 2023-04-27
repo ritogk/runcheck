@@ -3,7 +3,7 @@ import { inject } from "vue"
 import {
   useAlretListStateKey,
   useAlretListStateType,
-} from "@/pages/dashboard/states/AlretList/useAlretListState"
+} from "@/pages/dashboard/parts/AlretList/useAlretListState"
 
 const useAlertListState = inject(useAlretListStateKey) as useAlretListStateType
 </script>
