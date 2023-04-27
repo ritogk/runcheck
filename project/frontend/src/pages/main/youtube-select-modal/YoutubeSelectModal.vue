@@ -1,6 +1,31 @@
+<script setup lang="ts">
+import { ref, inject } from "vue"
+import {
+  Dialog,
+  DialogPanel,
+  TransitionChild,
+  TransitionRoot,
+} from "@headlessui/vue"
+import { XMarkIcon } from "@heroicons/vue/20/solid"
+import {
+  UseYoutubeSelectModalStateKey,
+  UseYoutubeSelectModalStateType,
+} from "@/pages/main/youtube-select-modal/UseYoutubeSelectModalState"
+
+const useYoutubeSelectModalState = inject(
+  UseYoutubeSelectModalStateKey
+) as UseYoutubeSelectModalStateType
+
+const state = useYoutubeSelectModalState.subscription
+
+const onClose = () => {
+  useYoutubeSelectModalState.close()
+}
+</script>
+
 <template>
-  <TransitionRoot as="template" :show="open">
-    <Dialog as="div" class="relative z-50" @close="open = false">
+  <TransitionRoot as="template" :show="state.opened">
+    <Dialog as="div" class="relative z-50" @close="onClose">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
@@ -35,7 +60,7 @@
                 <button
                   type="button"
                   class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  @click="open = false"
+                  @click="onClose"
                 >
                   <span class="sr-only">Close</span>
                   <XMarkIcon class="h-6 w-6" aria-hidden="true" />
@@ -243,15 +268,3 @@
     </Dialog>
   </TransitionRoot>
 </template>
-
-<script setup>
-import { ref } from "vue"
-import {
-  Dialog,
-  DialogPanel,
-  TransitionChild,
-  TransitionRoot,
-} from "@headlessui/vue"
-import { XMarkIcon } from "@heroicons/vue/20/solid"
-const open = ref(false)
-</script>
