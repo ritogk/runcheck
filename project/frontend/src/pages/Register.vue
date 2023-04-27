@@ -103,7 +103,7 @@ const onSubmit = async () => {
                 >*</span
               ></label
             >
-            <div class="mt-2">
+            <div class="mt-1">
               <input
                 id="hundle-name"
                 name="hundle-name"
@@ -116,7 +116,7 @@ const onSubmit = async () => {
             </div>
           </div>
 
-          <div>
+          <div class="mt-2">
             <label
               for="car-type"
               class="block text-sm font-medium leading-6 text-gray-900"
@@ -126,7 +126,7 @@ const onSubmit = async () => {
                 >*</span
               ></label
             >
-            <div class="mt-2">
+            <div class="mt-1">
               <input
                 id="car-type"
                 name="car-type"
@@ -139,7 +139,7 @@ const onSubmit = async () => {
             </div>
           </div>
 
-          <div>
+          <div class="mt-2">
             <label
               for="email"
               class="block text-sm font-medium leading-6 text-gray-900"
@@ -149,7 +149,7 @@ const onSubmit = async () => {
                 >*</span
               ></label
             >
-            <div class="mt-2">
+            <div class="mt-1">
               <input
                 id="email"
                 name="email"
@@ -162,7 +162,7 @@ const onSubmit = async () => {
             </div>
           </div>
 
-          <div>
+          <div class="mt-2">
             <label
               for="password"
               class="block text-sm font-medium leading-6 text-gray-900"
@@ -172,7 +172,7 @@ const onSubmit = async () => {
                 >*</span
               ></label
             >
-            <div class="mt-2">
+            <div class="mt-1">
               <div class="relative mt-2 rounded-md shadow-sm">
                 <input
                   id="password"
