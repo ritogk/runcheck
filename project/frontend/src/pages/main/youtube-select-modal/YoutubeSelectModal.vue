@@ -11,15 +11,21 @@ import {
   UseYoutubeSelectModalStateKey,
   UseYoutubeSelectModalStateType,
 } from "@/pages/main/youtube-select-modal/UseYoutubeSelectModalState"
-
+import { YoutubeApi } from "@/core/openapiClient"
 const useYoutubeSelectModalState = inject(
   UseYoutubeSelectModalStateKey
 ) as UseYoutubeSelectModalStateType
 
 const state = useYoutubeSelectModalState.subscription
+const youtubeApi = new YoutubeApi()
 
 const onClose = () => {
   useYoutubeSelectModalState.close()
+}
+
+const redirectToAuthorize = async () => {
+  const response = await youtubeApi.youtubeOauthAuthorizeGet()
+  location.href = response.redirectUrl
 }
 </script>
 
@@ -77,6 +83,7 @@ const onClose = () => {
 
                     <div
                       class="bg-red-500 text-gray-100 hover:text-white shadow text-sm font-bold py-2 px-2 rounded flex justify-start items-center cursor-pointer w-64 mt-2 mx-auto"
+                      @click="redirectToAuthorize"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
