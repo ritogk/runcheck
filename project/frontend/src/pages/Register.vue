@@ -4,13 +4,14 @@ import {
   useAlretListStateKey,
   useAlretListStateType,
 } from "@/components/AlretList/useAlretListState"
-import { UsersApi, AuthenticationApi } from "@/core/openapiClient/apis"
+import { UsersApi } from "@/core/openapiClient/apis"
 import { useRouter } from "vue-router"
+import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 
 const router = useRouter()
 const useAlertListState = inject(useAlretListStateKey) as useAlretListStateType
 const usersApi = new UsersApi()
-const authenticationApi = new AuthenticationApi()
+const userState = inject(useUserStateKey) as useUserStateType
 
 const form = {
   hanndleName: ref<HTMLInputElement | null>(null),
@@ -78,14 +79,15 @@ const onSubmit = async () => {
     return
   }
   // ログイン
-  await authenticationApi.authenticationLoginPost({
-    inlineObject1: {
-      email: form.email.value.value,
-      password: form.password.value.value,
-      remember: true,
-    },
-  })
-  router.push({ name: "index" })
+  if (
+    await userState.login(
+      form.email.value.value,
+      form.password.value.value,
+      true
+    )
+  ) {
+    router.push({ name: "index" })
+  }
 }
 </script>
 
