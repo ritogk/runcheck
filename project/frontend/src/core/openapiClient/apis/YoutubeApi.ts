@@ -75,13 +75,13 @@ export interface YoutubeApiInterface {
      * @throws {RequiredError}
      * @memberof YoutubeApiInterface
      */
-    youtubeVideosPostRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse2001>>>;
+    youtubeVideosGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse2001>>>;
 
     /**
      * 詳細内容
      * 本人がアップロードした動画一覧を取得
      */
-    youtubeVideosPost(initOverrides?: RequestInit): Promise<Array<InlineResponse2001>>;
+    youtubeVideosGet(initOverrides?: RequestInit): Promise<Array<InlineResponse2001>>;
 
 }
 
@@ -156,14 +156,14 @@ export class YoutubeApi extends runtime.BaseAPI implements YoutubeApiInterface {
      * 詳細内容
      * 本人がアップロードした動画一覧を取得
      */
-    async youtubeVideosPostRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse2001>>> {
+    async youtubeVideosGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse2001>>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
             path: `/youtube/videos`,
-            method: 'POST',
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
@@ -175,8 +175,8 @@ export class YoutubeApi extends runtime.BaseAPI implements YoutubeApiInterface {
      * 詳細内容
      * 本人がアップロードした動画一覧を取得
      */
-    async youtubeVideosPost(initOverrides?: RequestInit): Promise<Array<InlineResponse2001>> {
-        const response = await this.youtubeVideosPostRaw(initOverrides);
+    async youtubeVideosGet(initOverrides?: RequestInit): Promise<Array<InlineResponse2001>> {
+        const response = await this.youtubeVideosGetRaw(initOverrides);
         return await response.value();
     }
 

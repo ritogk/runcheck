@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from "vue"
+import { inject, ref } from "vue"
 import {
   Dialog,
   DialogPanel,
@@ -26,6 +26,22 @@ const onClose = () => {
 const redirectToAuthorize = async () => {
   const response = await youtubeApi.youtubeOauthAuthorizeGet()
   location.href = response.redirectUrl
+}
+
+const videos = ref(
+  Array<{
+    title: string
+    description: string
+    thumbnailUrl: string
+    url: string
+  }>()
+)
+youtubeApi.youtubeVideosGet().then((response) => {
+  videos.value.splice(0, videos.value.length, ...response)
+})
+
+const selectVideo = (url: string) => {
+  console.log(url)
 }
 </script>
 
@@ -60,7 +76,7 @@ const redirectToAuthorize = async () => {
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              class="relative w-full transform overflow-hidden rounded-lg bg-gray-100 px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+              class="relative w-full transform rounded-lg bg-gray-100 px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
             >
               <div class="absolute right-0 top-0 pr-4 pt-4 sm:block">
                 <button
@@ -164,7 +180,7 @@ const redirectToAuthorize = async () => {
                   </div>
                   <!-- Results, show/hide based on command palette state -->
                   <ul
-                    class="max-h-96 scroll-py-3 overflow-y-auto p-1"
+                    class="max-h-96 scroll-py-3 overflow-y-auto overflow-x-hidden p-1"
                     id="options"
                     role="listbox"
                   >
@@ -207,39 +223,31 @@ const redirectToAuthorize = async () => {
 
                     <!-- Active: "bg-gray-100" -->
                     <li
-                      v-for="i in 10"
-                      :key="i"
+                      v-for="video in videos"
+                      :key="video.url"
                       class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
                       id="option-1"
                       role="option"
                       tabindex="-1"
+                      @click="selectVideo(video.url)"
                     >
                       <div
-                        class="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-indigo-500"
+                        class="flex h-10 w-10 flex-none items-center justify-center"
                       >
-                        <svg
-                          class="h-6 w-6 text-white"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                          />
-                        </svg>
+                        <img
+                          :src="video.thumbnailUrl"
+                          alt="サムネイル"
+                          class="rounded-lg w-[40px] h-[40px]"
+                        />
                       </div>
                       <div class="ml-4 flex-auto">
                         <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
                         <p class="text-sm font-medium text-gray-700">
-                          美浜サーキット FIT GK5
+                          {{ video.title }}
                         </p>
                         <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
-                        <p class="text-sm text-gray-500">
-                          F:225/50r15 R:195/50r15
+                        <p class="text-sm text-gray-500 truncate w-full">
+                          {{ video.description }}
                         </p>
                       </div>
                     </li>

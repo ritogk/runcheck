@@ -77,7 +77,7 @@ class YoutubeApi
         'youtubeOauthPost' => [
             'application/json',
         ],
-        'youtubeVideosPost' => [
+        'youtubeVideosGet' => [
             'application/json',
         ],
     ];
@@ -620,36 +620,36 @@ class YoutubeApi
     }
 
     /**
-     * Operation youtubeVideosPost
+     * Operation youtubeVideosGet
      *
      * 本人がアップロードした動画一覧を取得
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosGet'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \App\OpenAPI\Model\YoutubeVideosPost200ResponseInner[]
+     * @return \App\OpenAPI\Model\YoutubeVideosGet200ResponseInner[]
      */
-    public function youtubeVideosPost(string $contentType = self::contentTypes['youtubeVideosPost'][0])
+    public function youtubeVideosGet(string $contentType = self::contentTypes['youtubeVideosGet'][0])
     {
-        list($response) = $this->youtubeVideosPostWithHttpInfo($contentType);
+        list($response) = $this->youtubeVideosGetWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation youtubeVideosPostWithHttpInfo
+     * Operation youtubeVideosGetWithHttpInfo
      *
      * 本人がアップロードした動画一覧を取得
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosGet'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \App\OpenAPI\Model\YoutubeVideosPost200ResponseInner[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \App\OpenAPI\Model\YoutubeVideosGet200ResponseInner[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function youtubeVideosPostWithHttpInfo(string $contentType = self::contentTypes['youtubeVideosPost'][0])
+    public function youtubeVideosGetWithHttpInfo(string $contentType = self::contentTypes['youtubeVideosGet'][0])
     {
-        $request = $this->youtubeVideosPostRequest($contentType);
+        $request = $this->youtubeVideosGetRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -688,23 +688,23 @@ class YoutubeApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\App\OpenAPI\Model\YoutubeVideosPost200ResponseInner[]' === '\SplFileObject') {
+                    if ('\App\OpenAPI\Model\YoutubeVideosGet200ResponseInner[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\App\OpenAPI\Model\YoutubeVideosPost200ResponseInner[]' !== 'string') {
+                        if ('\App\OpenAPI\Model\YoutubeVideosGet200ResponseInner[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\App\OpenAPI\Model\YoutubeVideosPost200ResponseInner[]', []),
+                        ObjectSerializer::deserialize($content, '\App\OpenAPI\Model\YoutubeVideosGet200ResponseInner[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\App\OpenAPI\Model\YoutubeVideosPost200ResponseInner[]';
+            $returnType = '\App\OpenAPI\Model\YoutubeVideosGet200ResponseInner[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -725,7 +725,7 @@ class YoutubeApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\App\OpenAPI\Model\YoutubeVideosPost200ResponseInner[]',
+                        '\App\OpenAPI\Model\YoutubeVideosGet200ResponseInner[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -736,18 +736,18 @@ class YoutubeApi
     }
 
     /**
-     * Operation youtubeVideosPostAsync
+     * Operation youtubeVideosGetAsync
      *
      * 本人がアップロードした動画一覧を取得
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function youtubeVideosPostAsync(string $contentType = self::contentTypes['youtubeVideosPost'][0])
+    public function youtubeVideosGetAsync(string $contentType = self::contentTypes['youtubeVideosGet'][0])
     {
-        return $this->youtubeVideosPostAsyncWithHttpInfo($contentType)
+        return $this->youtubeVideosGetAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -756,19 +756,19 @@ class YoutubeApi
     }
 
     /**
-     * Operation youtubeVideosPostAsyncWithHttpInfo
+     * Operation youtubeVideosGetAsyncWithHttpInfo
      *
      * 本人がアップロードした動画一覧を取得
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function youtubeVideosPostAsyncWithHttpInfo(string $contentType = self::contentTypes['youtubeVideosPost'][0])
+    public function youtubeVideosGetAsyncWithHttpInfo(string $contentType = self::contentTypes['youtubeVideosGet'][0])
     {
-        $returnType = '\App\OpenAPI\Model\YoutubeVideosPost200ResponseInner[]';
-        $request = $this->youtubeVideosPostRequest($contentType);
+        $returnType = '\App\OpenAPI\Model\YoutubeVideosGet200ResponseInner[]';
+        $request = $this->youtubeVideosGetRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -807,14 +807,14 @@ class YoutubeApi
     }
 
     /**
-     * Create request for operation 'youtubeVideosPost'
+     * Create request for operation 'youtubeVideosGet'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['youtubeVideosGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function youtubeVideosPostRequest(string $contentType = self::contentTypes['youtubeVideosPost'][0])
+    public function youtubeVideosGetRequest(string $contentType = self::contentTypes['youtubeVideosGet'][0])
     {
 
 
@@ -875,7 +875,7 @@ class YoutubeApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

@@ -57,7 +57,7 @@ class YouTubeController extends Controller
     {
         $videos = $action->fetch();
         return response()->json(
-            OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\YoutubeVideosPost200ResponseInner::class, $videos),
+            OpenAPIUtility::dicstionariesToModelContainers(OpenAPI\Model\YoutubeVideosGet200ResponseInner::class, $videos),
             Response::HTTP_OK
         );
     }

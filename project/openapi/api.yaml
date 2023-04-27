@@ -200,7 +200,7 @@ paths:
           description: 詳細内容
           content: {}
   /youtube/videos:
-    post:
+    get:
       tags:
         - "youtube"
       summary: 本人がアップロードした動画一覧を取得

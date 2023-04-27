@@ -1,6 +1,6 @@
 <?php
 /**
- * YoutubeVideosPost200ResponseInner
+ * YoutubeVideosGet200ResponseInner
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \App\OpenAPI\ObjectSerializer;
 
 /**
- * YoutubeVideosPost200ResponseInner Class Doc Comment
+ * YoutubeVideosGet200ResponseInner Class Doc Comment
  *
  * @category Class
  * @package  App\OpenAPI
@@ -40,7 +40,7 @@ use \App\OpenAPI\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class YoutubeVideosPost200ResponseInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class YoutubeVideosGet200ResponseInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class YoutubeVideosPost200ResponseInner implements ModelInterface, ArrayAccess, 
       *
       * @var string
       */
-    protected static $openAPIModelName = '_youtube_videos_post_200_response_inner';
+    protected static $openAPIModelName = '_youtube_videos_get_200_response_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
