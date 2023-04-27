@@ -43,14 +43,6 @@ const navigation = [
     show: computed(() => true),
   },
   {
-    name: "問い合わせ",
-    href: "#",
-    icon: ChatBubbleOvalLeftEllipsisIcon,
-    current: false,
-    action: () => {},
-    show: computed(() => true),
-  },
-  {
     name: "ログイン",
     href: "#",
     icon: ArrowRightOnRectangleIcon,
@@ -80,8 +72,7 @@ const navigation = [
     current: false,
     action: async () => {
       sidebarOpen.value = false
-      useUserState.logout()
-      router.push({ name: "index" })
+      router.push({ name: "register" })
     },
     show: computed(() => !userState.value.logined),
   },
