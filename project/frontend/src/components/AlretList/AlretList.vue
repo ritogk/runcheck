@@ -10,8 +10,8 @@ const useAlertListState = inject(useAlretListStateKey) as useAlretListStateType
 
 <template>
   <div
-    class="rounded-md bg-red-50 py-2 px-4"
-    v-for="(message, index) in useAlertListState.stateRefs.messages.value"
+    class="rounded-md bg-red-100 py-2 px-4"
+    v-for="(message, index) in useAlertListState.subscription.value.messages"
     :key="index"
   >
     <div class="flex">
@@ -36,7 +36,7 @@ const useAlertListState = inject(useAlretListStateKey) as useAlretListStateType
         <div class="-mx-1.5 -my-1.5">
           <button
             type="button"
-            class="inline-flex rounded-md bg-red-50 p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
+            class="inline-flex rounded-md bg-red-100 p-1.5 text-red-500 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
             @click="useAlertListState.remove(index)"
           >
             <span class="sr-only">Dismiss</span>

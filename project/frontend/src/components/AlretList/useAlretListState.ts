@@ -1,7 +1,7 @@
-import { InjectionKey, reactive, ToRefs, toRefs, Ref, ref } from "vue"
+import { InjectionKey, reactive, computed, ComputedRef } from "vue"
 
 type useAlretListStateType = {
-  stateRefs: ToRefs<{ messages: string[] }>
+  subscription: ComputedRef<{ messages: string[] }>
   add(message: string): void
   remove(index: number): void
 }
@@ -19,7 +19,7 @@ const useAlretListState = (): useAlretListStateType => {
   }
 
   return {
-    stateRefs: toRefs(state),
+    subscription: computed(() => state),
     add: add,
     remove: remove,
   }
