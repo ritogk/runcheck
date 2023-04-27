@@ -35,14 +35,6 @@ const router = useRouter()
 
 const navigation = [
   {
-    name: "問い合わせ",
-    href: "#",
-    icon: ChatBubbleOvalLeftEllipsisIcon,
-    current: false,
-    action: () => {},
-    show: computed(() => true),
-  },
-  {
     name: "ログイン",
     href: "#",
     icon: ArrowRightOnRectangleIcon,
@@ -80,6 +72,14 @@ const navigation = [
     name: "このアプリについて",
     href: "#",
     icon: QuestionMarkCircleIcon,
+    current: false,
+    action: () => {},
+    show: computed(() => true),
+  },
+  {
+    name: "問い合わせ",
+    href: "#",
+    icon: ChatBubbleOvalLeftEllipsisIcon,
     current: false,
     action: () => {},
     show: computed(() => true),
