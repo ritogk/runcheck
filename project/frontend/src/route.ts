@@ -3,6 +3,7 @@ import Main from "@/pages/main/Main.vue"
 import Register from "@/pages/register/Register.vue"
 import Login from "@/pages/login/Login.vue"
 import Home from "@/pages/home/Home.vue"
+import YoutubeOauthCallback from "@/pages/oauth/YoutubeOauthCallback.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/home",
     name: "home",
     component: Home,
+  },
+  {
+    path: "/youtube-oauth-callback",
+    name: "youtube-oauth-callback",
+    component: YoutubeOauthCallback,
   },
 ]
 
