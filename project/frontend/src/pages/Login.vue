@@ -1,3 +1,35 @@
+<script setup lang="ts">
+import { ref } from "vue"
+import { AuthenticationApi } from "@/core/openapiClient/apis"
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+const authenticationApi = new AuthenticationApi()
+
+const form = {
+  email: ref<HTMLInputElement | null>(null),
+  password: ref<HTMLInputElement | null>(null),
+  remember: ref<HTMLInputElement | null>(null),
+}
+
+const onSubmit = async () => {
+  if (
+    form.email.value === null ||
+    form.password.value === null ||
+    form.remember.value === null
+  )
+    return
+  await authenticationApi.authenticationLoginPost({
+    inlineObject1: {
+      email: form.email.value.value,
+      password: form.password.value.value,
+      remember: form.remember.value.checked,
+    },
+  })
+  router.push({ name: "index" })
+}
+</script>
+
 <template>
   <div class="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
@@ -15,7 +47,7 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6" @submit.prevent="onSubmit()">
           <div>
             <label
               for="email"
@@ -27,9 +59,11 @@
                 id="email"
                 name="email"
                 type="email"
+                :ref="form.email"
                 autocomplete="email"
                 required
                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="example@example.com"
               />
             </div>
           </div>
@@ -45,9 +79,11 @@
                 id="password"
                 name="password"
                 type="password"
-                autocomplete="current-password"
+                :ref="form.password"
+                autocomplete="new-password"
                 required
                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="パスワード"
               />
             </div>
           </div>
@@ -58,6 +94,7 @@
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
+                :ref="form.remember"
                 class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
               />
               <label for="remember-me" class="ml-2 block text-sm text-gray-900"
