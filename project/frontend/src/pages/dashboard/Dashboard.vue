@@ -33,6 +33,10 @@ const userState = useUserState.subscription
 
 const router = useRouter()
 
+const onHeaderClick = () => {
+  router.push({ name: "index" })
+}
+
 const navigation = [
   {
     name: "ログイン",
@@ -252,7 +256,10 @@ const sidebarOpen = ref(false)
     <div
       class="z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-3 shadow-sm sm:px-6 lg:hidden"
     >
-      <div class="flex-1 text-sm font-semibold leading-6 text-slate-100">
+      <div
+        class="flex-1 text-sm font-semibold leading-6 text-slate-100 cursor-pointer"
+        @click="onHeaderClick"
+      >
         <div>
           <div class="text-lg">RunCheck</div>
           <div class="text-[9px] font-normal leading-3">
