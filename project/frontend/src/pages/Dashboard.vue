@@ -1,3 +1,66 @@
+<script setup lang="ts">
+import { ref, provide, inject } from "vue"
+import {
+  Dialog,
+  DialogPanel,
+  TransitionChild,
+  TransitionRoot,
+} from "@headlessui/vue"
+import {
+  Bars3Icon,
+  UserIcon,
+  UserPlusIcon,
+  XMarkIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  ArrowRightOnRectangleIcon,
+  ArrowLeftOnRectangleIcon,
+  QuestionMarkCircleIcon,
+} from "@heroicons/vue/24/outline"
+
+import AlretList from "@/components/AlretList/AlretList.vue"
+import {
+  useAlretListState,
+  useAlretListStateKey,
+} from "@/components/AlretList/useAlretListState"
+import { useUserStateKey, useUserStateType } from "@/components/useUserState"
+
+const alretListState = useAlretListState()
+provide(useAlretListStateKey, alretListState)
+
+const useUserState = inject(useUserStateKey) as useUserStateType
+const userState = useUserState.subscription
+
+const navigation = [
+  {
+    name: "問い合わせ",
+    href: "#",
+    icon: ChatBubbleOvalLeftEllipsisIcon,
+    current: false,
+  },
+  {
+    name: "ログイン",
+    href: "#",
+    icon: ArrowRightOnRectangleIcon,
+    current: false,
+  },
+  {
+    name: "ログアウト",
+    href: "#",
+    icon: ArrowLeftOnRectangleIcon,
+    current: false,
+  },
+  { name: "新規登録", href: "#", icon: UserPlusIcon, current: false },
+  {
+    name: "このアプリについて",
+    href: "#",
+    icon: QuestionMarkCircleIcon,
+    current: false,
+  },
+]
+
+const sidebarOpen = ref(false)
+</script>
+
 <template>
   <div>
     <div class="flex justify-end">
@@ -68,6 +131,19 @@
                     <ul role="list" class="flex flex-1 flex-col gap-y-7">
                       <li>
                         <ul role="list" class="-mx-2 space-y-1">
+                          <li v-if="userState.logined">
+                            <a
+                              class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                            >
+                              <component
+                                :is="UserIcon"
+                                class="h-6 w-6 shrink-0"
+                                aria-hidden="true"
+                              />
+                              {{ userState.user.name }}
+                            </a>
+                          </li>
+
                           <li v-for="item in navigation" :key="item.name">
                             <a
                               :href="item.href"
@@ -175,61 +251,3 @@
     </main>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, provide } from "vue"
-import {
-  Dialog,
-  DialogPanel,
-  TransitionChild,
-  TransitionRoot,
-} from "@headlessui/vue"
-import {
-  Bars3Icon,
-  UserIcon,
-  UserPlusIcon,
-  XMarkIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
-  ArrowRightOnRectangleIcon,
-  ArrowLeftOnRectangleIcon,
-  QuestionMarkCircleIcon,
-} from "@heroicons/vue/24/outline"
-
-import AlretList from "@/components/AlretList/AlretList.vue"
-import {
-  useAlretListState,
-  useAlretListStateKey,
-} from "@/components/AlretList/useAlretListState"
-const alretListState = useAlretListState()
-provide(useAlretListStateKey, alretListState)
-const navigation = [
-  { name: "ritogk", href: "#", icon: UserIcon, current: true },
-  {
-    name: "問い合わせ",
-    href: "#",
-    icon: ChatBubbleOvalLeftEllipsisIcon,
-    current: false,
-  },
-  {
-    name: "ログイン",
-    href: "#",
-    icon: ArrowRightOnRectangleIcon,
-    current: false,
-  },
-  {
-    name: "ログアウト",
-    href: "#",
-    icon: ArrowLeftOnRectangleIcon,
-    current: false,
-  },
-  { name: "新規登録", href: "#", icon: UserPlusIcon, current: false },
-  {
-    name: "このアプリについて",
-    href: "#",
-    icon: QuestionMarkCircleIcon,
-    current: false,
-  },
-]
-
-const sidebarOpen = ref(false)
-</script>

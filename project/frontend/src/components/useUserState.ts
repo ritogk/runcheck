@@ -14,6 +14,7 @@ type useUserStateType = {
   ): Promise<boolean>
   login(email: string, password: string, remember: boolean): Promise<boolean>
   logout(): Promise<boolean>
+  load(): Promise<boolean>
 }
 
 const useUserState = (): useUserStateType => {
@@ -80,11 +81,24 @@ const useUserState = (): useUserStateType => {
     return false
   }
 
+  const load = async (): Promise<boolean> => {
+    try {
+      const response = await authenticationApi.authenticationMeGet()
+      state.user.id = response.id
+      state.user.name = response.name
+      state.logined = true
+      return true
+    } catch {
+      return false
+    }
+  }
+
   return {
     subscription: computed(() => state),
     register: register,
     login: login,
     logout: logout,
+    load: load,
   }
 }
 

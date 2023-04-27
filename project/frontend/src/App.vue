@@ -6,6 +6,7 @@ import { useUserState, useUserStateKey } from "@/components/useUserState"
 
 const userState = useUserState()
 provide(useUserStateKey, userState)
+userState.load()
 </script>
 
 <template>
