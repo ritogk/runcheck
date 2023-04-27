@@ -606,7 +606,7 @@
 
     <div class="m-5"></div>
 
-    <Modal></Modal>
+    <YoutubeSelectModal></YoutubeSelectModal>
   </div>
 </template>
 
@@ -618,5 +618,5 @@ import {
   SpeakerXMarkIcon,
   // SearchIcon,
 } from "@heroicons/vue/20/solid"
-import Modal from "@/components/Modal.vue"
+import YoutubeSelectModal from "@/pages/main/youtube-select-modal/YoutubeSelectModal.vue"
 </script>
