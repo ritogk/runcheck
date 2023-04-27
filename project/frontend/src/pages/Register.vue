@@ -4,9 +4,13 @@ import {
   useAlretListStateKey,
   useAlretListStateType,
 } from "@/components/AlretList/useAlretListState"
-import { UsersApi } from "@/core/openapiClient/apis/UsersApi"
+import { UsersApi, AuthenticationApi } from "@/core/openapiClient/apis"
+import { useRouter } from "vue-router"
 
+const router = useRouter()
 const useAlertListState = inject(useAlretListStateKey) as useAlretListStateType
+const usersApi = new UsersApi()
+const authenticationApi = new AuthenticationApi()
 
 const form = {
   hanndleName: ref<HTMLInputElement | null>(null),
@@ -60,7 +64,6 @@ const onSubmit = async () => {
   }
 
   // 登録処理
-  const usersApi = new UsersApi()
   try {
     await usersApi.usersPost({
       inlineObject: {
@@ -72,7 +75,17 @@ const onSubmit = async () => {
     })
   } catch {
     useAlertListState.add("エラーが発生しました。")
+    return
   }
+  // ログイン
+  await authenticationApi.authenticationLoginPost({
+    inlineObject1: {
+      email: form.email.value.value,
+      password: form.password.value.value,
+      remember: true,
+    },
+  })
+  router.push({ name: "index" })
 }
 </script>
 
