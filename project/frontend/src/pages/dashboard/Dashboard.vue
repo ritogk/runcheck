@@ -244,11 +244,6 @@ const sidebarOpen = ref(false)
                 </li>
               </ul>
             </li>
-            <li>
-              <div class="text-xs font-semibold leading-6 text-gray-400">
-                Your teams
-              </div>
-            </li>
           </ul>
         </nav>
       </div>
