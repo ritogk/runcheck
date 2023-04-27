@@ -36,18 +36,23 @@ const navigation = [
     href: "#",
     icon: ChatBubbleOvalLeftEllipsisIcon,
     current: false,
+    action: () => {},
   },
   {
     name: "ログイン",
     href: "#",
     icon: ArrowRightOnRectangleIcon,
     current: false,
+    action: () => {},
   },
   {
     name: "ログアウト",
     href: "#",
     icon: ArrowLeftOnRectangleIcon,
     current: false,
+    action: () => {
+      useUserState.logout()
+    },
   },
   { name: "新規登録", href: "#", icon: UserPlusIcon, current: false },
   {
@@ -55,6 +60,7 @@ const navigation = [
     href: "#",
     icon: QuestionMarkCircleIcon,
     current: false,
+    action: () => {},
   },
 ]
 
@@ -153,6 +159,7 @@ const sidebarOpen = ref(false)
                                   : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                               ]"
+                              @click="item.action"
                             >
                               <component
                                 :is="item.icon"
