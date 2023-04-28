@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide } from "vue"
+import { provide, ref } from "vue"
 import {
   ChevronDoubleRightIcon,
   ChevronDoubleLeftIcon,
@@ -17,6 +17,17 @@ import {
 const useYoutubeSelectModalState = UseYoutubeSelectModalState()
 provide(UseYoutubeSelectModalStateKey, useYoutubeSelectModalState)
 useYoutubeSelectModalState.load()
+
+const youtube1Url = ref("")
+const youtube2Url = ref("")
+
+const handleSelectYoutube = (videoNo: VideoNo, url: string) => {
+  if (videoNo === VideoNo.ONE) {
+    youtube1Url.value = url
+  } else if (videoNo === VideoNo.TWO) {
+    youtube2Url.value = url
+  }
+}
 </script>
 
 <template>
@@ -275,6 +286,7 @@ useYoutubeSelectModalState.load()
               id="email"
               class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-indigo-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               placeholder="https://youtube.com/nLKSSdMWZ8g"
+              v-model="youtube1Url"
             />
             <!-- 検索 -->
             <button
@@ -485,6 +497,7 @@ useYoutubeSelectModalState.load()
                 id="email"
                 class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-indigo-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder="https://youtube.com/nLKSSdMWZ8g"
+                v-model="youtube2Url"
               />
               <!-- 検索 -->
               <button
@@ -629,6 +642,8 @@ useYoutubeSelectModalState.load()
 
     <div class="m-5"></div>
 
-    <YoutubeSelectModal></YoutubeSelectModal>
+    <YoutubeSelectModal
+      @handle:select="handleSelectYoutube"
+    ></YoutubeSelectModal>
   </div>
 </template>

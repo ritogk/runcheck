@@ -258,7 +258,7 @@ const sidebarOpen = ref(false)
     >
       <div
         class="flex-1 text-sm font-semibold leading-6 text-slate-100 cursor-pointer"
-        @click="onHeaderClick"
+        @click="onHeaderClick()"
       >
         <div>
           <div class="text-lg">RunCheck</div>

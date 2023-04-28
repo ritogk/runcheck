@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref, computed } from "vue"
+import { inject, ref, computed, defineEmits } from "vue"
 import {
   Dialog,
   DialogPanel,
@@ -10,6 +10,7 @@ import { XMarkIcon } from "@heroicons/vue/20/solid"
 import {
   UseYoutubeSelectModalStateKey,
   UseYoutubeSelectModalStateType,
+  VideoNo,
 } from "@/pages/main/youtube-select-modal/UseYoutubeSelectModalState"
 import { YoutubeApi } from "@/core/openapiClient"
 const useYoutubeSelectModalState = inject(
@@ -52,8 +53,13 @@ const filteredVideos = computed(() => {
   })
 })
 
+const emit = defineEmits<{
+  (e: "handle:select", videoNo: VideoNo, url: string): void
+}>()
+
 const selectVideo = (url: string) => {
-  console.log(url)
+  emit("handle:select", state.value.videoNo, url)
+  onClose()
 }
 </script>
 
