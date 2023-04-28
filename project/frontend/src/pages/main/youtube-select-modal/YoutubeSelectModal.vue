@@ -28,6 +28,7 @@ const redirectToAuthorize = async () => {
   location.href = response.redirectUrl
 }
 
+const read = ref(false)
 const videos = ref(
   Array<{
     title: string
@@ -37,6 +38,7 @@ const videos = ref(
   }>()
 )
 youtubeApi.youtubeVideosGet().then((response) => {
+  read.value = true
   videos.value.splice(0, videos.value.length, ...response)
 })
 
@@ -185,97 +187,103 @@ const selectVideo = (url: string) => {
                     role="listbox"
                   >
                     <!-- スケルトン -->
-                    <li
-                      v-for="i in 5"
-                      :key="i"
-                      class="animate-pulse group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
-                      id="option-1"
-                      role="option"
-                      tabindex="-1"
-                    >
-                      <div
-                        class="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-gray-200"
+                    <div v-if="!read">
+                      <li
+                        v-for="i in 5"
+                        :key="i"
+                        class="animate-pulse group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        id="option-1"
+                        role="option"
+                        tabindex="-1"
                       >
-                        <svg
-                          class="text-white w-[24px] h-[24px]"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                          aria-hidden="true"
+                        <div
+                          class="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-gray-200"
                         >
-                          <path
-                            stroke-linecap="round"
-                            d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"
-                          ></path>
-                        </svg>
-                      </div>
-                      <div class="ml-4 flex-auto">
-                        <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
-                        <div
-                          class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-4/5 mb-4"
-                        ></div>
-                        <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
-                        <div
-                          class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-3/5"
-                        ></div>
-                      </div>
-                    </li>
+                          <svg
+                            class="text-white w-[24px] h-[24px]"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div class="ml-4 flex-auto">
+                          <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
+                          <div
+                            class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-4/5 mb-4"
+                          ></div>
+                          <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
+                          <div
+                            class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-3/5"
+                          ></div>
+                        </div>
+                      </li>
+                    </div>
 
                     <!-- Active: "bg-gray-100" -->
-                    <li
-                      v-for="video in videos"
-                      :key="video.url"
-                      class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
-                      id="option-1"
-                      role="option"
-                      tabindex="-1"
-                      @click="selectVideo(video.url)"
-                    >
-                      <div
-                        class="flex w-[40px] h-[40px]flex-shrink-0 items-center justify-center"
+                    <div v-if="read && videos.length >= 1">
+                      <li
+                        v-for="video in videos"
+                        :key="video.url"
+                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        id="option-1"
+                        role="option"
+                        tabindex="-1"
+                        @click="selectVideo(video.url)"
                       >
-                        <img
-                          :src="video.thumbnailUrl"
-                          alt="サムネイル"
-                          class="rounded-lg w-[40px] h-[40px]"
-                        />
-                      </div>
-                      <div
-                        class="ml-4 flex flex-col flex-1 w-[calc(100%_-_40px_-_1rem)]"
-                      >
-                        <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
-                        <p class="text-sm font-medium text-gray-700 truncate">
-                          {{ video.title }}
-                        </p>
-                        <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
-                        <p class="text-sm text-gray-500 truncate">
-                          {{ video.description }}
-                        </p>
-                      </div>
-                    </li>
+                        <div
+                          class="flex w-[40px] h-[40px]flex-shrink-0 items-center justify-center"
+                        >
+                          <img
+                            :src="video.thumbnailUrl"
+                            alt="サムネイル"
+                            class="rounded-lg w-[40px] h-[40px]"
+                          />
+                        </div>
+                        <div
+                          class="ml-4 flex flex-col flex-1 w-[calc(100%_-_40px_-_1rem)]"
+                        >
+                          <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
+                          <p class="text-sm font-medium text-gray-700 truncate">
+                            {{ video.title }}
+                          </p>
+                          <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
+                          <p class="text-sm text-gray-500 truncate">
+                            {{ video.description }}
+                          </p>
+                        </div>
+                      </li>
+                    </div>
 
                     <!-- More items... -->
                   </ul>
                   <!-- Empty state, show/hide based on command palette state -->
-                  <div class="px-3 py-3 text-center text-sm sm:px-14 mb-2">
-                    <svg
-                      class="mx-auto h-6 w-6 text-gray-400"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
-                      />
-                    </svg>
-                    <p class="mt-4 font-semibold text-gray-900">
-                      結果が見つかりませんでした
-                    </p>
+                  <div v-if="read && videos.length === 0">
+                    <div class="px-3 py-3 text-center text-sm sm:px-14 mb-2">
+                      <svg
+                        class="mx-auto h-6 w-6 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                        />
+                      </svg>
+                      <p class="mt-4 font-semibold text-gray-900">
+                        結果が見つかりませんでした
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
