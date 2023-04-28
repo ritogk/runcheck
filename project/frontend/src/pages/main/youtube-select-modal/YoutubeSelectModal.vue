@@ -232,7 +232,7 @@ const selectVideo = (url: string) => {
                       @click="selectVideo(video.url)"
                     >
                       <div
-                        class="flex h-10 w-10 flex-none items-center justify-center"
+                        class="flex w-[40px] h-[40px]flex-shrink-0 items-center justify-center"
                       >
                         <img
                           :src="video.thumbnailUrl"
@@ -240,13 +240,15 @@ const selectVideo = (url: string) => {
                           class="rounded-lg w-[40px] h-[40px]"
                         />
                       </div>
-                      <div class="ml-4 flex-auto">
+                      <div
+                        class="ml-4 flex flex-col flex-1 w-[calc(100%_-_40px_-_1rem)]"
+                      >
                         <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
-                        <p class="text-sm font-medium text-gray-700">
+                        <p class="text-sm font-medium text-gray-700 truncate">
                           {{ video.title }}
                         </p>
                         <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
-                        <p class="text-sm text-gray-500 truncate w-full">
+                        <p class="text-sm text-gray-500 truncate">
                           {{ video.description }}
                         </p>
                       </div>
