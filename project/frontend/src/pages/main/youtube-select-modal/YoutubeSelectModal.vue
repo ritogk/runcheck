@@ -186,27 +186,28 @@ const selectVideo = (url: string) => {
                   >
                     <!-- スケルトン -->
                     <li
+                      v-for="i in 5"
+                      :key="i"
                       class="animate-pulse group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
                       id="option-1"
                       role="option"
                       tabindex="-1"
                     >
                       <div
-                        class="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-indigo-500"
+                        class="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-gray-200"
                       >
                         <svg
-                          class="h-6 w-6 text-white"
+                          class="text-white w-[24px] h-[24px]"
                           fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
                           stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
                           aria-hidden="true"
                         >
                           <path
                             stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                          />
+                            d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"
+                          ></path>
                         </svg>
                       </div>
                       <div class="ml-4 flex-auto">
