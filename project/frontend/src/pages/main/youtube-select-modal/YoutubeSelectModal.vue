@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref } from "vue"
+import { inject, ref, computed } from "vue"
 import {
   Dialog,
   DialogPanel,
@@ -40,6 +40,16 @@ const videos = ref(
 youtubeApi.youtubeVideosGet().then((response) => {
   read.value = true
   videos.value.splice(0, videos.value.length, ...response)
+})
+
+const filter = ref("")
+const filteredVideos = computed(() => {
+  return videos.value.filter((video) => {
+    return (
+      video.title.includes(filter.value) ||
+      video.description.includes(filter.value)
+    )
+  })
 })
 
 const selectVideo = (url: string) => {
@@ -178,6 +188,7 @@ const selectVideo = (url: string) => {
                       role="combobox"
                       aria-expanded="false"
                       aria-controls="options"
+                      v-model="filter"
                     />
                   </div>
                   <!-- Results, show/hide based on command palette state -->
@@ -227,9 +238,9 @@ const selectVideo = (url: string) => {
                     </div>
 
                     <!-- Active: "bg-gray-100" -->
-                    <div v-if="read && videos.length >= 1">
+                    <div v-if="read && filteredVideos.length >= 1">
                       <li
-                        v-for="video in videos"
+                        v-for="video in filteredVideos"
                         :key="video.url"
                         class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
                         id="option-1"
@@ -264,7 +275,7 @@ const selectVideo = (url: string) => {
                     <!-- More items... -->
                   </ul>
                   <!-- Empty state, show/hide based on command palette state -->
-                  <div v-if="read && videos.length === 0">
+                  <div v-if="read && filteredVideos.length === 0">
                     <div class="px-3 py-3 text-center text-sm sm:px-14 mb-2">
                       <svg
                         class="mx-auto h-6 w-6 text-gray-400"
