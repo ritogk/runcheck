@@ -50,24 +50,48 @@ onMounted(() => {
   syncVideoState = new SyncVideoState(youtube1Player, youtube2Player);
 });
 
-const onLocalVideoSelect = () => {
-  elements.localVideo1.file.value?.click();
-};
+import { LocalVideoPlayer } from "@/components/LocalVideoPlayer";
 
 const elements = {
   localVideo1: {
     file: ref<HTMLInputElement | null>(null),
     video: ref<HTMLVideoElement | null>(null),
   },
+  localVideo2: {
+    file: ref<HTMLInputElement | null>(null),
+    video: ref<HTMLVideoElement | null>(null),
+  },
 };
-const localVideo1Src = ref("");
-const hundleChangeFileInput = (event: Event) => {
+
+const onLocalVideoSelect = (videoNo: VideoNo) => {
+  switch (videoNo) {
+    case VideoNo.ONE:
+      elements.localVideo1.file.value?.click();
+      break;
+    case VideoNo.TWO:
+      elements.localVideo2.file.value?.click();
+      break;
+    default:
+      break;
+  }
+};
+
+const hundleChangeLocalVideo1 = (event: Event) => {
   const file = (event as any).currentTarget.files[0];
   const objectURL = URL.createObjectURL(file);
-  localVideo1Src.value = objectURL;
-  if (elements.localVideo1.video.value) {
-    elements.localVideo1.video.value.load();
-  }
+  const localVideoPlayer = new LocalVideoPlayer(
+    elements.localVideo1.video.value as HTMLVideoElement,
+    objectURL
+  );
+};
+
+const hundleChangeLocalVideo2 = (event: Event) => {
+  const file = (event as any).currentTarget.files[0];
+  const objectURL = URL.createObjectURL(file);
+  const localVideoPlayer = new LocalVideoPlayer(
+    elements.localVideo2.video.value as HTMLVideoElement,
+    objectURL
+  );
 };
 </script>
 
@@ -355,7 +379,7 @@ const hundleChangeFileInput = (event: Event) => {
           <!-- 端末動画選択 -->
           <button
             class="rounded-md shadow-sm bg-white w-2/12 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
-            @click="onLocalVideoSelect"
+            @click="onLocalVideoSelect(VideoNo.ONE)"
           >
             <div class="flex items-center justify-center">
               <svg
@@ -377,7 +401,7 @@ const hundleChangeFileInput = (event: Event) => {
     <input
       type="file"
       :ref="elements.localVideo1.file"
-      @change="hundleChangeFileInput"
+      @change="hundleChangeLocalVideo1"
       hidden
     />
     <video
@@ -386,9 +410,20 @@ const hundleChangeFileInput = (event: Event) => {
       playsinline
       preload="none"
       class="w-full h-[220px]"
-    >
-      <source :src="localVideo1Src" type="video/mp4" />
-    </video>
+    ></video>
+    <input
+      type="file"
+      :ref="elements.localVideo2.file"
+      @change="hundleChangeLocalVideo2"
+      hidden
+    />
+    <video
+      :ref="elements.localVideo2.video"
+      controls
+      playsinline
+      preload="none"
+      class="w-full h-[220px]"
+    ></video>
     <div id="youtube-video-1" class="w-full h-[220px]"></div>
     <div id="youtube-video-2" class="w-full h-[220px]"></div>
 
@@ -563,6 +598,7 @@ const hundleChangeFileInput = (event: Event) => {
             <!-- 端末動画選択 -->
             <button
               class="rounded-md shadow-sm bg-white w-2/12 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
+              @click="onLocalVideoSelect(VideoNo.TWO)"
             >
               <div class="flex items-center justify-center">
                 <svg

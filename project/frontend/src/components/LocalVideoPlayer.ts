@@ -1,9 +1,11 @@
 import { IVideoPlayer } from "./IVideoPlayer";
 
 export class LocalVideoPlayer implements IVideoPlayer {
-  private path: string;
-  constructor(path: string) {
-    this.path = path;
+  private videoElement: HTMLVideoElement;
+  constructor(videoElement: HTMLVideoElement, objectURL: string) {
+    videoElement.src = objectURL;
+    videoElement.load();
+    this.videoElement = videoElement;
   }
 
   play = () => {
