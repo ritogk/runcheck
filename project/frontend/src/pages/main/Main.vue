@@ -49,6 +49,21 @@ onMounted(() => {
   );
   syncVideoState = new SyncVideoState(youtube1Player, youtube2Player);
 });
+
+const onLocalVideoSelect = () => {
+  document.getElementById("file-local-video-1")?.click();
+};
+
+const hundleChangeFileLocalVideo1 = (e: any) => {
+  const file = e.currentTarget.files[0];
+  const objectURL = URL.createObjectURL(file);
+  const videoElement = <HTMLVideoElement>(
+    document.getElementById("local-video-1")
+  );
+  if (videoElement) {
+    videoElement.src = objectURL;
+  }
+};
 </script>
 
 <template>
@@ -335,6 +350,7 @@ onMounted(() => {
           <!-- 端末動画選択 -->
           <button
             class="rounded-md shadow-sm bg-white w-2/12 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
+            @click="onLocalVideoSelect"
           >
             <div class="flex items-center justify-center">
               <svg
@@ -353,7 +369,19 @@ onMounted(() => {
         </div>
       </div>
     </div>
-
+    <input
+      type="file"
+      id="file-local-video-1"
+      hidden
+      @change="hundleChangeFileLocalVideo1"
+    />
+    <video
+      id="local-video-1"
+      controls
+      playsinline
+      preload="none"
+      class="w-full h-[220px]"
+    ></video>
     <div id="youtube-video-1" class="w-full h-[220px]"></div>
     <div id="youtube-video-2" class="w-full h-[220px]"></div>
 
