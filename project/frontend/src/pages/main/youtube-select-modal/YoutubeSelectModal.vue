@@ -15,21 +15,8 @@ import {
 import { VideoListState } from "@/pages/main/youtube-select-modal/VideoListState";
 import { YoutubeApi } from "@/core/openapiClient";
 const useModalState = inject(UseModalStateKey) as UseModalStateType;
-
-const state = useModalState.subscription;
 const youtubeApi = new YoutubeApi();
-
-const onClose = () => {
-  useModalState.close();
-};
-
-const redirectToAuthorize = async () => {
-  const response = await youtubeApi.youtubeOauthAuthorizeGet();
-  location.href = response.redirectUrl;
-};
-
 const videoListState = VideoListState();
-
 videoListState.load();
 
 const filter = ref("");
@@ -42,18 +29,27 @@ const filteredVideos = computed(() => {
   });
 });
 
+const onClose = () => {
+  useModalState.close();
+};
+
+const redirectToAuthorize = async () => {
+  const response = await youtubeApi.youtubeOauthAuthorizeGet();
+  location.href = response.redirectUrl;
+};
+
 const emit = defineEmits<{
   (e: "handle:select", videoNo: VideoNo, url: string): void;
 }>();
 
 const selectVideo = (url: string) => {
-  emit("handle:select", state.value.videoNo, url);
+  emit("handle:select", useModalState.subscription.videoNo.value, url);
   onClose();
 };
 </script>
 
 <template>
-  <TransitionRoot as="template" :show="state.opened">
+  <TransitionRoot as="template" :show="useModalState.subscription.opened.value">
     <Dialog as="div" class="relative z-50" @close="onClose">
       <TransitionChild
         as="template"
