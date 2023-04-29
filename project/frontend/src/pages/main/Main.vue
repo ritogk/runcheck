@@ -21,15 +21,15 @@ useModalState.load();
 const youtube1Url = ref("");
 const youtube2Url = ref("");
 
-const handleSelectYoutube = (videoNo: VideoNo, url: string) => {
+const handleSelectYoutube = async (videoNo: VideoNo, url: string) => {
   if (!syncVideoState) return;
   if (videoNo === VideoNo.ONE) {
     youtube1Url.value = url;
-    syncVideoState.getVideo1().destory();
+    await syncVideoState.getVideo1().destory();
     syncVideoState.setVideo1(new YouTubePlayer("youtube-video-1", url));
   } else if (videoNo === VideoNo.TWO) {
     youtube2Url.value = url;
-    syncVideoState.getVideo2().destory();
+    await syncVideoState.getVideo2().destory();
     syncVideoState.setVideo2(new YouTubePlayer("youtube-video-2", url));
   }
 };

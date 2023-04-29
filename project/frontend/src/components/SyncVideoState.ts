@@ -29,7 +29,6 @@ class SyncVideoState implements SyncVideoStateType {
   constructor(video1Player: IVideoPlayer, video2Player: IVideoPlayer) {
     this.video1Player = video1Player;
     this.video2Player = video2Player;
-    setInterval(this.sync, 500);
   }
 
   switchMute = (): void => {
@@ -65,14 +64,14 @@ class SyncVideoState implements SyncVideoStateType {
     return computed(() => this.currentPosition.value);
   };
 
-  setVideo1 = (videoPlayer: IVideoPlayer) => {
+  setVideo1 = async (videoPlayer: IVideoPlayer) => {
     this.video1Player = videoPlayer;
   };
   getVideo1 = (): IVideoPlayer => {
     return this.video1Player;
   };
 
-  setVideo2 = (videoPlayer: IVideoPlayer) => {
+  setVideo2 = async (videoPlayer: IVideoPlayer) => {
     this.video2Player = videoPlayer;
   };
   getVideo2 = (): IVideoPlayer => {

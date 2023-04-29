@@ -46,7 +46,7 @@ export class YouTubePlayer implements IVideoPlayer {
     return;
   };
 
-  destory(): void {
-    this.player.destroy();
+  destory(): Promise<void> {
+    return this.player.destroy();
   }
 }

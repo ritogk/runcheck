@@ -8,5 +8,5 @@ export interface IVideoPlayer {
   disableRepeat(): void;
   getCurrentPosition(): number;
   setCurrentPosition(currentPosition: number): void;
-  destory(): void;
+  destory(): Promise<void>;
 }

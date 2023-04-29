@@ -42,5 +42,7 @@ export class LocalVideoPlayer implements IVideoPlayer {
     return;
   };
 
-  destory(): void {}
+  destory(): Promise<void> {
+    return null as any;
+  }
 }
