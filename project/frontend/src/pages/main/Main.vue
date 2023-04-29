@@ -7,12 +7,12 @@ import {
   SpeakerXMarkIcon,
   // SearchIcon,
 } from "@heroicons/vue/20/solid";
-import YoutubeSelectModal from "@/pages/main/youtube-select-modal/YoutubeSelectModal.vue";
+import YoutubeSelectModal from "@/pages/main/parts/youtube-select-modal/YoutubeSelectModal.vue";
 import {
   UseModalState,
   UseModalStateKey,
   VideoNo,
-} from "@/pages/main/youtube-select-modal/UseModalState";
+} from "@/pages/main/parts/youtube-select-modal/UseModalState";
 
 const useModalState = UseModalState();
 provide(UseModalStateKey, useModalState);

@@ -11,8 +11,8 @@ import {
   UseModalStateKey,
   UseModalStateType,
   VideoNo,
-} from "@/pages/main/youtube-select-modal/UseModalState";
-import { VideoListState } from "@/pages/main/youtube-select-modal/VideoListState";
+} from "@/pages/main/parts/youtube-select-modal/UseModalState";
+import { VideoListState } from "@/pages/main/parts/youtube-select-modal/VideoListState";
 import { YoutubeApi } from "@/core/openapiClient";
 const useModalState = inject(UseModalStateKey) as UseModalStateType;
 const youtubeApi = new YoutubeApi();
