@@ -1,44 +1,46 @@
-import { IVideoPlayer } from "./IVideoPlayer"
+import { IVideoPlayer } from "./IVideoPlayer";
 
 export class LocalVideoPlayer implements IVideoPlayer {
-  private path: string
+  private path: string;
   constructor(path: string) {
-    this.path = path
+    this.path = path;
   }
 
   play = () => {
-    return
-  }
+    return;
+  };
 
   stop = () => {
-    return
-  }
+    return;
+  };
 
   mute = () => {
-    return
-  }
+    return;
+  };
 
   unMute = () => {
-    return
-  }
+    return;
+  };
 
   adjustSpeed = (speed: number) => {
-    return
-  }
+    return;
+  };
 
   enableRepeat = () => {
-    return
-  }
+    return;
+  };
 
   disableRepeat = () => {
-    return
-  }
+    return;
+  };
 
   getCurrentPosition = (): number => {
-    return 1
-  }
+    return 1;
+  };
 
   setCurrentPosition = (currentPosition: number) => {
-    return
-  }
+    return;
+  };
+
+  destory(): void {}
 }

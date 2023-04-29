@@ -1,44 +1,52 @@
-import { IVideoPlayer } from "./IVideoPlayer"
+import { IVideoPlayer } from "./IVideoPlayer";
+import YPlayer from "youtube-player";
+import { YouTubePlayer as YouTubePlayerType } from "node_modules/@types/youtube-player/dist/types";
 
 export class YouTubePlayer implements IVideoPlayer {
-  private youtubeUrl: string
-  constructor(youtubeUrl: string) {
-    this.youtubeUrl = youtubeUrl
+  private player: YouTubePlayerType;
+  constructor(elementId: string, youtubeUrl: string) {
+    this.player = YPlayer(elementId);
+    this.player.loadVideoByUrl(youtubeUrl);
+    this.player.stopVideo();
   }
 
   play = () => {
-    return
-  }
+    return;
+  };
 
   stop = () => {
-    return
-  }
+    return;
+  };
 
   mute = () => {
-    return
-  }
+    return;
+  };
 
   unMute = () => {
-    return
-  }
+    return;
+  };
 
   adjustSpeed = (speed: number) => {
-    return
-  }
+    return;
+  };
 
   enableRepeat = () => {
-    return
-  }
+    return;
+  };
 
   disableRepeat = () => {
-    return
-  }
+    return;
+  };
 
   getCurrentPosition = (): number => {
-    return 1
-  }
+    return 1;
+  };
 
   setCurrentPosition = (currentPosition: number) => {
-    return
+    return;
+  };
+
+  destory(): void {
+    this.player.destroy();
   }
 }

@@ -52,7 +52,7 @@ class FetchMyVideosAction
             'description' => $playlistItem['snippet']['description'],
             'thumbnail_url' => $playlistItem['snippet']['thumbnails']['default']['url'],
             'id' => $playlistItem['snippet']['resourceId']['videoId'],
-            'url' => sprintf("https://www.youtube.com/watch?v=%s", $playlistItem['snippet']['resourceId']['videoId'])
+            'url' => sprintf("https://www.youtube.com/embed/%s", $playlistItem['snippet']['resourceId']['videoId'])
           );
         }
         $nextPageToken = $playlistItemsResponse['nextPageToken'];

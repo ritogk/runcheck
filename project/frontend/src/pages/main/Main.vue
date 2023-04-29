@@ -1,33 +1,54 @@
 <script setup lang="ts">
-import { provide, ref } from "vue"
+import { provide, ref, onMounted } from "vue";
 import {
   ChevronDoubleRightIcon,
   ChevronDoubleLeftIcon,
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   // SearchIcon,
-} from "@heroicons/vue/20/solid"
-import YoutubeSelectModal from "@/pages/main/youtube-select-modal/YoutubeSelectModal.vue"
+} from "@heroicons/vue/20/solid";
+import YoutubeSelectModal from "@/pages/main/youtube-select-modal/YoutubeSelectModal.vue";
 import {
   UseModalState,
   UseModalStateKey,
   VideoNo,
-} from "@/pages/main/youtube-select-modal/UseModalState"
+} from "@/pages/main/youtube-select-modal/UseModalState";
 
-const useModalState = UseModalState()
-provide(UseModalStateKey, useModalState)
-useModalState.load()
+const useModalState = UseModalState();
+provide(UseModalStateKey, useModalState);
+useModalState.load();
 
-const youtube1Url = ref("")
-const youtube2Url = ref("")
+const youtube1Url = ref("");
+const youtube2Url = ref("");
 
 const handleSelectYoutube = (videoNo: VideoNo, url: string) => {
+  if (!syncVideoState) return;
   if (videoNo === VideoNo.ONE) {
-    youtube1Url.value = url
+    youtube1Url.value = url;
+    syncVideoState.getVideo1().destory();
+    syncVideoState.setVideo1(new YouTubePlayer("youtube-video-1", url));
   } else if (videoNo === VideoNo.TWO) {
-    youtube2Url.value = url
+    youtube2Url.value = url;
+    syncVideoState.getVideo2().destory();
+    syncVideoState.setVideo2(new YouTubePlayer("youtube-video-2", url));
   }
-}
+};
+
+import { YouTubePlayer } from "@/components/YouTubePlayer";
+import { SyncVideoState } from "@/components/SyncVideoState";
+
+let syncVideoState: SyncVideoState | null = null;
+onMounted(() => {
+  const youtube1Player = new YouTubePlayer(
+    "youtube-video-1",
+    "https://www.youtube.com/embed/nLKSSdMWZ8g"
+  );
+  const youtube2Player = new YouTubePlayer(
+    "youtube-video-2",
+    "https://www.youtube.com/embed/nLKSSdMWZ8g"
+  );
+  syncVideoState = new SyncVideoState(youtube1Player, youtube2Player);
+});
 </script>
 
 <template>
@@ -333,26 +354,8 @@ const handleSelectYoutube = (videoNo: VideoNo, url: string) => {
       </div>
     </div>
 
-    <iframe
-      width="100%"
-      height="220"
-      class="max-h-[300px]"
-      src="https://www.youtube.com/embed/nLKSSdMWZ8g"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-    ></iframe>
-    <iframe
-      width="100%"
-      height="220"
-      class="max-h-[300px]"
-      src="https://www.youtube.com/embed/nLKSSdMWZ8g"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-    ></iframe>
+    <div id="youtube-video-1" class="w-full h-[220px]"></div>
+    <div id="youtube-video-2" class="w-full h-[220px]"></div>
 
     <div class="max-h-[240px] mb-3">
       <div
