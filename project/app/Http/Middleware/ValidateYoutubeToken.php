@@ -45,8 +45,8 @@ class ValidateYoutubeToken
                 $this->client->set_access_token($session_token);
                 if ($this->client->is_access_token_expired()) {
                     // トークンの有効期限が切れていたらリフレッシュトークンからアクセストークンを生成
-                    $new_token = $this->generate_access_token_action->generate();
-                    if (!$new_token) {
+                    $new_token = $this->generate_access_token_action->generate();   
+                    if ($new_token) {
                         $this->session_action->put(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN, $new_token);
                     } else {
                         throw new OAuthException();
