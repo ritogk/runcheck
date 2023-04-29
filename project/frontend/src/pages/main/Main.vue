@@ -51,17 +51,22 @@ onMounted(() => {
 });
 
 const onLocalVideoSelect = () => {
-  document.getElementById("file-local-video-1")?.click();
+  elements.localVideo1.file.value?.click();
 };
 
-const hundleChangeFileLocalVideo1 = (e: any) => {
-  const file = e.currentTarget.files[0];
+const elements = {
+  localVideo1: {
+    file: ref<HTMLInputElement | null>(null),
+    video: ref<HTMLVideoElement | null>(null),
+  },
+};
+const localVideo1Src = ref("");
+const hundleChangeFileInput = (event: Event) => {
+  const file = (event as any).currentTarget.files[0];
   const objectURL = URL.createObjectURL(file);
-  const videoElement = <HTMLVideoElement>(
-    document.getElementById("local-video-1")
-  );
-  if (videoElement) {
-    videoElement.src = objectURL;
+  localVideo1Src.value = objectURL;
+  if (elements.localVideo1.video.value) {
+    elements.localVideo1.video.value.load();
   }
 };
 </script>
@@ -371,17 +376,19 @@ const hundleChangeFileLocalVideo1 = (e: any) => {
     </div>
     <input
       type="file"
-      id="file-local-video-1"
+      :ref="elements.localVideo1.file"
+      @change="hundleChangeFileInput"
       hidden
-      @change="hundleChangeFileLocalVideo1"
     />
     <video
-      id="local-video-1"
+      :ref="elements.localVideo1.video"
       controls
       playsinline
       preload="none"
       class="w-full h-[220px]"
-    ></video>
+    >
+      <source :src="localVideo1Src" type="video/mp4" />
+    </video>
     <div id="youtube-video-1" class="w-full h-[220px]"></div>
     <div id="youtube-video-2" class="w-full h-[220px]"></div>
 
