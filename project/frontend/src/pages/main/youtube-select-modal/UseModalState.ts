@@ -7,14 +7,14 @@ enum VideoNo {
   NONE,
 }
 
-type UseYoutubeSelectModalStateType = {
+type UseModalStateType = {
   subscription: ComputedRef<{ videoNo: VideoNo; opened: boolean }>
   open(videoNo: VideoNo): void
   close(): void
   load(): void
 }
 
-const UseYoutubeSelectModalState = (): UseYoutubeSelectModalStateType => {
+const UseModalState = (): UseModalStateType => {
   const state = reactive({ videoNo: VideoNo.NONE, opened: false })
 
   const open = (videoNo: VideoNo) => {
@@ -55,12 +55,12 @@ const UseYoutubeSelectModalState = (): UseYoutubeSelectModalStateType => {
   }
 }
 
-const UseYoutubeSelectModalStateKey: InjectionKey<UseYoutubeSelectModalStateType> =
-  Symbol("UseYoutubeSelectModalState")
+const UseModalStateKey: InjectionKey<UseModalStateType> =
+  Symbol("UseModalState")
 
 export {
-  UseYoutubeSelectModalState,
-  UseYoutubeSelectModalStateKey,
-  UseYoutubeSelectModalStateType,
+  UseModalState,
+  UseModalStateKey,
+  UseModalStateType,
   VideoNo,
 }

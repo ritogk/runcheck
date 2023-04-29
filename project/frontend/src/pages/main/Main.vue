@@ -9,14 +9,14 @@ import {
 } from "@heroicons/vue/20/solid"
 import YoutubeSelectModal from "@/pages/main/youtube-select-modal/YoutubeSelectModal.vue"
 import {
-  UseYoutubeSelectModalState,
-  UseYoutubeSelectModalStateKey,
+  UseModalState,
+  UseModalStateKey,
   VideoNo,
-} from "@/pages/main/youtube-select-modal/UseYoutubeSelectModalState"
+} from "@/pages/main/youtube-select-modal/UseModalState"
 
-const useYoutubeSelectModalState = UseYoutubeSelectModalState()
-provide(UseYoutubeSelectModalStateKey, useYoutubeSelectModalState)
-useYoutubeSelectModalState.load()
+const useModalState = UseModalState()
+provide(UseModalStateKey, useModalState)
+useModalState.load()
 
 const youtube1Url = ref("")
 const youtube2Url = ref("")
@@ -292,7 +292,7 @@ const handleSelectYoutube = (videoNo: VideoNo, url: string) => {
             <button
               type="button"
               class="relative w-3/12 -ml-px inline-flex items-center gap-x-1.5 rounded-r-md text-sm font-semibold bg-white text-gray-900 ring-1 ring-inset ring-indigo-300 hover:bg-gray-100"
-              @click="useYoutubeSelectModalState.open(VideoNo.ONE)"
+              @click="useModalState.open(VideoNo.ONE)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -503,7 +503,7 @@ const handleSelectYoutube = (videoNo: VideoNo, url: string) => {
               <button
                 type="button"
                 class="relative w-3/12 -ml-px inline-flex items-center gap-x-1.5 rounded-r-md text-sm font-semibold bg-white text-gray-900 ring-1 ring-inset ring-indigo-300 hover:bg-gray-100"
-                @click="useYoutubeSelectModalState.open(VideoNo.TWO)"
+                @click="useModalState.open(VideoNo.TWO)"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

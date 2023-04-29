@@ -1,66 +1,55 @@
 <script setup lang="ts">
-import { inject, ref, computed, defineEmits } from "vue"
+import { inject, ref, computed, defineEmits, watch } from "vue";
 import {
   Dialog,
   DialogPanel,
   TransitionChild,
   TransitionRoot,
-} from "@headlessui/vue"
-import { XMarkIcon } from "@heroicons/vue/20/solid"
+} from "@headlessui/vue";
+import { XMarkIcon } from "@heroicons/vue/20/solid";
 import {
-  UseYoutubeSelectModalStateKey,
-  UseYoutubeSelectModalStateType,
+  UseModalStateKey,
+  UseModalStateType,
   VideoNo,
-} from "@/pages/main/youtube-select-modal/UseYoutubeSelectModalState"
-import { YoutubeApi } from "@/core/openapiClient"
-const useYoutubeSelectModalState = inject(
-  UseYoutubeSelectModalStateKey
-) as UseYoutubeSelectModalStateType
+} from "@/pages/main/youtube-select-modal/UseModalState";
+import { VideoListState } from "@/pages/main/youtube-select-modal/VideoListState";
+import { YoutubeApi } from "@/core/openapiClient";
+const useModalState = inject(UseModalStateKey) as UseModalStateType;
 
-const state = useYoutubeSelectModalState.subscription
-const youtubeApi = new YoutubeApi()
+const state = useModalState.subscription;
+const youtubeApi = new YoutubeApi();
 
 const onClose = () => {
-  useYoutubeSelectModalState.close()
-}
+  useModalState.close();
+};
 
 const redirectToAuthorize = async () => {
-  const response = await youtubeApi.youtubeOauthAuthorizeGet()
-  location.href = response.redirectUrl
-}
+  const response = await youtubeApi.youtubeOauthAuthorizeGet();
+  location.href = response.redirectUrl;
+};
 
-const read = ref(false)
-const videos = ref(
-  Array<{
-    title: string
-    description: string
-    thumbnailUrl: string
-    url: string
-  }>()
-)
-youtubeApi.youtubeVideosGet().then((response) => {
-  read.value = true
-  videos.value.splice(0, videos.value.length, ...response)
-})
+const videoListState = VideoListState();
 
-const filter = ref("")
+videoListState.load();
+
+const filter = ref("");
 const filteredVideos = computed(() => {
-  return videos.value.filter((video) => {
+  return videoListState.subscription.videos.value.filter((video) => {
     return (
       video.title.includes(filter.value) ||
       video.description.includes(filter.value)
-    )
-  })
-})
+    );
+  });
+});
 
 const emit = defineEmits<{
-  (e: "handle:select", videoNo: VideoNo, url: string): void
-}>()
+  (e: "handle:select", videoNo: VideoNo, url: string): void;
+}>();
 
 const selectVideo = (url: string) => {
-  emit("handle:select", state.value.videoNo, url)
-  onClose()
-}
+  emit("handle:select", state.value.videoNo, url);
+  onClose();
+};
 </script>
 
 <template>
@@ -204,7 +193,7 @@ const selectVideo = (url: string) => {
                     role="listbox"
                   >
                     <!-- スケルトン -->
-                    <div v-if="!read">
+                    <div v-if="!videoListState.subscription.read">
                       <li
                         v-for="i in 5"
                         :key="i"
@@ -244,7 +233,12 @@ const selectVideo = (url: string) => {
                     </div>
 
                     <!-- Active: "bg-gray-100" -->
-                    <div v-if="read && filteredVideos.length >= 1">
+                    <div
+                      v-if="
+                        videoListState.subscription.read &&
+                        filteredVideos.length >= 1
+                      "
+                    >
                       <li
                         v-for="video in filteredVideos"
                         :key="video.url"
@@ -281,7 +275,12 @@ const selectVideo = (url: string) => {
                     <!-- More items... -->
                   </ul>
                   <!-- Empty state, show/hide based on command palette state -->
-                  <div v-if="read && filteredVideos.length === 0">
+                  <div
+                    v-if="
+                      videoListState.subscription.read &&
+                      filteredVideos.length === 0
+                    "
+                  >
                     <div class="px-3 py-3 text-center text-sm sm:px-14 mb-2">
                       <svg
                         class="mx-auto h-6 w-6 text-gray-400"
