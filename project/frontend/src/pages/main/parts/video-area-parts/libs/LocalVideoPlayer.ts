@@ -1,4 +1,4 @@
-import { IVideoPlayer } from "./IVideoPlayer";
+import { IVideoPlayer, VideoType } from "./IVideoPlayer";
 
 export class LocalVideoPlayer implements IVideoPlayer {
   private videoElement: HTMLVideoElement;
@@ -44,7 +44,12 @@ export class LocalVideoPlayer implements IVideoPlayer {
     return;
   };
 
-  destory(): Promise<void> {
-    return null as any;
+  async destory(): Promise<void> {
+    this.videoElement.src = "";
+    return;
   }
+
+  getVideoType = (): VideoType => {
+    return VideoType.LOCAL;
+  };
 }

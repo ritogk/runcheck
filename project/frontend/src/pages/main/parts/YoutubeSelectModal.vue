@@ -7,14 +7,14 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { XMarkIcon } from "@heroicons/vue/20/solid";
-import {
-  UseModalStateKey,
-  UseModalStateType,
-  VideoNo,
-} from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
-import { VideoListState } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/VideoListState";
+import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
 import { YoutubeApi } from "@/core/openapiClient";
-const useModalState = inject(UseModalStateKey) as UseModalStateType;
+import { VideoListState } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/VideoListState";
+import { VideoNo } from "./video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
+import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer";
+
+const useMainState = inject(UseMainStateKey) as UseMainStateType;
+
 const youtubeApi = new YoutubeApi();
 const videoListState = VideoListState();
 videoListState.load();
@@ -30,7 +30,7 @@ const filteredVideos = computed(() => {
 });
 
 const onClose = () => {
-  useModalState.close();
+  useMainState.youtubeModal.close();
 };
 
 const redirectToAuthorize = async () => {
@@ -38,18 +38,36 @@ const redirectToAuthorize = async () => {
   location.href = response.redirectUrl;
 };
 
-const emit = defineEmits<{
-  (e: "handle:select", videoNo: VideoNo, url: string): void;
-}>();
+// const emit = defineEmits<{
+//   (e: "handle:select", videoNo: VideoNo, url: string): void;
+// }>();
 
 const selectVideo = (url: string) => {
-  emit("handle:select", useModalState.subscription.videoNo.value, url);
-  onClose();
+  const videoNo = useMainState.youtubeModal.subscription.videoNo.value;
+  debugger;
+  switch (videoNo) {
+    case VideoNo.ONE:
+      useMainState.syncVideo.playerOwn.getPlayer()?.destory();
+      useMainState.syncVideo.playerOwn.setPlayer(
+        new YouTubePlayer("youtube-video-own", url)
+      );
+      break;
+    case VideoNo.TWO:
+      useMainState.syncVideo.playerTwo.getPlayer()?.destory();
+      useMainState.syncVideo.playerTwo.setPlayer(
+        new YouTubePlayer("youtube-video-two", url)
+      );
+      break;
+  }
+  useMainState.youtubeModal.close();
 };
 </script>
 
 <template>
-  <TransitionRoot as="template" :show="useModalState.subscription.opened.value">
+  <TransitionRoot
+    as="template"
+    :show="useMainState.youtubeModal.subscription.opened.value"
+  >
     <Dialog as="div" class="relative z-50" @close="onClose">
       <TransitionChild
         as="template"

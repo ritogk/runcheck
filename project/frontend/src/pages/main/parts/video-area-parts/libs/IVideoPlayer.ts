@@ -9,4 +9,10 @@ export interface IVideoPlayer {
   getCurrentPosition(): number;
   setCurrentPosition(currentPosition: number): void;
   destory(): Promise<void>;
+  getVideoType(): VideoType;
+}
+
+export enum VideoType {
+  YOUTUBE,
+  LOCAL,
 }

@@ -1,5 +1,8 @@
 import { computed, ComputedRef, ref, InjectionKey } from "vue";
-import { IVideoPlayer } from "./parts/video-area-parts/libs/IVideoPlayer";
+import {
+  IVideoPlayer,
+  VideoType,
+} from "./parts/video-area-parts/libs/IVideoPlayer";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 
 type UseMainStateType = {
@@ -22,17 +25,23 @@ type UseMainStateType = {
     close(): void;
     subscription: {
       opened: ComputedRef<boolean>;
+      videoNo: ComputedRef<VideoNo>;
     };
   };
-
   syncVideo: {
     playerOwn: {
       setPlayer(player: IVideoPlayer): void;
       getPlayer(): IVideoPlayer | null;
+      subscription: {
+        videoType: ComputedRef<VideoType>;
+      };
     };
     playerTwo: {
       setPlayer(player: IVideoPlayer): void;
       getPlayer(): IVideoPlayer | null;
+      subscription: {
+        videoType: ComputedRef<VideoType>;
+      };
     };
     switchMute(): void;
     switchRepeat(): void;
@@ -50,7 +59,7 @@ type UseMainStateType = {
   };
 };
 
-const useMainState = (): UseMainStateType => {
+const UseMainState = (): UseMainStateType => {
   const openedOpenModal = ref(false);
   const openModal = {
     open: () => {
@@ -91,11 +100,14 @@ const useMainState = (): UseMainStateType => {
     },
     subscription: {
       opened: computed(() => openedYoutubeModal.value),
+      videoNo: computed(() => youtubeModalVideoNo.value),
     },
   };
 
   let syncVideoPlayerOwn = null as IVideoPlayer | null;
+  const syncVideoPlayerOwnType = ref(VideoType.YOUTUBE);
   let syncVideoPlayerTwo = null as IVideoPlayer | null;
+  const syncVideoPlayerTwoType = ref(VideoType.YOUTUBE);
   const syncVideoCurrentPosition = ref(0);
   const syncVideoMuted = ref(false);
   const syncVideoRepeated = ref(false);
@@ -105,17 +117,25 @@ const useMainState = (): UseMainStateType => {
     playerOwn: {
       setPlayer: (player: IVideoPlayer) => {
         syncVideoPlayerOwn = player;
+        syncVideoPlayerOwnType.value = player.getVideoType();
       },
       getPlayer: (): IVideoPlayer | null => {
         return syncVideoPlayerOwn;
+      },
+      subscription: {
+        videoType: computed(() => syncVideoPlayerOwnType.value),
       },
     },
     playerTwo: {
       setPlayer: (player: IVideoPlayer) => {
         syncVideoPlayerTwo = player;
+        syncVideoPlayerTwoType.value = player.getVideoType();
       },
       getPlayer: (): IVideoPlayer | null => {
         return syncVideoPlayerTwo;
+      },
+      subscription: {
+        videoType: computed(() => syncVideoPlayerTwoType.value),
       },
     },
     switchMute: () => {
@@ -154,4 +174,4 @@ const useMainState = (): UseMainStateType => {
 const UseMainStateKey: InjectionKey<UseMainStateType> =
   Symbol("UseMainStateType");
 
-export { useMainState, UseMainStateKey, UseMainStateType };
+export { UseMainState, UseMainStateKey, UseMainStateType };

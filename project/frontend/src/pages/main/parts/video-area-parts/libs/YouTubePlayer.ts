@@ -1,4 +1,4 @@
-import { IVideoPlayer } from "./IVideoPlayer";
+import { IVideoPlayer, VideoType } from "./IVideoPlayer";
 import YPlayer from "youtube-player";
 import { YouTubePlayer as YouTubePlayerType } from "node_modules/@types/youtube-player/dist/types";
 
@@ -49,4 +49,8 @@ export class YouTubePlayer implements IVideoPlayer {
   destory(): Promise<void> {
     return this.player.destroy();
   }
+
+  getVideoType = (): VideoType => {
+    return VideoType.YOUTUBE;
+  };
 }

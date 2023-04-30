@@ -5,31 +5,17 @@ import {
   SpeakerXMarkIcon,
   // SearchIcon,
 } from "@heroicons/vue/20/solid";
-import {
-  UseModalState,
-  UseModalStateKey,
-  VideoNo,
-} from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
+import { UseMainState, UseMainStateKey } from "./UseMainState";
 import Video1Area from "./parts/Video1Area.vue";
 import Video2Area from "./parts/Video2Area.vue";
+import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue";
 
-import {
-  usePlayer,
-  UsePlayer1Key,
-  UsePlayer2Key,
-} from "./parts/video-area-parts/libs/UsePlayer";
-
-const useModalState = UseModalState();
-provide(UseModalStateKey, useModalState);
-useModalState.load();
-
-const usePlayer1 = usePlayer(VideoNo.ONE);
-provide(UsePlayer1Key, usePlayer1);
-const usePlayer2 = usePlayer(VideoNo.TWO);
-provide(UsePlayer2Key, usePlayer2);
+const useMainState = UseMainState();
+provide(UseMainStateKey, useMainState);
 </script>
 
 <template>
+  <YoutubeSelectModal></YoutubeSelectModal>
   <div class="max-w-[600px]">
     <div class="px-1 pt-2">
       <!-- ファイル操作 -->
@@ -172,8 +158,8 @@ provide(UsePlayer2Key, usePlayer2);
       <div class="h-px my-3 bg-gray-300"></div>
     </div>
 
-    <Video1Area :video-no="VideoNo.ONE"></Video1Area>
-    <Video2Area :video-no="VideoNo.TWO"></Video2Area>
+    <Video1Area></Video1Area>
+    <Video2Area></Video2Area>
     <div class="max-h-[240px] mb-3">
       <div
         class="bg-gray-50 border-gray-100 dark:bg-gray-800 dark:border-gray-500 border-b px-4 pt-6 pb-4 space-y-6"
