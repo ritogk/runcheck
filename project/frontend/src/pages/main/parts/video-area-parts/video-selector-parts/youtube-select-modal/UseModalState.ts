@@ -2,9 +2,9 @@ import { InjectionKey, reactive, computed, ComputedRef } from "vue";
 import { localStorageKeys } from "@/core/localstorageKey";
 
 enum VideoNo {
-  ONE,
-  TWO,
-  NONE,
+  ONE = 1,
+  TWO = 2,
+  NONE = 3,
 }
 
 type UseModalStateType = {

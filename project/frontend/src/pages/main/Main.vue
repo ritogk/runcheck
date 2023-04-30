@@ -13,9 +13,20 @@ import {
 import Video1Area from "./parts/Video1Area.vue";
 import Video2Area from "./parts/Video2Area.vue";
 
+import {
+  usePlayer,
+  UsePlayer1Key,
+  UsePlayer2Key,
+} from "./parts/video-area-parts/libs/UsePlayer";
+
 const useModalState = UseModalState();
 provide(UseModalStateKey, useModalState);
 useModalState.load();
+
+const usePlayer1 = usePlayer(VideoNo.ONE);
+provide(UsePlayer1Key, usePlayer1);
+const usePlayer2 = usePlayer(VideoNo.TWO);
+provide(UsePlayer2Key, usePlayer2);
 </script>
 
 <template>
