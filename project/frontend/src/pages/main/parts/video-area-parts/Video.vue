@@ -4,8 +4,8 @@ import {
   UseModalState,
   UseModalStateKey,
   VideoNo,
-} from "@/pages/main/parts/youtube-select-modal/UseModalState";
-import { YouTubePlayer } from "./YouTubePlayer";
+} from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
+import { YouTubePlayer } from "./libs/YouTubePlayer";
 const elements = {
   localVideo: {
     video: ref<HTMLVideoElement | null>(null),

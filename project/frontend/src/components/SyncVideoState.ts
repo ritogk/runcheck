@@ -1,5 +1,5 @@
 import { InjectionKey, ref, computed, ComputedRef } from "vue";
-import { IVideoPlayer } from "@/pages/main/parts/video-area-parts/IVideoPlayer";
+import { IVideoPlayer } from "@/pages/main/parts/video-area-parts/libs/IVideoPlayer";
 /**
  * 動画を動悸するためのフック
  * @returns

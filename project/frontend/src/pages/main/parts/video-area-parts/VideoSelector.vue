@@ -4,7 +4,7 @@ import {
   UseModalStateType,
   UseModalStateKey,
   VideoNo,
-} from "@/pages/main/parts/youtube-select-modal/UseModalState";
+} from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 
 const useModalState = inject(UseModalStateKey) as UseModalStateType;
 
@@ -14,7 +14,7 @@ const handleSelectYoutube = async (url: string) => {
   youtubeUrl.value = url;
 };
 
-import { YouTubePlayer } from "@/pages/main/parts/video-area-parts/YouTubePlayer";
+import { YouTubePlayer } from "@/pages/main/parts/video-area-parts/libs/YouTubePlayer";
 import { SyncVideoState } from "@/components/SyncVideoState";
 
 onMounted(() => {
@@ -24,7 +24,7 @@ onMounted(() => {
   );
 });
 
-import { LocalVideoPlayer } from "@/pages/main/parts/video-area-parts/LocalVideoPlayer";
+import { LocalVideoPlayer } from "@/pages/main/parts/video-area-parts/libs/LocalVideoPlayer";
 
 const elements = {
   localVideo: {
