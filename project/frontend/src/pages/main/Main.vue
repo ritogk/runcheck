@@ -25,11 +25,9 @@ const handleSelectYoutube = async (videoNo: VideoNo, url: string) => {
   if (!syncVideoState) return;
   if (videoNo === VideoNo.ONE) {
     youtube1Url.value = url;
-    await syncVideoState.getVideo1().destory();
     syncVideoState.setVideo1(new YouTubePlayer("youtube-video-1", url));
   } else if (videoNo === VideoNo.TWO) {
     youtube2Url.value = url;
-    await syncVideoState.getVideo2().destory();
     syncVideoState.setVideo2(new YouTubePlayer("youtube-video-2", url));
   }
 };
