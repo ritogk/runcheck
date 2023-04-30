@@ -13,9 +13,7 @@ interface SyncVideoStateType {
   setCurrentPosition(progres: number): void;
   getCurrentPosition(): ComputedRef<number>;
   setVideo1(videoPlayer: any): void;
-  getVideo1(): any;
   setVideo2(videoPlayer: any): void;
-  getVideo2(): any;
 }
 
 class SyncVideoState implements SyncVideoStateType {
@@ -67,15 +65,9 @@ class SyncVideoState implements SyncVideoStateType {
   setVideo1 = async (videoPlayer: IVideoPlayer) => {
     this.video1Player = videoPlayer;
   };
-  getVideo1 = (): IVideoPlayer => {
-    return this.video1Player;
-  };
 
   setVideo2 = async (videoPlayer: IVideoPlayer) => {
     this.video2Player = videoPlayer;
-  };
-  getVideo2 = (): IVideoPlayer => {
-    return this.video2Player;
   };
 }
 
