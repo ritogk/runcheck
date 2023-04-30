@@ -12,14 +12,16 @@ type UseModalStateType = {
     videoNo: ComputedRef<VideoNo>;
     opened: ComputedRef<boolean>;
   };
-  open(videoNo: VideoNo): void;
+  open(videoNo: VideoNo, callback: (youtubeUrl: string) => void): void;
   close(): void;
   load(): void;
 };
 
 const UseModalState = (): UseModalStateType => {
   const state = reactive({ videoNo: VideoNo.NONE, opened: false });
-  const open = (videoNo: VideoNo) => {
+  let closeCallback = (youtubeUrl: string) => {};
+  const open = (videoNo: VideoNo, callback: (youtubeUrl: string) => void) => {
+    closeCallback = callback;
     state.videoNo = videoNo;
     state.opened = true;
     save();
@@ -29,6 +31,7 @@ const UseModalState = (): UseModalStateType => {
     state.videoNo = VideoNo.NONE;
     state.opened = false;
     save();
+    closeCallback("aaaaaaa");
   };
 
   const load = () => {

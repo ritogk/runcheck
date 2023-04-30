@@ -34,7 +34,7 @@ const handleSelectYoutube = async (videoNo: VideoNo, url: string) => {
   }
 };
 
-import { YouTubePlayer } from "@/components/YouTubePlayer";
+import { YouTubePlayer } from "@/pages/main/parts/video-area-parts/YouTubePlayer";
 import { SyncVideoState } from "@/components/SyncVideoState";
 
 let syncVideoState: SyncVideoState | null = null;
@@ -50,7 +50,7 @@ onMounted(() => {
   syncVideoState = new SyncVideoState(youtube1Player, youtube2Player);
 });
 
-import { LocalVideoPlayer } from "@/components/LocalVideoPlayer";
+import { LocalVideoPlayer } from "@/pages/main/parts/video-area-parts/LocalVideoPlayer";
 
 const elements = {
   localVideo1: {
