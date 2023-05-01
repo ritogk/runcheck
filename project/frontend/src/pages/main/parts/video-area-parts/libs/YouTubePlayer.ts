@@ -7,7 +7,6 @@ export class YouTubePlayer implements IVideoPlayer {
   constructor(elementId: string, youtubeUrl: string) {
     this.player = YPlayer(elementId);
     this.player.loadVideoByUrl(youtubeUrl);
-    this.player.stopVideo();
   }
 
   play = () => {
