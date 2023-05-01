@@ -234,6 +234,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
 
   <!-- Video -->
   <div :ref="elements.videoArea">
+    <!-- dummy -->
     <div
       v-show="
         useMainState.syncVideo.playerOwn.subscription.videoType.value ===
@@ -241,7 +242,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
       "
     >
       <div
-        class="w-full bg-gray-300 relative"
+        class="w-full bg-gray-300 relative border-b-2 border-gray-200"
         :style="{ height: calcVideoHeight }"
       >
         <VideoCameraIcon
@@ -250,6 +251,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
         />
       </div>
     </div>
+    <!-- youtube -->
     <div
       v-show="
         useMainState.syncVideo.playerOwn.subscription.videoType.value ===
@@ -260,10 +262,9 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
         id="youtube-video-own"
         class="w-full"
         :style="{ height: calcVideoHeight }"
-      >
-        {{ useMainState.syncVideo.playerOwn.subscription.videoType.value }}
-      </div>
+      ></div>
     </div>
+    <!-- local -->
     <div
       v-show="
         useMainState.syncVideo.playerOwn.subscription.videoType.value ===
