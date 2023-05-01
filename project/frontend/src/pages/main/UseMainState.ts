@@ -186,9 +186,29 @@ const UseMainState = (): UseMainStateType => {
         await syncVideoPlayerOwn.getCurrentPosition();
       syncVideoTwoCurrentPosition =
         await syncVideoPlayerTwo.getCurrentPosition();
+      syncVideoSyncIntervalId = setInterval(async () => {
+        const videoOwnCurrentPosition =
+          (await syncVideoPlayerOwn.getCurrentPosition()) -
+          syncVideoOwnCurrentPosition;
+        const videoTwoCurrentPosition =
+          (await syncVideoPlayerTwo.getCurrentPosition()) -
+          syncVideoTwoCurrentPosition;
+
+        // 0.3秒以上ずれていたら同期させる
+        const diff = Math.abs(
+          videoOwnCurrentPosition - videoTwoCurrentPosition
+        );
+        if (diff >= 0.3) {
+          videoOwnCurrentPosition > videoTwoCurrentPosition
+            ? syncVideoPlayerOwn.seekTo(diff * -1)
+            : syncVideoPlayerTwo.seekTo(diff * -1);
+        }
+      }, 500);
     },
     stopSync: () => {
       syncVideoSynced.value = false;
+      clearInterval(syncVideoSyncIntervalId);
+      syncVideoSyncIntervalId = 0;
     },
     setCurrentPosition: (postion: number): void => {
       syncVideoCurrentPosition.value = postion;
