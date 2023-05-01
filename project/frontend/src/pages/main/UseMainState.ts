@@ -5,6 +5,7 @@ import {
 } from "./parts/video-area-parts/libs/IVideoPlayer";
 import { DummyPlayer } from "./parts/video-area-parts/libs/DummyPlayer";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
+import { localStorageKeys } from "@/core/localstorageKey";
 
 type UseMainStateType = {
   openModal: {
@@ -25,6 +26,8 @@ type UseMainStateType = {
     open(videoNo: VideoNo): void;
     close(): void;
     select(url: string): void;
+    load(): void;
+    save(): void;
     subscription: {
       opened: ComputedRef<boolean>;
       videoNo: ComputedRef<VideoNo>;
@@ -104,6 +107,23 @@ const UseMainState = (): UseMainStateType => {
     },
     select: (url: string) => {
       youtubeModalSelectUrl.value = url;
+    },
+    load: () => {
+      debugger;
+      const storage = localStorage.getItem(
+        localStorageKeys.YOUTUBE_SELECT_MODAL_STATE
+      );
+      if (storage) {
+        const item = <{ videoNo: VideoNo; opened: boolean }>JSON.parse(storage);
+        openedYoutubeModal.value = item.opened;
+        youtubeModalVideoNo.value = item.videoNo;
+      }
+    },
+    save: () => {
+      localStorage.setItem(
+        localStorageKeys.YOUTUBE_SELECT_MODAL_STATE,
+        JSON.stringify({ videoNo: youtubeModalVideoNo.value, opened: true })
+      );
     },
     subscription: {
       opened: computed(() => openedYoutubeModal.value),

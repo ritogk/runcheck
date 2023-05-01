@@ -12,12 +12,14 @@ import { YoutubeApi } from "@/core/openapiClient";
 import { VideoListState } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/VideoListState";
 import { VideoNo } from "./video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer";
+import { callbackYoutubeOauth } from "./CallbackYoutubeOauth";
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType;
 
-const youtubeApi = new YoutubeApi();
 const videoListState = VideoListState();
-videoListState.load();
+watch(useMainState.youtubeModal.subscription.opened, (value) => {
+  if (value) videoListState.load();
+});
 
 const filter = ref("");
 const filteredVideos = computed(() => {
@@ -33,8 +35,10 @@ const onClose = () => {
   useMainState.youtubeModal.close();
 };
 
+const youtubeApi = new YoutubeApi();
 const redirectToAuthorize = async () => {
   const response = await youtubeApi.youtubeOauthAuthorizeGet();
+  useMainState.youtubeModal.save();
   location.href = response.redirectUrl;
 };
 
@@ -57,6 +61,12 @@ const selectVideo = async (url: string) => {
   }
   useMainState.youtubeModal.close();
 };
+
+// Oauthで認可された後の処理
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get("code");
+debugger;
+if (code) callbackYoutubeOauth(code);
 </script>
 
 <template>
