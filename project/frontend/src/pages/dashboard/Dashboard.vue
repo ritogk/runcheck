@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, provide, inject, computed } from "vue"
-import { useRouter } from "vue-router"
+import { ref, provide, inject, computed } from "vue";
+import { useRouter } from "vue-router";
 import {
   Dialog,
   DialogPanel,
   TransitionChild,
   TransitionRoot,
-} from "@headlessui/vue"
+} from "@headlessui/vue";
 import {
   Bars3Icon,
   UserIcon,
@@ -16,26 +16,26 @@ import {
   ArrowRightOnRectangleIcon,
   ArrowLeftOnRectangleIcon,
   QuestionMarkCircleIcon,
-} from "@heroicons/vue/24/outline"
+} from "@heroicons/vue/24/outline";
 
-import AlretList from "@/pages/dashboard/parts/AlretList/AlretList.vue"
+import AlretList from "@/pages/dashboard/parts/AlretList/AlretList.vue";
 import {
   useAlretListState,
   useAlretListStateKey,
-} from "@/pages/dashboard/parts/AlretList/useAlretListState"
-import { useUserStateKey, useUserStateType } from "@/components/useUserState"
+} from "@/pages/dashboard/parts/AlretList/useAlretListState";
+import { useUserStateKey, useUserStateType } from "@/components/useUserState";
 
-const alretListState = useAlretListState()
-provide(useAlretListStateKey, alretListState)
+const alretListState = useAlretListState();
+provide(useAlretListStateKey, alretListState);
 
-const useUserState = inject(useUserStateKey) as useUserStateType
-const userState = useUserState.subscription
+const useUserState = inject(useUserStateKey) as useUserStateType;
+const userState = useUserState.subscription;
 
-const router = useRouter()
+const router = useRouter();
 
 const onHeaderClick = () => {
-  router.push({ name: "index" })
-}
+  router.push({ name: "index" });
+};
 
 const navigation = [
   {
@@ -44,8 +44,8 @@ const navigation = [
     icon: ArrowRightOnRectangleIcon,
     current: false,
     action: () => {
-      sidebarOpen.value = false
-      router.push({ name: "login" })
+      sidebarOpen.value = false;
+      router.push({ name: "login" });
     },
     show: computed(() => !userState.value.logined),
   },
@@ -55,9 +55,9 @@ const navigation = [
     icon: ArrowLeftOnRectangleIcon,
     current: false,
     action: async () => {
-      sidebarOpen.value = false
-      useUserState.logout()
-      router.push({ name: "index" })
+      sidebarOpen.value = false;
+      useUserState.logout();
+      router.push({ name: "index" });
     },
     show: computed(() => userState.value.logined),
   },
@@ -67,8 +67,8 @@ const navigation = [
     icon: UserPlusIcon,
     current: false,
     action: async () => {
-      sidebarOpen.value = false
-      router.push({ name: "register" })
+      sidebarOpen.value = false;
+      router.push({ name: "register" });
     },
     show: computed(() => !userState.value.logined),
   },
@@ -86,13 +86,13 @@ const navigation = [
     icon: ChatBubbleOvalLeftEllipsisIcon,
     current: false,
     action: () => {
-      location.href = "https://twitter.com/homing_fd2"
+      location.href = "https://twitter.com/homing_fd2";
     },
     show: computed(() => true),
   },
-]
+];
 
-const sidebarOpen = ref(false)
+const sidebarOpen = ref(false);
 </script>
 
 <template>
@@ -215,12 +215,16 @@ const sidebarOpen = ref(false)
     >
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6">
-        <div class="flex h-16 shrink-0 items-center">
-          <img
-            class="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-            alt="Your Company"
-          />
+        <div
+          class="text-sm font-semibold leading-6 text-slate-100 cursor-pointer mt-5"
+          @click="onHeaderClick()"
+        >
+          <div>
+            <div class="text-[20px]">RunCheck</div>
+            <div class="text-[10px] font-normal leading-5">
+              車載動画でサーキットを攻略！タイムアップのための比較アプリ
+            </div>
+          </div>
         </div>
         <nav class="flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
