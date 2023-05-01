@@ -6,7 +6,8 @@ export interface IVideoPlayer {
   adjustSpeed(speed: number): void;
   enableRepeat(): void;
   disableRepeat(): void;
-  getCurrentPosition(): number;
+  seekTo(seconds: number): void;
+  getCurrentPosition(): Promise<number>;
   setCurrentPosition(currentPosition: number): void;
   destory(): Promise<void>;
   getVideoType(): VideoType;

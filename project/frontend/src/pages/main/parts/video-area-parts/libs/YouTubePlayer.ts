@@ -11,19 +11,19 @@ export class YouTubePlayer implements IVideoPlayer {
   }
 
   play = () => {
-    return;
+    this.player.playVideo();
   };
 
   stop = () => {
-    return;
+    this.player.stopVideo();
   };
 
   mute = () => {
-    return;
+    this.player.mute();
   };
 
   unMute = () => {
-    return;
+    this.player.unMute();
   };
 
   adjustSpeed = (speed: number) => {
@@ -38,13 +38,16 @@ export class YouTubePlayer implements IVideoPlayer {
     return;
   };
 
-  getCurrentPosition = (): number => {
-    return 1;
+  seekTo = async (seconds: number) => {
+    const curerntTime = await this.getCurrentPosition();
+    this.player.seekTo(curerntTime + seconds, true);
   };
 
-  setCurrentPosition = (currentPosition: number) => {
-    return;
+  getCurrentPosition = async (): Promise<number> => {
+    return this.player.getCurrentTime();
   };
+
+  setCurrentPosition = (currentPosition: number) => {};
 
   destory(): Promise<void> {
     return this.player.destroy();

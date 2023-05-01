@@ -37,14 +37,14 @@ type UseMainStateType = {
   syncVideo: {
     playerOwn: {
       setPlayer(player: IVideoPlayer): void;
-      getPlayer(): IVideoPlayer | null;
+      getPlayer(): IVideoPlayer;
       subscription: {
         videoType: ComputedRef<VideoType>;
       };
     };
     playerTwo: {
       setPlayer(player: IVideoPlayer): void;
-      getPlayer(): IVideoPlayer | null;
+      getPlayer(): IVideoPlayer;
       subscription: {
         videoType: ComputedRef<VideoType>;
       };
@@ -147,7 +147,7 @@ const UseMainState = (): UseMainStateType => {
         syncVideoPlayerOwn = player;
         syncVideoPlayerOwnType.value = player.getVideoType();
       },
-      getPlayer: (): IVideoPlayer | null => {
+      getPlayer: (): IVideoPlayer => {
         return syncVideoPlayerOwn;
       },
       subscription: {
@@ -159,7 +159,7 @@ const UseMainState = (): UseMainStateType => {
         syncVideoPlayerTwo = player;
         syncVideoPlayerTwoType.value = player.getVideoType();
       },
-      getPlayer: (): IVideoPlayer | null => {
+      getPlayer: (): IVideoPlayer => {
         return syncVideoPlayerTwo;
       },
       subscription: {

@@ -29,7 +29,9 @@ export class DummyPlayer implements IVideoPlayer {
     return;
   };
 
-  getCurrentPosition = (): number => {
+  seekTo(seconds: number): void {}
+
+  getCurrentPosition = async (): Promise<number> => {
     return 1;
   };
 

@@ -57,6 +57,10 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
     new YouTubePlayer("youtube-video-two", youtubeUrl)
   );
 };
+
+const hundleVideoSeek = (seconds: number) => {
+  useMainState.syncVideo.playerTwo.getPlayer().seekTo(seconds);
+};
 </script>
 <template>
   <!-- Video -->
@@ -187,6 +191,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
     <div class="mt-2 flex gap-2 justify-between">
       <button
         class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+        @click="hundleVideoSeek(1)"
       >
         <div class="flex items-center justify-center">
           <ChevronDoubleRightIcon
@@ -198,6 +203,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
       </button>
       <button
         class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+        @click="hundleVideoSeek(0.5)"
       >
         <div class="flex items-center justify-center">
           <ChevronDoubleRightIcon
@@ -209,6 +215,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
       </button>
       <button
         class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+        @click="hundleVideoSeek(0.1)"
       >
         <div class="flex items-center justify-center">
           <ChevronDoubleRightIcon
@@ -220,6 +227,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
       </button>
       <button
         class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+        @click="hundleVideoSeek(0.05)"
       >
         <div class="flex items-center justify-center">
           <ChevronDoubleRightIcon
@@ -234,6 +242,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
     <div class="mt-2 flex gap-2 justify-between">
       <button
         class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+        @click="hundleVideoSeek(-1)"
       >
         <div class="flex items-center justify-center">
           <ChevronDoubleLeftIcon
@@ -245,6 +254,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
       </button>
       <button
         class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+        @click="hundleVideoSeek(-0.5)"
       >
         <div class="flex items-center justify-center">
           <ChevronDoubleLeftIcon
@@ -256,6 +266,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
       </button>
       <button
         class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+        @click="hundleVideoSeek(-0.1)"
       >
         <div class="flex items-center justify-center">
           <ChevronDoubleLeftIcon
@@ -267,6 +278,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
       </button>
       <button
         class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+        @click="hundleVideoSeek(-0.05)"
       >
         <div class="flex items-center justify-center">
           <ChevronDoubleLeftIcon
