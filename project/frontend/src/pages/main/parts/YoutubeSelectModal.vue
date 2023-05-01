@@ -42,18 +42,16 @@ const redirectToAuthorize = async () => {
 //   (e: "handle:select", videoNo: VideoNo, url: string): void;
 // }>();
 
-const selectVideo = (url: string) => {
+const selectVideo = async (url: string) => {
   const videoNo = useMainState.youtubeModal.subscription.videoNo.value;
-  debugger;
   switch (videoNo) {
     case VideoNo.ONE:
-      useMainState.syncVideo.playerOwn.getPlayer()?.destory();
-      useMainState.syncVideo.playerOwn.setPlayer(
-        new YouTubePlayer("youtube-video-own", url)
-      );
+      await useMainState.syncVideo.playerOwn.getPlayer()?.destory();
+      const a = new YouTubePlayer("youtube-video-own", url);
+      useMainState.syncVideo.playerOwn.setPlayer(a);
       break;
     case VideoNo.TWO:
-      useMainState.syncVideo.playerTwo.getPlayer()?.destory();
+      await useMainState.syncVideo.playerTwo.getPlayer()?.destory();
       useMainState.syncVideo.playerTwo.setPlayer(
         new YouTubePlayer("youtube-video-two", url)
       );

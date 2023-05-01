@@ -39,19 +39,18 @@ const onLocalVideoSelect = () => {
   elements.localVideo.file.value?.click();
 };
 
-const hundleChangeLocalVideo = (event: Event) => {
+const hundleChangeLocalVideo = async (event: Event) => {
   const file = (event as any).currentTarget.files[0];
   const objectURL = URL.createObjectURL(file);
+  await useMainState.syncVideo.playerOwn.getPlayer()?.destory();
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
   );
-  useMainState.syncVideo.playerOwn.getPlayer()?.destory();
   useMainState.syncVideo.playerOwn.setPlayer(localVideoPlayer);
 };
 </script>
 <template>
-  <div>{{ useMainState.syncVideo.playerOwn.subscription.videoType.value }}</div>
   <!-- ajust-->
   <div>
     <!-- 進む -->
@@ -225,23 +224,28 @@ const hundleChangeLocalVideo = (event: Event) => {
   <!-- Video -->
   <div>
     <div
-      id="youtube-video-own"
-      class="w-full h-[220px]"
       v-show="
         useMainState.syncVideo.playerOwn.subscription.videoType.value ===
         VideoType.YOUTUBE
       "
-    ></div>
-    <video
-      :ref="elements.localVideo.video"
-      controls
-      playsinline
-      preload="none"
-      class="w-full h-[220px]"
+    >
+      <div id="youtube-video-own" class="w-full h-[220px]">
+        {{ useMainState.syncVideo.playerOwn.subscription.videoType.value }}
+      </div>
+    </div>
+    <div
       v-show="
         useMainState.syncVideo.playerOwn.subscription.videoType.value ===
         VideoType.LOCAL
       "
-    ></video>
+    >
+      <video
+        :ref="elements.localVideo.video"
+        controls
+        playsinline
+        preload="none"
+        class="w-full h-[220px]"
+      ></video>
+    </div>
   </div>
 </template>
