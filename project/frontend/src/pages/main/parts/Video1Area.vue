@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Video from "@/pages/main/parts/video-area-parts/Video.vue";
-import { ref, onMounted, inject } from "vue";
+import { ref, onMounted, inject, watch } from "vue";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer";
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
@@ -15,6 +15,9 @@ const videoNo = VideoNo.ONE;
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType;
 const youtubeUrl = ref("");
+watch(useMainState.youtubeModal.subscription.url, () => {
+  youtubeUrl.value = useMainState.youtubeModal.subscription.url.value;
+});
 
 const elements = {
   localVideo: {

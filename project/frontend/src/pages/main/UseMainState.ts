@@ -23,9 +23,11 @@ type UseMainStateType = {
   youtubeModal: {
     open(videoNo: VideoNo): void;
     close(): void;
+    select(url: string): void;
     subscription: {
       opened: ComputedRef<boolean>;
       videoNo: ComputedRef<VideoNo>;
+      url: ComputedRef<string>;
     };
   };
   syncVideo: {
@@ -89,6 +91,7 @@ const UseMainState = (): UseMainStateType => {
 
   const openedYoutubeModal = ref(false);
   const youtubeModalVideoNo = ref(VideoNo.NONE);
+  const youtubeModalSelectUrl = ref("");
   const youtubeModal = {
     open: (videoNo: VideoNo) => {
       openedYoutubeModal.value = true;
@@ -98,9 +101,13 @@ const UseMainState = (): UseMainStateType => {
       openedYoutubeModal.value = false;
       youtubeModalVideoNo.value = VideoNo.NONE;
     },
+    select: (url: string) => {
+      youtubeModalSelectUrl.value = url;
+    },
     subscription: {
       opened: computed(() => openedYoutubeModal.value),
       videoNo: computed(() => youtubeModalVideoNo.value),
+      url: computed(() => youtubeModalSelectUrl.value),
     },
   };
 

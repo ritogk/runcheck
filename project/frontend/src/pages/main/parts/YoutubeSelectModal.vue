@@ -38,17 +38,15 @@ const redirectToAuthorize = async () => {
   location.href = response.redirectUrl;
 };
 
-// const emit = defineEmits<{
-//   (e: "handle:select", videoNo: VideoNo, url: string): void;
-// }>();
-
 const selectVideo = async (url: string) => {
+  useMainState.youtubeModal.select(url);
   const videoNo = useMainState.youtubeModal.subscription.videoNo.value;
   switch (videoNo) {
     case VideoNo.ONE:
       await useMainState.syncVideo.playerOwn.getPlayer()?.destory();
-      const a = new YouTubePlayer("youtube-video-own", url);
-      useMainState.syncVideo.playerOwn.setPlayer(a);
+      useMainState.syncVideo.playerOwn.setPlayer(
+        new YouTubePlayer("youtube-video-own", url)
+      );
       break;
     case VideoNo.TWO:
       await useMainState.syncVideo.playerTwo.getPlayer()?.destory();
