@@ -12,6 +12,14 @@ import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue";
 
 const useMainState = UseMainState();
 provide(UseMainStateKey, useMainState);
+
+const hundleVideoRunSyncClick = () => {
+  useMainState.syncVideo.runSync();
+};
+
+const hundleVideoStopSyncClick = () => {
+  useMainState.syncVideo.stopSync();
+};
 </script>
 
 <template>
@@ -85,10 +93,14 @@ provide(UseMainStateKey, useMainState);
 
       <!-- 動画を同期 and つぶやく-->
       <div>
-        <span class="isolate inline-flex rounded-md shadow-sm">
+        <span
+          class="isolate inline-flex rounded-md shadow-sm"
+          v-show="!useMainState.syncVideo.subscription.synced.value"
+        >
           <button
             type="button"
             class="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-indigo-700 hover:bg-indigo-500 focus:z-10"
+            @click="hundleVideoRunSyncClick"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -109,6 +121,35 @@ provide(UseMainStateKey, useMainState);
             動画を同期
           </button>
         </span>
+
+        <span
+          class="isolate inline-flex rounded-md shadow-sm"
+          v-show="useMainState.syncVideo.subscription.synced.value"
+        >
+          <button
+            type="button"
+            class="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-indigo-700 hover:bg-indigo-500 focus:z-10"
+            @click="hundleVideoStopSyncClick"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              width="20px"
+              height="20px"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+              />
+            </svg>
+            同期解除
+          </button>
+        </span>
+
         <span class="isolate inline-flex rounded-md shadow-sm ml-2">
           <button
             type="button"

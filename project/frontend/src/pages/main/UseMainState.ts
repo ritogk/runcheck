@@ -53,7 +53,8 @@ type UseMainStateType = {
     switchRepeat(): void;
     adjustSpeed(speed: number): void;
     reload(): void;
-    switchSync(): void;
+    runSync(): void;
+    stopSync(): void;
     setCurrentPosition(postion: number): void;
     subscription: {
       muted: ComputedRef<boolean>;
@@ -141,6 +142,9 @@ const UseMainState = (): UseMainStateType => {
   const syncVideoRepeated = ref(false);
   const syncVideoSpeed = ref(1);
   const syncVideoSynced = ref(false);
+  let syncVideoSyncIntervalId = 0;
+  let syncVideoOwnCurrentPosition = 0;
+  let syncVideoTwoCurrentPosition = 0;
   const syncVideo = {
     playerOwn: {
       setPlayer: (player: IVideoPlayer) => {
@@ -176,8 +180,15 @@ const UseMainState = (): UseMainStateType => {
       syncVideoSpeed.value = speed;
     },
     reload: (): void => {},
-    switchSync: () => {
-      syncVideoSynced.value = !syncVideoSynced.value;
+    runSync: async () => {
+      syncVideoSynced.value = true;
+      syncVideoOwnCurrentPosition =
+        await syncVideoPlayerOwn.getCurrentPosition();
+      syncVideoTwoCurrentPosition =
+        await syncVideoPlayerTwo.getCurrentPosition();
+    },
+    stopSync: () => {
+      syncVideoSynced.value = false;
     },
     setCurrentPosition: (postion: number): void => {
       syncVideoCurrentPosition.value = postion;
