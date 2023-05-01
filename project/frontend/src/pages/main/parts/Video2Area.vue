@@ -111,7 +111,7 @@ const hundleVideoSeek = (seconds: number) => {
   </div>
 
   <!-- selector -->
-  <div>
+  <div v-show="!useMainState.syncVideo.subscription.synced.value">
     <div>
       <div class="mt-2 flex gap-2 rounded-md">
         <!-- Youtube -->
@@ -186,7 +186,7 @@ const hundleVideoSeek = (seconds: number) => {
   </div>
 
   <!-- ajust-->
-  <div>
+  <div v-show="!useMainState.syncVideo.subscription.synced.value">
     <!-- 進む -->
     <div class="mt-2 flex gap-2 justify-between">
       <button
