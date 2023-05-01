@@ -7,6 +7,7 @@ import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
 import {
   ChevronDoubleRightIcon,
   ChevronDoubleLeftIcon,
+  VideoCameraIcon,
   // SearchIcon,
 } from "@heroicons/vue/20/solid";
 import { VideoType } from "./video-area-parts/libs/IVideoPlayer";
@@ -26,16 +27,6 @@ const elements = {
   },
   videoArea: ref<HTMLInputElement | null>(null),
 };
-
-const videoType = ref(VideoType.YOUTUBE);
-onMounted(() => {
-  useMainState.syncVideo.playerOwn.setPlayer(
-    new YouTubePlayer(
-      "youtube-video-own",
-      "https://www.youtube.com/embed/nLKSSdMWZ8g"
-    )
-  );
-});
 
 const calcVideoHeight = ref("300px");
 watch(elements.videoArea, () => {
@@ -165,6 +156,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
       </button>
     </div>
   </div>
+
   <!-- selector -->
   <div>
     <div>
@@ -239,8 +231,25 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
       hidden
     />
   </div>
+
   <!-- Video -->
   <div :ref="elements.videoArea">
+    <div
+      v-show="
+        useMainState.syncVideo.playerOwn.subscription.videoType.value ===
+        VideoType.NONE
+      "
+    >
+      <div
+        class="w-full bg-gray-300 relative"
+        :style="{ height: calcVideoHeight }"
+      >
+        <VideoCameraIcon
+          class="h-2/5 w-2/5 text-gray-400 absolute top-0 right-0 bottom-0 left-0 m-auto"
+          aria-hidden="true"
+        />
+      </div>
+    </div>
     <div
       v-show="
         useMainState.syncVideo.playerOwn.subscription.videoType.value ===

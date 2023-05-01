@@ -3,6 +3,7 @@ import {
   IVideoPlayer,
   VideoType,
 } from "./parts/video-area-parts/libs/IVideoPlayer";
+import { DummyPlayer } from "./parts/video-area-parts/libs/DummyPlayer";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 
 type UseMainStateType = {
@@ -111,10 +112,10 @@ const UseMainState = (): UseMainStateType => {
     },
   };
 
-  let syncVideoPlayerOwn = null as IVideoPlayer | null;
-  const syncVideoPlayerOwnType = ref(VideoType.YOUTUBE);
-  let syncVideoPlayerTwo = null as IVideoPlayer | null;
-  const syncVideoPlayerTwoType = ref(VideoType.YOUTUBE);
+  let syncVideoPlayerOwn = new DummyPlayer();
+  const syncVideoPlayerOwnType = ref(VideoType.NONE);
+  let syncVideoPlayerTwo = new DummyPlayer();
+  const syncVideoPlayerTwoType = ref(VideoType.NONE);
   const syncVideoCurrentPosition = ref(0);
   const syncVideoMuted = ref(false);
   const syncVideoRepeated = ref(false);

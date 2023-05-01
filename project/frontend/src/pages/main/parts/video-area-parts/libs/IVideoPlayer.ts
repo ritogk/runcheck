@@ -15,4 +15,5 @@ export interface IVideoPlayer {
 export enum VideoType {
   YOUTUBE,
   LOCAL,
+  NONE,
 }
