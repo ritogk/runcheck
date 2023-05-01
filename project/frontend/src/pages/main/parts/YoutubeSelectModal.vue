@@ -65,7 +65,6 @@ const selectVideo = async (url: string) => {
 // Oauthで認可された後の処理
 const urlParams = new URLSearchParams(window.location.search);
 const code = urlParams.get("code");
-debugger;
 if (code) callbackYoutubeOauth(code);
 </script>
 
