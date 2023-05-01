@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Video from "@/pages/main/parts/video-area-parts/Video.vue";
-import { ref, onMounted, inject, watch } from "vue";
+import { ref, onMounted, inject, watch, watchEffect } from "vue";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer";
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
@@ -24,6 +24,7 @@ const elements = {
     file: ref<HTMLInputElement | null>(null),
     video: ref<HTMLVideoElement | null>(null),
   },
+  videoArea: ref<HTMLInputElement | null>(null),
 };
 
 const videoType = ref(VideoType.YOUTUBE);
@@ -34,6 +35,12 @@ onMounted(() => {
       "https://www.youtube.com/embed/nLKSSdMWZ8g"
     )
   );
+});
+
+const calcVideoHeight = ref("300px");
+watch(elements.videoArea, () => {
+  const width = elements.videoArea.value?.offsetWidth ?? 600;
+  calcVideoHeight.value = `${width * (9 / 16)}px`;
 });
 
 import { LocalVideoPlayer } from "@/pages/main/parts/video-area-parts/libs/LocalVideoPlayer";
@@ -233,14 +240,18 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
     />
   </div>
   <!-- Video -->
-  <div>
+  <div :ref="elements.videoArea">
     <div
       v-show="
         useMainState.syncVideo.playerOwn.subscription.videoType.value ===
         VideoType.YOUTUBE
       "
     >
-      <div id="youtube-video-own" class="w-full h-[220px]">
+      <div
+        id="youtube-video-own"
+        class="w-full"
+        :style="{ height: calcVideoHeight }"
+      >
         {{ useMainState.syncVideo.playerOwn.subscription.videoType.value }}
       </div>
     </div>
@@ -255,7 +266,8 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
         controls
         playsinline
         preload="none"
-        class="w-full h-[220px]"
+        class="w-full"
+        :style="{ height: calcVideoHeight }"
       ></video>
     </div>
   </div>
