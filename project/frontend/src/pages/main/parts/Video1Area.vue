@@ -38,11 +38,11 @@ onMounted(() => {
 
 import { LocalVideoPlayer } from "@/pages/main/parts/video-area-parts/libs/LocalVideoPlayer";
 
-const onLocalVideoSelect = () => {
+const hundleLocalVideoSelect = () => {
   elements.localVideo.file.value?.click();
 };
 
-const hundleChangeLocalVideo = async (event: Event) => {
+const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0];
   const objectURL = URL.createObjectURL(file);
   await useMainState.syncVideo.playerOwn.getPlayer()?.destory();
@@ -51,6 +51,13 @@ const hundleChangeLocalVideo = async (event: Event) => {
     objectURL
   );
   useMainState.syncVideo.playerOwn.setPlayer(localVideoPlayer);
+};
+
+const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
+  await useMainState.syncVideo.playerOwn.getPlayer()?.destory();
+  useMainState.syncVideo.playerOwn.setPlayer(
+    new YouTubePlayer("youtube-video-own", youtubeUrl)
+  );
 };
 </script>
 <template>
@@ -172,6 +179,7 @@ const hundleChangeLocalVideo = async (event: Event) => {
             class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-indigo-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             placeholder="https://youtube.com/nLKSSdMWZ8g"
             v-model="youtubeUrl"
+            @keyup.enter="hundleYoutubeUrlEnter(youtubeUrl)"
           />
           <!-- 検索 -->
           <button
@@ -199,7 +207,7 @@ const hundleChangeLocalVideo = async (event: Event) => {
         <!-- 端末動画選択 -->
         <button
           class="rounded-md shadow-sm bg-white w-2/12 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
-          @click="onLocalVideoSelect()"
+          @click="hundleLocalVideoSelect()"
         >
           <div class="flex items-center justify-center">
             <svg
@@ -220,7 +228,7 @@ const hundleChangeLocalVideo = async (event: Event) => {
     <input
       type="file"
       :ref="elements.localVideo.file"
-      @change="hundleChangeLocalVideo"
+      @change="hundleLocalVideoChange"
       hidden
     />
   </div>
