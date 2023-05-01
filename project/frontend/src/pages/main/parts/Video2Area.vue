@@ -1,63 +1,111 @@
 <script setup lang="ts">
 import Video from "@/pages/main/parts/video-area-parts/Video.vue";
-import { provide, ref, onMounted, inject } from "vue";
+import { ref, onMounted, inject, watch, watchEffect } from "vue";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer";
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
 import {
   ChevronDoubleRightIcon,
   ChevronDoubleLeftIcon,
+  VideoCameraIcon,
   // SearchIcon,
 } from "@heroicons/vue/20/solid";
+import { VideoType } from "./video-area-parts/libs/IVideoPlayer";
 
 const videoNo = VideoNo.TWO;
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType;
 const youtubeUrl = ref("");
+watch(useMainState.youtubeModal.subscription.url, () => {
+  youtubeUrl.value = useMainState.youtubeModal.subscription.url.value;
+});
 
 const elements = {
   localVideo: {
     file: ref<HTMLInputElement | null>(null),
     video: ref<HTMLVideoElement | null>(null),
   },
+  videoArea: ref<HTMLInputElement | null>(null),
 };
 
-onMounted(() => {
-  useMainState.syncVideo.playerTwo.setPlayer(
-    new YouTubePlayer(
-      "youtube-video-two",
-      "https://www.youtube.com/embed/nLKSSdMWZ8g"
-    )
-  );
+const calcVideoHeight = ref("300px");
+watch(elements.videoArea, () => {
+  const width = elements.videoArea.value?.offsetWidth ?? 600;
+  calcVideoHeight.value = `${width * (9 / 16)}px`;
 });
 
 import { LocalVideoPlayer } from "@/pages/main/parts/video-area-parts/libs/LocalVideoPlayer";
 
-const onLocalVideoSelect = () => {
+const hundleLocalVideoSelect = () => {
   elements.localVideo.file.value?.click();
 };
 
-const hundleChangeLocalVideo = (event: Event) => {
+const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0];
   const objectURL = URL.createObjectURL(file);
+  await useMainState.syncVideo.playerTwo.getPlayer()?.destory();
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
+  );
+  useMainState.syncVideo.playerTwo.setPlayer(localVideoPlayer);
+};
+
+const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
+  await useMainState.syncVideo.playerTwo.getPlayer()?.destory();
+  useMainState.syncVideo.playerTwo.setPlayer(
+    new YouTubePlayer("youtube-video-two", youtubeUrl)
   );
 };
 </script>
 <template>
   <!-- Video -->
-  <div>
-    <div id="youtube-video-two" class="w-full h-[220px]"></div>
-    <video
-      :ref="elements.localVideo.video"
-      controls
-      playsinline
-      preload="none"
-      class="w-full h-[220px]"
-    ></video>
+  <div :ref="elements.videoArea">
+    <div
+      v-show="
+        useMainState.syncVideo.playerTwo.subscription.videoType.value ===
+        VideoType.NONE
+      "
+    >
+      <div
+        class="w-full bg-gray-300 relative"
+        :style="{ height: calcVideoHeight }"
+      >
+        <VideoCameraIcon
+          class="h-2/5 w-2/5 text-gray-400 absolute top-0 right-0 bottom-0 left-0 m-auto"
+          aria-hidden="true"
+        />
+      </div>
+    </div>
+    <div
+      v-show="
+        useMainState.syncVideo.playerTwo.subscription.videoType.value ===
+        VideoType.YOUTUBE
+      "
+    >
+      <div
+        id="youtube-video-two"
+        class="w-full"
+        :style="{ height: calcVideoHeight }"
+      ></div>
+    </div>
+    <div
+      v-show="
+        useMainState.syncVideo.playerTwo.subscription.videoType.value ===
+        VideoType.LOCAL
+      "
+    >
+      <video
+        :ref="elements.localVideo.video"
+        controls
+        playsinline
+        preload="none"
+        class="w-full"
+        :style="{ height: calcVideoHeight }"
+      ></video>
+    </div>
   </div>
+
   <!-- selector -->
   <div>
     <div>
@@ -79,6 +127,7 @@ const hundleChangeLocalVideo = (event: Event) => {
             class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-indigo-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             placeholder="https://youtube.com/nLKSSdMWZ8g"
             v-model="youtubeUrl"
+            @keyup.enter="hundleYoutubeUrlEnter(youtubeUrl)"
           />
           <!-- 検索 -->
           <button
@@ -106,7 +155,7 @@ const hundleChangeLocalVideo = (event: Event) => {
         <!-- 端末動画選択 -->
         <button
           class="rounded-md shadow-sm bg-white w-2/12 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
-          @click="onLocalVideoSelect()"
+          @click="hundleLocalVideoSelect()"
         >
           <div class="flex items-center justify-center">
             <svg
@@ -127,10 +176,11 @@ const hundleChangeLocalVideo = (event: Event) => {
     <input
       type="file"
       :ref="elements.localVideo.file"
-      @change="hundleChangeLocalVideo"
+      @change="hundleLocalVideoChange"
       hidden
     />
   </div>
+
   <!-- ajust-->
   <div>
     <!-- 進む -->
