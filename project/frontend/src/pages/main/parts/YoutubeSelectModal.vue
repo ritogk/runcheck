@@ -47,15 +47,17 @@ const selectVideo = async (url: string) => {
   const videoNo = useMainState.youtubeModal.subscription.videoNo.value;
   switch (videoNo) {
     case VideoNo.ONE:
-      await useMainState.syncVideo.playerOwn.getPlayer()?.destory();
-      useMainState.syncVideo.playerOwn.setPlayer(
-        new YouTubePlayer("youtube-video-own", url)
+      await useMainState.syncVideo.videoOwn.destory();
+      useMainState.syncVideo.videoOwn = new YouTubePlayer(
+        "youtube-video-own",
+        url
       );
       break;
     case VideoNo.TWO:
-      await useMainState.syncVideo.playerTwo.getPlayer()?.destory();
-      useMainState.syncVideo.playerTwo.setPlayer(
-        new YouTubePlayer("youtube-video-two", url)
+      await useMainState.syncVideo.videoTwo.destory();
+      useMainState.syncVideo.videoTwo = new YouTubePlayer(
+        "youtube-video-two",
+        url
       );
       break;
   }

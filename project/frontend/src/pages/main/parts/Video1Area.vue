@@ -44,23 +44,24 @@ const hundleLocalVideoSelect = () => {
 const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0];
   const objectURL = URL.createObjectURL(file);
-  await useMainState.syncVideo.playerOwn.getPlayer()?.destory();
+  await useMainState.syncVideo.videoOwn.destory();
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
   );
-  useMainState.syncVideo.playerOwn.setPlayer(localVideoPlayer);
+  useMainState.syncVideo.videoOwn = localVideoPlayer;
 };
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
-  await useMainState.syncVideo.playerOwn.getPlayer()?.destory();
-  useMainState.syncVideo.playerOwn.setPlayer(
-    new YouTubePlayer("youtube-video-own", youtubeUrl)
+  await useMainState.syncVideo.videoOwn.destory();
+  useMainState.syncVideo.videoOwn = new YouTubePlayer(
+    "youtube-video-own",
+    youtubeUrl
   );
 };
 
 const hundleVideoSeek = (seconds: number) => {
-  useMainState.syncVideo.playerOwn.getPlayer().seekTo(seconds);
+  useMainState.syncVideo.videoOwn.seekTo(seconds);
 };
 </script>
 <template>
@@ -250,7 +251,7 @@ const hundleVideoSeek = (seconds: number) => {
     <!-- dummy -->
     <div
       v-show="
-        useMainState.syncVideo.playerOwn.subscription.videoType.value ===
+        useMainState.syncVideo.subscription.videoOwnType.value ===
         VideoType.NONE
       "
     >
@@ -267,7 +268,7 @@ const hundleVideoSeek = (seconds: number) => {
     <!-- youtube -->
     <div
       v-show="
-        useMainState.syncVideo.playerOwn.subscription.videoType.value ===
+        useMainState.syncVideo.subscription.videoOwnType.value ===
         VideoType.YOUTUBE
       "
     >
@@ -280,7 +281,7 @@ const hundleVideoSeek = (seconds: number) => {
     <!-- local -->
     <div
       v-show="
-        useMainState.syncVideo.playerOwn.subscription.videoType.value ===
+        useMainState.syncVideo.subscription.videoOwnType.value ===
         VideoType.LOCAL
       "
     >

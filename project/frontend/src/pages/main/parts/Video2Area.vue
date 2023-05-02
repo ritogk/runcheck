@@ -44,23 +44,24 @@ const hundleLocalVideoSelect = () => {
 const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0];
   const objectURL = URL.createObjectURL(file);
-  await useMainState.syncVideo.playerTwo.getPlayer()?.destory();
+  await useMainState.syncVideo.videoTwo.destory();
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
   );
-  useMainState.syncVideo.playerTwo.setPlayer(localVideoPlayer);
+  useMainState.syncVideo.videoTwo = localVideoPlayer;
 };
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
-  await useMainState.syncVideo.playerTwo.getPlayer()?.destory();
-  useMainState.syncVideo.playerTwo.setPlayer(
-    new YouTubePlayer("youtube-video-two", youtubeUrl)
+  await useMainState.syncVideo.videoTwo.destory();
+  useMainState.syncVideo.videoTwo = new YouTubePlayer(
+    "youtube-video-two",
+    youtubeUrl
   );
 };
 
 const hundleVideoSeek = (seconds: number) => {
-  useMainState.syncVideo.playerTwo.getPlayer().seekTo(seconds);
+  useMainState.syncVideo.videoTwo.seekTo(seconds);
 };
 </script>
 <template>
@@ -68,7 +69,7 @@ const hundleVideoSeek = (seconds: number) => {
   <div :ref="elements.videoArea">
     <div
       v-show="
-        useMainState.syncVideo.playerTwo.subscription.videoType.value ===
+        useMainState.syncVideo.subscription.videoTwoType.value ===
         VideoType.NONE
       "
     >
@@ -84,7 +85,7 @@ const hundleVideoSeek = (seconds: number) => {
     </div>
     <div
       v-show="
-        useMainState.syncVideo.playerTwo.subscription.videoType.value ===
+        useMainState.syncVideo.subscription.videoTwoType.value ===
         VideoType.YOUTUBE
       "
     >
@@ -96,7 +97,7 @@ const hundleVideoSeek = (seconds: number) => {
     </div>
     <div
       v-show="
-        useMainState.syncVideo.playerTwo.subscription.videoType.value ===
+        useMainState.syncVideo.subscription.videoTwoType.value ===
         VideoType.LOCAL
       "
     >
