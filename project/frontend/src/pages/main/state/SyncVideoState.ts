@@ -6,7 +6,7 @@ import {
 import { DummyPlayer } from "@/pages/main/parts/video-area-parts/libs/DummyPlayer";
 
 /**
- * 動画を動悸するためのフック
+ * 動画を同期させるための状態クラス
  * @returns
  */
 interface SyncVideoStateType {
@@ -24,6 +24,8 @@ interface SyncVideoStateType {
     repeated: ComputedRef<boolean>;
     speed: ComputedRef<number>;
     synced: ComputedRef<boolean>;
+    videoOwnType: ComputedRef<VideoType>;
+    videoTwoType: ComputedRef<VideoType>;
   };
 }
 
