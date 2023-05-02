@@ -5,7 +5,9 @@ import {
 } from "./parts/video-area-parts/libs/IVideoPlayer";
 import { DummyPlayer } from "./parts/video-area-parts/libs/DummyPlayer";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
-import { localStorageKeys } from "@/core/localstorageKey";
+import { openModalState } from "./state/openModalState";
+import { saveModalState } from "./state/saveModalState";
+import { youtubeSelectModalState } from "./state/youtubeSelectModalState";
 
 type UseMainStateType = {
   openModal: {
@@ -67,72 +69,6 @@ type UseMainStateType = {
 };
 
 const UseMainState = (): UseMainStateType => {
-  const openedOpenModal = ref(false);
-  const openModal = {
-    open: () => {
-      openedOpenModal.value = true;
-    },
-    close: () => {
-      openedOpenModal.value = false;
-    },
-    subscription: {
-      opened: computed(() => openedOpenModal.value),
-    },
-  };
-
-  const openedSaveModal = ref(false);
-  const saveModal = {
-    opened: ref(false),
-    open: () => {
-      openedSaveModal.value = true;
-    },
-    close: () => {
-      openedSaveModal.value = false;
-    },
-    subscription: {
-      opened: computed(() => openedSaveModal.value),
-    },
-  };
-
-  const openedYoutubeModal = ref(false);
-  const youtubeModalVideoNo = ref(VideoNo.NONE);
-  const youtubeModalSelectUrl = ref("");
-  const youtubeModal = {
-    open: (videoNo: VideoNo) => {
-      openedYoutubeModal.value = true;
-      youtubeModalVideoNo.value = videoNo;
-    },
-    close: () => {
-      openedYoutubeModal.value = false;
-      youtubeModalVideoNo.value = VideoNo.NONE;
-    },
-    select: (url: string) => {
-      youtubeModalSelectUrl.value = url;
-    },
-    load: () => {
-      debugger;
-      const storage = localStorage.getItem(
-        localStorageKeys.YOUTUBE_SELECT_MODAL_STATE
-      );
-      if (storage) {
-        const item = <{ videoNo: VideoNo; opened: boolean }>JSON.parse(storage);
-        openedYoutubeModal.value = item.opened;
-        youtubeModalVideoNo.value = item.videoNo;
-      }
-    },
-    save: () => {
-      localStorage.setItem(
-        localStorageKeys.YOUTUBE_SELECT_MODAL_STATE,
-        JSON.stringify({ videoNo: youtubeModalVideoNo.value, opened: true })
-      );
-    },
-    subscription: {
-      opened: computed(() => openedYoutubeModal.value),
-      videoNo: computed(() => youtubeModalVideoNo.value),
-      url: computed(() => youtubeModalSelectUrl.value),
-    },
-  };
-
   let syncVideoPlayerOwn = new DummyPlayer();
   const syncVideoPlayerOwnType = ref(VideoType.NONE);
   let syncVideoPlayerTwo = new DummyPlayer();
@@ -149,13 +85,23 @@ const UseMainState = (): UseMainStateType => {
     playerOwn: {
       setPlayer: (player: IVideoPlayer) => {
         syncVideoPlayerOwn = player;
+        // ここで発火
         syncVideoPlayerOwnType.value = player.getVideoType();
       },
       getPlayer: (): IVideoPlayer => {
         return syncVideoPlayerOwn;
       },
       subscription: {
-        videoType: computed(() => syncVideoPlayerOwnType.value),
+        videoType: computed(() => {
+          return syncVideoPlayerOwnType.value;
+        }),
+      },
+      testDayo: () => {
+        const subscription = {
+          videoType: computed(() => {
+            return syncVideoPlayerOwnType.value;
+          }),
+        };
       },
     },
     playerTwo: {
@@ -223,14 +169,13 @@ const UseMainState = (): UseMainStateType => {
   };
 
   return {
-    openModal: openModal,
-    saveModal: saveModal,
-    youtubeModal: youtubeModal,
+    openModal: openModalState(),
+    saveModal: saveModalState(),
+    youtubeModal: youtubeSelectModalState(),
     syncVideo: syncVideo,
   };
 };
 
 const UseMainStateKey: InjectionKey<UseMainStateType> =
   Symbol("UseMainStateType");
-
 export { UseMainState, UseMainStateKey, UseMainStateType };
