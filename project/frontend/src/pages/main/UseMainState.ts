@@ -40,6 +40,7 @@ type UseMainStateType = {
     videoOwn: IVideoPlayer;
     videoTwo: IVideoPlayer;
     currentPosition: WritableComputedRef<number>;
+    switchPlay(): void;
     switchMute(): void;
     switchRepeat(): void;
     adjustSpeed(speed: number): void;

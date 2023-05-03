@@ -14,7 +14,7 @@ export class YouTubePlayer implements IVideoPlayer {
   };
 
   stop = () => {
-    this.player.stopVideo();
+    this.player.pauseVideo();
   };
 
   mute = () => {

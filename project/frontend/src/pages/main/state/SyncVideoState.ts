@@ -13,6 +13,7 @@ interface ISyncVideoStateType {
   videoOwn: IVideoPlayer;
   videoTwo: IVideoPlayer;
   currentPosition: WritableComputedRef<number>;
+  switchPlay(): void;
   switchMute(): void;
   switchRepeat(): void;
   adjustSpeed(speed: number): void;
@@ -32,16 +33,17 @@ interface ISyncVideoStateType {
 export class SyncVideoState implements ISyncVideoStateType {
   private _currentPosition = ref(0);
   private _videoOwnPlayer: IVideoPlayer = new DummyPlayer();
-  private _videoTwoPlayer: IVideoPlayer = new DummyPlayer();
   private _videoOwnType = ref(VideoType.NONE);
+  private _videoOwnStartPosition = 0;
+  private _videoTwoPlayer: IVideoPlayer = new DummyPlayer();
   private _videoTwoType = ref(VideoType.NONE);
+  private _videoTwoStartPosition = 0;
+  private _playing = ref(true);
   private _muted = ref(false);
   private _repeated = ref(false);
   private _speed = ref(1);
   private _synced = ref(false);
   private _syncIntervalId = 0;
-  private _videoOwnStartPosition = 0;
-  private _videoTwoStartPosition = 0;
 
   get videoOwn() {
     return this._videoOwnPlayer;
@@ -67,6 +69,17 @@ export class SyncVideoState implements ISyncVideoStateType {
       this._currentPosition.value = value;
     },
   });
+
+  switchPlay = (): void => {
+    this._playing.value = !this._playing.value;
+    if (this._playing.value) {
+      this._videoOwnPlayer.play();
+      this._videoTwoPlayer.play();
+    } else {
+      this._videoOwnPlayer.stop();
+      this._videoTwoPlayer.stop();
+    }
+  };
 
   switchMute = (): void => {
     this._muted.value = !this._muted.value;
