@@ -4,8 +4,8 @@ import {
   VideoType,
 } from "./parts/video-area-parts/libs/IVideoPlayer";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
-import { openModalState } from "./state/openModalState";
-import { saveModalState } from "./state/saveModalState";
+import { OpenModalState } from "./state/OpenModalState";
+import { SaveModalState } from "./state/SaveModalState";
 import { YoutubeSelectorModalState } from "./state/YoutubeSelectorModalState";
 import { SyncVideoState } from "./state/SyncVideoState";
 
@@ -59,8 +59,8 @@ type UseMainStateType = {
 
 const UseMainState = (): UseMainStateType => {
   return {
-    openModal: openModalState(),
-    saveModal: saveModalState(),
+    openModal: new OpenModalState(),
+    saveModal: new SaveModalState(),
     youtubeModal: new YoutubeSelectorModalState(),
     syncVideo: new SyncVideoState(),
   };
