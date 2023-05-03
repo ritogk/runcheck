@@ -44,7 +44,7 @@ const redirectToAuthorize = async () => {
 
 const selectVideo = async (url: string) => {
   useMainState.youtubeModal.select(url);
-  const videoNo = useMainState.youtubeModal.subscription.videoNo.value;
+  const videoNo = useMainState.youtubeModal.subscription.currentVideoNo.value;
   switch (videoNo) {
     case VideoNo.ONE:
       await useMainState.syncVideo.videoOwn.destory();

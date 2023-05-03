@@ -16,9 +16,10 @@ const videoNo = VideoNo.ONE;
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType;
 const youtubeUrl = ref("");
-watch(useMainState.youtubeModal.subscription.url, () => {
-  if (useMainState.youtubeModal.subscription.videoNo.value !== videoNo) return;
-  youtubeUrl.value = useMainState.youtubeModal.subscription.url.value;
+watch(useMainState.youtubeModal.subscription.selectUrl, () => {
+  if (useMainState.youtubeModal.subscription.currentVideoNo.value !== videoNo)
+    return;
+  youtubeUrl.value = useMainState.youtubeModal.subscription.selectUrl.value;
 });
 
 const elements = {

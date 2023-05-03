@@ -6,7 +6,7 @@ import {
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 import { openModalState } from "./state/openModalState";
 import { saveModalState } from "./state/saveModalState";
-import { youtubeSelectModalState } from "./state/youtubeSelectModalState";
+import { YoutubeSelectorModalState } from "./state/YoutubeSelectorModalState";
 import { SyncVideoState } from "./state/SyncVideoState";
 
 type UseMainStateType = {
@@ -32,8 +32,8 @@ type UseMainStateType = {
     save(): void;
     subscription: {
       opened: ComputedRef<boolean>;
-      videoNo: ComputedRef<VideoNo>;
-      url: ComputedRef<string>;
+      currentVideoNo: ComputedRef<VideoNo>;
+      selectUrl: ComputedRef<string>;
     };
   };
   syncVideo: {
@@ -61,7 +61,7 @@ const UseMainState = (): UseMainStateType => {
   return {
     openModal: openModalState(),
     saveModal: saveModalState(),
-    youtubeModal: youtubeSelectModalState(),
+    youtubeModal: new YoutubeSelectorModalState(),
     syncVideo: new SyncVideoState(),
   };
 };
