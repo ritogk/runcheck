@@ -1,4 +1,5 @@
-import { IVideoPlayer, VideoType } from "./IVideoPlayer";
+import { computed } from "vue";
+import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer";
 
 export class LocalVideoPlayer implements IVideoPlayer {
   private videoElement: HTMLVideoElement;
@@ -56,4 +57,12 @@ export class LocalVideoPlayer implements IVideoPlayer {
   getVideoType = (): VideoType => {
     return VideoType.LOCAL;
   };
+
+  get subscription() {
+    return {
+      status: computed(() => {
+        return Status.WAITING;
+      }),
+    };
+  }
 }

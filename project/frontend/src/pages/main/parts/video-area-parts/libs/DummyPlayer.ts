@@ -1,4 +1,5 @@
-import { IVideoPlayer, VideoType } from "./IVideoPlayer";
+import { computed } from "vue";
+import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer";
 
 export class DummyPlayer implements IVideoPlayer {
   play = () => {
@@ -46,4 +47,10 @@ export class DummyPlayer implements IVideoPlayer {
   getVideoType = (): VideoType => {
     return VideoType.NONE;
   };
+
+  get subscription() {
+    return {
+      status: Status.WAITING;
+    };
+  }
 }
