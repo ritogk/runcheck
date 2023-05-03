@@ -71,7 +71,7 @@ const hundleReload = () => {
             height="24"
             fill="currentColor"
             viewBox="0 0 16 16"
-            class="fill-gray-500"
+            class="fill-gray-500 hover:fill-gray-400"
           >
             <path
               d="M11 4v1.466a.25.25 0 0 0 .41.192l2.36-1.966a.25.25 0 0 0 0-.384l-2.36-1.966a.25.25 0 0 0-.41.192V3H5a5 5 0 0 0-4.48 7.223.5.5 0 0 0 .896-.446A4 4 0 0 1 5 4h6Zm4.48 1.777a.5.5 0 0 0-.896.446A4 4 0 0 1 11 12H5.001v-1.466a.25.25 0 0 0-.41-.192l-2.36 1.966a.25.25 0 0 0 0 .384l2.36 1.966a.25.25 0 0 0 .41-.192V13h6a5 5 0 0 0 4.48-7.223Z"
@@ -88,7 +88,7 @@ const hundleReload = () => {
             width="24"
             height="24"
             viewBox="0 0 16 16"
-            class="fill-gray-500"
+            class="fill-gray-500 hover:fill-gray-400"
           >
             <path
               d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"
@@ -110,7 +110,7 @@ const hundleReload = () => {
         <svg
           width="30"
           height="32"
-          fill="currentColor"
+          class="fill-gray-600 hover:fill-gray-500"
           v-show="useMainState.syncVideo.subscription.playing.value"
         >
           <rect x="6" y="4" width="4" height="24" rx="2" />
@@ -119,7 +119,7 @@ const hundleReload = () => {
         <svg
           width="30"
           height="32"
-          fill="currentColor"
+          class="fill-gray-600 hover:fill-gray-500"
           v-show="!useMainState.syncVideo.subscription.playing.value"
         >
           <path d="M6 4l20 12-20 12z" />
@@ -132,7 +132,12 @@ const hundleReload = () => {
           aria-label="Skip 10 seconds"
           @click="hundleReload()"
         >
-          <svg width="24" height="24" fill="none">
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            class="text-gray-500 hover:text-gray-400"
+          >
             <path
               d="M17.509 16.95c-2.862 2.733-7.501 2.733-10.363 0-2.861-2.734-2.861-7.166 0-9.9 2.862-2.733 7.501-2.733 10.363 0 .38.365.711.759.991 1.176"
               stroke="currentColor"
@@ -158,10 +163,12 @@ const hundleReload = () => {
         >
           <SpeakerWaveIcon
             style="width: 24px; height: 24px"
+            class="text-gray-500 hover:text-gray-400"
             v-show="!useMainState.syncVideo.subscription.muted.value"
           ></SpeakerWaveIcon>
           <SpeakerXMarkIcon
             style="width: 24px; height: 24px"
+            class="text-gray-500 hover:text-gray-400"
             v-show="useMainState.syncVideo.subscription.muted.value"
           ></SpeakerXMarkIcon>
         </button>
