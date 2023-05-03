@@ -9,19 +9,19 @@ export class LocalVideoPlayer implements IVideoPlayer {
   }
 
   play = () => {
-    return;
+    this.videoElement.play();
   };
 
   stop = () => {
-    return;
+    this.videoElement.pause();
   };
 
   mute = () => {
-    return;
+    this.videoElement.muted = true;
   };
 
   unMute = () => {
-    return;
+    this.videoElement.muted = false;
   };
 
   adjustSpeed = (speed: number) => {
