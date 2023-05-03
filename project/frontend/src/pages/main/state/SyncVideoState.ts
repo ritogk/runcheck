@@ -40,7 +40,7 @@ export class SyncVideoState implements ISyncVideoStateType {
   private _videoTwoType = ref(VideoType.NONE);
   private _videoTwoStartPosition = 0;
   private _playing = ref(false);
-  private _muted = ref(false);
+  private _muted = ref(true);
   private _repeated = ref(false);
   private _speed = ref(1);
   private _synced = ref(false);
@@ -84,6 +84,13 @@ export class SyncVideoState implements ISyncVideoStateType {
 
   switchMute = (): void => {
     this._muted.value = !this._muted.value;
+    if (this._muted.value) {
+      this._videoOwnPlayer.mute();
+      this._videoTwoPlayer.mute();
+    } else {
+      this._videoOwnPlayer.unMute();
+      this._videoTwoPlayer.unMute();
+    }
   };
 
   switchRepeat = (): void => {

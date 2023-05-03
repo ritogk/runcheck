@@ -14,6 +14,10 @@ const hundlePlaySwitch = () => {
   useMainState.syncVideo.videoTwo.mute();
   useMainState.syncVideo.switchPlay();
 };
+
+const hundleMuteSwitch = () => {
+  useMainState.syncVideo.switchMute();
+};
 </script>
 
 <template>
@@ -55,7 +59,7 @@ const hundlePlaySwitch = () => {
       class="bg-gray-200 text-gray-500 dark:bg-gray-600 dark:text-gray-200 flex items-center"
     >
       <div class="flex-auto flex items-center justify-evenly">
-        <!-- ボタン1 -->
+        <!-- リピート ボタン -->
         <button type="button" aria-label="Skip 10 seconds">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +77,7 @@ const hundlePlaySwitch = () => {
             />
           </svg>
         </button>
-        <!-- ボタン2 -->
+        <!-- 倍速 ボタン -->
         <button type="button" aria-label="Skip 10 seconds">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +122,7 @@ const hundlePlaySwitch = () => {
         </svg>
       </button>
       <div class="flex-auto flex items-center justify-evenly">
-        <!-- ボタン3 -->
+        <!-- 再読み込み ボタン -->
         <button type="button" aria-label="Skip 10 seconds">
           <svg width="24" height="24" fill="none">
             <path
@@ -137,17 +141,20 @@ const hundlePlaySwitch = () => {
             />
           </svg>
         </button>
-        <!-- ボタン4 -->
+        <!-- ミュート ボタン -->
         <button
           type="button"
           class="sm:block lg:hidden xl:block"
           aria-label="Previous"
+          @click="hundleMuteSwitch()"
         >
           <SpeakerWaveIcon
-            style="width: 24px; height: 24px; display: none"
+            style="width: 24px; height: 24px"
+            v-show="!useMainState.syncVideo.subscription.muted.value"
           ></SpeakerWaveIcon>
           <SpeakerXMarkIcon
             style="width: 24px; height: 24px"
+            v-show="useMainState.syncVideo.subscription.muted.value"
           ></SpeakerXMarkIcon>
         </button>
       </div>
