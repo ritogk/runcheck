@@ -135,7 +135,7 @@ export class SyncVideoState implements ISyncVideoStateType {
         return this._videoOwnType.value;
       }),
       videoTwoType: computed(() => {
-        return this._videoOwnType.value;
+        return this._videoTwoType.value;
       }),
     };
   }
