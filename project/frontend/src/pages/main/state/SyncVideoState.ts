@@ -9,7 +9,7 @@ import { DummyPlayer } from "@/pages/main/parts/video-area-parts/libs/DummyPlaye
  * 動画を同期させるための状態クラス
  * @returns
  */
-interface SyncVideoStateType {
+interface ISyncVideoStateType {
   videoOwn: IVideoPlayer;
   videoTwo: IVideoPlayer;
   currentPosition: WritableComputedRef<number>;
@@ -29,7 +29,7 @@ interface SyncVideoStateType {
   };
 }
 
-export class SyncVideoState implements SyncVideoStateType {
+export class SyncVideoState implements ISyncVideoStateType {
   private _currentPosition = ref(0);
   private _videoOwnPlayer: IVideoPlayer = new DummyPlayer();
   private _videoTwoPlayer: IVideoPlayer = new DummyPlayer();
