@@ -21,6 +21,7 @@ interface ISyncVideoStateType {
   runSync(): void;
   stopSync(): void;
   subscription: {
+    playing: ComputedRef<boolean>;
     muted: ComputedRef<boolean>;
     repeated: ComputedRef<boolean>;
     speed: ComputedRef<number>;
@@ -38,7 +39,7 @@ export class SyncVideoState implements ISyncVideoStateType {
   private _videoTwoPlayer: IVideoPlayer = new DummyPlayer();
   private _videoTwoType = ref(VideoType.NONE);
   private _videoTwoStartPosition = 0;
-  private _playing = ref(true);
+  private _playing = ref(false);
   private _muted = ref(false);
   private _repeated = ref(false);
   private _speed = ref(1);
@@ -100,6 +101,7 @@ export class SyncVideoState implements ISyncVideoStateType {
   reload = (): void => {};
 
   runSync = async () => {
+    this._playing.value = false;
     this._synced.value = true;
     this._videoOwnStartPosition =
       await this._videoOwnPlayer.getCurrentPosition();
@@ -132,6 +134,9 @@ export class SyncVideoState implements ISyncVideoStateType {
 
   get subscription() {
     return {
+      playing: computed(() => {
+        return this._playing.value;
+      }),
       muted: computed(() => {
         return this._muted.value;
       }),

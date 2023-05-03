@@ -48,6 +48,7 @@ type UseMainStateType = {
     runSync(): void;
     stopSync(): void;
     subscription: {
+      playing: ComputedRef<boolean>;
       muted: ComputedRef<boolean>;
       repeated: ComputedRef<boolean>;
       speed: ComputedRef<number>;

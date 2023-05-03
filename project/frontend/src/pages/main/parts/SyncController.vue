@@ -8,6 +8,12 @@ import {
 } from "@heroicons/vue/20/solid";
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType;
+
+const hundlePlaySwitch = () => {
+  useMainState.syncVideo.videoOwn.mute();
+  useMainState.syncVideo.videoTwo.mute();
+  useMainState.syncVideo.switchPlay();
+};
 </script>
 
 <template>
@@ -91,11 +97,24 @@ const useMainState = inject(UseMainStateKey) as UseMainStateType;
         type="button"
         class="bg-white text-gray-900 dark:bg-gray-100 dark:text-gray-700 flex-none -my-2 mx-auto w-20 h-20 rounded-full ring-1 ring-gray-900/5 shadow-md flex items-center justify-center"
         aria-label="Pause"
-        @click="useMainState.syncVideo.switchPlay()"
+        @click="hundlePlaySwitch()"
       >
-        <svg width="30" height="32" fill="currentColor">
+        <svg
+          width="30"
+          height="32"
+          fill="currentColor"
+          v-show="useMainState.syncVideo.subscription.playing.value"
+        >
           <rect x="6" y="4" width="4" height="24" rx="2" />
           <rect x="20" y="4" width="4" height="24" rx="2" />
+        </svg>
+        <svg
+          width="30"
+          height="32"
+          fill="currentColor"
+          v-show="!useMainState.syncVideo.subscription.playing.value"
+        >
+          <path d="M6 4l20 12-20 12z" />
         </svg>
       </button>
       <div class="flex-auto flex items-center justify-evenly">
