@@ -109,16 +109,27 @@ export class SyncVideoState implements ISyncVideoStateType {
       await this._videoTwoPlayer.getCurrentPosition();
 
     this._syncIntervalId = setInterval(async () => {
-      const videoOwnPosition =
-        (await this._videoOwnPlayer.getCurrentPosition()) -
-        this._videoOwnStartPosition;
-      const videoTwoPosition =
-        (await this._videoTwoPlayer.getCurrentPosition()) -
-        this._videoTwoStartPosition;
+      const videoOwnCurrentPosition =
+        await this._videoOwnPlayer.getCurrentPosition();
+      const videoTwoCurrentPosition =
+        await this._videoTwoPlayer.getCurrentPosition();
+      // 開始ポジションより手前の場合は開始ポジションに戻す
+      if (
+        videoOwnCurrentPosition < this._videoOwnStartPosition ||
+        videoTwoCurrentPosition < this._videoTwoStartPosition
+      ) {
+        this._videoOwnPlayer.seekTo(this._videoOwnStartPosition);
+        this._videoTwoPlayer.seekTo(this._videoTwoStartPosition);
+        return;
+      }
 
-      // 0.3秒以上ずれていたら同期させる
+      const videoOwnPosition =
+        videoOwnCurrentPosition - this._videoOwnStartPosition;
+      const videoTwoPosition =
+        videoTwoCurrentPosition - this._videoTwoStartPosition;
+      // 0.1秒以上ずれていたら同期させる
       const diff = Math.abs(videoOwnPosition - videoTwoPosition);
-      if (diff >= 0.3) {
+      if (diff >= 0.1) {
         videoOwnPosition > videoTwoPosition
           ? this._videoOwnPlayer.seekTo(diff * -1)
           : this._videoTwoPlayer.seekTo(diff * -1);
