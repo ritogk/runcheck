@@ -37,8 +37,7 @@ export class LocalVideoPlayer implements IVideoPlayer {
   };
 
   seekTo = async (seconds: number) => {
-    const currentPosition = await this.getCurrentPosition();
-    this.videoElement.currentTime = currentPosition + seconds;
+    this.videoElement.currentTime = seconds;
   };
 
   getCurrentPosition = async (): Promise<number> => {

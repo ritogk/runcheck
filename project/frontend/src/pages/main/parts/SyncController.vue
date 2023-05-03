@@ -18,6 +18,10 @@ const hundlePlaySwitch = () => {
 const hundleMuteSwitch = () => {
   useMainState.syncVideo.switchMute();
 };
+
+const hundleReload = () => {
+  useMainState.syncVideo.reload();
+};
 </script>
 
 <template>
@@ -123,7 +127,11 @@ const hundleMuteSwitch = () => {
       </button>
       <div class="flex-auto flex items-center justify-evenly">
         <!-- 再読み込み ボタン -->
-        <button type="button" aria-label="Skip 10 seconds">
+        <button
+          type="button"
+          aria-label="Skip 10 seconds"
+          @click="hundleReload()"
+        >
           <svg width="24" height="24" fill="none">
             <path
               d="M17.509 16.95c-2.862 2.733-7.501 2.733-10.363 0-2.861-2.734-2.861-7.166 0-9.9 2.862-2.733 7.501-2.733 10.363 0 .38.365.711.759.991 1.176"

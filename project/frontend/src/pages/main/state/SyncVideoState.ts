@@ -105,7 +105,11 @@ export class SyncVideoState implements ISyncVideoStateType {
     this._synced.value = !this._synced.value;
   };
 
-  reload = (): void => {};
+  reload = (): void => {
+    this._playing.value = false;
+    this.videoOwn.seekTo(this._videoOwnStartPosition);
+    this.videoTwo.seekTo(this._videoTwoStartPosition);
+  };
 
   runSync = async () => {
     this._playing.value = false;
@@ -138,8 +142,8 @@ export class SyncVideoState implements ISyncVideoStateType {
       const diff = Math.abs(videoOwnPosition - videoTwoPosition);
       if (diff >= 0.1) {
         videoOwnPosition > videoTwoPosition
-          ? this._videoOwnPlayer.seekTo(diff * -1)
-          : this._videoTwoPlayer.seekTo(diff * -1);
+          ? this._videoOwnPlayer.seekTo(videoOwnCurrentPosition + diff * -1)
+          : this._videoTwoPlayer.seekTo(videoTwoCurrentPosition + diff * -1);
       }
     }, 500);
   };
