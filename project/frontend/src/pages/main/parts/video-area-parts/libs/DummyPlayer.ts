@@ -50,7 +50,9 @@ export class DummyPlayer implements IVideoPlayer {
 
   get subscription() {
     return {
-      status: Status.WAITING;
+      status: computed(() => {
+        return Status.WAITING;
+      }),
     };
   }
 }
