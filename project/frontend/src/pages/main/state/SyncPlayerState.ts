@@ -123,12 +123,17 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   private syncFlg = false;
   runSync = async () => {
     this._playing.value = false;
-    this._synced.value = true;
-    this._playerOneStartPosition =
-      await this._playerOneManager.subscription.player.value.getCurrentPosition();
-    this._playerTwoStartPosition =
-      await this._playerTwoManager.subscription.player.value.getCurrentPosition();
+    await this._playerOneManager.subscription.player.value.stop();
+    await this._playerTwoManager.subscription.player.value.stop();
 
+    const [videoOwnCurrentPosition, videoTwoCurrentPosition] =
+      await Promise.all([
+        this._playerOneManager.subscription.player.value.getCurrentPosition(),
+        this._playerTwoManager.subscription.player.value.getCurrentPosition(),
+      ]);
+    this._playerOneStartPosition = videoOwnCurrentPosition;
+    this._playerTwoStartPosition = videoTwoCurrentPosition;
+    this._synced.value = true;
     // 同期ぐるぐる
     this._syncIntervalId = setInterval(async () => {
       if (this.syncFlg) return;
