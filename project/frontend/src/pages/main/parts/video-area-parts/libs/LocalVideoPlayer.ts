@@ -1,12 +1,30 @@
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer";
 
 export class LocalVideoPlayer implements IVideoPlayer {
   private videoElement: HTMLVideoElement;
+  public _status = ref(Status.WAITING);
+
   constructor(videoElement: HTMLVideoElement, objectURL: string) {
     videoElement.src = objectURL;
     videoElement.load();
     this.videoElement = videoElement;
+
+    this.videoElement.addEventListener("loadeddata", () => {
+      this._status.value = Status.WAITING;
+    });
+    this.videoElement.addEventListener("canplay", () => {
+      this._status.value = Status.CAN_PLAY;
+    });
+    this.videoElement.addEventListener("play", () => {
+      this._status.value = Status.PLAYING;
+    });
+    this.videoElement.addEventListener("pause", () => {
+      this._status.value = Status.PAUSE;
+    });
+    this.videoElement.addEventListener("ended", () => {
+      this._status.value = Status.ENDED;
+    });
   }
 
   get videoType() {
@@ -63,14 +81,9 @@ export class LocalVideoPlayer implements IVideoPlayer {
     return;
   }
 
-  get subscription() {
-    return {
-      status: computed(() => {
-        return Status.WAITING;
-      }),
-      videoType: computed(() => {
-        return VideoType.LOCAL;
-      }),
-    };
-  }
+  public subscription = {
+    status: computed(() => {
+      return this._status.value;
+    }),
+  };
 }
