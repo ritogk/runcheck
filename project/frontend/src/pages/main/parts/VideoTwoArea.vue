@@ -74,7 +74,6 @@ const hundleVideoSeek = async (seconds: number) => {
 </script>
 
 <template>
-  {{ videoTwoManager.subscription.videoType.value }}
   <!-- Video -->
   <div :ref="elements.videoArea">
     <div

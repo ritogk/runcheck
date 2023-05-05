@@ -74,7 +74,6 @@ const hundleVideoSeek = async (seconds: number) => {
 };
 </script>
 <template>
-  {{ videoOwnManager.subscription.videoType.value }}
   <!-- ajust-->
   <div v-show="!useMainState.syncVideo.subscription.synced.value">
     <!-- 進む -->

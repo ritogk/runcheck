@@ -5,8 +5,8 @@ import {
   UseMainStateKey,
   UseMainStateType,
 } from "./UseMainState";
-import Video1Area from "./parts/Video1Area.vue";
-import Video2Area from "./parts/Video2Area.vue";
+import VideoOneArea from "./parts/VideoOneArea.vue";
+import VideoTwoArea from "./parts/VideoTwoArea.vue";
 import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue";
 import SyncController from "./parts/SyncController.vue";
 
@@ -199,8 +199,8 @@ const hundleVideoStopSyncClick = () => {
       <div class="h-px my-3 bg-gray-300"></div>
     </div>
 
-    <Video1Area></Video1Area>
-    <Video2Area></Video2Area>
+    <VideoOneArea></VideoOneArea>
+    <VideoTwoArea></VideoTwoArea>
     <SyncController></SyncController>
     <div class="m-5"></div>
   </div>
