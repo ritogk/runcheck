@@ -24,6 +24,10 @@ const hundleMuteSwitch = () => {
 const hundleReload = () => {
   useMainState.syncPlayer.reload();
 };
+
+const hundleRepeatSwitch = () => {
+  useMainState.syncPlayer.switchRepeat();
+};
 </script>
 
 <template>
@@ -66,7 +70,11 @@ const hundleReload = () => {
     >
       <div class="flex-auto flex items-center justify-evenly">
         <!-- リピート ボタン -->
-        <button type="button" aria-label="Skip 10 seconds">
+        <button
+          type="button"
+          aria-label="Skip 10 seconds"
+          @click="hundleRepeatSwitch()"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -74,6 +82,20 @@ const hundleReload = () => {
             fill="currentColor"
             viewBox="0 0 16 16"
             class="fill-gray-500 hover:fill-gray-400"
+            v-show="!useMainState.syncPlayer.subscription.repeated.value"
+          >
+            <path
+              d="M11 4v1.466a.25.25 0 0 0 .41.192l2.36-1.966a.25.25 0 0 0 0-.384l-2.36-1.966a.25.25 0 0 0-.41.192V3H5a5 5 0 0 0-4.48 7.223.5.5 0 0 0 .896-.446A4 4 0 0 1 5 4h6Zm4.48 1.777a.5.5 0 0 0-.896.446A4 4 0 0 1 11 12H5.001v-1.466a.25.25 0 0 0-.41-.192l-2.36 1.966a.25.25 0 0 0 0 .384l2.36 1.966a.25.25 0 0 0 .41-.192V13h6a5 5 0 0 0 4.48-7.223Z"
+            />
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+            class="fill-gray-500 hover:fill-gray-400"
+            v-show="useMainState.syncPlayer.subscription.repeated.value"
           >
             <path
               d="M11 4v1.466a.25.25 0 0 0 .41.192l2.36-1.966a.25.25 0 0 0 0-.384l-2.36-1.966a.25.25 0 0 0-.41.192V3H5a5 5 0 0 0-4.48 7.223.5.5 0 0 0 .896-.446A4 4 0 0 1 5 4h6Zm4.48 1.777a.5.5 0 0 0-.896.446A4 4 0 0 1 11 12H5.001v-1.466a.25.25 0 0 0-.41-.192l-2.36 1.966a.25.25 0 0 0 0 .384l2.36 1.966a.25.25 0 0 0 .41-.192V13h6a5 5 0 0 0 4.48-7.223Z"

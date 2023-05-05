@@ -1,5 +1,14 @@
-import { ref, computed, ComputedRef, WritableComputedRef } from "vue";
-import { IVideoPlayer } from "@/pages/main/parts/video-area-parts/libs/IVideoPlayer";
+import {
+  ref,
+  computed,
+  ComputedRef,
+  WritableComputedRef,
+  watchEffect,
+} from "vue";
+import {
+  IVideoPlayer,
+  Status,
+} from "@/pages/main/parts/video-area-parts/libs/IVideoPlayer";
 import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerManager";
 
 /**
@@ -44,6 +53,19 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   constructor() {
     this._playerOneManager = new PlayerManager();
     this._playerTwoManager = new PlayerManager();
+
+    // リピート処理
+    watchEffect(() => {
+      if (!this._repeated.value) return;
+      if (
+        this._playerOneManager.subscription.player.value.subscription.status
+          .value === Status.ENDED ||
+        this._playerTwoManager.subscription.player.value.subscription.status
+          .value === Status.ENDED
+      ) {
+        this.reload();
+      }
+    });
   }
 
   get playerOneManager() {
@@ -99,6 +121,9 @@ export class SyncPlayerState implements ISyncPlayerStateType {
 
   reload = (): void => {
     this._playing.value = false;
+    this._playerOneManager.subscription.player.value.stop();
+    this._playerTwoManager.subscription.player.value.stop();
+    this.switchMute();
     this._playerOneManager.subscription.player.value.seekTo(
       this._playerOneStartPosition
     );
