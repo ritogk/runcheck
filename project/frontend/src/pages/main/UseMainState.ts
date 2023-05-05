@@ -8,7 +8,7 @@ import { OpenModalState } from "./state/OpenModalState";
 import { SaveModalState } from "./state/SaveModalState";
 import { YoutubeSelectorModalState } from "./state/YoutubeSelectorModalState";
 import { SyncVideoState } from "./state/SyncVideoState";
-import { PlayerSwitcher } from "@/pages/main/parts/video-area-parts/libs/PlayerSwitcher";
+import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerManager";
 
 type UseMainStateType = {
   openModal: {
@@ -38,8 +38,8 @@ type UseMainStateType = {
     };
   };
   syncVideo: {
-    videoOwnSwitcher: PlayerSwitcher;
-    videoTwoSwitcher: PlayerSwitcher;
+    videoOwnManager: PlayerManager;
+    videoTwoManager: PlayerManager;
     currentPosition: WritableComputedRef<number>;
     switchPlay(): void;
     switchMute(): void;
@@ -49,8 +49,6 @@ type UseMainStateType = {
     runSync(): void;
     stopSync(): void;
     subscription: {
-      // videoOwn: ComputedRef<IVideoPlayer>;
-      // videoTwo: ComputedRef<IVideoPlayer>;
       playing: ComputedRef<boolean>;
       muted: ComputedRef<boolean>;
       repeated: ComputedRef<boolean>;
