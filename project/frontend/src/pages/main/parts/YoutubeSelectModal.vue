@@ -47,20 +47,24 @@ const redirectToAuthorize = async () => {
   location.href = response.redirectUrl;
 };
 
-const videoOwnManager = useMainState.syncVideo.videoOwnManager;
-const videoTwoManager = useMainState.syncVideo.videoTwoManager;
+const playerOneManager = useMainState.syncPlayer.playerOneManager;
+const playerTwoManager = useMainState.syncPlayer.playerTwoManager;
 
 const selectVideo = async (url: string) => {
   useMainState.youtubeModal.select(url);
   const videoNo = useMainState.youtubeModal.subscription.currentVideoNo.value;
   switch (videoNo) {
     case VideoNo.ONE:
-      videoOwnManager.subscription.player.value.destory();
-      videoOwnManager.changePlayer(new YouTubePlayer("youtube-video-own", url));
+      playerOneManager.subscription.player.value.destory();
+      playerOneManager.changePlayer(
+        new YouTubePlayer("youtube-video-own", url)
+      );
       break;
     case VideoNo.TWO:
-      videoTwoManager.subscription.player.value.destory();
-      videoTwoManager.changePlayer(new YouTubePlayer("youtube-video-two", url));
+      playerTwoManager.subscription.player.value.destory();
+      playerTwoManager.changePlayer(
+        new YouTubePlayer("youtube-video-two", url)
+      );
       break;
   }
   useMainState.youtubeModal.close();

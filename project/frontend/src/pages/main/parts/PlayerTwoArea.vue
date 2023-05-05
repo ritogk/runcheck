@@ -13,7 +13,7 @@ import {
 } from "@heroicons/vue/20/solid";
 import { VideoType } from "./video-area-parts/libs/IVideoPlayer";
 
-const videoNo = VideoNo.ONE;
+const videoNo = VideoNo.TWO;
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType;
 const youtubeUrl = ref("");
@@ -41,41 +41,156 @@ const hundleLocalVideoSelect = () => {
   elements.localVideo.file.value?.click();
 };
 
-const videoOwnManager = useMainState.syncVideo.videoOwnManager;
+const playerTwoManager = useMainState.syncPlayer.playerTwoManager;
 
 const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0];
   const objectURL = URL.createObjectURL(file);
 
-  videoOwnManager.subscription.player.value.destory();
+  playerTwoManager.subscription.player.value.destory();
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
   );
-  videoOwnManager.changePlayer(localVideoPlayer);
-  videoOwnManager.subscription.player.value.changeVideo(objectURL);
+  playerTwoManager.changePlayer(localVideoPlayer);
+  playerTwoManager.subscription.player.value.changeVideo(objectURL);
 };
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
-  videoOwnManager.subscription.player.value.destory();
-  videoOwnManager.changePlayer(
-    new YouTubePlayer("youtube-video-own", youtubeUrl)
+  playerTwoManager.subscription.player.value.destory();
+  playerTwoManager.changePlayer(
+    new YouTubePlayer("youtube-video-two", youtubeUrl)
   );
-  videoOwnManager.subscription.player.value.changeVideo(youtubeUrl);
+  playerTwoManager.subscription.player.value.changeVideo(youtubeUrl);
 };
 
 const hundleVideoSeek = async (seconds: number) => {
-  // useMainState.syncVideo.videoOwnSwitcher.subscription.player.value
   const currentPosition =
-    await videoOwnManager.subscription.player.value.getCurrentPosition();
-  useMainState.syncVideo.videoOwnManager.subscription.player.value.seekTo(
+    await playerTwoManager.subscription.player.value.getCurrentPosition();
+  useMainState.syncPlayer.playerTwoManager.subscription.player.value.seekTo(
     currentPosition + seconds
   );
 };
 </script>
+
 <template>
+  <!-- Video -->
+  <div :ref="elements.videoArea">
+    <div
+      v-show="playerTwoManager.subscription.videoType.value === VideoType.NONE"
+    >
+      <div
+        class="w-full bg-gray-300 relative"
+        :style="{ height: calcVideoHeight }"
+      >
+        <VideoCameraIcon
+          class="h-2/5 w-2/5 text-gray-400 absolute top-0 right-0 bottom-0 left-0 m-auto"
+          aria-hidden="true"
+        />
+      </div>
+    </div>
+    <div
+      v-show="
+        playerTwoManager.subscription.videoType.value === VideoType.YOUTUBE
+      "
+    >
+      <div
+        id="youtube-video-two"
+        class="w-full"
+        :style="{ height: calcVideoHeight }"
+      ></div>
+    </div>
+    <div
+      v-show="playerTwoManager.subscription.videoType.value === VideoType.LOCAL"
+    >
+      <video
+        :ref="elements.localVideo.video"
+        controls
+        playsinline
+        preload="none"
+        class="w-full"
+        :style="{ height: calcVideoHeight }"
+      ></video>
+    </div>
+  </div>
+
+  <!-- selector -->
+  <div v-show="!useMainState.syncPlayer.subscription.synced.value">
+    <div>
+      <div class="mt-2 flex gap-2 rounded-md">
+        <!-- Youtube -->
+        <div
+          class="flex w-10/12 relative flex-grow items-stretch focus-within:z-10 shadow-sm"
+        >
+          <label
+            for="name"
+            class="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            >YouTube</label
+          >
+          <!-- Youtube url -->
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-indigo-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            placeholder="https://youtube.com/nLKSSdMWZ8g"
+            v-model="youtubeUrl"
+            @keyup.enter="hundleYoutubeUrlEnter(youtubeUrl)"
+          />
+          <!-- 検索 -->
+          <button
+            type="button"
+            class="relative w-3/12 -ml-px inline-flex items-center gap-x-1.5 rounded-r-md text-sm font-semibold bg-white text-gray-900 ring-1 ring-inset ring-indigo-300 hover:bg-gray-100"
+            @click="useMainState.youtubeModal.open(videoNo)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              width="20px"
+              height="20px"
+              class="stroke-gray-500 mx-auto"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+          </button>
+        </div>
+        <!-- 端末動画選択 -->
+        <button
+          class="rounded-md shadow-sm bg-white w-2/12 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
+          @click="hundleLocalVideoSelect()"
+        >
+          <div class="flex items-center justify-center">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 56 41"
+              xmlns="http://www.w3.org/2000/svg"
+              class="fill-gray-500"
+            >
+              <path
+                d="M43.6667 7.33333C43.6667 5.91885 43.1048 4.56229 42.1046 3.5621C41.1044 2.5619 39.7478 2 38.3333 2H6.33333C4.91885 2 3.56229 2.5619 2.5621 3.5621C1.5619 4.56229 1 5.91885 1 7.33333V34C1 35.4145 1.5619 36.771 2.5621 37.7712C3.56229 38.7714 4.91885 39.3333 6.33333 39.3333H38.3333C39.7478 39.3333 41.1044 38.7714 42.1046 37.7712C43.1048 36.771 43.6667 35.4145 43.6667 34V25.112L54.3333 34V7.33333L43.6667 16.2213V7.33333ZM33 23.3333H25V31.3333H19.6667V23.3333H11.6667V18H19.6667V10H25V18H33V23.3333Z"
+              />
+            </svg>
+          </div>
+        </button>
+      </div>
+    </div>
+    <input
+      type="file"
+      :ref="elements.localVideo.file"
+      @change="hundleLocalVideoChange"
+      hidden
+    />
+  </div>
+
   <!-- ajust-->
-  <div v-show="!useMainState.syncVideo.subscription.synced.value">
+  <div v-show="!useMainState.syncPlayer.subscription.synced.value">
     <!-- 進む -->
     <div class="mt-2 flex gap-2 justify-between">
       <button
@@ -177,125 +292,6 @@ const hundleVideoSeek = async (seconds: number) => {
           0.05s
         </div>
       </button>
-    </div>
-  </div>
-
-  <!-- selector -->
-  <div v-show="!useMainState.syncVideo.subscription.synced.value">
-    <div>
-      <div class="mt-2 flex gap-2 rounded-md">
-        <!-- Youtube -->
-        <div
-          class="flex w-10/12 relative flex-grow items-stretch focus-within:z-10 shadow-sm"
-        >
-          <label
-            for="name"
-            class="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-            >YouTube</label
-          >
-          <!-- Youtube url -->
-          <input
-            type="email"
-            name="email"
-            id="email"
-            class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-indigo-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            placeholder="https://youtube.com/nLKSSdMWZ8g"
-            v-model="youtubeUrl"
-            @keyup.enter="hundleYoutubeUrlEnter(youtubeUrl)"
-          />
-          <!-- 検索 -->
-          <button
-            type="button"
-            class="relative w-3/12 -ml-px inline-flex items-center gap-x-1.5 rounded-r-md text-sm font-semibold bg-white text-gray-900 ring-1 ring-inset ring-indigo-300 hover:bg-gray-100"
-            @click="useMainState.youtubeModal.open(videoNo)"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              width="20px"
-              height="20px"
-              class="stroke-gray-500 mx-auto"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              />
-            </svg>
-          </button>
-        </div>
-        <!-- 端末動画選択 -->
-        <button
-          class="rounded-md shadow-sm bg-white w-2/12 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
-          @click="hundleLocalVideoSelect()"
-        >
-          <div class="flex items-center justify-center">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 56 41"
-              xmlns="http://www.w3.org/2000/svg"
-              class="fill-gray-500"
-            >
-              <path
-                d="M43.6667 7.33333C43.6667 5.91885 43.1048 4.56229 42.1046 3.5621C41.1044 2.5619 39.7478 2 38.3333 2H6.33333C4.91885 2 3.56229 2.5619 2.5621 3.5621C1.5619 4.56229 1 5.91885 1 7.33333V34C1 35.4145 1.5619 36.771 2.5621 37.7712C3.56229 38.7714 4.91885 39.3333 6.33333 39.3333H38.3333C39.7478 39.3333 41.1044 38.7714 42.1046 37.7712C43.1048 36.771 43.6667 35.4145 43.6667 34V25.112L54.3333 34V7.33333L43.6667 16.2213V7.33333ZM33 23.3333H25V31.3333H19.6667V23.3333H11.6667V18H19.6667V10H25V18H33V23.3333Z"
-              />
-            </svg>
-          </div>
-        </button>
-      </div>
-    </div>
-    <input
-      type="file"
-      :ref="elements.localVideo.file"
-      @change="hundleLocalVideoChange"
-      hidden
-    />
-  </div>
-
-  <!-- Video -->
-  <div :ref="elements.videoArea">
-    <!-- dummy -->
-    <div
-      v-show="videoOwnManager.subscription.videoType.value === VideoType.NONE"
-    >
-      <div
-        class="w-full bg-gray-300 relative border-b-2 border-gray-200"
-        :style="{ height: calcVideoHeight }"
-      >
-        <VideoCameraIcon
-          class="h-2/5 w-2/5 text-gray-400 absolute top-0 right-0 bottom-0 left-0 m-auto"
-          aria-hidden="true"
-        />
-      </div>
-    </div>
-    <!-- youtube -->
-    <div
-      v-show="
-        videoOwnManager.subscription.videoType.value === VideoType.YOUTUBE
-      "
-    >
-      <div
-        id="youtube-video-own"
-        class="w-full"
-        :style="{ height: calcVideoHeight }"
-      ></div>
-    </div>
-    <!-- local -->
-    <div
-      v-show="videoOwnManager.subscription.videoType.value === VideoType.LOCAL"
-    >
-      <video
-        :ref="elements.localVideo.video"
-        id="local-video-own"
-        controls
-        playsinline
-        preload="none"
-        class="w-full"
-        :style="{ height: calcVideoHeight }"
-      ></video>
     </div>
   </div>
 </template>

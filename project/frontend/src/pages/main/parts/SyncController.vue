@@ -8,21 +8,21 @@ import {
 } from "@heroicons/vue/20/solid";
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType;
-const videoOwn = useMainState.syncVideo.videoOwnManager.subscription.player;
-const videoTwo = useMainState.syncVideo.videoTwoManager.subscription.player;
+const videoOwn = useMainState.syncPlayer.playerOneManager.subscription.player;
+const videoTwo = useMainState.syncPlayer.playerTwoManager.subscription.player;
 
 const hundlePlaySwitch = () => {
   videoOwn.value.mute();
   videoTwo.value.mute();
-  useMainState.syncVideo.switchPlay();
+  useMainState.syncPlayer.switchPlay();
 };
 
 const hundleMuteSwitch = () => {
-  useMainState.syncVideo.switchMute();
+  useMainState.syncPlayer.switchMute();
 };
 
 const hundleReload = () => {
-  useMainState.syncVideo.reload();
+  useMainState.syncPlayer.reload();
 };
 </script>
 
@@ -113,7 +113,7 @@ const hundleReload = () => {
           width="30"
           height="32"
           class="fill-gray-600 hover:fill-gray-500"
-          v-show="useMainState.syncVideo.subscription.playing.value"
+          v-show="useMainState.syncPlayer.subscription.playing.value"
         >
           <rect x="6" y="4" width="4" height="24" rx="2" />
           <rect x="20" y="4" width="4" height="24" rx="2" />
@@ -122,7 +122,7 @@ const hundleReload = () => {
           width="30"
           height="32"
           class="fill-gray-600 hover:fill-gray-500"
-          v-show="!useMainState.syncVideo.subscription.playing.value"
+          v-show="!useMainState.syncPlayer.subscription.playing.value"
         >
           <path d="M6 4l20 12-20 12z" />
         </svg>
@@ -166,12 +166,12 @@ const hundleReload = () => {
           <SpeakerWaveIcon
             style="width: 24px; height: 24px"
             class="text-gray-500 hover:text-gray-400"
-            v-show="!useMainState.syncVideo.subscription.muted.value"
+            v-show="!useMainState.syncPlayer.subscription.muted.value"
           ></SpeakerWaveIcon>
           <SpeakerXMarkIcon
             style="width: 24px; height: 24px"
             class="text-gray-500 hover:text-gray-400"
-            v-show="useMainState.syncVideo.subscription.muted.value"
+            v-show="useMainState.syncPlayer.subscription.muted.value"
           ></SpeakerXMarkIcon>
         </button>
       </div>

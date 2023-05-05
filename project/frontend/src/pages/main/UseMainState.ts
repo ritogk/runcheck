@@ -7,7 +7,7 @@ import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-part
 import { OpenModalState } from "./state/OpenModalState";
 import { SaveModalState } from "./state/SaveModalState";
 import { YoutubeSelectorModalState } from "./state/YoutubeSelectorModalState";
-import { SyncVideoState } from "./state/SyncVideoState";
+import { SyncPlayerState } from "./state/SyncPlayerState";
 import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerManager";
 
 type UseMainStateType = {
@@ -37,9 +37,9 @@ type UseMainStateType = {
       selectUrl: ComputedRef<string>;
     };
   };
-  syncVideo: {
-    videoOwnManager: PlayerManager;
-    videoTwoManager: PlayerManager;
+  syncPlayer: {
+    playerOneManager: PlayerManager;
+    playerTwoManager: PlayerManager;
     currentPosition: WritableComputedRef<number>;
     switchPlay(): void;
     switchMute(): void;
@@ -63,7 +63,7 @@ const UseMainState = (): UseMainStateType => {
     openModal: new OpenModalState(),
     saveModal: new SaveModalState(),
     youtubeModal: new YoutubeSelectorModalState(),
-    syncVideo: new SyncVideoState(),
+    syncPlayer: new SyncPlayerState(),
   };
 };
 

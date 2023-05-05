@@ -5,8 +5,8 @@ import {
   UseMainStateKey,
   UseMainStateType,
 } from "./UseMainState";
-import VideoOneArea from "./parts/VideoOneArea.vue";
-import VideoTwoArea from "./parts/VideoTwoArea.vue";
+import PlayerOneArea from "./parts/PlayerOneArea.vue";
+import PlayerTwoArea from "./parts/PlayerTwoArea.vue";
 import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue";
 import SyncController from "./parts/SyncController.vue";
 
@@ -14,11 +14,11 @@ const useMainState = UseMainState();
 provide(UseMainStateKey, useMainState);
 
 const hundleVideoRunSyncClick = () => {
-  useMainState.syncVideo.runSync();
+  useMainState.syncPlayer.runSync();
 };
 
 const hundleVideoStopSyncClick = () => {
-  useMainState.syncVideo.stopSync();
+  useMainState.syncPlayer.stopSync();
 };
 </script>
 
@@ -95,7 +95,7 @@ const hundleVideoStopSyncClick = () => {
       <div>
         <span
           class="isolate inline-flex rounded-md shadow-sm"
-          v-show="!useMainState.syncVideo.subscription.synced.value"
+          v-show="!useMainState.syncPlayer.subscription.synced.value"
         >
           <button
             type="button"
@@ -124,7 +124,7 @@ const hundleVideoStopSyncClick = () => {
 
         <span
           class="isolate inline-flex rounded-md shadow-sm"
-          v-show="useMainState.syncVideo.subscription.synced.value"
+          v-show="useMainState.syncPlayer.subscription.synced.value"
         >
           <button
             type="button"
@@ -199,8 +199,8 @@ const hundleVideoStopSyncClick = () => {
       <div class="h-px my-3 bg-gray-300"></div>
     </div>
 
-    <VideoOneArea></VideoOneArea>
-    <VideoTwoArea></VideoTwoArea>
+    <PlayerOneArea></PlayerOneArea>
+    <PlayerTwoArea></PlayerTwoArea>
     <SyncController></SyncController>
     <div class="m-5"></div>
   </div>
