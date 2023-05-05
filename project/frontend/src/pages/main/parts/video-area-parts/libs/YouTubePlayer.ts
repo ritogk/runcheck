@@ -1,90 +1,92 @@
-import { computed, ref } from "vue";
-import YPlayer from "youtube-player";
-import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer";
-import { YouTubePlayer as YouTubePlayerType } from "youtube-player/dist/types";
-import PlayerStates from "youtube-player/dist/constants/PlayerStates";
+import { computed, ref } from "vue"
+import YPlayer from "youtube-player"
+import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer"
+import { YouTubePlayer as YouTubePlayerType } from "youtube-player/dist/types"
+import PlayerStates from "youtube-player/dist/constants/PlayerStates"
 
 export class YouTubePlayer implements IVideoPlayer {
-  private player: YouTubePlayerType;
-  public _status = ref(Status.WAITING);
+  private player: YouTubePlayerType
+  public _status = ref(Status.WAITING)
 
   constructor(elementId: string, youtubeUrl: string) {
-    this.player = YPlayer(elementId);
-    this.player.loadVideoByUrl(youtubeUrl);
-    this.player.on("stateChange", async (status) => {
+    this.player = YPlayer(elementId)
+    this.player.loadVideoByUrl(youtubeUrl)
+    // ステータス変更を監視
+    this.player.on("stateChange", (status) => {
       switch (status.data) {
         case PlayerStates.UNSTARTED:
-          this._status.value = Status.WAITING;
-          break;
+          this._status.value = Status.WAITING
+          break
         case PlayerStates.BUFFERING:
-          this._status.value = Status.CAN_PLAY;
-          break;
+          this._status.value = Status.CAN_PLAY
+          break
         case PlayerStates.PLAYING:
-          this._status.value = Status.PLAYING;
-          break;
+          this._status.value = Status.PLAYING
+          break
         case PlayerStates.PAUSED:
-          this._status.value = Status.PAUSE;
-          break;
+          this._status.value = Status.PAUSE
+          break
         case PlayerStates.ENDED:
-          this._status.value = Status.ENDED;
-          break;
+          this._status.value = Status.ENDED
+          break
       }
-    });
+    })
   }
 
   get videoType() {
-    return VideoType.YOUTUBE;
+    return VideoType.YOUTUBE
   }
 
   changeVideo(url: string): void {
-    this.player.loadVideoByUrl(url);
+    this.player.loadVideoByUrl(url)
   }
 
   play = () => {
-    this.player.playVideo();
-  };
+    this.player.playVideo()
+  }
 
   stop = async () => {
-    return this.player.pauseVideo();
-  };
+    return this.player.pauseVideo()
+  }
 
   mute = () => {
-    this.player.mute();
-  };
+    this.player.mute()
+  }
 
   unMute = () => {
-    this.player.unMute();
-  };
+    this.player.unMute()
+  }
 
   adjustSpeed = (speed: number) => {
-    return;
-  };
+    return
+  }
 
   enableRepeat = () => {
-    return;
-  };
+    return
+  }
 
   disableRepeat = () => {
-    return;
-  };
+    return
+  }
 
   seekTo = async (seconds: number) => {
-    return this.player.seekTo(seconds, true);
-  };
+    return this.player.seekTo(seconds, true)
+  }
 
   getCurrentPosition = async (): Promise<number> => {
-    return this.player.getCurrentTime();
-  };
+    return this.player.getCurrentTime()
+  }
 
-  setCurrentPosition = (currentPosition: number) => {};
+  setCurrentPosition = (currentPosition: number) => {}
 
   destory(): Promise<void> {
-    return this.player.destroy();
+    return this.player.destroy()
   }
 
   public subscription = {
     status: computed(() => {
-      return this._status.value;
+      console.log("status:" + this._status.value)
+      return this._status.value
     }),
-  };
+  }
 }
