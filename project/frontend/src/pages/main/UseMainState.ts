@@ -1,8 +1,4 @@
 import { ComputedRef, InjectionKey, WritableComputedRef } from "vue";
-import {
-  IVideoPlayer,
-  VideoType,
-} from "./parts/video-area-parts/libs/IVideoPlayer";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 import { OpenModalState } from "./state/OpenModalState";
 import { SaveModalState } from "./state/SaveModalState";
