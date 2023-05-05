@@ -142,26 +142,25 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._playerTwoStartPosition =
       await this._playerTwoManager.subscription.player.value.getCurrentPosition();
 
+    // 同期ぐるぐる
     this._syncIntervalId = setInterval(async () => {
       const videoOwnCurrentPosition =
         await this._playerOneManager.subscription.player.value.getCurrentPosition();
       const videoTwoCurrentPosition =
         await this._playerTwoManager.subscription.player.value.getCurrentPosition();
+
       // 開始ポジションより手前の場合は開始ポジションに戻す
       if (
         videoOwnCurrentPosition < this._playerOneStartPosition ||
         videoTwoCurrentPosition < this._playerTwoStartPosition
       ) {
-        await this._playerOneManager.subscription.player.value.stop();
-        await this._playerTwoManager.subscription.player.value.stop();
+        console.log("開始ポジションより手前の場合は開始ポジションに戻す");
         await this._playerOneManager.subscription.player.value.seekTo(
           this._playerOneStartPosition
         );
         await this._playerTwoManager.subscription.player.value.seekTo(
           this._playerTwoStartPosition
         );
-        this._playerOneManager.subscription.player.value.play();
-        this._playerTwoManager.subscription.player.value.play();
         return;
       }
 
@@ -172,19 +171,18 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       // 0.1秒以上ずれていたら同期させる
       const diff = Math.abs(videoOwnPosition - videoTwoPosition);
       if (diff >= 0.1) {
-        await this._playerOneManager.subscription.player.value.stop();
-        await this._playerTwoManager.subscription.player.value.stop();
-        videoOwnPosition > videoTwoPosition
-          ? await this._playerOneManager.subscription.player.value.seekTo(
-              videoOwnCurrentPosition + diff * -1
-            )
-          : await this._playerTwoManager.subscription.player.value.seekTo(
-              videoTwoCurrentPosition + diff * -1
-            );
-        this._playerOneManager.subscription.player.value.play();
-        this._playerTwoManager.subscription.player.value.play();
+        console.log("0.1秒以上ずれていたら同期させる");
+        if (videoOwnPosition > videoTwoPosition) {
+          await this._playerOneManager.subscription.player.value.seekTo(
+            videoOwnCurrentPosition + diff * -1
+          );
+        } else {
+          await this._playerTwoManager.subscription.player.value.seekTo(
+            videoTwoCurrentPosition + diff * -1
+          );
+        }
       }
-    }, 1000);
+    }, 500);
   };
 
   stopSync = (): void => {
