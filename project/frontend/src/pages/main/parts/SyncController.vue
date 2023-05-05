@@ -8,10 +8,12 @@ import {
 } from "@heroicons/vue/20/solid";
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType;
+const videoOwn = useMainState.syncVideo.videoOwnSwitcher.subscription.player;
+const videoTwo = useMainState.syncVideo.videoTwoSwitcher.subscription.player;
 
 const hundlePlaySwitch = () => {
-  useMainState.syncVideo.videoOwn.mute();
-  useMainState.syncVideo.videoTwo.mute();
+  videoOwn.value.mute();
+  videoTwo.value.mute();
   useMainState.syncVideo.switchPlay();
 };
 

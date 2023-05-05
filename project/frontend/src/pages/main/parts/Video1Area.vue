@@ -36,33 +36,36 @@ watch(elements.videoArea, () => {
   calcVideoHeight.value = `${width * (9 / 16)}px`;
 });
 
-import { LocalVideoPlayer } from "@/pages/main/parts/video-area-parts/libs/LocalVideoPlayer";
-
 const hundleLocalVideoSelect = () => {
   elements.localVideo.file.value?.click();
 };
 
+const videoOwnSwitcher = useMainState.syncVideo.videoOwnSwitcher;
+
 const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0];
   const objectURL = URL.createObjectURL(file);
-  await useMainState.syncVideo.videoOwn.destory();
-  const localVideoPlayer = new LocalVideoPlayer(
-    elements.localVideo.video.value as HTMLVideoElement,
-    objectURL
-  );
-  useMainState.syncVideo.videoOwn = localVideoPlayer;
+  // const localVideoPlayer = new LocalVideoPlayer(
+  //   elements.localVideo.video.value as HTMLVideoElement,
+  //   objectURL
+  // );
+  videoOwnSwitcher.changePlayer(VideoType.LOCAL);
+  videoOwnSwitcher.subscription.player.value.changeVideo(objectURL);
 };
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
-  await useMainState.syncVideo.videoOwn.destory();
-  useMainState.syncVideo.videoOwn = new YouTubePlayer(
-    "youtube-video-own",
-    youtubeUrl
-  );
+  videoOwnSwitcher.changePlayer(VideoType.YOUTUBE);
+  videoOwnSwitcher.subscription.player.value.changeVideo(youtubeUrl);
 };
 
-const hundleVideoSeek = (seconds: number) => {
-  useMainState.syncVideo.videoOwn.seekTo(seconds);
+const hundleVideoSeek = async (seconds: number) => {
+  // useMainState.syncVideo.videoOwnSwitcher.subscription.player.value
+  const currentPosition =
+    await videoOwnSwitcher.subscription.player.value.getCurrentPosition();
+  debugger;
+  useMainState.syncVideo.videoOwnSwitcher.subscription.player.value.seekTo(
+    currentPosition + seconds
+  );
 };
 </script>
 <template>
@@ -248,13 +251,11 @@ const hundleVideoSeek = (seconds: number) => {
   </div>
 
   <!-- Video -->
+  {{ videoOwnSwitcher.subscription.videoType.value }}
   <div :ref="elements.videoArea">
     <!-- dummy -->
     <div
-      v-show="
-        useMainState.syncVideo.subscription.videoOwnType.value ===
-        VideoType.NONE
-      "
+      v-show="videoOwnSwitcher.subscription.videoType.value === VideoType.NONE"
     >
       <div
         class="w-full bg-gray-300 relative border-b-2 border-gray-200"
@@ -269,8 +270,7 @@ const hundleVideoSeek = (seconds: number) => {
     <!-- youtube -->
     <div
       v-show="
-        useMainState.syncVideo.subscription.videoOwnType.value ===
-        VideoType.YOUTUBE
+        videoOwnSwitcher.subscription.videoType.value === VideoType.YOUTUBE
       "
     >
       <div
@@ -281,13 +281,11 @@ const hundleVideoSeek = (seconds: number) => {
     </div>
     <!-- local -->
     <div
-      v-show="
-        useMainState.syncVideo.subscription.videoOwnType.value ===
-        VideoType.LOCAL
-      "
+      v-show="videoOwnSwitcher.subscription.videoType.value === VideoType.LOCAL"
     >
       <video
         :ref="elements.localVideo.video"
+        id="local-video-own"
         controls
         playsinline
         preload="none"

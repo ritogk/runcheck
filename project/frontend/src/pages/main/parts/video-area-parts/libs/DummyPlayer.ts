@@ -2,6 +2,12 @@ import { computed } from "vue";
 import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer";
 
 export class DummyPlayer implements IVideoPlayer {
+  get videoType() {
+    return VideoType.NONE;
+  }
+
+  changeVideo(url: string): void {}
+
   play = () => {
     return;
   };

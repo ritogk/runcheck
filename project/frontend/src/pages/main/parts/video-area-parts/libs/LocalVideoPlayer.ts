@@ -9,6 +9,15 @@ export class LocalVideoPlayer implements IVideoPlayer {
     this.videoElement = videoElement;
   }
 
+  get videoType() {
+    return VideoType.LOCAL;
+  }
+
+  changeVideo(url: string): void {
+    this.videoElement.src = url;
+    this.videoElement.load();
+  }
+
   play = () => {
     this.videoElement.play();
   };
@@ -54,14 +63,13 @@ export class LocalVideoPlayer implements IVideoPlayer {
     return;
   }
 
-  getVideoType = (): VideoType => {
-    return VideoType.LOCAL;
-  };
-
   get subscription() {
     return {
       status: computed(() => {
         return Status.WAITING;
+      }),
+      videoType: computed(() => {
+        return VideoType.LOCAL;
       }),
     };
   }

@@ -7,31 +7,41 @@ import PlayerStates from "youtube-player/dist/constants/PlayerStates";
 export class YouTubePlayer implements IVideoPlayer {
   private player: YouTubePlayerType;
   public _status = ref(Status.WAITING);
+
   constructor(elementId: string, youtubeUrl: string) {
     this.player = YPlayer(elementId);
     this.player.loadVideoByUrl(youtubeUrl);
-    this.player.on("stateChange", (status) => {
-      console.log(status.data);
-      console.log(this.subscription.status.value);
-      debugger;
+    this.player.on("stateChange", async (status) => {
       switch (status.data) {
         case PlayerStates.UNSTARTED:
           this._status.value = Status.WAITING;
+          console.log(await this.player.getCurrentTime());
           break;
         case PlayerStates.BUFFERING:
           this._status.value = Status.CAN_PLAY;
+          console.log(await this.player.getCurrentTime());
           break;
         case PlayerStates.PLAYING:
           this._status.value = Status.PLAYING;
+          console.log(await this.player.getCurrentTime());
           break;
         case PlayerStates.PAUSED:
           this._status.value = Status.PAUSE;
+          console.log(await this.player.getCurrentTime());
           break;
         case PlayerStates.ENDED:
           this._status.value = Status.ENDED;
           break;
       }
     });
+  }
+
+  get videoType() {
+    return VideoType.YOUTUBE;
+  }
+
+  changeVideo(url: string): void {
+    this.player.loadVideoByUrl(url);
   }
 
   play = () => {
@@ -76,11 +86,6 @@ export class YouTubePlayer implements IVideoPlayer {
     return this.player.destroy();
   }
 
-  getVideoType = (): VideoType => {
-    return VideoType.YOUTUBE;
-  };
-
-  // こいつが動かない。
   public subscription = {
     status: computed(() => {
       return this._status.value;

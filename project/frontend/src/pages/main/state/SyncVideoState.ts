@@ -1,17 +1,14 @@
 import { ref, computed, ComputedRef, WritableComputedRef } from "vue";
-import {
-  IVideoPlayer,
-  VideoType,
-} from "@/pages/main/parts/video-area-parts/libs/IVideoPlayer";
-import { DummyPlayer } from "@/pages/main/parts/video-area-parts/libs/DummyPlayer";
+import { IVideoPlayer } from "@/pages/main/parts/video-area-parts/libs/IVideoPlayer";
+import { PlayerSwitcher } from "@/pages/main/parts/video-area-parts/libs/PlayerSwitcher";
 
 /**
  * 動画を同期させるための状態クラス
  * @returns
  */
 interface ISyncVideoStateType {
-  videoOwn: IVideoPlayer;
-  videoTwo: IVideoPlayer;
+  videoOwnSwitcher: PlayerSwitcher;
+  videoTwoSwitcher: PlayerSwitcher;
   currentPosition: WritableComputedRef<number>;
   switchPlay(): void;
   switchMute(): void;
@@ -21,23 +18,21 @@ interface ISyncVideoStateType {
   runSync(): void;
   stopSync(): void;
   subscription: {
+    // videoOwn: ComputedRef<IVideoPlayer>;
+    // videoTwo: ComputedRef<IVideoPlayer>;
     playing: ComputedRef<boolean>;
     muted: ComputedRef<boolean>;
     repeated: ComputedRef<boolean>;
     speed: ComputedRef<number>;
     synced: ComputedRef<boolean>;
-    videoOwnType: ComputedRef<VideoType>;
-    videoTwoType: ComputedRef<VideoType>;
   };
 }
 
 export class SyncVideoState implements ISyncVideoStateType {
   private _currentPosition = ref(0);
-  private _videoOwnPlayer: IVideoPlayer = new DummyPlayer();
-  private _videoOwnType = ref(VideoType.NONE);
+  private _videoOwnSwitcher: PlayerSwitcher;
   private _videoOwnStartPosition = 0;
-  private _videoTwoPlayer: IVideoPlayer = new DummyPlayer();
-  private _videoTwoType = ref(VideoType.NONE);
+  private _videoTwoSwitcher: PlayerSwitcher;
   private _videoTwoStartPosition = 0;
   private _playing = ref(false);
   private _muted = ref(true);
@@ -46,20 +41,17 @@ export class SyncVideoState implements ISyncVideoStateType {
   private _synced = ref(false);
   private _syncIntervalId = 0;
 
-  get videoOwn() {
-    return this._videoOwnPlayer;
-  }
-  set videoOwn(value: IVideoPlayer) {
-    this._videoOwnType.value = value.getVideoType();
-    this._videoOwnPlayer = value;
+  constructor() {
+    this._videoOwnSwitcher = new PlayerSwitcher();
+    this._videoTwoSwitcher = new PlayerSwitcher();
   }
 
-  get videoTwo() {
-    return this._videoTwoPlayer;
+  get videoOwnSwitcher() {
+    return this._videoOwnSwitcher;
   }
-  set videoTwo(value: IVideoPlayer) {
-    this._videoTwoType.value = value.getVideoType();
-    this._videoTwoPlayer = value;
+
+  get videoTwoSwitcher() {
+    return this._videoTwoSwitcher;
   }
 
   currentPosition = computed({
@@ -74,22 +66,22 @@ export class SyncVideoState implements ISyncVideoStateType {
   switchPlay = (): void => {
     this._playing.value = !this._playing.value;
     if (this._playing.value) {
-      this._videoOwnPlayer.play();
-      this._videoTwoPlayer.play();
+      this._videoOwnSwitcher.subscription.player.value.play();
+      this._videoTwoSwitcher.subscription.player.value.play();
     } else {
-      this._videoOwnPlayer.stop();
-      this._videoTwoPlayer.stop();
+      this._videoOwnSwitcher.subscription.player.value.stop();
+      this._videoTwoSwitcher.subscription.player.value.stop();
     }
   };
 
   switchMute = (): void => {
     this._muted.value = !this._muted.value;
     if (this._muted.value) {
-      this._videoOwnPlayer.mute();
-      this._videoTwoPlayer.mute();
+      this._videoOwnSwitcher.subscription.player.value.mute();
+      this._videoTwoSwitcher.subscription.player.value.mute();
     } else {
-      this._videoOwnPlayer.unMute();
-      this._videoTwoPlayer.unMute();
+      this._videoOwnSwitcher.subscription.player.value.unMute();
+      this._videoTwoSwitcher.subscription.player.value.unMute();
     }
   };
 
@@ -107,30 +99,38 @@ export class SyncVideoState implements ISyncVideoStateType {
 
   reload = (): void => {
     this._playing.value = false;
-    this.videoOwn.seekTo(this._videoOwnStartPosition);
-    this.videoTwo.seekTo(this._videoTwoStartPosition);
+    this._videoOwnSwitcher.subscription.player.value.seekTo(
+      this._videoOwnStartPosition
+    );
+    this._videoTwoSwitcher.subscription.player.value.seekTo(
+      this._videoTwoStartPosition
+    );
   };
 
   runSync = async () => {
     this._playing.value = false;
     this._synced.value = true;
     this._videoOwnStartPosition =
-      await this._videoOwnPlayer.getCurrentPosition();
+      await this._videoOwnSwitcher.subscription.player.value.getCurrentPosition();
     this._videoTwoStartPosition =
-      await this._videoTwoPlayer.getCurrentPosition();
+      await this._videoTwoSwitcher.subscription.player.value.getCurrentPosition();
 
     this._syncIntervalId = setInterval(async () => {
       const videoOwnCurrentPosition =
-        await this._videoOwnPlayer.getCurrentPosition();
+        await this._videoOwnSwitcher.subscription.player.value.getCurrentPosition();
       const videoTwoCurrentPosition =
-        await this._videoTwoPlayer.getCurrentPosition();
+        await this._videoTwoSwitcher.subscription.player.value.getCurrentPosition();
       // 開始ポジションより手前の場合は開始ポジションに戻す
       if (
         videoOwnCurrentPosition < this._videoOwnStartPosition ||
         videoTwoCurrentPosition < this._videoTwoStartPosition
       ) {
-        this._videoOwnPlayer.seekTo(this._videoOwnStartPosition);
-        this._videoTwoPlayer.seekTo(this._videoTwoStartPosition);
+        this._videoOwnSwitcher.subscription.player.value.seekTo(
+          this._videoOwnStartPosition
+        );
+        this._videoTwoSwitcher.subscription.player.value.seekTo(
+          this._videoTwoStartPosition
+        );
         return;
       }
 
@@ -142,8 +142,12 @@ export class SyncVideoState implements ISyncVideoStateType {
       const diff = Math.abs(videoOwnPosition - videoTwoPosition);
       if (diff >= 0.1) {
         videoOwnPosition > videoTwoPosition
-          ? this._videoOwnPlayer.seekTo(videoOwnCurrentPosition + diff * -1)
-          : this._videoTwoPlayer.seekTo(videoTwoCurrentPosition + diff * -1);
+          ? this._videoOwnSwitcher.subscription.player.value.seekTo(
+              videoOwnCurrentPosition + diff * -1
+            )
+          : this._videoTwoSwitcher.subscription.player.value.seekTo(
+              videoTwoCurrentPosition + diff * -1
+            );
       }
     }, 500);
   };
@@ -156,6 +160,12 @@ export class SyncVideoState implements ISyncVideoStateType {
 
   get subscription() {
     return {
+      // videoOwn: computed(() => {
+      //   return this._videoOwnSwitcher.subscription.player.value;
+      // }),
+      // videoTwo: computed(() => {
+      //   return this._videoTwoSwitcher.subscription.player.value;
+      // }),
       playing: computed(() => {
         return this._playing.value;
       }),
@@ -170,12 +180,6 @@ export class SyncVideoState implements ISyncVideoStateType {
       }),
       synced: computed(() => {
         return this._synced.value;
-      }),
-      videoOwnType: computed(() => {
-        return this._videoOwnType.value;
-      }),
-      videoTwoType: computed(() => {
-        return this._videoTwoType.value;
       }),
     };
   }

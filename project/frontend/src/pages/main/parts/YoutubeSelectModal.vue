@@ -13,6 +13,11 @@ import { VideoListState } from "@/pages/main/parts/video-area-parts/video-select
 import { VideoNo } from "./video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer";
 import { callbackYoutubeOauth } from "./CallbackYoutubeOauth";
+import {
+  IVideoPlayer,
+  VideoType,
+  Status,
+} from "@/pages/main/parts/video-area-parts/libs/IVideoPlayer";
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType;
 
@@ -42,23 +47,21 @@ const redirectToAuthorize = async () => {
   location.href = response.redirectUrl;
 };
 
+const videoOwnSwitcher = useMainState.syncVideo.videoOwnSwitcher;
+
 const selectVideo = async (url: string) => {
   useMainState.youtubeModal.select(url);
   const videoNo = useMainState.youtubeModal.subscription.currentVideoNo.value;
   switch (videoNo) {
     case VideoNo.ONE:
-      await useMainState.syncVideo.videoOwn.destory();
-      useMainState.syncVideo.videoOwn = new YouTubePlayer(
-        "youtube-video-own",
-        url
-      );
+      useMainState.syncVideo.videoOwnSwitcher.changePlayer(VideoType.YOUTUBE);
+      // await useMainState.syncVideo.subscription.videoOwn.value.destory();
+      videoOwnSwitcher.subscription.player.value.changeVideo(url);
       break;
     case VideoNo.TWO:
-      await useMainState.syncVideo.videoTwo.destory();
-      useMainState.syncVideo.videoTwo = new YouTubePlayer(
-        "youtube-video-two",
-        url
-      );
+      useMainState.syncVideo.videoTwoSwitcher.changePlayer(VideoType.YOUTUBE);
+      // await useMainState.syncVideo.subscription.videoTwo.value.destory();
+      videoOwnSwitcher.subscription.player.value.changeVideo(url);
       break;
   }
   useMainState.youtubeModal.close();

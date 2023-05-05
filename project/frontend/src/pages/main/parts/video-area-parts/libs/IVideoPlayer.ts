@@ -1,5 +1,7 @@
 import { ComputedRef } from "vue";
 export interface IVideoPlayer {
+  videoType: VideoType;
+  changeVideo(url: string): void;
   play(): void;
   stop(): void;
   mute(): void;
@@ -11,7 +13,6 @@ export interface IVideoPlayer {
   getCurrentPosition(): Promise<number>;
   setCurrentPosition(currentPosition: number): void;
   destory(): Promise<void>;
-  getVideoType(): VideoType;
   subscription: {
     status: ComputedRef<Status>;
   };
