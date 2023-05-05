@@ -3,13 +3,13 @@ export interface IVideoPlayer {
   videoType: VideoType;
   changeVideo(url: string): void;
   play(): void;
-  stop(): void;
+  stop(): Promise<void>;
   mute(): void;
   unMute(): void;
   adjustSpeed(speed: number): void;
   enableRepeat(): void;
   disableRepeat(): void;
-  seekTo(seconds: number): void;
+  seekTo(seconds: number): Promise<void>;
   getCurrentPosition(): Promise<number>;
   setCurrentPosition(currentPosition: number): void;
   destory(): Promise<void>;

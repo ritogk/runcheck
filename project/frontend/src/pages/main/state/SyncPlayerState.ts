@@ -119,10 +119,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._synced.value = !this._synced.value;
   };
 
-  reload = (): void => {
+  reload = async () => {
     this._playing.value = false;
-    this._playerOneManager.subscription.player.value.stop();
-    this._playerTwoManager.subscription.player.value.stop();
+    await this._playerOneManager.subscription.player.value.stop();
+    await this._playerTwoManager.subscription.player.value.stop();
     this.switchMute();
     this._playerOneManager.subscription.player.value.seekTo(
       this._playerOneStartPosition
@@ -130,6 +130,8 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._playerTwoManager.subscription.player.value.seekTo(
       this._playerTwoStartPosition
     );
+    this._playerOneManager.subscription.player.value.play();
+    this._playerTwoManager.subscription.player.value.play();
   };
 
   runSync = async () => {
@@ -150,12 +152,16 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         videoOwnCurrentPosition < this._playerOneStartPosition ||
         videoTwoCurrentPosition < this._playerTwoStartPosition
       ) {
-        this._playerOneManager.subscription.player.value.seekTo(
+        await this._playerOneManager.subscription.player.value.stop();
+        await this._playerTwoManager.subscription.player.value.stop();
+        await this._playerOneManager.subscription.player.value.seekTo(
           this._playerOneStartPosition
         );
-        this._playerTwoManager.subscription.player.value.seekTo(
+        await this._playerTwoManager.subscription.player.value.seekTo(
           this._playerTwoStartPosition
         );
+        this._playerOneManager.subscription.player.value.play();
+        this._playerTwoManager.subscription.player.value.play();
         return;
       }
 
@@ -166,15 +172,19 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       // 0.1秒以上ずれていたら同期させる
       const diff = Math.abs(videoOwnPosition - videoTwoPosition);
       if (diff >= 0.1) {
+        await this._playerOneManager.subscription.player.value.stop();
+        await this._playerTwoManager.subscription.player.value.stop();
         videoOwnPosition > videoTwoPosition
-          ? this._playerOneManager.subscription.player.value.seekTo(
+          ? await this._playerOneManager.subscription.player.value.seekTo(
               videoOwnCurrentPosition + diff * -1
             )
-          : this._playerTwoManager.subscription.player.value.seekTo(
+          : await this._playerTwoManager.subscription.player.value.seekTo(
               videoTwoCurrentPosition + diff * -1
             );
+        this._playerOneManager.subscription.player.value.play();
+        this._playerTwoManager.subscription.player.value.play();
       }
-    }, 500);
+    }, 1000);
   };
 
   stopSync = (): void => {

@@ -12,8 +12,8 @@ export class DummyPlayer implements IVideoPlayer {
     return;
   };
 
-  stop = () => {
-    return;
+  stop = async () => {
+    return Promise.resolve();
   };
 
   mute = () => {
@@ -36,7 +36,9 @@ export class DummyPlayer implements IVideoPlayer {
     return;
   };
 
-  seekTo(seconds: number): void {}
+  seekTo = async (seconds: number) => {
+    return Promise.resolve();
+  };
 
   getCurrentPosition = async (): Promise<number> => {
     return 1;

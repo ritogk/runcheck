@@ -40,8 +40,8 @@ export class LocalVideoPlayer implements IVideoPlayer {
     this.videoElement.play();
   };
 
-  stop = () => {
-    this.videoElement.pause();
+  stop = async () => {
+    return Promise.resolve(this.videoElement.pause());
   };
 
   mute = () => {
@@ -66,6 +66,7 @@ export class LocalVideoPlayer implements IVideoPlayer {
 
   seekTo = async (seconds: number) => {
     this.videoElement.currentTime = seconds;
+    return Promise.resolve();
   };
 
   getCurrentPosition = async (): Promise<number> => {

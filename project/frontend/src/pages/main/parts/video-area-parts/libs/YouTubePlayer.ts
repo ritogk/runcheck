@@ -44,8 +44,8 @@ export class YouTubePlayer implements IVideoPlayer {
     this.player.playVideo();
   };
 
-  stop = () => {
-    this.player.pauseVideo();
+  stop = async () => {
+    return this.player.pauseVideo();
   };
 
   mute = () => {
@@ -69,7 +69,7 @@ export class YouTubePlayer implements IVideoPlayer {
   };
 
   seekTo = async (seconds: number) => {
-    this.player.seekTo(seconds, true);
+    return this.player.seekTo(seconds, true);
   };
 
   getCurrentPosition = async (): Promise<number> => {
