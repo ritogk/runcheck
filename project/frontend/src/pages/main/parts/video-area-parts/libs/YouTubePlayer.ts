@@ -15,19 +15,15 @@ export class YouTubePlayer implements IVideoPlayer {
       switch (status.data) {
         case PlayerStates.UNSTARTED:
           this._status.value = Status.WAITING;
-          console.log(await this.player.getCurrentTime());
           break;
         case PlayerStates.BUFFERING:
           this._status.value = Status.CAN_PLAY;
-          console.log(await this.player.getCurrentTime());
           break;
         case PlayerStates.PLAYING:
           this._status.value = Status.PLAYING;
-          console.log(await this.player.getCurrentTime());
           break;
         case PlayerStates.PAUSED:
           this._status.value = Status.PAUSE;
-          console.log(await this.player.getCurrentTime());
           break;
         case PlayerStates.ENDED:
           this._status.value = Status.ENDED;
