@@ -53,19 +53,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   constructor() {
     this._playerOneManager = new PlayerManager();
     this._playerTwoManager = new PlayerManager();
-
-    // リピート処理
-    watchEffect(() => {
-      if (!this._repeated.value) return;
-      if (
-        this._playerOneManager.subscription.player.value.subscription.status
-          .value === Status.ENDED ||
-        this._playerTwoManager.subscription.player.value.subscription.status
-          .value === Status.ENDED
-      ) {
-        this.reload();
-      }
-    });
   }
 
   get playerOneManager() {
@@ -120,20 +107,20 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   };
 
   reload = async () => {
-    this._playing.value = false;
+    this._playerOneManager.subscription.player.value.mute();
+    this._playerTwoManager.subscription.player.value.mute();
     await this._playerOneManager.subscription.player.value.stop();
     await this._playerTwoManager.subscription.player.value.stop();
-    this.switchMute();
-    this._playerOneManager.subscription.player.value.seekTo(
+    await this._playerOneManager.subscription.player.value.seekTo(
       this._playerOneStartPosition
     );
-    this._playerTwoManager.subscription.player.value.seekTo(
+    await this._playerTwoManager.subscription.player.value.seekTo(
       this._playerTwoStartPosition
     );
-    this._playerOneManager.subscription.player.value.play();
-    this._playerTwoManager.subscription.player.value.play();
+    this._playing.value = false;
   };
 
+  private syncFlg = false;
   runSync = async () => {
     this._playing.value = false;
     this._synced.value = true;
@@ -144,23 +131,63 @@ export class SyncPlayerState implements ISyncPlayerStateType {
 
     // 同期ぐるぐる
     this._syncIntervalId = setInterval(async () => {
-      const videoOwnCurrentPosition =
-        await this._playerOneManager.subscription.player.value.getCurrentPosition();
-      const videoTwoCurrentPosition =
-        await this._playerTwoManager.subscription.player.value.getCurrentPosition();
+      if (this.syncFlg) return;
+      this.syncFlg = true;
 
-      // 開始ポジションより手前の場合は開始ポジションに戻す
+      const st = new Date().getTime();
+      const [videoOwnCurrentPosition, videoTwoCurrentPosition] =
+        await Promise.all([
+          this._playerOneManager.subscription.player.value.getCurrentPosition(),
+          this._playerTwoManager.subscription.player.value.getCurrentPosition(),
+        ]);
+      // 動画が再生しきっていてリピートフラグが立っている場合はリロード処理
       if (
-        videoOwnCurrentPosition < this._playerOneStartPosition ||
-        videoTwoCurrentPosition < this._playerTwoStartPosition
+        (this._playerOneManager.subscription.player.value.subscription.status
+          .value === Status.ENDED ||
+          this._playerTwoManager.subscription.player.value.subscription.status
+            .value === Status.ENDED) &&
+        this._repeated.value
       ) {
-        console.log("開始ポジションより手前の場合は開始ポジションに戻す");
+        console.log(
+          "動画が再生しきっていてリピートフラグが立っている場合はリロード処理"
+        );
+        this._playerOneManager.subscription.player.value.mute();
+        this._playerTwoManager.subscription.player.value.mute();
+        this._muted.value = false;
+        await this._playerOneManager.subscription.player.value.stop();
+        await this._playerTwoManager.subscription.player.value.stop();
+        this._playing.value = false;
         await this._playerOneManager.subscription.player.value.seekTo(
           this._playerOneStartPosition
         );
         await this._playerTwoManager.subscription.player.value.seekTo(
           this._playerTwoStartPosition
         );
+        this._playerOneManager.subscription.player.value.play();
+        this._playerTwoManager.subscription.player.value.play();
+        this._playing.value = true;
+        this.syncFlg = false;
+        return;
+      }
+
+      if (
+        videoOwnCurrentPosition < this._playerOneStartPosition ||
+        videoTwoCurrentPosition < this._playerTwoStartPosition
+      ) {
+        // 開始ポジションより手前の場合は開始ポジションに戻す
+        console.log("開始ポジションより手前の場合は開始ポジションに戻す");
+        await this._playerOneManager.subscription.player.value.mute();
+        await this._playerTwoManager.subscription.player.value.mute();
+        await this._playerOneManager.subscription.player.value.seekTo(
+          this._playerOneStartPosition
+        );
+        await this._playerTwoManager.subscription.player.value.seekTo(
+          this._playerTwoStartPosition
+        );
+        await this._playerOneManager.subscription.player.value.stop();
+        await this._playerTwoManager.subscription.player.value.stop();
+        this._playing.value = false;
+        this.syncFlg = false;
         return;
       }
 
@@ -171,6 +198,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       // 0.1秒以上ずれていたら同期させる
       const diff = Math.abs(videoOwnPosition - videoTwoPosition);
       if (diff >= 0.1) {
+        console.log(`diff: ${diff}`);
         console.log("0.1秒以上ずれていたら同期させる");
         if (videoOwnPosition > videoTwoPosition) {
           await this._playerOneManager.subscription.player.value.seekTo(
@@ -182,6 +210,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
           );
         }
       }
+      this.syncFlg = false;
     }, 500);
   };
 
