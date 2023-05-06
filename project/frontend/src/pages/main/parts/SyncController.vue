@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref } from "vue";
+import { inject, ref, computed } from "vue";
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
 import {
   SpeakerWaveIcon,
@@ -76,6 +76,12 @@ const calcSliderPosition = (pageX: number): number => {
   }
   return x;
 };
+
+const sliderPositionStyle = computed(() => {
+  const width = elements.slider.value?.clientWidth;
+  if (!width) return "0%";
+  return `${(pointer.value / width) * 100}%`;
+});
 </script>
 
 <style>
@@ -105,8 +111,6 @@ const calcSliderPosition = (pageX: number): number => {
 </style>
 
 <template>
-  <p>{{ pointer }}</p>
-
   <div class="max-h-[240px] mb-3">
     <div
       class="bg-gray-50 border-gray-100 dark:bg-gray-800 dark:border-gray-500 border-b px-4 pt-6 pb-4 space-y-6"
@@ -127,7 +131,7 @@ const calcSliderPosition = (pageX: number): number => {
           >
             <div
               class="bg-cyan-500 dark:bg-cyan-400 h-2"
-              style="width: 30%"
+              :style="{ width: sliderPositionStyle }"
               role="progressbar"
               aria-label="music progress"
               aria-valuenow="{1456}"
@@ -138,7 +142,7 @@ const calcSliderPosition = (pageX: number): number => {
           <!-- スライダーのポイント -->
           <div
             class="ring-cyan-500 dark:ring-cyan-400 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-2 flex items-center justify-center bg-white rounded-full shadow"
-            style="left: 30%"
+            :style="{ left: sliderPositionStyle }"
             @drag="hundleDrag"
           >
             <div
