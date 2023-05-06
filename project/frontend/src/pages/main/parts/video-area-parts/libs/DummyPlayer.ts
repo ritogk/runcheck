@@ -9,7 +9,7 @@ export class DummyPlayer implements IVideoPlayer {
   changeVideo(url: string): void {}
 
   play = () => {
-    return;
+    return Promise.resolve();
   };
 
   stop = async () => {
@@ -17,7 +17,7 @@ export class DummyPlayer implements IVideoPlayer {
   };
 
   mute = () => {
-    return;
+    return Promise.resolve();
   };
 
   unMute = () => {

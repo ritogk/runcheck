@@ -2,9 +2,9 @@ import { ComputedRef } from "vue";
 export interface IVideoPlayer {
   videoType: VideoType;
   changeVideo(url: string): void;
-  play(): void;
+  play(): Promise<void>;
   stop(): Promise<void>;
-  mute(): void;
+  mute(): Promise<void>;
   unMute(): void;
   adjustSpeed(speed: number): void;
   enableRepeat(): void;

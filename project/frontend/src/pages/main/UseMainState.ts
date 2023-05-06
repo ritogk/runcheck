@@ -1,4 +1,4 @@
-import { ComputedRef, InjectionKey, WritableComputedRef } from "vue";
+import { ComputedRef, InjectionKey, WritableComputedRef, Ref } from "vue";
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
 import { OpenModalState } from "./state/OpenModalState";
 import { SaveModalState } from "./state/SaveModalState";
@@ -34,6 +34,7 @@ type UseMainStateType = {
     };
   };
   syncPlayer: {
+    diff: Ref<{ abs: number; own: number; two: number }[]>;
     playerOneManager: PlayerManager;
     playerTwoManager: PlayerManager;
     currentPosition: WritableComputedRef<number>;

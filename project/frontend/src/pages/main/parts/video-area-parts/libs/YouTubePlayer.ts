@@ -42,7 +42,7 @@ export class YouTubePlayer implements IVideoPlayer {
   }
 
   play = () => {
-    this.player.playVideo();
+    return this.player.playVideo();
   };
 
   stop = async () => {
@@ -50,7 +50,7 @@ export class YouTubePlayer implements IVideoPlayer {
   };
 
   mute = () => {
-    this.player.mute();
+    return this.player.mute();
   };
 
   unMute = () => {
