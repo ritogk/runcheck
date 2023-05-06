@@ -113,24 +113,24 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   };
 
   reload = async () => {
-    this._playerOneManager.subscription.player.value.mute();
-    this._playerTwoManager.subscription.player.value.mute();
-    await Promise.all([
-      this._playerOneManager.subscription.player.value.stop(),
-      this._playerTwoManager.subscription.player.value.stop(),
-    ]);
+    await this._playerOneManager.subscription.player.value.mute();
+    await this._playerTwoManager.subscription.player.value.mute();
+    this._muted.value = true;
+    await this._playerOneManager.subscription.player.value.stop();
+    await this._playerTwoManager.subscription.player.value.stop();
     this._playing.value = false;
-    await Promise.all([
-      this._playerOneManager.subscription.player.value.seekTo(
-        this._playerOneStartPosition
-      ),
-      this._playerTwoManager.subscription.player.value.seekTo(
-        this._playerTwoStartPosition
-      ),
-    ]);
+    await this._playerOneManager.subscription.player.value.seekTo(
+      this._playerOneStartPosition
+    );
+    await this._playerTwoManager.subscription.player.value.seekTo(
+      this._playerTwoStartPosition
+    );
+    await this._playerOneManager.subscription.player.value.play();
+    await this._playerTwoManager.subscription.player.value.play();
+    this._playing.value = true;
   };
 
-  private syncFlg = false;
+  private syncProcessing = false;
   runSync = async () => {
     this._playing.value = false;
     await Promise.all([
@@ -138,26 +138,31 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       this._playerTwoManager.subscription.player.value.stop(),
     ]);
 
-    const [videoOwnCurrentPosition, videoTwoCurrentPosition] =
-      await Promise.all([
-        this._playerOneManager.subscription.player.value.getCurrentPosition(),
-        this._playerTwoManager.subscription.player.value.getCurrentPosition(),
-      ]);
-    this._playerOneStartPosition = videoOwnCurrentPosition;
-    this._playerTwoStartPosition = videoTwoCurrentPosition;
+    const [playerOneStartPosition, playerTwoStartPosition] = await Promise.all([
+      this._playerOneManager.subscription.player.value.getCurrentPosition(),
+      this._playerTwoManager.subscription.player.value.getCurrentPosition(),
+    ]);
+    this._playerOneStartPosition =
+      Math.floor(playerOneStartPosition * 100) / 100;
+    this._playerTwoStartPosition =
+      Math.floor(playerTwoStartPosition * 100) / 100;
     this._synced.value = true;
     // 同期ぐるぐる
     this._syncIntervalId = setInterval(async () => {
-      if (this.syncFlg) return;
-      this.syncFlg = true;
+      if (this.syncProcessing) return;
+      this.syncProcessing = true;
 
       const st = new Date().getTime();
-      const [videoOwnCurrentPosition, videoTwoCurrentPosition] =
+      let [playerOneCurrentPosition, playerTwoCurrentPosition] =
         await Promise.all([
           this._playerOneManager.subscription.player.value.getCurrentPosition(),
           this._playerTwoManager.subscription.player.value.getCurrentPosition(),
         ]);
-      // 動画が再生しきっていてリピートフラグが立っている場合はリロード処理
+      playerOneCurrentPosition =
+        Math.floor(playerOneCurrentPosition * 100) / 100;
+      playerTwoCurrentPosition =
+        Math.floor(playerTwoCurrentPosition * 100) / 100;
+      // 動画が再生しきっていてリピートフラグが立っている場合はリロード
       if (
         (this._playerOneManager.subscription.player.value.subscription.status
           .value === Status.ENDED ||
@@ -166,96 +171,56 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         this._repeated.value
       ) {
         console.log(
-          "動画が再生しきっていてリピートフラグが立っている場合はリロード処理"
+          "動画が再生しきっていてリピートフラグが立っている場合はリロード"
         );
-        await this._playerOneManager.subscription.player.value.mute();
-        await this._playerTwoManager.subscription.player.value.mute();
-        this._muted.value = false;
-        await Promise.all([
-          this._playerOneManager.subscription.player.value.stop(),
-          this._playerTwoManager.subscription.player.value.stop(),
-        ]);
-        this._playing.value = false;
-        await Promise.all([
-          this._playerOneManager.subscription.player.value.seekTo(
-            this._playerOneStartPosition
-          ),
-          this._playerTwoManager.subscription.player.value.seekTo(
-            this._playerTwoStartPosition
-          ),
-        ]);
-        await Promise.all([
-          this._playerOneManager.subscription.player.value.play(),
-          this._playerTwoManager.subscription.player.value.play(),
-        ]);
-        this._playing.value = true;
-        this.syncFlg = false;
-        // alert("リピートしたよ！");
+        this.reload();
+        this.syncProcessing = false;
         return;
       }
 
       if (
-        videoOwnCurrentPosition < this._playerOneStartPosition ||
-        videoTwoCurrentPosition < this._playerTwoStartPosition
+        playerOneCurrentPosition < this._playerOneStartPosition ||
+        playerTwoCurrentPosition < this._playerTwoStartPosition
       ) {
         // 開始ポジションより手前の場合は開始ポジションに戻す
         console.log("開始ポジションより手前の場合は開始ポジションに戻す");
-
-        Promise.all([
-          this._playerOneManager.subscription.player.value.mute(),
-          this._playerOneManager.subscription.player.value.seekTo(
-            this._playerOneStartPosition
-          ),
-          this._playerOneManager.subscription.player.value.stop(),
-        ]);
-
-        Promise.all([
-          this._playerTwoManager.subscription.player.value.mute(),
-          this._playerTwoManager.subscription.player.value.seekTo(
-            this._playerTwoStartPosition
-          ),
-          this._playerTwoManager.subscription.player.value.stop(),
-        ]);
-        // alert("もどしたよ！");
-        // alert("videoOwnCurrentPosition:" + videoOwnCurrentPosition);
-        // alert("videoTwoCurrentPosition:" + videoTwoCurrentPosition);
-        this._playing.value = false;
-        this.syncFlg = false;
+        this.reload();
+        this.syncProcessing = false;
         return;
       }
 
       const videoOwnPosition =
-        videoOwnCurrentPosition - this._playerOneStartPosition;
+        playerOneCurrentPosition - this._playerOneStartPosition;
       const videoTwoPosition =
-        videoTwoCurrentPosition - this._playerTwoStartPosition;
+        playerTwoCurrentPosition - this._playerTwoStartPosition;
       // 0.1秒以上ずれていたら同期させる
       const diff = Math.abs(videoOwnPosition - videoTwoPosition);
       if (diff >= 0.1) {
-        this.diff.value.push({
-          abs: Math.floor(diff * 100) / 100,
-          own: Math.floor(videoOwnPosition * 100) / 100,
-          two: Math.floor(videoTwoPosition * 100) / 100,
-        });
-        console.log(`diff: ${diff}`);
+        // this.diff.value.push({
+        //   abs: Math.floor(diff * 100) / 100,
+        //   own: Math.floor(videoOwnPosition * 100) / 100,
+        //   two: Math.floor(videoTwoPosition * 100) / 100,
+        // });
         console.log("0.1秒以上ずれていたら同期させる");
         if (videoOwnPosition > videoTwoPosition) {
           this._playerOneManager.subscription.player.value.seekTo(
-            videoOwnCurrentPosition + diff * -1
+            playerOneCurrentPosition + diff * -1
           );
           // 片方の動画のみをシークすると「シークのタイムラグ」と「再生され続けている時間」をあわせて0.4秒くらいずれてしまうので意味のないシークを挟む
+          // なぜかcurrentPositionより前にシークする時がある。
           this._playerTwoManager.subscription.player.value.seekTo(
-            videoTwoCurrentPosition
+            playerTwoCurrentPosition
           );
         } else {
           this._playerOneManager.subscription.player.value.seekTo(
-            videoOwnCurrentPosition
+            playerOneCurrentPosition
           );
           this._playerTwoManager.subscription.player.value.seekTo(
-            videoTwoCurrentPosition + diff * -1
+            playerTwoCurrentPosition + diff * -1
           );
         }
       }
-      this.syncFlg = false;
+      this.syncProcessing = false;
     }, 500);
   };
 
