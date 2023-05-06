@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from "vue";
+import { inject, ref } from "vue";
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
 import {
   SpeakerWaveIcon,
@@ -28,20 +28,106 @@ const hundleReload = () => {
 const hundleRepeatSwitch = () => {
   useMainState.syncPlayer.switchRepeat();
 };
+
+const hundleDrag = (e: any) => {
+  console.log(e);
+};
+
+const pointer = ref(0);
+const elements = {
+  slider: ref<HTMLDivElement | null>(null),
+};
+const hundleSliderTouchStart = (e: TouchEvent) => {
+  const touch = e.changedTouches[0];
+  pointer.value = calcSliderPosition(touch.pageX);
+};
+
+const hundleSliderTouchMove = (e: TouchEvent) => {
+  e.preventDefault();
+  const touch = e.changedTouches[0];
+  pointer.value = calcSliderPosition(touch.pageX);
+};
+
+let draged = false;
+const hundleSliderMouseDown = (event: MouseEvent) => {
+  draged = true;
+  event.preventDefault();
+  pointer.value = calcSliderPosition(event.pageX);
+};
+const hundleSliderMouseMove = (event: MouseEvent) => {
+  if (!draged) return;
+  event.preventDefault();
+  pointer.value = calcSliderPosition(event.pageX);
+};
+const hundleSliderMouseUp = (event: MouseEvent) => {
+  draged = false;
+};
+
+const calcSliderPosition = (pageX: number): number => {
+  const rect = elements.slider.value?.getBoundingClientRect();
+  if (!rect) return 0;
+  let x = 0;
+  if (pageX - rect.left > 0) {
+    if (pageX - rect.left <= rect.width) {
+      x = pageX - rect.left;
+    } else {
+      x = rect.width;
+    }
+  }
+  return x;
+};
 </script>
 
+<style>
+#slider {
+  width: 300px;
+  height: 10px;
+  background-color: #ddd;
+}
+
+.slider-bar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-handle {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #333;
+  cursor: grab;
+  user-select: none;
+}
+</style>
+
 <template>
+  <p>{{ pointer }}</p>
+
   <div class="max-h-[240px] mb-3">
     <div
       class="bg-gray-50 border-gray-100 dark:bg-gray-800 dark:border-gray-500 border-b px-4 pt-6 pb-4 space-y-6"
     >
-      <div class="space-y-2">
+      <div
+        class="space-y-2"
+        :ref="elements.slider"
+        @touchstart="hundleSliderTouchStart"
+        @touchmove="hundleSliderTouchMove"
+        @mousedown="hundleSliderMouseDown"
+        @mousemove="hundleSliderMouseMove"
+        @mouseup="hundleSliderMouseUp"
+      >
         <div class="relative">
+          <!-- スライダーの軸 -->
           <div
             class="bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden"
           >
             <div
-              class="bg-cyan-500 dark:bg-cyan-400 w-1/2 h-2"
+              class="bg-cyan-500 dark:bg-cyan-400 h-2"
+              style="width: 30%"
               role="progressbar"
               aria-label="music progress"
               aria-valuenow="{1456}"
@@ -49,8 +135,11 @@ const hundleRepeatSwitch = () => {
               aria-valuemax="{4550}"
             ></div>
           </div>
+          <!-- スライダーのポイント -->
           <div
-            class="ring-cyan-500 dark:ring-cyan-400 ring-2 absolute left-1/2 top-1/2 w-4 h-4 -mt-2 -ml-2 flex items-center justify-center bg-white rounded-full shadow"
+            class="ring-cyan-500 dark:ring-cyan-400 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-2 flex items-center justify-center bg-white rounded-full shadow"
+            style="left: 30%"
+            @drag="hundleDrag"
           >
             <div
               class="w-1.5 h-1.5 bg-cyan-500 dark:bg-cyan-400 rounded-full ring-1 ring-inset ring-gray-900/5"
