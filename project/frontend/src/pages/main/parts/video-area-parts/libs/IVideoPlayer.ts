@@ -12,6 +12,7 @@ export interface IVideoPlayer {
   seekTo(seconds: number): Promise<void>;
   getCurrentPosition(): Promise<number>;
   setCurrentPosition(currentPosition: number): void;
+  getDuration(): Promise<number>;
   destory(): Promise<void>;
   subscription: {
     status: ComputedRef<Status>;

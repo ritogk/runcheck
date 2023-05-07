@@ -48,6 +48,10 @@ export class DummyPlayer implements IVideoPlayer {
     return;
   };
 
+  getDuration = async (): Promise<number> => {
+    return 1;
+  };
+
   async destory(): Promise<void> {
     return;
   }

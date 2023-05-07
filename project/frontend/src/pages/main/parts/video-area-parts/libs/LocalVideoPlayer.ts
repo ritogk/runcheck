@@ -79,6 +79,10 @@ export class LocalVideoPlayer implements IVideoPlayer {
     return;
   };
 
+  getDuration = async (): Promise<number> => {
+    return Promise.resolve(this.videoElement.duration);
+  };
+
   async destory(): Promise<void> {
     this.videoElement.src = "";
     return;
