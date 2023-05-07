@@ -34,13 +34,14 @@ const hundleDrag = (e: any) => {}
 const elements = {
   slider: ref<HTMLDivElement | null>(null),
 }
+// touch
 const hundleSliderTouchStart = (e: TouchEvent) => {
+  useMainState.syncPlayer.disableSync()
   const touch = e.changedTouches[0]
   useMainState.syncPlayer.seekTo(
     calcSliderPosition(touch.pageX) / (elements.slider.value?.clientWidth ?? 1)
   )
 }
-
 const hundleSliderTouchMove = (e: TouchEvent) => {
   e.preventDefault()
   const touch = e.changedTouches[0]
@@ -48,10 +49,15 @@ const hundleSliderTouchMove = (e: TouchEvent) => {
     calcSliderPosition(touch.pageX) / (elements.slider.value?.clientWidth ?? 1)
   )
 }
+const hundleSliderTouchEnd = (e: TouchEvent) => {
+  useMainState.syncPlayer.enableSync()
+}
 
+// mouse
 let draged = false
 const hundleSliderMouseDown = (event: MouseEvent) => {
   draged = true
+  useMainState.syncPlayer.disableSync()
   event.preventDefault()
   useMainState.syncPlayer.seekTo(
     calcSliderPosition(event.pageX) / (elements.slider.value?.clientWidth ?? 1)
@@ -66,6 +72,7 @@ const hundleSliderMouseMove = (event: MouseEvent) => {
 }
 const hundleSliderMouseUp = (event: MouseEvent) => {
   draged = false
+  useMainState.syncPlayer.enableSync()
 }
 
 const calcSliderPosition = (pageX: number): number => {
@@ -125,6 +132,7 @@ const sliderPositionStyle = computed(() => {
         :ref="elements.slider"
         @touchstart="hundleSliderTouchStart"
         @touchmove="hundleSliderTouchMove"
+        @touchend="hundleSliderTouchEnd"
         @mousedown="hundleSliderMouseDown"
         @mousemove="hundleSliderMouseMove"
         @mouseup="hundleSliderMouseUp"

@@ -28,6 +28,8 @@ interface ISyncPlayerStateType {
   reload(): void
   runSync(): void
   stopSync(): void
+  enableSync(): void
+  disableSync(): void
   seekTo(progressRate: number): Promise<void>
   subscription: {
     videoOwn: ComputedRef<IVideoPlayer>
@@ -200,6 +202,12 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       ) {
         // 開始ポジションより手前の場合は開始ポジションに戻す
         console.log("開始ポジションより手前の場合は開始ポジションに戻す")
+        // console.log(
+        //   `playerOneCurrentPosition:${playerOneCurrentPosition} playerOneStartPosition:${this._playerOneStartPosition}`
+        // )
+        // console.log(
+        //   `playerTwoCurrentPosition:${playerTwoCurrentPosition} playerTwoStartPosition:${this._playerTwoStartPosition}`
+        // )
         this.reload()
         this.syncProcessing = false
         return
@@ -243,6 +251,14 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     }, 500)
   }
 
+  enableSync(): void {
+    this.syncProcessing = false
+  }
+
+  disableSync(): void {
+    this.syncProcessing = true
+  }
+
   stopSync = (): void => {
     this.diff.value = []
     this._synced.value = false
@@ -251,20 +267,25 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   }
 
   seekTo = async (progressRate: number) => {
+    this._syncProgressRate.value = progressRate
+    // ミュート
+    await this._playerOneManager.subscription.player.value.mute()
+    await this._playerTwoManager.subscription.player.value.mute()
+    this._muted.value = true
+
+    // シーク
     const playerOneRange =
       (await this._playerOneManager.subscription.player.value.getDuration()) -
       this._playerOneStartPosition
     const playerTwoRange =
       (await this._playerTwoManager.subscription.player.value.getDuration()) -
       this._playerTwoStartPosition
-
     this._playerOneManager.subscription.player.value.seekTo(
-      playerOneRange * progressRate
+      this._playerOneStartPosition + playerOneRange * progressRate
     )
     this._playerTwoManager.subscription.player.value.seekTo(
-      playerTwoRange * progressRate
+      this._playerTwoStartPosition + playerTwoRange * progressRate
     )
-    this._syncProgressRate.value = progressRate
   }
 
   get subscription() {
