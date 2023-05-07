@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { provide, ref } from "vue"
-import { UseMainState, UseMainStateKey, UseMainStateType } from "./UseMainState"
+import { UseMainState, UseMainStateKey } from "./UseMainState"
 import PlayerOneArea from "./parts/PlayerOneArea.vue"
 import PlayerTwoArea from "./parts/PlayerTwoArea.vue"
 import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue"

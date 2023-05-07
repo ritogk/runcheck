@@ -1,5 +1,3 @@
-import { ComputedRef, InjectionKey, WritableComputedRef, Ref } from "vue"
-import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
 import { OpenModalState, IOpenModalState } from "./state/OpenModalState"
 import { SaveModalState, ISaveModalState } from "./state/SaveModalState"
 import {
@@ -11,7 +9,6 @@ import {
   IAdjustSpeedModalState,
 } from "./state/AdjustSpeedModalState"
 import { SyncPlayerState, ISyncPlayerStateType } from "./state/SyncPlayerState"
-import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerManager"
 
 type UseMainStateType = {
   openModal: IOpenModalState
