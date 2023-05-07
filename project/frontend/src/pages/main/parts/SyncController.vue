@@ -90,8 +90,6 @@ const calcSliderPosition = (pageX: number): number => {
 }
 
 const sliderPositionStyle = computed(() => {
-  const width = elements.slider.value?.clientWidth
-  if (!width) return "0%"
   return `${useMainState.syncPlayer.subscription.progressRate.value * 100}%`
 })
 
