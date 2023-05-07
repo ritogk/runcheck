@@ -108,7 +108,16 @@ paths:
       responses:
         "200":
           description: OK
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comparisonId:
+                    type: number
+                    description: "比較ID"
+                required:
+                  - comparisonId
   /comparisons/{comparisonId}:
     get:
       tags:
@@ -293,13 +302,13 @@ components:
         video1Url:
           type: string
         video1TimeSt:
-          type: string
+          type: number
         video1VideoType:
           $ref: "#/components/schemas/videoType"
         video2Url:
           type: string
         video2TimeSt:
-          type: string
+          type: number
         video2VideoType:
           $ref: "#/components/schemas/videoType"
       required:

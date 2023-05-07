@@ -61,7 +61,7 @@ class CompoarionController extends Controller
 
         if ($comparison) {
             return response()->json(
-                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\VideoComparison::class, $comparison->toArray()),
+                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\ComparisonsPost200Response::class, ['comparisonId'=>$comparison->id]),
                 Response::HTTP_CREATED
             );
         } else {

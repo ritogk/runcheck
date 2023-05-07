@@ -17,6 +17,13 @@ const hundleVideoRunSyncClick = () => {
 const hundleVideoStopSyncClick = () => {
   useMainState.syncPlayer.stopSync()
 }
+
+const hundleTweetClick = async () => {
+  const compoarion = await useMainState.syncPlayer.saveSync()
+  // ツイートする
+  const url = `${location.href}?comparisonId=${compoarion.id}`
+  window.open("https://twitter.com/intent/tweet?text=" + url)
+}
 </script>
 
 <template>
@@ -152,6 +159,7 @@ const hundleVideoStopSyncClick = () => {
           <button
             type="button"
             class="relative inline-flex items-center gap-x-1.5 rounded-md bg-[#16A2F3] px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-[#0C7FF2] hover:bg-indigo-500 focus:z-10"
+            @click="hundleTweetClick()"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

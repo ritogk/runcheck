@@ -52,10 +52,10 @@ export interface VideoComparison {
     video1Url: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof VideoComparison
      */
-    video1TimeSt: string;
+    video1TimeSt: number;
     /**
      * 
      * @type {VideoType}
@@ -70,10 +70,10 @@ export interface VideoComparison {
     video2Url: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof VideoComparison
      */
-    video2TimeSt: string;
+    video2TimeSt: number;
     /**
      * 
      * @type {VideoType}

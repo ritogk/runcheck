@@ -882,11 +882,12 @@ class ComparisonsApi
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \App\OpenAPI\Model\ComparisonsPost200Response
      */
     public function comparisonsPost($videoComparison, string $contentType = self::contentTypes['comparisonsPost'][0])
     {
-        $this->comparisonsPostWithHttpInfo($videoComparison, $contentType);
+        list($response) = $this->comparisonsPostWithHttpInfo($videoComparison, $contentType);
+        return $response;
     }
 
     /**
@@ -899,7 +900,7 @@ class ComparisonsApi
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \App\OpenAPI\Model\ComparisonsPost200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function comparisonsPostWithHttpInfo($videoComparison, string $contentType = self::contentTypes['comparisonsPost'][0])
     {
@@ -940,10 +941,50 @@ class ComparisonsApi
                 );
             }
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    if ('\App\OpenAPI\Model\ComparisonsPost200Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\App\OpenAPI\Model\ComparisonsPost200Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\App\OpenAPI\Model\ComparisonsPost200Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\App\OpenAPI\Model\ComparisonsPost200Response';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\App\OpenAPI\Model\ComparisonsPost200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -983,14 +1024,27 @@ class ComparisonsApi
      */
     public function comparisonsPostAsyncWithHttpInfo($videoComparison, string $contentType = self::contentTypes['comparisonsPost'][0])
     {
-        $returnType = '';
+        $returnType = '\App\OpenAPI\Model\ComparisonsPost200Response';
         $request = $this->comparisonsPostRequest($videoComparison, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -1041,7 +1095,7 @@ class ComparisonsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['application/json', ],
             $contentType,
             $multipart
         );

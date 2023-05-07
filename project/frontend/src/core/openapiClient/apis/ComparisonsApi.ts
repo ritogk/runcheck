@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    InlineResponse200,
+    InlineResponse200FromJSON,
+    InlineResponse200ToJSON,
     VideoComparison,
     VideoComparisonFromJSON,
     VideoComparisonToJSON,
@@ -99,13 +102,13 @@ export interface ComparisonsApiInterface {
      * @throws {RequiredError}
      * @memberof ComparisonsApiInterface
      */
-    comparisonsPostRaw(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>>;
+    comparisonsPostRaw(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse200>>;
 
     /**
      * 詳細内容
      * 比較情報を登録
      */
-    comparisonsPost(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<void>;
+    comparisonsPost(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<InlineResponse200>;
 
 }
 
@@ -212,7 +215,7 @@ export class ComparisonsApi extends runtime.BaseAPI implements ComparisonsApiInt
      * 詳細内容
      * 比較情報を登録
      */
-    async comparisonsPostRaw(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async comparisonsPostRaw(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse200>> {
         if (requestParameters.videoComparison === null || requestParameters.videoComparison === undefined) {
             throw new runtime.RequiredError('videoComparison','Required parameter requestParameters.videoComparison was null or undefined when calling comparisonsPost.');
         }
@@ -231,15 +234,16 @@ export class ComparisonsApi extends runtime.BaseAPI implements ComparisonsApiInt
             body: VideoComparisonToJSON(requestParameters.videoComparison),
         }, initOverrides);
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse200FromJSON(jsonValue));
     }
 
     /**
      * 詳細内容
      * 比較情報を登録
      */
-    async comparisonsPost(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.comparisonsPostRaw(requestParameters, initOverrides);
+    async comparisonsPost(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<InlineResponse200> {
+        const response = await this.comparisonsPostRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
 }

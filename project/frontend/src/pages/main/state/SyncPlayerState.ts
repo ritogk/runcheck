@@ -2,8 +2,13 @@ import { ref, computed, ComputedRef, watch } from "vue"
 import {
   IVideoPlayer,
   Status,
+  VideoType,
 } from "@/pages/main/parts/video-area-parts/libs/IVideoPlayer"
 import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerManager"
+import {
+  ComparisonsApi,
+  VideoType as ApiVideoType,
+} from "@/core/openapiClient/index"
 
 export interface ISyncPlayerStateType {
   playerOneManager: PlayerManager
@@ -17,6 +22,7 @@ export interface ISyncPlayerStateType {
   stopSync(): void
   enableSync(): void
   disableSync(): void
+  saveSync(): Promise<{ id: number }>
   seekTo(progressRate: number): Promise<void>
   subscription: {
     videoOwn: ComputedRef<IVideoPlayer>
@@ -44,6 +50,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   private _speed = ref(1)
   private _synced = ref(false)
   private _syncIntervalId = 0
+  private comparisonsApi = new ComparisonsApi()
 
   constructor() {
     this._playerOneManager = new PlayerManager()
@@ -225,12 +232,47 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     }, 500)
   }
 
-  enableSync(): void {
+  enableSync = () => {
     this.syncProcessing = false
   }
 
-  disableSync(): void {
+  disableSync = () => {
     this.syncProcessing = true
+  }
+
+  saveSync = async (): Promise<{ id: number }> => {
+    const video1Url =
+      await this.playerOneManager.subscription.player.value.getPath()
+    const video1EmbedUrl = `https://www.youtube.com/embed/${video1Url.substring(
+      video1Url.length - 11
+    )}`
+    const video1TimeSt = this._playerOneStartPosition
+    const video1VideoType =
+      this.playerOneManager.subscription.videoType.value === VideoType.YOUTUBE
+        ? ApiVideoType.YOUTUBE
+        : ApiVideoType.LOCAL
+    const video2Url =
+      await this.playerTwoManager.subscription.player.value.getPath()
+    const video2EmbedUrl = `https://www.youtube.com/embed/${video2Url.substring(
+      video1Url.length - 11
+    )}`
+    const video2TimeSt = this._playerTwoStartPosition
+    const video2VideoType =
+      this.playerTwoManager.subscription.videoType.value === VideoType.YOUTUBE
+        ? ApiVideoType.YOUTUBE
+        : ApiVideoType.LOCAL
+    // 同期情報の登録
+    const response = await this.comparisonsApi.comparisonsPost({
+      videoComparison: {
+        video1Url: video1EmbedUrl,
+        video1TimeSt: video1TimeSt,
+        video1VideoType: video1VideoType,
+        video2Url: video2EmbedUrl,
+        video2TimeSt: video2TimeSt,
+        video2VideoType: video2VideoType,
+      },
+    })
+    return { id: response.comparisonId }
   }
 
   stopSync = (): void => {
