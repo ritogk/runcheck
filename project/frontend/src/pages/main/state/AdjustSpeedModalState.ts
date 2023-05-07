@@ -1,6 +1,6 @@
 import { computed, ref, ComputedRef } from "vue"
 
-interface IAdjustSpeedModalState {
+export interface IAdjustSpeedModalState {
   open(): void
   close(): void
   subscription: {

@@ -16,7 +16,7 @@ import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerMa
  * 動画を同期させるための状態クラス
  * @returns
  */
-interface ISyncPlayerStateType {
+export interface ISyncPlayerStateType {
   diff: Ref<{ abs: number; own: number; two: number }[]>
   playerOneManager: PlayerManager
   playerTwoManager: PlayerManager

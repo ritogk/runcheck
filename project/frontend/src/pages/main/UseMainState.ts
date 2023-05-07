@@ -1,71 +1,24 @@
 import { ComputedRef, InjectionKey, WritableComputedRef, Ref } from "vue"
 import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
-import { OpenModalState } from "./state/OpenModalState"
-import { SaveModalState } from "./state/SaveModalState"
-import { YoutubeSelectorModalState } from "./state/YoutubeSelectorModalState"
-import { AdjustSpeedModalState } from "./state/AdjustSpeedModalState"
-import { SyncPlayerState } from "./state/SyncPlayerState"
+import { OpenModalState, IOpenModalState } from "./state/OpenModalState"
+import { SaveModalState, ISaveModalState } from "./state/SaveModalState"
+import {
+  YoutubeSelectorModalState,
+  IYoutubeSelectorModalState,
+} from "./state/YoutubeSelectorModalState"
+import {
+  AdjustSpeedModalState,
+  IAdjustSpeedModalState,
+} from "./state/AdjustSpeedModalState"
+import { SyncPlayerState, ISyncPlayerStateType } from "./state/SyncPlayerState"
 import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerManager"
 
 type UseMainStateType = {
-  openModal: {
-    open(): void
-    close(): void
-    subscription: {
-      opened: ComputedRef<boolean>
-    }
-  }
-  saveModal: {
-    open(): void
-    close(): void
-    subscription: {
-      opened: ComputedRef<boolean>
-    }
-  }
-  youtubeModal: {
-    open(videoNo: VideoNo): void
-    close(): void
-    select(url: string): void
-    load(): void
-    save(): void
-    subscription: {
-      opened: ComputedRef<boolean>
-      currentVideoNo: ComputedRef<VideoNo>
-      selectUrl: ComputedRef<string>
-    }
-  }
-  adjustSpeedModal: {
-    open(): void
-    close(): void
-    subscription: {
-      opened: ComputedRef<boolean>
-    }
-  }
-  syncPlayer: {
-    diff: Ref<{ abs: number; own: number; two: number }[]>
-    playerOneManager: PlayerManager
-    playerTwoManager: PlayerManager
-    currentPosition: WritableComputedRef<number>
-    switchPlay(): void
-    switchMute(): void
-    switchRepeat(): void
-    adjustSpeed(speed: number): void
-    reload(): void
-    runSync(): void
-    stopSync(): void
-    enableSync(): void
-    disableSync(): void
-    seekTo(progressRate: number): Promise<void>
-    subscription: {
-      playing: ComputedRef<boolean>
-      muted: ComputedRef<boolean>
-      repeated: ComputedRef<boolean>
-      speed: ComputedRef<number>
-      synced: ComputedRef<boolean>
-      progressRate: ComputedRef<number>
-      duration: ComputedRef<number>
-    }
-  }
+  openModal: IOpenModalState
+  saveModal: ISaveModalState
+  youtubeModal: IYoutubeSelectorModalState
+  adjustSpeedModal: IAdjustSpeedModalState
+  syncPlayer: ISyncPlayerStateType
 }
 
 const UseMainState = (): UseMainStateType => {
