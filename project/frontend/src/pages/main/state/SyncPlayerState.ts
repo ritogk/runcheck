@@ -46,6 +46,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   private _playerOneStartPosition = 0;
   private _playerTwoManager: PlayerManager;
   private _playerTwoStartPosition = 0;
+  private _syncDuration = ref(0);
   private _playing = ref(false);
   private _muted = ref(true);
   private _repeated = ref(false);
@@ -137,7 +138,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       this._playerOneManager.subscription.player.value.stop(),
       this._playerTwoManager.subscription.player.value.stop(),
     ]);
-
     const [playerOneStartPosition, playerTwoStartPosition] = await Promise.all([
       this._playerOneManager.subscription.player.value.getCurrentPosition(),
       this._playerTwoManager.subscription.player.value.getCurrentPosition(),
@@ -146,7 +146,20 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       Math.floor(playerOneStartPosition * 100) / 100;
     this._playerTwoStartPosition =
       Math.floor(playerTwoStartPosition * 100) / 100;
+
+    // 動画1と動画2で同期した時間の範囲を算出
+    const playerOneDuration =
+      await this._playerOneManager.subscription.player.value.getDuration();
+    const playerTwoDuration =
+      await this._playerTwoManager.subscription.player.value.getDuration();
+    const playerOneRange = playerOneDuration - this._playerOneStartPosition;
+    const playerTwoRange = playerTwoDuration - this._playerTwoStartPosition;
+    playerOneRange > playerTwoRange
+      ? (this._syncDuration.value = playerTwoRange)
+      : (this._syncDuration.value = playerOneRange);
+
     this._synced.value = true;
+
     // 同期ぐるぐる
     this._syncIntervalId = setInterval(async () => {
       if (this.syncProcessing) return;
