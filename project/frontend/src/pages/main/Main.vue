@@ -1,25 +1,21 @@
 <script setup lang="ts">
-import { provide, ref } from "vue";
-import {
-  UseMainState,
-  UseMainStateKey,
-  UseMainStateType,
-} from "./UseMainState";
-import PlayerOneArea from "./parts/PlayerOneArea.vue";
-import PlayerTwoArea from "./parts/PlayerTwoArea.vue";
-import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue";
-import SyncController from "./parts/SyncController.vue";
+import { provide, ref } from "vue"
+import { UseMainState, UseMainStateKey, UseMainStateType } from "./UseMainState"
+import PlayerOneArea from "./parts/PlayerOneArea.vue"
+import PlayerTwoArea from "./parts/PlayerTwoArea.vue"
+import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue"
+import SyncController from "./parts/SyncController.vue"
 
-const useMainState = UseMainState();
-provide(UseMainStateKey, useMainState);
+const useMainState = UseMainState()
+provide(UseMainStateKey, useMainState)
 
 const hundleVideoRunSyncClick = () => {
-  useMainState.syncPlayer.runSync();
-};
+  useMainState.syncPlayer.runSync()
+}
 
 const hundleVideoStopSyncClick = () => {
-  useMainState.syncPlayer.stopSync();
-};
+  useMainState.syncPlayer.stopSync()
+}
 
 // const diffList = ref<number[]>([]);
 </script>
@@ -210,7 +206,9 @@ const hundleVideoStopSyncClick = () => {
 
     <PlayerOneArea></PlayerOneArea>
     <PlayerTwoArea></PlayerTwoArea>
-    <SyncController></SyncController>
+    <SyncController
+      v-show="useMainState.syncPlayer.subscription.synced.value"
+    ></SyncController>
     <div class="m-5"></div>
   </div>
 </template>
