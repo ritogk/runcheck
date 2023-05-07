@@ -36,6 +36,7 @@ interface ISyncPlayerStateType {
     repeated: ComputedRef<boolean>
     speed: ComputedRef<number>
     synced: ComputedRef<boolean>
+    progressRate: ComputedRef<number>
   }
 }
 
@@ -270,6 +271,9 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       }),
       synced: computed(() => {
         return this._synced.value
+      }),
+      progressRate: computed(() => {
+        return this._syncProgressRate.value
       }),
     }
   }

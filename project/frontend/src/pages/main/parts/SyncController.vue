@@ -1,87 +1,87 @@
 <script setup lang="ts">
-import { inject, ref, computed } from "vue";
-import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
+import { inject, ref, computed } from "vue"
+import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
 import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   // SearchIcon,
-} from "@heroicons/vue/20/solid";
+} from "@heroicons/vue/20/solid"
 
-const useMainState = inject(UseMainStateKey) as UseMainStateType;
-const videoOwn = useMainState.syncPlayer.playerOneManager.subscription.player;
-const videoTwo = useMainState.syncPlayer.playerTwoManager.subscription.player;
+const useMainState = inject(UseMainStateKey) as UseMainStateType
+const videoOwn = useMainState.syncPlayer.playerOneManager.subscription.player
+const videoTwo = useMainState.syncPlayer.playerTwoManager.subscription.player
 
 const hundlePlaySwitch = () => {
-  videoOwn.value.mute();
-  videoTwo.value.mute();
-  useMainState.syncPlayer.switchPlay();
-};
+  videoOwn.value.mute()
+  videoTwo.value.mute()
+  useMainState.syncPlayer.switchPlay()
+}
 
 const hundleMuteSwitch = () => {
-  useMainState.syncPlayer.switchMute();
-};
+  useMainState.syncPlayer.switchMute()
+}
 
 const hundleReload = () => {
-  useMainState.syncPlayer.reload();
-};
+  useMainState.syncPlayer.reload()
+}
 
 const hundleRepeatSwitch = () => {
-  useMainState.syncPlayer.switchRepeat();
-};
+  useMainState.syncPlayer.switchRepeat()
+}
 
 const hundleDrag = (e: any) => {
-  console.log(e);
-};
+  console.log(e)
+}
 
-const pointer = ref(0);
+const pointer = ref(0)
 const elements = {
   slider: ref<HTMLDivElement | null>(null),
-};
+}
 const hundleSliderTouchStart = (e: TouchEvent) => {
-  const touch = e.changedTouches[0];
-  pointer.value = calcSliderPosition(touch.pageX);
-};
+  const touch = e.changedTouches[0]
+  pointer.value = calcSliderPosition(touch.pageX)
+}
 
 const hundleSliderTouchMove = (e: TouchEvent) => {
-  e.preventDefault();
-  const touch = e.changedTouches[0];
-  pointer.value = calcSliderPosition(touch.pageX);
-};
+  e.preventDefault()
+  const touch = e.changedTouches[0]
+  pointer.value = calcSliderPosition(touch.pageX)
+}
 
-let draged = false;
+let draged = false
 const hundleSliderMouseDown = (event: MouseEvent) => {
-  draged = true;
-  event.preventDefault();
-  pointer.value = calcSliderPosition(event.pageX);
-};
+  draged = true
+  event.preventDefault()
+  pointer.value = calcSliderPosition(event.pageX)
+}
 const hundleSliderMouseMove = (event: MouseEvent) => {
-  if (!draged) return;
-  event.preventDefault();
-  pointer.value = calcSliderPosition(event.pageX);
-};
+  if (!draged) return
+  event.preventDefault()
+  pointer.value = calcSliderPosition(event.pageX)
+}
 const hundleSliderMouseUp = (event: MouseEvent) => {
-  draged = false;
-};
+  draged = false
+}
 
 const calcSliderPosition = (pageX: number): number => {
-  const rect = elements.slider.value?.getBoundingClientRect();
-  if (!rect) return 0;
-  let x = 0;
+  const rect = elements.slider.value?.getBoundingClientRect()
+  if (!rect) return 0
+  let x = 0
   if (pageX - rect.left > 0) {
     if (pageX - rect.left <= rect.width) {
-      x = pageX - rect.left;
+      x = pageX - rect.left
     } else {
-      x = rect.width;
+      x = rect.width
     }
   }
-  return x;
-};
+  return x
+}
 
 const sliderPositionStyle = computed(() => {
-  const width = elements.slider.value?.clientWidth;
-  if (!width) return "0%";
-  return `${(pointer.value / width) * 100}%`;
-});
+  const width = elements.slider.value?.clientWidth
+  if (!width) return "0%"
+  return `${useMainState.syncPlayer.subscription.progressRate.value * 100}%`
+})
 </script>
 
 <style>
