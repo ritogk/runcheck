@@ -10,7 +10,6 @@ import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerMa
  * @returns
  */
 export interface ISyncPlayerStateType {
-  diff: Ref<{ abs: number; own: number; two: number }[]>
   playerOneManager: PlayerManager
   playerTwoManager: PlayerManager
   switchPlay(): void
@@ -37,7 +36,6 @@ export interface ISyncPlayerStateType {
 }
 
 export class SyncPlayerState implements ISyncPlayerStateType {
-  public diff = ref([{ abs: 0, own: 0, two: 0 }])
   private _playerOneManager: PlayerManager
   private _playerOneStartPosition = 0
   private _playerTwoManager: PlayerManager
@@ -208,11 +206,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       // 0.1秒以上ずれていたら同期させる
       const diff = Math.abs(videoOwnPosition - videoTwoPosition)
       if (diff >= 0.1) {
-        // this.diff.value.push({
-        //   abs: Math.floor(diff * 100) / 100,
-        //   own: Math.floor(videoOwnPosition * 100) / 100,
-        //   two: Math.floor(videoTwoPosition * 100) / 100,
-        // });
         console.log("0.1秒以上ずれていたら同期させる")
         if (videoOwnPosition > videoTwoPosition) {
           this._playerOneManager.subscription.player.value.seekTo(
@@ -248,7 +241,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   }
 
   stopSync = (): void => {
-    this.diff.value = []
     this._synced.value = false
     clearInterval(this._syncIntervalId)
     this._syncIntervalId = 0

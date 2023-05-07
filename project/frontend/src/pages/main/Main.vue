@@ -17,18 +17,9 @@ const hundleVideoRunSyncClick = () => {
 const hundleVideoStopSyncClick = () => {
   useMainState.syncPlayer.stopSync()
 }
-
-// const diffList = ref<number[]>([]);
 </script>
 
 <template>
-  <!-- <div
-    v-for="dif in useMainState.syncPlayer.diff.value"
-    :key="dif.own + dif.two"
-  >
-    abs: {{ dif.abs }} own: {{ dif.own }} two: {{ dif.two }}
-  </div> -->
-
   <YoutubeSelectModal></YoutubeSelectModal>
   <AdjustSpeedModal></AdjustSpeedModal>
   <div class="max-w-[600px]">
