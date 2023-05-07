@@ -1,14 +1,10 @@
-import { ref, computed, ComputedRef, WritableComputedRef, Ref } from "vue"
+import { ref, computed, ComputedRef } from "vue"
 import {
   IVideoPlayer,
   Status,
 } from "@/pages/main/parts/video-area-parts/libs/IVideoPlayer"
 import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerManager"
 
-/**
- * 動画を同期させるための状態クラス
- * @returns
- */
 export interface ISyncPlayerStateType {
   playerOneManager: PlayerManager
   playerTwoManager: PlayerManager
