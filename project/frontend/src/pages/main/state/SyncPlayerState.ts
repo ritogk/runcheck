@@ -126,6 +126,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   runSync = async () => {
     this._playing.value = false
     this._muted.value = true
+    this._repeated.value = true
     const [playerOneStartPosition, playerTwoStartPosition] = await Promise.all([
       this._playerOneManager.subscription.player.value.getCurrentPosition(),
       this._playerTwoManager.subscription.player.value.getCurrentPosition(),
