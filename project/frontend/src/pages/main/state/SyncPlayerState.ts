@@ -28,6 +28,7 @@ interface ISyncPlayerStateType {
   reload(): void
   runSync(): void
   stopSync(): void
+  seekTo(progressRate: number): Promise<void>
   subscription: {
     videoOwn: ComputedRef<IVideoPlayer>
     videoTwo: ComputedRef<IVideoPlayer>
@@ -247,6 +248,23 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._synced.value = false
     clearInterval(this._syncIntervalId)
     this._syncIntervalId = 0
+  }
+
+  seekTo = async (progressRate: number) => {
+    const playerOneRange =
+      (await this._playerOneManager.subscription.player.value.getDuration()) -
+      this._playerOneStartPosition
+    const playerTwoRange =
+      (await this._playerTwoManager.subscription.player.value.getDuration()) -
+      this._playerTwoStartPosition
+
+    this._playerOneManager.subscription.player.value.seekTo(
+      playerOneRange * progressRate
+    )
+    this._playerTwoManager.subscription.player.value.seekTo(
+      playerTwoRange * progressRate
+    )
+    this._syncProgressRate.value = progressRate
   }
 
   get subscription() {

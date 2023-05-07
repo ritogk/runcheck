@@ -45,6 +45,7 @@ type UseMainStateType = {
     reload(): void
     runSync(): void
     stopSync(): void
+    seekTo(progressRate: number): Promise<void>
     subscription: {
       playing: ComputedRef<boolean>
       muted: ComputedRef<boolean>

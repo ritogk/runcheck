@@ -29,35 +29,40 @@ const hundleRepeatSwitch = () => {
   useMainState.syncPlayer.switchRepeat()
 }
 
-const hundleDrag = (e: any) => {
-  console.log(e)
-}
+const hundleDrag = (e: any) => {}
 
-const pointer = ref(0)
 const elements = {
   slider: ref<HTMLDivElement | null>(null),
 }
 const hundleSliderTouchStart = (e: TouchEvent) => {
   const touch = e.changedTouches[0]
-  pointer.value = calcSliderPosition(touch.pageX)
+  useMainState.syncPlayer.seekTo(
+    calcSliderPosition(touch.pageX) / (elements.slider.value?.clientWidth ?? 1)
+  )
 }
 
 const hundleSliderTouchMove = (e: TouchEvent) => {
   e.preventDefault()
   const touch = e.changedTouches[0]
-  pointer.value = calcSliderPosition(touch.pageX)
+  useMainState.syncPlayer.seekTo(
+    calcSliderPosition(touch.pageX) / (elements.slider.value?.clientWidth ?? 1)
+  )
 }
 
 let draged = false
 const hundleSliderMouseDown = (event: MouseEvent) => {
   draged = true
   event.preventDefault()
-  pointer.value = calcSliderPosition(event.pageX)
+  useMainState.syncPlayer.seekTo(
+    calcSliderPosition(event.pageX) / (elements.slider.value?.clientWidth ?? 1)
+  )
 }
 const hundleSliderMouseMove = (event: MouseEvent) => {
   if (!draged) return
   event.preventDefault()
-  pointer.value = calcSliderPosition(event.pageX)
+  useMainState.syncPlayer.seekTo(
+    calcSliderPosition(event.pageX) / (elements.slider.value?.clientWidth ?? 1)
+  )
 }
 const hundleSliderMouseUp = (event: MouseEvent) => {
   draged = false
