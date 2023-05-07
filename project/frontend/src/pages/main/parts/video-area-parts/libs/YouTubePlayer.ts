@@ -87,6 +87,10 @@ export class YouTubePlayer implements IVideoPlayer {
     return this.player.destroy()
   }
 
+  getPath = (): Promise<string> => {
+    return this.player.getVideoUrl()
+  }
+
   public subscription = {
     status: computed(() => {
       return this._status.value

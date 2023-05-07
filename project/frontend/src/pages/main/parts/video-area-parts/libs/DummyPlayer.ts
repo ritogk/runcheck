@@ -1,70 +1,74 @@
-import { computed } from "vue";
-import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer";
+import { computed } from "vue"
+import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer"
 
 export class DummyPlayer implements IVideoPlayer {
   get videoType() {
-    return VideoType.NONE;
+    return VideoType.NONE
   }
 
   changeVideo(url: string): void {}
 
   play = () => {
-    return Promise.resolve();
-  };
+    return Promise.resolve()
+  }
 
   stop = async () => {
-    return Promise.resolve();
-  };
+    return Promise.resolve()
+  }
 
   mute = () => {
-    return Promise.resolve();
-  };
+    return Promise.resolve()
+  }
 
   unMute = () => {
-    return;
-  };
+    return
+  }
 
   adjustSpeed = (speed: number) => {
-    return;
-  };
+    return
+  }
 
   enableRepeat = () => {
-    return;
-  };
+    return
+  }
 
   disableRepeat = () => {
-    return;
-  };
+    return
+  }
 
   seekTo = async (seconds: number) => {
-    return Promise.resolve();
-  };
+    return Promise.resolve()
+  }
 
   getCurrentPosition = async (): Promise<number> => {
-    return 1;
-  };
+    return 1
+  }
 
   setCurrentPosition = (currentPosition: number) => {
-    return;
-  };
+    return
+  }
 
   getDuration = async (): Promise<number> => {
-    return 1;
-  };
+    return 1
+  }
 
   async destory(): Promise<void> {
-    return;
+    return
   }
 
   getVideoType = (): VideoType => {
-    return VideoType.NONE;
-  };
+    return VideoType.NONE
+  }
+
+  getPath = (): Promise<string> => {
+    return Promise.resolve("")
+  }
 
   get subscription() {
     return {
       status: computed(() => {
-        return Status.WAITING;
+        return Status.WAITING
       }),
-    };
+    }
   }
 }

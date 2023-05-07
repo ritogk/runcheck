@@ -83,6 +83,10 @@ export class LocalVideoPlayer implements IVideoPlayer {
     return Promise.resolve(this.videoElement.duration)
   }
 
+  getPath = (): Promise<string> => {
+    return Promise.resolve(this.videoElement.src)
+  }
+
   async destory(): Promise<void> {
     this.videoElement.src = ""
     return
