@@ -114,7 +114,6 @@ function convertSecondsToMMSS(seconds: number) {
 }
 
 const hundleAdjustSpeedClick = () => {
-  debugger
   useMainState.adjustSpeedModal.open()
 }
 </script>
