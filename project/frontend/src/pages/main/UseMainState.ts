@@ -3,6 +3,7 @@ import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-part
 import { OpenModalState } from "./state/OpenModalState"
 import { SaveModalState } from "./state/SaveModalState"
 import { YoutubeSelectorModalState } from "./state/YoutubeSelectorModalState"
+import { AdjustSpeedModalState } from "./state/AdjustSpeedModalState"
 import { SyncPlayerState } from "./state/SyncPlayerState"
 import { PlayerManager } from "@/pages/main/parts/video-area-parts/libs/PlayerManager"
 
@@ -31,6 +32,13 @@ type UseMainStateType = {
       opened: ComputedRef<boolean>
       currentVideoNo: ComputedRef<VideoNo>
       selectUrl: ComputedRef<string>
+    }
+  }
+  adjustSpeedModal: {
+    open(): void
+    close(): void
+    subscription: {
+      opened: ComputedRef<boolean>
     }
   }
   syncPlayer: {
@@ -65,6 +73,7 @@ const UseMainState = (): UseMainStateType => {
     openModal: new OpenModalState(),
     saveModal: new SaveModalState(),
     youtubeModal: new YoutubeSelectorModalState(),
+    adjustSpeedModal: new AdjustSpeedModalState(),
     syncPlayer: new SyncPlayerState(),
   }
 }

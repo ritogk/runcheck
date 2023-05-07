@@ -112,6 +112,11 @@ function convertSecondsToMMSS(seconds: number) {
     remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds
   return formattedMinutes + ":" + formattedSeconds
 }
+
+const hundleAdjustSpeedClick = () => {
+  debugger
+  useMainState.adjustSpeedModal.open()
+}
 </script>
 
 <style>
@@ -230,7 +235,11 @@ function convertSecondsToMMSS(seconds: number) {
           </svg>
         </button>
         <!-- 倍速 ボタン -->
-        <button type="button" aria-label="Skip 10 seconds">
+        <button
+          type="button"
+          aria-label="Skip 10 seconds"
+          @click="hundleAdjustSpeedClick()"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

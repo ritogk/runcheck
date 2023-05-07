@@ -113,6 +113,8 @@ export class SyncPlayerState implements ISyncPlayerStateType {
 
   adjustSpeed = (speed: number): void => {
     this._speed.value = speed
+    this._playerOneManager.subscription.player.value.adjustSpeed(speed)
+    this._playerTwoManager.subscription.player.value.adjustSpeed(speed)
   }
 
   switchSync = () => {
@@ -137,7 +139,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._playing.value = true
   }
 
-  private syncProcessing = false
+  private syncProcessing = false // 処理中フラグ
   runSync = async () => {
     this._playing.value = false
     await Promise.all([
@@ -163,6 +165,9 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     playerOneRange > playerTwoRange
       ? (this._syncDuration.value = playerTwoRange)
       : (this._syncDuration.value = playerOneRange)
+
+    // 1倍速に戻す
+    this.adjustSpeed(1)
 
     this._synced.value = true
 

@@ -4,6 +4,7 @@ import { UseMainState, UseMainStateKey, UseMainStateType } from "./UseMainState"
 import PlayerOneArea from "./parts/PlayerOneArea.vue"
 import PlayerTwoArea from "./parts/PlayerTwoArea.vue"
 import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue"
+import AdjustSpeedModal from "./parts/AdjustSpeedModal.vue"
 import SyncController from "./parts/SyncController.vue"
 
 const useMainState = UseMainState()
@@ -29,6 +30,7 @@ const hundleVideoStopSyncClick = () => {
   </div> -->
 
   <YoutubeSelectModal></YoutubeSelectModal>
+  <AdjustSpeedModal></AdjustSpeedModal>
   <div class="max-w-[600px]">
     <div class="px-1 pt-2">
       <!-- ファイル操作 -->
