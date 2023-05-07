@@ -1,4 +1,4 @@
-import { ref, computed, ComputedRef } from "vue"
+import { ref, computed, ComputedRef, watch } from "vue"
 import {
   IVideoPlayer,
   Status,
@@ -38,8 +38,8 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   private _playerTwoStartPosition = 0
   private _syncDuration = ref(0)
   private _syncProgressRate = ref(0)
-  private _playing = ref(false)
-  private _muted = ref(true)
+  private _playing = ref(true)
+  private _muted = ref(false)
   private _repeated = ref(false)
   private _speed = ref(1)
   private _synced = ref(false)
@@ -48,6 +48,31 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   constructor() {
     this._playerOneManager = new PlayerManager()
     this._playerTwoManager = new PlayerManager()
+
+    watch(this._playing, (value) => {
+      if (value) {
+        this._playerOneManager.subscription.player.value.play()
+        this._playerTwoManager.subscription.player.value.play()
+      } else {
+        this._playerOneManager.subscription.player.value.stop()
+        this._playerTwoManager.subscription.player.value.stop()
+      }
+    })
+
+    watch(this._muted, (value) => {
+      if (value) {
+        this._playerOneManager.subscription.player.value.mute()
+        this._playerTwoManager.subscription.player.value.mute()
+      } else {
+        this._playerOneManager.subscription.player.value.unMute()
+        this._playerTwoManager.subscription.player.value.unMute()
+      }
+    })
+
+    watch(this._speed, (value) => {
+      this._playerOneManager.subscription.player.value.adjustSpeed(value)
+      this._playerTwoManager.subscription.player.value.adjustSpeed(value)
+    })
   }
 
   get playerOneManager() {
@@ -60,27 +85,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
 
   switchPlay = async () => {
     this._playing.value = !this._playing.value
-    if (this._playing.value) {
-      this._playerOneManager.subscription.player.value.play()
-      this._playerTwoManager.subscription.player.value.play()
-    } else {
-      await Promise.all([
-        this._playerOneManager.subscription.player.value.stop(),
-        this._playerTwoManager.subscription.player.value.stop(),
-      ])
-    }
-    return
   }
 
   switchMute = (): void => {
     this._muted.value = !this._muted.value
-    if (this._muted.value) {
-      this._playerOneManager.subscription.player.value.mute()
-      this._playerTwoManager.subscription.player.value.mute()
-    } else {
-      this._playerOneManager.subscription.player.value.unMute()
-      this._playerTwoManager.subscription.player.value.unMute()
-    }
   }
 
   switchRepeat = (): void => {
@@ -89,8 +97,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
 
   adjustSpeed = (speed: number): void => {
     this._speed.value = speed
-    this._playerOneManager.subscription.player.value.adjustSpeed(speed)
-    this._playerTwoManager.subscription.player.value.adjustSpeed(speed)
   }
 
   switchSync = () => {
@@ -98,11 +104,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   }
 
   reload = async () => {
-    await this._playerOneManager.subscription.player.value.mute()
-    await this._playerTwoManager.subscription.player.value.mute()
     this._muted.value = true
-    await this._playerOneManager.subscription.player.value.stop()
-    await this._playerTwoManager.subscription.player.value.stop()
     this._playing.value = false
     await this._playerOneManager.subscription.player.value.seekTo(
       this._playerOneStartPosition
@@ -110,18 +112,13 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     await this._playerTwoManager.subscription.player.value.seekTo(
       this._playerTwoStartPosition
     )
-    await this._playerOneManager.subscription.player.value.play()
-    await this._playerTwoManager.subscription.player.value.play()
     this._playing.value = true
   }
 
   private syncProcessing = false // 処理中フラグ
   runSync = async () => {
     this._playing.value = false
-    await Promise.all([
-      this._playerOneManager.subscription.player.value.stop(),
-      this._playerTwoManager.subscription.player.value.stop(),
-    ])
+    this._muted.value = true
     const [playerOneStartPosition, playerTwoStartPosition] = await Promise.all([
       this._playerOneManager.subscription.player.value.getCurrentPosition(),
       this._playerTwoManager.subscription.player.value.getCurrentPosition(),
@@ -244,11 +241,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
 
   seekTo = async (progressRate: number) => {
     this._syncProgressRate.value = progressRate
-    // ミュート
-    await this._playerOneManager.subscription.player.value.mute()
-    await this._playerTwoManager.subscription.player.value.mute()
     this._muted.value = true
-
     // シーク
     const playerOneRange =
       (await this._playerOneManager.subscription.player.value.getDuration()) -
