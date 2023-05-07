@@ -1,3 +1,4 @@
+import { InjectionKey } from "vue"
 import { OpenModalState, IOpenModalState } from "./state/OpenModalState"
 import { SaveModalState, ISaveModalState } from "./state/SaveModalState"
 import {

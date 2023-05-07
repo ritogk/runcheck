@@ -1,11 +1,4 @@
-import {
-  ref,
-  computed,
-  ComputedRef,
-  WritableComputedRef,
-  watchEffect,
-  Ref,
-} from "vue"
+import { ref, computed, ComputedRef, WritableComputedRef, Ref } from "vue"
 import {
   IVideoPlayer,
   Status,
@@ -20,7 +13,6 @@ export interface ISyncPlayerStateType {
   diff: Ref<{ abs: number; own: number; two: number }[]>
   playerOneManager: PlayerManager
   playerTwoManager: PlayerManager
-  currentPosition: WritableComputedRef<number>
   switchPlay(): void
   switchMute(): void
   switchRepeat(): void
@@ -46,7 +38,6 @@ export interface ISyncPlayerStateType {
 
 export class SyncPlayerState implements ISyncPlayerStateType {
   public diff = ref([{ abs: 0, own: 0, two: 0 }])
-  private _currentPosition = ref(0)
   private _playerOneManager: PlayerManager
   private _playerOneStartPosition = 0
   private _playerTwoManager: PlayerManager
@@ -72,15 +63,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   get playerTwoManager() {
     return this._playerTwoManager
   }
-
-  currentPosition = computed({
-    get: () => {
-      return this._currentPosition.value
-    },
-    set: (value) => {
-      this._currentPosition.value = value
-    },
-  })
 
   switchPlay = async () => {
     this._playing.value = !this._playing.value
