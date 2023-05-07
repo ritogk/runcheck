@@ -55,6 +55,7 @@ type UseMainStateType = {
       speed: ComputedRef<number>
       synced: ComputedRef<boolean>
       progressRate: ComputedRef<number>
+      duration: ComputedRef<number>
     }
   }
 }

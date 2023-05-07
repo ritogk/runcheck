@@ -94,6 +94,26 @@ const sliderPositionStyle = computed(() => {
   if (!width) return "0%"
   return `${useMainState.syncPlayer.subscription.progressRate.value * 100}%`
 })
+
+const currentMMSS = computed(() => {
+  return convertSecondsToMMSS(
+    useMainState.syncPlayer.subscription.duration.value *
+      useMainState.syncPlayer.subscription.progressRate.value
+  )
+})
+const endMMSS = computed(() => {
+  return convertSecondsToMMSS(
+    useMainState.syncPlayer.subscription.duration.value
+  )
+})
+function convertSecondsToMMSS(seconds: number) {
+  var minutes = Math.floor(seconds / 60)
+  var remainingSeconds = Math.floor(seconds % 60)
+  var formattedMinutes = minutes < 10 ? "0" + minutes : minutes
+  var formattedSeconds =
+    remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds
+  return formattedMinutes + ":" + formattedSeconds
+}
 </script>
 
 <style>
@@ -166,8 +186,8 @@ const sliderPositionStyle = computed(() => {
         <div
           class="flex justify-between text-sm leading-6 font-medium tabular-nums"
         >
-          <div class="text-cyan-500 dark:text-gray-100">24:16</div>
-          <div class="text-gray-500 dark:text-gray-400">75:50</div>
+          <div class="text-cyan-500 dark:text-gray-100">{{ currentMMSS }}</div>
+          <div class="text-gray-500 dark:text-gray-400">{{ endMMSS }}</div>
         </div>
       </div>
     </div>
