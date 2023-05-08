@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, inject } from "vue"
+import { ref, inject, watch, reactive } from "vue"
 import {
   Dialog,
   DialogPanel,
@@ -16,11 +16,9 @@ import {
   CheckIcon,
   ChevronUpDownIcon,
 } from "@heroicons/vue/20/solid"
-import {
-  UseMainState,
-  UseMainStateKey,
-  UseMainStateType,
-} from "@/pages/main/UseMainState"
+import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
+import { ComparisonsApi } from "@/core/openapiClient"
+import { useRouter } from "vue-router"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
@@ -28,19 +26,31 @@ const onClose = () => {
   useMainState.openModal.close()
 }
 
-const people = [
-  { id: 1, name: "Wade Cooper" },
-  { id: 2, name: "Arlene Mccoy" },
-  { id: 3, name: "Devon Webb" },
-  { id: 4, name: "Tom Cook" },
-  { id: 5, name: "Tanya Fox" },
-  { id: 6, name: "Hellen Schmidt" },
-  { id: 7, name: "Caroline Schultz" },
-  { id: 8, name: "Mason Heaney" },
-  { id: 9, name: "Claudie Smitham" },
-  { id: 10, name: "Emil Schaefer" },
-]
-const selected = ref(people[3])
+const comparisonsApi = new ComparisonsApi()
+const comparisonOptions = reactive<{ id: number; name: string }[]>([
+  { id: 0, name: "　" },
+])
+watch(useMainState.openModal.subscription.opened, async (value) => {
+  if (value) {
+    const response = await comparisonsApi.comparisonsGet()
+    comparisonOptions.splice(
+      0,
+      comparisonOptions.length,
+      ...response
+        .filter((x) => {
+          return !x.anonymous
+        })
+        .map((x) => {
+          return { id: x.id, name: x.title }
+        })
+    )
+  }
+})
+const selected = ref(comparisonOptions[0])
+
+const hundleOpen = () => {
+  location.href = `${window.location.origin}${window.location.pathname}?comparisonId=${selected.value.id}`
+}
 </script>
 <template>
   <TransitionRoot
@@ -131,9 +141,9 @@ const selected = ref(people[3])
                             >
                               <ListboxOption
                                 as="template"
-                                v-for="person in people"
-                                :key="person.id"
-                                :value="person"
+                                v-for="option in comparisonOptions"
+                                :key="option.id"
+                                :value="option"
                                 v-slot="{ active, selected }"
                               >
                                 <li
@@ -151,7 +161,7 @@ const selected = ref(people[3])
                                         : 'font-normal',
                                       'block truncate',
                                     ]"
-                                    >{{ person.name }}</span
+                                    >{{ option.name }}</span
                                   >
 
                                   <span
@@ -177,6 +187,7 @@ const selected = ref(people[3])
                         <button
                           type="submit"
                           class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          @click="hundleOpen"
                         >
                           開く
                         </button>
