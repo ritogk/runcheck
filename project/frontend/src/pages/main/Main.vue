@@ -8,7 +8,7 @@ import AdjustSpeedModal from "./parts/AdjustSpeedModal.vue"
 import FileController from "./parts/FileController.vue"
 import SyncController from "./parts/SyncController.vue"
 import SyncOption from "./parts/SyncOption.vue"
-import TitleArea from "./parts/TitleArea.vue"
+import MemoArea from "./parts/MemoArea.vue"
 
 const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)
@@ -20,7 +20,7 @@ provide(UseMainStateKey, useMainState)
   <div class="max-w-[600px]">
     <div class="px-1 pt-2">
       <FileController></FileController>
-      <TitleArea></TitleArea>
+      <MemoArea></MemoArea>
       <SyncOption></SyncOption>
       <div class="h-px my-3 bg-gray-300"></div>
     </div>

@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { provide, inject } from "vue"
-import { UseMainState, UseMainStateKey } from "@/pages/main/UseMainState"
+import { UseMainStateType, UseMainStateKey } from "@/pages/main/UseMainState"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 
-const useMainState = UseMainState()
-provide(UseMainStateKey, useMainState)
+const useMainState = inject(UseMainStateKey) as UseMainStateType
 
 const userState = inject(useUserStateKey) as useUserStateType
 </script>
@@ -20,10 +19,10 @@ const userState = inject(useUserStateKey) as useUserStateType
       >
         <div class="ml-4 mt-4">
           <h3 class="text-base font-semibold leading-6 text-gray-900">
-            美浜サーキット ベストラップvsセカンドラップ
+            {{ useMainState.title.subscription.title.value }}
           </h3>
           <p class="mt-1 text-sm text-gray-500">
-            F:A052 225/50/R15 R:A052 195/50/R15
+            {{ useMainState.title.subscription.memo.value }}
           </p>
         </div>
       </div>
