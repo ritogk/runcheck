@@ -21,8 +21,9 @@ provide(UseMainStateKey, useMainState)
     <div class="px-1 pt-2">
       <FileController></FileController>
       <MemoArea></MemoArea>
+      <div class="h-px my-2 bg-gray-300"></div>
       <SyncOption></SyncOption>
-      <div class="h-px my-3 bg-gray-300"></div>
+      <div class="h-px my-2 bg-gray-300"></div>
     </div>
 
     <PlayerOneArea></PlayerOneArea>
