@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, inject, reactive } from "vue"
+import { ref, inject, reactive, computed } from "vue"
 import {
   Listbox,
   ListboxButton,
@@ -7,33 +7,48 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/vue"
-import {
-  CheckIcon,
-  ChevronUpDownIcon,
-  // TrashIcon,
-} from "@heroicons/vue/20/solid"
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
 import { fetchComparisons } from "@/core/comparisons"
 
-const tagOptions = reactive<{ id: number; name: string }[]>([
-  { id: 0, name: "　" },
-])
+const comparisons = reactive<
+  { id: number; title: string; memo: string; tag: string }[]
+>([])
 
 const fetch = async () => {
   const response = await fetchComparisons()
-  tagOptions.splice(
+  comparisons.splice(
     0,
-    tagOptions.length,
+    comparisons.length,
     ...response
       .filter((x) => {
         return !x.anonymous
       })
       .map((x) => {
-        return { id: x.id, name: x.title }
+        return { id: x.id, title: x.title, memo: x.memo, tag: x.category }
       })
   )
 }
 fetch()
-const selected = ref(tagOptions[0])
+
+const tagOptions = computed(() => {
+  return [
+    { id: 0, name: "　" },
+    ...comparisons.map((x) => {
+      return { id: x.id, name: x.tag }
+    }),
+  ]
+})
+const selected = ref({ id: 0, name: "　" })
+
+const syncs = computed(() => {
+  return comparisons
+    .filter((x) => {
+      return selected.value.name === "　" || x.tag === selected.value.name
+    })
+    .map((x) => {
+      return { id: x.id, title: x.title, memo: x.memo, tag: x.tag }
+    })
+})
 </script>
 
 <template>
@@ -121,12 +136,12 @@ const selected = ref(tagOptions[0])
 
       <div class="overflow-hidden bg-white shadow sm:rounded-md">
         <ul role="list" class="divide-y divide-gray-200">
-          <li>
+          <li v-for="sync in syncs" :key="sync.id">
             <a href="#" class="block hover:bg-gray-50">
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
                   <p class="truncate text-sm font-medium text-indigo-600">
-                    けんぼーさん比較(美浜)
+                    {{ sync.title }}
                   </p>
                 </div>
                 <div class="mt-2 sm:flex sm:justify-between">
@@ -145,7 +160,24 @@ const selected = ref(tagOptions[0])
                           transform="translate(-16.249 -263.266)"
                         />
                       </svg>
-                      フィット
+                      {{ sync.memo }}
+                    </p>
+                    <p
+                      class="mt-2 flex items-center text-sm text-gray-500 sm:ml-6 sm:mt-0"
+                    >
+                      <svg
+                        class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      {{ sync.tag }}
                     </p>
                   </div>
                   <div
