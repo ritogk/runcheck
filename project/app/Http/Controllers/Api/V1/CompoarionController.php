@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 // usecase
 use App\UseCase\Comparison\RegisterComparisonAction;
 use App\UseCase\Comparison\FindComparisonAction;
+use App\UseCase\Comparison\ListComparisonAction;
 use App\UseCase\Comparison\DeleteComparisonAction;
 use App\UseCase\Comparison\PublishComparisonAction;
 // openapi
@@ -29,7 +30,27 @@ class CompoarionController extends Controller
         if ($comparison) {
             return response()->json(
                 OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\VideoComparison::class, $comparison->toArray()),
-                Response::HTTP_CREATED
+                Response::HTTP_OK
+            );
+        }
+        return response()->json(
+            [],
+            Response::HTTP_NO_CONTENT
+        );
+    }
+
+    /**
+     * 一覧取得
+     *
+     * @return JsonResponse
+     */
+    public function list(ListComparisonAction $action): JsonResponse
+    {
+        $comparisons = $action->list();
+        if ($comparisons) {
+            return response()->json(
+                $comparisons,
+                Response::HTTP_OK
             );
         }
         return response()->json(

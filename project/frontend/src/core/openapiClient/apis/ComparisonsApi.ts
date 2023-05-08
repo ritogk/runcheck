@@ -18,6 +18,9 @@ import {
     InlineResponse200,
     InlineResponse200FromJSON,
     InlineResponse200ToJSON,
+    InlineResponse2001,
+    InlineResponse2001FromJSON,
+    InlineResponse2001ToJSON,
     VideoComparison,
     VideoComparisonFromJSON,
     VideoComparisonToJSON,
@@ -96,19 +99,34 @@ export interface ComparisonsApiInterface {
 
     /**
      * 詳細内容
+     * @summary 比較情報一覧を取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ComparisonsApiInterface
+     */
+    comparisonsGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse200>>>;
+
+    /**
+     * 詳細内容
+     * 比較情報一覧を取得
+     */
+    comparisonsGet(initOverrides?: RequestInit): Promise<Array<InlineResponse200>>;
+
+    /**
+     * 詳細内容
      * @summary 比較情報を登録
      * @param {VideoComparison} videoComparison 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ComparisonsApiInterface
      */
-    comparisonsPostRaw(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse200>>;
+    comparisonsPostRaw(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse2001>>;
 
     /**
      * 詳細内容
      * 比較情報を登録
      */
-    comparisonsPost(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<InlineResponse200>;
+    comparisonsPost(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<InlineResponse2001>;
 
 }
 
@@ -213,9 +231,37 @@ export class ComparisonsApi extends runtime.BaseAPI implements ComparisonsApiInt
 
     /**
      * 詳細内容
+     * 比較情報一覧を取得
+     */
+    async comparisonsGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse200>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/comparisons`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InlineResponse200FromJSON));
+    }
+
+    /**
+     * 詳細内容
+     * 比較情報一覧を取得
+     */
+    async comparisonsGet(initOverrides?: RequestInit): Promise<Array<InlineResponse200>> {
+        const response = await this.comparisonsGetRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * 詳細内容
      * 比較情報を登録
      */
-    async comparisonsPostRaw(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse200>> {
+    async comparisonsPostRaw(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse2001>> {
         if (requestParameters.videoComparison === null || requestParameters.videoComparison === undefined) {
             throw new runtime.RequiredError('videoComparison','Required parameter requestParameters.videoComparison was null or undefined when calling comparisonsPost.');
         }
@@ -234,14 +280,14 @@ export class ComparisonsApi extends runtime.BaseAPI implements ComparisonsApiInt
             body: VideoComparisonToJSON(requestParameters.videoComparison),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse200FromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2001FromJSON(jsonValue));
     }
 
     /**
      * 詳細内容
      * 比較情報を登録
      */
-    async comparisonsPost(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<InlineResponse200> {
+    async comparisonsPost(requestParameters: ComparisonsPostRequest, initOverrides?: RequestInit): Promise<InlineResponse2001> {
         const response = await this.comparisonsPostRaw(requestParameters, initOverrides);
         return await response.value();
     }

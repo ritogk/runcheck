@@ -118,6 +118,55 @@ paths:
                     description: "比較ID"
                 required:
                   - comparisonId
+    get:
+      tags:
+        - "comparisons"
+      summary: 比較情報一覧を取得
+      description: 詳細内容
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    category:
+                      type: string
+                    memo:
+                      type: string
+                    title:
+                      type: string
+                    video1Url:
+                      type: string
+                    video1TimeSt:
+                      type: number
+                    video1VideoType:
+                      $ref: "#/components/schemas/videoType"
+                    video2Url:
+                      type: string
+                    video2TimeSt:
+                      type: number
+                    video2VideoType:
+                      $ref: "#/components/schemas/videoType"
+                    anonymous:
+                      type: boolean
+                  required:
+                    - id
+                    - category
+                    - memo
+                    - title
+                    - video1Url
+                    - video1TimeSt
+                    - video1VideoType
+                    - video2Url
+                    - video2TimeSt
+                    - video2VideoType
+                    - anonymous
   /comparisons/{comparisonId}:
     get:
       tags:
