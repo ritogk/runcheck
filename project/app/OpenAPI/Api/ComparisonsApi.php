@@ -77,7 +77,7 @@ class ComparisonsApi
         'comparisonsComparisonIdGet' => [
             'application/json',
         ],
-        'comparisonsComparisonIdPublishPost' => [
+        'comparisonsComparisonIdPublishPut' => [
             'application/json',
         ],
         'comparisonsPost' => [
@@ -644,37 +644,37 @@ class ComparisonsApi
     }
 
     /**
-     * Operation comparisonsComparisonIdPublishPost
+     * Operation comparisonsComparisonIdPublishPut
      *
      * 比較情報を公開状態にする
      *
      * @param  int $comparisonId comparisonId (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPut'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function comparisonsComparisonIdPublishPost($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPost'][0])
+    public function comparisonsComparisonIdPublishPut($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPut'][0])
     {
-        $this->comparisonsComparisonIdPublishPostWithHttpInfo($comparisonId, $contentType);
+        $this->comparisonsComparisonIdPublishPutWithHttpInfo($comparisonId, $contentType);
     }
 
     /**
-     * Operation comparisonsComparisonIdPublishPostWithHttpInfo
+     * Operation comparisonsComparisonIdPublishPutWithHttpInfo
      *
      * 比較情報を公開状態にする
      *
      * @param  int $comparisonId (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPut'] to see the possible values for this operation
      *
      * @throws \App\OpenAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function comparisonsComparisonIdPublishPostWithHttpInfo($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPost'][0])
+    public function comparisonsComparisonIdPublishPutWithHttpInfo($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPut'][0])
     {
-        $request = $this->comparisonsComparisonIdPublishPostRequest($comparisonId, $contentType);
+        $request = $this->comparisonsComparisonIdPublishPutRequest($comparisonId, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -721,19 +721,19 @@ class ComparisonsApi
     }
 
     /**
-     * Operation comparisonsComparisonIdPublishPostAsync
+     * Operation comparisonsComparisonIdPublishPutAsync
      *
      * 比較情報を公開状態にする
      *
      * @param  int $comparisonId (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPut'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function comparisonsComparisonIdPublishPostAsync($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPost'][0])
+    public function comparisonsComparisonIdPublishPutAsync($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPut'][0])
     {
-        return $this->comparisonsComparisonIdPublishPostAsyncWithHttpInfo($comparisonId, $contentType)
+        return $this->comparisonsComparisonIdPublishPutAsyncWithHttpInfo($comparisonId, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -742,20 +742,20 @@ class ComparisonsApi
     }
 
     /**
-     * Operation comparisonsComparisonIdPublishPostAsyncWithHttpInfo
+     * Operation comparisonsComparisonIdPublishPutAsyncWithHttpInfo
      *
      * 比較情報を公開状態にする
      *
      * @param  int $comparisonId (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPut'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function comparisonsComparisonIdPublishPostAsyncWithHttpInfo($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPost'][0])
+    public function comparisonsComparisonIdPublishPutAsyncWithHttpInfo($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPut'][0])
     {
         $returnType = '';
-        $request = $this->comparisonsComparisonIdPublishPostRequest($comparisonId, $contentType);
+        $request = $this->comparisonsComparisonIdPublishPutRequest($comparisonId, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -781,21 +781,21 @@ class ComparisonsApi
     }
 
     /**
-     * Create request for operation 'comparisonsComparisonIdPublishPost'
+     * Create request for operation 'comparisonsComparisonIdPublishPut'
      *
      * @param  int $comparisonId (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['comparisonsComparisonIdPublishPut'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function comparisonsComparisonIdPublishPostRequest($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPost'][0])
+    public function comparisonsComparisonIdPublishPutRequest($comparisonId, string $contentType = self::contentTypes['comparisonsComparisonIdPublishPut'][0])
     {
 
         // verify the required parameter 'comparisonId' is set
         if ($comparisonId === null || (is_array($comparisonId) && count($comparisonId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $comparisonId when calling comparisonsComparisonIdPublishPost'
+                'Missing the required parameter $comparisonId when calling comparisonsComparisonIdPublishPut'
             );
         }
 
@@ -865,7 +865,7 @@ class ComparisonsApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'POST',
+            'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

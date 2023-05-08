@@ -31,7 +31,7 @@ export interface ComparisonsComparisonIdGetRequest {
     comparisonId: number;
 }
 
-export interface ComparisonsComparisonIdPublishPostRequest {
+export interface ComparisonsComparisonIdPublishPutRequest {
     comparisonId: number;
 }
 
@@ -86,13 +86,13 @@ export interface ComparisonsApiInterface {
      * @throws {RequiredError}
      * @memberof ComparisonsApiInterface
      */
-    comparisonsComparisonIdPublishPostRaw(requestParameters: ComparisonsComparisonIdPublishPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>>;
+    comparisonsComparisonIdPublishPutRaw(requestParameters: ComparisonsComparisonIdPublishPutRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>>;
 
     /**
      * 詳細内容
      * 比較情報を公開状態にする
      */
-    comparisonsComparisonIdPublishPost(requestParameters: ComparisonsComparisonIdPublishPostRequest, initOverrides?: RequestInit): Promise<void>;
+    comparisonsComparisonIdPublishPut(requestParameters: ComparisonsComparisonIdPublishPutRequest, initOverrides?: RequestInit): Promise<void>;
 
     /**
      * 詳細内容
@@ -184,9 +184,9 @@ export class ComparisonsApi extends runtime.BaseAPI implements ComparisonsApiInt
      * 詳細内容
      * 比較情報を公開状態にする
      */
-    async comparisonsComparisonIdPublishPostRaw(requestParameters: ComparisonsComparisonIdPublishPostRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async comparisonsComparisonIdPublishPutRaw(requestParameters: ComparisonsComparisonIdPublishPutRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.comparisonId === null || requestParameters.comparisonId === undefined) {
-            throw new runtime.RequiredError('comparisonId','Required parameter requestParameters.comparisonId was null or undefined when calling comparisonsComparisonIdPublishPost.');
+            throw new runtime.RequiredError('comparisonId','Required parameter requestParameters.comparisonId was null or undefined when calling comparisonsComparisonIdPublishPut.');
         }
 
         const queryParameters: any = {};
@@ -195,7 +195,7 @@ export class ComparisonsApi extends runtime.BaseAPI implements ComparisonsApiInt
 
         const response = await this.request({
             path: `/comparisons/{comparisonId}/publish`.replace(`{${"comparisonId"}}`, encodeURIComponent(String(requestParameters.comparisonId))),
-            method: 'POST',
+            method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
@@ -207,8 +207,8 @@ export class ComparisonsApi extends runtime.BaseAPI implements ComparisonsApiInt
      * 詳細内容
      * 比較情報を公開状態にする
      */
-    async comparisonsComparisonIdPublishPost(requestParameters: ComparisonsComparisonIdPublishPostRequest, initOverrides?: RequestInit): Promise<void> {
-        await this.comparisonsComparisonIdPublishPostRaw(requestParameters, initOverrides);
+    async comparisonsComparisonIdPublishPut(requestParameters: ComparisonsComparisonIdPublishPutRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.comparisonsComparisonIdPublishPutRaw(requestParameters, initOverrides);
     }
 
     /**
