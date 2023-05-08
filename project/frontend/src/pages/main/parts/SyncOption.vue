@@ -17,7 +17,7 @@ const hundleTweetClick = async () => {
   const compoarion = await useMainState.syncPlayer.saveSync()
   await useMainState.syncPlayer.publishSync(compoarion.id)
   // ツイートする
-  const url = `${location.href}?comparisonId=${compoarion.id}`
+  const url = `${window.location.origin}${window.location.pathname}?comparisonId=${compoarion.id}`
   window.open("https://twitter.com/intent/tweet?text=" + url)
 }
 
