@@ -233,6 +233,12 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     }, 500)
   }
 
+  stopSync = (): void => {
+    this._synced.value = false
+    clearInterval(this._syncIntervalId)
+    this._syncIntervalId = 0
+  }
+
   enableSync = () => {
     this.syncProcessing = false
   }
@@ -255,7 +261,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     const video2Url =
       await this.playerTwoManager.subscription.player.value.getPath()
     const video2EmbedUrl = `https://www.youtube.com/embed/${video2Url.substring(
-      video1Url.length - 11
+      video2Url.length - 11
     )}`
     const video2TimeSt = this._playerTwoStartPosition
     const video2VideoType =
@@ -274,12 +280,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       },
     })
     return { id: response.comparisonId }
-  }
-
-  stopSync = (): void => {
-    this._synced.value = false
-    clearInterval(this._syncIntervalId)
-    this._syncIntervalId = 0
   }
 
   seekTo = async (progressRate: number) => {

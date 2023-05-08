@@ -1,79 +1,74 @@
 <script setup lang="ts">
-import { inject, ref, computed, defineEmits, watch } from "vue";
+import { inject, ref, computed, watch } from "vue"
 import {
   Dialog,
   DialogPanel,
   TransitionChild,
   TransitionRoot,
-} from "@headlessui/vue";
-import { XMarkIcon } from "@heroicons/vue/20/solid";
-import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
-import { YoutubeApi } from "@/core/openapiClient";
-import { VideoListState } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/VideoListState";
-import { VideoNo } from "./video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
-import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer";
-import { callbackYoutubeOauth } from "./CallbackYoutubeOauth";
-import {
-  IVideoPlayer,
-  VideoType,
-  Status,
-} from "@/pages/main/parts/video-area-parts/libs/IVideoPlayer";
+} from "@headlessui/vue"
+import { XMarkIcon } from "@heroicons/vue/20/solid"
+import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
+import { YoutubeApi } from "@/core/openapiClient"
+import { VideoListState } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/VideoListState"
+import { VideoNo } from "./video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
+import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer"
+import { callbackYoutubeOauth } from "./CallbackYoutubeOauth"
 
-const useMainState = inject(UseMainStateKey) as UseMainStateType;
+const useMainState = inject(UseMainStateKey) as UseMainStateType
 
-const videoListState = VideoListState();
+const videoListState = VideoListState()
 watch(useMainState.youtubeModal.subscription.opened, (value) => {
-  if (value) videoListState.load();
-});
+  if (value) videoListState.load()
+})
 
-const filter = ref("");
+const filter = ref("")
 const filteredVideos = computed(() => {
   return videoListState.subscription.videos.value.filter((video) => {
     return (
       video.title.includes(filter.value) ||
       video.description.includes(filter.value)
-    );
-  });
-});
+    )
+  })
+})
 
 const onClose = () => {
-  useMainState.youtubeModal.close();
-};
+  useMainState.youtubeModal.close()
+}
 
-const youtubeApi = new YoutubeApi();
+const youtubeApi = new YoutubeApi()
 const redirectToAuthorize = async () => {
-  const response = await youtubeApi.youtubeOauthAuthorizeGet();
-  useMainState.youtubeModal.save();
-  location.href = response.redirectUrl;
-};
+  const response = await youtubeApi.youtubeOauthAuthorizeGet()
+  useMainState.youtubeModal.save()
+  location.href = response.redirectUrl
+}
 
-const playerOneManager = useMainState.syncPlayer.playerOneManager;
-const playerTwoManager = useMainState.syncPlayer.playerTwoManager;
+const playerOneManager = useMainState.syncPlayer.playerOneManager
+const playerTwoManager = useMainState.syncPlayer.playerTwoManager
 
 const selectVideo = async (url: string) => {
-  useMainState.youtubeModal.select(url);
-  const videoNo = useMainState.youtubeModal.subscription.currentVideoNo.value;
+  useMainState.youtubeModal.select(url)
+  const videoNo = useMainState.youtubeModal.subscription.currentVideoNo.value
   switch (videoNo) {
     case VideoNo.ONE:
-      playerOneManager.subscription.player.value.destory();
-      playerOneManager.changePlayer(
-        new YouTubePlayer("youtube-video-own", url)
-      );
-      break;
+      playerOneManager.subscription.player.value.destory()
+      const playerOne = new YouTubePlayer("youtube-video-own", url)
+      await playerOne.load()
+      playerOneManager.changePlayer(playerOne)
+      break
     case VideoNo.TWO:
-      playerTwoManager.subscription.player.value.destory();
-      playerTwoManager.changePlayer(
-        new YouTubePlayer("youtube-video-two", url)
-      );
-      break;
+      playerTwoManager.subscription.player.value.destory()
+      const playerTwo = new YouTubePlayer("youtube-video-two", url)
+      await playerTwo.load()
+      playerTwoManager.changePlayer(playerTwo)
+      break
   }
-  useMainState.youtubeModal.close();
-};
+  useMainState.youtubeModal.close()
+}
 
 // Oauthで認可された後の処理
-const urlParams = new URLSearchParams(window.location.search);
-const code = urlParams.get("code");
-if (code) callbackYoutubeOauth(code);
+const urlParams = new URLSearchParams(window.location.search)
+const code = urlParams.get("code")
+if (code) callbackYoutubeOauth(code)
 </script>
 
 <template>

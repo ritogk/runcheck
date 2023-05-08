@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import Video from "@/pages/main/parts/video-area-parts/Video.vue";
-import { ref, onMounted, inject, watch, watchEffect } from "vue";
-import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState";
-import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer";
-import { LocalVideoPlayer } from "./video-area-parts/libs/LocalVideoPlayer";
-import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState";
+import Video from "@/pages/main/parts/video-area-parts/Video.vue"
+import { ref, onMounted, inject, watch, watchEffect } from "vue"
+import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
+import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer"
+import { LocalVideoPlayer } from "./video-area-parts/libs/LocalVideoPlayer"
+import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
 import {
   ChevronDoubleRightIcon,
   ChevronDoubleLeftIcon,
   VideoCameraIcon,
   // SearchIcon,
-} from "@heroicons/vue/20/solid";
-import { VideoType } from "./video-area-parts/libs/IVideoPlayer";
+} from "@heroicons/vue/20/solid"
+import { VideoType } from "./video-area-parts/libs/IVideoPlayer"
 
-const videoNo = VideoNo.ONE;
+const videoNo = VideoNo.ONE
 
-const useMainState = inject(UseMainStateKey) as UseMainStateType;
-const youtubeUrl = ref("");
+const useMainState = inject(UseMainStateKey) as UseMainStateType
+const youtubeUrl = ref("")
 watch(useMainState.youtubeModal.subscription.selectUrl, () => {
   if (useMainState.youtubeModal.subscription.currentVideoNo.value !== videoNo)
-    return;
-  youtubeUrl.value = useMainState.youtubeModal.subscription.selectUrl.value;
-});
+    return
+  youtubeUrl.value = useMainState.youtubeModal.subscription.selectUrl.value
+})
 
 const elements = {
   localVideo: {
@@ -29,48 +29,49 @@ const elements = {
     video: ref<HTMLVideoElement | null>(null),
   },
   videoArea: ref<HTMLInputElement | null>(null),
-};
+}
 
-const calcVideoHeight = ref("300px");
+const calcVideoHeight = ref("300px")
 watch(elements.videoArea, () => {
-  const width = elements.videoArea.value?.offsetWidth ?? 600;
-  calcVideoHeight.value = `${width * (9 / 16)}px`;
-});
+  const width = elements.videoArea.value?.offsetWidth ?? 600
+  calcVideoHeight.value = `${width * (9 / 16)}px`
+})
 
 const hundleLocalVideoSelect = () => {
-  elements.localVideo.file.value?.click();
-};
+  elements.localVideo.file.value?.click()
+}
 
-const playerOneManager = useMainState.syncPlayer.playerOneManager;
+const playerOneManager = useMainState.syncPlayer.playerOneManager
 
 const hundleLocalVideoChange = async (event: Event) => {
-  const file = (event as any).currentTarget.files[0];
-  const objectURL = URL.createObjectURL(file);
+  const file = (event as any).currentTarget.files[0]
+  const objectURL = URL.createObjectURL(file)
 
-  playerOneManager.subscription.player.value.destory();
+  playerOneManager.subscription.player.value.destory()
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
-  );
-  playerOneManager.changePlayer(localVideoPlayer);
-  playerOneManager.subscription.player.value.changeVideo(objectURL);
-};
+  )
+  await localVideoPlayer.load()
+  playerOneManager.changePlayer(localVideoPlayer)
+  playerOneManager.subscription.player.value.changeVideo(objectURL)
+}
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
-  playerOneManager.subscription.player.value.destory();
-  playerOneManager.changePlayer(
-    new YouTubePlayer("youtube-video-own", youtubeUrl)
-  );
-  playerOneManager.subscription.player.value.changeVideo(youtubeUrl);
-};
+  playerOneManager.subscription.player.value.destory()
+  const player = new YouTubePlayer("youtube-video-own", youtubeUrl)
+  await player.load()
+  playerOneManager.changePlayer(player)
+  playerOneManager.subscription.player.value.changeVideo(youtubeUrl)
+}
 
 const hundleVideoSeek = async (seconds: number) => {
   const currentPosition =
-    await playerOneManager.subscription.player.value.getCurrentPosition();
+    await playerOneManager.subscription.player.value.getCurrentPosition()
   useMainState.syncPlayer.playerOneManager.subscription.player.value.seekTo(
     currentPosition + seconds
-  );
-};
+  )
+}
 </script>
 <template>
   <!-- ajust-->
