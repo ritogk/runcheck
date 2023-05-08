@@ -17,7 +17,7 @@ import {
   ChevronUpDownIcon,
 } from "@heroicons/vue/20/solid"
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
-import { ComparisonsApi } from "@/core/openapiClient"
+import { fetchComparisons } from "@/core/comparisons"
 import { useRouter } from "vue-router"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
@@ -26,13 +26,12 @@ const onClose = () => {
   useMainState.openModal.close()
 }
 
-const comparisonsApi = new ComparisonsApi()
 const comparisonOptions = reactive<{ id: number; name: string }[]>([
   { id: 0, name: "　" },
 ])
 watch(useMainState.openModal.subscription.opened, async (value) => {
   if (value) {
-    const response = await comparisonsApi.comparisonsGet()
+    const response = await fetchComparisons()
     comparisonOptions.splice(
       0,
       comparisonOptions.length,
