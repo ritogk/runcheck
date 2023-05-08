@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, inject, reactive, computed } from "vue"
+import { useRouter } from "vue-router"
 import {
   Listbox,
   ListboxButton,
@@ -49,6 +50,11 @@ const syncs = computed(() => {
       return { id: x.id, title: x.title, memo: x.memo, tag: x.tag }
     })
 })
+
+const router = useRouter()
+const hundleTitleClick = (comparisonId: number) => {
+  router.push({ name: "index", query: { comparisonId: comparisonId } })
+}
 </script>
 
 <template>
@@ -140,7 +146,10 @@ const syncs = computed(() => {
             <a href="#" class="block hover:bg-gray-50">
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
-                  <p class="truncate text-sm font-medium text-indigo-600">
+                  <p
+                    class="truncate text-sm font-medium text-indigo-600"
+                    @click="hundleTitleClick(sync.id)"
+                  >
                     {{ sync.title }}
                   </p>
                 </div>
