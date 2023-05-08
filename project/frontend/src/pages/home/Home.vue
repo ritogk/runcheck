@@ -1,3 +1,41 @@
+<script setup lang="ts">
+import { ref, inject, reactive } from "vue"
+import {
+  Listbox,
+  ListboxButton,
+  ListboxLabel,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/vue"
+import {
+  CheckIcon,
+  ChevronUpDownIcon,
+  // TrashIcon,
+} from "@heroicons/vue/20/solid"
+import { fetchComparisons } from "@/core/comparisons"
+
+const tagOptions = reactive<{ id: number; name: string }[]>([
+  { id: 0, name: "　" },
+])
+
+const fetch = async () => {
+  const response = await fetchComparisons()
+  tagOptions.splice(
+    0,
+    tagOptions.length,
+    ...response
+      .filter((x) => {
+        return !x.anonymous
+      })
+      .map((x) => {
+        return { id: x.id, name: x.title }
+      })
+  )
+}
+fetch()
+const selected = ref(tagOptions[0])
+</script>
+
 <template>
   <div class="mx-3">
     <div class="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8">
@@ -46,9 +84,9 @@
             >
               <ListboxOption
                 as="template"
-                v-for="person in people"
-                :key="person.id"
-                :value="person"
+                v-for="option in tagOptions"
+                :key="option.id"
+                :value="option"
                 v-slot="{ active, selected }"
               >
                 <li
@@ -62,7 +100,7 @@
                       selected ? 'font-semibold' : 'font-normal',
                       'block truncate',
                     ]"
-                    >{{ person.name }}</span
+                    >{{ option.name }}</span
                   >
 
                   <span
@@ -126,34 +164,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue"
-import {
-  Listbox,
-  ListboxButton,
-  ListboxLabel,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/vue"
-import {
-  CheckIcon,
-  ChevronUpDownIcon,
-  // TrashIcon,
-} from "@heroicons/vue/20/solid"
-
-const people = [
-  { id: 1, name: "Wade Cooper" },
-  { id: 2, name: "Arlene Mccoy" },
-  { id: 3, name: "Devon Webb" },
-  { id: 4, name: "Tom Cook" },
-  { id: 5, name: "Tanya Fox" },
-  { id: 6, name: "Hellen Schmidt" },
-  { id: 7, name: "Caroline Schultz" },
-  { id: 8, name: "Mason Heaney" },
-  { id: 9, name: "Claudie Smitham" },
-  { id: 10, name: "Emil Schaefer" },
-]
-
-const selected = ref(people[3])
-</script>
