@@ -7,13 +7,38 @@ import {
   TransitionRoot,
 } from "@headlessui/vue"
 import { XMarkIcon } from "@heroicons/vue/20/solid"
-
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
+const form = {
+  title: ref<HTMLInputElement | null>(null),
+  memo: ref<HTMLInputElement | null>(null),
+  tag: ref<HTMLInputElement | null>(null),
+}
+
 const onClose = () => {
   useMainState.saveModal.close()
+}
+
+const onSubmit = async () => {
+  if (
+    form.title.value === null ||
+    form.memo.value === null ||
+    form.tag.value === null
+  )
+    return
+
+  if (
+    await useMainState.syncPlayer.saveSync(
+      false,
+      form.title.value.value,
+      form.memo.value.value,
+      form.tag.value.value
+    )
+  ) {
+    onClose()
+  }
 }
 </script>
 
@@ -75,7 +100,7 @@ const onClose = () => {
 
                   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div class="bg-white px-4 py-8 shadow rounded-lg sm:px-10">
-                      <form class="space-y-6" action="#" method="POST">
+                      <form class="space-y-6" @submit.prevent="onSubmit()">
                         <div>
                           <label
                             for="title"
@@ -90,6 +115,7 @@ const onClose = () => {
                               autocomplete="title"
                               required
                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              :ref="form.title"
                             />
                           </div>
                         </div>
@@ -108,6 +134,7 @@ const onClose = () => {
                               autocomplete="memo"
                               required
                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              :ref="form.memo"
                             />
                           </div>
                         </div>
@@ -126,6 +153,7 @@ const onClose = () => {
                               autocomplete="tag"
                               required
                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              :ref="form.tag"
                             />
                           </div>
                         </div>

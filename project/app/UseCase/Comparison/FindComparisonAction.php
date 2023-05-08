@@ -28,7 +28,7 @@ class FindComparisonAction
     if ($user && $user->id == $comparison->user_id) {
       return $comparison;
     }
-    // 匿名情報は公開されている物だけ返す
+    // 匿名情報
     if ($comparison->release_kbn && $comparison->anonymous) {
       return $comparison;
     }

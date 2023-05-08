@@ -80,6 +80,12 @@ export interface VideoComparison {
      * @memberof VideoComparison
      */
     video2VideoType: VideoType;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof VideoComparison
+     */
+    anonymous: boolean;
 }
 
 export function VideoComparisonFromJSON(json: any): VideoComparison {
@@ -101,6 +107,7 @@ export function VideoComparisonFromJSONTyped(json: any, ignoreDiscriminator: boo
         'video2Url': json['video2Url'],
         'video2TimeSt': json['video2TimeSt'],
         'video2VideoType': VideoTypeFromJSON(json['video2VideoType']),
+        'anonymous': json['anonymous'],
     };
 }
 
@@ -122,6 +129,7 @@ export function VideoComparisonToJSON(value?: VideoComparison | null): any {
         'video2Url': value.video2Url,
         'video2TimeSt': value.video2TimeSt,
         'video2VideoType': VideoTypeToJSON(value.video2VideoType),
+        'anonymous': value.anonymous,
     };
 }
 

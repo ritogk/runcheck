@@ -311,6 +311,8 @@ components:
           type: number
         video2VideoType:
           $ref: "#/components/schemas/videoType"
+        anonymous:
+          type: boolean
       required:
         - video1Url
         - video1TimeSt
@@ -318,6 +320,7 @@ components:
         - video2Url
         - video2TimeSt
         - video2VideoType
+        - anonymous
     requestOperationLog:
       description: リクエスト 操作ログ
       type: object

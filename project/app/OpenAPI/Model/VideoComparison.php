@@ -66,7 +66,8 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
         'video1VideoType' => '\App\OpenAPI\Model\VideoType',
         'video2Url' => 'string',
         'video2TimeSt' => 'float',
-        'video2VideoType' => '\App\OpenAPI\Model\VideoType'
+        'video2VideoType' => '\App\OpenAPI\Model\VideoType',
+        'anonymous' => 'bool'
     ];
 
     /**
@@ -85,7 +86,8 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
         'video1VideoType' => null,
         'video2Url' => null,
         'video2TimeSt' => null,
-        'video2VideoType' => null
+        'video2VideoType' => null,
+        'anonymous' => null
     ];
 
     /**
@@ -102,7 +104,8 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
 		'video1VideoType' => false,
 		'video2Url' => false,
 		'video2TimeSt' => false,
-		'video2VideoType' => false
+		'video2VideoType' => false,
+		'anonymous' => false
     ];
 
     /**
@@ -199,7 +202,8 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
         'video1VideoType' => 'video1VideoType',
         'video2Url' => 'video2Url',
         'video2TimeSt' => 'video2TimeSt',
-        'video2VideoType' => 'video2VideoType'
+        'video2VideoType' => 'video2VideoType',
+        'anonymous' => 'anonymous'
     ];
 
     /**
@@ -216,7 +220,8 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
         'video1VideoType' => 'setVideo1VideoType',
         'video2Url' => 'setVideo2Url',
         'video2TimeSt' => 'setVideo2TimeSt',
-        'video2VideoType' => 'setVideo2VideoType'
+        'video2VideoType' => 'setVideo2VideoType',
+        'anonymous' => 'setAnonymous'
     ];
 
     /**
@@ -233,7 +238,8 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
         'video1VideoType' => 'getVideo1VideoType',
         'video2Url' => 'getVideo2Url',
         'video2TimeSt' => 'getVideo2TimeSt',
-        'video2VideoType' => 'getVideo2VideoType'
+        'video2VideoType' => 'getVideo2VideoType',
+        'anonymous' => 'getAnonymous'
     ];
 
     /**
@@ -302,6 +308,7 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('video2Url', $data ?? [], null);
         $this->setIfExists('video2TimeSt', $data ?? [], null);
         $this->setIfExists('video2VideoType', $data ?? [], null);
+        $this->setIfExists('anonymous', $data ?? [], null);
     }
 
     /**
@@ -348,6 +355,9 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['video2VideoType'] === null) {
             $invalidProperties[] = "'video2VideoType' can't be null";
+        }
+        if ($this->container['anonymous'] === null) {
+            $invalidProperties[] = "'anonymous' can't be null";
         }
         return $invalidProperties;
     }
@@ -603,6 +613,33 @@ class VideoComparison implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable video2VideoType cannot be null');
         }
         $this->container['video2VideoType'] = $video2VideoType;
+
+        return $this;
+    }
+
+    /**
+     * Gets anonymous
+     *
+     * @return bool
+     */
+    public function getAnonymous()
+    {
+        return $this->container['anonymous'];
+    }
+
+    /**
+     * Sets anonymous
+     *
+     * @param bool $anonymous anonymous
+     *
+     * @return self
+     */
+    public function setAnonymous($anonymous)
+    {
+        if (is_null($anonymous)) {
+            throw new \InvalidArgumentException('non-nullable anonymous cannot be null');
+        }
+        $this->container['anonymous'] = $anonymous;
 
         return $this;
     }

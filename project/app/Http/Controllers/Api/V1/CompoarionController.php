@@ -48,6 +48,7 @@ class CompoarionController extends Controller
     {
         $requestBody = new OpenAPI\Model\VideoComparison($request->all());
         $comparison = $action->register(
+            $requestBody->getAnonymous() == 1 ? true : false,
             $requestBody->getCategory() ?? '',
             $requestBody->getTitle(),
             $requestBody->getMemo(),

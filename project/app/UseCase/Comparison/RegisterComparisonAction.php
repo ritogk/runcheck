@@ -18,6 +18,7 @@ class RegisterComparisonAction
   /**
    * Undocumented function
    *
+   * @param bool $anonymous
    * @param string|null $category
    * @param string|null $title
    * @param string|null $memo
@@ -29,7 +30,7 @@ class RegisterComparisonAction
    * @param integer $video2_type
    * @return Comparison|null
    */
-  public function register(?string $category, ?string $title, ?string $memo, int $video1_time_st, string $video1_url, int $video1_type, float $video2_time_st, string $video2_url, int $video2_type): ?Comparison
+  public function register(bool $anonymous, ?string $category, ?string $title, ?string $memo, int $video1_time_st, string $video1_url, int $video1_type, float $video2_time_st, string $video2_url, int $video2_type): ?Comparison
   {
     $user = $this->action->me();
     $comparison = new Comparison();
@@ -44,7 +45,7 @@ class RegisterComparisonAction
     $comparison->video2_url = $video2_url;
     $comparison->video2_type = $video2_type;
     $comparison->release_kbn = false;
-    $comparison->anonymous = $user ? false : true;
+    $comparison->anonymous = $anonymous;
     $comparison->save();
     return $comparison;
   }

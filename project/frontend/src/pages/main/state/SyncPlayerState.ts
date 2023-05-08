@@ -22,7 +22,12 @@ export interface ISyncPlayerStateType {
   stopSync(): void
   enableSync(): void
   disableSync(): void
-  saveSync(): Promise<{ id: number }>
+  saveSync(
+    anonymous: boolean,
+    title?: string,
+    memo?: string,
+    category?: string
+  ): Promise<{ id: number }>
   publishSync(id: number): Promise<void>
   seekTo(progressRate: number): Promise<void>
   subscription: {
@@ -248,7 +253,12 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this.syncProcessing = true
   }
 
-  saveSync = async (): Promise<{ id: number }> => {
+  saveSync = async (
+    anonymous: boolean,
+    title?: string,
+    memo?: string,
+    category?: string
+  ): Promise<{ id: number }> => {
     const video1Url =
       await this.playerOneManager.subscription.player.value.getPath()
     const video1EmbedUrl = `https://www.youtube.com/embed/${video1Url.substring(
@@ -272,6 +282,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     // 同期情報の登録
     const response = await this.comparisonsApi.comparisonsPost({
       videoComparison: {
+        title: title,
+        category: category,
+        memo: memo,
+        anonymous: anonymous,
         video1Url: video1EmbedUrl,
         video1TimeSt: video1TimeSt,
         video1VideoType: video1VideoType,

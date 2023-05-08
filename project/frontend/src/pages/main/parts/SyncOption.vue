@@ -14,7 +14,7 @@ const hundleVideoStopSyncClick = () => {
 }
 
 const hundleTweetClick = async () => {
-  const compoarion = await useMainState.syncPlayer.saveSync()
+  const compoarion = await useMainState.syncPlayer.saveSync(true)
   await useMainState.syncPlayer.publishSync(compoarion.id)
   // ツイートする
   const url = `${window.location.origin}${window.location.pathname}?comparisonId=${compoarion.id}`
