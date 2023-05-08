@@ -6,11 +6,19 @@ import PlayerStates from "youtube-player/dist/constants/PlayerStates"
 
 export class YouTubePlayer implements IVideoPlayer {
   private player: YouTubePlayerType
+  private youtubeUrl: string
   public _status = ref(Status.WAITING)
 
   constructor(elementId: string, youtubeUrl: string) {
     this.player = YPlayer(elementId)
-    this.player.loadVideoByUrl(youtubeUrl)
+    this.youtubeUrl = youtubeUrl
+  }
+
+  get videoType() {
+    return VideoType.YOUTUBE
+  }
+
+  load = async () => {
     // ステータス変更を監視
     this.player.on("stateChange", (status) => {
       switch (status.data) {
@@ -31,10 +39,7 @@ export class YouTubePlayer implements IVideoPlayer {
           break
       }
     })
-  }
-
-  get videoType() {
-    return VideoType.YOUTUBE
+    return this.player.loadVideoByUrl(this.youtubeUrl)
   }
 
   changeVideo(url: string): void {

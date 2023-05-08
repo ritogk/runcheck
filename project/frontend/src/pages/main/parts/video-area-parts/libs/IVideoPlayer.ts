@@ -1,6 +1,7 @@
 import { ComputedRef } from "vue"
 export interface IVideoPlayer {
   videoType: VideoType
+  load(): Promise<void>
   changeVideo(url: string): void
   play(): Promise<void>
   stop(): Promise<void>

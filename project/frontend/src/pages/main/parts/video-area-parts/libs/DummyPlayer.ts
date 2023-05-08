@@ -6,6 +6,10 @@ export class DummyPlayer implements IVideoPlayer {
     return VideoType.NONE
   }
 
+  load = async () => {
+    return Promise.resolve()
+  }
+
   changeVideo(url: string): void {}
 
   play = () => {

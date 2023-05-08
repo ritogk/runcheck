@@ -7,9 +7,14 @@ export class LocalVideoPlayer implements IVideoPlayer {
 
   constructor(videoElement: HTMLVideoElement, objectURL: string) {
     videoElement.src = objectURL
-    videoElement.load()
     this.videoElement = videoElement
+  }
 
+  get videoType() {
+    return VideoType.LOCAL
+  }
+
+  load = async () => {
     // ステータスの変更を監視
     this.videoElement.addEventListener("loadeddata", () => {
       this._status.value = Status.WAITING
@@ -26,10 +31,7 @@ export class LocalVideoPlayer implements IVideoPlayer {
     this.videoElement.addEventListener("ended", () => {
       this._status.value = Status.ENDED
     })
-  }
-
-  get videoType() {
-    return VideoType.LOCAL
+    return Promise.resolve(this.videoElement.load())
   }
 
   changeVideo(url: string): void {
