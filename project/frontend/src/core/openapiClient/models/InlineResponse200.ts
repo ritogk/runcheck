@@ -28,10 +28,10 @@ import {
 export interface InlineResponse200 {
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse200
      */
-    id: string;
+    id: number;
     /**
      * 
      * @type {string}

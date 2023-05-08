@@ -57,7 +57,7 @@ class ComparisonsGet200ResponseInner implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
+        'id' => 'float',
         'category' => 'string',
         'memo' => 'string',
         'title' => 'string',
@@ -395,7 +395,7 @@ class ComparisonsGet200ResponseInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets id
      *
-     * @return string
+     * @return float
      */
     public function getId()
     {
@@ -405,7 +405,7 @@ class ComparisonsGet200ResponseInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param float $id id
      *
      * @return self
      */
