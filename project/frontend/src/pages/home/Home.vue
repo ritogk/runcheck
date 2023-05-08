@@ -9,7 +9,7 @@ import {
   ListboxOptions,
 } from "@headlessui/vue"
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
-import { fetchComparisons } from "@/core/comparisons"
+import { fetchComparisons, deleteComparison } from "@/core/comparisons"
 
 const comparisons = reactive<
   { id: number; title: string; memo: string; tag: string }[]
@@ -54,6 +54,13 @@ const syncs = computed(() => {
 const router = useRouter()
 const hundleTitleClick = (comparisonId: number) => {
   router.push({ name: "index", query: { comparisonId: comparisonId } })
+}
+
+const hundleDelete = (comparisonId: number, title: string) => {
+  if (confirm(`${title}を削除します。\nよろしいですか？`)) {
+    deleteComparison(comparisonId)
+    router.go(0)
+  }
 }
 </script>
 
@@ -192,7 +199,10 @@ const hundleTitleClick = (comparisonId: number) => {
                   <div
                     class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0"
                   >
-                    <p class="truncate text-sm font-medium text-red-400">
+                    <p
+                      class="truncate text-sm font-medium text-red-400"
+                      @click="hundleDelete(sync.id, sync.title)"
+                    >
                       削除する
                     </p>
                   </div>
