@@ -29,7 +29,7 @@ class FindComparisonAction
       return $comparison;
     }
     // 匿名情報は公開されている物だけ返す
-    if ($comparison->release_kbn) {
+    if ($comparison->release_kbn && $comparison->anonymous) {
       return $comparison;
     }
     return null;
