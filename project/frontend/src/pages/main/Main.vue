@@ -5,11 +5,16 @@ import PlayerOneArea from "./parts/PlayerOneArea.vue"
 import PlayerTwoArea from "./parts/PlayerTwoArea.vue"
 import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue"
 import AdjustSpeedModal from "./parts/AdjustSpeedModal.vue"
+import SaveModal from "./parts/SaveModal.vue"
 import SyncController from "./parts/SyncController.vue"
 import SyncOption from "./parts/SyncOption.vue"
 
 const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)
+
+const hundleSaveClick = () => {
+  useMainState.saveModal.open()
+}
 </script>
 
 <template>
@@ -45,6 +50,7 @@ provide(UseMainStateKey, useMainState)
 
           <button
             class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            @click="hundleSaveClick()"
           >
             <div class="flex items-center justify-center gap-1">
               <svg
@@ -64,6 +70,7 @@ provide(UseMainStateKey, useMainState)
           </button>
         </div>
       </div>
+      <SaveModal></SaveModal>
 
       <div
         class="border border-gray-300 rounded-md bg-white px-4 py-3 sm:px-4 my-2"

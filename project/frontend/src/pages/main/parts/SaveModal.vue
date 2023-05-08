@@ -1,6 +1,28 @@
+<script setup lang="ts">
+import { inject, ref } from "vue"
+import {
+  Dialog,
+  DialogPanel,
+  TransitionChild,
+  TransitionRoot,
+} from "@headlessui/vue"
+import { XMarkIcon } from "@heroicons/vue/20/solid"
+
+import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
+
+const useMainState = inject(UseMainStateKey) as UseMainStateType
+
+const onClose = () => {
+  useMainState.saveModal.close()
+}
+</script>
+
 <template>
-  <TransitionRoot as="template" :show="open">
-    <Dialog as="div" class="relative z-50" @close="open = false">
+  <TransitionRoot
+    as="template"
+    :show="useMainState.saveModal.subscription.opened.value"
+  >
+    <Dialog as="div" class="relative z-50" @close="onClose">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
@@ -35,7 +57,7 @@
                 <button
                   type="button"
                   class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  @click="open = false"
+                  @click="onClose()"
                 >
                   <span class="sr-only">Close</span>
                   <XMarkIcon class="h-6 w-6" aria-hidden="true" />
@@ -128,15 +150,3 @@
     </Dialog>
   </TransitionRoot>
 </template>
-
-<script setup>
-import { ref } from "vue"
-import {
-  Dialog,
-  DialogPanel,
-  TransitionChild,
-  TransitionRoot,
-} from "@headlessui/vue"
-import { XMarkIcon } from "@heroicons/vue/20/solid"
-const open = ref(true)
-</script>
