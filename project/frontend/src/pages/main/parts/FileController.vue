@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { provide, inject } from "vue"
-import { UseMainState, UseMainStateKey } from "@/pages/main/UseMainState"
+import { inject } from "vue"
+import { UseMainStateType, UseMainStateKey } from "@/pages/main/UseMainState"
 import SaveModal from "./SaveModal.vue"
 import OpenModal from "./OpenModal.vue"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 
-const useMainState = UseMainState()
-provide(UseMainStateKey, useMainState)
+const useMainState = inject(UseMainStateKey) as UseMainStateType
 
 const userState = inject(useUserStateKey) as useUserStateType
 
