@@ -9,11 +9,15 @@ const userState = inject(useUserStateKey) as useUserStateType
 </script>
 
 <template>
-  <div v-show="userState.subscription.value.logined">
+  <div
+    v-show="
+      userState.subscription.value.logined &&
+      useMainState.title.subscription.title.value &&
+      useMainState.title.subscription.memo.value
+    "
+  >
     <!-- タイトル、詳細 -->
-    <div
-      class="border border-gray-300 rounded-md bg-white px-4 py-3 sm:px-4 my-2"
-    >
+    <div class="border border-gray-300 rounded-md bg-white px-4 py-3 sm:px-4">
       <div
         class="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap"
       >
