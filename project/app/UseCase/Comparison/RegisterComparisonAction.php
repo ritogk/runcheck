@@ -44,6 +44,7 @@ class RegisterComparisonAction
     $comparison->video2_url = $video2_url;
     $comparison->video2_type = $video2_type;
     $comparison->release_kbn = false;
+    $comparison->anonymous = $user ? false : true;
     $comparison->save();
     return $comparison;
   }
