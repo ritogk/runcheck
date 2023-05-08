@@ -1,6 +1,53 @@
+<script setup lang="ts">
+import { ref, inject } from "vue"
+import {
+  Dialog,
+  DialogPanel,
+  TransitionChild,
+  TransitionRoot,
+  Listbox,
+  ListboxButton,
+  ListboxLabel,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/vue"
+import {
+  XMarkIcon,
+  CheckIcon,
+  ChevronUpDownIcon,
+} from "@heroicons/vue/20/solid"
+import {
+  UseMainState,
+  UseMainStateKey,
+  UseMainStateType,
+} from "@/pages/main/UseMainState"
+
+const useMainState = inject(UseMainStateKey) as UseMainStateType
+
+const onClose = () => {
+  useMainState.openModal.close()
+}
+
+const people = [
+  { id: 1, name: "Wade Cooper" },
+  { id: 2, name: "Arlene Mccoy" },
+  { id: 3, name: "Devon Webb" },
+  { id: 4, name: "Tom Cook" },
+  { id: 5, name: "Tanya Fox" },
+  { id: 6, name: "Hellen Schmidt" },
+  { id: 7, name: "Caroline Schultz" },
+  { id: 8, name: "Mason Heaney" },
+  { id: 9, name: "Claudie Smitham" },
+  { id: 10, name: "Emil Schaefer" },
+]
+const selected = ref(people[3])
+</script>
 <template>
-  <TransitionRoot as="template" :show="open">
-    <Dialog as="div" class="relative z-50" @close="open = false">
+  <TransitionRoot
+    as="template"
+    :show="useMainState.openModal.subscription.opened.value"
+  >
+    <Dialog as="div" class="relative z-50" @close="onClose()">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
@@ -35,7 +82,7 @@
                 <button
                   type="button"
                   class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  @click="open = false"
+                  @click="onClose"
                 >
                   <span class="sr-only">Close</span>
                   <XMarkIcon class="h-6 w-6" aria-hidden="true" />
@@ -145,38 +192,3 @@
     </Dialog>
   </TransitionRoot>
 </template>
-
-<script setup>
-import { ref } from "vue"
-import {
-  Dialog,
-  DialogPanel,
-  TransitionChild,
-  TransitionRoot,
-  Listbox,
-  ListboxButton,
-  ListboxLabel,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/vue"
-import {
-  XMarkIcon,
-  CheckIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/vue/20/solid"
-const open = ref(true)
-
-const people = [
-  { id: 1, name: "Wade Cooper" },
-  { id: 2, name: "Arlene Mccoy" },
-  { id: 3, name: "Devon Webb" },
-  { id: 4, name: "Tom Cook" },
-  { id: 5, name: "Tanya Fox" },
-  { id: 6, name: "Hellen Schmidt" },
-  { id: 7, name: "Caroline Schultz" },
-  { id: 8, name: "Mason Heaney" },
-  { id: 9, name: "Claudie Smitham" },
-  { id: 10, name: "Emil Schaefer" },
-]
-const selected = ref(people[3])
-</script>

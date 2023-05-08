@@ -6,11 +6,16 @@ import PlayerTwoArea from "./parts/PlayerTwoArea.vue"
 import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue"
 import AdjustSpeedModal from "./parts/AdjustSpeedModal.vue"
 import SaveModal from "./parts/SaveModal.vue"
+import OpenModal from "./parts/OpenModal.vue"
 import SyncController from "./parts/SyncController.vue"
 import SyncOption from "./parts/SyncOption.vue"
 
 const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)
+
+const hundleOpenClick = () => {
+  useMainState.openModal.open()
+}
 
 const hundleSaveClick = () => {
   useMainState.saveModal.open()
@@ -27,6 +32,7 @@ const hundleSaveClick = () => {
         <div class="flex gap-2">
           <button
             class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            @click="hundleOpenClick"
           >
             <div class="flex items-center justify-center gap-1">
               <svg
@@ -71,6 +77,7 @@ const hundleSaveClick = () => {
         </div>
       </div>
       <SaveModal></SaveModal>
+      <OpenModal></OpenModal>
 
       <div
         class="border border-gray-300 rounded-md bg-white px-4 py-3 sm:px-4 my-2"
