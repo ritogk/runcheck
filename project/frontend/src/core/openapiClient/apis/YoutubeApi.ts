@@ -18,12 +18,12 @@ import {
     InlineObject2,
     InlineObject2FromJSON,
     InlineObject2ToJSON,
-    InlineResponse2001,
-    InlineResponse2001FromJSON,
-    InlineResponse2001ToJSON,
     InlineResponse2002,
     InlineResponse2002FromJSON,
     InlineResponse2002ToJSON,
+    InlineResponse2003,
+    InlineResponse2003FromJSON,
+    InlineResponse2003ToJSON,
 } from '../models';
 
 export interface YoutubeOauthPostRequest {
@@ -44,13 +44,13 @@ export interface YoutubeApiInterface {
      * @throws {RequiredError}
      * @memberof YoutubeApiInterface
      */
-    youtubeOauthAuthorizeGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse2001>>;
+    youtubeOauthAuthorizeGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse2002>>;
 
     /**
      * 詳細内容
      * 認可画面のURLを取得
      */
-    youtubeOauthAuthorizeGet(initOverrides?: RequestInit): Promise<InlineResponse2001>;
+    youtubeOauthAuthorizeGet(initOverrides?: RequestInit): Promise<InlineResponse2002>;
 
     /**
      * 詳細内容
@@ -75,13 +75,13 @@ export interface YoutubeApiInterface {
      * @throws {RequiredError}
      * @memberof YoutubeApiInterface
      */
-    youtubeVideosGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse2002>>>;
+    youtubeVideosGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse2003>>>;
 
     /**
      * 詳細内容
      * 本人がアップロードした動画一覧を取得
      */
-    youtubeVideosGet(initOverrides?: RequestInit): Promise<Array<InlineResponse2002>>;
+    youtubeVideosGet(initOverrides?: RequestInit): Promise<Array<InlineResponse2003>>;
 
 }
 
@@ -94,7 +94,7 @@ export class YoutubeApi extends runtime.BaseAPI implements YoutubeApiInterface {
      * 詳細内容
      * 認可画面のURLを取得
      */
-    async youtubeOauthAuthorizeGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse2001>> {
+    async youtubeOauthAuthorizeGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<InlineResponse2002>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -106,14 +106,14 @@ export class YoutubeApi extends runtime.BaseAPI implements YoutubeApiInterface {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2001FromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2002FromJSON(jsonValue));
     }
 
     /**
      * 詳細内容
      * 認可画面のURLを取得
      */
-    async youtubeOauthAuthorizeGet(initOverrides?: RequestInit): Promise<InlineResponse2001> {
+    async youtubeOauthAuthorizeGet(initOverrides?: RequestInit): Promise<InlineResponse2002> {
         const response = await this.youtubeOauthAuthorizeGetRaw(initOverrides);
         return await response.value();
     }
@@ -156,7 +156,7 @@ export class YoutubeApi extends runtime.BaseAPI implements YoutubeApiInterface {
      * 詳細内容
      * 本人がアップロードした動画一覧を取得
      */
-    async youtubeVideosGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse2002>>> {
+    async youtubeVideosGetRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Array<InlineResponse2003>>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -168,14 +168,14 @@ export class YoutubeApi extends runtime.BaseAPI implements YoutubeApiInterface {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InlineResponse2002FromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InlineResponse2003FromJSON));
     }
 
     /**
      * 詳細内容
      * 本人がアップロードした動画一覧を取得
      */
-    async youtubeVideosGet(initOverrides?: RequestInit): Promise<Array<InlineResponse2002>> {
+    async youtubeVideosGet(initOverrides?: RequestInit): Promise<Array<InlineResponse2003>> {
         const response = await this.youtubeVideosGetRaw(initOverrides);
         return await response.value();
     }

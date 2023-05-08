@@ -20,11 +20,11 @@ import { exists, mapValues } from '../runtime';
  */
 export interface InlineResponse2001 {
     /**
-     * 認可画面のリダイレクト用URL
-     * @type {string}
+     * 比較ID
+     * @type {number}
      * @memberof InlineResponse2001
      */
-    redirectUrl: string;
+    comparisonId: number;
 }
 
 export function InlineResponse2001FromJSON(json: any): InlineResponse2001 {
@@ -37,7 +37,7 @@ export function InlineResponse2001FromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'redirectUrl': json['redirectUrl'],
+        'comparisonId': json['comparisonId'],
     };
 }
 
@@ -50,7 +50,7 @@ export function InlineResponse2001ToJSON(value?: InlineResponse2001 | null): any
     }
     return {
         
-        'redirectUrl': value.redirectUrl,
+        'comparisonId': value.comparisonId,
     };
 }
 

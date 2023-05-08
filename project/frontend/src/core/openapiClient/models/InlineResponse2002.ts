@@ -20,29 +20,11 @@ import { exists, mapValues } from '../runtime';
  */
 export interface InlineResponse2002 {
     /**
-     * url
+     * 認可画面のリダイレクト用URL
      * @type {string}
      * @memberof InlineResponse2002
      */
-    url: string;
-    /**
-     * タイトル
-     * @type {string}
-     * @memberof InlineResponse2002
-     */
-    title: string;
-    /**
-     * 説明
-     * @type {string}
-     * @memberof InlineResponse2002
-     */
-    description: string;
-    /**
-     * サムネ画像のURL
-     * @type {string}
-     * @memberof InlineResponse2002
-     */
-    thumbnailUrl: string;
+    redirectUrl: string;
 }
 
 export function InlineResponse2002FromJSON(json: any): InlineResponse2002 {
@@ -55,10 +37,7 @@ export function InlineResponse2002FromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'url': json['url'],
-        'title': json['title'],
-        'description': json['description'],
-        'thumbnailUrl': json['thumbnailUrl'],
+        'redirectUrl': json['redirectUrl'],
     };
 }
 
@@ -71,10 +50,7 @@ export function InlineResponse2002ToJSON(value?: InlineResponse2002 | null): any
     }
     return {
         
-        'url': value.url,
-        'title': value.title,
-        'description': value.description,
-        'thumbnailUrl': value.thumbnailUrl,
+        'redirectUrl': value.redirectUrl,
     };
 }
 

@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    VideoType,
+    VideoTypeFromJSON,
+    VideoTypeFromJSONTyped,
+    VideoTypeToJSON,
+} from './';
+
 /**
  * 
  * @export
@@ -20,11 +27,71 @@ import { exists, mapValues } from '../runtime';
  */
 export interface InlineResponse200 {
     /**
-     * 比較ID
+     * 
+     * @type {string}
+     * @memberof InlineResponse200
+     */
+    id: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse200
+     */
+    category: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse200
+     */
+    memo: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse200
+     */
+    title: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse200
+     */
+    video1Url: string;
+    /**
+     * 
      * @type {number}
      * @memberof InlineResponse200
      */
-    comparisonId: number;
+    video1TimeSt: number;
+    /**
+     * 
+     * @type {VideoType}
+     * @memberof InlineResponse200
+     */
+    video1VideoType: VideoType;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse200
+     */
+    video2Url: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse200
+     */
+    video2TimeSt: number;
+    /**
+     * 
+     * @type {VideoType}
+     * @memberof InlineResponse200
+     */
+    video2VideoType: VideoType;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse200
+     */
+    anonymous: boolean;
 }
 
 export function InlineResponse200FromJSON(json: any): InlineResponse200 {
@@ -37,7 +104,17 @@ export function InlineResponse200FromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'comparisonId': json['comparisonId'],
+        'id': json['id'],
+        'category': json['category'],
+        'memo': json['memo'],
+        'title': json['title'],
+        'video1Url': json['video1Url'],
+        'video1TimeSt': json['video1TimeSt'],
+        'video1VideoType': VideoTypeFromJSON(json['video1VideoType']),
+        'video2Url': json['video2Url'],
+        'video2TimeSt': json['video2TimeSt'],
+        'video2VideoType': VideoTypeFromJSON(json['video2VideoType']),
+        'anonymous': json['anonymous'],
     };
 }
 
@@ -50,7 +127,17 @@ export function InlineResponse200ToJSON(value?: InlineResponse200 | null): any {
     }
     return {
         
-        'comparisonId': value.comparisonId,
+        'id': value.id,
+        'category': value.category,
+        'memo': value.memo,
+        'title': value.title,
+        'video1Url': value.video1Url,
+        'video1TimeSt': value.video1TimeSt,
+        'video1VideoType': VideoTypeToJSON(value.video1VideoType),
+        'video2Url': value.video2Url,
+        'video2TimeSt': value.video2TimeSt,
+        'video2VideoType': VideoTypeToJSON(value.video2VideoType),
+        'anonymous': value.anonymous,
     };
 }
 

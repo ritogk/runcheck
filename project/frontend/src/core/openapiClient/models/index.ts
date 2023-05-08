@@ -6,6 +6,7 @@ export * from './InlineObject2';
 export * from './InlineResponse200';
 export * from './InlineResponse2001';
 export * from './InlineResponse2002';
+export * from './InlineResponse2003';
 export * from './OperationCd';
 export * from './RequestOperationLog';
 export * from './User';
