@@ -24,12 +24,12 @@ class FindComparisonAction
   {
     $comparison = Comparison::find($comparison_id);
     $user = $this->action->me();
-    // 匿名情報は公開されている物だけ返す
-    if ($comparison->anonymous && $comparison->release_kbn) {
-      return $comparison;
-    }
     // 自身の情報は公開フラグ関係なしに返す。
     if ($user && $user->id == $comparison->user_id) {
+      return $comparison;
+    }
+    // 匿名情報は公開されている物だけ返す
+    if ($comparison->release_kbn) {
       return $comparison;
     }
     return null;

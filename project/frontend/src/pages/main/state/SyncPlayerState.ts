@@ -23,6 +23,7 @@ export interface ISyncPlayerStateType {
   enableSync(): void
   disableSync(): void
   saveSync(): Promise<{ id: number }>
+  publishSync(id: number): Promise<void>
   seekTo(progressRate: number): Promise<void>
   subscription: {
     videoOwn: ComputedRef<IVideoPlayer>
@@ -280,6 +281,12 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       },
     })
     return { id: response.comparisonId }
+  }
+
+  publishSync(id: number): Promise<void> {
+    return this.comparisonsApi.comparisonsComparisonIdPublishPut({
+      comparisonId: id,
+    })
   }
 
   seekTo = async (progressRate: number) => {

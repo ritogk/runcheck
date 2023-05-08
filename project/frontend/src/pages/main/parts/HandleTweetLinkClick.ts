@@ -12,7 +12,6 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
     useAlretListStateKey
   ) as useAlretListStateType
   const useMainState = inject(UseMainStateKey) as UseMainStateType
-
   const comparisonsApi = new ComparisonsApi()
   try {
     const response = await comparisonsApi.comparisonsComparisonIdGet({

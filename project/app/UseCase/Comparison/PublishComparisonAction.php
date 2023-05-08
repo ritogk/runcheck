@@ -24,7 +24,7 @@ class PublishComparisonAction
   {
     $comparison = Comparison::find($comparison_id);
     $user = $this->action->me();
-    if ($user && $user->id == $comparison->user_id || $comparison->anonymous) {
+    if ($user && $user->id == $comparison->user_id) {
       $comparison->release_kbn = true;
     }
     $comparison->save();
