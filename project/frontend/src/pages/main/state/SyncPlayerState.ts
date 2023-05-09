@@ -261,26 +261,33 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     memo?: string,
     category?: string
   ): Promise<{ id: number }> => {
-    const video1Url =
-      await this.playerOneManager.subscription.player.value.getPath()
-    const video1EmbedUrl = `https://www.youtube.com/embed/${video1Url.substring(
-      video1Url.length - 11
-    )}`
-    const video1TimeSt = this._playerOneStartPosition
     const video1VideoType =
       this.playerOneManager.subscription.videoType.value === VideoType.YOUTUBE
         ? ApiVideoType.YOUTUBE
         : ApiVideoType.LOCAL
-    const video2Url =
-      await this.playerTwoManager.subscription.player.value.getPath()
-    const video2EmbedUrl = `https://www.youtube.com/embed/${video2Url.substring(
-      video2Url.length - 11
-    )}`
-    const video2TimeSt = this._playerTwoStartPosition
+    const video1Url =
+      await this.playerOneManager.subscription.player.value.getPath()
+    const video1EmbedUrl =
+      video1VideoType === ApiVideoType.YOUTUBE
+        ? `https://www.youtube.com/embed/${video1Url.substring(
+            video1Url.length - 11
+          )}`
+        : video1Url
+    const video1TimeSt = this._playerOneStartPosition
+
     const video2VideoType =
       this.playerTwoManager.subscription.videoType.value === VideoType.YOUTUBE
         ? ApiVideoType.YOUTUBE
         : ApiVideoType.LOCAL
+    const video2Url =
+      await this.playerTwoManager.subscription.player.value.getPath()
+    const video2EmbedUrl =
+      video2VideoType === ApiVideoType.YOUTUBE
+        ? `https://www.youtube.com/embed/${video2Url.substring(
+            video2Url.length - 11
+          )}`
+        : video2Url
+    const video2TimeSt = this._playerTwoStartPosition
     // 同期情報の登録
     const response = await this.comparisonsApi.comparisonsPost({
       videoComparison: {
