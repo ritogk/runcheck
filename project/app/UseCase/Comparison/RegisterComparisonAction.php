@@ -30,7 +30,7 @@ class RegisterComparisonAction
    * @param integer $video2_type
    * @return Comparison|null
    */
-  public function register(bool $anonymous, ?string $category, ?string $title, ?string $memo, int $video1_time_st, string $video1_url, int $video1_type, float $video2_time_st, string $video2_url, int $video2_type): ?Comparison
+  public function register(bool $anonymous, ?string $category, ?string $title, ?string $memo, float $video1_time_st, string $video1_url, int $video1_type, float $video2_time_st, string $video2_url, int $video2_type): ?Comparison
   {
     $user = $this->action->me();
     $comparison = new Comparison();
