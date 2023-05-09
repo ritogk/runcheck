@@ -83,8 +83,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     })
 
     watch(this._speed, (value) => {
+      this.syncProcessing = true
       this._playerOneManager.subscription.player.value.adjustSpeed(value)
       this._playerTwoManager.subscription.player.value.adjustSpeed(value)
+      this.syncProcessing = false
     })
   }
 
