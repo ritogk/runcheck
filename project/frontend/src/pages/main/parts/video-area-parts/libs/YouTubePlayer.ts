@@ -10,7 +10,7 @@ export class YouTubePlayer implements IVideoPlayer {
   public _status = ref(Status.WAITING)
 
   constructor(elementId: string, youtubeUrl: string) {
-    this.player = YPlayer(elementId)
+    this.player = YPlayer(elementId, { playerVars: { controls: 0 } })
     this.youtubeUrl = youtubeUrl
   }
 
