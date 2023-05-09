@@ -31,8 +31,6 @@ export interface ISyncPlayerStateType {
   publishSync(id: number): Promise<void>
   seekTo(progressRate: number): Promise<void>
   subscription: {
-    videoOne: ComputedRef<IVideoPlayer>
-    videoTwo: ComputedRef<IVideoPlayer>
     playing: ComputedRef<boolean>
     muted: ComputedRef<boolean>
     repeated: ComputedRef<boolean>
@@ -331,12 +329,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
 
   get subscription() {
     return {
-      videoOne: computed(() => {
-        return this._playerOneManager.subscription.player.value
-      }),
-      videoTwo: computed(() => {
-        return this._playerTwoManager.subscription.player.value
-      }),
       playing: computed(() => {
         return this._playing.value
       }),
