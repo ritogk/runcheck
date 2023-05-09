@@ -31,7 +31,7 @@ export interface ISyncPlayerStateType {
   publishSync(id: number): Promise<void>
   seekTo(progressRate: number): Promise<void>
   subscription: {
-    videoOwn: ComputedRef<IVideoPlayer>
+    videoOne: ComputedRef<IVideoPlayer>
     videoTwo: ComputedRef<IVideoPlayer>
     playing: ComputedRef<boolean>
     muted: ComputedRef<boolean>
@@ -208,15 +208,15 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         return
       }
 
-      const videoOwnPosition =
+      const videoOnePosition =
         playerOneCurrentPosition - this._playerOneStartPosition
       const videoTwoPosition =
         playerTwoCurrentPosition - this._playerTwoStartPosition
       // 0.1秒以上ずれていたら同期させる
-      const diff = Math.abs(videoOwnPosition - videoTwoPosition)
+      const diff = Math.abs(videoOnePosition - videoTwoPosition)
       if (diff >= 0.1) {
         console.log("0.1秒以上ずれていたら同期させる")
-        if (videoOwnPosition > videoTwoPosition) {
+        if (videoOnePosition > videoTwoPosition) {
           this._playerOneManager.subscription.player.value.seekTo(
             playerOneCurrentPosition + diff * -1
           )
@@ -236,7 +236,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       }
 
       // 再生完了率を取得
-      this._syncProgressRate.value = videoOwnPosition / this._syncDuration.value
+      this._syncProgressRate.value = videoOnePosition / this._syncDuration.value
       this.syncProcessing = false
     }, 500)
   }
@@ -332,7 +332,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
 
   get subscription() {
     return {
-      videoOwn: computed(() => {
+      videoOne: computed(() => {
         return this._playerOneManager.subscription.player.value
       }),
       videoTwo: computed(() => {

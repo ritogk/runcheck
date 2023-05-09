@@ -59,7 +59,7 @@ const hundleLocalVideoChange = async (event: Event) => {
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
   playerOneManager.subscription.player.value.destory()
-  const player = new YouTubePlayer("youtube-video-own", youtubeUrl)
+  const player = new YouTubePlayer("youtube-video-one", youtubeUrl)
   await player.load()
   playerOneManager.changePlayer(player)
   playerOneManager.subscription.player.value.changeVideo(youtubeUrl)
@@ -278,7 +278,7 @@ const hundleVideoSeek = async (seconds: number) => {
       "
     >
       <div
-        id="youtube-video-own"
+        id="youtube-video-one"
         class="w-full"
         :style="{ height: calcVideoHeight }"
       ></div>
@@ -289,7 +289,7 @@ const hundleVideoSeek = async (seconds: number) => {
     >
       <video
         :ref="elements.localVideo.video"
-        id="local-video-own"
+        id="local-video-one"
         controls
         playsinline
         preload="none"

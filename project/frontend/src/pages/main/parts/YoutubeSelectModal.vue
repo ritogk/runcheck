@@ -51,7 +51,7 @@ const selectVideo = async (url: string) => {
   switch (videoNo) {
     case VideoNo.ONE:
       playerOneManager.subscription.player.value.destory()
-      const playerOne = new YouTubePlayer("youtube-video-own", url)
+      const playerOne = new YouTubePlayer("youtube-video-one", url)
       await playerOne.load()
       playerOneManager.changePlayer(playerOne)
       break

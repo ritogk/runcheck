@@ -19,7 +19,7 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
     })
     useMainState.title.changeTitle(response.title ?? "")
     useMainState.title.changeMemo(response.memo ?? "")
-    const playerOne = new YouTubePlayer("youtube-video-own", response.video1Url)
+    const playerOne = new YouTubePlayer("youtube-video-one", response.video1Url)
     const playerTwo = new YouTubePlayer("youtube-video-two", response.video2Url)
     await playerOne.load()
     await playerTwo.load()
