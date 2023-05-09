@@ -127,7 +127,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     await this._playerTwoManager.subscription.player.value.seekTo(
       this._playerTwoStartPosition
     )
-    this._playing.value = true
   }
 
   private syncProcessing = false // 処理中フラグ
