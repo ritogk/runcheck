@@ -9,6 +9,7 @@ export interface IPlayerManager {
   changePlayer(player: IVideoPlayer): void
   subscription: {
     player: ComputedRef<IVideoPlayer>
+    videoType: ComputedRef<VideoType>
   }
 }
 
