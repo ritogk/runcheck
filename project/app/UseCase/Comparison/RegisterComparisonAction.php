@@ -44,6 +44,7 @@ class RegisterComparisonAction
     $comparison->video2_time_st = $video2_time_st;
     $comparison->video2_url = $video2_url;
     $comparison->video2_type = $video2_type;
+    $comparison->video_type = Comparison::VIDEO_TYPE_KIND['YOUTUBE_YOUTUBE'];
     $comparison->release_kbn = false;
     $comparison->anonymous = $anonymous;
     $comparison->save();

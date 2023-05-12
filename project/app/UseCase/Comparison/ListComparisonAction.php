@@ -22,7 +22,7 @@ class ListComparisonAction
   public function list(): array
   {
     $user = $this->action->me();
-    $comparisons = Comparison::where("user_id", $user->id)->orderBy("id")->get();
+    $comparisons = Comparison::where("user_id", $user->id)->where("video_type", Comparison::VIDEO_TYPE_KIND["YOUTUBE_YOUTUBE"])->orderBy("id")->get();
     return $comparisons->toArray();
   }
 }

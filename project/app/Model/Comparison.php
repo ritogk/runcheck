@@ -80,4 +80,10 @@ class Comparison extends Model
             ->pluck('category');
         return $data;
     }
+
+    const VIDEO_TYPE_KIND = [
+        'YOUTUBE_YOUTUBE' => 1,
+        'LOCAL_LOCAL' => 2,
+        'YOUTUBE_LOCAL' => 3,
+    ];
 }
