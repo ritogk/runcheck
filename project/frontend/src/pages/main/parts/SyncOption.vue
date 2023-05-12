@@ -2,6 +2,7 @@
 import { inject, ref, computed } from "vue"
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
 import { handleTweetLinkClick } from "./HandleTweetLinkClick"
+import { VideoType } from "./video-area-parts/libs/IVideoPlayer"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
@@ -14,6 +15,15 @@ const hundleVideoStopSyncClick = () => {
 }
 
 const hundleTweetClick = async () => {
+  if (
+    useMainState.syncPlayer.playerOneManager.subscription.videoType.value !==
+      VideoType.YOUTUBE ||
+    useMainState.syncPlayer.playerTwoManager.subscription.videoType.value !=
+      VideoType.YOUTUBE
+  ) {
+    alert("共有はYouTube同士の組み合わせのみ行えます。")
+    return
+  }
   const compoarion = await useMainState.syncPlayer.saveSync(true)
   await useMainState.syncPlayer.publishSync(compoarion.id)
   // ツイートする
@@ -127,7 +137,7 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
             </g>
           </g>
         </svg>
-        動画を共有
+        比較結果を共有
       </button>
     </span>
   </div>
