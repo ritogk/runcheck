@@ -313,17 +313,11 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._syncProgressRate.value = progressRate
     this._muted.value = true
     // シーク
-    const playerOneRange =
-      (await this._playerOneManager.subscription.player.value.getDuration()) -
-      this._playerOneStartPosition
-    const playerTwoRange =
-      (await this._playerTwoManager.subscription.player.value.getDuration()) -
-      this._playerTwoStartPosition
     this._playerOneManager.subscription.player.value.seekTo(
-      this._playerOneStartPosition + playerOneRange * progressRate
+      this._playerOneStartPosition + this._syncDuration.value * progressRate
     )
     this._playerTwoManager.subscription.player.value.seekTo(
-      this._playerTwoStartPosition + playerTwoRange * progressRate
+      this._playerTwoStartPosition + this._syncDuration.value * progressRate
     )
   }
 
