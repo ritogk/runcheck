@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { ref, inject } from "vue"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
+import {
+  useAlretListStateKey,
+  useAlretListStateType,
+} from "@/pages/dashboard/parts/AlretList/useAlretListState"
 import { useRouter } from "vue-router"
 
 const router = useRouter()
 const userState = inject(useUserStateKey) as useUserStateType
+const userAlretListState = inject(useAlretListStateKey) as useAlretListStateType
 
 const form = {
   email: ref<HTMLInputElement | null>(null),
@@ -19,15 +24,18 @@ const onSubmit = async () => {
     form.remember.value === null
   )
     return
-
-  if (
-    await userState.login(
+  try {
+    const response = await userState.login(
       form.email.value.value,
       form.password.value.value,
       form.remember.value.checked
     )
-  ) {
+    if (!response) throw new Error()
     router.push({ name: "index" })
+  } catch {
+    userAlretListState.add(
+      "認証に失敗しました。メールアドレスとパスワードを確認してください。"
+    )
   }
 }
 </script>
