@@ -52,7 +52,7 @@ const hundleLocalVideoChange = async (event: Event) => {
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
   )
-  await localVideoPlayer.load()
+  localVideoPlayer.load()
   playerOneManager.changePlayer(localVideoPlayer)
   playerOneManager.subscription.player.value.changeVideo(objectURL)
 }
@@ -60,7 +60,7 @@ const hundleLocalVideoChange = async (event: Event) => {
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
   playerOneManager.subscription.player.value.destory()
   const player = new YouTubePlayer("youtube-video-one", youtubeUrl)
-  await player.load()
+  player.load()
   playerOneManager.changePlayer(player)
   playerOneManager.subscription.player.value.changeVideo(youtubeUrl)
 }
