@@ -127,7 +127,7 @@ if (code) callbackYoutubeOauth(code)
                     </p>
 
                     <div
-                      class="bg-red-500 text-gray-100 hover:text-white shadow text-sm font-bold py-2 px-2 rounded flex justify-start items-center cursor-pointer w-64 mt-2 mx-auto"
+                      class="group bg-red-500 text-gray-100 hover:bg-red-400 shadow text-sm font-bold py-2 px-2 rounded flex justify-start items-center cursor-pointer w-64 mt-2 mx-auto"
                       @click="redirectToAuthorize"
                     >
                       <svg
@@ -175,7 +175,7 @@ if (code) callbackYoutubeOauth(code)
                         </g>
                       </svg>
                       <span
-                        class="border-l border-red-700 h-6 w-1 block mr-1 ml-2"
+                        class="border-l border-red-700 group-hover:border-red-600 h-6 w-1 block mr-1 ml-2"
                       ></span>
                       <span class="pl-3">YouTube 動画一覧を取得</span>
                     </div>
