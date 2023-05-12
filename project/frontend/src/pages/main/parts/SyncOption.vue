@@ -90,7 +90,7 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
     <span class="isolate inline-flex rounded-md shadow-sm ml-2">
       <button
         type="button"
-        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-[#16A2F3] px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-[#0C7FF2] hover:bg-indigo-500 focus:z-10"
+        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-[#16A2F3] px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-[#1697f3] hover:bg-[#45b7f7] focus:z-10"
         @click="hundleTweetClick()"
       >
         <svg
