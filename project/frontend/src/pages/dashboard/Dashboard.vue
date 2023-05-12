@@ -38,6 +38,7 @@ const hundleHeaderClick = () => {
 }
 
 const hundleHomeClick = () => {
+  sidebarOpen.value = false
   router.push({ name: "home" })
 }
 
