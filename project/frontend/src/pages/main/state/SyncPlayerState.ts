@@ -321,29 +321,27 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     )
   }
 
-  get subscription() {
-    return {
-      playing: computed(() => {
-        return this._playing.value
-      }),
-      muted: computed(() => {
-        return this._muted.value
-      }),
-      repeated: computed(() => {
-        return this._repeated.value
-      }),
-      speed: computed(() => {
-        return this._speed.value
-      }),
-      synced: computed(() => {
-        return this._synced.value
-      }),
-      progressRate: computed(() => {
-        return this._syncProgressRate.value
-      }),
-      duration: computed(() => {
-        return this._syncDuration.value
-      }),
-    }
+  subscription = {
+    playing: computed(() => {
+      return this._playing.value
+    }),
+    muted: computed(() => {
+      return this._muted.value
+    }),
+    repeated: computed(() => {
+      return this._repeated.value
+    }),
+    speed: computed(() => {
+      return this._speed.value
+    }),
+    synced: computed(() => {
+      return this._synced.value
+    }),
+    progressRate: computed(() => {
+      return this._syncProgressRate.value
+    }),
+    duration: computed(() => {
+      return this._syncDuration.value
+    }),
   }
 }

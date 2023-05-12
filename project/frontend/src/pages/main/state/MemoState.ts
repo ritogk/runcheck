@@ -20,14 +20,12 @@ export class MemoState implements IMemoState {
     this._memo.value = value
   }
 
-  get subscription() {
-    return {
-      title: computed(() => {
-        return this._title.value
-      }),
-      memo: computed(() => {
-        return this._memo.value
-      }),
-    }
+  subscription = {
+    title: computed(() => {
+      return this._title.value
+    }),
+    memo: computed(() => {
+      return this._memo.value
+    }),
   }
 }

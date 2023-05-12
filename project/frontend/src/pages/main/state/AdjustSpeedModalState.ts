@@ -18,11 +18,9 @@ export class AdjustSpeedModalState implements IAdjustSpeedModalState {
     this._opened.value = false
   }
 
-  get subscription() {
-    return {
-      opened: computed(() => {
-        return this._opened.value
-      }),
-    }
+  subscription = {
+    opened: computed(() => {
+      return this._opened.value
+    }),
   }
 }

@@ -51,17 +51,15 @@ export class YoutubeSelectorModalState implements IYoutubeSelectorModalState {
     )
   }
 
-  get subscription() {
-    return {
-      opened: computed(() => {
-        return this._opened.value
-      }),
-      currentVideoNo: computed(() => {
-        return this._currentVideoNo.value
-      }),
-      selectUrl: computed(() => {
-        return this._selectUrl.value
-      }),
-    }
+  subscription = {
+    opened: computed(() => {
+      return this._opened.value
+    }),
+    currentVideoNo: computed(() => {
+      return this._currentVideoNo.value
+    }),
+    selectUrl: computed(() => {
+      return this._selectUrl.value
+    }),
   }
 }

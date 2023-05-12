@@ -68,11 +68,9 @@ export class DummyPlayer implements IVideoPlayer {
     return Promise.resolve("")
   }
 
-  get subscription() {
-    return {
-      status: computed(() => {
-        return Status.WAITING
-      }),
-    }
+  subscription = {
+    status: computed(() => {
+      return Status.WAITING
+    }),
   }
 }
