@@ -147,7 +147,7 @@ const hundleAdjustSpeedClick = () => {
 <template>
   <div class="max-h-[240px] mb-3">
     <div
-      class="bg-gray-50 border-gray-100 dark:bg-gray-800 dark:border-gray-500 border-b px-4 pt-6 pb-4 space-y-6"
+      class="bg-gray-50 border-gray-100 dark:bg-gray-800 dark:border-gray-500 border-b px-8 pt-6 pb-4 space-y-6"
     >
       <div
         class="space-y-2"
