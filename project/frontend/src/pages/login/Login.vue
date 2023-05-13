@@ -4,7 +4,7 @@ import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 import {
   useAlretListStateKey,
   useAlretListStateType,
-} from "@/app/dashboard-parts/AlretList/useAlretListState"
+} from "@/app/dashboard-parts/useAlretListState"
 import { useRouter } from "vue-router"
 
 const router = useRouter()

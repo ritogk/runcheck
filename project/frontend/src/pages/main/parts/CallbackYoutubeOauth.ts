@@ -4,7 +4,7 @@ import { YoutubeApi } from "@/core/openapiClient"
 import {
   useAlretListStateKey,
   useAlretListStateType,
-} from "@/app/dashboard-parts/AlretList/useAlretListState"
+} from "@/app/dashboard-parts/useAlretListState"
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 
