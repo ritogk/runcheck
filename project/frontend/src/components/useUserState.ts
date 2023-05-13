@@ -84,6 +84,7 @@ const useUserState = (): useUserStateType => {
       state.user.id = 0
       state.user.name = ""
       state.logined = false
+      state.isYoutubeAuthroized = false
       return true
     } catch (e) {
       // debugger
