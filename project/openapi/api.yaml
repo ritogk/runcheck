@@ -306,7 +306,31 @@ paths:
         "200":
           description: OK
           content: {}
-
+  /status:
+    get:
+      tags:
+        - "status"
+      summary: 未ログインユーザーも含めたユーザーの状態を取得
+      description: 詳細内容
+      responses:
+        "200":
+          description: 状態
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isLogined:
+                    type: boolean
+                    description: "ログイン状態"
+                  isYoutubeAuthroized:
+                    type: boolean
+                    description: "Youtube認可状態"
+                  user:
+                    $ref: "#/components/schemas/User"
+                    description: "ユーザー"
+                required:
+                  - redirectUrl
 components:
   schemas:
     User:
