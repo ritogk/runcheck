@@ -34,7 +34,7 @@ const userState = useUserState.subscription
 const router = useRouter()
 
 const hundleHeaderClick = () => {
-  router.go(0)
+  location.href = location.origin + router.resolve("index").href
 }
 
 const hundleHomeClick = () => {
