@@ -1,4 +1,4 @@
-import { InjectionKey, reactive, computed, ComputedRef } from "vue"
+import { InjectionKey, ref, computed, ComputedRef } from "vue"
 import {
   AuthenticationApi,
   UsersApi,
@@ -6,11 +6,11 @@ import {
 } from "@/core/openapiClient/apis"
 
 type UseUserStateType = {
-  subscription: ComputedRef<{
-    logined: boolean
-    isYoutubeAuthroized: boolean
-    user: { id: number; name: string }
-  }>
+  subscription: {
+    logined: ComputedRef<boolean>
+    isYoutubeAuthroized: ComputedRef<boolean>
+    user: ComputedRef<{ id: number; name: string }>
+  }
   register(
     handleName: string,
     carType: string,
@@ -26,11 +26,9 @@ const UseUserState = (): UseUserStateType => {
   const authenticationApi = new AuthenticationApi()
   const usersApi = new UsersApi()
   const statusApi = new StatusApi()
-  const state = reactive({
-    logined: false,
-    isYoutubeAuthroized: false,
-    user: { id: 0, name: "" },
-  })
+  const _logined = ref(false)
+  const _isYoutubeAuthroized = ref(false)
+  const _user = ref({ id: 0, name: "" })
 
   const register = async (
     handleName: string,
@@ -49,9 +47,8 @@ const UseUserState = (): UseUserStateType => {
       })
 
       if (await login(email, password, true)) {
-        state.user.id = response.id
-        state.user.name = response.name
-        state.logined = true
+        _user.value = { id: response.id, name: response.name }
+        _logined.value = true
       }
       return true
     } catch {
@@ -68,9 +65,8 @@ const UseUserState = (): UseUserStateType => {
           remember: remember,
         },
       })
-      state.user.id = response.id
-      state.user.name = response.name
-      state.logined = true
+      _user.value = { id: response.id, name: response.name }
+      _logined.value = true
       return true
     } catch (e) {
       // debugger
@@ -81,10 +77,9 @@ const UseUserState = (): UseUserStateType => {
   const logout = async () => {
     try {
       await authenticationApi.authenticationLogoutPost()
-      state.user.id = 0
-      state.user.name = ""
-      state.logined = false
-      state.isYoutubeAuthroized = false
+      _user.value = { id: 0, name: "" }
+      _logined.value = false
+      _isYoutubeAuthroized.value = false
       return true
     } catch (e) {
       // debugger
@@ -95,10 +90,13 @@ const UseUserState = (): UseUserStateType => {
   const load = async (): Promise<boolean> => {
     try {
       const response = await statusApi.statusGet()
-      state.user.id = response.user?.id ?? 0
-      state.user.name = response.user?.name ?? ""
-      state.logined = response.isLogined
-      state.isYoutubeAuthroized = response.isYoutubeAuthroized
+      _user.value = {
+        id: response.user?.id ?? 0,
+        name: response.user?.name ?? "",
+      }
+      _logined.value = response.isLogined
+      _isYoutubeAuthroized.value = response.isYoutubeAuthroized
+
       return true
     } catch {
       return false
@@ -106,7 +104,17 @@ const UseUserState = (): UseUserStateType => {
   }
 
   return {
-    subscription: computed(() => state),
+    subscription: {
+      logined: computed(() => {
+        return _logined.value
+      }),
+      isYoutubeAuthroized: computed(() => {
+        return _isYoutubeAuthroized.value
+      }),
+      user: computed(() => {
+        return _user.value
+      }),
+    },
     register: register,
     login: login,
     logout: logout,

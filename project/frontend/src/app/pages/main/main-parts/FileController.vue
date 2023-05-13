@@ -28,7 +28,7 @@ const hundleSaveClick = () => {
   <SaveModal></SaveModal>
   <OpenModal></OpenModal>
 
-  <div v-show="userState.subscription.value.logined" class="mb-2">
+  <div v-show="userState.subscription.logined.value" class="mb-2">
     <!-- ファイル操作 -->
     <div>
       <div class="flex gap-2">

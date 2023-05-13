@@ -17,7 +17,7 @@ const userState = inject(UseUserStateKey) as UseUserStateType
 <template>
   <div
     v-show="
-      userState.subscription.value.logined &&
+      userState.subscription.logined.value &&
       useMainState.memo.subscription.title.value &&
       useMainState.memo.subscription.memo.value
     "

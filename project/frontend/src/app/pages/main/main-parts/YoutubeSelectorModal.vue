@@ -26,7 +26,7 @@ const useUserState = inject(UseUserStateKey) as UseUserStateType
 
 const youtubeListState = YoutubeListState()
 watch(useMainState.youtubeModal.subscription.opened, (value) => {
-  if (value && useUserState.subscription.value.isYoutubeAuthroized)
+  if (value && useUserState.subscription.isYoutubeAuthroized.value)
     youtubeListState.load()
 })
 
