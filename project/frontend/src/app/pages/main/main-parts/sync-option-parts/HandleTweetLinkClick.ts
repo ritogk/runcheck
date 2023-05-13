@@ -8,7 +8,7 @@ import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main/UseMainState"
-import { YouTubePlayer } from "@/app/pages/main/parts/player-area-parts/YouTubePlayer"
+import { YouTubePlayer } from "@/app/pages/main/main-parts/player-area-parts/YouTubePlayer"
 
 export const handleTweetLinkClick = async (comparisonId: number) => {
   const useAlretState = inject(useAlretStateKey) as useAlretStateType

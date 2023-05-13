@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { provide } from "vue"
 import { UseMainState, UseMainStateKey } from "./UseMainState"
-import PlayerOneArea from "./parts/PlayerOneArea.vue"
-import PlayerTwoArea from "./parts/PlayerTwoArea.vue"
-import YoutubeSelectorModal from "./parts/YoutubeSelectorModal.vue"
-import AdjustSpeedModal from "./parts/AdjustSpeedModal.vue"
-import FileController from "./parts/FileController.vue"
-import SyncController from "./parts/SyncController.vue"
-import SyncOption from "./parts/SyncOption.vue"
-import MemoArea from "./parts/MemoArea.vue"
+import PlayerOneArea from "./main-parts/PlayerOneArea.vue"
+import PlayerTwoArea from "./main-parts/PlayerTwoArea.vue"
+import YoutubeSelectorModal from "./main-parts/YoutubeSelectorModal.vue"
+import AdjustSpeedModal from "./main-parts/AdjustSpeedModal.vue"
+import FileController from "./main-parts/FileController.vue"
+import SyncController from "./main-parts/SyncController.vue"
+import SyncOption from "./main-parts/SyncOption.vue"
+import MemoArea from "./main-parts/MemoArea.vue"
 
 const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)
