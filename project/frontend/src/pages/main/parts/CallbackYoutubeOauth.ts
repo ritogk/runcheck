@@ -2,17 +2,15 @@ import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { YoutubeApi } from "@/core/openapiClient"
 import {
-  useAlretListStateKey,
-  useAlretListStateType,
-} from "@/app/dashboard-parts/useAlretListState"
+  useAlretStateKey,
+  useAlretStateType,
+} from "@/app/dashboard-parts/useAlretState"
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 
 export const callbackYoutubeOauth = async (code: string) => {
   const router = useRouter()
-  const useAlretListState = inject(
-    useAlretListStateKey
-  ) as useAlretListStateType
+  const useAlretState = inject(useAlretStateKey) as useAlretStateType
   const useMainState = inject(UseMainStateKey) as UseMainStateType
   const useUserState = inject(useUserStateKey) as useUserStateType
 
@@ -22,7 +20,7 @@ export const callbackYoutubeOauth = async (code: string) => {
     await useUserState.load()
     useMainState.youtubeModal.load()
   } catch {
-    useAlretListState.add("Youtubeとの連携でエラーが発生しました。")
+    useAlretState.add("Youtubeとの連携でエラーが発生しました。")
   }
   router.push({ name: "index" })
 }

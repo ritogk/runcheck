@@ -1,16 +1,14 @@
 import { inject } from "vue"
 import { ComparisonsApi } from "@/core/openapiClient"
 import {
-  useAlretListStateKey,
-  useAlretListStateType,
-} from "@/app/dashboard-parts/useAlretListState"
+  useAlretStateKey,
+  useAlretStateType,
+} from "@/app/dashboard-parts/useAlretState"
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
 import { YouTubePlayer } from "@/pages/main/parts/video-area-parts/libs/YouTubePlayer"
 
 export const handleTweetLinkClick = async (comparisonId: number) => {
-  const useAlretListState = inject(
-    useAlretListStateKey
-  ) as useAlretListStateType
+  const useAlretState = inject(useAlretStateKey) as useAlretStateType
   const useMainState = inject(UseMainStateKey) as UseMainStateType
   const comparisonsApi = new ComparisonsApi()
   try {
@@ -37,6 +35,6 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
       }, 2000)
     }, 2000)
   } catch {
-    useAlretListState.add("動画の読み込みでエラーが発生しました。")
+    useAlretState.add("動画の読み込みでエラーが発生しました。")
   }
 }

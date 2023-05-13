@@ -2,14 +2,14 @@
 import { ref, inject } from "vue"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 import {
-  useAlretListStateKey,
-  useAlretListStateType,
-} from "@/app/dashboard-parts/useAlretListState"
+  useAlretStateKey,
+  useAlretStateType,
+} from "@/app/dashboard-parts/useAlretState"
 import { useRouter } from "vue-router"
 
 const router = useRouter()
 const userState = inject(useUserStateKey) as useUserStateType
-const userAlretListState = inject(useAlretListStateKey) as useAlretListStateType
+const userAlretListState = inject(useAlretStateKey) as useAlretStateType
 
 const form = {
   email: ref<HTMLInputElement | null>(null),

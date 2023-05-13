@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref, inject } from "vue"
 import {
-  useAlretListStateKey,
-  useAlretListStateType,
-} from "@/app/dashboard-parts/useAlretListState"
+  useAlretStateKey,
+  useAlretStateType,
+} from "@/app/dashboard-parts/useAlretState"
 import { useRouter } from "vue-router"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 
 const router = useRouter()
-const useAlertListState = inject(useAlretListStateKey) as useAlretListStateType
+const useAlertState = inject(useAlretStateKey) as useAlretStateType
 
 const userState = inject(useUserStateKey) as useUserStateType
 
@@ -75,7 +75,7 @@ const onSubmit = async () => {
       router.push({ name: "index" })
     }
   } catch {
-    useAlertListState.add("エラーが発生しました。")
+    useAlertState.add("エラーが発生しました。")
     return
   }
 }

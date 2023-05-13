@@ -18,15 +18,15 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/vue/24/outline"
 
-import AlretList from "@/app/dashboard-parts/AlretList.vue"
+import AlretArea from "@/app/dashboard-parts/AlretArea.vue"
 import {
-  useAlretListState,
-  useAlretListStateKey,
-} from "./dashboard-parts/useAlretListState"
+  useAlretState,
+  useAlretStateKey,
+} from "./dashboard-parts/useAlretState"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 
-const alretListState = useAlretListState()
-provide(useAlretListStateKey, alretListState)
+const alretState = useAlretState()
+provide(useAlretStateKey, alretState)
 
 const useUserState = inject(useUserStateKey) as useUserStateType
 const userState = useUserState.subscription
@@ -302,7 +302,7 @@ const sidebarOpen = ref(false)
     </div>
 
     <main class="lg:pl-72">
-      <AlretList></AlretList>
+      <AlretArea></AlretArea>
       <div class="sm:px-1 lg:px-8 bg-gray-100">
         <!-- Your content -->
         <router-view></router-view>

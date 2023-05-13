@@ -1,12 +1,12 @@
 import { InjectionKey, reactive, computed, ComputedRef } from "vue"
 
-type useAlretListStateType = {
+type useAlretStateType = {
   subscription: ComputedRef<{ messages: string[] }>
   add(message: string): void
   remove(index: number): void
 }
 
-const useAlretListState = (): useAlretListStateType => {
+const useAlretState = (): useAlretStateType => {
   // 状態
   const state = reactive({ messages: [] as string[] })
 
@@ -26,7 +26,7 @@ const useAlretListState = (): useAlretListStateType => {
   }
 }
 
-const useAlretListStateKey: InjectionKey<useAlretListStateType> =
-  Symbol("useMessageState")
+const useAlretStateKey: InjectionKey<useAlretStateType> =
+  Symbol("useAlretState")
 
-export { useAlretListState, useAlretListStateKey, useAlretListStateType }
+export { useAlretState, useAlretStateKey, useAlretStateType }
