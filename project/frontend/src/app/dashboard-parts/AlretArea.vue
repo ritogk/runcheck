@@ -8,7 +8,7 @@ const useAlertListState = inject(UseAlretStateKey) as UseAlretStateType
 <template>
   <div
     class="rounded-md bg-red-100 py-2 px-4"
-    v-for="(message, index) in useAlertListState.subscription.value.messages"
+    v-for="(message, index) in useAlertListState.subscription.messages.value"
     :key="index"
   >
     <div class="flex">

@@ -1,26 +1,32 @@
-import { InjectionKey, reactive, computed, ComputedRef } from "vue"
+import { InjectionKey, ref, computed, ComputedRef } from "vue"
 
 type UseAlretStateType = {
-  subscription: ComputedRef<{ messages: string[] }>
+  subscription: {
+    messages: ComputedRef<string[]>
+  }
   add(message: string): void
   remove(index: number): void
 }
 
 const UseAlretState = (): UseAlretStateType => {
   // 状態
-  const state = reactive({ messages: [] as string[] })
+  const _messages = ref<string[]>([])
 
   const add = (message: string) => {
-    state.messages.push(message)
+    _messages.value.push(message)
     window.scroll({ top: 0, behavior: "smooth" })
   }
 
   const remove = (index: number) => {
-    state.messages.splice(index, 1)
+    _messages.value.splice(index, 1)
   }
 
   return {
-    subscription: computed(() => state),
+    subscription: {
+      messages: computed(() => {
+        return _messages.value
+      }),
+    },
     add: add,
     remove: remove,
   }
