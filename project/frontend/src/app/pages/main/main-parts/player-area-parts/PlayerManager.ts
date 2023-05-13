@@ -19,12 +19,12 @@ export class PlayerManager implements IPlayerManager {
 
   changePlayer = (player: IVideoPlayer) => {
     this._player = player
-    this._videoType.value = player.videoType
+    this._videoType.value = player.VIDEO_TYPE
   }
 
   subscription = {
     player: computed(() => {
-      return this._player.videoType === this._videoType.value
+      return this._player.VIDEO_TYPE === this._videoType.value
         ? this._player
         : new DummyPlayer()
     }),

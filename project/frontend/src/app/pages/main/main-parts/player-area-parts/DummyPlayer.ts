@@ -2,9 +2,7 @@ import { computed } from "vue"
 import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer"
 
 export class DummyPlayer implements IVideoPlayer {
-  get videoType() {
-    return VideoType.NONE
-  }
+  public readonly VIDEO_TYPE = VideoType.NONE
 
   load = async () => {
     return Promise.resolve()

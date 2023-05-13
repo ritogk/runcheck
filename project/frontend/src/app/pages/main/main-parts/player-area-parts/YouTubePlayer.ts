@@ -7,15 +7,12 @@ import PlayerStates from "youtube-player/dist/constants/PlayerStates"
 export class YouTubePlayer implements IVideoPlayer {
   private player: YouTubePlayerType
   private youtubeUrl: string
-  public _status = ref(Status.WAITING)
+  private _status = ref(Status.WAITING)
+  public readonly VIDEO_TYPE = VideoType.YOUTUBE
 
   constructor(elementId: string, youtubeUrl: string) {
     this.player = YPlayer(elementId, { playerVars: { controls: 0 } })
     this.youtubeUrl = youtubeUrl
-  }
-
-  get videoType() {
-    return VideoType.YOUTUBE
   }
 
   load = async () => {

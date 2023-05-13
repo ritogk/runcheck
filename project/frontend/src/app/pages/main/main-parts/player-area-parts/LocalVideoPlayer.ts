@@ -3,15 +3,12 @@ import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer"
 
 export class LocalVideoPlayer implements IVideoPlayer {
   private videoElement: HTMLVideoElement
-  public _status = ref(Status.WAITING)
+  private _status = ref(Status.WAITING)
+  public readonly VIDEO_TYPE = VideoType.LOCAL
 
   constructor(videoElement: HTMLVideoElement, objectURL: string) {
     videoElement.src = objectURL
     this.videoElement = videoElement
-  }
-
-  get videoType() {
-    return VideoType.LOCAL
   }
 
   load = async () => {
