@@ -5,7 +5,7 @@ import {
   UseMainStateType,
 } from "@/app/pages/main/UseMainState"
 import { handleTweetLinkClick } from "./HandleTweetLinkClick"
-import { VideoType } from "./video-area-parts/libs/IVideoPlayer"
+import { VideoType } from "./player-area-parts/libs/IVideoPlayer"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 

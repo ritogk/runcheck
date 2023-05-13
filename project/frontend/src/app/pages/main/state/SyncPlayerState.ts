@@ -3,8 +3,8 @@ import {
   IVideoPlayer,
   Status,
   VideoType,
-} from "@/app/pages/main/parts/video-area-parts/libs/IVideoPlayer"
-import { PlayerManager } from "@/app/pages/main/parts/video-area-parts/libs/PlayerManager"
+} from "@/app/pages/main/parts/player-area-parts/libs/IVideoPlayer"
+import { PlayerManager } from "@/app/pages/main/parts/player-area-parts/libs/PlayerManager"
 import {
   ComparisonsApi,
   VideoType as ApiVideoType,
