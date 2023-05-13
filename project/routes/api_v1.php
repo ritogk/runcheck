@@ -39,3 +39,7 @@ Route::group(['prefix' => 'youtube'], function () {
 });
 
 Route::put('/operation-log', [V1\OperationLogController::class, 'create']);
+
+Route::group(['prefix' => 'status'], function () {
+    Route::get('/', [V1\StatusController::class, 'status']);
+});
