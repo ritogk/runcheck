@@ -19,7 +19,7 @@ class StatusController extends Controller
     {
         $result = $action->status();
         return response()->json(
-            ['is_logined' => $result['is_logined'], 'is_youtube_authroized' => $result['is_youtube_authroized'], 'user' => $result['user']],
+            ['isLogined' => $result['is_logined'], 'isYoutubeAuthroized' => $result['is_youtube_authroized'], 'user' => $result['user']],
             Response::HTTP_OK
         );
     }
