@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { inject } from "vue"
-import { useAlretStateKey, useAlretStateType } from "./useAlretState"
+import { UseAlretStateKey, UseAlretStateType } from "./UseAlretState"
 
-const useAlertListState = inject(useAlretStateKey) as useAlretStateType
+const useAlertListState = inject(UseAlretStateKey) as UseAlretStateType
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 import { inject } from "vue"
 import { ComparisonsApi } from "@/core/openapiClient"
 import {
-  useAlretStateKey,
-  useAlretStateType,
-} from "@/app/dashboard-parts/useAlretState"
+  UseAlretStateKey,
+  UseAlretStateType,
+} from "@/app/dashboard-parts/UseAlretState"
 import {
   UseMainStateKey,
   UseMainStateType,
@@ -11,7 +11,7 @@ import {
 import { YouTubePlayer } from "@/app/pages/main/main-parts/player-area-parts/YouTubePlayer"
 
 export const handleTweetLinkClick = async (comparisonId: number) => {
-  const useAlretState = inject(useAlretStateKey) as useAlretStateType
+  const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
   const useMainState = inject(UseMainStateKey) as UseMainStateType
   const comparisonsApi = new ComparisonsApi()
   try {

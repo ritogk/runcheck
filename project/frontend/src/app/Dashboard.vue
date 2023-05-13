@@ -21,17 +21,17 @@ import {
 import AlretArea from "@/app/dashboard-parts/AlretArea.vue"
 // 状態
 import {
-  useAlretState,
-  useAlretStateKey,
-} from "./dashboard-parts/useAlretState"
+  UseAlretState,
+  UseAlretStateKey,
+} from "./dashboard-parts/UseAlretState"
 import {
   UseUserState,
   UseUserStateKey,
 } from "@/app/dashboard-parts/UseUserState"
 
-const alretState = useAlretState()
+const alretState = UseAlretState()
 const useUserState = UseUserState()
-provide(useAlretStateKey, alretState)
+provide(UseAlretStateKey, alretState)
 provide(UseUserStateKey, useUserState)
 
 useUserState.load()

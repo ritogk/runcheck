@@ -2,9 +2,9 @@ import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { YoutubeApi } from "@/core/openapiClient"
 import {
-  useAlretStateKey,
-  useAlretStateType,
-} from "@/app/dashboard-parts/useAlretState"
+  UseAlretStateKey,
+  UseAlretStateType,
+} from "@/app/dashboard-parts/UseAlretState"
 import {
   UseMainStateKey,
   UseMainStateType,
@@ -16,7 +16,7 @@ import {
 
 export const callbackYoutubeOauth = async (code: string) => {
   const router = useRouter()
-  const useAlretState = inject(useAlretStateKey) as useAlretStateType
+  const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
   const useMainState = inject(UseMainStateKey) as UseMainStateType
   const useUserState = inject(UseUserStateKey) as UseUserStateType
 

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, inject } from "vue"
 import {
-  useAlretStateKey,
-  useAlretStateType,
-} from "@/app/dashboard-parts/useAlretState"
+  UseAlretStateKey,
+  UseAlretStateType,
+} from "@/app/dashboard-parts/UseAlretState"
 import { useRouter } from "vue-router"
 import {
   UseUserStateKey,
@@ -11,7 +11,7 @@ import {
 } from "@/app/dashboard-parts/UseUserState"
 
 const router = useRouter()
-const useAlertState = inject(useAlretStateKey) as useAlretStateType
+const useAlertState = inject(UseAlretStateKey) as UseAlretStateType
 
 const userState = inject(UseUserStateKey) as UseUserStateType
 
