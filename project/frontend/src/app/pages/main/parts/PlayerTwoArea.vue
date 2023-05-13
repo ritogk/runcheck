@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Video from "@/app/pages/main/parts/video-area-parts/Video.vue"
-import { ref, onMounted, inject, watch, watchEffect } from "vue"
+import { ref, inject, watch } from "vue"
 import { VideoNo } from "@/app/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
 import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer"
 import { LocalVideoPlayer } from "./video-area-parts/libs/LocalVideoPlayer"

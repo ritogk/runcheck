@@ -4,8 +4,8 @@ import {
   UseMainStateType,
   UseMainStateKey,
 } from "@/app/pages/main/UseMainState"
-import SaveModal from "./SaveModal.vue"
-import OpenModal from "./OpenModal.vue"
+import SaveModal from "./file-controller-parts/SaveModal.vue"
+import OpenModal from "./file-controller-parts/OpenModal.vue"
 import {
   useUserStateKey,
   useUserStateType,

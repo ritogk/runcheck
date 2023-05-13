@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref, computed } from "vue"
+import { inject } from "vue"
 import {
   UseMainStateKey,
   UseMainStateType,
