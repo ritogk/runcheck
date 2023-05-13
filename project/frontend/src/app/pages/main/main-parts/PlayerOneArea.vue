@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, inject, watch } from "vue"
-import { VideoNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
+import { PlayerNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
 import { LocalVideoPlayer } from "./player-area-parts/LocalVideoPlayer"
 import {
@@ -15,12 +15,12 @@ import {
 } from "@heroicons/vue/20/solid"
 import { VideoType } from "./player-area-parts/IVideoPlayer"
 
-const videoNo = VideoNo.ONE
+const playerNo = PlayerNo.ONE
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const youtubeUrl = ref("")
 watch(useMainState.youtubeModal.subscription.selectUrl, () => {
-  if (useMainState.youtubeModal.subscription.currentVideoNo.value !== videoNo)
+  if (useMainState.youtubeModal.subscription.currentPlayerNo.value !== playerNo)
     return
   youtubeUrl.value = useMainState.youtubeModal.subscription.selectUrl.value
 })
@@ -209,7 +209,7 @@ const hundleVideoSeek = async (seconds: number) => {
           <button
             type="button"
             class="relative w-3/12 -ml-px inline-flex items-center gap-x-1.5 rounded-r-md text-sm font-semibold bg-white text-gray-900 ring-1 ring-inset ring-indigo-300 hover:bg-gray-100"
-            @click="useMainState.youtubeModal.open(videoNo)"
+            @click="useMainState.youtubeModal.open(playerNo)"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

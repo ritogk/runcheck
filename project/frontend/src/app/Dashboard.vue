@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, provide, inject, computed } from "vue"
 import { useRouter } from "vue-router"
+// component
 import {
   Dialog,
   DialogPanel,
@@ -17,8 +18,8 @@ import {
   ArrowLeftOnRectangleIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/vue/24/outline"
-
 import AlretArea from "@/app/dashboard-parts/AlretArea.vue"
+// 状態
 import {
   useAlretState,
   useAlretStateKey,
@@ -29,10 +30,10 @@ import {
 } from "@/app/dashboard-parts/UseUserState"
 
 const alretState = useAlretState()
-provide(useAlretStateKey, alretState)
-
 const useUserState = UseUserState()
+provide(useAlretStateKey, alretState)
 provide(UseUserStateKey, useUserState)
+
 useUserState.load()
 
 const router = useRouter()

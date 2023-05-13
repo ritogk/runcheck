@@ -17,7 +17,7 @@ import {
 } from "@/app/dashboard-parts/UseUserState"
 import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListState"
-import { VideoNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
+import { PlayerNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
 import { callbackYoutubeOauth } from "./youtube-selector-modal-parts/CallbackYoutubeOauth"
 
@@ -56,15 +56,15 @@ const playerTwoManager = useMainState.syncPlayer.playerTwoManager
 
 const selectVideo = async (url: string) => {
   useMainState.youtubeModal.select(url)
-  const videoNo = useMainState.youtubeModal.subscription.currentVideoNo.value
-  switch (videoNo) {
-    case VideoNo.ONE:
+  const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
+  switch (playerNo) {
+    case PlayerNo.ONE:
       playerOneManager.subscription.player.value.destory()
       const playerOne = new YouTubePlayer("youtube-video-one", url)
       await playerOne.load()
       playerOneManager.changePlayer(playerOne)
       break
-    case VideoNo.TWO:
+    case PlayerNo.TWO:
       playerTwoManager.subscription.player.value.destory()
       const playerTwo = new YouTubePlayer("youtube-video-two", url)
       await playerTwo.load()
