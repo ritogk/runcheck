@@ -1,9 +1,14 @@
 import { InjectionKey, reactive, computed, ComputedRef } from "vue"
-import { AuthenticationApi, UsersApi } from "@/core/openapiClient/apis"
+import {
+  AuthenticationApi,
+  UsersApi,
+  StatusApi,
+} from "@/core/openapiClient/apis"
 
 type useUserStateType = {
   subscription: ComputedRef<{
     logined: boolean
+    isYoutubeAuthroized: boolean
     user: { id: number; name: string }
   }>
   register(
@@ -20,7 +25,12 @@ type useUserStateType = {
 const useUserState = (): useUserStateType => {
   const authenticationApi = new AuthenticationApi()
   const usersApi = new UsersApi()
-  const state = reactive({ logined: false, user: { id: 0, name: "" } })
+  const statusApi = new StatusApi()
+  const state = reactive({
+    logined: false,
+    isYoutubeAuthroized: false,
+    user: { id: 0, name: "" },
+  })
 
   const register = async (
     handleName: string,
@@ -83,10 +93,11 @@ const useUserState = (): useUserStateType => {
 
   const load = async (): Promise<boolean> => {
     try {
-      const response = await authenticationApi.authenticationMeGet()
-      state.user.id = response.id
-      state.user.name = response.name
-      state.logined = true
+      const response = await statusApi.statusGet()
+      state.user.id = response.user?.id ?? 0
+      state.user.name = response.user?.name ?? ""
+      state.logined = response.isLogined
+      state.isYoutubeAuthroized = response.isYoutubeAuthroized
       return true
     } catch {
       return false
