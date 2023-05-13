@@ -3,7 +3,7 @@ import { provide } from "vue"
 import { UseMainState, UseMainStateKey } from "./UseMainState"
 import PlayerOneArea from "./parts/PlayerOneArea.vue"
 import PlayerTwoArea from "./parts/PlayerTwoArea.vue"
-import YoutubeSelectModal from "./parts/YoutubeSelectModal.vue"
+import YoutubeSelectorModal from "./parts/YoutubeSelectorModal.vue"
 import AdjustSpeedModal from "./parts/AdjustSpeedModal.vue"
 import FileController from "./parts/FileController.vue"
 import SyncController from "./parts/SyncController.vue"
@@ -15,7 +15,7 @@ provide(UseMainStateKey, useMainState)
 </script>
 
 <template>
-  <YoutubeSelectModal></YoutubeSelectModal>
+  <YoutubeSelectorModal></YoutubeSelectorModal>
   <AdjustSpeedModal></AdjustSpeedModal>
   <div class="max-w-[600px]">
     <div class="px-1 pt-2">
