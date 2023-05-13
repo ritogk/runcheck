@@ -16,7 +16,7 @@ import {
   useUserStateType,
 } from "@/app/dashboard-parts/useUserState"
 import { YoutubeApi } from "@/core/openapiClient"
-import { VideoListState } from "./player-area-parts/video-selector-parts/VideoListState"
+import { YoutubeListState } from "./youtube-selector-modal/YoutubeListState"
 import { VideoNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./player-area-parts/libs/YouTubePlayer"
 import { callbackYoutubeOauth } from "./CallbackYoutubeOauth"
@@ -24,15 +24,15 @@ import { callbackYoutubeOauth } from "./CallbackYoutubeOauth"
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useUserState = inject(useUserStateKey) as useUserStateType
 
-const videoListState = VideoListState()
+const youtubeListState = YoutubeListState()
 watch(useMainState.youtubeModal.subscription.opened, (value) => {
   if (value && useUserState.subscription.value.isYoutubeAuthroized)
-    videoListState.load()
+    youtubeListState.load()
 })
 
 const filter = ref("")
 const filteredVideos = computed(() => {
-  return videoListState.subscription.videos.value.filter((video) => {
+  return youtubeListState.subscription.videos.value.filter((video) => {
     return (
       video.title.includes(filter.value) ||
       video.description.includes(filter.value)
@@ -224,7 +224,7 @@ if (code) callbackYoutubeOauth(code)
                     role="listbox"
                   >
                     <!-- スケルトン -->
-                    <div v-if="!videoListState.subscription.read">
+                    <div v-if="!youtubeListState.subscription.read">
                       <li
                         v-for="i in 5"
                         :key="i"
@@ -266,7 +266,7 @@ if (code) callbackYoutubeOauth(code)
                     <!-- Active: "bg-gray-100" -->
                     <div
                       v-if="
-                        videoListState.subscription.read &&
+                        youtubeListState.subscription.read &&
                         filteredVideos.length >= 1
                       "
                     >
@@ -308,7 +308,7 @@ if (code) callbackYoutubeOauth(code)
                   <!-- Empty state, show/hide based on command palette state -->
                   <div
                     v-if="
-                      videoListState.subscription.read &&
+                      youtubeListState.subscription.read &&
                       filteredVideos.length === 0
                     "
                   >
