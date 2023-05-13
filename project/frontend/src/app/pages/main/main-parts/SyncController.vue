@@ -11,12 +11,12 @@ import {
 } from "@heroicons/vue/20/solid"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
-const videoOne = useMainState.syncPlayer.playerOneManager.subscription.player
-const videoTwo = useMainState.syncPlayer.playerTwoManager.subscription.player
+const playerOne = useMainState.syncPlayer.playerOneManager.subscription.player
+const playerTwo = useMainState.syncPlayer.playerTwoManager.subscription.player
 
 const hundlePlaySwitch = () => {
-  videoOne.value.mute()
-  videoTwo.value.mute()
+  playerOne.value.mute()
+  playerTwo.value.mute()
   useMainState.syncPlayer.switchPlay()
 }
 

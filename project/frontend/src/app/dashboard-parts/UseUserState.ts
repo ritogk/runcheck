@@ -23,9 +23,9 @@ type UseUserStateType = {
 }
 
 const UseUserState = (): UseUserStateType => {
-  const authenticationApi = new AuthenticationApi()
-  const usersApi = new UsersApi()
-  const statusApi = new StatusApi()
+  const _authenticationApi = new AuthenticationApi()
+  const _usersApi = new UsersApi()
+  const _statusApi = new StatusApi()
   const _logined = ref(false)
   const _isYoutubeAuthroized = ref(false)
   const _user = ref({ id: 0, name: "" })
@@ -37,7 +37,7 @@ const UseUserState = (): UseUserStateType => {
     password: string
   ): Promise<boolean> => {
     try {
-      const response = await usersApi.usersPost({
+      const response = await _usersApi.usersPost({
         inlineObject: {
           handleName: handleName,
           carType: carType,
@@ -58,7 +58,7 @@ const UseUserState = (): UseUserStateType => {
 
   const login = async (email: string, password: string, remember: boolean) => {
     try {
-      const response = await authenticationApi.authenticationLoginPost({
+      const response = await _authenticationApi.authenticationLoginPost({
         inlineObject1: {
           email: email,
           password: password,
@@ -76,7 +76,7 @@ const UseUserState = (): UseUserStateType => {
 
   const logout = async () => {
     try {
-      await authenticationApi.authenticationLogoutPost()
+      await _authenticationApi.authenticationLogoutPost()
       _user.value = { id: 0, name: "" }
       _logined.value = false
       _isYoutubeAuthroized.value = false
@@ -89,7 +89,7 @@ const UseUserState = (): UseUserStateType => {
 
   const load = async (): Promise<boolean> => {
     try {
-      const response = await statusApi.statusGet()
+      const response = await _statusApi.statusGet()
       _user.value = {
         id: response.user?.id ?? 0,
         name: response.user?.name ?? "",

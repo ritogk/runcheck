@@ -5,19 +5,19 @@ import { YouTubePlayer as YouTubePlayerType } from "youtube-player/dist/types"
 import PlayerStates from "youtube-player/dist/constants/PlayerStates"
 
 export class YouTubePlayer implements IVideoPlayer {
-  private player: YouTubePlayerType
-  private youtubeUrl: string
+  private _player: YouTubePlayerType
+  private _youtubeUrl: string
   private _status = ref(Status.WAITING)
   public readonly VIDEO_TYPE = VideoType.YOUTUBE
 
   constructor(elementId: string, youtubeUrl: string) {
-    this.player = YPlayer(elementId, { playerVars: { controls: 0 } })
-    this.youtubeUrl = youtubeUrl
+    this._player = YPlayer(elementId, { playerVars: { controls: 0 } })
+    this._youtubeUrl = youtubeUrl
   }
 
   load = async () => {
     // ステータス変更を監視
-    this.player.on("stateChange", (status) => {
+    this._player.on("stateChange", (status) => {
       switch (status.data) {
         case PlayerStates.UNSTARTED:
           this._status.value = Status.WAITING
@@ -36,31 +36,31 @@ export class YouTubePlayer implements IVideoPlayer {
           break
       }
     })
-    return this.player.loadVideoByUrl(this.youtubeUrl)
+    return this._player.loadVideoByUrl(this._youtubeUrl)
   }
 
   changeVideo(url: string): void {
-    this.player.loadVideoByUrl(url)
+    this._player.loadVideoByUrl(url)
   }
 
   play = () => {
-    return this.player.playVideo()
+    return this._player.playVideo()
   }
 
   stop = async () => {
-    return this.player.pauseVideo()
+    return this._player.pauseVideo()
   }
 
   mute = () => {
-    return this.player.mute()
+    return this._player.mute()
   }
 
   unMute = () => {
-    this.player.unMute()
+    this._player.unMute()
   }
 
   adjustSpeed = (speed: number) => {
-    this.player.setPlaybackRate(speed)
+    this._player.setPlaybackRate(speed)
   }
 
   enableRepeat = () => {
@@ -72,23 +72,23 @@ export class YouTubePlayer implements IVideoPlayer {
   }
 
   seekTo = async (seconds: number) => {
-    return this.player.seekTo(seconds, true)
+    return this._player.seekTo(seconds, true)
   }
 
   getCurrentTime = async (): Promise<number> => {
-    return await this.player.getCurrentTime()
+    return await this._player.getCurrentTime()
   }
 
   getDuration = async (): Promise<number> => {
-    return this.player.getDuration()
+    return this._player.getDuration()
   }
 
   destory(): Promise<void> {
-    return this.player.destroy()
+    return this._player.destroy()
   }
 
   getPath = (): Promise<string> => {
-    return this.player.getVideoUrl()
+    return this._player.getVideoUrl()
   }
 
   public subscription = {

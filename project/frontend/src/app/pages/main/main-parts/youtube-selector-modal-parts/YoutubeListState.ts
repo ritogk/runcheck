@@ -17,12 +17,12 @@ interface IYoutubeListState {
 }
 
 const YoutubeListState = (): IYoutubeListState => {
-  const youtubeApi = new YoutubeApi()
+  const _youtubeApi = new YoutubeApi()
   const state = reactive({ read: false, videos: [] as VideoType[] })
 
   const load = async (): Promise<boolean> => {
     try {
-      const res = await youtubeApi.youtubeVideosGet()
+      const res = await _youtubeApi.youtubeVideosGet()
       state.read = true
       state.videos.splice(0, state.videos.length, ...res)
       return true

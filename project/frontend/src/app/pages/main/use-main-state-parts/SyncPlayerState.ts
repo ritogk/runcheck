@@ -54,7 +54,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   private _speed = ref(1)
   private _synced = ref(false)
   private _syncIntervalId = 0
-  private comparisonsApi = new ComparisonsApi()
+  private _comparisonsApi = new ComparisonsApi()
 
   constructor() {
     this._playerOneManager = new PlayerManager()
@@ -286,7 +286,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         : video2Url
     const video2TimeSt = this._playerTwoStartPosition
     // 同期情報の登録
-    const response = await this.comparisonsApi.comparisonsPost({
+    const response = await this._comparisonsApi.comparisonsPost({
       videoComparison: {
         title: title,
         category: category,
@@ -304,7 +304,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   }
 
   publishSync(id: number): Promise<void> {
-    return this.comparisonsApi.comparisonsComparisonIdPublishPut({
+    return this._comparisonsApi.comparisonsComparisonIdPublishPut({
       comparisonId: id,
     })
   }
