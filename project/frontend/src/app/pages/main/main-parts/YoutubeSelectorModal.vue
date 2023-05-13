@@ -17,7 +17,7 @@ import {
 } from "@/app/dashboard-parts/UseUserState"
 import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListState"
-import { PlayerNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
+import { PlayerNo } from "@/app/pages/main/use-main-state-parts/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
 import { callbackYoutubeOauth } from "./youtube-selector-modal-parts/CallbackYoutubeOauth"
 
