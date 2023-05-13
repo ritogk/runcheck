@@ -69,7 +69,7 @@ const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
 
 const hundleVideoSeek = async (seconds: number) => {
   const currentPosition =
-    await playerOneManager.subscription.player.value.getCurrentPosition()
+    await playerOneManager.subscription.player.value.getCurrentTime()
   useMainState.syncPlayer.playerOneManager.subscription.player.value.seekTo(
     currentPosition + seconds
   )

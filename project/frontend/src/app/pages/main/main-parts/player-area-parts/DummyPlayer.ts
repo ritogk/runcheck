@@ -44,7 +44,7 @@ export class DummyPlayer implements IVideoPlayer {
     return Promise.resolve()
   }
 
-  getCurrentPosition = async (): Promise<number> => {
+  getCurrentTime = async (): Promise<number> => {
     return 1
   }
 

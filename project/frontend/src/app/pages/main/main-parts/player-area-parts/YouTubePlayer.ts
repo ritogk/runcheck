@@ -78,7 +78,7 @@ export class YouTubePlayer implements IVideoPlayer {
     return this.player.seekTo(seconds, true)
   }
 
-  getCurrentPosition = async (): Promise<number> => {
+  getCurrentTime = async (): Promise<number> => {
     return await this.player.getCurrentTime()
   }
 

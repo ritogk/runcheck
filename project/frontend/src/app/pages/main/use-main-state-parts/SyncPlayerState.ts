@@ -133,8 +133,8 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._muted.value = true
     this._repeated.value = true
     const [playerOneStartPosition, playerTwoStartPosition] = await Promise.all([
-      this._playerOneManager.subscription.player.value.getCurrentPosition(),
-      this._playerTwoManager.subscription.player.value.getCurrentPosition(),
+      this._playerOneManager.subscription.player.value.getCurrentTime(),
+      this._playerTwoManager.subscription.player.value.getCurrentTime(),
     ])
     this._playerOneStartPosition =
       Math.floor(playerOneStartPosition * 100) / 100
@@ -165,8 +165,8 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       const st = new Date().getTime()
       let [playerOneCurrentPosition, playerTwoCurrentPosition] =
         await Promise.all([
-          this._playerOneManager.subscription.player.value.getCurrentPosition(),
-          this._playerTwoManager.subscription.player.value.getCurrentPosition(),
+          this._playerOneManager.subscription.player.value.getCurrentTime(),
+          this._playerTwoManager.subscription.player.value.getCurrentTime(),
         ])
       playerOneCurrentPosition =
         Math.floor(playerOneCurrentPosition * 100) / 100
