@@ -1,5 +1,4 @@
 import { computed, ref, ComputedRef } from "vue"
-import { VideoNo } from "@/app/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
 import { localStorageKeys } from "@/core/localstorageKey"
 
 export interface IYoutubeSelectorModalState {
@@ -14,6 +13,7 @@ export interface IYoutubeSelectorModalState {
     selectUrl: ComputedRef<string>
   }
 }
+
 export class YoutubeSelectorModalState implements IYoutubeSelectorModalState {
   private _opened = ref(false)
   private _currentVideoNo = ref(VideoNo.NONE)
@@ -62,4 +62,10 @@ export class YoutubeSelectorModalState implements IYoutubeSelectorModalState {
       return this._selectUrl.value
     }),
   }
+}
+
+export enum VideoNo {
+  ONE = 1,
+  TWO = 2,
+  NONE = 3,
 }

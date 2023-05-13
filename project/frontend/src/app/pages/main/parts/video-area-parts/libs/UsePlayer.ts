@@ -1,7 +1,7 @@
 import { InjectionKey, reactive, computed, ComputedRef } from "vue"
 import { IVideoPlayer } from "./IVideoPlayer"
 import { YouTubePlayer } from "./YouTubePlayer"
-import { VideoNo } from "@/app/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
+import { VideoNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
 type UsePlayerType = {
   getPlayer(): IVideoPlayer
   setPlayer(player: IVideoPlayer): void

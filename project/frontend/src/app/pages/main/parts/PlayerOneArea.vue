@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, inject, watch } from "vue"
-import { VideoNo } from "@/app/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
+import { VideoNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer"
 import { LocalVideoPlayer } from "./video-area-parts/libs/LocalVideoPlayer"
 import {
