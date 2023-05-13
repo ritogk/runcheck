@@ -12,7 +12,6 @@ export interface IVideoPlayer {
   disableRepeat(): void
   seekTo(seconds: number): Promise<void>
   getCurrentPosition(): Promise<number>
-  setCurrentPosition(currentPosition: number): void
   getDuration(): Promise<number>
   getPath(): Promise<string>
   destory(): Promise<void>

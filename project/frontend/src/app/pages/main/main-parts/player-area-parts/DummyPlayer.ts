@@ -48,10 +48,6 @@ export class DummyPlayer implements IVideoPlayer {
     return 1
   }
 
-  setCurrentPosition = (currentPosition: number) => {
-    return
-  }
-
   getDuration = async (): Promise<number> => {
     return 1
   }

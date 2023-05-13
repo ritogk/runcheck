@@ -77,10 +77,6 @@ export class LocalVideoPlayer implements IVideoPlayer {
     return Promise.resolve(this.videoElement.currentTime)
   }
 
-  setCurrentPosition = (currentPosition: number) => {
-    return
-  }
-
   getDuration = async (): Promise<number> => {
     return Promise.resolve(this.videoElement.duration)
   }
