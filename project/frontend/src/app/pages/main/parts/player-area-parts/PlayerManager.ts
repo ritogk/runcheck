@@ -2,8 +2,8 @@ import { ComputedRef, InjectionKey, computed, ref } from "vue"
 import {
   IVideoPlayer,
   VideoType,
-} from "@/app/pages/main/parts/player-area-parts/libs/IVideoPlayer"
-import { DummyPlayer } from "@/app/pages/main/parts/player-area-parts/libs/DummyPlayer"
+} from "@/app/pages/main/parts/player-area-parts/IVideoPlayer"
+import { DummyPlayer } from "@/app/pages/main/parts/player-area-parts/DummyPlayer"
 
 export interface IPlayerManager {
   changePlayer(player: IVideoPlayer): void

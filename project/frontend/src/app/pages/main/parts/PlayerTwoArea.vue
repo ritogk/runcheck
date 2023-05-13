@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, inject, watch } from "vue"
 import { VideoNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
-import { YouTubePlayer } from "./player-area-parts/libs/YouTubePlayer"
-import { LocalVideoPlayer } from "./player-area-parts/libs/LocalVideoPlayer"
+import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
+import { LocalVideoPlayer } from "./player-area-parts/LocalVideoPlayer"
 import {
   UseMainStateKey,
   UseMainStateType,
@@ -13,7 +13,7 @@ import {
   VideoCameraIcon,
   // SearchIcon,
 } from "@heroicons/vue/20/solid"
-import { VideoType } from "./player-area-parts/libs/IVideoPlayer"
+import { VideoType } from "./player-area-parts/IVideoPlayer"
 
 const videoNo = VideoNo.TWO
 

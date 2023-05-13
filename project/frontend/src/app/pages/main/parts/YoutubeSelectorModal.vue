@@ -18,7 +18,7 @@ import {
 import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListState"
 import { VideoNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
-import { YouTubePlayer } from "./player-area-parts/libs/YouTubePlayer"
+import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
 import { callbackYoutubeOauth } from "./CallbackYoutubeOauth"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
