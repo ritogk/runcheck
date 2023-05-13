@@ -7,13 +7,16 @@ import {
   TransitionRoot,
 } from "@headlessui/vue"
 import { XMarkIcon } from "@heroicons/vue/20/solid"
-import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
+import {
+  UseMainStateKey,
+  UseMainStateType,
+} from "@/app/pages/main/UseMainState"
 import {
   useUserStateKey,
   useUserStateType,
 } from "@/app/dashboard-parts/useUserState"
 import { YoutubeApi } from "@/core/openapiClient"
-import { VideoListState } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/VideoListState"
+import { VideoListState } from "@/app/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/VideoListState"
 import { VideoNo } from "./video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
 import { YouTubePlayer } from "./video-area-parts/libs/YouTubePlayer"
 import { callbackYoutubeOauth } from "./CallbackYoutubeOauth"

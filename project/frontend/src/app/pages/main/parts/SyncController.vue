@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { inject, ref, computed } from "vue"
-import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
+import {
+  UseMainStateKey,
+  UseMainStateType,
+} from "@/app/pages/main/UseMainState"
 import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,

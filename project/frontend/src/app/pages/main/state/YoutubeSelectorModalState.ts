@@ -1,5 +1,5 @@
 import { computed, ref, ComputedRef } from "vue"
-import { VideoNo } from "@/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
+import { VideoNo } from "@/app/pages/main/parts/video-area-parts/video-selector-parts/youtube-select-modal/UseModalState"
 import { localStorageKeys } from "@/core/localstorageKey"
 
 export interface IYoutubeSelectorModalState {

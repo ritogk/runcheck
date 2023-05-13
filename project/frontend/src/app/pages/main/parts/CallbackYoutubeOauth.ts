@@ -5,7 +5,10 @@ import {
   useAlretStateKey,
   useAlretStateType,
 } from "@/app/dashboard-parts/useAlretState"
-import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
+import {
+  UseMainStateKey,
+  UseMainStateType,
+} from "@/app/pages/main/UseMainState"
 import {
   useUserStateKey,
   useUserStateType,

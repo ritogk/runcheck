@@ -4,8 +4,11 @@ import {
   useAlretStateKey,
   useAlretStateType,
 } from "@/app/dashboard-parts/useAlretState"
-import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
-import { YouTubePlayer } from "@/pages/main/parts/video-area-parts/libs/YouTubePlayer"
+import {
+  UseMainStateKey,
+  UseMainStateType,
+} from "@/app/pages/main/UseMainState"
+import { YouTubePlayer } from "@/app/pages/main/parts/video-area-parts/libs/YouTubePlayer"
 
 export const handleTweetLinkClick = async (comparisonId: number) => {
   const useAlretState = inject(useAlretStateKey) as useAlretStateType

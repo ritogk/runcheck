@@ -7,7 +7,10 @@ import {
   TransitionRoot,
 } from "@headlessui/vue"
 import { XMarkIcon } from "@heroicons/vue/20/solid"
-import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
+import {
+  UseMainStateKey,
+  UseMainStateType,
+} from "@/app/pages/main/UseMainState"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 

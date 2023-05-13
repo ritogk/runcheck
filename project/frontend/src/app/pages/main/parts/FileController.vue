@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { inject } from "vue"
-import { UseMainStateType, UseMainStateKey } from "@/pages/main/UseMainState"
+import {
+  UseMainStateType,
+  UseMainStateKey,
+} from "@/app/pages/main/UseMainState"
 import SaveModal from "./SaveModal.vue"
 import OpenModal from "./OpenModal.vue"
 import {
