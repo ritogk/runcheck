@@ -18,8 +18,8 @@ const userState = inject(UseUserStateKey) as UseUserStateType
   <div
     v-show="
       userState.subscription.value.logined &&
-      useMainState.title.subscription.title.value &&
-      useMainState.title.subscription.memo.value
+      useMainState.memo.subscription.title.value &&
+      useMainState.memo.subscription.memo.value
     "
   >
     <!-- タイトル、詳細 -->
@@ -29,10 +29,10 @@ const userState = inject(UseUserStateKey) as UseUserStateType
       >
         <div class="ml-4 mt-4">
           <h3 class="text-base font-semibold leading-6 text-gray-900">
-            {{ useMainState.title.subscription.title.value }}
+            {{ useMainState.memo.subscription.title.value }}
           </h3>
           <p class="mt-1 text-sm text-gray-500">
-            {{ useMainState.title.subscription.memo.value }}
+            {{ useMainState.memo.subscription.memo.value }}
           </p>
         </div>
       </div>

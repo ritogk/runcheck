@@ -15,7 +15,7 @@ import { SyncPlayerState, ISyncPlayerStateType } from "./state/SyncPlayerState"
 type UseMainStateType = {
   openModal: IOpenModalState
   saveModal: ISaveModalState
-  title: MemoState
+  memo: MemoState
   youtubeModal: IYoutubeSelectorModalState
   adjustSpeedModal: IAdjustSpeedModalState
   syncPlayer: ISyncPlayerStateType
@@ -25,7 +25,7 @@ const UseMainState = (): UseMainStateType => {
   return {
     openModal: new OpenModalState(),
     saveModal: new SaveModalState(),
-    title: new MemoState(),
+    memo: new MemoState(),
     youtubeModal: new YoutubeSelectorModalState(),
     adjustSpeedModal: new AdjustSpeedModalState(),
     syncPlayer: new SyncPlayerState(),
