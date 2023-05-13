@@ -3,7 +3,7 @@ import { ref, inject } from "vue"
 import {
   useAlretListStateKey,
   useAlretListStateType,
-} from "@/pages/dashboard/parts/AlretList/useAlretListState"
+} from "@/app/dashboard-parts/AlretList/useAlretListState"
 import { useRouter } from "vue-router"
 import { useUserStateKey, useUserStateType } from "@/components/useUserState"
 

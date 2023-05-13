@@ -3,7 +3,7 @@ import { ComparisonsApi } from "@/core/openapiClient"
 import {
   useAlretListStateKey,
   useAlretListStateType,
-} from "@/pages/dashboard/parts/AlretList/useAlretListState"
+} from "@/app/dashboard-parts/AlretList/useAlretListState"
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
 import { YouTubePlayer } from "@/pages/main/parts/video-area-parts/libs/YouTubePlayer"
 
