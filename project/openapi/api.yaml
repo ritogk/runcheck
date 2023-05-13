@@ -330,7 +330,9 @@ paths:
                     $ref: "#/components/schemas/User"
                     description: "ユーザー"
                 required:
-                  - redirectUrl
+                  - isLogined
+                  - isYoutubeAuthroized
+                  - user
 components:
   schemas:
     User:
