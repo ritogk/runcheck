@@ -23,7 +23,10 @@ import {
   useAlretState,
   useAlretStateKey,
 } from "./dashboard-parts/useAlretState"
-import { useUserStateKey, useUserStateType } from "@/components/useUserState"
+import {
+  useUserStateKey,
+  useUserStateType,
+} from "@/app/dashboard-parts/useUserState"
 
 const alretState = useAlretState()
 provide(useAlretStateKey, alretState)

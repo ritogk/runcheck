@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, inject } from "vue"
-import { useUserStateKey, useUserStateType } from "@/components/useUserState"
+import {
+  useUserStateKey,
+  useUserStateType,
+} from "@/app/dashboard-parts/useUserState"
 import {
   useAlretStateKey,
   useAlretStateType,

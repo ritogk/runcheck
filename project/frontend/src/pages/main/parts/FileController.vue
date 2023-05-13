@@ -3,7 +3,10 @@ import { inject } from "vue"
 import { UseMainStateType, UseMainStateKey } from "@/pages/main/UseMainState"
 import SaveModal from "./SaveModal.vue"
 import OpenModal from "./OpenModal.vue"
-import { useUserStateKey, useUserStateType } from "@/components/useUserState"
+import {
+  useUserStateKey,
+  useUserStateType,
+} from "@/app/dashboard-parts/useUserState"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 

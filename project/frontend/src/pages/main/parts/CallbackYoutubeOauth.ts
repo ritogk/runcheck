@@ -6,7 +6,10 @@ import {
   useAlretStateType,
 } from "@/app/dashboard-parts/useAlretState"
 import { UseMainStateKey, UseMainStateType } from "@/pages/main/UseMainState"
-import { useUserStateKey, useUserStateType } from "@/components/useUserState"
+import {
+  useUserStateKey,
+  useUserStateType,
+} from "@/app/dashboard-parts/useUserState"
 
 export const callbackYoutubeOauth = async (code: string) => {
   const router = useRouter()

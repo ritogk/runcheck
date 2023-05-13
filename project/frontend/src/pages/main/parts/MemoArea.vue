@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { inject } from "vue"
 import { UseMainStateType, UseMainStateKey } from "@/pages/main/UseMainState"
-import { useUserStateKey, useUserStateType } from "@/components/useUserState"
+import {
+  useUserStateKey,
+  useUserStateType,
+} from "@/app/dashboard-parts/useUserState"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 

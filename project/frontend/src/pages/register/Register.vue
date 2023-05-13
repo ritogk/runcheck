@@ -5,7 +5,10 @@ import {
   useAlretStateType,
 } from "@/app/dashboard-parts/useAlretState"
 import { useRouter } from "vue-router"
-import { useUserStateKey, useUserStateType } from "@/components/useUserState"
+import {
+  useUserStateKey,
+  useUserStateType,
+} from "@/app/dashboard-parts/useUserState"
 
 const router = useRouter()
 const useAlertState = inject(useAlretStateKey) as useAlretStateType
