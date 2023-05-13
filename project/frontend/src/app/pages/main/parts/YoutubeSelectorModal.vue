@@ -16,7 +16,7 @@ import {
   useUserStateType,
 } from "@/app/dashboard-parts/useUserState"
 import { YoutubeApi } from "@/core/openapiClient"
-import { YoutubeListState } from "./youtube-selector-modal/YoutubeListState"
+import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListState"
 import { VideoNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./player-area-parts/libs/YouTubePlayer"
 import { callbackYoutubeOauth } from "./CallbackYoutubeOauth"
