@@ -11,6 +11,11 @@ const routes: Array<RouteRecordRaw> = [
     component: Main,
   },
   {
+    path: "/main",
+    name: "main",
+    component: Main,
+  },
+  {
     path: "/register",
     name: "register",
     component: Register,
