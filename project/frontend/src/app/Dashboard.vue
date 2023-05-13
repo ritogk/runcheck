@@ -24,15 +24,16 @@ import {
   useAlretStateKey,
 } from "./dashboard-parts/useAlretState"
 import {
-  useUserStateKey,
-  useUserStateType,
-} from "@/app/dashboard-parts/useUserState"
+  UseUserState,
+  UseUserStateKey,
+} from "@/app/dashboard-parts/UseUserState"
 
 const alretState = useAlretState()
 provide(useAlretStateKey, alretState)
 
-const useUserState = inject(useUserStateKey) as useUserStateType
-const userState = useUserState.subscription
+const useUserState = UseUserState()
+provide(UseUserStateKey, useUserState)
+useUserState.load()
 
 const router = useRouter()
 
@@ -55,7 +56,7 @@ const navigation = [
       sidebarOpen.value = false
       router.push({ name: "login" })
     },
-    show: computed(() => !userState.value.logined),
+    show: computed(() => !useUserState.subscription.value.logined),
   },
   {
     name: "ログアウト",
@@ -67,7 +68,7 @@ const navigation = [
       useUserState.logout()
       router.push({ name: "index" })
     },
-    show: computed(() => userState.value.logined),
+    show: computed(() => useUserState.subscription.value.logined),
   },
   {
     name: "新規登録",
@@ -78,7 +79,7 @@ const navigation = [
       sidebarOpen.value = false
       router.push({ name: "register" })
     },
-    show: computed(() => !userState.value.logined),
+    show: computed(() => !useUserState.subscription.value.logined),
   },
   {
     name: "このアプリについて",
@@ -173,7 +174,7 @@ const sidebarOpen = ref(false)
                     <ul role="list" class="flex flex-1 flex-col gap-y-7">
                       <li>
                         <ul role="list" class="-mx-2 space-y-1">
-                          <li v-if="userState.logined">
+                          <li v-if="useUserState.subscription.value.logined">
                             <a
                               class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer"
                               @click="hundleHomeClick()"
@@ -183,7 +184,7 @@ const sidebarOpen = ref(false)
                                 class="h-6 w-6 shrink-0"
                                 aria-hidden="true"
                               />
-                              {{ userState.user.name }}
+                              {{ useUserState.subscription.value.user.name }}
                             </a>
                           </li>
 
@@ -240,7 +241,7 @@ const sidebarOpen = ref(false)
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
             <li>
               <ul role="list" class="-mx-2 space-y-1">
-                <li v-if="userState.logined">
+                <li v-if="useUserState.subscription.value.logined">
                   <a
                     class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer"
                     @click="hundleHomeClick()"
@@ -250,7 +251,7 @@ const sidebarOpen = ref(false)
                       class="h-6 w-6 shrink-0"
                       aria-hidden="true"
                     />
-                    {{ userState.user.name }}
+                    {{ useUserState.subscription.value.user.name }}
                   </a>
                 </li>
                 <li v-for="item in navigation" :key="item.name">

@@ -10,15 +10,15 @@ import {
   UseMainStateType,
 } from "@/app/pages/main/UseMainState"
 import {
-  useUserStateKey,
-  useUserStateType,
-} from "@/app/dashboard-parts/useUserState"
+  UseUserStateKey,
+  UseUserStateType,
+} from "@/app/dashboard-parts/UseUserState"
 
 export const callbackYoutubeOauth = async (code: string) => {
   const router = useRouter()
   const useAlretState = inject(useAlretStateKey) as useAlretStateType
   const useMainState = inject(UseMainStateKey) as UseMainStateType
-  const useUserState = inject(useUserStateKey) as useUserStateType
+  const useUserState = inject(UseUserStateKey) as UseUserStateType
 
   const youtubeApi = new YoutubeApi()
   try {

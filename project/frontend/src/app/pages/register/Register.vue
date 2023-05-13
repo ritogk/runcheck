@@ -6,14 +6,14 @@ import {
 } from "@/app/dashboard-parts/useAlretState"
 import { useRouter } from "vue-router"
 import {
-  useUserStateKey,
-  useUserStateType,
-} from "@/app/dashboard-parts/useUserState"
+  UseUserStateKey,
+  UseUserStateType,
+} from "@/app/dashboard-parts/UseUserState"
 
 const router = useRouter()
 const useAlertState = inject(useAlretStateKey) as useAlretStateType
 
-const userState = inject(useUserStateKey) as useUserStateType
+const userState = inject(UseUserStateKey) as UseUserStateType
 
 const form = {
   hanndleName: ref<HTMLInputElement | null>(null),

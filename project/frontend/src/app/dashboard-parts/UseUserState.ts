@@ -5,7 +5,7 @@ import {
   StatusApi,
 } from "@/core/openapiClient/apis"
 
-type useUserStateType = {
+type UseUserStateType = {
   subscription: ComputedRef<{
     logined: boolean
     isYoutubeAuthroized: boolean
@@ -22,7 +22,7 @@ type useUserStateType = {
   load(): Promise<boolean>
 }
 
-const useUserState = (): useUserStateType => {
+const UseUserState = (): UseUserStateType => {
   const authenticationApi = new AuthenticationApi()
   const usersApi = new UsersApi()
   const statusApi = new StatusApi()
@@ -114,6 +114,6 @@ const useUserState = (): useUserStateType => {
   }
 }
 
-const useUserStateKey: InjectionKey<useUserStateType> = Symbol("useUserState")
+const UseUserStateKey: InjectionKey<UseUserStateType> = Symbol("useUserState")
 
-export { useUserState, useUserStateKey, useUserStateType }
+export { UseUserState, UseUserStateKey, UseUserStateType }

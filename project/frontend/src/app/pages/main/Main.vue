@@ -15,8 +15,6 @@ provide(UseMainStateKey, useMainState)
 </script>
 
 <template>
-  <YoutubeSelectorModal></YoutubeSelectorModal>
-  <AdjustSpeedModal></AdjustSpeedModal>
   <div class="max-w-[600px]">
     <div class="px-1 pt-2">
       <FileController></FileController>
@@ -33,4 +31,6 @@ provide(UseMainStateKey, useMainState)
     ></SyncController>
     <div class="m-5"></div>
   </div>
+  <YoutubeSelectorModal></YoutubeSelectorModal>
+  <AdjustSpeedModal></AdjustSpeedModal>
 </template>

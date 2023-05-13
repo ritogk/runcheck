@@ -12,9 +12,9 @@ import {
   UseMainStateType,
 } from "@/app/pages/main/UseMainState"
 import {
-  useUserStateKey,
-  useUserStateType,
-} from "@/app/dashboard-parts/useUserState"
+  UseUserStateKey,
+  UseUserStateType,
+} from "@/app/dashboard-parts/UseUserState"
 import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListState"
 import { VideoNo } from "@/app/pages/main/state/YoutubeSelectorModalState"
@@ -22,7 +22,7 @@ import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
 import { callbackYoutubeOauth } from "./youtube-selector-modal-parts/CallbackYoutubeOauth"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
-const useUserState = inject(useUserStateKey) as useUserStateType
+const useUserState = inject(UseUserStateKey) as UseUserStateType
 
 const youtubeListState = YoutubeListState()
 watch(useMainState.youtubeModal.subscription.opened, (value) => {

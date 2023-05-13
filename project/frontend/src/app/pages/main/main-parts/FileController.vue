@@ -7,13 +7,13 @@ import {
 import SaveModal from "./file-controller-parts/SaveModal.vue"
 import OpenModal from "./file-controller-parts/OpenModal.vue"
 import {
-  useUserStateKey,
-  useUserStateType,
-} from "@/app/dashboard-parts/useUserState"
+  UseUserStateKey,
+  UseUserStateType,
+} from "@/app/dashboard-parts/UseUserState"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
-const userState = inject(useUserStateKey) as useUserStateType
+const userState = inject(UseUserStateKey) as UseUserStateType
 
 const hundleOpenClick = () => {
   useMainState.openModal.open()

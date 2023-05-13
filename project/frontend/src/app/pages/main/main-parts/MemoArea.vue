@@ -5,13 +5,13 @@ import {
   UseMainStateKey,
 } from "@/app/pages/main/UseMainState"
 import {
-  useUserStateKey,
-  useUserStateType,
-} from "@/app/dashboard-parts/useUserState"
+  UseUserStateKey,
+  UseUserStateType,
+} from "@/app/dashboard-parts/UseUserState"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
-const userState = inject(useUserStateKey) as useUserStateType
+const userState = inject(UseUserStateKey) as UseUserStateType
 </script>
 
 <template>
