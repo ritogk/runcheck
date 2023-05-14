@@ -16,6 +16,10 @@ const UseLoading = (): UseLoadingStateType => {
 
   const run = () => {
     _isLoading.value = true
+    // エラー時に何もできなくならないように10秒後に強制OFF
+    setTimeout(() => {
+      _isLoading.value = false
+    }, 10000)
   }
 
   const stop = () => {
