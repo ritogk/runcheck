@@ -11,7 +11,7 @@ export class YouTubePlayer implements IVideoPlayer {
   public readonly VIDEO_TYPE = VideoType.YOUTUBE
 
   constructor(elementId: string, youtubeUrl: string) {
-    this._player = YPlayer(elementId, { playerVars: { controls: 0 } })
+    this._player = YPlayer(elementId)
     this._youtubeUrl = youtubeUrl
   }
 
