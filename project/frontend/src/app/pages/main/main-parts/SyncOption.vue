@@ -31,7 +31,7 @@ const hundleTweetClick = async () => {
   await useMainState.syncPlayer.publishSync(compoarion.id)
   // ツイートする
   const url = `${window.location.origin}${window.location.pathname}?comparisonId=${compoarion.id}`
-  window.open("https://twitter.com/intent/tweet?text=" + url)
+  location.href = "https://twitter.com/intent/tweet?text=" + url
 }
 
 // ツイートしたURLから飛んできた時の処理
