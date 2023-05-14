@@ -9,7 +9,7 @@
     <script defer src="{{ asset('/spa/js/app.js?v='.time(), true) }}"></script>
     
   </head>
-  <body>
+  <body style="background: rgb(243, 244, 246);">
     <noscript>
       <strong>We're sorry but hello-world doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
