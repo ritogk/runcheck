@@ -56,17 +56,18 @@ const playerTwoManager = useMainState.syncPlayer.playerTwoManager
 
 const selectVideo = async (url: string) => {
   useMainState.youtubeModal.select(url)
+  const youtubeId = url.substring(url.length - 11)
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
   switch (playerNo) {
     case PlayerNo.ONE:
       playerOneManager.subscription.player.value.destory()
-      const playerOne = new YouTubePlayer("youtube-video-one", url)
+      const playerOne = new YouTubePlayer("youtube-video-one", youtubeId)
       await playerOne.load()
       playerOneManager.changePlayer(playerOne)
       break
     case PlayerNo.TWO:
       playerTwoManager.subscription.player.value.destory()
-      const playerTwo = new YouTubePlayer("youtube-video-two", url)
+      const playerTwo = new YouTubePlayer("youtube-video-two", youtubeId)
       await playerTwo.load()
       playerTwoManager.changePlayer(playerTwo)
       break

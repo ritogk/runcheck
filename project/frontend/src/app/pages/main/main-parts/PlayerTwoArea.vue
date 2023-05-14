@@ -56,15 +56,14 @@ const hundleLocalVideoChange = async (event: Event) => {
   )
   localVideoPlayer.load()
   playerTwoManager.changePlayer(localVideoPlayer)
-  playerTwoManager.subscription.player.value.changeVideo(objectURL)
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
   playerTwoManager.subscription.player.value.destory()
-  const player = new YouTubePlayer("youtube-video-two", youtubeUrl)
+  const youtubeId = youtubeUrl.substring(youtubeUrl.length - 11)
+  const player = new YouTubePlayer("youtube-video-two", youtubeId)
   player.load()
   playerTwoManager.changePlayer(player)
-  playerTwoManager.subscription.player.value.changeVideo(youtubeUrl)
 }
 
 const hundleVideoSeek = async (seconds: number) => {

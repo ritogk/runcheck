@@ -8,8 +8,6 @@ export class DummyPlayer implements IVideoPlayer {
     return Promise.resolve()
   }
 
-  changeVideo(url: string): void {}
-
   play = () => {
     return Promise.resolve()
   }

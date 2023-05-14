@@ -31,11 +31,6 @@ export class LocalVideoPlayer implements IVideoPlayer {
     return Promise.resolve(this._videoElement.load())
   }
 
-  changeVideo(url: string): void {
-    this._videoElement.src = url
-    this._videoElement.load()
-  }
-
   play = () => {
     return this._videoElement.play()
   }
