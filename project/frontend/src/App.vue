@@ -3,10 +3,14 @@ import { provide } from "vue"
 import Dashboard from "@/app/Dashboard.vue"
 import Loading from "@/app/Loading.vue"
 import "./tailwind.css"
-import { UseLoading, UseLoadingKey } from "@/app/loading-parts/LoadingState"
+import {
+  UseLoading,
+  UseLoadingStateKey,
+} from "@/app/loading-parts/LoadingState"
 
 const useLoading = UseLoading()
-provide(UseLoadingKey, useLoading)
+provide(UseLoadingStateKey, useLoading)
+useLoading.load()
 </script>
 
 <template>

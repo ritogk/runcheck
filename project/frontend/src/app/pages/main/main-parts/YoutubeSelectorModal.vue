@@ -15,6 +15,10 @@ import {
   UseUserStateKey,
   UseUserStateType,
 } from "@/app/dashboard-parts/UseUserState"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/loading-parts/LoadingState"
 import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListState"
 import { PlayerNo } from "@/app/pages/main/use-main-state-parts/YoutubeSelectorModalState"
@@ -23,6 +27,7 @@ import { callbackYoutubeOauth } from "./youtube-selector-modal-parts/CallbackYou
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useUserState = inject(UseUserStateKey) as UseUserStateType
+const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const youtubeListState = YoutubeListState()
 watch(useMainState.youtubeModal.subscription.opened, (value) => {
@@ -48,6 +53,8 @@ const youtubeApi = new YoutubeApi()
 const redirectToAuthorize = async () => {
   const response = await youtubeApi.youtubeOauthAuthorizeGet()
   useMainState.youtubeModal.save()
+  useLoadingState.run()
+  useLoadingState.save()
   location.href = response.redirectUrl
 }
 
