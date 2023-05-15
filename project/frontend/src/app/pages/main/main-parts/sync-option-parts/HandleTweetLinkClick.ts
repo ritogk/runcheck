@@ -8,11 +8,18 @@ import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main/UseMainState"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/loading-parts/LoadingState"
 import { YouTubePlayer } from "@/app/pages/main/main-parts/player-area-parts/YouTubePlayer"
 
 export const handleTweetLinkClick = async (comparisonId: number) => {
   const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
   const useMainState = inject(UseMainStateKey) as UseMainStateType
+  const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+
+  useLoadingState.run()
   const comparisonsApi = new ComparisonsApi()
   try {
     const response = await comparisonsApi.comparisonsComparisonIdGet({
@@ -42,6 +49,7 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
       // seekToをした後に数秒待機しないとcurrentTimeが古い値になる。
       setTimeout(async () => {
         useMainState.syncPlayer.runSync()
+        useLoadingState.stop()
       }, 2000)
     }, 2000)
   } catch {
