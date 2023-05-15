@@ -63,7 +63,6 @@ const playerTwoManager = useMainState.syncPlayer.playerTwoManager
 
 const selectVideo = async (url: string) => {
   useLoadingState.run()
-  useMainState.youtubeModal.select(url)
   const youtubeId = url.substring(url.length - 11)
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
   switch (playerNo) {
