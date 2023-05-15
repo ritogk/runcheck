@@ -64,10 +64,10 @@ const hundleTitleClick = (comparisonId: number) => {
   router.push({ name: "index", query: { comparisonId: comparisonId } })
 }
 
-const hundleDelete = (comparisonId: number, title: string) => {
+const hundleDelete = async (comparisonId: number, title: string) => {
   if (confirm(`${title}を削除します。\nよろしいですか？`)) {
-    deleteComparison(comparisonId)
-    router.go(0)
+    await deleteComparison(comparisonId)
+    window.location.reload()
   }
 }
 </script>
