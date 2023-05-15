@@ -1,4 +1,4 @@
-import { InjectionKey, ref, computed, ComputedRef } from "vue"
+import { ref, computed, ComputedRef } from "vue"
 import { YoutubeApi } from "@/core/openapiClient"
 
 type VideoType = {
@@ -10,6 +10,7 @@ type VideoType = {
 
 interface IYoutubeListState {
   subscription: {
+    isReading: ComputedRef<boolean>
     read: ComputedRef<boolean>
     videos: ComputedRef<VideoType[]>
   }
@@ -19,22 +20,27 @@ interface IYoutubeListState {
 const YoutubeListState = (): IYoutubeListState => {
   const _youtubeApi = new YoutubeApi()
   const _isRead = ref(false)
+  const _isReading = ref(false)
   const _videos = ref<VideoType[]>([])
 
   const load = async (): Promise<boolean> => {
+    _isReading.value = true
     try {
       const res = await _youtubeApi.youtubeVideosGet()
       _isRead.value = true
       _videos.value.splice(0, _videos.value.length, ...res)
+      _isReading.value = false
       return true
     } catch {
       _isRead.value = false
+      _isReading.value = false
+      return false
     }
-    return false
   }
 
   return {
     subscription: {
+      isReading: computed(() => _isReading.value),
       read: computed(() => _isRead.value),
       videos: computed(() => _videos.value),
     },
