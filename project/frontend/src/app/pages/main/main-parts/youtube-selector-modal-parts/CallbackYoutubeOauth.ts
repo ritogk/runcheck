@@ -25,12 +25,13 @@ export const callbackYoutubeOauth = async (code: string) => {
   const useUserState = inject(UseUserStateKey) as UseUserStateType
   const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
+  const loadingId = useLoadingState.run()
   const youtubeApi = new YoutubeApi()
   try {
     await youtubeApi.youtubeOauthPost({ inlineObject2: { code: code } })
     await useUserState.load()
     useMainState.youtubeModal.load()
-    useLoadingState.stop()
+    useLoadingState.stop(loadingId)
     useLoadingState.save()
   } catch {
     useAlretState.add("Youtubeとの連携でエラーが発生しました。")

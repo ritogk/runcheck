@@ -2,8 +2,8 @@ import { InjectionKey, ref, computed, ComputedRef } from "vue"
 import { localStorageKeys } from "@/core/localstorageKey"
 
 type UseLoadingStateType = {
-  run(): void
-  stop(): void
+  run(): number
+  stop(id: number): void
   save(): void
   load(): void
   subscription: {
@@ -13,18 +13,29 @@ type UseLoadingStateType = {
 
 const UseLoading = (): UseLoadingStateType => {
   const _isLoading = ref(false)
+  const _processing = ref<{ id: number }[]>([])
 
-  const run = () => {
+  const run = (): number => {
     _isLoading.value = true
+    const id =
+      _processing.value.length === 0
+        ? 1
+        : Math.max(..._processing.value.map((x) => x.id)) + 1
+    _processing.value.push({ id: id })
     // エラー時に何もできなくならないように10秒後に強制OFF
     setTimeout(() => {
       _isLoading.value = false
+      _processing.value = []
       save()
     }, 10000)
+    return id
   }
 
-  const stop = () => {
-    _isLoading.value = false
+  const stop = (id: number) => {
+    _processing.value = _processing.value.filter((x) => x.id !== id)
+    if (_processing.value.length === 0) {
+      _isLoading.value = false
+    }
   }
 
   const save = () => {

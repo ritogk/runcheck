@@ -40,9 +40,9 @@ provide(UseAlretStateKey, alretState)
 provide(UseUserStateKey, useUserState)
 
 const loadState = async () => {
-  useLoadingState.run()
+  const loadingId = useLoadingState.run()
   await useUserState.load()
-  useLoadingState.stop()
+  useLoadingState.stop(loadingId)
 }
 loadState()
 

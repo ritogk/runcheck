@@ -19,7 +19,7 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
   const useMainState = inject(UseMainStateKey) as UseMainStateType
   const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
-  useLoadingState.run()
+  const loadingId = useLoadingState.run()
   const comparisonsApi = new ComparisonsApi()
   try {
     const response = await comparisonsApi.comparisonsComparisonIdGet({
@@ -49,7 +49,7 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
       // seekToをした後に数秒待機しないとcurrentTimeが古い値になる。
       setTimeout(async () => {
         useMainState.syncPlayer.runSync()
-        useLoadingState.stop()
+        useLoadingState.stop(loadingId)
         window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
       }, 2000)
     }, 2000)

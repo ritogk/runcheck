@@ -24,7 +24,7 @@ const hundleVideoStopSyncClick = () => {
 }
 
 const hundleTweetClick = async () => {
-  useLoadingState.run()
+  const loadingId = useLoadingState.run()
   if (
     useMainState.syncPlayer.playerOneManager.subscription.videoType.value !==
       VideoType.YOUTUBE ||
@@ -38,7 +38,7 @@ const hundleTweetClick = async () => {
   await useMainState.syncPlayer.publishSync(compoarion.id)
   // ツイートする
   const url = `${window.location.origin}${window.location.pathname}?comparisonId=${compoarion.id}`
-  useLoadingState.stop()
+  useLoadingState.stop(loadingId)
   location.href = "https://twitter.com/intent/tweet?text=" + url
 }
 

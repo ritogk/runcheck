@@ -22,7 +22,7 @@ const comparisons = reactive<
 >([])
 
 const fetch = async () => {
-  useLoadingState.run()
+  const loadingId = useLoadingState.run()
   const response = await fetchComparisons()
   comparisons.splice(
     0,
@@ -35,7 +35,7 @@ const fetch = async () => {
         return { id: x.id, title: x.title, memo: x.memo, tag: x.category }
       })
   )
-  useLoadingState.stop()
+  useLoadingState.stop(loadingId)
 }
 fetch()
 

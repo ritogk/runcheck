@@ -62,7 +62,7 @@ const playerOneManager = useMainState.syncPlayer.playerOneManager
 const playerTwoManager = useMainState.syncPlayer.playerTwoManager
 
 const selectVideo = async (url: string) => {
-  useLoadingState.run()
+  const loadingId = useLoadingState.run()
   const youtubeId = url.substring(url.length - 11)
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
   switch (playerNo) {
@@ -80,7 +80,7 @@ const selectVideo = async (url: string) => {
       break
   }
   useMainState.youtubeModal.close()
-  useLoadingState.stop()
+  useLoadingState.stop(loadingId)
 }
 
 // Oauthで認可された後の処理
