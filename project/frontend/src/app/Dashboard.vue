@@ -28,13 +28,23 @@ import {
   UseUserState,
   UseUserStateKey,
 } from "@/app/dashboard-parts/UseUserState"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/loading-parts/LoadingState"
 
 const alretState = UseAlretState()
 const useUserState = UseUserState()
+const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 provide(UseAlretStateKey, alretState)
 provide(UseUserStateKey, useUserState)
 
-useUserState.load()
+const loadState = async () => {
+  useLoadingState.run()
+  await useUserState.load()
+  useLoadingState.stop()
+}
+loadState()
 
 const router = useRouter()
 
