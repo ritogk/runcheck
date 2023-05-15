@@ -20,8 +20,15 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
     })
     useMainState.memo.changeTitle(response.title ?? "")
     useMainState.memo.changeMemo(response.memo ?? "")
-    const playerOne = new YouTubePlayer("youtube-video-one", response.video1Url)
-    const playerTwo = new YouTubePlayer("youtube-video-two", response.video2Url)
+
+    const youtubeOneId = response.video1Url.substring(
+      response.video1Url.length - 11
+    )
+    const youtubeTwoId = response.video2Url.substring(
+      response.video2Url.length - 11
+    )
+    const playerOne = new YouTubePlayer("youtube-video-one", youtubeOneId)
+    const playerTwo = new YouTubePlayer("youtube-video-two", youtubeTwoId)
     await playerOne.load()
     await playerTwo.load()
     // iframe生成後に数秒待機しないとなぜかiframeの制御が効かない。
