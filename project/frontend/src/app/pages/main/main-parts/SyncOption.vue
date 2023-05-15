@@ -16,6 +16,7 @@ const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const hundleVideoRunSyncClick = () => {
   useMainState.syncPlayer.runSync()
+  window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
 }
 
 const hundleVideoStopSyncClick = () => {
