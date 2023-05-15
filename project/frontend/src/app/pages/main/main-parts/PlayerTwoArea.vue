@@ -19,11 +19,6 @@ const playerNo = PlayerNo.TWO
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const youtubeUrl = ref("")
-watch(useMainState.youtubeModal.subscription.selectUrl, () => {
-  if (useMainState.youtubeModal.subscription.currentPlayerNo.value !== playerNo)
-    return
-  youtubeUrl.value = useMainState.youtubeModal.subscription.selectUrl.value
-})
 
 const elements = {
   localVideo: {
