@@ -29,7 +29,7 @@ const hundleSpeedSelect = async (speed: number) => {
     as="template"
     :show="useMainState.adjustSpeedModal.subscription.opened.value"
   >
-    <Dialog as="div" class="relative z-50" @close="onClose">
+    <Dialog as="div" class="relative z-40" @close="onClose">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
