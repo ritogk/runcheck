@@ -19,6 +19,7 @@ const UseLoading = (): UseLoadingStateType => {
     // エラー時に何もできなくならないように10秒後に強制OFF
     setTimeout(() => {
       _isLoading.value = false
+      save()
     }, 10000)
   }
 
@@ -55,7 +56,7 @@ const UseLoading = (): UseLoadingStateType => {
   }
 }
 
-const UseLoadingKey: InjectionKey<UseLoadingStateType> =
+const UseLoadingStateKey: InjectionKey<UseLoadingStateType> =
   Symbol("UseLoadingState")
 
-export { UseLoading, UseLoadingKey, UseLoadingStateType }
+export { UseLoading, UseLoadingStateKey, UseLoadingStateType }
