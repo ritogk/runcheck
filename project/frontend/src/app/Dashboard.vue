@@ -111,7 +111,7 @@ const sidebarOpen = ref(false)
       <TransitionRoot as="template" :show="sidebarOpen">
         <Dialog
           as="div"
-          class="relative z-50 lg:hidden"
+          class="relative z-40 lg:hidden"
           @close="sidebarOpen = false"
         >
           <TransitionChild
@@ -223,7 +223,7 @@ const sidebarOpen = ref(false)
 
     <!-- Static sidebar for desktop -->
     <div
-      class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col"
+      class="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-72 lg:flex-col"
     >
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6">
