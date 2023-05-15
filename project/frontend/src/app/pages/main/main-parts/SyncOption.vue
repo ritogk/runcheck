@@ -4,10 +4,15 @@ import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main/UseMainState"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/loading-parts/LoadingState"
 import { handleTweetLinkClick } from "./sync-option-parts/HandleTweetLinkClick"
 import { VideoType } from "./player-area-parts/IVideoPlayer"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
+const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const hundleVideoRunSyncClick = () => {
   useMainState.syncPlayer.runSync()
@@ -18,6 +23,7 @@ const hundleVideoStopSyncClick = () => {
 }
 
 const hundleTweetClick = async () => {
+  useLoadingState.run()
   if (
     useMainState.syncPlayer.playerOneManager.subscription.videoType.value !==
       VideoType.YOUTUBE ||
@@ -31,6 +37,7 @@ const hundleTweetClick = async () => {
   await useMainState.syncPlayer.publishSync(compoarion.id)
   // ツイートする
   const url = `${window.location.origin}${window.location.pathname}?comparisonId=${compoarion.id}`
+  useLoadingState.stop()
   location.href = "https://twitter.com/intent/tweet?text=" + url
 }
 
