@@ -232,7 +232,7 @@ if (code) callbackYoutubeOauth(code)
                     role="listbox"
                   >
                     <!-- スケルトン -->
-                    <div v-if="!youtubeListState.subscription.read">
+                    <div v-if="!youtubeListState.subscription.read.value">
                       <li
                         v-for="i in 5"
                         :key="i"
@@ -344,10 +344,7 @@ if (code) callbackYoutubeOauth(code)
                   </div>
 
                   <!-- ローディング -->
-                  <div
-                    class="flex justify-center py-4"
-                    v-if="youtubeListState.subscription.isReading.value"
-                  >
+                  <div class="flex justify-center py-4" style="display: none">
                     <svg
                       aria-hidden="true"
                       class="w-12 h-12 mr-2 text-gray-200 animate-spin fill-blue-500"
