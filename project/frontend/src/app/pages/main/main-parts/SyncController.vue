@@ -121,32 +121,6 @@ const hundleAdjustSpeedClick = () => {
 }
 </script>
 
-<style>
-#slider {
-  width: 300px;
-  height: 10px;
-  background-color: #ddd;
-}
-
-.slider-bar {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.slider-handle {
-  position: absolute;
-  top: -5px;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #333;
-  cursor: grab;
-  user-select: none;
-}
-</style>
-
 <template>
   <div class="max-h-[240px] mb-3">
     <div
