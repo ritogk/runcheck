@@ -2,9 +2,9 @@
 
 <template>
   <div
-    class="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-90 backdrop-blur-lg brightness-50"
+    class="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-90 backdrop-blur-lg brightness-50 z-40"
   ></div>
-  <div class="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+  <div class="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-40">
     <svg
       aria-hidden="true"
       class="w-28 h-28 mr-2 text-gray-700 animate-spin fill-blue-600"
