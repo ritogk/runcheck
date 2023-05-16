@@ -10,6 +10,7 @@ import {
   UseUserStateKey,
   UseUserStateType,
 } from "@/app/dashboard-parts/UseUserState"
+import { VideoType } from "@/app/pages/main/main-parts/player-area-parts/IVideoPlayer"
 import { operationLog } from "@/core/operationLog"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
@@ -22,6 +23,15 @@ const hundleOpenClick = () => {
 }
 
 const hundleSaveClick = () => {
+  if (
+    useMainState.syncPlayer.playerOneManager.subscription.videoType.value !==
+      VideoType.YOUTUBE ||
+    useMainState.syncPlayer.playerTwoManager.subscription.videoType.value !=
+      VideoType.YOUTUBE
+  ) {
+    alert("保存はYouTube同士の組み合わせのみ行えます。")
+    return
+  }
   operationLog.send(operationLog.OPERATION_CD.SAVE_MODAL_CLICK)
   useMainState.saveModal.open()
 }
