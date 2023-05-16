@@ -18,7 +18,7 @@ export interface ISyncPlayerStateType {
   switchRepeat(): void
   adjustSpeed(speed: number): void
   reload(): void
-  runSync(): void
+  runSync(): Promise<void>
   stopSync(): void
   enableSync(): void
   disableSync(): void
