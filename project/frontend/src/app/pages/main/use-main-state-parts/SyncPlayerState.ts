@@ -17,6 +17,7 @@ export interface ISyncPlayerStateType {
   switchMute(): void
   switchRepeat(): void
   adjustSpeed(speed: number): void
+  mute(): void
   reload(): void
   runSync(): Promise<void>
   stopSync(): void
@@ -110,6 +111,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
 
   adjustSpeed = (speed: number): void => {
     this._speed.value = speed
+  }
+
+  mute = (): void => {
+    this._muted.value = true
   }
 
   switchSync = () => {

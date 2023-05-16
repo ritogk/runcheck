@@ -13,13 +13,10 @@ import { operationLog } from "@/core/operationLog"
 import { OperationCd } from "@/core/openapiClient"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
-const playerOne = useMainState.syncPlayer.playerOneManager.subscription.player
-const playerTwo = useMainState.syncPlayer.playerTwoManager.subscription.player
 
 const hundlePlaySwitch = () => {
   operationLog.send(OperationCd.SYNC_CONTROLLER_SWITCH_PLAY_CLICK)
-  playerOne.value.mute()
-  playerTwo.value.mute()
+  useMainState.syncPlayer.mute()
   useMainState.syncPlayer.switchPlay()
 }
 
