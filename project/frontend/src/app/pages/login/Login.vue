@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, inject } from "vue"
-import Logo from "@/components/logo.vue"
 import {
   UseUserStateKey,
   UseUserStateType,
@@ -47,7 +46,6 @@ const onSubmit = async () => {
 <template>
   <div class="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <Logo class="mx-auto h-12 w-auto"></Logo>
       <h2
         class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
       >
