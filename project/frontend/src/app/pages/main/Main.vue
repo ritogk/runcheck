@@ -27,7 +27,6 @@ provide(UseMainStateKey, useMainState)
     <SyncController
       v-show="useMainState.syncPlayer.subscription.synced.value"
     ></SyncController>
-    <div class="m-5"></div>
   </div>
   <YoutubeSelectorModal></YoutubeSelectorModal>
   <AdjustSpeedModal></AdjustSpeedModal>

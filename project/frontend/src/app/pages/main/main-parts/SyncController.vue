@@ -134,7 +134,7 @@ const hundleAdjustSpeedClick = () => {
 
 <template>
   <Transition name="controller">
-    <div class="max-h-[240px] mb-3">
+    <div class="max-h-[240px]">
       <div class="bg-gray-50 border-0 border-gray-100 px-8 pt-6 pb-4 space-y-6">
         <div
           class="space-y-2"
@@ -183,7 +183,7 @@ const hundleAdjustSpeedClick = () => {
         </div>
       </div>
       <div
-        class="bg-gray-200 text-gray-500 dark:bg-gray-600 dark:text-gray-200 flex items-center"
+        class="bg-gray-200 text-gray-500 dark:bg-gray-600 dark:text-gray-200 flex items-center pb-3"
       >
         <div class="flex-auto flex items-center justify-evenly">
           <!-- リピート ボタン -->
