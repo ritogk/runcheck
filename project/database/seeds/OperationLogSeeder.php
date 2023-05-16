@@ -140,5 +140,31 @@ class OperationLogSeeder extends Seeder
             'operation_nm' => 'NUMBER_LOGIN_CLICK',
             'execution_cnt' => 0
         ]);
+
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_SYNC_CONTROLLER_SWITCH_REPEAT_CLICK,
+            'operation_nm' => 'SYNC_CONTROLLER_SWITCH_REPEAT_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_SYNC_CONTROLLER_SPEED_CLICK,
+            'operation_nm' => 'SYNC_CONTROLLER_SPEED_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_SYNC_CONTROLLER_SWITCH_PLAY_CLICK,
+            'operation_nm' => 'SYNC_CONTROLLER_SWITCH_PLAY_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_SYNC_CONTROLLER_RELOAD_CLICK,
+            'operation_nm' => 'SYNC_CONTROLLER_RELOAD_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_SYNC_CONTROLLER_SWITCH_MUTE_CLICK,
+            'operation_nm' => 'SYNC_CONTROLLER_SWITCH_MUTE_CLICK',
+            'execution_cnt' => 0
+        ]);
     }
 }

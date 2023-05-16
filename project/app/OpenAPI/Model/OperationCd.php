@@ -92,6 +92,16 @@ class OperationCd
 
     public const NUMBER_LOGIN_CLICK = 25;
 
+    public const NUMBER_SYNC_CONTROLLER_SWITCH_PLAY_CLICK = 26;
+
+    public const NUMBER_SYNC_CONTROLLER_SWITCH_REPEAT_CLICK = 27;
+
+    public const NUMBER_SYNC_CONTROLLER_SPEED_CLICK = 28;
+
+    public const NUMBER_SYNC_CONTROLLER_RELOAD_CLICK = 29;
+
+    public const NUMBER_SYNC_CONTROLLER_SWITCH_MUTE_CLICK = 30;
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -123,7 +133,12 @@ class OperationCd
             self::NUMBER_HOME_OPEN_CLICK,
             self::NUMBER_HOME_DELETE_CLICK,
             self::NUMBER_REGISTER_CLICK,
-            self::NUMBER_LOGIN_CLICK
+            self::NUMBER_LOGIN_CLICK,
+            self::NUMBER_SYNC_CONTROLLER_SWITCH_PLAY_CLICK,
+            self::NUMBER_SYNC_CONTROLLER_SWITCH_REPEAT_CLICK,
+            self::NUMBER_SYNC_CONTROLLER_SPEED_CLICK,
+            self::NUMBER_SYNC_CONTROLLER_RELOAD_CLICK,
+            self::NUMBER_SYNC_CONTROLLER_SWITCH_MUTE_CLICK
         ];
     }
 }

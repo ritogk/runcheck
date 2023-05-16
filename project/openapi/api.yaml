@@ -436,6 +436,11 @@ components:
           23,
           24,
           25,
+          26,
+          27,
+          28,
+          29,
+          30,
         ]
       x-enum-varnames:
         [
@@ -464,4 +469,9 @@ components:
           HOME_DELETE_CLICK,
           REGISTER_CLICK,
           LOGIN_CLICK,
+          SYNC_CONTROLLER_SWITCH_PLAY_CLICK,
+          SYNC_CONTROLLER_SWITCH_REPEAT_CLICK,
+          SYNC_CONTROLLER_SPEED_CLICK,
+          SYNC_CONTROLLER_RELOAD_CLICK,
+          SYNC_CONTROLLER_SWITCH_MUTE_CLICK,
         ]
