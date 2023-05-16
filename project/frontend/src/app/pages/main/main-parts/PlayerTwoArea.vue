@@ -14,6 +14,7 @@ import {
   // SearchIcon,
 } from "@heroicons/vue/20/solid"
 import { VideoType } from "./player-area-parts/IVideoPlayer"
+import { operationLog } from "@/core/operationLog"
 
 const playerNo = PlayerNo.TWO
 
@@ -35,6 +36,7 @@ watch(elements.videoArea, () => {
 })
 
 const hundleLocalVideoSelect = () => {
+  operationLog.send(operationLog.OPERATION_CD.PLAYER_TWO_LOCAL_SELECT)
   elements.localVideo.file.value?.click()
 }
 
@@ -54,6 +56,7 @@ const hundleLocalVideoChange = async (event: Event) => {
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
+  operationLog.send(operationLog.OPERATION_CD.PLAYER_TWO_URL_ENTER)
   playerTwoManager.subscription.player.value.destory()
   const youtubeId = youtubeUrl.substring(youtubeUrl.length - 11)
   const player = new YouTubePlayer("youtube-video-two", youtubeId)
@@ -67,6 +70,11 @@ const hundleVideoSeek = async (seconds: number) => {
   useMainState.syncPlayer.playerTwoManager.subscription.player.value.seekTo(
     currentPosition + seconds
   )
+}
+
+const hundleYoutubeSearch = () => {
+  operationLog.send(operationLog.OPERATION_CD.PLAYER_TWO_YOUTUBE_SEARCH_CLICK)
+  useMainState.youtubeModal.open(playerNo)
 }
 </script>
 
@@ -165,7 +173,7 @@ const hundleVideoSeek = async (seconds: number) => {
               <button
                 type="button"
                 class="relative w-3/12 -ml-px inline-flex items-center gap-x-1.5 rounded-r-md text-sm font-semibold bg-white text-gray-900 ring-1 ring-inset ring-slate-300 hover:bg-gray-100"
-                @click="useMainState.youtubeModal.open(playerNo)"
+                @click="hundleYoutubeSearch()"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

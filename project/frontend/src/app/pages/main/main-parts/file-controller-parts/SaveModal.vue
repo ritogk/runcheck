@@ -11,6 +11,7 @@ import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main/UseMainState"
+import { operationLog } from "@/core/operationLog"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
@@ -25,6 +26,7 @@ const onClose = () => {
 }
 
 const onSubmit = async () => {
+  operationLog.send(operationLog.OPERATION_CD.SAVE_CLICK)
   if (
     form.title.value === null ||
     form.memo.value === null ||

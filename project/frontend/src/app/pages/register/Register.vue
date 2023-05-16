@@ -9,6 +9,7 @@ import {
   UseUserStateKey,
   UseUserStateType,
 } from "@/app/dashboard-parts/UseUserState"
+import { operationLog } from "@/core/operationLog"
 
 const router = useRouter()
 const useAlertState = inject(UseAlretStateKey) as UseAlretStateType
@@ -39,6 +40,7 @@ const onSwitchPasswordVisibility = (type: "password" | "passwordConfirm") => {
 }
 
 const onSubmit = async () => {
+  operationLog.send(operationLog.OPERATION_CD.REGISTER_CLICK)
   if (
     form.hanndleName.value === null ||
     form.carType.value === null ||

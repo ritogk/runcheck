@@ -20,6 +20,7 @@ import {
   UseLoadingStateType,
 } from "@/app/loading-parts/LoadingState"
 import { YoutubeApi } from "@/core/openapiClient"
+import { operationLog } from "@/core/operationLog"
 import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListState"
 import { PlayerNo } from "@/app/pages/main/use-main-state-parts/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
@@ -51,6 +52,7 @@ const onClose = () => {
 
 const youtubeApi = new YoutubeApi()
 const redirectToAuthorize = async () => {
+  operationLog.send(operationLog.OPERATION_CD.YOUTUBE_OAUTH_CLICK)
   const response = await youtubeApi.youtubeOauthAuthorizeGet()
   useMainState.youtubeModal.save()
   useLoadingState.run()
@@ -62,6 +64,7 @@ const playerOneManager = useMainState.syncPlayer.playerOneManager
 const playerTwoManager = useMainState.syncPlayer.playerTwoManager
 
 const selectVideo = async (url: string) => {
+  operationLog.send(operationLog.OPERATION_CD.YOUTUBE_SELECT)
   const loadingId = useLoadingState.run()
   const youtubeId = url.substring(url.length - 11)
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value

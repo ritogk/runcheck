@@ -9,30 +9,34 @@ import {
   SpeakerXMarkIcon,
   // SearchIcon,
 } from "@heroicons/vue/20/solid"
+import { operationLog } from "@/core/operationLog"
+import { OperationCd } from "@/core/openapiClient"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const playerOne = useMainState.syncPlayer.playerOneManager.subscription.player
 const playerTwo = useMainState.syncPlayer.playerTwoManager.subscription.player
 
 const hundlePlaySwitch = () => {
+  operationLog.send(OperationCd.SYNC_CONTROLLER_SWITCH_PLAY_CLICK)
   playerOne.value.mute()
   playerTwo.value.mute()
   useMainState.syncPlayer.switchPlay()
 }
 
 const hundleMuteSwitch = () => {
+  operationLog.send(OperationCd.SYNC_CONTROLLER_SWITCH_MUTE_CLICK)
   useMainState.syncPlayer.switchMute()
 }
 
 const hundleReload = () => {
+  operationLog.send(OperationCd.SYNC_CONTROLLER_RELOAD_CLICK)
   useMainState.syncPlayer.reload()
 }
 
 const hundleRepeatSwitch = () => {
+  operationLog.send(OperationCd.SYNC_CONTROLLER_SWITCH_REPEAT_CLICK)
   useMainState.syncPlayer.switchRepeat()
 }
-
-const hundleDrag = (e: any) => {}
 
 const elements = {
   slider: ref<HTMLDivElement | null>(null),
@@ -117,6 +121,7 @@ function convertSecondsToMMSS(seconds: number) {
 }
 
 const hundleAdjustSpeedClick = () => {
+  operationLog.send(operationLog.OPERATION_CD.SYNC_CONTROLLER_SPEED_CLICK)
   useMainState.adjustSpeedModal.open()
 }
 </script>
