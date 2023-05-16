@@ -48,7 +48,7 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
         useMainState.syncPlayer.runSync()
         useLoadingState.stop(loadingId)
         window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
-      }, 2000)
+      }, 3000)
     }, 2000)
   } catch {
     useAlretState.add("動画の読み込みでエラーが発生しました。")
