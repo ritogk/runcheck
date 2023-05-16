@@ -128,5 +128,17 @@ class OperationLogSeeder extends Seeder
             'operation_nm' => 'HOME_DELETE_CLICK',
             'execution_cnt' => 0
         ]);
+
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_REGISTER_CLICK,
+            'operation_nm' => 'REGISTER_CLICK',
+            'execution_cnt' => 0
+        ]);
+
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_LOGIN_CLICK,
+            'operation_nm' => 'NUMBER_LOGIN_CLICK',
+            'execution_cnt' => 0
+        ]);
     }
 }

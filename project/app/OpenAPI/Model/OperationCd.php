@@ -88,6 +88,10 @@ class OperationCd
 
     public const NUMBER_HOME_DELETE_CLICK = 23;
 
+    public const NUMBER_REGISTER_CLICK = 24;
+
+    public const NUMBER_LOGIN_CLICK = 25;
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -117,7 +121,9 @@ class OperationCd
             self::NUMBER_NAV_ABOUT_APP_CLICK,
             self::NUMBER_NAV_INQUIRY,
             self::NUMBER_HOME_OPEN_CLICK,
-            self::NUMBER_HOME_DELETE_CLICK
+            self::NUMBER_HOME_DELETE_CLICK,
+            self::NUMBER_REGISTER_CLICK,
+            self::NUMBER_LOGIN_CLICK
         ];
     }
 }

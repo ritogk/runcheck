@@ -40,7 +40,9 @@ export enum OperationCd {
     NAV_ABOUT_APP_CLICK = 20,
     NAV_INQUIRY = 21,
     HOME_OPEN_CLICK = 22,
-    HOME_DELETE_CLICK = 23
+    HOME_DELETE_CLICK = 23,
+    REGISTER_CLICK = 24,
+    LOGIN_CLICK = 25
 }
 
 export function OperationCdFromJSON(json: any): OperationCd {

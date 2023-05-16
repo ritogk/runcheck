@@ -434,6 +434,8 @@ components:
           21,
           22,
           23,
+          24,
+          25,
         ]
       x-enum-varnames:
         [
@@ -460,4 +462,6 @@ components:
           NAV_INQUIRY,
           HOME_OPEN_CLICK,
           HOME_DELETE_CLICK,
+          REGISTER_CLICK,
+          LOGIN_CLICK,
         ]
