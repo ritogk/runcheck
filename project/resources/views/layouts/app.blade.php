@@ -37,7 +37,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- ファビコン -->
-    <link rel="icon" type="image/x-icon" href="/favicon.png" />
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
