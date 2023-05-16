@@ -9,6 +9,7 @@ import {
   ComparisonsApi,
   VideoType as ApiVideoType,
 } from "@/core/openapiClient/index"
+import { extractYoutubeId } from "@/core/extractYoutubeId"
 
 export interface ISyncPlayerStateType {
   playerOneManager: PlayerManager
@@ -271,9 +272,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       await this.playerOneManager.subscription.player.value.getPath()
     const video1EmbedUrl =
       video1VideoType === ApiVideoType.YOUTUBE
-        ? `https://www.youtube.com/embed/${video1Url.substring(
-            video1Url.length - 11
-          )}`
+        ? `https://www.youtube.com/embed/${extractYoutubeId(video1Url)}`
         : video1Url
     const video1TimeSt = this._playerOneStartPosition
 
@@ -285,9 +284,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       await this.playerTwoManager.subscription.player.value.getPath()
     const video2EmbedUrl =
       video2VideoType === ApiVideoType.YOUTUBE
-        ? `https://www.youtube.com/embed/${video2Url.substring(
-            video2Url.length - 11
-          )}`
+        ? `https://www.youtube.com/embed/${extractYoutubeId(video2Url)}`
         : video2Url
     const video2TimeSt = this._playerTwoStartPosition
     // 同期情報の登録

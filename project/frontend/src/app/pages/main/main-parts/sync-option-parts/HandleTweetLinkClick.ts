@@ -13,6 +13,7 @@ import {
   UseLoadingStateType,
 } from "@/app/loading-parts/LoadingState"
 import { YouTubePlayer } from "@/app/pages/main/main-parts/player-area-parts/YouTubePlayer"
+import { extractYoutubeId } from "@/core/extractYoutubeId"
 
 export const handleTweetLinkClick = async (comparisonId: number) => {
   const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
@@ -28,12 +29,8 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
     useMainState.memo.changeTitle(response.title ?? "")
     useMainState.memo.changeMemo(response.memo ?? "")
 
-    const youtubeOneId = response.video1Url.substring(
-      response.video1Url.length - 11
-    )
-    const youtubeTwoId = response.video2Url.substring(
-      response.video2Url.length - 11
-    )
+    const youtubeOneId = extractYoutubeId(response.video1Url)
+    const youtubeTwoId = extractYoutubeId(response.video2Url)
     const playerOne = new YouTubePlayer("youtube-video-one", youtubeOneId)
     const playerTwo = new YouTubePlayer("youtube-video-two", youtubeTwoId)
     await playerOne.load()
