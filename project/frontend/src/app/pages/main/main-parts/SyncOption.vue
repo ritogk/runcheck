@@ -28,7 +28,6 @@ const hundleVideoStopSyncClick = () => {
 
 const hundleTweetClick = async () => {
   operationLog.send(operationLog.OPERATION_CD.SYNC_SHARE_CLICK)
-  const loadingId = useLoadingState.run()
   if (
     useMainState.syncPlayer.playerOneManager.subscription.videoType.value !==
       VideoType.YOUTUBE ||
@@ -38,6 +37,7 @@ const hundleTweetClick = async () => {
     alert("共有はYouTube同士の組み合わせのみ行えます。")
     return
   }
+  const loadingId = useLoadingState.run()
   const compoarion = await useMainState.syncPlayer.saveSync(true)
   await useMainState.syncPlayer.publishSync(compoarion.id)
   // ツイートする
