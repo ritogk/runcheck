@@ -263,11 +263,11 @@ if (code) callbackYoutubeOauth(code)
                           <div class="ml-4 flex-auto">
                             <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
                             <div
-                              class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-4/5 mb-4"
+                              class="h-2.5 bg-gray-200 rounded-fullw-4/5 mb-4"
                             ></div>
                             <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
                             <div
-                              class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-3/5"
+                              class="h-2.5 bg-gray-200 rounded-full w-3/5"
                             ></div>
                           </div>
                         </li>
