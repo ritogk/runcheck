@@ -16,7 +16,7 @@ provide(UseMainStateKey, useMainState)
 
 <template>
   <div class="max-w-[600px]">
-    <div class="px-1 pt-3">
+    <div class="px-1">
       <FileController></FileController>
       <MemoArea></MemoArea>
       <SyncOption class="my-2"></SyncOption>
