@@ -10,9 +10,14 @@ import {
   UseUserStateType,
 } from "@/app/dashboard-parts/UseUserState"
 import { operationLog } from "@/core/operationLog"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/loading-parts/LoadingState"
 
 const router = useRouter()
 const useAlertState = inject(UseAlretStateKey) as UseAlretStateType
+const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const userState = inject(UseUserStateKey) as UseUserStateType
 
@@ -68,21 +73,22 @@ const onSubmit = async () => {
     return
   }
 
+  const loadingId = useLoadingState.run()
   try {
-    if (
-      await userState.register(
-        form.hanndleName.value.value,
-        form.carType.value.value,
-        form.email.value.value,
-        form.password.value.value
-      )
-    ) {
-      router.push({ name: "index" })
-    }
+    await userState.register(
+      form.hanndleName.value.value,
+      form.carType.value.value,
+      form.email.value.value,
+      form.password.value.value
+    )
+    useLoadingState.stop(loadingId)
+    router.push({ name: "index" })
   } catch {
-    useAlertState.add("エラーが発生しました。")
-    return
+    useAlertState.add(
+      "エラーが発生しました。既に登録されているメールアドレスの可能性があります。"
+    )
   }
+  useLoadingState.stop(loadingId)
 }
 </script>
 

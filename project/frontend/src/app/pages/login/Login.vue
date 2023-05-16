@@ -10,10 +10,15 @@ import {
 } from "@/app/dashboard-parts/UseAlretState"
 import { useRouter } from "vue-router"
 import { operationLog } from "@/core/operationLog"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/loading-parts/LoadingState"
 
 const router = useRouter()
 const userState = inject(UseUserStateKey) as UseUserStateType
 const userAlretListState = inject(UseAlretStateKey) as UseAlretStateType
+const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const form = {
   email: ref<HTMLInputElement | null>(null),
@@ -29,19 +34,21 @@ const onSubmit = async () => {
     form.remember.value === null
   )
     return
+  const loadingId = useLoadingState.run()
   try {
     const response = await userState.login(
       form.email.value.value,
       form.password.value.value,
       form.remember.value.checked
     )
-    if (!response) throw new Error()
+    useLoadingState.stop(loadingId)
     router.push({ name: "index" })
   } catch {
     userAlretListState.add(
       "認証に失敗しました。メールアドレスとパスワードを確認してください。"
     )
   }
+  useLoadingState.stop(loadingId)
 }
 </script>
 

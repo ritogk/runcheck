@@ -16,10 +16,10 @@ type UseUserStateType = {
     carType: string,
     email: string,
     password: string
-  ): Promise<boolean>
-  login(email: string, password: string, remember: boolean): Promise<boolean>
-  logout(): Promise<boolean>
-  load(): Promise<boolean>
+  ): Promise<void>
+  login(email: string, password: string, remember: boolean): Promise<void>
+  logout(): Promise<void>
+  load(): Promise<void>
 }
 
 const UseUserState = (): UseUserStateType => {
@@ -35,7 +35,7 @@ const UseUserState = (): UseUserStateType => {
     carType: string,
     email: string,
     password: string
-  ): Promise<boolean> => {
+  ): Promise<void> => {
     try {
       const response = await _usersApi.usersPost({
         inlineObject: {
@@ -46,17 +46,24 @@ const UseUserState = (): UseUserStateType => {
         },
       })
 
-      if (await login(email, password, true)) {
+      try {
+        await login(email, password, true)
         _user.value = { id: response.id, name: response.name }
         _logined.value = true
+      } catch {
+        throw new Error()
       }
-      return true
     } catch {
-      return false
+      throw new Error()
     }
+    return
   }
 
-  const login = async (email: string, password: string, remember: boolean) => {
+  const login = async (
+    email: string,
+    password: string,
+    remember: boolean
+  ): Promise<void> => {
     try {
       const response = await _authenticationApi.authenticationLoginPost({
         inlineObject1: {
@@ -67,27 +74,25 @@ const UseUserState = (): UseUserStateType => {
       })
       _user.value = { id: response.id, name: response.name }
       _logined.value = true
-      return true
+      return
     } catch (e) {
-      // debugger
+      throw new Error()
     }
-    return false
   }
 
-  const logout = async () => {
+  const logout = async (): Promise<void> => {
     try {
       await _authenticationApi.authenticationLogoutPost()
       _user.value = { id: 0, name: "" }
       _logined.value = false
       _isYoutubeAuthroized.value = false
-      return true
+      return
     } catch (e) {
-      // debugger
+      throw new Error()
     }
-    return false
   }
 
-  const load = async (): Promise<boolean> => {
+  const load = async (): Promise<void> => {
     try {
       const response = await _statusApi.statusGet()
       _user.value = {
@@ -96,10 +101,9 @@ const UseUserState = (): UseUserStateType => {
       }
       _logined.value = response.isLogined
       _isYoutubeAuthroized.value = response.isYoutubeAuthroized
-
-      return true
+      return
     } catch {
-      return false
+      throw new Error()
     }
   }
 
