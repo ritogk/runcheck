@@ -97,7 +97,9 @@ const navigation = [
     href: "#",
     icon: QuestionMarkCircleIcon,
     current: false,
-    action: () => {},
+    action: () => {
+      location.href = "/lp/ja"
+    },
     show: computed(() => true),
   },
   {
