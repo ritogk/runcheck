@@ -1,6 +1,5 @@
 import { ref, computed, ComputedRef, watch } from "vue"
 import {
-  IVideoPlayer,
   Status,
   VideoType,
 } from "@/app/pages/main/main-parts/player-area-parts/IVideoPlayer"
