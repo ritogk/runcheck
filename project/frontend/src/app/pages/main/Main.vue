@@ -16,12 +16,10 @@ provide(UseMainStateKey, useMainState)
 
 <template>
   <div class="max-w-[600px]">
-    <div class="px-1 pt-2">
+    <div class="px-1 pt-3">
       <FileController></FileController>
       <MemoArea></MemoArea>
-      <div class="h-px my-2 bg-gray-300"></div>
-      <SyncOption></SyncOption>
-      <div class="h-px my-2 bg-gray-300"></div>
+      <SyncOption class="my-2"></SyncOption>
     </div>
 
     <PlayerOneArea></PlayerOneArea>

@@ -50,7 +50,7 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
 
 <template>
   <!-- 動画を同期 and つぶやく-->
-  <div class="mt-2">
+  <div>
     <span
       class="isolate inline-flex rounded-md shadow-sm"
       v-show="!useMainState.syncPlayer.subscription.synced.value"
