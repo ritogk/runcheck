@@ -409,31 +409,55 @@ components:
       enum: [1, 2]
       x-enum-varnames: [YOUTUBE, LOCAL]
     operationCd:
-      description: |
-        ■操作コード  
-        ENABLE_SENSOR: センサーを有効にする  
-        CALIBRATION: キャリブレーション  
-        CALIBRATION_BEFORE_SETTING: 直前設定を使う  
-        CALIBRATION_NEXT_1: キャリブレーション1 次へ  
-        CALIBRATION_NEXT_2: キャリブレーション2 次へ  
-        MAX_14_G: Max1.4G  
-        MAX_10_G: Max1.0G  
-        VOICE_OUTPUT_ON: 音声出力ON  
-        VOICE_OUTPUT_OFF: 音声出力OFF  
-        GBOWL: GBowl  
-        GINDICATOR: GIndicator
-      enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      enum:
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+        ]
       x-enum-varnames:
         [
-          ENABLE_SENSOR,
-          CALIBRATION,
-          CALIBRATION_BEFORE_SETTING,
-          CALIBRATION_NEXT_1,
-          CALIBRATION_NEXT_2,
-          MAX_14_G,
-          MAX_10_G,
-          VOICE_OUTPUT_ON,
-          VOICE_OUTPUT_OFF,
-          GBOWL,
-          GINDICATOR,
+          OPEN_MODAL_CLICK,
+          OPEN_CLICK,
+          SAVE_MODAL_CLICK,
+          SAVE_CLICK,
+          SYNC_RUN_CLICK,
+          SYNC_STOP_CLICK,
+          SYNC_SHARE_CLICK,
+          PLAYER_ONE_URL_ENTER,
+          PLAYER_ONE_YOUTUBE_SEARCH_CLICK,
+          PLAYER_ONE_LOCAL_SELECT,
+          PLAYER_TWO_URL_ENTER,
+          PLAYER_TWO_YOUTUBE_SEARCH_CLICK,
+          PLAYER_TWO_LOCAL_SELECT,
+          YOUTUBE_OAUTH_CLICK,
+          YOUTUBE_SELECT,
+          NAV_HOME_CLICK,
+          NAV_LOGIN_CLICK,
+          NAV_LOGOUT_CLICK,
+          NAV_REGISTER_CLICK,
+          NAV_ABOUT_APP_CLICK,
+          NAV_INQUIRY,
+          HOME_OPEN_CLICK,
+          HOME_DELETE_CLICK,
         ]

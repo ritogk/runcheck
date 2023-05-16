@@ -33,7 +33,6 @@ use \App\OpenAPI\ObjectSerializer;
  * OperationCd Class Doc Comment
  *
  * @category Class
- * @description ■操作コード   ENABLE_SENSOR: センサーを有効にする   CALIBRATION: キャリブレーション   CALIBRATION_BEFORE_SETTING: 直前設定を使う   CALIBRATION_NEXT_1: キャリブレーション1 次へ   CALIBRATION_NEXT_2: キャリブレーション2 次へ   MAX_14_G: Max1.4G   MAX_10_G: Max1.0G   VOICE_OUTPUT_ON: 音声出力ON   VOICE_OUTPUT_OFF: 音声出力OFF   GBOWL: GBowl   GINDICATOR: GIndicator
  * @package  App\OpenAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -43,27 +42,51 @@ class OperationCd
     /**
      * Possible values of this enum
      */
-    public const NUMBER_ENABLE_SENSOR = 1;
+    public const NUMBER_OPEN_MODAL_CLICK = 1;
 
-    public const NUMBER_CALIBRATION = 2;
+    public const NUMBER_OPEN_CLICK = 2;
 
-    public const NUMBER_CALIBRATION_BEFORE_SETTING = 3;
+    public const NUMBER_SAVE_MODAL_CLICK = 3;
 
-    public const NUMBER_CALIBRATION_NEXT_1 = 4;
+    public const NUMBER_SAVE_CLICK = 4;
 
-    public const NUMBER_CALIBRATION_NEXT_2 = 5;
+    public const NUMBER_SYNC_RUN_CLICK = 5;
 
-    public const NUMBER_MAX_14_G = 6;
+    public const NUMBER_SYNC_STOP_CLICK = 6;
 
-    public const NUMBER_MAX_10_G = 7;
+    public const NUMBER_SYNC_SHARE_CLICK = 7;
 
-    public const NUMBER_VOICE_OUTPUT_ON = 8;
+    public const NUMBER_PLAYER_ONE_URL_ENTER = 8;
 
-    public const NUMBER_VOICE_OUTPUT_OFF = 9;
+    public const NUMBER_PLAYER_ONE_YOUTUBE_SEARCH_CLICK = 9;
 
-    public const NUMBER_GBOWL = 10;
+    public const NUMBER_PLAYER_ONE_LOCAL_SELECT = 10;
 
-    public const NUMBER_GINDICATOR = 11;
+    public const NUMBER_PLAYER_TWO_URL_ENTER = 11;
+
+    public const NUMBER_PLAYER_TWO_YOUTUBE_SEARCH_CLICK = 12;
+
+    public const NUMBER_PLAYER_TWO_LOCAL_SELECT = 13;
+
+    public const NUMBER_YOUTUBE_OAUTH_CLICK = 14;
+
+    public const NUMBER_YOUTUBE_SELECT = 15;
+
+    public const NUMBER_NAV_HOME_CLICK = 16;
+
+    public const NUMBER_NAV_LOGIN_CLICK = 17;
+
+    public const NUMBER_NAV_LOGOUT_CLICK = 18;
+
+    public const NUMBER_NAV_REGISTER_CLICK = 19;
+
+    public const NUMBER_NAV_ABOUT_APP_CLICK = 20;
+
+    public const NUMBER_NAV_INQUIRY = 21;
+
+    public const NUMBER_HOME_OPEN_CLICK = 22;
+
+    public const NUMBER_HOME_DELETE_CLICK = 23;
 
     /**
      * Gets allowable values of the enum
@@ -72,17 +95,29 @@ class OperationCd
     public static function getAllowableEnumValues()
     {
         return [
-            self::NUMBER_ENABLE_SENSOR,
-            self::NUMBER_CALIBRATION,
-            self::NUMBER_CALIBRATION_BEFORE_SETTING,
-            self::NUMBER_CALIBRATION_NEXT_1,
-            self::NUMBER_CALIBRATION_NEXT_2,
-            self::NUMBER_MAX_14_G,
-            self::NUMBER_MAX_10_G,
-            self::NUMBER_VOICE_OUTPUT_ON,
-            self::NUMBER_VOICE_OUTPUT_OFF,
-            self::NUMBER_GBOWL,
-            self::NUMBER_GINDICATOR
+            self::NUMBER_OPEN_MODAL_CLICK,
+            self::NUMBER_OPEN_CLICK,
+            self::NUMBER_SAVE_MODAL_CLICK,
+            self::NUMBER_SAVE_CLICK,
+            self::NUMBER_SYNC_RUN_CLICK,
+            self::NUMBER_SYNC_STOP_CLICK,
+            self::NUMBER_SYNC_SHARE_CLICK,
+            self::NUMBER_PLAYER_ONE_URL_ENTER,
+            self::NUMBER_PLAYER_ONE_YOUTUBE_SEARCH_CLICK,
+            self::NUMBER_PLAYER_ONE_LOCAL_SELECT,
+            self::NUMBER_PLAYER_TWO_URL_ENTER,
+            self::NUMBER_PLAYER_TWO_YOUTUBE_SEARCH_CLICK,
+            self::NUMBER_PLAYER_TWO_LOCAL_SELECT,
+            self::NUMBER_YOUTUBE_OAUTH_CLICK,
+            self::NUMBER_YOUTUBE_SELECT,
+            self::NUMBER_NAV_HOME_CLICK,
+            self::NUMBER_NAV_LOGIN_CLICK,
+            self::NUMBER_NAV_LOGOUT_CLICK,
+            self::NUMBER_NAV_REGISTER_CLICK,
+            self::NUMBER_NAV_ABOUT_APP_CLICK,
+            self::NUMBER_NAV_INQUIRY,
+            self::NUMBER_HOME_OPEN_CLICK,
+            self::NUMBER_HOME_DELETE_CLICK
         ];
     }
 }

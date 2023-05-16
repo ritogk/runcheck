@@ -13,33 +13,34 @@
  */
 
 /**
- * ■操作コード  
- * ENABLE_SENSOR: センサーを有効にする  
- * CALIBRATION: キャリブレーション  
- * CALIBRATION_BEFORE_SETTING: 直前設定を使う  
- * CALIBRATION_NEXT_1: キャリブレーション1 次へ  
- * CALIBRATION_NEXT_2: キャリブレーション2 次へ  
- * MAX_14_G: Max1.4G  
- * MAX_10_G: Max1.0G  
- * VOICE_OUTPUT_ON: 音声出力ON  
- * VOICE_OUTPUT_OFF: 音声出力OFF  
- * GBOWL: GBowl  
- * GINDICATOR: GIndicator
+ * 
  * @export
  * @enum {string}
  */
 export enum OperationCd {
-    ENABLE_SENSOR = 1,
-    CALIBRATION = 2,
-    CALIBRATION_BEFORE_SETTING = 3,
-    CALIBRATION_NEXT_1 = 4,
-    CALIBRATION_NEXT_2 = 5,
-    MAX_14_G = 6,
-    MAX_10_G = 7,
-    VOICE_OUTPUT_ON = 8,
-    VOICE_OUTPUT_OFF = 9,
-    GBOWL = 10,
-    GINDICATOR = 11
+    OPEN_MODAL_CLICK = 1,
+    OPEN_CLICK = 2,
+    SAVE_MODAL_CLICK = 3,
+    SAVE_CLICK = 4,
+    SYNC_RUN_CLICK = 5,
+    SYNC_STOP_CLICK = 6,
+    SYNC_SHARE_CLICK = 7,
+    PLAYER_ONE_URL_ENTER = 8,
+    PLAYER_ONE_YOUTUBE_SEARCH_CLICK = 9,
+    PLAYER_ONE_LOCAL_SELECT = 10,
+    PLAYER_TWO_URL_ENTER = 11,
+    PLAYER_TWO_YOUTUBE_SEARCH_CLICK = 12,
+    PLAYER_TWO_LOCAL_SELECT = 13,
+    YOUTUBE_OAUTH_CLICK = 14,
+    YOUTUBE_SELECT = 15,
+    NAV_HOME_CLICK = 16,
+    NAV_LOGIN_CLICK = 17,
+    NAV_LOGOUT_CLICK = 18,
+    NAV_REGISTER_CLICK = 19,
+    NAV_ABOUT_APP_CLICK = 20,
+    NAV_INQUIRY = 21,
+    HOME_OPEN_CLICK = 22,
+    HOME_DELETE_CLICK = 23
 }
 
 export function OperationCdFromJSON(json: any): OperationCd {
