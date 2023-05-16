@@ -154,7 +154,7 @@ const hundleAdjustSpeedClick = () => {
               class="bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden"
             >
               <div
-                class="bg-cyan-500 dark:bg-cyan-400 h-2"
+                class="bg-slate-500 dark:bg-slate-400 h-2"
                 :style="{ width: sliderPositionStyle }"
                 role="progressbar"
                 aria-label="music progress"
@@ -165,19 +165,19 @@ const hundleAdjustSpeedClick = () => {
             </div>
             <!-- スライダーのポイント -->
             <div
-              class="ring-cyan-500 dark:ring-cyan-400 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-2 flex items-center justify-center bg-white rounded-full shadow"
+              class="ring-slate-500 dark:ring-slate-400 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-2 flex items-center justify-center bg-white rounded-full shadow"
               :style="{ left: sliderPositionStyle }"
               @drag="hundleDrag"
             >
               <div
-                class="w-1.5 h-1.5 bg-cyan-500 dark:bg-cyan-400 rounded-full ring-1 ring-inset ring-gray-900/5"
+                class="w-1.5 h-1.5 bg-slate-500 dark:bg-slate-400 rounded-full ring-1 ring-inset ring-gray-900/5"
               ></div>
             </div>
           </div>
           <div
             class="flex justify-between text-sm leading-6 font-medium tabular-nums"
           >
-            <div class="text-cyan-500 dark:text-gray-100">
+            <div class="text-slate-500 dark:text-gray-100">
               {{ currentMMSS }}
             </div>
             <div class="text-gray-500 dark:text-gray-400">{{ endMMSS }}</div>

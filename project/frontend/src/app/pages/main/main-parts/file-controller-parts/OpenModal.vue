@@ -93,7 +93,7 @@ const hundleOpen = () => {
               <div class="absolute right-0 top-0 pr-4 pt-4 sm:block">
                 <button
                   type="button"
-                  class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
                   @click="onClose"
                 >
                   <span class="sr-only">Close</span>
@@ -118,7 +118,7 @@ const hundleOpen = () => {
                         >
                         <div class="relative mt-2">
                           <ListboxButton
-                            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-600 sm:text-sm sm:leading-6"
                           >
                             <span class="block truncate">{{
                               selected.name
@@ -151,7 +151,7 @@ const hundleOpen = () => {
                                 <li
                                   :class="[
                                     active
-                                      ? 'bg-indigo-600 text-white'
+                                      ? 'bg-slate-600 text-white'
                                       : 'text-gray-900',
                                     'relative cursor-default select-none py-2 pl-8 pr-4',
                                   ]"
@@ -169,7 +169,7 @@ const hundleOpen = () => {
                                   <span
                                     v-if="selected"
                                     :class="[
-                                      active ? 'text-white' : 'text-indigo-600',
+                                      active ? 'text-white' : 'text-slate-600',
                                       'absolute inset-y-0 left-0 flex items-center pl-1.5',
                                     ]"
                                   >
@@ -188,7 +188,7 @@ const hundleOpen = () => {
                       <div class="mt-12">
                         <button
                           type="submit"
-                          class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-indigo-400"
+                          class="flex w-full justify-center rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 disabled:bg-slate-400"
                           :disabled="selected.id === 0"
                           @click="hundleOpen"
                         >

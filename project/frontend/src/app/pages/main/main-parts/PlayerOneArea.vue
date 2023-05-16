@@ -222,7 +222,7 @@ const hundleVideoSeek = async (seconds: number) => {
                 type="email"
                 name="email"
                 id="email"
-                class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-indigo-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"
                 placeholder="https://youtube.com/nLKSSdMWZ8g"
                 v-model="youtubeUrl"
                 @keyup.enter="hundleYoutubeUrlEnter(youtubeUrl)"
@@ -230,7 +230,7 @@ const hundleVideoSeek = async (seconds: number) => {
               <!-- 検索 -->
               <button
                 type="button"
-                class="relative w-3/12 -ml-px inline-flex items-center gap-x-1.5 rounded-r-md text-sm font-semibold bg-white text-gray-900 ring-1 ring-inset ring-indigo-300 hover:bg-gray-100"
+                class="relative w-3/12 -ml-px inline-flex items-center gap-x-1.5 rounded-r-md text-sm font-semibold bg-white text-gray-900 ring-1 ring-inset ring-slate-300 hover:bg-gray-100"
                 @click="useMainState.youtubeModal.open(playerNo)"
               >
                 <svg

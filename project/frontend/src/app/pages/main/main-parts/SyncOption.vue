@@ -57,7 +57,7 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
     >
       <button
         type="button"
-        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-indigo-700 hover:bg-indigo-500 focus:z-10"
+        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10"
         @click="hundleVideoRunSyncClick"
       >
         <svg
@@ -86,7 +86,7 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
     >
       <button
         type="button"
-        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-indigo-700 hover:bg-indigo-500 focus:z-10"
+        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10"
         @click="hundleVideoStopSyncClick"
       >
         <svg

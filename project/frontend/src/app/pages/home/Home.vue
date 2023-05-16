@@ -92,7 +92,7 @@ const hundleDelete = async (comparisonId: number, title: string) => {
         >
         <div class="relative mt-2">
           <ListboxButton
-            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-600 sm:text-sm sm:leading-6"
           >
             <span class="block truncate">{{ selected.name }}</span>
             <span
@@ -122,7 +122,7 @@ const hundleDelete = async (comparisonId: number, title: string) => {
               >
                 <li
                   :class="[
-                    active ? 'bg-indigo-600 text-white' : 'text-gray-900',
+                    active ? 'bg-slate-600 text-white' : 'text-gray-900',
                     'relative cursor-default select-none py-2 pl-3 pr-9',
                   ]"
                 >
@@ -137,7 +137,7 @@ const hundleDelete = async (comparisonId: number, title: string) => {
                   <span
                     v-if="selected"
                     :class="[
-                      active ? 'text-white' : 'text-indigo-600',
+                      active ? 'text-white' : 'text-slate-600',
                       'absolute inset-y-0 right-0 flex items-center pr-4',
                     ]"
                   >
@@ -157,7 +157,7 @@ const hundleDelete = async (comparisonId: number, title: string) => {
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
                   <p
-                    class="truncate text-sm font-medium text-indigo-600"
+                    class="truncate text-sm font-medium text-slate-600"
                     @click="hundleTitleClick(sync.id)"
                   >
                     {{ sync.title }}

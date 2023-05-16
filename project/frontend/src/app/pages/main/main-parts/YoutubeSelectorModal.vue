@@ -128,7 +128,7 @@ if (code) callbackYoutubeOauth(code)
               <div class="absolute right-0 top-0 pr-4 pt-4 sm:block">
                 <button
                   type="button"
-                  class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
                   @click="onClose"
                 >
                   <span class="sr-only">Close</span>
