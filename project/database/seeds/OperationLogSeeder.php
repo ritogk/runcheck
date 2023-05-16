@@ -14,58 +14,118 @@ class OperationLogSeeder extends Seeder
     public function run()
     {
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_ENABLE_SENSOR,
-            'operation_nm' => '「センサーを有効にする」',
+            'operation_cd' => OperationCd::NUMBER_OPEN_MODAL_CLICK,
+            'operation_nm' => 'OPEN_MODAL_CLICK',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_CALIBRATION,
-            'operation_nm' => '「キャリブレーション」',
+            'operation_cd' => OperationCd::NUMBER_OPEN_CLICK,
+            'operation_nm' => 'OPEN_CLICK',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_CALIBRATION_BEFORE_SETTING,
-            'operation_nm' => '「直前設定を使う」',
+            'operation_cd' => OperationCd::NUMBER_SAVE_MODAL_CLICK,
+            'operation_nm' => 'SAVE_MODAL_CLICK',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_CALIBRATION_NEXT_1,
-            'operation_nm' => '「キャリブレーション 次へ1」',
+            'operation_cd' => OperationCd::NUMBER_SAVE_CLICK,
+            'operation_nm' => 'SAVE_CLICK',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_CALIBRATION_NEXT_2,
-            'operation_nm' => '「キャリブレーション 次へ2」',
+            'operation_cd' => OperationCd::NUMBER_SYNC_RUN_CLICK,
+            'operation_nm' => 'SYNC_RUN_CLICK',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_MAX_14_G,
-            'operation_nm' => '「Max1.4G」',
+            'operation_cd' => OperationCd::NUMBER_SYNC_STOP_CLICK,
+            'operation_nm' => 'SYNC_STOP_CLICK',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_MAX_10_G,
-            'operation_nm' => '「Max1.0G」',
+            'operation_cd' => OperationCd::NUMBER_SYNC_SHARE_CLICK,
+            'operation_nm' => 'SYNC_SHARE_CLICK',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_VOICE_OUTPUT_ON,
-            'operation_nm' => '「音声出力ON」',
+            'operation_cd' => OperationCd::NUMBER_PLAYER_ONE_URL_ENTER,
+            'operation_nm' => 'PLAYER_ONE_URL_ENTER',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_VOICE_OUTPUT_OFF,
-            'operation_nm' => '「音声出力OFF」',
+            'operation_cd' => OperationCd::NUMBER_PLAYER_ONE_YOUTUBE_SEARCH_CLICK,
+            'operation_nm' => 'PLAYER_ONE_YOUTUBE_SEARCH_CLICK',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_GBOWL,
-            'operation_nm' => '「GBowl」',
+            'operation_cd' => OperationCd::NUMBER_PLAYER_ONE_LOCAL_SELECT,
+            'operation_nm' => 'PLAYER_ONE_LOCAL_SELECT',
             'execution_cnt' => 0
         ]);
         OperationLog::create([
-            'operation_cd' => OperationCd::NUMBER_GINDICATOR,
-            'operation_nm' => '「GIndicator」',
+            'operation_cd' => OperationCd::NUMBER_PLAYER_TWO_URL_ENTER,
+            'operation_nm' => 'PLAYER_TWO_URL_ENTER',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_PLAYER_TWO_YOUTUBE_SEARCH_CLICK,
+            'operation_nm' => 'PLAYER_TWO_YOUTUBE_SEARCH_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_PLAYER_TWO_LOCAL_SELECT,
+            'operation_nm' => 'PLAYER_TWO_LOCAL_SELECT',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_YOUTUBE_OAUTH_CLICK,
+            'operation_nm' => 'YOUTUBE_OAUTH_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_YOUTUBE_SELECT,
+            'operation_nm' => 'YOUTUBE_SELECT',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_NAV_HOME_CLICK,
+            'operation_nm' => 'NAV_HOME_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_NAV_LOGIN_CLICK,
+            'operation_nm' => 'NAV_LOGIN_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_NAV_LOGOUT_CLICK,
+            'operation_nm' => 'NAV_LOGOUT_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_NAV_REGISTER_CLICK,
+            'operation_nm' => 'NAV_REGISTER_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_NAV_ABOUT_APP_CLICK,
+            'operation_nm' => 'NAV_ABOUT_APP_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_NAV_INQUIRY,
+            'operation_nm' => 'NAV_INQUIRY',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_HOME_OPEN_CLICK,
+            'operation_nm' => 'HOME_OPEN_CLICK',
+            'execution_cnt' => 0
+        ]);
+        OperationLog::create([
+            'operation_cd' => OperationCd::NUMBER_HOME_DELETE_CLICK,
+            'operation_nm' => 'HOME_DELETE_CLICK',
             'execution_cnt' => 0
         ]);
     }
