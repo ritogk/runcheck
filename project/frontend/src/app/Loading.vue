@@ -7,7 +7,7 @@
   <div class="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-40">
     <svg
       aria-hidden="true"
-      class="w-28 h-28 mr-2 text-gray-700 animate-spin fill-blue-600"
+      class="w-28 h-28 mr-2 text-gray-700 animate-spin fill-slate-500"
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
