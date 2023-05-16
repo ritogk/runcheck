@@ -167,7 +167,7 @@ const hundleDelete = async (comparisonId: number, title: string) => {
                   </p>
                 </div>
                 <div class="mt-2 sm:flex sm:justify-between">
-                  <div class="sm:flex">
+                  <div class="sm:flex" @click="hundleTitleClick(sync.id)">
                     <p class="flex items-center text-sm text-gray-500">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
