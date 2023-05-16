@@ -165,7 +165,6 @@ const hundleAdjustSpeedClick = () => {
             <div
               class="ring-slate-500 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-2 flex items-center justify-center bg-white rounded-full shadow"
               :style="{ left: sliderPositionStyle }"
-              @drag="hundleDrag"
             >
               <div
                 class="w-1.5 h-1.5 bg-slate-500 rounded-full ring-1 ring-inset ring-gray-900/5"
