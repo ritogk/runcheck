@@ -15,7 +15,7 @@
 
 Route::get('/', function () {
   return redirect('/app/index');
-});
+})->name('app');
 
 // spaのルーティング
 Route::get('/app/{any}', function () {
