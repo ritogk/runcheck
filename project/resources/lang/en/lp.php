@@ -31,7 +31,7 @@ return [
 
     'youtube又は端末内の動画の比較' => 'Comparison of videos on youtube or in your device',
     '比較した結果の保存(ユーザー登録する必要あり)' => 'Save comparison results (user registration required)',
-    '比較した結果をツイッター等で共有(ユーザー登録する必要あり)' => 'Share the comparison results on Twitter, etc. (User registration required)',
+    '比較した結果をツイッター等で共有' => 'Share the comparison results on Twitter, etc.',
 
     '今すぐ起動' => 'Start Now',
 ];
