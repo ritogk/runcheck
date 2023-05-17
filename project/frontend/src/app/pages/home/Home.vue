@@ -41,12 +41,25 @@ const fetch = async () => {
 fetch()
 
 const tagOptions = computed(() => {
-  return [
+  const tmp = [
     { id: 0, name: "　" },
     ...comparisons.map((x) => {
       return { id: x.id, name: x.tag }
     }),
   ]
+  const groupedArray = tmp.reduce(
+    (result: { id: number; name: string }[], obj) => {
+      const existingObj = result.find((item) => item.name === obj.name)
+      if (existingObj) {
+        existingObj.id++
+      } else {
+        result.push({ id: 1, name: obj.name })
+      }
+      return result
+    },
+    []
+  )
+  return groupedArray
 })
 const selected = ref({ id: 0, name: "　" })
 
