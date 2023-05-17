@@ -78,9 +78,11 @@ const navigation = [
     icon: ArrowLeftOnRectangleIcon,
     current: false,
     action: async () => {
+      const loadingId = useLoadingState.run()
       operationLog.send(operationLog.OPERATION_CD.NAV_LOGOUT_CLICK)
       sidebarOpen.value = false
-      useUserState.logout()
+      await useUserState.logout()
+      useLoadingState.stop(loadingId)
       router.push({ name: "index" })
     },
     show: computed(() => useUserState.subscription.logined.value),
