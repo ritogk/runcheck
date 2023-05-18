@@ -195,13 +195,13 @@
                 <h2 class="display-4 lh-1 mb-2">{{__('lp.スクリーンショット')}}</h2>
                 <div class="row">
                     <div class="col">
+                        <img class="rounded img-fluid" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/screenshot3.jpg') }}" alt="..." />
+                    </div>
+                    <div class="col">
                         <img class="rounded img-fluid" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/screenshot1.jpg') }}" alt="..." />
                     </div>
                     <div class="col">
                         <img class="rounded img-fluid" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/screenshot2.jpg') }}" alt="..." />
-                    </div>
-                    <div class="col">
-                        <img class="rounded img-fluid" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/screenshot3.jpg') }}" alt="..." />
                     </div>
                 </div>
             </div>
