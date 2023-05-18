@@ -11,15 +11,37 @@
 |
 */
 
-Auth::routes();
+// Auth::routes();
+
+Route::get('/', function () {
+  return redirect('/app/index');
+})->name('app');
+
+// spaのルーティング
+Route::get('/app/{any}', function () {
+  return view('app');
+})->where('any', '.*');
 
 // lp
 Route::get('/lp/ja', 'LPController@show_ja')->name('lp.ja');
 Route::get('/lp/en', 'LPController@show_en')->name('lp.en');
 
+// 旧urlのリダイレクト
+Route::get('/youyou', function () {
+  return redirect('/');
+});
+
+Route::get('/privacy', function () {
+  return view('privacy');
+})->name('privacy');
+
+Route::get('/terms', function () {
+  return view('terms');
+})->name('terms');
+
 // youyou
-Route::get('/', 'YouYouController@index');
-Route::get('/youyou', 'YouYouController@index')->name('youyou');
+// Route::get('/', 'YouYouController@index');
+// Route::get('/youyou', 'YouYouController@index')->name('youyou');
 Route::post('/youyou_store', 'YouYouController@store')->name('youyou.store');
 // twittercardの関係でidはクエリパラメーターで渡す
 Route::get('/youyou-tweat', 'YouYouController@tweat')->name('youyou.tweat');
@@ -53,11 +75,11 @@ Route::get('/analysis/access_youyou/', 'Ajax\AnalysisController@access_youyou');
 Route::get('/analysis/access_locallocal/', 'Ajax\AnalysisController@access_locallocal');
 Route::get('/analysis/access_youlocal/', 'Ajax\AnalysisController@access_youlocal');
 
-// ホーム
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home_tweat/{id}', 'HomeController@tweat')->name('home.tweat');
-Route::get('/home_destroy/{id}', 'HomeController@destroy')->name('home.destroy');
-Route::get('/home_release_update/{id}', 'HomeController@release_update')->name('home.release_update');
+// // ホーム
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home_tweat/{id}', 'HomeController@tweat')->name('home.tweat');
+// Route::get('/home_destroy/{id}', 'HomeController@destroy')->name('home.destroy');
+// Route::get('/home_release_update/{id}', 'HomeController@release_update')->name('home.release_update');
 
 // お問い合わせ
 Route::get('contact', 'ContactsController@index')->name('contact');

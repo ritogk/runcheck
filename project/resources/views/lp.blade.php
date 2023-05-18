@@ -55,7 +55,6 @@
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#features">{{__('lp.基本機能')}}</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#demo">{{__('lp.デモ')}}</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="#howtouse">{{__('lp.使い方')}}</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#screenshot">{{__('lp.スクリーンショット')}}</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#startnow">{{__('lp.今すぐ起動')}}</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="https://twitter.com/homing_fd2">{{__('lp.お問い合わせ')}}</a></li>
@@ -74,7 +73,7 @@
                             <h1 class="display-1 lh-1 mb-3">{{__('lp.車載動画でサーキットを攻略！タイムアップのための比較アプリ')}}</h1>
                             <p class="lead fw-normal text-muted mb-4">{{__('lp.サーキットに特化した車載動画比較アプリ。気になるあの人やベストラップとセカンドラップ等の比較が無料で簡単に行えます。youtubeで公開されている全ての車載動画と比較が行えるので比較対象は無限大！！')}}</p>
                             <div class="d-flex flex-column flex-lg-row align-items-center">
-                                <a class="me-lg-3 mb-1 mb-lg-0" href="{{ route('youyou')}}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
+                                <a class="me-lg-3 mb-1 mb-lg-0" href="{{ route('app')}}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
                             </div>
                         </div>
                     </div>
@@ -168,27 +167,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 order-lg-0">
-                        <!-- Features section device mockup-->
-                        <div class="features-device-mockup">
-                            <svg class="circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="circleGradient" gradientTransform="rotate(45)">
-                                        <stop class="gradient-start-color" offset="0%"></stop>
-                                        <stop class="gradient-end-color" offset="100%"></stop>
-                                    </linearGradient>
-                                </defs>
-                                <circle cx="50" cy="50" r="50"></circle>
-                            </svg>
-                            <div class="device-wrapper">
-                                <div class="device" data-device="iPhoneX" data-orientation="portrait" data-color="black">
-                                    <div class="screen bg-black">
-                                        <img src="{{ App\Assets\Helpers::cacheBusting('/lp/img/iphone-demo.gif') }}" style="max-width: 100%; height: 100%" alt="..." />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -200,7 +178,7 @@
                         <h2 class="display-4 lh-1 mb-2">{{__('lp.基本機能')}}</h2>
                         <p class="lead fw-normal text-muted mb-1">・{{__('lp.youtube又は端末内の動画の比較')}}</p>
                         <p class="lead fw-normal text-muted mb-1">・{{__('lp.比較した結果の保存(ユーザー登録する必要あり)')}}</p>
-                        <p class="lead fw-normal text-muted mb-1">・{{__('lp.比較した結果をツイッター等で共有(ユーザー登録する必要あり)')}}</p>
+                        <p class="lead fw-normal text-muted mb-1">・{{__('lp.比較した結果をツイッター等で共有')}}</p>
                     </div>
                 </div>
             </div>
@@ -209,18 +187,11 @@
         <section id="demo" class="bg-white">
             <div class="container px-5">
                 <h2 class="display-4 lh-1 mb-2">{{__('lp.デモ')}}</h2>
-                <iframe style="aspect-ratio: 16 / 9;width: 100%;height: 400px;" src="https://www.youtube.com/embed/QD5WELzWhNY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe style="aspect-ratio: 16 / 9;width: 100%;height: 400px;" src="https://www.youtube.com/embed/2yt_BNky6Kg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
         <!-- App demo section-->
-        <section id="howtouse" class="bg-light">
-            <div class="container px-5">
-                <h2 class="display-4 lh-1 mb-2">{{__('lp.使い方')}}</h2>
-                <iframe style="aspect-ratio: 16 / 9;width: 100%;height: 400px;" src="https://www.youtube.com/embed/rem2jO5b7Hw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </section>
-        <!-- App demo section-->
-        <section id="screenshot" class="bg-white">
+        <section id="screenshot" class="bg-light">
             <div class="container px-5">
                 <h2 class="display-4 lh-1 mb-2">{{__('lp.スクリーンショット')}}</h2>
                 <div class="row">
@@ -242,7 +213,7 @@
             <div class="container px-5">
                 <h2 class="text-center text-white font-alt mb-4">{{__('lp.今すぐ起動')}}</h2>
                 <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
-                    <a class="me-lg-3 mb-4 mb-lg-0" href="{{ route('youyou')}}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
+                    <a class="me-lg-3 mb-4 mb-lg-0" href="{{ route('app')}}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
                 </div>
             </div>
         </section>
@@ -250,9 +221,8 @@
         <footer class="bg-black text-center py-5">
             <div class="container px-5">
                 <div class="text-white-50 small">
-                    <div class="mb-2">Copyright (c) 2013-2022 Start Bootstrap LLC</div>
-                    <a href="https://twitter.com/homing_fd2">{{__('lp.お問い合わせ')}}</a>
-                    
+                    <a class="mx-2" href="{{ route('terms')}}">{{__('lp.利用規約')}}</a>
+                    <a href="{{ route('privacy')}}">{{__('lp.プライバシーポリシー')}}</a>
                 </div>
             </div>
         </footer>

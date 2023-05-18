@@ -1,0 +1,477 @@
+openapi: 3.0.0
+info:
+  title: OpenAPI Tutorial
+  description: OpenAPI Tutorial by halhorn
+  version: 0.0.0
+servers:
+  - url: https://tunneling8000.homisoftware.net/api/v1
+    description: 開発用
+paths:
+  /users:
+    post:
+      tags:
+        - "users"
+      summary: 新規登録
+      description: 詳細内容
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                handleName:
+                  type: string
+                carType:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - handleName
+                - carType
+                - email
+                - password
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /authentication/login:
+    post:
+      tags:
+        - "authentication"
+      summary: ログイン
+      description: 詳細内容
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                remember:
+                  type: boolean
+              required:
+                - email
+                - password
+                - remember
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /authentication/logout:
+    post:
+      tags:
+        - "authentication"
+      summary: ログアウト
+      description: 詳細内容
+      responses:
+        "200":
+          description: OK
+          content: {}
+  /authentication/me:
+    get:
+      tags:
+        - "authentication"
+      summary: ログイン済のユーザー情報を取得
+      description: 詳細内容
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /comparisons:
+    post:
+      tags:
+        - "comparisons"
+      summary: 比較情報を登録
+      description: 詳細内容
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VideoComparison"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comparisonId:
+                    type: number
+                    description: "比較ID"
+                required:
+                  - comparisonId
+    get:
+      tags:
+        - "comparisons"
+      summary: 比較情報一覧を取得
+      description: 詳細内容
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    category:
+                      type: string
+                    memo:
+                      type: string
+                    title:
+                      type: string
+                    video1Url:
+                      type: string
+                    video1TimeSt:
+                      type: number
+                    video1VideoType:
+                      $ref: "#/components/schemas/videoType"
+                    video2Url:
+                      type: string
+                    video2TimeSt:
+                      type: number
+                    video2VideoType:
+                      $ref: "#/components/schemas/videoType"
+                    anonymous:
+                      type: boolean
+                  required:
+                    - id
+                    - category
+                    - memo
+                    - title
+                    - video1Url
+                    - video1TimeSt
+                    - video1VideoType
+                    - video2Url
+                    - video2TimeSt
+                    - video2VideoType
+                    - anonymous
+  /comparisons/{comparisonId}:
+    get:
+      tags:
+        - "comparisons"
+      summary: 比較情報を取得
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: comparisonId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: アンケートの回答状態
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VideoComparison"
+    delete:
+      tags:
+        - "comparisons"
+      summary: 比較情報を削除
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: comparisonId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content: {}
+  /comparisons/{comparisonId}/publish:
+    put:
+      tags:
+        - "comparisons"
+      summary: 比較情報を公開状態にする
+      description: 詳細内容
+      parameters:
+        - in: path
+          name: comparisonId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content: {}
+  /youtube/oauth/authorize:
+    get:
+      tags:
+        - "youtube"
+      summary: 認可画面のURLを取得
+      description: 詳細内容
+      responses:
+        "200":
+          description: アンケートの回答状態
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  redirectUrl:
+                    type: string
+                    description: "認可画面のリダイレクト用URL"
+                required:
+                  - redirectUrl
+  /youtube/oauth:
+    post:
+      tags:
+        - "youtube"
+      summary: アクセストークンを取得
+      description: 詳細内容
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+              required:
+                - code
+      responses:
+        "200":
+          description: 詳細内容
+          content: {}
+  /youtube/videos:
+    get:
+      tags:
+        - "youtube"
+      summary: 本人がアップロードした動画一覧を取得
+      description: 詳細内容
+      responses:
+        "200":
+          description: アンケートの回答状態
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                      description: "url"
+                    title:
+                      type: string
+                      description: "タイトル"
+                    description:
+                      type: string
+                      description: "説明"
+                    thumbnailUrl:
+                      type: string
+                      description: "サムネ画像のURL"
+                  required:
+                    - url
+                    - title
+                    - description
+                    - thumbnailUrl
+  /operation-log:
+    put:
+      tags:
+        - "operationLog"
+      summary: 操作ログを送信
+      description: 詳細内容
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestOperationLog"
+      responses:
+        "200":
+          description: OK
+          content: {}
+  /status:
+    get:
+      tags:
+        - "status"
+      summary: 未ログインユーザーも含めたユーザーの状態を取得
+      description: 詳細内容
+      responses:
+        "200":
+          description: 状態
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isLogined:
+                    type: boolean
+                    description: "ログイン状態"
+                  isYoutubeAuthroized:
+                    type: boolean
+                    description: "Youtube認可状態"
+                  user:
+                    $ref: "#/components/schemas/User"
+                    description: "ユーザー"
+                required:
+                  - isLogined
+                  - isYoutubeAuthroized
+                  - user
+components:
+  schemas:
+    User:
+      description: ユーザー情報
+      type: object
+      properties:
+        id:
+          type: integer
+          description: "ユーザーID"
+        name:
+          type: string
+          description: "ネーム"
+      required:
+        - id
+        - name
+
+    Video:
+      description: 動画情報
+      type: object
+      properties:
+        url:
+          type: string
+        timeSt:
+          type: string
+        videoType:
+          $ref: "#/components/schemas/videoType"
+      required:
+        - url
+        - timeSt
+        - videoType
+
+    VideoComparison:
+      description: 動画比較情報
+      type: object
+      properties:
+        category:
+          type: string
+        memo:
+          type: string
+        title:
+          type: string
+        video1Url:
+          type: string
+        video1TimeSt:
+          type: number
+        video1VideoType:
+          $ref: "#/components/schemas/videoType"
+        video2Url:
+          type: string
+        video2TimeSt:
+          type: number
+        video2VideoType:
+          $ref: "#/components/schemas/videoType"
+        anonymous:
+          type: boolean
+      required:
+        - video1Url
+        - video1TimeSt
+        - video1VideoType
+        - video2Url
+        - video2TimeSt
+        - video2VideoType
+        - anonymous
+    requestOperationLog:
+      description: リクエスト 操作ログ
+      type: object
+      properties:
+        operationCd:
+          $ref: "#/components/schemas/operationCd"
+      required:
+        - operationCd
+    videoType:
+      description: 動画タイプ
+      enum: [1, 2]
+      x-enum-varnames: [YOUTUBE, LOCAL]
+    operationCd:
+      enum:
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+        ]
+      x-enum-varnames:
+        [
+          OPEN_MODAL_CLICK,
+          OPEN_CLICK,
+          SAVE_MODAL_CLICK,
+          SAVE_CLICK,
+          SYNC_RUN_CLICK,
+          SYNC_STOP_CLICK,
+          SYNC_SHARE_CLICK,
+          PLAYER_ONE_URL_ENTER,
+          PLAYER_ONE_YOUTUBE_SEARCH_CLICK,
+          PLAYER_ONE_LOCAL_SELECT,
+          PLAYER_TWO_URL_ENTER,
+          PLAYER_TWO_YOUTUBE_SEARCH_CLICK,
+          PLAYER_TWO_LOCAL_SELECT,
+          YOUTUBE_OAUTH_CLICK,
+          YOUTUBE_SELECT,
+          NAV_HOME_CLICK,
+          NAV_LOGIN_CLICK,
+          NAV_LOGOUT_CLICK,
+          NAV_REGISTER_CLICK,
+          NAV_ABOUT_APP_CLICK,
+          NAV_INQUIRY,
+          HOME_OPEN_CLICK,
+          HOME_DELETE_CLICK,
+          REGISTER_CLICK,
+          LOGIN_CLICK,
+          SYNC_CONTROLLER_SWITCH_PLAY_CLICK,
+          SYNC_CONTROLLER_SWITCH_REPEAT_CLICK,
+          SYNC_CONTROLLER_SPEED_CLICK,
+          SYNC_CONTROLLER_RELOAD_CLICK,
+          SYNC_CONTROLLER_SWITCH_MUTE_CLICK,
+        ]

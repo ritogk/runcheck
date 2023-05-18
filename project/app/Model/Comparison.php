@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Model\Comparison
@@ -39,9 +40,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Comparison whereVideo2Url($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Comparison whereVideoType($value)
  * @mixin \Eloquent
+ * @property string $video1_type youtube, local
+ * @property string $video2_type youtube, local
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Comparison whereVideo1Type($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Comparison whereVideo2Type($value)
  */
 class Comparison extends Model
 {
+    use SoftDeletes;
     protected $guarded = ['id']; // ブラックリスト
 
     // select2用データ
@@ -74,4 +80,10 @@ class Comparison extends Model
             ->pluck('category');
         return $data;
     }
+
+    const VIDEO_TYPE_KIND = [
+        'YOUTUBE_YOUTUBE' => 1,
+        'LOCAL_LOCAL' => 2,
+        'YOUTUBE_LOCAL' => 3,
+    ];
 }

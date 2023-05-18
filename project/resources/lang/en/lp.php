@@ -9,7 +9,7 @@ return [
     'スクリーンショット' => 'Screenshots',
     'お問い合わせ' => 'Contact Us',
 
-    ' 車載動画でサーキットを攻略！タイムアップのための比較アプリ' => 'Take on the circuit with in-car video! Comparison app for improving times.',
+    '車載動画でサーキットを攻略！タイムアップのための比較アプリ' => 'Take on the circuit with in-car video! Comparison app for improving times.',
     'サーキットに特化した車載動画比較アプリ。気になるあの人やベストラップとセカンドラップ等の比較が無料で簡単に行えます。youtubeで公開されている全ての車載動画と比較が行えるので比較対象は無限大！！' => 'An in-car video comparison app specialising in circuits. You can easily compare the best lap with the second lap, etc. with all the in-car videos on youtube, so the comparison targets are endless!',
 
     '振り返りこそが学びと成長の鍵' => 'Looking back is the key to learn and grow!',
@@ -31,7 +31,10 @@ return [
 
     'youtube又は端末内の動画の比較' => 'Comparison of videos on youtube or in your device',
     '比較した結果の保存(ユーザー登録する必要あり)' => 'Save comparison results (user registration required)',
-    '比較した結果をツイッター等で共有(ユーザー登録する必要あり)' => 'Share the comparison results on Twitter, etc. (User registration required)',
+    '比較した結果をツイッター等で共有' => 'Share the comparison results on Twitter, etc.',
 
     '今すぐ起動' => 'Start Now',
+
+    '利用規約' => 'Terms of Use',
+    'プライバシーポリシー' => 'Privacy Policy'
 ];

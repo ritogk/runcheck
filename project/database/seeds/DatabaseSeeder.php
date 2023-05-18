@@ -1,5 +1,7 @@
 <?php
 
+// namespace Database\Seeds;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +22,6 @@ class DatabaseSeeder extends Seeder
         DB::table('analyzes')->insert([
             'multi_set' => 0,
         ]);
+        $this->call(OperationLogSeeder::class);
     }
 }
