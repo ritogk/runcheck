@@ -11,7 +11,6 @@
         <link rel="alternate" hreflang="en-au" lang="en" href="{{ route('lp.en') }}" />
 
         <title>{{__('lp.html-title')}}</title>
-        <link rel="icon" type="image/x-icon" href="/lp/favicon.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         
