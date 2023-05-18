@@ -1,4 +1,6 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>プライバシーポリシー</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>プライバシーポリシー</title>
+@include('components.gtag')
+<style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
