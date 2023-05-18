@@ -106,7 +106,6 @@
             <div class="container px-5">
                 <div class="row gx-5 justify-content-center">
                     <div class="col-xl-8">
-                        <div class="h2 fs-1 text-white mb-4">{{__('lp.振り返りこそが学びと成長の鍵')}}</div>
                         <img src="{{ App\Assets\Helpers::cacheBusting('/lp/img/homisoftware-logo.svg') }}" alt="..." style="width:200px" />
                     </div>
                 </div>
