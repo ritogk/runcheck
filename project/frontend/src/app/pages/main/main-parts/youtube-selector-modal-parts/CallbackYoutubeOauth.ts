@@ -17,6 +17,7 @@ import {
   UseLoadingStateKey,
   UseLoadingStateType,
 } from "@/app/loading-parts/LoadingState"
+import { apiConfig } from "@/core/openapi"
 
 export const callbackYoutubeOauth = async (code: string) => {
   const router = useRouter()
@@ -26,7 +27,7 @@ export const callbackYoutubeOauth = async (code: string) => {
   const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
   const loadingId = useLoadingState.run()
-  const youtubeApi = new YoutubeApi()
+  const youtubeApi = new YoutubeApi(apiConfig)
   try {
     await youtubeApi.youtubeOauthPost({ inlineObject2: { code: code } })
     await useUserState.load()

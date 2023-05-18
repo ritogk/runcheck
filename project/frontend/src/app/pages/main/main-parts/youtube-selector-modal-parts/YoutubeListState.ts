@@ -1,5 +1,6 @@
 import { ref, computed, ComputedRef } from "vue"
 import { YoutubeApi } from "@/core/openapiClient"
+import { apiConfig } from "@/core/openapi"
 
 type VideoType = {
   title: string
@@ -18,7 +19,7 @@ interface IYoutubeListState {
 }
 
 const YoutubeListState = (): IYoutubeListState => {
-  const _youtubeApi = new YoutubeApi()
+  const _youtubeApi = new YoutubeApi(apiConfig)
   const _isRead = ref(false)
   const _isReading = ref(false)
   const _videos = ref<VideoType[]>([])

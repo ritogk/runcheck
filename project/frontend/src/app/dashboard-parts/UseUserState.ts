@@ -4,6 +4,7 @@ import {
   UsersApi,
   StatusApi,
 } from "@/core/openapiClient/apis"
+import { apiConfig } from "@/core/openapi"
 
 type UseUserStateType = {
   subscription: {
@@ -23,9 +24,9 @@ type UseUserStateType = {
 }
 
 const UseUserState = (): UseUserStateType => {
-  const _authenticationApi = new AuthenticationApi()
-  const _usersApi = new UsersApi()
-  const _statusApi = new StatusApi()
+  const _authenticationApi = new AuthenticationApi(apiConfig)
+  const _usersApi = new UsersApi(apiConfig)
+  const _statusApi = new StatusApi(apiConfig)
   const _logined = ref(false)
   const _isYoutubeAuthroized = ref(false)
   const _user = ref({ id: 0, name: "" })
