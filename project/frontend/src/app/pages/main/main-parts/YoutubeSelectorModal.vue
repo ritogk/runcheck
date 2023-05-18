@@ -25,6 +25,7 @@ import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListStat
 import { PlayerNo } from "@/app/pages/main/use-main-state-parts/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
 import { callbackYoutubeOauth } from "./youtube-selector-modal-parts/CallbackYoutubeOauth"
+import { apiConfig } from "@/core/openapi"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useUserState = inject(UseUserStateKey) as UseUserStateType
@@ -50,7 +51,7 @@ const onClose = () => {
   useMainState.youtubeModal.close()
 }
 
-const youtubeApi = new YoutubeApi()
+const youtubeApi = new YoutubeApi(apiConfig)
 const redirectToAuthorize = async () => {
   operationLog.send(operationLog.OPERATION_CD.YOUTUBE_OAUTH_CLICK)
   const response = await youtubeApi.youtubeOauthAuthorizeGet()
