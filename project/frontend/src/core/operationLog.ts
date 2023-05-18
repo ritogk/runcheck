@@ -1,6 +1,7 @@
 import { OperationLogApi, OperationCd } from "@/core/openapiClient"
+import { apiConfig } from "@/core/openapi"
 
-const operationLogApi = new OperationLogApi()
+const operationLogApi = new OperationLogApi(apiConfig)
 
 const send = (operationCd: OperationCd) => {
   operationLogApi.operationLogPut({

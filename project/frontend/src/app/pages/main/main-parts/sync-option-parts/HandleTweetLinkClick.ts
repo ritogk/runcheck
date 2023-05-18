@@ -14,6 +14,7 @@ import {
 } from "@/app/loading-parts/LoadingState"
 import { YouTubePlayer } from "@/app/pages/main/main-parts/player-area-parts/YouTubePlayer"
 import { extractYoutubeId } from "@/core/extractYoutubeId"
+import { apiConfig } from "@/core/openapi"
 
 export const handleTweetLinkClick = async (comparisonId: number) => {
   const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
@@ -21,7 +22,7 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
   const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
   const loadingId = useLoadingState.run()
-  const comparisonsApi = new ComparisonsApi()
+  const comparisonsApi = new ComparisonsApi(apiConfig)
   try {
     const response = await comparisonsApi.comparisonsComparisonIdGet({
       comparisonId: comparisonId,

@@ -1,5 +1,6 @@
 import { ComparisonsApi } from "@/core/openapiClient"
-const comparisonsApi = new ComparisonsApi()
+import { apiConfig } from "@/core/openapi"
+const comparisonsApi = new ComparisonsApi(apiConfig)
 
 export const fetchComparisons = async () => {
   const response = await comparisonsApi.comparisonsGet()

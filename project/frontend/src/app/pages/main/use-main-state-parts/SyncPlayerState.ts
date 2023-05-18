@@ -9,6 +9,7 @@ import {
   VideoType as ApiVideoType,
 } from "@/core/openapiClient/index"
 import { extractYoutubeId } from "@/core/extractYoutubeId"
+import { apiConfig } from "@/core/openapi"
 
 export interface ISyncPlayerStateType {
   playerOneManager: PlayerManager
@@ -56,7 +57,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   private _speed = ref(1)
   private _synced = ref(false)
   private _syncIntervalId = 0
-  private _comparisonsApi = new ComparisonsApi()
+  private _comparisonsApi = new ComparisonsApi(apiConfig)
 
   constructor() {
     this._playerOneManager = new PlayerManager()
