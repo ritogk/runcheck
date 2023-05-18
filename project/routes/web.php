@@ -31,6 +31,14 @@ Route::get('/youyou', function () {
   return redirect('/');
 });
 
+Route::get('/privacy', function () {
+  return view('privacy');
+})->name('privacy');
+
+Route::get('/terms', function () {
+  return view('terms');
+})->name('terms');
+
 // youyou
 // Route::get('/', 'YouYouController@index');
 // Route::get('/youyou', 'YouYouController@index')->name('youyou');

@@ -221,9 +221,8 @@
         <footer class="bg-black text-center py-5">
             <div class="container px-5">
                 <div class="text-white-50 small">
-                    <div class="mb-2">Copyright (c) 2013-2022 Start Bootstrap LLC</div>
-                    <a href="https://twitter.com/homing_fd2">{{__('lp.お問い合わせ')}}</a>
-                    
+                    <a class="mx-2" href="{{ route('terms')}}">{{__('lp.利用規約')}}</a>
+                    <a href="{{ route('privacy')}}">{{__('lp.プライバシーポリシー')}}</a>
                 </div>
             </div>
         </footer>

@@ -34,4 +34,7 @@ return [
     '比較した結果をツイッター等で共有' => 'Share the comparison results on Twitter, etc.',
 
     '今すぐ起動' => 'Start Now',
+
+    '利用規約' => 'Terms of Use',
+    'プライバシーポリシー' => 'Privacy Policy'
 ];
