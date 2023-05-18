@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-/src/core/env.ts
+/src/env.ts
 
 
 # local env files
