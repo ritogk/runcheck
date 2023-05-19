@@ -21,3 +21,5 @@ jobs:
             git pull
             cd project
             php artisan migrate
+            cd frontend
+            yarn build
