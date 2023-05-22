@@ -20,6 +20,8 @@ jobs:
             cd runcheck
             git pull
             cd project
+            composer install
             php artisan migrate
             cd frontend
+            yarn install
             yarn build
