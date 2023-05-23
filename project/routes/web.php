@@ -11,11 +11,7 @@
 |
 */
 
-// Auth::routes();
-
-Route::get('/', function () {
-  return redirect('/lp/ja');
-});
+Route::get('/', 'LPController@show_ja')->name('lp.ja');
 
 // spaのルーティング
 Route::get('/app/{any}', function () {
