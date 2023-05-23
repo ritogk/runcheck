@@ -64,7 +64,7 @@
                             <h1 class="display-1 lh-1 mb-3">{{__('lp.車載動画でサーキットを攻略！タイムアップのための比較アプリ')}}</h1>
                             <p class="lead fw-normal text-muted mb-4">{{__('lp.サーキットに特化した車載動画比較アプリ。気になるあの人やベストラップとセカンドラップ等の比較が無料で簡単に行えます。youtubeで公開されている全ての車載動画と比較が行えるので比較対象は無限大！！')}}</p>
                             <div class="d-flex flex-column flex-lg-row align-items-center">
-                                <a class="me-lg-3 mb-1 mb-lg-0" href="{{ route('app')}}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
+                                <a class="me-lg-3 mb-1 mb-lg-0" href="{{ route('app', ['any' => 'index']) }}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
                             </div>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
             <div class="container px-5">
                 <h2 class="text-center text-white font-alt mb-4">{{__('lp.今すぐ起動')}}</h2>
                 <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
-                    <a class="me-lg-3 mb-4 mb-lg-0" href="{{ route('app')}}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
+                    <a class="me-lg-3 mb-4 mb-lg-0" href="{{ route('app', ['any' => 'index']) }}"><img class="app-badge" src="{{ App\Assets\Helpers::cacheBusting('/lp/img/startapp.png') }}" alt="..." /></a>
                 </div>
             </div>
         </section>
