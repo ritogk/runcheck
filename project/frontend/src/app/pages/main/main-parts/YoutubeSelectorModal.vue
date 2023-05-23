@@ -87,6 +87,14 @@ const selectVideo = async (url: string) => {
   useLoadingState.stop(loadingId)
 }
 
+const hundleTermsClick = () => {
+  location.href = "/terms"
+}
+
+const hundlePrivacyClick = () => {
+  location.href = "/privacy"
+}
+
 // Oauthで認可された後の処理
 const urlParams = new URLSearchParams(window.location.search)
 const code = urlParams.get("code")
@@ -143,11 +151,10 @@ if (code) callbackYoutubeOauth(code)
                 <!-- Youtube Oauth-->
                 <div class="text-center">
                   <!-- Empty state, show/hide based on command palette state -->
-                  <div class="px-2 py-4 text-center text-sm sm:px-14">
+                  <div class="px-1 py-4 text-center text-sm">
                     <p class="text-gray-500">
                       このボタンをクリックすると、あなたのYouTube動画一覧が表示されます。
                     </p>
-
                     <div
                       class="group bg-red-500 text-gray-100 hover:bg-red-400 shadow text-sm font-bold py-2 px-2 rounded flex justify-start items-center cursor-pointer w-64 mt-2 mx-auto"
                       @click="redirectToAuthorize"
@@ -201,6 +208,19 @@ if (code) callbackYoutubeOauth(code)
                       ></span>
                       <span class="pl-3">YouTube 動画一覧を取得</span>
                     </div>
+                    <p class="text-gray-500 text-center text-[12px] mt-2">
+                      <a
+                        class="underline"
+                        @click="hundleTermsClick()"
+                        href="javascript: void(0);"
+                        >利用規約</a
+                      >、<a
+                        class="underline"
+                        @click="hundlePrivacyClick()"
+                        href="javascript: void(0);"
+                        >プライバシーポリシー</a
+                      >に同意したうえで取得してください。
+                    </p>
                   </div>
                 </div>
                 <!-- 動画一覧 -->
