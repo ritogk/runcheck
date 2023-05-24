@@ -100,7 +100,7 @@ const hundleDelete = async (comparisonId: number, title: string) => {
       </div>
     </div>
 
-    <div class="max-w-[700px] items-center mx-auto">
+    <div class="mx-auto max-w-[700px] items-center">
       <!-- タグ -->
       <Listbox as="div" v-model="selected" class="mb-7">
         <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900"

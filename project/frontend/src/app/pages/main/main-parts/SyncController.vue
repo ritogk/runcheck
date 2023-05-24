@@ -137,7 +137,7 @@ const hundleAdjustSpeedClick = () => {
 <template>
   <Transition name="controller">
     <div class="max-h-[240px]">
-      <div class="bg-gray-50 border-0 border-gray-100 px-8 pt-6 pb-4 space-y-6">
+      <div class="space-y-6 border-0 border-gray-100 bg-gray-50 px-8 pb-4 pt-6">
         <div
           class="space-y-2"
           :ref="elements.slider"
@@ -150,9 +150,9 @@ const hundleAdjustSpeedClick = () => {
         >
           <div class="relative">
             <!-- スライダーの軸 -->
-            <div class="bg-gray-100 rounded-full overflow-hidden">
+            <div class="overflow-hidden rounded-full bg-gray-100">
               <div
-                class="bg-slate-500 h-2"
+                class="h-2 bg-slate-500"
                 :style="{ width: sliderPositionStyle }"
                 role="progressbar"
                 aria-label="music progress"
@@ -163,16 +163,16 @@ const hundleAdjustSpeedClick = () => {
             </div>
             <!-- スライダーのポイント -->
             <div
-              class="ring-slate-500 ring-2 absolute top-1/2 w-4 h-4 -mt-2 -ml-2 flex items-center justify-center bg-white rounded-full shadow"
+              class="absolute top-1/2 -ml-2 -mt-2 flex h-4 w-4 items-center justify-center rounded-full bg-white shadow ring-2 ring-slate-500"
               :style="{ left: sliderPositionStyle }"
             >
               <div
-                class="w-1.5 h-1.5 bg-slate-500 rounded-full ring-1 ring-inset ring-gray-900/5"
+                class="h-1.5 w-1.5 rounded-full bg-slate-500 ring-1 ring-inset ring-gray-900/5"
               ></div>
             </div>
           </div>
           <div
-            class="flex justify-between text-sm leading-6 font-medium tabular-nums"
+            class="flex justify-between text-sm font-medium tabular-nums leading-6"
           >
             <div class="text-slate-500">
               {{ currentMMSS }}
@@ -181,8 +181,8 @@ const hundleAdjustSpeedClick = () => {
           </div>
         </div>
       </div>
-      <div class="bg-gray-200 text-gray-500 flex items-center pb-3">
-        <div class="flex-auto flex items-center justify-evenly">
+      <div class="flex items-center bg-gray-200 pb-3 text-gray-500">
+        <div class="flex flex-auto items-center justify-evenly">
           <!-- リピート ボタン -->
           <button
             type="button"
@@ -245,7 +245,7 @@ const hundleAdjustSpeedClick = () => {
         <!-- 再生ボタン -->
         <button
           type="button"
-          class="bg-white text-gray-900 flex-none -my-2 mx-auto w-20 h-20 rounded-full ring-1 ring-gray-900/5 shadow-md flex items-center justify-center"
+          class="-my-2 mx-auto flex h-20 w-20 flex-none items-center justify-center rounded-full bg-white text-gray-900 shadow-md ring-1 ring-gray-900/5"
           aria-label="Pause"
           @click="hundlePlaySwitch()"
         >
@@ -267,7 +267,7 @@ const hundleAdjustSpeedClick = () => {
             <path d="M6 4l20 12-20 12z" />
           </svg>
         </button>
-        <div class="flex-auto flex items-center justify-evenly">
+        <div class="flex flex-auto items-center justify-evenly">
           <!-- 再読み込み ボタン -->
           <button
             type="button"

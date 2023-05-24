@@ -83,91 +83,91 @@ const hundleSpeedSelect = async (speed: number) => {
                     <!-- Active: "bg-gray-100" -->
                     <div>
                       <li
-                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                         id="option-1"
                         role="option"
                         tabindex="-1"
                         @click="hundleSpeedSelect(0.25)"
                       >
-                        <p class="text-sm font-medium text-gray-700 truncate">
+                        <p class="truncate text-sm font-medium text-gray-700">
                           0.25
                         </p>
                       </li>
                       <li
-                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                         id="option-1"
                         role="option"
                         tabindex="-1"
                         @click="hundleSpeedSelect(0.5)"
                       >
-                        <p class="text-sm font-medium text-gray-700 truncate">
+                        <p class="truncate text-sm font-medium text-gray-700">
                           0.5
                         </p>
                       </li>
                       <li
-                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                         id="option-1"
                         role="option"
                         tabindex="-1"
                         @click="hundleSpeedSelect(0.75)"
                       >
-                        <p class="text-sm font-medium text-gray-700 truncate">
+                        <p class="truncate text-sm font-medium text-gray-700">
                           0.75
                         </p>
                       </li>
                       <li
-                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                         id="option-1"
                         role="option"
                         tabindex="-1"
                         @click="hundleSpeedSelect(1)"
                       >
-                        <p class="text-sm font-medium text-gray-700 truncate">
+                        <p class="truncate text-sm font-medium text-gray-700">
                           標準
                         </p>
                       </li>
                       <li
-                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                         id="option-1"
                         role="option"
                         tabindex="-1"
                         @click="hundleSpeedSelect(1.25)"
                       >
-                        <p class="text-sm font-medium text-gray-700 truncate">
+                        <p class="truncate text-sm font-medium text-gray-700">
                           1.25
                         </p>
                       </li>
                       <li
-                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                         id="option-1"
                         role="option"
                         tabindex="-1"
                         @click="hundleSpeedSelect(1.5)"
                       >
-                        <p class="text-sm font-medium text-gray-700 truncate">
+                        <p class="truncate text-sm font-medium text-gray-700">
                           1.5
                         </p>
                       </li>
                       <li
-                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                         id="option-1"
                         role="option"
                         tabindex="-1"
                         @click="hundleSpeedSelect(1.75)"
                       >
-                        <p class="text-sm font-medium text-gray-700 truncate">
+                        <p class="truncate text-sm font-medium text-gray-700">
                           1.75
                         </p>
                       </li>
 
                       <li
-                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                         id="option-1"
                         role="option"
                         tabindex="-1"
                         @click="hundleSpeedSelect(2)"
                       >
-                        <p class="text-sm font-medium text-gray-700 truncate">
+                        <p class="truncate text-sm font-medium text-gray-700">
                           2
                         </p>
                       </li>

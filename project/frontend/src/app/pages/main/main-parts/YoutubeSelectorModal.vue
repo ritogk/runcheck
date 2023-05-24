@@ -156,7 +156,7 @@ if (code) callbackYoutubeOauth(code)
                       このボタンをクリックすると、あなたのYouTube動画一覧が表示されます。
                     </p>
                     <div
-                      class="group bg-red-500 text-gray-100 hover:bg-red-400 shadow text-sm font-bold py-2 px-2 rounded flex justify-start items-center cursor-pointer w-64 mt-2 mx-auto"
+                      class="group mx-auto mt-2 flex w-64 cursor-pointer items-center justify-start rounded bg-red-500 px-2 py-2 text-sm font-bold text-gray-100 shadow hover:bg-red-400"
                       @click="redirectToAuthorize"
                     >
                       <svg
@@ -204,11 +204,11 @@ if (code) callbackYoutubeOauth(code)
                         </g>
                       </svg>
                       <span
-                        class="border-l border-red-700 group-hover:border-red-600 h-6 w-1 block mr-1 ml-2"
+                        class="ml-2 mr-1 block h-6 w-1 border-l border-red-700 group-hover:border-red-600"
                       ></span>
                       <span class="pl-3">YouTube 動画一覧を取得</span>
                     </div>
-                    <p class="text-gray-500 text-center text-[12px] mt-2">
+                    <p class="mt-2 text-center text-[12px] text-gray-500">
                       <a
                         class="underline"
                         @click="hundleTermsClick()"
@@ -262,7 +262,7 @@ if (code) callbackYoutubeOauth(code)
                         <li
                           v-for="i in 5"
                           :key="i"
-                          class="animate-pulse group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                          class="group flex animate-pulse cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                           id="option-1"
                           role="option"
                           tabindex="-1"
@@ -271,7 +271,7 @@ if (code) callbackYoutubeOauth(code)
                             class="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-gray-200"
                           >
                             <svg
-                              class="text-white w-[24px] h-[24px]"
+                              class="h-[24px] w-[24px] text-white"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -287,18 +287,18 @@ if (code) callbackYoutubeOauth(code)
                           <div class="ml-4 flex-auto">
                             <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
                             <div
-                              class="h-2.5 bg-gray-200 rounded-fullw-4/5 mb-4"
+                              class="rounded-fullw-4/5 mb-4 h-2.5 bg-gray-200"
                             ></div>
                             <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
                             <div
-                              class="h-2.5 bg-gray-200 rounded-full w-3/5"
+                              class="h-2.5 w-3/5 rounded-full bg-gray-200"
                             ></div>
                           </div>
                         </li>
                       </div>
                       <!-- ローディングの背景 -->
                       <div
-                        class="absolute top-0 left-0 w-full h-full bg-gray-50 opacity-10 rounded-lg backdrop-blur-lg brightness-50"
+                        class="absolute left-0 top-0 h-full w-full rounded-lg bg-gray-50 opacity-10 brightness-50 backdrop-blur-lg"
                         v-if="
                           youtubeListState.subscription.isReading.value &&
                           filteredVideos.length === 0
@@ -306,7 +306,7 @@ if (code) callbackYoutubeOauth(code)
                       ></div>
                       <!-- ローディングのスピナー -->
                       <div
-                        class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2"
+                        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
                         v-if="
                           youtubeListState.subscription.isReading.value &&
                           filteredVideos.length === 0
@@ -314,7 +314,7 @@ if (code) callbackYoutubeOauth(code)
                       >
                         <svg
                           aria-hidden="true"
-                          class="w-12 h-12 mr-2 text-slate-300 animate-spin fill-slate-500"
+                          class="mr-2 h-12 w-12 animate-spin fill-slate-500 text-slate-300"
                           viewBox="0 0 100 101"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
@@ -342,30 +342,30 @@ if (code) callbackYoutubeOauth(code)
                       <li
                         v-for="video in filteredVideos"
                         :key="video.url"
-                        class="group flex cursor-default select-none rounded-xl p-3 border-b border-b-gray-100 focus:bg-gray-100"
+                        class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
                         id="option-1"
                         role="option"
                         tabindex="-1"
                         @click="selectVideo(video.url)"
                       >
                         <div
-                          class="flex w-[40px] h-[40px]flex-shrink-0 items-center justify-center"
+                          class="h-[40px]flex-shrink-0 flex w-[40px] items-center justify-center"
                         >
                           <img
                             :src="video.thumbnailUrl"
                             alt="サムネイル"
-                            class="rounded-lg w-[40px] h-[40px]"
+                            class="h-[40px] w-[40px] rounded-lg"
                           />
                         </div>
                         <div
-                          class="ml-4 flex flex-col flex-1 w-[calc(100%_-_40px_-_1rem)]"
+                          class="ml-4 flex w-[calc(100%_-_40px_-_1rem)] flex-1 flex-col"
                         >
                           <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
-                          <p class="text-sm font-medium text-gray-700 truncate">
+                          <p class="truncate text-sm font-medium text-gray-700">
                             {{ video.title }}
                           </p>
                           <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
-                          <p class="text-sm text-gray-500 truncate">
+                          <p class="truncate text-sm text-gray-500">
                             {{ video.description }}
                           </p>
                         </div>
@@ -383,7 +383,7 @@ if (code) callbackYoutubeOauth(code)
                       filteredVideos.length === 0
                     "
                   >
-                    <div class="px-3 py-3 text-center text-sm sm:px-14 mb-2">
+                    <div class="mb-2 px-3 py-3 text-center text-sm sm:px-14">
                       <svg
                         class="mx-auto h-6 w-6 text-gray-400"
                         fill="none"

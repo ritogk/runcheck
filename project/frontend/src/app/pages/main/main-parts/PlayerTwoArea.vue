@@ -107,11 +107,11 @@ const hundleYoutubeSearch = () => {
       v-show="playerTwoManager.subscription.videoType.value === VideoType.NONE"
     >
       <div
-        class="w-full bg-gray-300 relative"
+        class="relative w-full bg-gray-300"
         :style="{ height: calcVideoHeight }"
       >
         <VideoCameraIcon
-          class="h-2/5 w-2/5 text-gray-400 absolute top-0 right-0 bottom-0 left-0 m-auto"
+          class="absolute bottom-0 left-0 right-0 top-0 m-auto h-2/5 w-2/5 text-gray-400"
           aria-hidden="true"
         />
       </div>
@@ -152,7 +152,7 @@ const hundleYoutubeSearch = () => {
           <div class="mt-2 flex gap-2 rounded-md">
             <!-- Youtube -->
             <div
-              class="flex w-10/12 relative flex-grow items-stretch focus-within:z-10 shadow-sm"
+              class="relative flex w-10/12 flex-grow items-stretch shadow-sm focus-within:z-10"
             >
               <label
                 for="name"
@@ -172,7 +172,7 @@ const hundleYoutubeSearch = () => {
               <!-- 検索 -->
               <button
                 type="button"
-                class="relative w-3/12 -ml-px inline-flex items-center gap-x-1.5 rounded-r-md text-sm font-semibold bg-white text-gray-900 ring-1 ring-inset ring-slate-300 hover:bg-gray-100"
+                class="relative -ml-px inline-flex w-3/12 items-center gap-x-1.5 rounded-r-md bg-white text-sm font-semibold text-gray-900 ring-1 ring-inset ring-slate-300 hover:bg-gray-100"
                 @click="hundleYoutubeSearch()"
               >
                 <svg
@@ -182,7 +182,7 @@ const hundleYoutubeSearch = () => {
                   stroke-width="2"
                   width="20px"
                   height="20px"
-                  class="stroke-gray-500 mx-auto"
+                  class="mx-auto stroke-gray-500"
                 >
                   <path
                     stroke-linecap="round"
@@ -194,7 +194,7 @@ const hundleYoutubeSearch = () => {
             </div>
             <!-- 端末動画選択 -->
             <button
-              class="rounded-md shadow-sm bg-white w-2/12 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
+              class="w-2/12 rounded-md bg-white text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
               @click="hundleLocalVideoSelect()"
             >
               <div class="flex items-center justify-center">
@@ -224,9 +224,9 @@ const hundleYoutubeSearch = () => {
       <!-- adjustment-->
       <div>
         <!-- 進む -->
-        <div class="mt-2 flex gap-2 justify-between">
+        <div class="mt-2 flex justify-between gap-2">
           <button
-            class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             @click="hundleVideoSeek(1)"
           >
             <div class="flex items-center justify-center">
@@ -238,7 +238,7 @@ const hundleYoutubeSearch = () => {
             </div>
           </button>
           <button
-            class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             @click="hundleVideoSeek(0.5)"
           >
             <div class="flex items-center justify-center">
@@ -250,7 +250,7 @@ const hundleYoutubeSearch = () => {
             </div>
           </button>
           <button
-            class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             @click="hundleVideoSeek(0.1)"
           >
             <div class="flex items-center justify-center">
@@ -262,7 +262,7 @@ const hundleYoutubeSearch = () => {
             </div>
           </button>
           <button
-            class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             @click="hundleVideoSeek(0.05)"
           >
             <div class="flex items-center justify-center">
@@ -275,9 +275,9 @@ const hundleYoutubeSearch = () => {
           </button>
         </div>
         <!-- 戻る -->
-        <div class="mt-2 flex gap-2 justify-between">
+        <div class="mt-2 flex justify-between gap-2">
           <button
-            class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             @click="hundleVideoSeek(-1)"
           >
             <div class="flex items-center justify-center">
@@ -289,7 +289,7 @@ const hundleYoutubeSearch = () => {
             </div>
           </button>
           <button
-            class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             @click="hundleVideoSeek(-0.5)"
           >
             <div class="flex items-center justify-center">
@@ -301,7 +301,7 @@ const hundleYoutubeSearch = () => {
             </div>
           </button>
           <button
-            class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             @click="hundleVideoSeek(-0.1)"
           >
             <div class="flex items-center justify-center">
@@ -313,7 +313,7 @@ const hundleYoutubeSearch = () => {
             </div>
           </button>
           <button
-            class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+            class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
             @click="hundleVideoSeek(-0.05)"
           >
             <div class="flex items-center justify-center">

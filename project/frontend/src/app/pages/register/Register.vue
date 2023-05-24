@@ -111,7 +111,7 @@ const onSubmit = async () => {
               class="block text-sm font-medium leading-6 text-gray-900"
               required
               >ハンドルネーム<span
-                class="text-red-400 text-lg leading-none"
+                class="text-lg leading-none text-red-400"
                 title="このフィールドは必須です"
                 >*</span
               ></label
@@ -134,7 +134,7 @@ const onSubmit = async () => {
               for="car-type"
               class="block text-sm font-medium leading-6 text-gray-900"
               >車種<span
-                class="text-red-400 text-lg leading-none"
+                class="text-lg leading-none text-red-400"
                 title="このフィールドは必須です"
                 >*</span
               ></label
@@ -157,7 +157,7 @@ const onSubmit = async () => {
               for="email"
               class="block text-sm font-medium leading-6 text-gray-900"
               >メールアドレス<span
-                class="text-red-400 text-lg leading-none"
+                class="text-lg leading-none text-red-400"
                 title="このフィールドは必須です"
                 >*</span
               ></label
@@ -180,14 +180,14 @@ const onSubmit = async () => {
               for="password"
               class="block text-sm font-medium leading-6 text-gray-900"
               >パスワード<span
-                class="text-red-400 text-lg leading-none"
+                class="text-lg leading-none text-red-400"
                 title="このフィールドは必須です"
                 >*</span
               ></label
             >
             <div class="mt-2">
               <div class="flex gap-2">
-                <div class="relative mt-2 rounded-md shadow-sm w-1/2">
+                <div class="relative mt-2 w-1/2 rounded-md shadow-sm">
                   <input
                     id="password"
                     name="password"
@@ -217,7 +217,7 @@ const onSubmit = async () => {
                     </svg>
                   </div>
                 </div>
-                <div class="relative mt-2 rounded-md shadow-sm w-1/2">
+                <div class="relative mt-2 w-1/2 rounded-md shadow-sm">
                   <input
                     id="passwordConfirm"
                     name="passwordConfirm"
@@ -254,7 +254,7 @@ const onSubmit = async () => {
           <div>
             <button
               type="button"
-              class="flex w-full justify-center rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 mt-7"
+              class="mt-7 flex w-full justify-center rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
               @click="onSubmit()"
             >
               新規登録

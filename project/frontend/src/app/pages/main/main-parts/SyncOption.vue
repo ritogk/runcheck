@@ -112,7 +112,7 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
       </button>
     </span>
 
-    <span class="isolate inline-flex rounded-md shadow-sm ml-2">
+    <span class="isolate ml-2 inline-flex rounded-md shadow-sm">
       <button
         type="button"
         class="relative inline-flex items-center gap-x-1.5 rounded-md bg-[#16A2F3] px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-[#1697f3] hover:bg-[#45b7f7] focus:z-10 disabled:opacity-50"

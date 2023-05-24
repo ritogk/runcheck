@@ -94,7 +94,7 @@ const onSubmit = async () => {
                 </button>
               </div>
               <div class="">
-                <div class="flex min-h-full flex-col justify-center py-2 px-2">
+                <div class="flex min-h-full flex-col justify-center px-2 py-2">
                   <div class="sm:mx-auto sm:w-full sm:max-w-md">
                     <h2
                       class="text-center text-3xl font-bold tracking-tight text-gray-900"
@@ -104,7 +104,7 @@ const onSubmit = async () => {
                   </div>
 
                   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                    <div class="bg-white px-4 py-8 shadow rounded-lg sm:px-10">
+                    <div class="rounded-lg bg-white px-4 py-8 shadow sm:px-10">
                       <form class="space-y-6" @submit.prevent="onSubmit()">
                         <div>
                           <label

@@ -46,7 +46,7 @@ const hundleSaveClick = () => {
     <div>
       <div class="flex gap-2">
         <button
-          class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
           @click="hundleOpenClick"
         >
           <div class="flex items-center justify-center gap-1">
@@ -70,7 +70,7 @@ const hundleSaveClick = () => {
         </button>
 
         <button
-          class="rounded-md shadow-sm bg-white w-1/4 px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
           @click="hundleSaveClick()"
         >
           <div class="flex items-center justify-center gap-1">

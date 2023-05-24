@@ -169,7 +169,7 @@ const sidebarOpen = ref(false)
                   leave-to="opacity-0"
                 >
                   <div
-                    class="flex w-16 justify-center pt-5 items-start"
+                    class="flex w-16 items-start justify-center pt-5"
                     @click="sidebarOpen = false"
                   >
                     <button type="button" class="-m-2.5 p-2.5">
@@ -186,12 +186,12 @@ const sidebarOpen = ref(false)
                   class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10"
                 >
                   <nav class="flex flex-1 flex-col">
-                    <ul role="list" class="flex flex-1 flex-col gap-y-7 mt-7">
+                    <ul role="list" class="mt-7 flex flex-1 flex-col gap-y-7">
                       <li>
                         <ul role="list" class="-mx-2 space-y-1">
                           <li v-if="useUserState.subscription.logined.value">
                             <a
-                              class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer"
+                              class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                               @click="hundleHomeClick()"
                             >
                               <component
@@ -210,8 +210,8 @@ const sidebarOpen = ref(false)
                               :class="[
                                 item.current
                                   ? 'bg-gray-800 text-white'
-                                  : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+                                  : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
                               ]"
                               @click="item.action"
                             >
@@ -242,7 +242,7 @@ const sidebarOpen = ref(false)
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6">
         <div
-          class="text-sm font-semibold leading-6 text-slate-100 cursor-pointer mt-5"
+          class="mt-5 cursor-pointer text-sm font-semibold leading-6 text-slate-100"
           @click="hundleHeaderClick()"
         >
           <div>
@@ -258,7 +258,7 @@ const sidebarOpen = ref(false)
               <ul role="list" class="-mx-2 space-y-1">
                 <li v-if="useUserState.subscription.logined.value">
                   <a
-                    class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer"
+                    class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                     @click="hundleHomeClick()"
                   >
                     <component
@@ -276,8 +276,8 @@ const sidebarOpen = ref(false)
                     :class="[
                       item.current
                         ? 'bg-gray-800 text-white'
-                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+                        : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                      'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
                     ]"
                     @click="item.action"
                   >
@@ -300,7 +300,7 @@ const sidebarOpen = ref(false)
       class="z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-3 shadow-sm sm:px-6 lg:hidden"
     >
       <div
-        class="flex-1 text-sm font-semibold leading-6 text-slate-100 cursor-pointer"
+        class="flex-1 cursor-pointer text-sm font-semibold leading-6 text-slate-100"
         @click="hundleHeaderClick()"
       >
         <div>
@@ -322,7 +322,7 @@ const sidebarOpen = ref(false)
 
     <main class="lg:pl-72">
       <AlretArea></AlretArea>
-      <div class="sm:px-1 lg:px-8 bg-gray-100">
+      <div class="bg-gray-100 sm:px-1 lg:px-8">
         <!-- Your content -->
         <router-view></router-view>
       </div>

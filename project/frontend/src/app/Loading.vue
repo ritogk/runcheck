@@ -2,12 +2,12 @@
 
 <template>
   <div
-    class="fixed top-0 left-0 w-full h-full bg-gray-800 opacity-90 backdrop-blur-lg brightness-50 z-40"
+    class="fixed left-0 top-0 z-40 h-full w-full bg-gray-800 opacity-90 brightness-50 backdrop-blur-lg"
   ></div>
-  <div class="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-40">
+  <div class="fixed left-1/2 top-1/2 z-40 -translate-x-1/2 -translate-y-1/2">
     <svg
       aria-hidden="true"
-      class="w-28 h-28 mr-2 text-gray-700 animate-spin fill-slate-500"
+      class="mr-2 h-28 w-28 animate-spin fill-slate-500 text-gray-700"
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

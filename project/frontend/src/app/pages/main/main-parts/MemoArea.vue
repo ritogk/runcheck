@@ -23,7 +23,7 @@ const userState = inject(UseUserStateKey) as UseUserStateType
     "
   >
     <!-- タイトル、詳細 -->
-    <div class="border border-gray-300 rounded-md bg-white px-4 py-3 sm:px-4">
+    <div class="rounded-md border border-gray-300 bg-white px-4 py-3 sm:px-4">
       <div
         class="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap"
       >

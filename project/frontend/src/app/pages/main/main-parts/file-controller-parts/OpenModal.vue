@@ -102,7 +102,7 @@ const hundleOpen = () => {
                 </button>
               </div>
               <div class="">
-                <div class="flex min-h-full flex-col justify-center py-2 px-2">
+                <div class="flex min-h-full flex-col justify-center px-2 py-2">
                   <div class="sm:mx-auto sm:w-full sm:max-w-md">
                     <h2
                       class="text-center text-3xl font-bold tracking-tight text-gray-900"
@@ -111,7 +111,7 @@ const hundleOpen = () => {
                     </h2>
                   </div>
                   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                    <div class="bg-white px-4 py-8 shadow rounded-lg sm:px-10">
+                    <div class="rounded-lg bg-white px-4 py-8 shadow sm:px-10">
                       <Listbox as="div" v-model="selected">
                         <ListboxLabel
                           class="block text-sm font-medium leading-6 text-gray-900"
