@@ -4,7 +4,6 @@ import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer"
 export class LocalVideoPlayer implements IVideoPlayer {
   private _videoElement: HTMLVideoElement
   private _status = ref(Status.WAITING)
-  public readonly VIDEO_TYPE = VideoType.LOCAL
 
   constructor(videoElement: HTMLVideoElement, objectURL: string) {
     videoElement.src = objectURL
@@ -85,6 +84,9 @@ export class LocalVideoPlayer implements IVideoPlayer {
   public subscription = {
     status: computed(() => {
       return this._status.value
+    }),
+    videoType: computed(() => {
+      return VideoType.LOCAL
     }),
   }
 }

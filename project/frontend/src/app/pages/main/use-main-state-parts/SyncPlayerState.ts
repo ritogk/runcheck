@@ -1,9 +1,10 @@
-import { ref, computed, ComputedRef, watch } from "vue"
+import { ref, shallowRef, ShallowRef, computed, ComputedRef, watch } from "vue"
 import {
+  IVideoPlayer,
   Status,
   VideoType,
 } from "@/app/pages/main/main-parts/player-area-parts/IVideoPlayer"
-import { PlayerManager } from "@/app/pages/main/main-parts/player-area-parts/PlayerManager"
+import { DummyPlayer } from "@/app/pages/main/main-parts/player-area-parts/DummyPlayer"
 import {
   ComparisonsApi,
   VideoType as ApiVideoType,
@@ -12,8 +13,8 @@ import { extractYoutubeId } from "@/core/extractYoutubeId"
 import { apiConfig } from "@/core/openapi"
 
 export interface ISyncPlayerStateType {
-  playerOneManager: PlayerManager
-  playerTwoManager: PlayerManager
+  playerOneManager: ShallowRef<IVideoPlayer>
+  playerTwoManager: ShallowRef<IVideoPlayer>
   switchPlay(): void
   switchMute(): void
   switchRepeat(): void
@@ -45,9 +46,9 @@ export interface ISyncPlayerStateType {
 }
 
 export class SyncPlayerState implements ISyncPlayerStateType {
-  private _playerOneManager: PlayerManager
+  private _playerOneManager = shallowRef<IVideoPlayer>(new DummyPlayer())
   private _playerOneStartPosition = 0
-  private _playerTwoManager: PlayerManager
+  private _playerTwoManager = shallowRef<IVideoPlayer>(new DummyPlayer())
   private _playerTwoStartPosition = 0
   private _syncDuration = ref(0)
   private _syncProgressRate = ref(0)
@@ -60,33 +61,30 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   private _comparisonsApi = new ComparisonsApi(apiConfig)
 
   constructor() {
-    this._playerOneManager = new PlayerManager()
-    this._playerTwoManager = new PlayerManager()
-
     watch(this._playing, (value) => {
       if (value) {
-        this._playerOneManager.subscription.player.value.play()
-        this._playerTwoManager.subscription.player.value.play()
+        this._playerOneManager.value.play()
+        this._playerTwoManager.value.play()
       } else {
-        this._playerOneManager.subscription.player.value.stop()
-        this._playerTwoManager.subscription.player.value.stop()
+        this._playerOneManager.value.stop()
+        this._playerTwoManager.value.stop()
       }
     })
 
     watch(this._muted, (value) => {
       if (value) {
-        this._playerOneManager.subscription.player.value.mute()
-        this._playerTwoManager.subscription.player.value.mute()
+        this._playerOneManager.value.mute()
+        this._playerTwoManager.value.mute()
       } else {
-        this._playerOneManager.subscription.player.value.unMute()
-        this._playerTwoManager.subscription.player.value.unMute()
+        this._playerOneManager.value.unMute()
+        this._playerTwoManager.value.unMute()
       }
     })
 
     watch(this._speed, (value) => {
       this.syncProcessing = true
-      this._playerOneManager.subscription.player.value.adjustSpeed(value)
-      this._playerTwoManager.subscription.player.value.adjustSpeed(value)
+      this._playerOneManager.value.adjustSpeed(value)
+      this._playerTwoManager.value.adjustSpeed(value)
       this.syncProcessing = false
     })
   }
@@ -130,12 +128,8 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   reload = async () => {
     this._muted.value = true
     this._playing.value = false
-    await this._playerOneManager.subscription.player.value.seekTo(
-      this._playerOneStartPosition
-    )
-    await this._playerTwoManager.subscription.player.value.seekTo(
-      this._playerTwoStartPosition
-    )
+    await this._playerOneManager.value.seekTo(this._playerOneStartPosition)
+    await this._playerTwoManager.value.seekTo(this._playerTwoStartPosition)
   }
 
   private syncProcessing = false // 処理中フラグ
@@ -144,8 +138,8 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._muted.value = true
     this._repeated.value = true
     const [playerOneStartPosition, playerTwoStartPosition] = await Promise.all([
-      this._playerOneManager.subscription.player.value.getCurrentTime(),
-      this._playerTwoManager.subscription.player.value.getCurrentTime(),
+      this._playerOneManager.value.getCurrentTime(),
+      this._playerTwoManager.value.getCurrentTime(),
     ])
     this._playerOneStartPosition =
       Math.floor(playerOneStartPosition * 100) / 100
@@ -153,10 +147,8 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       Math.floor(playerTwoStartPosition * 100) / 100
 
     // 動画1と動画2で同期した時間の範囲を算出
-    const playerOneDuration =
-      await this._playerOneManager.subscription.player.value.getDuration()
-    const playerTwoDuration =
-      await this._playerTwoManager.subscription.player.value.getDuration()
+    const playerOneDuration = await this._playerOneManager.value.getDuration()
+    const playerTwoDuration = await this._playerTwoManager.value.getDuration()
     const playerOneRange = playerOneDuration - this._playerOneStartPosition
     const playerTwoRange = playerTwoDuration - this._playerTwoStartPosition
     playerOneRange > playerTwoRange
@@ -176,8 +168,8 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       const st = new Date().getTime()
       let [playerOneCurrentPosition, playerTwoCurrentPosition] =
         await Promise.all([
-          this._playerOneManager.subscription.player.value.getCurrentTime(),
-          this._playerTwoManager.subscription.player.value.getCurrentTime(),
+          this._playerOneManager.value.getCurrentTime(),
+          this._playerTwoManager.value.getCurrentTime(),
         ])
       playerOneCurrentPosition =
         Math.floor(playerOneCurrentPosition * 100) / 100
@@ -185,10 +177,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         Math.floor(playerTwoCurrentPosition * 100) / 100
       // 動画が再生しきっていてリピートフラグが立っている場合はリロード
       if (
-        (this._playerOneManager.subscription.player.value.subscription.status
-          .value === Status.ENDED ||
-          this._playerTwoManager.subscription.player.value.subscription.status
-            .value === Status.ENDED) &&
+        (this._playerOneManager.value.subscription.status.value ===
+          Status.ENDED ||
+          this._playerTwoManager.value.subscription.status.value ===
+            Status.ENDED) &&
         this._repeated.value
       ) {
         console.log(
@@ -225,19 +217,15 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       if (diff >= 0.1) {
         console.log("0.1秒以上ずれていたら同期させる")
         if (videoOnePosition > videoTwoPosition) {
-          this._playerOneManager.subscription.player.value.seekTo(
+          this._playerOneManager.value.seekTo(
             playerOneCurrentPosition + diff * -1
           )
           // 片方の動画のみをシークすると「シークのタイムラグ」と「再生され続けている時間」をあわせて0.4秒くらいずれてしまうので意味のないシークを挟む
           // なぜかcurrentPositionより前にシークする時がある。
-          this._playerTwoManager.subscription.player.value.seekTo(
-            playerTwoCurrentPosition
-          )
+          this._playerTwoManager.value.seekTo(playerTwoCurrentPosition)
         } else {
-          this._playerOneManager.subscription.player.value.seekTo(
-            playerOneCurrentPosition
-          )
-          this._playerTwoManager.subscription.player.value.seekTo(
+          this._playerOneManager.value.seekTo(playerOneCurrentPosition)
+          this._playerTwoManager.value.seekTo(
             playerTwoCurrentPosition + diff * -1
           )
         }
@@ -271,11 +259,11 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     category?: string
   ): Promise<{ id: number }> => {
     const video1VideoType =
-      this.playerOneManager.subscription.videoType.value === VideoType.YOUTUBE
+      this.playerOneManager.value.subscription.videoType.value ===
+      VideoType.YOUTUBE
         ? ApiVideoType.YOUTUBE
         : ApiVideoType.LOCAL
-    const video1Url =
-      await this.playerOneManager.subscription.player.value.getPath()
+    const video1Url = await this.playerOneManager.value.getPath()
     const video1EmbedUrl =
       video1VideoType === ApiVideoType.YOUTUBE
         ? `https://www.youtube.com/embed/${extractYoutubeId(video1Url)}`
@@ -283,11 +271,11 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     const video1TimeSt = this._playerOneStartPosition
 
     const video2VideoType =
-      this.playerTwoManager.subscription.videoType.value === VideoType.YOUTUBE
+      this.playerTwoManager.value.subscription.videoType.value ===
+      VideoType.YOUTUBE
         ? ApiVideoType.YOUTUBE
         : ApiVideoType.LOCAL
-    const video2Url =
-      await this.playerTwoManager.subscription.player.value.getPath()
+    const video2Url = await this.playerTwoManager.value.getPath()
     const video2EmbedUrl =
       video2VideoType === ApiVideoType.YOUTUBE
         ? `https://www.youtube.com/embed/${extractYoutubeId(video2Url)}`
@@ -321,10 +309,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._syncProgressRate.value = progressRate
     this._muted.value = true
     // シーク
-    this._playerOneManager.subscription.player.value.seekTo(
+    this._playerOneManager.value.seekTo(
       this._playerOneStartPosition + this._syncDuration.value * progressRate
     )
-    this._playerTwoManager.subscription.player.value.seekTo(
+    this._playerTwoManager.value.seekTo(
       this._playerTwoStartPosition + this._syncDuration.value * progressRate
     )
   }

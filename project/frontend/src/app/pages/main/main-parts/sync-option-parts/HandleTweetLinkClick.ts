@@ -42,8 +42,8 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
       await playerTwo.stop()
       await playerOne.seekTo(response.video1TimeSt)
       await playerTwo.seekTo(response.video2TimeSt)
-      useMainState.syncPlayer.playerOneManager.changePlayer(playerOne)
-      useMainState.syncPlayer.playerTwoManager.changePlayer(playerTwo)
+      useMainState.syncPlayer.playerOneManager.value = playerOne
+      useMainState.syncPlayer.playerTwoManager.value = playerTwo
       // seekToをした後に数秒待機しないとcurrentTimeが古い値になる。
       setTimeout(async () => {
         useMainState.syncPlayer.runSync()

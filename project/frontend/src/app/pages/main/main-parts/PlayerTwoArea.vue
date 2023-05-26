@@ -46,28 +46,27 @@ const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0]
   const objectURL = URL.createObjectURL(file)
 
-  playerTwoManager.subscription.player.value.destory()
+  playerTwoManager.value.destory()
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
   )
   localVideoPlayer.load()
-  playerTwoManager.changePlayer(localVideoPlayer)
+  playerTwoManager.value = localVideoPlayer
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
   operationLog.send(operationLog.OPERATION_CD.PLAYER_TWO_URL_ENTER)
-  playerTwoManager.subscription.player.value.destory()
+  playerTwoManager.value.destory()
   const youtubeId = youtubeUrl.substring(youtubeUrl.length - 11)
   const player = new YouTubePlayer("youtube-video-two", youtubeId)
   player.load()
-  playerTwoManager.changePlayer(player)
+  playerTwoManager.value = player
 }
 
 const hundleVideoSeek = async (seconds: number) => {
-  const currentPosition =
-    await playerTwoManager.subscription.player.value.getCurrentTime()
-  useMainState.syncPlayer.playerTwoManager.subscription.player.value.seekTo(
+  const currentPosition = await playerTwoManager.value.getCurrentTime()
+  useMainState.syncPlayer.playerTwoManager.value.seekTo(
     currentPosition + seconds
   )
 }

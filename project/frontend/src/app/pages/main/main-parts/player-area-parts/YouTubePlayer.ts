@@ -8,7 +8,6 @@ export class YouTubePlayer implements IVideoPlayer {
   private _player: YouTubePlayerType
   private _youtubeId: string
   private _status = ref(Status.WAITING)
-  public readonly VIDEO_TYPE = VideoType.YOUTUBE
 
   constructor(elementId: string, youtubeId: string) {
     this._player = YPlayer(elementId, { playerVars: { controls: 0 } })
@@ -90,6 +89,9 @@ export class YouTubePlayer implements IVideoPlayer {
   public subscription = {
     status: computed(() => {
       return this._status.value
+    }),
+    videoType: computed(() => {
+      return VideoType.YOUTUBE
     }),
   }
 }

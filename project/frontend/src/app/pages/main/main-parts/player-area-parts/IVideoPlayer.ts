@@ -1,6 +1,5 @@
 import { ComputedRef } from "vue"
 export interface IVideoPlayer {
-  VIDEO_TYPE: VideoType
   load(): Promise<void>
   play(): Promise<void>
   stop(): Promise<void>
@@ -16,6 +15,7 @@ export interface IVideoPlayer {
   destory(): Promise<void>
   subscription: {
     status: ComputedRef<Status>
+    videoType: ComputedRef<VideoType>
   }
 }
 

@@ -29,10 +29,10 @@ const hundleVideoStopSyncClick = () => {
 const hundleTweetClick = async () => {
   operationLog.send(operationLog.OPERATION_CD.SYNC_SHARE_CLICK)
   if (
-    useMainState.syncPlayer.playerOneManager.subscription.videoType.value !==
-      VideoType.YOUTUBE ||
-    useMainState.syncPlayer.playerTwoManager.subscription.videoType.value !=
-      VideoType.YOUTUBE
+    useMainState.syncPlayer.playerOneManager.value.subscription.videoType
+      .value !== VideoType.YOUTUBE ||
+    useMainState.syncPlayer.playerTwoManager.value.subscription.videoType
+      .value != VideoType.YOUTUBE
   ) {
     alert("共有はYouTube同士の組み合わせのみ行えます。")
     return

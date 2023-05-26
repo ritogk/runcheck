@@ -2,8 +2,6 @@ import { computed } from "vue"
 import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer"
 
 export class DummyPlayer implements IVideoPlayer {
-  public readonly VIDEO_TYPE = VideoType.NONE
-
   load = async () => {
     return Promise.resolve()
   }
@@ -63,6 +61,9 @@ export class DummyPlayer implements IVideoPlayer {
   subscription = {
     status: computed(() => {
       return Status.WAITING
+    }),
+    videoType: computed(() => {
+      return VideoType.NONE
     }),
   }
 }
