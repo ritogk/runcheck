@@ -61,8 +61,8 @@ const redirectToAuthorize = async () => {
   location.href = response.redirectUrl
 }
 
-const playerOneManager = useMainState.syncPlayer.playerOneManager
-const playerTwoManager = useMainState.syncPlayer.playerTwoManager
+const playerOne = useMainState.syncPlayer.playerOne
+const playerTwo = useMainState.syncPlayer.playerTwo
 
 const selectVideo = async (url: string) => {
   operationLog.send(operationLog.OPERATION_CD.YOUTUBE_SELECT)
@@ -71,16 +71,16 @@ const selectVideo = async (url: string) => {
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
   switch (playerNo) {
     case PlayerNo.ONE:
-      playerOneManager.value.destory()
-      const playerOne = new YouTubePlayer("youtube-video-one", youtubeId)
-      await playerOne.load()
-      playerOneManager.value = playerOne
+      playerOne.value.destory()
+      const playerOneTemp = new YouTubePlayer("youtube-video-one", youtubeId)
+      await playerOneTemp.load()
+      playerOne.value = playerOneTemp
       break
     case PlayerNo.TWO:
-      playerTwoManager.value.destory()
-      const playerTwo = new YouTubePlayer("youtube-video-two", youtubeId)
-      await playerTwo.load()
-      playerTwoManager.value = playerTwo
+      playerTwo.value.destory()
+      const playerTwoTemp = new YouTubePlayer("youtube-video-two", youtubeId)
+      await playerTwoTemp.load()
+      playerTwo.value = playerTwoTemp
       break
   }
   useMainState.youtubeModal.close()

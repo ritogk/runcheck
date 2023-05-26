@@ -40,35 +40,33 @@ const hundleLocalVideoSelect = () => {
   elements.localVideo.file.value?.click()
 }
 
-const playerTwoManager = useMainState.syncPlayer.playerTwoManager
+const playerTwo = useMainState.syncPlayer.playerTwo
 
 const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0]
   const objectURL = URL.createObjectURL(file)
 
-  playerTwoManager.value.destory()
+  playerTwo.value.destory()
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
   )
   localVideoPlayer.load()
-  playerTwoManager.value = localVideoPlayer
+  playerTwo.value = localVideoPlayer
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
   operationLog.send(operationLog.OPERATION_CD.PLAYER_TWO_URL_ENTER)
-  playerTwoManager.value.destory()
+  playerTwo.value.destory()
   const youtubeId = youtubeUrl.substring(youtubeUrl.length - 11)
   const player = new YouTubePlayer("youtube-video-two", youtubeId)
   player.load()
-  playerTwoManager.value = player
+  playerTwo.value = player
 }
 
 const hundleVideoSeek = async (seconds: number) => {
-  const currentPosition = await playerTwoManager.value.getCurrentTime()
-  useMainState.syncPlayer.playerTwoManager.value.seekTo(
-    currentPosition + seconds
-  )
+  const currentPosition = await playerTwo.value.getCurrentTime()
+  useMainState.syncPlayer.playerTwo.value.seekTo(currentPosition + seconds)
 }
 
 const hundleYoutubeSearch = () => {
@@ -102,9 +100,7 @@ const hundleYoutubeSearch = () => {
 <template>
   <!-- Video -->
   <div :ref="elements.videoArea">
-    <div
-      v-show="playerTwoManager.subscription.videoType.value === VideoType.NONE"
-    >
+    <div v-show="playerTwo.subscription.videoType.value === VideoType.NONE">
       <div
         class="relative w-full bg-gray-300"
         :style="{ height: calcVideoHeight }"
@@ -115,20 +111,14 @@ const hundleYoutubeSearch = () => {
         />
       </div>
     </div>
-    <div
-      v-show="
-        playerTwoManager.subscription.videoType.value === VideoType.YOUTUBE
-      "
-    >
+    <div v-show="playerTwo.subscription.videoType.value === VideoType.YOUTUBE">
       <div
         id="youtube-video-two"
         class="w-full"
         :style="{ height: calcVideoHeight }"
       ></div>
     </div>
-    <div
-      v-show="playerTwoManager.subscription.videoType.value === VideoType.LOCAL"
-    >
+    <div v-show="playerTwo.subscription.videoType.value === VideoType.LOCAL">
       <video
         :ref="elements.localVideo.video"
         controls

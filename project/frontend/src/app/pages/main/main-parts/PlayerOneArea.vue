@@ -40,35 +40,33 @@ const hundleLocalVideoSelect = () => {
   elements.localVideo.file.value?.click()
 }
 
-const playerOneManager = useMainState.syncPlayer.playerOneManager
+const playerOne = useMainState.syncPlayer.playerOne
 
 const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0]
   const objectURL = URL.createObjectURL(file)
 
-  playerOneManager.value.destory()
+  playerOne.value.destory()
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
   )
   localVideoPlayer.load()
-  playerOneManager.value = localVideoPlayer
+  playerOne.value = localVideoPlayer
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
   operationLog.send(operationLog.OPERATION_CD.PLAYER_ONE_URL_ENTER)
-  playerOneManager.value.destory()
+  playerOne.value.destory()
   const youtubeId = youtubeUrl.substring(youtubeUrl.length - 11)
   const player = new YouTubePlayer("youtube-video-one", youtubeId)
   await player.load()
-  playerOneManager.value = player
+  playerOne.value = player
 }
 
 const hundleVideoSeek = async (seconds: number) => {
-  const currentPosition = await playerOneManager.value.getCurrentTime()
-  useMainState.syncPlayer.playerOneManager.value.seekTo(
-    currentPosition + seconds
-  )
+  const currentPosition = await playerOne.value.getCurrentTime()
+  useMainState.syncPlayer.playerOne.value.seekTo(currentPosition + seconds)
 }
 
 const hundleYoutubeSearch = () => {
@@ -291,9 +289,7 @@ const hundleYoutubeSearch = () => {
   <!-- Video -->
   <div :ref="elements.videoArea">
     <!-- dummy -->
-    <div
-      v-show="playerOneManager.subscription.videoType.value === VideoType.NONE"
-    >
+    <div v-show="playerOne.subscription.videoType.value === VideoType.NONE">
       <div
         class="relative w-full border-b-2 border-gray-200 bg-gray-300"
         :style="{ height: calcVideoHeight }"
@@ -305,11 +301,7 @@ const hundleYoutubeSearch = () => {
       </div>
     </div>
     <!-- youtube -->
-    <div
-      v-show="
-        playerOneManager.subscription.videoType.value === VideoType.YOUTUBE
-      "
-    >
+    <div v-show="playerOne.subscription.videoType.value === VideoType.YOUTUBE">
       <div
         id="youtube-video-one"
         class="w-full"
@@ -317,9 +309,7 @@ const hundleYoutubeSearch = () => {
       ></div>
     </div>
     <!-- local -->
-    <div
-      v-show="playerOneManager.subscription.videoType.value === VideoType.LOCAL"
-    >
+    <div v-show="playerOne.subscription.videoType.value === VideoType.LOCAL">
       <video
         :ref="elements.localVideo.video"
         id="local-video-one"
