@@ -47,7 +47,7 @@ class FetchMyVideosAction
           'pageToken' => $nextPageToken,
         ));
 
-      try{
+        try{
           foreach ($playlistItemsResponse['items'] as $playlistItem) {
             $sample[] = [$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']];
             // \Log::debug($playlistItem['snippet']['title']);
@@ -63,10 +63,11 @@ class FetchMyVideosAction
             );
           }
           $nextPageToken = $playlistItemsResponse['nextPageToken'];
-      } catch (Exception $e) {
-        \Log::debug([$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']]);
+        } catch (Exception $e) {
+          \Log::debug([$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']]);
+        }
+        if (!$nextPageToken) break;
       }
-      if (!$nextPageToken) break;
     }
     // \Log::debug($sample);
     return $videos;
