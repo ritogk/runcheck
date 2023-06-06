@@ -46,8 +46,11 @@ class FetchMyVideosAction
           'pageToken' => $nextPageToken,
         ));
 
-        \Log::debug(json_encode($playlistItemsResponse['items']));
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
+          \Log::debug($playlistItem['snippet']['title']);
+          \Log::debug($playlistItem['snippet']['description']);
+          \Log::debug($playlistItem['snippet']['thumbnails']['default']['url']);
+          \Log::debug($playlistItem['snippet']['resourceId']['videoId']);
           $videos[] = array(
             'title' => $playlistItem['snippet']['title'],
             'description' => $playlistItem['snippet']['description'],
