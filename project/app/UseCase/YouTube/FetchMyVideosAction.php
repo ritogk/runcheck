@@ -65,7 +65,7 @@ class FetchMyVideosAction
       }
       if (!$nextPageToken) break;
     }
-    \Log::debug($sample);
+    \Log::debug(json_encode($sample));
     return $videos;
   }
 }
