@@ -54,13 +54,13 @@ class FetchMyVideosAction
           // \Log::debug($playlistItem['snippet']['description']);
           // \Log::debug($playlistItem['snippet']['thumbnails']['default']['url']);
           // \Log::debug($playlistItem['snippet']['resourceId']['videoId']);
-          // $videos[] = array(
-          //   'title' => $playlistItem['snippet']['title'],
-          //   'description' => $playlistItem['snippet']['description'],
-          //   'thumbnail_url' => $playlistItem['snippet']['thumbnails']['default']['url'],
-          //   'id' => $playlistItem['snippet']['resourceId']['videoId'],
-          //   'url' => sprintf("https://www.youtube.com/embed/%s", $playlistItem['snippet']['resourceId']['videoId'])
-          // );
+          $videos[] = array(
+            'title' => $playlistItem['snippet']['title'],
+            'description' => $playlistItem['snippet']['description'],
+            'thumbnail_url' => $playlistItem['snippet']['thumbnails']['default']['url'],
+            'id' => $playlistItem['snippet']['resourceId']['videoId'],
+            'url' => sprintf("https://www.youtube.com/embed/%s", $playlistItem['snippet']['resourceId']['videoId'])
+          );
         }
         $nextPageToken = $playlistItemsResponse['nextPageToken'];
       }
