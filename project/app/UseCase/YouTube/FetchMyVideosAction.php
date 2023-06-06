@@ -38,7 +38,6 @@ class FetchMyVideosAction
     $nextPageToken = '';
     $videos = [];
     while (true) {
-      \Log::debug(count($playlistItemsResponse['items']));
       $sample = [];
       foreach ($channelsResponse['items'] as $channel) {
         $uploadsListId = $channel['contentDetails']['relatedPlaylists']['uploads'];
@@ -46,7 +45,8 @@ class FetchMyVideosAction
           'playlistId' => $uploadsListId,
           'maxResults' => 50,
           'pageToken' => $nextPageToken,
-        ));   
+        ));
+        \Log::debug(count($playlistItemsResponse['items']));   
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
           $sample[] = [$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']];
           // \Log::debug($playlistItem['snippet']['title']);
