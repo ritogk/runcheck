@@ -48,6 +48,7 @@ class FetchMyVideosAction
         ));
         \Log::debug(count($playlistItemsResponse['items']));   
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
+          \Log::debug([$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']]);
           $sample[] = [$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']];
           // \Log::debug($playlistItem['snippet']['title']);
           // \Log::debug($playlistItem['snippet']['description']);
@@ -65,7 +66,7 @@ class FetchMyVideosAction
       }
       if (!$nextPageToken) break;
     }
-    \Log::debug(json_encode($sample));
+    // \Log::debug($sample);
     return $videos;
   }
 }
