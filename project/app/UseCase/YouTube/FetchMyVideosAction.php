@@ -49,7 +49,7 @@ class FetchMyVideosAction
 
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
           if($playlistItem['snippet']['thumbnails'] == null){
-            \Log::debug([$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']]);
+            \Log::debug([$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId'], $playlistItem['status']['uploadStatus']]);
           }
           $sample[] = [$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']];
           // \Log::debug($playlistItem['snippet']['title']);
