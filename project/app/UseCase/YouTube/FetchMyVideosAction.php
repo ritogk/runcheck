@@ -48,7 +48,8 @@ class FetchMyVideosAction
         ));
 
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
-          if($playlistItem['snippet']['thumbnails'] == null){
+          
+          if($playlistItem['snippet']['title'] == "Deleted video"){
             \Log::debug([$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']]);
             \Log::debug($playlistItem['status']['uploadStatus']);
           }
