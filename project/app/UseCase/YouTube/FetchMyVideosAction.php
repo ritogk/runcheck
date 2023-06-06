@@ -46,23 +46,26 @@ class FetchMyVideosAction
           'pageToken' => $nextPageToken,
         ));
 
+        $sample = []
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
-          \Log::debug($playlistItem['snippet']['title']);
-          \Log::debug($playlistItem['snippet']['description']);
-          \Log::debug($playlistItem['snippet']['thumbnails']['default']['url']);
-          \Log::debug($playlistItem['snippet']['resourceId']['videoId']);
-          $videos[] = array(
-            'title' => $playlistItem['snippet']['title'],
-            'description' => $playlistItem['snippet']['description'],
-            'thumbnail_url' => $playlistItem['snippet']['thumbnails']['default']['url'],
-            'id' => $playlistItem['snippet']['resourceId']['videoId'],
-            'url' => sprintf("https://www.youtube.com/embed/%s", $playlistItem['snippet']['resourceId']['videoId'])
-          );
+          $sample[] = [$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']]
+          // \Log::debug($playlistItem['snippet']['title']);
+          // \Log::debug($playlistItem['snippet']['description']);
+          // \Log::debug($playlistItem['snippet']['thumbnails']['default']['url']);
+          // \Log::debug($playlistItem['snippet']['resourceId']['videoId']);
+          // $videos[] = array(
+          //   'title' => $playlistItem['snippet']['title'],
+          //   'description' => $playlistItem['snippet']['description'],
+          //   'thumbnail_url' => $playlistItem['snippet']['thumbnails']['default']['url'],
+          //   'id' => $playlistItem['snippet']['resourceId']['videoId'],
+          //   'url' => sprintf("https://www.youtube.com/embed/%s", $playlistItem['snippet']['resourceId']['videoId'])
+          // );
         }
         $nextPageToken = $playlistItemsResponse['nextPageToken'];
       }
       if (!$nextPageToken) break;
     }
+    \Log::debug($sample);
     return $videos;
   }
 }
