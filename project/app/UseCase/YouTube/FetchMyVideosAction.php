@@ -63,8 +63,6 @@ class FetchMyVideosAction
             );
           }
           $nextPageToken = $playlistItemsResponse['nextPageToken'];
-        }
-        
       } catch (Exception $e) {
         \Log::debug([$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']]);
       }
