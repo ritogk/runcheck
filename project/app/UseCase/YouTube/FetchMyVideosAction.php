@@ -37,8 +37,8 @@ class FetchMyVideosAction
 
     $nextPageToken = '';
     $videos = [];
+    $sample = [];
     while (true) {
-      $sample = [];
       foreach ($channelsResponse['items'] as $channel) {
         $uploadsListId = $channel['contentDetails']['relatedPlaylists']['uploads'];
         $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('snippet', array(
