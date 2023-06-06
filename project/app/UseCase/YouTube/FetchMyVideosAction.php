@@ -37,7 +37,6 @@ class FetchMyVideosAction
 
     $nextPageToken = '';
     $videos = [];
-    $sample = [];
     while (true) {
       foreach ($channelsResponse['items'] as $channel) {
         $uploadsListId = $channel['contentDetails']['relatedPlaylists']['uploads'];
@@ -48,16 +47,10 @@ class FetchMyVideosAction
         ));
 
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
-          
+          // 削除された動画は無視。レスポンスがおかしいのでこの先に流すとエラーになる。
           if($playlistItem['snippet']['title'] == "Deleted video"){
-            \Log::debug([$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']]);
-            \Log::debug($playlistItem);
+            continue;
           }
-          $sample[] = [$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']];
-          // \Log::debug($playlistItem['snippet']['title']);
-          // \Log::debug($playlistItem['snippet']['description']);
-          // \Log::debug($playlistItem['snippet']['thumbnails']['default']['url']);
-          // \Log::debug($playlistItem['snippet']['resourceId']['videoId']);
           $videos[] = array(
             'title' => $playlistItem['snippet']['title'],
             'description' => $playlistItem['snippet']['description'],
@@ -70,7 +63,6 @@ class FetchMyVideosAction
       }
       if (!$nextPageToken) break;
     }
-    // \Log::debug($sample);
     return $videos;
   }
 }
