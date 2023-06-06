@@ -27,12 +27,11 @@ class GetStatusAction
     $isLogined = $user !== null;
     $access_token = false;
     if($isLogined){
-      $access_token = !empty($user->youtube_token);
+      $isYoutubeAuthroized = !empty($user->youtube_token);
     }else{
       $access_token = $this->session_storage_action->get(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN);
+      $isYoutubeAuthroized = !empty($access_token);
     }
-    $access_token = $this->session_storage_action->get(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN);
-    $isYoutubeAuthroized = !empty($access_token);
     return ['is_logined' => $isLogined, 'is_youtube_authroized' => $isYoutubeAuthroized, 'user' => $user];
   }
 }
