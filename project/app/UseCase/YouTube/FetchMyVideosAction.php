@@ -46,7 +46,7 @@ class FetchMyVideosAction
           'pageToken' => $nextPageToken,
         ));
 
-        $sample = []
+        $sample = [];
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
           $sample[] = [$playlistItem['snippet']['title'], $playlistItem['snippet']['description'], $playlistItem['snippet']['thumbnails']['default']['url'] ?? '', $playlistItem['snippet']['resourceId']['videoId']]
           // \Log::debug($playlistItem['snippet']['title']);
