@@ -54,16 +54,14 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
 
 <template>
   <!-- 動画を同期 and つぶやく-->
-  <div>
-    <span
-      class="isolate inline-flex rounded-md shadow-sm"
+  <div class="flex gap-2">
+    <button
+      type="button"
+      class="w-1/2 items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10"
       v-show="!useMainState.syncPlayer.subscription.synced.value"
+      @click="hundleVideoRunSyncClick"
     >
-      <button
-        type="button"
-        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10"
-        @click="hundleVideoRunSyncClick"
-      >
+      <div class="flex items-center justify-center gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -81,18 +79,16 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
         </svg>
 
         動画を同期
-      </button>
-    </span>
+      </div>
+    </button>
 
-    <span
-      class="isolate inline-flex rounded-md shadow-sm"
+    <button
+      type="button"
+      class="w-1/2 items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10"
       v-show="useMainState.syncPlayer.subscription.synced.value"
+      @click="hundleVideoStopSyncClick"
     >
-      <button
-        type="button"
-        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10"
-        @click="hundleVideoStopSyncClick"
-      >
+      <div class="flex items-center justify-center gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -109,16 +105,16 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
           />
         </svg>
         同期解除
-      </button>
-    </span>
+      </div>
+    </button>
 
-    <span class="isolate ml-2 inline-flex rounded-md shadow-sm">
-      <button
-        type="button"
-        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-[#16A2F3] px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-[#1697f3] hover:bg-[#45b7f7] focus:z-10 disabled:opacity-50"
-        :disabled="!useMainState.syncPlayer.subscription.synced.value"
-        @click="hundleTweetClick()"
-      >
+    <button
+      type="button"
+      class="w-1/2 items-center gap-x-1.5 rounded-md bg-[#16A2F3] px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-[#1697f3] hover:bg-[#45b7f7] focus:z-10 disabled:opacity-50"
+      :disabled="!useMainState.syncPlayer.subscription.synced.value"
+      @click="hundleTweetClick()"
+    >
+      <div class="flex items-center justify-center gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -154,7 +150,7 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
           </g>
         </svg>
         比較結果を共有
-      </button>
-    </span>
+      </div>
+    </button>
   </div>
 </template>
