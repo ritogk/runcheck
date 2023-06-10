@@ -137,7 +137,7 @@ const hundleYoutubeSearch = () => {
       class="overflow-hidden"
     >
       <!-- selector -->
-      <div>
+      <div class="px-1">
         <div>
           <div class="mt-2 flex gap-2 rounded-md">
             <!-- Youtube -->
@@ -212,7 +212,7 @@ const hundleYoutubeSearch = () => {
       </div>
 
       <!-- adjustment-->
-      <div>
+      <div class="px-1">
         <!-- 進む -->
         <div class="mt-2 flex justify-between gap-2">
           <button
