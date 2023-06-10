@@ -82,6 +82,7 @@ const onSubmit = async () => {
       form.password.value.value
     )
     useLoadingState.stop(loadingId)
+    useAlertState.clear()
     router.push({ name: "index" })
   } catch {
     useAlertState.add(

@@ -48,6 +48,7 @@ export const handleTweetLinkClick = async (comparisonId: number) => {
       setTimeout(async () => {
         useMainState.syncPlayer.runSync()
         useLoadingState.stop(loadingId)
+        useAlretState.clear()
         window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
       }, 3000)
     }, 2000)

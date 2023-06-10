@@ -33,6 +33,7 @@ export const callbackYoutubeOauth = async (code: string) => {
     await useUserState.load()
     useMainState.youtubeModal.load()
     useLoadingState.stop(loadingId)
+    useAlretState.clear()
     useLoadingState.save()
   } catch {
     useAlretState.add("Youtubeとの連携でエラーが発生しました。")

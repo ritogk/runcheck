@@ -17,7 +17,7 @@ import {
 
 const router = useRouter()
 const userState = inject(UseUserStateKey) as UseUserStateType
-const userAlretListState = inject(UseAlretStateKey) as UseAlretStateType
+const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const form = {
@@ -42,9 +42,10 @@ const onSubmit = async () => {
       form.remember.value.checked
     )
     useLoadingState.stop(loadingId)
+    useAlretState.clear()
     router.push({ name: "index" })
   } catch {
-    userAlretListState.add(
+    useAlretState.add(
       "認証に失敗しました。メールアドレスとパスワードを確認してください。"
     )
   }
