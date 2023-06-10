@@ -49,8 +49,6 @@ const UseUserState = (): UseUserStateType => {
 
       try {
         await login(email, password, true)
-        _user.value = { id: response.id, name: response.name }
-        _logined.value = true
       } catch {
         throw new Error()
       }
@@ -73,8 +71,7 @@ const UseUserState = (): UseUserStateType => {
           remember: remember,
         },
       })
-      _user.value = { id: response.id, name: response.name }
-      _logined.value = true
+      await load()
       return
     } catch (e) {
       throw new Error()
@@ -84,9 +81,7 @@ const UseUserState = (): UseUserStateType => {
   const logout = async (): Promise<void> => {
     try {
       await _authenticationApi.authenticationLogoutPost()
-      _user.value = { id: 0, name: "" }
-      _logined.value = false
-      _isYoutubeAuthroized.value = false
+      await load()
       return
     } catch (e) {
       throw new Error()
