@@ -6,6 +6,7 @@ type UseAlretStateType = {
   }
   add(message: string): void
   remove(index: number): void
+  clear(): void
 }
 
 const UseAlretState = (): UseAlretStateType => {
@@ -21,6 +22,10 @@ const UseAlretState = (): UseAlretStateType => {
     _messages.value.splice(index, 1)
   }
 
+  const clear = () => {
+    _messages.value = []
+  }
+
   return {
     subscription: {
       messages: computed(() => {
@@ -29,6 +34,7 @@ const UseAlretState = (): UseAlretStateType => {
     },
     add: add,
     remove: remove,
+    clear: clear,
   }
 }
 
