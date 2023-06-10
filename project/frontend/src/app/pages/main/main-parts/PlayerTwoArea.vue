@@ -15,6 +15,7 @@ import {
 } from "@heroicons/vue/20/solid"
 import { VideoType } from "./player-area-parts/IVideoPlayer"
 import { operationLog } from "@/core/operationLog"
+import { extractYoutubeId } from "@/core/extractYoutubeId"
 
 const playerNo = PlayerNo.TWO
 
@@ -58,7 +59,7 @@ const hundleLocalVideoChange = async (event: Event) => {
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
   operationLog.send(operationLog.OPERATION_CD.PLAYER_TWO_URL_ENTER)
   playerTwo.value.destory()
-  const youtubeId = youtubeUrl.substring(youtubeUrl.length - 11)
+  const youtubeId = extractYoutubeId(youtubeUrl)
   const player = new YouTubePlayer("youtube-video-two", youtubeId)
   player.load()
   playerTwo.value = player
