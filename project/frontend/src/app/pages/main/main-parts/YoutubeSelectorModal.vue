@@ -208,7 +208,7 @@ if (code) callbackYoutubeOauth(code)
                       ></span>
                       <span class="pl-3">YouTube 動画一覧を取得</span>
                     </div>
-                    <p class="mt-2 text-center text-[12px] text-gray-500">
+                    <p class="mt-2 text-center text-[12px] text-gray-500" hidden>
                       <a
                         class="underline"
                         @click="hundleTermsClick()"
