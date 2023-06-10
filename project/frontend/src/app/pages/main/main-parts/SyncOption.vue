@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from "vue"
+import { inject, computed } from "vue"
 import {
   UseMainStateKey,
   UseMainStateType,
@@ -46,6 +46,15 @@ const hundleTweetClick = async () => {
   location.href = "https://twitter.com/intent/tweet?text=" + url
 }
 
+const isSyncButtonDisabled = computed(() => {
+  return (
+    useMainState.syncPlayer.playerOne.value.subscription.videoType.value ===
+      VideoType.NONE ||
+    useMainState.syncPlayer.playerTwo.value.subscription.videoType.value ===
+      VideoType.NONE
+  )
+})
+
 // ツイートしたURLから飛んできた時の処理
 const urlParams = new URLSearchParams(window.location.search)
 const comparisonId = urlParams.get("comparisonId")
@@ -57,8 +66,9 @@ if (comparisonId) handleTweetLinkClick(Number(comparisonId))
   <div class="flex gap-2">
     <button
       type="button"
-      class="w-1/2 items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10"
+      class="w-1/2 items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10 disabled:opacity-50"
       v-show="!useMainState.syncPlayer.subscription.synced.value"
+      :disabled="isSyncButtonDisabled"
       @click="hundleVideoRunSyncClick"
     >
       <div class="flex items-center justify-center gap-1">
