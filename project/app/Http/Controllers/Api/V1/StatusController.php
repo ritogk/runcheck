@@ -18,8 +18,11 @@ class StatusController extends Controller
     public function status(GetStatusAction $action): JsonResponse
     {
         $result = $action->status();
+        $user = $result['user'];
         return response()->json(
-            ['isLogined' => $result['is_logined'], 'isYoutubeAuthroized' => $result['is_youtube_authroized'], 'user' => ['id' => $result['user']['id'], 'name' => $result['user']['name']]],
+            ['isLogined' => $result['is_logined'],
+            'isYoutubeAuthroized' => $result['is_youtube_authroized'],
+            'user' => ['id' => $user ? $user['id'] : 0, 'name' => $user ? $user['name'] : ""]],
             Response::HTTP_OK
         );
     }
