@@ -34,10 +34,10 @@ import {
 } from "@/app/loading-parts/LoadingState"
 import { operationLog } from "@/core/operationLog"
 
-const alretState = UseAlretState()
+const useAlretState = UseAlretState()
 const useUserState = UseUserState()
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
-provide(UseAlretStateKey, alretState)
+provide(UseAlretStateKey, useAlretState)
 provide(UseUserStateKey, useUserState)
 
 const loadState = async () => {
