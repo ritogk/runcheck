@@ -137,7 +137,9 @@ const hundleAdjustSpeedClick = () => {
 <template>
   <Transition name="controller">
     <div class="max-h-[240px]">
-      <div class="space-y-6 border-0 border-gray-100 bg-gray-50 px-8 pb-4 pt-6">
+      <div
+        class="space-y-6 border-0 border-gray-100 bg-gray-100 px-8 pb-4 pt-6"
+      >
         <div
           class="space-y-2"
           :ref="elements.slider"
@@ -150,7 +152,7 @@ const hundleAdjustSpeedClick = () => {
         >
           <div class="relative">
             <!-- スライダーの軸 -->
-            <div class="overflow-hidden rounded-full bg-gray-100">
+            <div class="overflow-hidden rounded-full bg-gray-200">
               <div
                 class="h-2 bg-slate-500"
                 :style="{ width: sliderPositionStyle }"
@@ -182,7 +184,7 @@ const hundleAdjustSpeedClick = () => {
         </div>
       </div>
       <div
-        class="flex items-center rounded-t-lg bg-gray-100 pb-3 text-gray-500"
+        class="flex items-center rounded-t-lg bg-gray-200 pb-3 text-gray-500"
       >
         <div class="flex flex-auto items-center justify-evenly">
           <!-- リピート ボタン -->
