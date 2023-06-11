@@ -23,7 +23,7 @@ provide(UseMainStateKey, useMainState)
     </div>
 
     <PlayerOneArea></PlayerOneArea>
-    <PlayerTwoArea></PlayerTwoArea>
+    <PlayerTwoArea class="pb-2"></PlayerTwoArea>
     <SyncController
       v-show="useMainState.syncPlayer.subscription.synced.value"
     ></SyncController>
