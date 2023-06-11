@@ -137,7 +137,7 @@ const hundleYoutubeSearch = () => {
     <Transition name="adjustment">
       <div
         v-show="!useMainState.syncPlayer.subscription.synced.value"
-        class="overflow-hidden"
+        class="overflow-hidden pb-2"
       >
         <!-- selector -->
         <div class="px-1">
