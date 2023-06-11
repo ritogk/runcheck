@@ -181,7 +181,9 @@ const hundleAdjustSpeedClick = () => {
           </div>
         </div>
       </div>
-      <div class="flex items-center bg-gray-200 pb-3 text-gray-500">
+      <div
+        class="flex items-center rounded-t-lg bg-gray-100 pb-3 text-gray-500"
+      >
         <div class="flex flex-auto items-center justify-evenly">
           <!-- リピート ボタン -->
           <button
@@ -245,7 +247,7 @@ const hundleAdjustSpeedClick = () => {
         <!-- 再生ボタン -->
         <button
           type="button"
-          class="-my-2 mx-auto flex h-20 w-20 flex-none items-center justify-center rounded-full bg-white text-gray-900 shadow-md ring-1 ring-gray-900/5"
+          class="-my-2 mx-auto flex h-20 w-20 flex-none items-center justify-center rounded-full bg-white text-gray-900 shadow-sm ring-1 ring-gray-300"
           aria-label="Pause"
           @click="hundlePlaySwitch()"
         >
