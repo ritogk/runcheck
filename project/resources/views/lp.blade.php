@@ -23,6 +23,7 @@
         <link href="{{ App\Assets\Helpers::cacheBusting('/lp/css/styles.css') }}" rel="stylesheet" />
 
         @include('components.gtag')
+        @include('components.clarity-lp')
     </head>
     <body id="page-top">
         <!-- Navigation-->
