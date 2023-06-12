@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('/spa/runcheck-app.css?v='.time(), true) }}">
 
     @include('components.gtag')
+    @include('components.clarity')
     
   </head>
   <body style="background: rgb(243, 244, 246);">
