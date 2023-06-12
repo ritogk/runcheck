@@ -34,9 +34,10 @@ const useAlertListState = inject(UseAlretStateKey) as UseAlretStateType
           <button
             type="button"
             class="inline-flex rounded-md bg-red-100 p-1.5 text-red-500 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50"
+            title="閉じる"
+            aria-label="閉じる"
             @click="useAlertListState.remove(index)"
           >
-            <span class="sr-only">Dismiss</span>
             <svg
               class="h-5 w-5"
               viewBox="0 0 20 20"

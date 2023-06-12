@@ -64,9 +64,10 @@ const hundleSpeedSelect = async (speed: number) => {
                 <button
                   type="button"
                   class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+                  title="閉じる"
+                  aria-label="閉じる"
                   @click="onClose"
                 >
-                  <span class="sr-only">Close</span>
                   <XMarkIcon class="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>

@@ -172,8 +172,12 @@ const sidebarOpen = ref(false)
                     class="flex w-16 items-start justify-center pt-5"
                     @click="sidebarOpen = false"
                   >
-                    <button type="button" class="-m-2.5 p-2.5">
-                      <span class="sr-only">Close sidebar</span>
+                    <button
+                      type="button"
+                      class="-m-2.5 p-2.5"
+                      title="サイドバーを閉じる"
+                      aria-label="サイドバーを  閉じる"
+                    >
                       <XMarkIcon
                         class="h-6 w-6 text-white"
                         aria-hidden="true"
@@ -313,9 +317,10 @@ const sidebarOpen = ref(false)
       <button
         type="button"
         class="-m-2.5 p-2.5 text-gray-400 lg:hidden"
+        title="サイドバーを開く"
+        aria-label="サイドバーを開く"
         @click="sidebarOpen = true"
       >
-        <span class="sr-only">Open sidebar</span>
         <Bars3Icon class="h-6 w-6" aria-hidden="true" />
       </button>
     </div>
