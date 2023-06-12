@@ -29,14 +29,14 @@ const form = {
   passwordConfirm: ref<HTMLInputElement | null>(null),
 }
 
-const onSwitchPasswordVisibility = (type: "password" | "passwordConfirm") => {
+const onSwitchPasswordVisibility = (type: "password" | "password-confirm") => {
   switch (type) {
     case "password":
       if (form.password.value === null) return
       form.password.value.type =
         form.password.value.type === "password" ? "text" : "password"
       break
-    case "passwordConfirm":
+    case "password-confirm":
       if (form.passwordConfirm.value === null) return
       form.passwordConfirm.value.type =
         form.passwordConfirm.value.type === "password" ? "text" : "password"
@@ -220,8 +220,8 @@ const onSubmit = async () => {
                 </div>
                 <div class="relative mt-2 w-1/2 rounded-md shadow-sm">
                   <input
-                    id="passwordConfirm"
-                    name="passwordConfirm"
+                    id="password-confirm"
+                    name="password-confirm"
                     type="password"
                     autocomplete="password-confirm"
                     :ref="form.passwordConfirm"
@@ -240,7 +240,7 @@ const onSubmit = async () => {
                       width="20"
                       height="20"
                       viewBox="0 0 200 145.522"
-                      @click="onSwitchPasswordVisibility('passwordConfirm')"
+                      @click="onSwitchPasswordVisibility('password-confirm')"
                     >
                       <path
                         d="M99.363,0C52.631,0,14.243,30.17,0,72.083,14.243,114,52.631,145.522,99.363,145.522S185.754,114,200,72.083A106.312,106.312,0,0,0,99.363,0ZM97.382,24.478a47.647,47.647,0,1,1,1.981,95.254,47.643,47.643,0,1,1-1.981-95.265ZM99.363,39.1A32.987,32.987,0,1,0,132.35,72.083,32.987,32.987,0,0,0,99.363,39.1Zm8.233,8.743a11.454,11.454,0,1,1-11.215,11.69A11.455,11.455,0,0,1,107.6,47.839Z"
