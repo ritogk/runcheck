@@ -22,8 +22,10 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{ App\Assets\Helpers::cacheBusting('/lp/css/styles.css') }}" rel="stylesheet" />
 
-        @include('components.gtag')
-        @include('components.clarity-lp')
+        @if(config('app.env') === 'production')
+            @include('components.gtag')
+            @include('components.clarity-lp')
+        @endif
     </head>
     <body id="page-top">
         <!-- Navigation-->
