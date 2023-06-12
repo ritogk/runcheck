@@ -8,7 +8,7 @@ import {
   UseLoadingStateKey,
   UseLoadingStateType,
 } from "@/app/loading-parts/LoadingState"
-import { handleTweetLinkClick } from "./sync-option-parts/HandleTweetLinkClick"
+import { handleComparisonOpen } from "./sync-option-parts/HandleComparisonOpen"
 import { VideoType } from "./player-area-parts/IVideoPlayer"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
@@ -54,7 +54,7 @@ const isSyncButtonDisabled = computed(() => {
 // ツイートしたURLから飛んできた時の処理
 const urlParams = new URLSearchParams(window.location.search)
 const comparisonId = urlParams.get("comparisonId")
-if (comparisonId) handleTweetLinkClick(Number(comparisonId))
+if (comparisonId) handleComparisonOpen(Number(comparisonId))
 </script>
 
 <template>

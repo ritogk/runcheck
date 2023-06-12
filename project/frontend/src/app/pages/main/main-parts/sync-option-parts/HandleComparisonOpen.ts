@@ -16,7 +16,7 @@ import { YouTubePlayer } from "@/app/pages/main/main-parts/player-area-parts/You
 import { extractYoutubeId } from "@/core/extractYoutubeId"
 import { apiConfig } from "@/core/openapi"
 
-export const handleTweetLinkClick = async (comparisonId: number) => {
+export const handleComparisonOpen = async (comparisonId: number) => {
   const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
   const useMainState = inject(UseMainStateKey) as UseMainStateType
   const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
