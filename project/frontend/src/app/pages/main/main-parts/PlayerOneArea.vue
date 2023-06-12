@@ -236,15 +236,15 @@ const hundleYoutubeSearch = () => {
                 class="relative flex w-10/12 flex-grow items-stretch shadow-sm focus-within:z-10"
               >
                 <label
-                  for="name"
+                  for="youtube-url-one"
                   class="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
                   >YouTube</label
                 >
                 <!-- Youtube url -->
                 <input
                   type="email"
-                  name="email"
-                  id="email"
+                  name="youtube-url-one"
+                  id="youtube-url-one"
                   class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"
                   placeholder="https://youtube.com/nLKSSdMWZ8g"
                   v-model="youtubeUrl"
