@@ -128,8 +128,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   reload = async () => {
     this._muted.value = true
     this._playing.value = false
-    await this._playerOne.value.seekTo(this._playerOneStartPosition)
-    await this._playerTwo.value.seekTo(this._playerTwoStartPosition)
   }
 
   private syncProcessing = false // 処理中フラグ
