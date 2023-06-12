@@ -19,7 +19,7 @@ import {
 } from "@/app/loading-parts/LoadingState"
 import { apiConfig } from "@/core/openapi"
 
-export const callbackYoutubeOauth = async (code: string) => {
+export const handleYoutubeOauthCallback = async (code: string) => {
   const router = useRouter()
   const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
   const useMainState = inject(UseMainStateKey) as UseMainStateType

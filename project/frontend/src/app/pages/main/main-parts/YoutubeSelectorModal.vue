@@ -23,7 +23,7 @@ import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListState"
 import { PlayerNo } from "@/app/pages/main/use-main-state-parts/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
-import { callbackYoutubeOauth } from "./youtube-selector-modal-parts/CallbackYoutubeOauth"
+import { handleYoutubeOauthCallback } from "./youtube-selector-modal-parts/HandleYoutubeOauthCallback"
 import { apiConfig } from "@/core/openapi"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
@@ -95,7 +95,7 @@ const hundlePrivacyClick = () => {
 // Oauthで認可された後の処理
 const urlParams = new URLSearchParams(window.location.search)
 const code = urlParams.get("code")
-if (code) callbackYoutubeOauth(code)
+if (code) handleYoutubeOauthCallback(code)
 </script>
 
 <template>
