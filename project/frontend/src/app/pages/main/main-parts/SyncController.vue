@@ -150,7 +150,11 @@ const hundleAdjustSpeedClick = () => {
           @mousemove="hundleSliderMouseMove"
           @mouseup="hundleSliderMouseUp"
         >
-          <div class="relative">
+          <div
+            class="relative"
+            title="移動スライダー"
+            aria-label="移動スライダー"
+          >
             <!-- スライダーの軸 -->
             <div class="overflow-hidden rounded-full bg-gray-200">
               <div
@@ -190,7 +194,8 @@ const hundleAdjustSpeedClick = () => {
           <!-- リピート ボタン -->
           <button
             type="button"
-            aria-label="Skip 10 seconds"
+            title="リピート切替"
+            aria-label="リピート切替"
             @click="hundleRepeatSwitch()"
           >
             <svg
@@ -226,7 +231,8 @@ const hundleAdjustSpeedClick = () => {
           <!-- 倍速 ボタン -->
           <button
             type="button"
-            aria-label="Skip 10 seconds"
+            title="倍速"
+            aria-label="倍速"
             @click="hundleAdjustSpeedClick()"
           >
             <svg
@@ -250,7 +256,12 @@ const hundleAdjustSpeedClick = () => {
         <button
           type="button"
           class="-my-2 mx-auto flex h-20 w-20 flex-none items-center justify-center rounded-full bg-white text-gray-900 shadow-sm ring-1 ring-gray-300"
-          aria-label="Pause"
+          :title="
+            useMainState.syncPlayer.subscription.playing.value ? `停止` : `再生`
+          "
+          :aria-label="
+            useMainState.syncPlayer.subscription.playing.value ? `停止` : `再生`
+          "
           @click="hundlePlaySwitch()"
         >
           <svg
@@ -275,7 +286,8 @@ const hundleAdjustSpeedClick = () => {
           <!-- 再読み込み ボタン -->
           <button
             type="button"
-            aria-label="Skip 10 seconds"
+            title="再読み込み"
+            aria-label="再読み込み"
             @click="hundleReload()"
           >
             <svg
@@ -304,7 +316,8 @@ const hundleAdjustSpeedClick = () => {
           <button
             type="button"
             class="sm:block lg:hidden xl:block"
-            aria-label="Previous"
+            title="ミュート切替"
+            aria-label="ミュート切替"
             @click="hundleMuteSwitch()"
           >
             <SpeakerWaveIcon
