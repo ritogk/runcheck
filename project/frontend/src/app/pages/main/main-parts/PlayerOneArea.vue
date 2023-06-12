@@ -238,7 +238,8 @@ const hundleYoutubeSearch = () => {
                 <button
                   type="button"
                   class="relative -ml-px inline-flex w-3/12 items-center gap-x-1.5 rounded-r-md bg-white text-sm font-semibold text-gray-900 ring-1 ring-inset ring-slate-300 hover:bg-gray-100"
-                  alt="YouTube選択"
+                  title="YouTube動画選択"
+                  aria-label="YouTube動画選択"
                   @click="hundleYoutubeSearch()"
                 >
                   <svg
@@ -261,7 +262,8 @@ const hundleYoutubeSearch = () => {
               <!-- 端末動画選択 -->
               <button
                 class="w-2/12 rounded-md bg-white text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus:z-10"
-                alt="端末動画選択"
+                title="端末動画選択"
+                aria-label="端末動画選択"
                 @click="hundleLocalVideoSelect()"
               >
                 <div class="flex items-center justify-center">
