@@ -156,58 +156,68 @@ if (code) callbackYoutubeOauth(code)
                     <p class="text-gray-500">
                       このボタンをクリックすると、あなたのYouTube動画一覧が表示されます。
                     </p>
-                    <div
-                      class="group mx-auto mt-2 flex w-64 cursor-pointer items-center justify-start rounded bg-red-500 px-2 py-2 text-sm font-bold text-gray-100 shadow hover:bg-red-400"
-                      @click="redirectToAuthorize"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                        version="1.1"
-                        id="YouTube_Icon"
-                        x="0px"
-                        y="0px"
-                        viewBox="0 0 1024 721"
-                        enable-background="new 0 0 1024 721"
-                        xml:space="preserve"
-                        style="width: 24px; height: 24px"
+                    <div class="text-center">
+                      <button
+                        class="group mt-2 w-64 rounded bg-red-500 px-2 py-2 text-sm font-bold text-gray-100 shadow hover:bg-red-400"
+                        @click="redirectToAuthorize"
                       >
-                        <path
-                          id="Triangle"
-                          fill="#FFFFFF"
-                          d="M407,493l276-143L407,206V493z"
-                        />
-                        <path
-                          id="The_Sharpness"
-                          opacity="0.12"
-                          fill="#420000"
-                          d="M407,206l242,161.6l34-17.6L407,206z"
-                        />
-                        <g id="Lozenge">
-                          <g>
-                            <linearGradient
-                              id="SVGID_1_"
-                              gradientUnits="userSpaceOnUse"
-                              x1="512.5"
-                              y1="719.7"
-                              x2="512.5"
-                              y2="1.2"
-                              gradientTransform="matrix(1 0 0 -1 0 721)"
-                            >
-                              <stop offset="0" style="stop-color: #e52d27" />
-                              <stop offset="1" style="stop-color: #bf171d" />
-                            </linearGradient>
+                        <div class="flex justify-start">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            version="1.1"
+                            id="YouTube_Icon"
+                            x="0px"
+                            y="0px"
+                            viewBox="0 0 1024 721"
+                            enable-background="new 0 0 1024 721"
+                            xml:space="preserve"
+                            style="width: 24px; height: 24px"
+                          >
                             <path
-                              fill="url(#SVGID_1_)"
-                              d="M1013,156.3c0,0-10-70.4-40.6-101.4C933.6,14.2,890,14,870.1,11.6C727.1,1.3,512.7,1.3,512.7,1.3    h-0.4c0,0-214.4,0-357.4,10.3C135,14,91.4,14.2,52.6,54.9C22,85.9,12,156.3,12,156.3S1.8,238.9,1.8,321.6v77.5    C1.8,481.8,12,564.4,12,564.4s10,70.4,40.6,101.4c38.9,40.7,89.9,39.4,112.6,43.7c81.7,7.8,347.3,10.3,347.3,10.3    s214.6-0.3,357.6-10.7c20-2.4,63.5-2.6,102.3-43.3c30.6-31,40.6-101.4,40.6-101.4s10.2-82.7,10.2-165.3v-77.5    C1023.2,238.9,1013,156.3,1013,156.3z M407,493V206l276,144L407,493z"
+                              id="Triangle"
+                              fill="#FFFFFF"
+                              d="M407,493l276-143L407,206V493z"
                             />
-                          </g>
-                        </g>
-                      </svg>
-                      <span
-                        class="ml-2 mr-1 block h-6 w-1 border-l border-red-700 group-hover:border-red-600"
-                      ></span>
-                      <span class="pl-3">YouTube 動画一覧を取得</span>
+                            <path
+                              id="The_Sharpness"
+                              opacity="0.12"
+                              fill="#420000"
+                              d="M407,206l242,161.6l34-17.6L407,206z"
+                            />
+                            <g id="Lozenge">
+                              <g>
+                                <linearGradient
+                                  id="SVGID_1_"
+                                  gradientUnits="userSpaceOnUse"
+                                  x1="512.5"
+                                  y1="719.7"
+                                  x2="512.5"
+                                  y2="1.2"
+                                  gradientTransform="matrix(1 0 0 -1 0 721)"
+                                >
+                                  <stop
+                                    offset="0"
+                                    style="stop-color: #e52d27"
+                                  />
+                                  <stop
+                                    offset="1"
+                                    style="stop-color: #bf171d"
+                                  />
+                                </linearGradient>
+                                <path
+                                  fill="url(#SVGID_1_)"
+                                  d="M1013,156.3c0,0-10-70.4-40.6-101.4C933.6,14.2,890,14,870.1,11.6C727.1,1.3,512.7,1.3,512.7,1.3    h-0.4c0,0-214.4,0-357.4,10.3C135,14,91.4,14.2,52.6,54.9C22,85.9,12,156.3,12,156.3S1.8,238.9,1.8,321.6v77.5    C1.8,481.8,12,564.4,12,564.4s10,70.4,40.6,101.4c38.9,40.7,89.9,39.4,112.6,43.7c81.7,7.8,347.3,10.3,347.3,10.3    s214.6-0.3,357.6-10.7c20-2.4,63.5-2.6,102.3-43.3c30.6-31,40.6-101.4,40.6-101.4s10.2-82.7,10.2-165.3v-77.5    C1023.2,238.9,1013,156.3,1013,156.3z M407,493V206l276,144L407,493z"
+                                />
+                              </g>
+                            </g>
+                          </svg>
+                          <span
+                            class="ml-2 mr-1 block h-6 w-1 border-l border-red-700 group-hover:border-red-600"
+                          ></span>
+                          <span class="pl-3">YouTube 動画一覧を取得</span>
+                        </div>
+                      </button>
                     </div>
                     <p
                       class="mt-2 text-center text-[12px] text-gray-500"
