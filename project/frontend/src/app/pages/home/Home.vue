@@ -14,7 +14,6 @@ import {
   UseLoadingStateKey,
   UseLoadingStateType,
 } from "@/app/loading-parts/LoadingState"
-import { operationLog } from "@/core/operationLog"
 
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
@@ -75,12 +74,10 @@ const syncs = computed(() => {
 
 const router = useRouter()
 const hundleTitleClick = (comparisonId: number) => {
-  operationLog.send(operationLog.OPERATION_CD.HOME_OPEN_CLICK)
   router.push({ name: "index", query: { comparisonId: comparisonId } })
 }
 
 const hundleDelete = async (comparisonId: number, title: string) => {
-  operationLog.send(operationLog.OPERATION_CD.HOME_DELETE_CLICK)
   if (confirm(`${title}を削除します。\nよろしいですか？`)) {
     await deleteComparison(comparisonId)
     window.location.reload()

@@ -32,7 +32,6 @@ import {
   UseLoadingStateKey,
   UseLoadingStateType,
 } from "@/app/loading-parts/LoadingState"
-import { operationLog } from "@/core/operationLog"
 
 const useAlretState = UseAlretState()
 const useUserState = UseUserState()
@@ -54,7 +53,6 @@ const hundleHeaderClick = () => {
 }
 
 const hundleHomeClick = () => {
-  operationLog.send(operationLog.OPERATION_CD.NAV_HOME_CLICK)
   sidebarOpen.value = false
   router.push({ name: "home" })
 }
@@ -66,7 +64,6 @@ const navigation = [
     icon: ArrowRightOnRectangleIcon,
     current: false,
     action: () => {
-      operationLog.send(operationLog.OPERATION_CD.NAV_LOGIN_CLICK)
       sidebarOpen.value = false
       router.push({ name: "login" })
     },
@@ -79,7 +76,6 @@ const navigation = [
     current: false,
     action: async () => {
       const loadingId = useLoadingState.run()
-      operationLog.send(operationLog.OPERATION_CD.NAV_LOGOUT_CLICK)
       sidebarOpen.value = false
       await useUserState.logout()
       useLoadingState.stop(loadingId)
@@ -93,7 +89,6 @@ const navigation = [
     icon: UserPlusIcon,
     current: false,
     action: async () => {
-      operationLog.send(operationLog.OPERATION_CD.NAV_REGISTER_CLICK)
       sidebarOpen.value = false
       router.push({ name: "register" })
     },
@@ -105,7 +100,6 @@ const navigation = [
     icon: QuestionMarkCircleIcon,
     current: false,
     action: () => {
-      operationLog.send(operationLog.OPERATION_CD.NAV_ABOUT_APP_CLICK)
       location.href = "/lp/ja"
     },
     show: computed(() => true),
@@ -116,7 +110,6 @@ const navigation = [
     icon: ChatBubbleOvalLeftEllipsisIcon,
     current: false,
     action: () => {
-      operationLog.send(operationLog.OPERATION_CD.NAV_INQUIRY)
       location.href = "https://twitter.com/homing_fd2"
     },
     show: computed(() => true),

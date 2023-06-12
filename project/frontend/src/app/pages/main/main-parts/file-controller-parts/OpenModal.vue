@@ -21,7 +21,6 @@ import {
   UseMainStateType,
 } from "@/app/pages/main/UseMainState"
 import { fetchComparisons } from "@/core/comparisons"
-import { operationLog } from "@/core/operationLog"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
@@ -51,7 +50,6 @@ watch(useMainState.openModal.subscription.opened, async (value) => {
 const selected = ref(comparisonOptions[0])
 
 const hundleOpen = () => {
-  operationLog.send(operationLog.OPERATION_CD.OPEN_CLICK)
   location.href = `${window.location.origin}${window.location.pathname}?comparisonId=${selected.value.id}`
 }
 </script>

@@ -11,14 +11,12 @@ import {
   UseUserStateType,
 } from "@/app/dashboard-parts/UseUserState"
 import { VideoType } from "@/app/pages/main/main-parts/player-area-parts/IVideoPlayer"
-import { operationLog } from "@/core/operationLog"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
 const userState = inject(UseUserStateKey) as UseUserStateType
 
 const hundleOpenClick = () => {
-  operationLog.send(operationLog.OPERATION_CD.OPEN_MODAL_CLICK)
   useMainState.openModal.open()
 }
 
@@ -32,7 +30,6 @@ const hundleSaveClick = () => {
     alert("保存はYouTube同士の組み合わせのみ行えます。")
     return
   }
-  operationLog.send(operationLog.OPERATION_CD.SAVE_MODAL_CLICK)
   useMainState.saveModal.open()
 }
 </script>

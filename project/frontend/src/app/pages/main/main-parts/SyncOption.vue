@@ -10,24 +10,20 @@ import {
 } from "@/app/loading-parts/LoadingState"
 import { handleTweetLinkClick } from "./sync-option-parts/HandleTweetLinkClick"
 import { VideoType } from "./player-area-parts/IVideoPlayer"
-import { operationLog } from "@/core/operationLog"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const hundleVideoRunSyncClick = () => {
-  operationLog.send(operationLog.OPERATION_CD.SYNC_RUN_CLICK)
   useMainState.syncPlayer.runSync()
   window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
 }
 
 const hundleVideoStopSyncClick = () => {
-  operationLog.send(operationLog.OPERATION_CD.SYNC_STOP_CLICK)
   useMainState.syncPlayer.stopSync()
 }
 
 const hundleTweetClick = async () => {
-  operationLog.send(operationLog.OPERATION_CD.SYNC_SHARE_CLICK)
   if (
     useMainState.syncPlayer.playerOne.value.subscription.videoType.value !==
       VideoType.YOUTUBE ||

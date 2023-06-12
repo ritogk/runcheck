@@ -9,29 +9,24 @@ import {
   SpeakerXMarkIcon,
   // SearchIcon,
 } from "@heroicons/vue/20/solid"
-import { operationLog } from "@/core/operationLog"
 import { OperationCd } from "@/core/openapiClient"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
 const hundlePlaySwitch = () => {
-  operationLog.send(OperationCd.SYNC_CONTROLLER_SWITCH_PLAY_CLICK)
   useMainState.syncPlayer.mute()
   useMainState.syncPlayer.switchPlay()
 }
 
 const hundleMuteSwitch = () => {
-  operationLog.send(OperationCd.SYNC_CONTROLLER_SWITCH_MUTE_CLICK)
   useMainState.syncPlayer.switchMute()
 }
 
 const hundleReload = () => {
-  operationLog.send(OperationCd.SYNC_CONTROLLER_RELOAD_CLICK)
   useMainState.syncPlayer.reload()
 }
 
 const hundleRepeatSwitch = () => {
-  operationLog.send(OperationCd.SYNC_CONTROLLER_SWITCH_REPEAT_CLICK)
   useMainState.syncPlayer.switchRepeat()
 }
 
@@ -118,7 +113,6 @@ function convertSecondsToMMSS(seconds: number) {
 }
 
 const hundleAdjustSpeedClick = () => {
-  operationLog.send(operationLog.OPERATION_CD.SYNC_CONTROLLER_SPEED_CLICK)
   useMainState.adjustSpeedModal.open()
 }
 </script>

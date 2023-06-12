@@ -9,7 +9,6 @@ import {
   UseAlretStateType,
 } from "@/app/dashboard-parts/UseAlretState"
 import { useRouter } from "vue-router"
-import { operationLog } from "@/core/operationLog"
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
@@ -27,7 +26,6 @@ const form = {
 }
 
 const onSubmit = async () => {
-  operationLog.send(operationLog.OPERATION_CD.LOGIN_CLICK)
   if (
     form.email.value === null ||
     form.password.value === null ||

@@ -14,7 +14,6 @@ import {
   // SearchIcon,
 } from "@heroicons/vue/20/solid"
 import { VideoType } from "./player-area-parts/IVideoPlayer"
-import { operationLog } from "@/core/operationLog"
 import { extractYoutubeId } from "@/core/extractYoutubeId"
 
 const playerNo = PlayerNo.ONE
@@ -37,7 +36,6 @@ watch(elements.videoArea, () => {
 })
 
 const hundleLocalVideoSelect = () => {
-  operationLog.send(operationLog.OPERATION_CD.PLAYER_ONE_LOCAL_SELECT)
   elements.localVideo.file.value?.click()
 }
 
@@ -57,7 +55,6 @@ const hundleLocalVideoChange = async (event: Event) => {
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
-  operationLog.send(operationLog.OPERATION_CD.PLAYER_ONE_URL_ENTER)
   playerOne.value.destory()
   const youtubeId = extractYoutubeId(youtubeUrl)
   const player = new YouTubePlayer("youtube-video-one", youtubeId)
@@ -71,7 +68,6 @@ const hundleVideoSeek = async (seconds: number) => {
 }
 
 const hundleYoutubeSearch = () => {
-  operationLog.send(operationLog.OPERATION_CD.PLAYER_ONE_YOUTUBE_SEARCH_CLICK)
   useMainState.youtubeModal.open(playerNo)
 }
 </script>

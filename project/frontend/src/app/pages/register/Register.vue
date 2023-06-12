@@ -9,7 +9,6 @@ import {
   UseUserStateKey,
   UseUserStateType,
 } from "@/app/dashboard-parts/UseUserState"
-import { operationLog } from "@/core/operationLog"
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
@@ -45,7 +44,6 @@ const onSwitchPasswordVisibility = (type: "password" | "password-confirm") => {
 }
 
 const onSubmit = async () => {
-  operationLog.send(operationLog.OPERATION_CD.REGISTER_CLICK)
   if (
     form.hanndleName.value === null ||
     form.carType.value === null ||
