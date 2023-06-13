@@ -9,6 +9,7 @@ import FileController from "./main-parts/FileController.vue"
 import SyncController from "./main-parts/SyncController.vue"
 import SyncOption from "./main-parts/SyncOption.vue"
 import MemoArea from "./main-parts/MemoArea.vue"
+import { VideoType } from "@/app/pages/main/main-parts/player-area-parts/IVideoPlayer"
 import {
   UseUserStateKey,
   UseUserStateType,
@@ -18,6 +19,23 @@ const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)
 
 const userState = inject(UseUserStateKey) as UseUserStateType
+
+const hundleOpenClick = () => {
+  useMainState.openModal.open()
+}
+
+const hundleSaveClick = () => {
+  if (
+    useMainState.syncPlayer.playerOne.value.subscription.videoType.value !==
+      VideoType.YOUTUBE ||
+    useMainState.syncPlayer.playerTwo.value.subscription.videoType.value !=
+      VideoType.YOUTUBE
+  ) {
+    alert("保存はYouTube同士の組み合わせのみ行えます。")
+    return
+  }
+  useMainState.saveModal.open()
+}
 </script>
 
 <template>
@@ -25,6 +43,8 @@ const userState = inject(UseUserStateKey) as UseUserStateType
     <div class="px-1">
       <FileController
         v-show="userState.subscription.logined.value"
+        @hundle-open-click="hundleOpenClick"
+        @hundle-save-click="hundleSaveClick"
       ></FileController>
       <MemoArea></MemoArea>
       <SyncOption class="my-2"></SyncOption>

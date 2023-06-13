@@ -1,30 +1,18 @@
 <script setup lang="ts">
-import { inject } from "vue"
-import {
-  UseMainStateType,
-  UseMainStateKey,
-} from "@/app/pages/main/UseMainState"
 import SaveModal from "./file-controller-parts/SaveModal.vue"
 import OpenModal from "./file-controller-parts/OpenModal.vue"
-import { VideoType } from "@/app/pages/main/main-parts/player-area-parts/IVideoPlayer"
 
-const useMainState = inject(UseMainStateKey) as UseMainStateType
+const emits = defineEmits<{
+  (e: "hundleOpenClick"): void
+  (e: "hundleSaveClick"): void
+}>()
 
 const hundleOpenClick = () => {
-  useMainState.openModal.open()
+  emits("hundleOpenClick")
 }
 
 const hundleSaveClick = () => {
-  if (
-    useMainState.syncPlayer.playerOne.value.subscription.videoType.value !==
-      VideoType.YOUTUBE ||
-    useMainState.syncPlayer.playerTwo.value.subscription.videoType.value !=
-      VideoType.YOUTUBE
-  ) {
-    alert("保存はYouTube同士の組み合わせのみ行えます。")
-    return
-  }
-  useMainState.saveModal.open()
+  emits("hundleSaveClick")
 }
 </script>
 
@@ -63,7 +51,7 @@ const hundleSaveClick = () => {
 
           <button
             class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-            @click="hundleSaveClick()"
+            @click="hundleSaveClick"
           >
             <div class="flex items-center justify-center gap-1">
               <svg
