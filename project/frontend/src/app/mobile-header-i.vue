@@ -5,7 +5,6 @@ import { Bars3Icon } from "@heroicons/vue/24/outline"
 import { UseSidebarStateKey, IUseSidebarState } from "./use-sidebar-state"
 
 const useSidebarState = inject(UseSidebarStateKey) as IUseSidebarState
-
 const router = useRouter()
 
 const hundleHeaderClick = () => {
