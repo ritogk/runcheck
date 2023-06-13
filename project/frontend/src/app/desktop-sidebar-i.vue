@@ -2,7 +2,7 @@
 import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { UserIcon } from "@heroicons/vue/24/outline"
-import { UseUserStateType, UseUserStateKey } from "@/app/UseUserState"
+import { UseUserStateType, UseUserStateKey } from "@/app/use-user-state"
 import { UseSidebarStateKey, IUseSidebarState } from "./use-sidebar-state"
 
 const useSidebarState = inject(UseSidebarStateKey) as IUseSidebarState

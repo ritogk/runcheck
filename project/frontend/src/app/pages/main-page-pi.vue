@@ -9,7 +9,7 @@ import FileControllerI from "./main-page-parts/file-controller-i.vue"
 import SyncControllerI from "./main-page-parts/sync-controller-i.vue"
 import SyncOptionI from "./main-page-parts/sync-option-i.vue"
 import Memo from "./main-page-parts/memo.vue"
-import { UseUserStateKey, UseUserStateType } from "@/app/UseUserState"
+import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
 
 const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)

@@ -1,6 +1,6 @@
 import { inject } from "vue"
 import { ComparisonsApi } from "@/core/openapiClient"
-import { UseAlretStateKey, UseAlretStateType } from "@/app/UseAlretState"
+import { UseAlretStateKey, UseAlretStateType } from "@/app/use-alret-state"
 import {
   UseMainStateKey,
   UseMainStateType,

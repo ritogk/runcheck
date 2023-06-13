@@ -1,12 +1,12 @@
 import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { YoutubeApi } from "@/core/openapiClient"
-import { UseAlretStateKey, UseAlretStateType } from "@/app/UseAlretState"
+import { UseAlretStateKey, UseAlretStateType } from "@/app/use-alret-state"
 import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main-page-parts/use-main-state"
-import { UseUserStateKey, UseUserStateType } from "@/app/UseUserState"
+import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { apiConfig } from "@/core/openapi"
 
