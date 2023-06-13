@@ -1,27 +1,12 @@
 <script setup lang="ts">
-import { inject } from "vue"
-import {
-  UseMainStateType,
-  UseMainStateKey,
-} from "@/app/pages/main/UseMainState"
-import {
-  UseUserStateKey,
-  UseUserStateType,
-} from "@/app/dashboard-parts/UseUserState"
-
-const useMainState = inject(UseMainStateKey) as UseMainStateType
-
-const userState = inject(UseUserStateKey) as UseUserStateType
+const props = defineProps<{
+  title: string
+  memo: string
+}>()
 </script>
 
 <template>
-  <div
-    v-show="
-      userState.subscription.logined.value &&
-      useMainState.memo.subscription.title.value &&
-      useMainState.memo.subscription.memo.value
-    "
-  >
+  <div>
     <!-- タイトル、詳細 -->
     <div class="rounded-md border border-gray-300 bg-white px-4 py-3 sm:px-4">
       <div
@@ -29,10 +14,10 @@ const userState = inject(UseUserStateKey) as UseUserStateType
       >
         <div class="ml-4 mt-4">
           <h3 class="text-base font-semibold leading-6 text-gray-900">
-            {{ useMainState.memo.subscription.title.value }}
+            {{ props.title }}
           </h3>
           <p class="mt-1 text-sm text-gray-500">
-            {{ useMainState.memo.subscription.memo.value }}
+            {{ props.memo }}
           </p>
         </div>
       </div>

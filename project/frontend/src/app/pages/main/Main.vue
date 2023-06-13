@@ -46,7 +46,15 @@ const hundleSaveClick = () => {
         @hundle-open-click="hundleOpenClick"
         @hundle-save-click="hundleSaveClick"
       ></FileController>
-      <MemoArea></MemoArea>
+      <MemoArea
+        :title="useMainState.memo.subscription.title.value"
+        :memo="useMainState.memo.subscription.memo.value"
+        v-show="
+          userState.subscription.logined.value &&
+          useMainState.memo.subscription.title.value &&
+          useMainState.memo.subscription.memo.value
+        "
+      ></MemoArea>
       <SyncOption class="my-2"></SyncOption>
     </div>
 
