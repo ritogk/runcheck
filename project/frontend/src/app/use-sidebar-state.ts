@@ -7,6 +7,7 @@ import {
   FunctionalComponent,
   HTMLAttributes,
   VNodeProps,
+  InjectionKey,
 } from "vue"
 import { useRouter } from "vue-router"
 
@@ -129,3 +130,7 @@ export class UseSidebarState implements IUseSidebarState {
     }),
   }
 }
+
+export const UseSidebarStateKey: InjectionKey<IUseSidebarState> = Symbol(
+  "UseSidebarStateType"
+)
