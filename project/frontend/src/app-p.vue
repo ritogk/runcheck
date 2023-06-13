@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { provide } from "vue"
-import DesktopSidebarI from "./app/desktop-sidebar-i.vue"
-import MobileHeaderI from "./app/mobile-header-i.vue"
-import MobileSidebarI from "./app/mobile-sidebar-i.vue"
+import SidebarDesktopI from "./app/sidebar-desktop-i.vue"
+import HeaderMobileI from "./app/header-mobile-i.vue"
+import SidebarMobileI from "./app/sidebar-mobile-i.vue"
 import AlretI from "@/app/alret-i.vue"
 import Loading from "@/app/loading.vue"
 import "./tailwind.css"
@@ -32,9 +32,9 @@ loadState()
 
 <template>
   <div class="touch-manipulation">
-    <MobileSidebarI></MobileSidebarI>
-    <MobileHeaderI></MobileHeaderI>
-    <DesktopSidebarI></DesktopSidebarI>
+    <HeaderMobileI></HeaderMobileI>
+    <SidebarMobileI></SidebarMobileI>
+    <SidebarDesktopI></SidebarDesktopI>
     <main class="lg:pl-72">
       <AlretI></AlretI>
       <div class="bg-gray-100 sm:px-1 lg:px-8">
