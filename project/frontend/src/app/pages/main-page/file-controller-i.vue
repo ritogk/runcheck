@@ -3,10 +3,10 @@ import { inject } from "vue"
 import {
   UseMainStateType,
   UseMainStateKey,
-} from "@/app/pages/main-page-parts/use-main-state"
-import SaveModalI from "./file-controller-parts/save-modal-i.vue"
-import OpenModalI from "./file-controller-parts/open-modal-i.vue"
-import { VideoType } from "@/app/pages/main-page-parts/player-area-parts/i-video-player"
+} from "@/app/pages/main-page/use-main-state"
+import SaveModalI from "./file-controller/save-modal-i.vue"
+import OpenModalI from "./file-controller/open-modal-i.vue"
+import { VideoType } from "@/app/pages/main-page/player-area/i-video-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 

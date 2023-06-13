@@ -4,9 +4,9 @@ import { UseAlretStateKey, UseAlretStateType } from "@/app/use-alret-state"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page-parts/use-main-state"
+} from "@/app/pages/main-page/use-main-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
-import { YouTubePlayer } from "@/app/pages/main-page-parts/player-area-parts/youtube-player"
+import { YouTubePlayer } from "@/app/pages/main-page/player-area/youtube-player"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 

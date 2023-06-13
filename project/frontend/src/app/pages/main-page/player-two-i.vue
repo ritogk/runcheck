@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { ref, inject, watch } from "vue"
-import { PlayerNo } from "@/app/pages/main-page-parts/use-main-state-parts/youtube-selector-modal-state"
-import { YouTubePlayer } from "./player-area-parts/youtube-player"
-import { LocalVideoPlayer } from "./player-area-parts/local-video-player"
+import { PlayerNo } from "@/app/pages/main-page/use-main-state/youtube-selector-modal-state"
+import { YouTubePlayer } from "./player-area/youtube-player"
+import { LocalVideoPlayer } from "./player-area/local-video-player"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page-parts/use-main-state"
+} from "@/app/pages/main-page/use-main-state"
 import { VideoCameraIcon } from "@heroicons/vue/20/solid"
-import AdjustmentArea from "./player-area-parts/adjustment-area.vue"
-import { VideoType } from "./player-area-parts/i-video-player"
+import AdjustmentArea from "./player-area/adjustment-area.vue"
+import { VideoType } from "./player-area/i-video-player"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 
 const playerNo = PlayerNo.TWO

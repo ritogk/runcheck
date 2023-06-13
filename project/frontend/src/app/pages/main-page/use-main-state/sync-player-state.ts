@@ -3,8 +3,8 @@ import {
   IVideoPlayer,
   Status,
   VideoType,
-} from "@/app/pages/main-page-parts/player-area-parts/i-video-player"
-import { DummyPlayer } from "@/app/pages/main-page-parts/player-area-parts/dummy-player"
+} from "@/app/pages/main-page/player-area/i-video-player"
+import { DummyPlayer } from "@/app/pages/main-page/player-area/dummy-player"
 import {
   ComparisonsApi,
   VideoType as ApiVideoType,

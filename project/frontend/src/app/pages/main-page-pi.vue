@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { provide, inject } from "vue"
-import { UseMainState, UseMainStateKey } from "./main-page-parts/use-main-state"
-import PlayerOneI from "./main-page-parts/player-one-i.vue"
-import PlayerTwoI from "./main-page-parts/player-two-i.vue"
-import YoutubeSelectorModalI from "./main-page-parts/youtube-selector-modal-i.vue"
-import AdjustSpeedModalI from "./main-page-parts/adjust-speed-modal-i.vue"
-import FileControllerI from "./main-page-parts/file-controller-i.vue"
-import SyncControllerI from "./main-page-parts/sync-controller-i.vue"
-import SyncOptionI from "./main-page-parts/sync-option-i.vue"
-import Memo from "./main-page-parts/memo.vue"
+import { UseMainState, UseMainStateKey } from "./main-page/use-main-state"
+import PlayerOneI from "./main-page/player-one-i.vue"
+import PlayerTwoI from "./main-page/player-two-i.vue"
+import YoutubeSelectorModalI from "./main-page/youtube-selector-modal-i.vue"
+import AdjustSpeedModalI from "./main-page/adjust-speed-modal-i.vue"
+import FileControllerI from "./main-page/file-controller-i.vue"
+import SyncControllerI from "./main-page/sync-controller-i.vue"
+import SyncOptionI from "./main-page/sync-option-i.vue"
+import Memo from "./main-page/memo.vue"
 import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
 
 const useMainState = UseMainState()

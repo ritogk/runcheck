@@ -19,7 +19,7 @@ import {
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page-parts/use-main-state"
+} from "@/app/pages/main-page/use-main-state"
 import { fetchComparisons } from "@/core/comparisons"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
