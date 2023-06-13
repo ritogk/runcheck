@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, provide, inject, computed } from "vue"
+import { provide, inject } from "vue"
 import { useRouter } from "vue-router"
 // component
 import {
@@ -8,16 +8,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue"
-import {
-  Bars3Icon,
-  UserIcon,
-  UserPlusIcon,
-  XMarkIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
-  ArrowRightOnRectangleIcon,
-  ArrowLeftOnRectangleIcon,
-  QuestionMarkCircleIcon,
-} from "@heroicons/vue/24/outline"
+import { Bars3Icon, UserIcon, XMarkIcon } from "@heroicons/vue/24/outline"
 import AlretI from "@/app/dashboard-parts/alret-i.vue"
 // 状態
 import {
@@ -25,19 +16,20 @@ import {
   UseAlretStateKey,
 } from "./dashboard-parts/UseAlretState"
 import {
-  UseUserState,
+  UseUserStateType,
   UseUserStateKey,
 } from "@/app/dashboard-parts/UseUserState"
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
 } from "@/app/loading-parts/loading-state"
+import { UseSidebarState } from "./use-sidebar-state"
 
+const useSidebarState = new UseSidebarState()
 const useAlretState = UseAlretState()
-const useUserState = UseUserState()
+const useUserState = inject(UseUserStateKey) as UseUserStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 provide(UseAlretStateKey, useAlretState)
-provide(UseUserStateKey, useUserState)
 
 const loadState = async () => {
   const loadingId = useLoadingState.run()
@@ -53,80 +45,22 @@ const hundleHeaderClick = () => {
 }
 
 const hundleHomeClick = () => {
-  sidebarOpen.value = false
+  useSidebarState.close()
   router.push({ name: "home" })
 }
-
-const navigation = [
-  {
-    name: "ログイン",
-    href: "#",
-    icon: ArrowRightOnRectangleIcon,
-    current: false,
-    action: () => {
-      sidebarOpen.value = false
-      router.push({ name: "login" })
-    },
-    show: computed(() => !useUserState.subscription.logined.value),
-  },
-  {
-    name: "ログアウト",
-    href: "#",
-    icon: ArrowLeftOnRectangleIcon,
-    current: false,
-    action: async () => {
-      const loadingId = useLoadingState.run()
-      sidebarOpen.value = false
-      await useUserState.logout()
-      useLoadingState.stop(loadingId)
-      router.push({ name: "index" })
-    },
-    show: computed(() => useUserState.subscription.logined.value),
-  },
-  {
-    name: "新規登録",
-    href: "#",
-    icon: UserPlusIcon,
-    current: false,
-    action: async () => {
-      sidebarOpen.value = false
-      router.push({ name: "register" })
-    },
-    show: computed(() => !useUserState.subscription.logined.value),
-  },
-  {
-    name: "このアプリについて",
-    href: "#",
-    icon: QuestionMarkCircleIcon,
-    current: false,
-    action: () => {
-      location.href = "/lp/ja"
-    },
-    show: computed(() => true),
-  },
-  {
-    name: "問い合わせ",
-    href: "#",
-    icon: ChatBubbleOvalLeftEllipsisIcon,
-    current: false,
-    action: () => {
-      location.href = "https://twitter.com/homing_fd2"
-    },
-    show: computed(() => true),
-  },
-]
-
-const sidebarOpen = ref(false)
 </script>
 
 <template>
   <div>
     <div class="flex justify-end">
-      <TransitionRoot as="template" :show="sidebarOpen">
+      <TransitionRoot
+        as="template"
+        :show="useSidebarState.subscription.opened.value"
+      >
         <Dialog
           as="div"
           class="relative z-40 lg:hidden"
-          @close="sidebarOpen = false"
+          @close="useSidebarState.close()"
         >
           <TransitionChild
             as="template"
@@ -163,7 +97,7 @@ const sidebarOpen = ref(false)
                 >
                   <div
                     class="flex w-16 items-start justify-center pt-5"
-                    @click="sidebarOpen = false"
+                    @click="useSidebarState.close()"
                   >
                     <button
                       type="button"
@@ -200,7 +134,11 @@ const sidebarOpen = ref(false)
                             </a>
                           </li>
 
-                          <li v-for="item in navigation" :key="item.name">
+                          <li
+                            v-for="item in useSidebarState.subscription.items
+                              .value"
+                            :key="item.name"
+                          >
                             <a
                               v-if="item.show.value"
                               :href="item.href"
@@ -266,7 +204,10 @@ const sidebarOpen = ref(false)
                     {{ useUserState.subscription.user.value.name }}
                   </a>
                 </li>
-                <li v-for="item in navigation" :key="item.name">
+                <li
+                  v-for="item in useSidebarState.subscription.items.value"
+                  :key="item.name"
+                >
                   <a
                     v-if="item.show.value"
                     :href="item.href"
@@ -312,7 +253,7 @@ const sidebarOpen = ref(false)
         class="-m-2.5 p-2.5 text-gray-400 lg:hidden"
         title="サイドバーを開く"
         aria-label="サイドバーを開く"
-        @click="sidebarOpen = true"
+        @click="useSidebarState.open()"
       >
         <Bars3Icon class="h-6 w-6" aria-hidden="true" />
       </button>

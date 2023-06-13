@@ -7,9 +7,15 @@ import {
   UseLoading,
   UseLoadingStateKey,
 } from "@/app/loading-parts/loading-state"
+import {
+  UseUserState,
+  UseUserStateKey,
+} from "@/app/dashboard-parts/UseUserState"
 
 const useLoading = UseLoading()
+const useUserState = UseUserState()
 provide(UseLoadingStateKey, useLoading)
+provide(UseUserStateKey, useUserState)
 useLoading.load()
 </script>
 
