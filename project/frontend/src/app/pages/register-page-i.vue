@@ -1,18 +1,9 @@
 <script setup lang="ts">
 import { ref, inject } from "vue"
-import {
-  UseAlretStateKey,
-  UseAlretStateType,
-} from "@/app/dashboard-parts/UseAlretState"
+import { UseAlretStateKey, UseAlretStateType } from "@/app/UseAlretState"
 import { useRouter } from "vue-router"
-import {
-  UseUserStateKey,
-  UseUserStateType,
-} from "@/app/dashboard-parts/UseUserState"
-import {
-  UseLoadingStateKey,
-  UseLoadingStateType,
-} from "@/app/loading-parts/loading-state"
+import { UseUserStateKey, UseUserStateType } from "@/app/UseUserState"
+import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 
 const router = useRouter()
 const useAlertState = inject(UseAlretStateKey) as UseAlretStateType

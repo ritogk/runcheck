@@ -4,10 +4,7 @@ import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main-page-parts/use-main-state"
-import {
-  UseLoadingStateKey,
-  UseLoadingStateType,
-} from "@/app/loading-parts/loading-state"
+import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { handleComparisonOpen } from "./sync-option-parts/handle-comparison-open"
 import { VideoType } from "./player-area-parts/i-video-player"
 

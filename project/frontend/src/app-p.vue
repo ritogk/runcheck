@@ -3,21 +3,12 @@ import { provide } from "vue"
 import DesktopSidebarI from "./app/desktop-sidebar-i.vue"
 import MobileHeaderI from "./app/mobile-header-i.vue"
 import MobileSidebarI from "./app/mobile-sidebar-i.vue"
-import AlretI from "@/app/dashboard-parts/alret-i.vue"
+import AlretI from "@/app/alret-i.vue"
 import Loading from "@/app/loading.vue"
 import "./tailwind.css"
-import {
-  UseLoadingState,
-  UseLoadingStateKey,
-} from "@/app/loading-parts/loading-state"
-import {
-  UseUserState,
-  UseUserStateKey,
-} from "@/app/dashboard-parts/UseUserState"
-import {
-  UseAlretState,
-  UseAlretStateKey,
-} from "./app/dashboard-parts/UseAlretState"
+import { UseLoadingState, UseLoadingStateKey } from "@/app/loading-state"
+import { UseUserState, UseUserStateKey } from "@/app/UseUserState"
+import { UseAlretState, UseAlretStateKey } from "./app/UseAlretState"
 import { UseSidebarState, UseSidebarStateKey } from "./app/use-sidebar-state"
 
 const useLoadingState = UseLoadingState()

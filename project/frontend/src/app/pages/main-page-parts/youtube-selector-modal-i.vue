@@ -11,14 +11,8 @@ import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main-page-parts/use-main-state"
-import {
-  UseUserStateKey,
-  UseUserStateType,
-} from "@/app/dashboard-parts/UseUserState"
-import {
-  UseLoadingStateKey,
-  UseLoadingStateType,
-} from "@/app/loading-parts/loading-state"
+import { UseUserStateKey, UseUserStateType } from "@/app/UseUserState"
+import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal-parts/youtube-list-state"
 import { PlayerNo } from "@/app/pages/main-page-parts/use-main-state-parts/youtube-selector-modal-state"

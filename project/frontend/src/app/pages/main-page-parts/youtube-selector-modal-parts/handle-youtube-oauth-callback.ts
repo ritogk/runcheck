@@ -1,22 +1,13 @@
 import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { YoutubeApi } from "@/core/openapiClient"
-import {
-  UseAlretStateKey,
-  UseAlretStateType,
-} from "@/app/dashboard-parts/UseAlretState"
+import { UseAlretStateKey, UseAlretStateType } from "@/app/UseAlretState"
 import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main-page-parts/use-main-state"
-import {
-  UseUserStateKey,
-  UseUserStateType,
-} from "@/app/dashboard-parts/UseUserState"
-import {
-  UseLoadingStateKey,
-  UseLoadingStateType,
-} from "@/app/loading-parts/loading-state"
+import { UseUserStateKey, UseUserStateType } from "@/app/UseUserState"
+import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { apiConfig } from "@/core/openapi"
 
 export const handleYoutubeOauthCallback = async (code: string) => {

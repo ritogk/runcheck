@@ -9,8 +9,8 @@ import {
   InjectionKey,
 } from "vue"
 import { useRouter } from "vue-router"
-import { UseUserStateType } from "@/app/dashboard-parts/UseUserState"
-import { UseLoadingStateType } from "@/app/loading-parts/loading-state"
+import { UseUserStateType } from "@/app/UseUserState"
+import { UseLoadingStateType } from "@/app/loading-state"
 import {
   UserPlusIcon,
   ChatBubbleOvalLeftEllipsisIcon,
