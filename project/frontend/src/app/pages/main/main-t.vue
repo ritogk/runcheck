@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { provide, inject } from "vue"
 import { UseMainState, UseMainStateKey } from "./UseMainState"
-import PlayerOneArea from "./main-parts/PlayerOneArea.vue"
-import PlayerTwoArea from "./main-parts/PlayerTwoArea.vue"
-import YoutubeSelectorModal from "./main-parts/YoutubeSelectorModal.vue"
-import AdjustSpeedModal from "./main-parts/AdjustSpeedModal.vue"
-import FileControllerTw from "./main-parts/file-controller-tw.vue"
-import SyncController from "./main-parts/SyncController.vue"
-import SyncOption from "./main-parts/SyncOption.vue"
-import MemoArea from "./main-parts/MemoArea.vue"
+import PlayerOneT from "./main-parts/player-one-t.vue"
+import PlayerTwoT from "./main-parts/player-two-t.vue"
+import YoutubeSelectorModalT from "./main-parts/youtube-selector-modal-t.vue"
+import AdjustSpeedModalT from "./main-parts/adjust-speed-modal-t.vue"
+import FileControllerT from "./main-parts/file-controller-t.vue"
+import SyncControllerT from "./main-parts/sync-controller-t.vue"
+import SyncOptionT from "./main-parts/sync-option-t.vue"
+import Memo from "./main-parts/memo.vue"
 import {
   UseUserStateKey,
   UseUserStateType,
@@ -23,10 +23,10 @@ const userState = inject(UseUserStateKey) as UseUserStateType
 <template>
   <div class="max-w-[600px]">
     <div class="px-1">
-      <FileControllerTw
+      <FileControllerT
         v-show="userState.subscription.logined.value"
-      ></FileControllerTw>
-      <MemoArea
+      ></FileControllerT>
+      <Memo
         :title="useMainState.memo.subscription.title.value"
         :memo="useMainState.memo.subscription.memo.value"
         v-show="
@@ -34,16 +34,16 @@ const userState = inject(UseUserStateKey) as UseUserStateType
           useMainState.memo.subscription.title.value &&
           useMainState.memo.subscription.memo.value
         "
-      ></MemoArea>
-      <SyncOption class="my-2"></SyncOption>
+      ></Memo>
+      <SyncOptionT class="my-2"></SyncOptionT>
     </div>
 
-    <PlayerOneArea></PlayerOneArea>
-    <PlayerTwoArea></PlayerTwoArea>
-    <SyncController
+    <PlayerOneT></PlayerOneT>
+    <PlayerTwoT></PlayerTwoT>
+    <SyncControllerT
       v-show="useMainState.syncPlayer.subscription.synced.value"
-    ></SyncController>
+    ></SyncControllerT>
   </div>
-  <YoutubeSelectorModal></YoutubeSelectorModal>
-  <AdjustSpeedModal></AdjustSpeedModal>
+  <YoutubeSelectorModalT></YoutubeSelectorModalT>
+  <AdjustSpeedModalT></AdjustSpeedModalT>
 </template>

@@ -9,7 +9,6 @@ import {
   SpeakerXMarkIcon,
   // SearchIcon,
 } from "@heroicons/vue/20/solid"
-import { OperationCd } from "@/core/openapiClient"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 

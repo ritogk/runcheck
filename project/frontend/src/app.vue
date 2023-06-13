@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { provide } from "vue"
-import Dashboard from "@/app/Dashboard.vue"
-import Loading from "@/app/Loading.vue"
+import DashboardT from "@/app/dashboard-t.vue"
+import LoadingT from "@/app/loading-t.vue"
 import "./tailwind.css"
 import {
   UseLoading,
@@ -14,6 +14,6 @@ useLoading.load()
 </script>
 
 <template>
-  <Dashboard class="touch-manipulation" />
-  <Loading v-if="useLoading.subscription.isLoading.value"></Loading>
+  <DashboardT class="touch-manipulation" />
+  <LoadingT v-if="useLoading.subscription.isLoading.value"></LoadingT>
 </template>

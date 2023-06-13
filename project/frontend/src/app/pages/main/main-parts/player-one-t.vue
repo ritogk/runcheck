@@ -3,16 +3,19 @@ import { ref, inject, watch } from "vue"
 import { PlayerNo } from "@/app/pages/main/use-main-state-parts/YoutubeSelectorModalState"
 import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
 import { LocalVideoPlayer } from "./player-area-parts/LocalVideoPlayer"
+import AdjustmentArea from "./player-area-parts/adjustment-area.vue"
 import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main/UseMainState"
-import { VideoCameraIcon } from "@heroicons/vue/20/solid"
-import AdjustmentArea from "./player-area-parts/AdjustmentArea.vue"
+import {
+  VideoCameraIcon,
+  // SearchIcon,
+} from "@heroicons/vue/20/solid"
 import { VideoType } from "./player-area-parts/IVideoPlayer"
 import { extractYoutubeId } from "@/core/extractYoutubeId"
 
-const playerNo = PlayerNo.TWO
+const playerNo = PlayerNo.ONE
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const youtubeUrl = ref("")
@@ -35,27 +38,27 @@ const hundleLocalVideoSelect = () => {
   elements.localVideo.file.value?.click()
 }
 
-const playerTwo = useMainState.syncPlayer.playerTwo
+const playerOne = useMainState.syncPlayer.playerOne
 
 const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0]
   const objectURL = URL.createObjectURL(file)
 
-  playerTwo.value.destory()
+  playerOne.value.destory()
   const localVideoPlayer = new LocalVideoPlayer(
     elements.localVideo.video.value as HTMLVideoElement,
     objectURL
   )
   localVideoPlayer.load()
-  playerTwo.value = localVideoPlayer
+  playerOne.value = localVideoPlayer
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
-  playerTwo.value.destory()
+  playerOne.value.destory()
   const youtubeId = extractYoutubeId(youtubeUrl)
-  const player = new YouTubePlayer("youtube-video-two", youtubeId)
-  player.load()
-  playerTwo.value = player
+  const player = new YouTubePlayer("youtube-video-one", youtubeId)
+  await player.load()
+  playerOne.value = player
 }
 
 const hundleYoutubeSearch = () => {
@@ -87,45 +90,12 @@ const hundleYoutubeSearch = () => {
 
 <template>
   <div>
-    <!-- Video -->
-    <div :ref="elements.videoArea">
-      <div v-show="playerTwo.subscription.videoType.value === VideoType.NONE">
-        <div
-          class="relative w-full bg-gray-300"
-          :style="{ height: calcVideoHeight }"
-        >
-          <VideoCameraIcon
-            class="absolute bottom-0 left-0 right-0 top-0 m-auto h-2/5 w-2/5 text-gray-400"
-            aria-hidden="true"
-          />
-        </div>
-      </div>
-      <div
-        v-show="playerTwo.subscription.videoType.value === VideoType.YOUTUBE"
-      >
-        <div
-          id="youtube-video-two"
-          class="w-full"
-          :style="{ height: calcVideoHeight }"
-        ></div>
-      </div>
-      <div v-show="playerTwo.subscription.videoType.value === VideoType.LOCAL">
-        <video
-          :ref="elements.localVideo.video"
-          controls
-          playsinline
-          preload="none"
-          class="w-full"
-          :style="{ height: calcVideoHeight }"
-        ></video>
-      </div>
-    </div>
-
     <Transition name="adjustment">
       <div
         v-show="!useMainState.syncPlayer.subscription.synced.value"
-        class="overflow-hidden pb-2"
+        class="overflow-hidden"
       >
+        <AdjustmentArea :player="playerOne" class="px-1"></AdjustmentArea>
         <!-- selector -->
         <div class="px-1">
           <div>
@@ -135,15 +105,15 @@ const hundleYoutubeSearch = () => {
                 class="relative flex w-10/12 flex-grow items-stretch shadow-sm focus-within:z-10"
               >
                 <label
-                  for="youtube-url-two"
+                  for="youtube-url-one"
                   class="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
                   >YouTube</label
                 >
                 <!-- Youtube url -->
                 <input
                   type="email"
-                  name="youtube-url-two"
-                  id="youtube-url-two"
+                  name="youtube-url-one"
+                  id="youtube-url-one"
                   class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"
                   placeholder="https://youtube.com/nLKSSdMWZ8g"
                   v-model="youtubeUrl"
@@ -204,10 +174,45 @@ const hundleYoutubeSearch = () => {
             hidden
           />
         </div>
-
-        <!-- adjustment-->
-        <AdjustmentArea :player="playerTwo" class="mt-2 px-1"></AdjustmentArea>
       </div>
     </Transition>
+
+    <!-- Video -->
+    <div :ref="elements.videoArea">
+      <!-- dummy -->
+      <div v-show="playerOne.subscription.videoType.value === VideoType.NONE">
+        <div
+          class="relative w-full border-b-2 border-gray-200 bg-gray-300"
+          :style="{ height: calcVideoHeight }"
+        >
+          <VideoCameraIcon
+            class="absolute bottom-0 left-0 right-0 top-0 m-auto h-2/5 w-2/5 text-gray-400"
+            aria-hidden="true"
+          />
+        </div>
+      </div>
+      <!-- youtube -->
+      <div
+        v-show="playerOne.subscription.videoType.value === VideoType.YOUTUBE"
+      >
+        <div
+          id="youtube-video-one"
+          class="w-full"
+          :style="{ height: calcVideoHeight }"
+        ></div>
+      </div>
+      <!-- local -->
+      <div v-show="playerOne.subscription.videoType.value === VideoType.LOCAL">
+        <video
+          :ref="elements.localVideo.video"
+          id="local-video-one"
+          controls
+          playsinline
+          preload="none"
+          class="w-full"
+          :style="{ height: calcVideoHeight }"
+        ></video>
+      </div>
+    </div>
   </div>
 </template>

@@ -4,8 +4,8 @@ import {
   UseMainStateType,
   UseMainStateKey,
 } from "@/app/pages/main/UseMainState"
-import SaveModal from "./file-controller-parts/SaveModal.vue"
-import OpenModal from "./file-controller-parts/OpenModal.vue"
+import SaveModalT from "./file-controller-parts/save-modal-t.vue"
+import OpenModalT from "./file-controller-parts/open-modal-t.vue"
 import { VideoType } from "@/app/pages/main/main-parts/player-area-parts/IVideoPlayer"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
@@ -30,8 +30,8 @@ const hundleSaveClick = () => {
 
 <template>
   <div>
-    <SaveModal></SaveModal>
-    <OpenModal></OpenModal>
+    <SaveModalT></SaveModalT>
+    <OpenModalT></OpenModalT>
 
     <div class="my-2">
       <!-- ファイル操作 -->
