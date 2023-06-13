@@ -9,8 +9,8 @@ import {
   TransitionRoot,
 } from "@headlessui/vue"
 import { UserIcon, XMarkIcon } from "@heroicons/vue/24/outline"
-import { UseUserStateType, UseUserStateKey } from "@/app/use-user-state"
-import { UseSidebarStateKey, IUseSidebarState } from "./use-sidebar-state"
+import { UseUserStateType, UseUserStateKey } from "@/app/user-state"
+import { UseSidebarStateKey, IUseSidebarState } from "./sidebar-state"
 
 const useSidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const useUserState = inject(UseUserStateKey) as UseUserStateType

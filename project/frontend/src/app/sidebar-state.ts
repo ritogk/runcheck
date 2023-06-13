@@ -9,7 +9,7 @@ import {
   InjectionKey,
 } from "vue"
 import { useRouter } from "vue-router"
-import { UseUserStateType } from "@/app/use-user-state"
+import { UseUserStateType } from "@/app/user-state"
 import { UseLoadingStateType } from "@/app/loading-state"
 import {
   UserPlusIcon,

@@ -7,9 +7,9 @@ import AlretI from "@/app/alret-i.vue"
 import Loading from "@/app/loading.vue"
 import "./tailwind.css"
 import { UseLoadingState, UseLoadingStateKey } from "@/app/loading-state"
-import { UseUserState, UseUserStateKey } from "@/app/use-user-state"
-import { UseAlretState, UseAlretStateKey } from "./app/use-alret-state"
-import { UseSidebarState, UseSidebarStateKey } from "./app/use-sidebar-state"
+import { UseUserState, UseUserStateKey } from "@/app/user-state"
+import { UseAlretState, UseAlretStateKey } from "./app/alret-state"
+import { UseSidebarState, UseSidebarStateKey } from "./app/sidebar-state"
 
 const useLoadingState = UseLoadingState()
 const useUserState = UseUserState()

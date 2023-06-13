@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref, inject, watch } from "vue"
-import { PlayerNo } from "@/app/pages/main-page/use-main-state/youtube-selector-modal-state"
+import { PlayerNo } from "./main-state/youtube-selector-modal-state"
 import { YouTubePlayer } from "./player-area/youtube-player"
 import { LocalVideoPlayer } from "./player-area/local-video-player"
 import AdjustmentArea from "./player-area/adjustment-area.vue"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page/use-main-state"
+} from "@/app/pages/main-page/main-state"
 import {
   VideoCameraIcon,
   // SearchIcon,

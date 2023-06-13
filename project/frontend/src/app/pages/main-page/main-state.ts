@@ -1,25 +1,19 @@
 import { InjectionKey } from "vue"
-import {
-  OpenModalState,
-  IOpenModalState,
-} from "./use-main-state/open-modal-state"
-import {
-  SaveModalState,
-  ISaveModalState,
-} from "./use-main-state/save-modal-state"
-import { MemoState } from "./use-main-state/memo-state"
+import { OpenModalState, IOpenModalState } from "./main-state/open-modal-state"
+import { SaveModalState, ISaveModalState } from "./main-state/save-modal-state"
+import { MemoState } from "./main-state/memo-state"
 import {
   YoutubeSelectorModalState,
   IYoutubeSelectorModalState,
-} from "./use-main-state/youtube-selector-modal-state"
+} from "./main-state/youtube-selector-modal-state"
 import {
   AdjustSpeedModalState,
   IAdjustSpeedModalState,
-} from "./use-main-state/adjust-speed-modal-state"
+} from "./main-state/adjust-speed-modal-state"
 import {
   SyncPlayerState,
   ISyncPlayerStateType,
-} from "./use-main-state/sync-player-state"
+} from "./main-state/sync-player-state"
 
 type UseMainStateType = {
   openModal: IOpenModalState

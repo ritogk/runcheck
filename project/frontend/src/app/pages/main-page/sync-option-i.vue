@@ -3,7 +3,7 @@ import { inject, computed } from "vue"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page/use-main-state"
+} from "@/app/pages/main-page/main-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { handleComparisonOpen } from "./sync-option/handle-comparison-open"
 import { VideoType } from "./player-area/i-video-player"

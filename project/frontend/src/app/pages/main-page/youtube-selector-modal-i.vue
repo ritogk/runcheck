@@ -10,12 +10,12 @@ import { XMarkIcon } from "@heroicons/vue/20/solid"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page/use-main-state"
-import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
+} from "@/app/pages/main-page/main-state"
+import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal/youtube-list-state"
-import { PlayerNo } from "@/app/pages/main-page/use-main-state/youtube-selector-modal-state"
+import { PlayerNo } from "@/app/pages/main-page/main-state/youtube-selector-modal-state"
 import { YouTubePlayer } from "./player-area/youtube-player"
 import { handleYoutubeOauthCallback } from "./youtube-selector-modal/handle-youtube-oauth-callback"
 import { apiConfig } from "@/core/openapi"

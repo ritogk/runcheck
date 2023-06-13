@@ -3,7 +3,7 @@ import { inject } from "vue"
 import {
   UseMainStateType,
   UseMainStateKey,
-} from "@/app/pages/main-page/use-main-state"
+} from "@/app/pages/main-page/main-state"
 import SaveModalI from "./file-controller/save-modal-i.vue"
 import OpenModalI from "./file-controller/open-modal-i.vue"
 import { VideoType } from "@/app/pages/main-page/player-area/i-video-player"

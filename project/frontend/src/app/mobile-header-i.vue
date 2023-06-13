@@ -2,7 +2,7 @@
 import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { Bars3Icon } from "@heroicons/vue/24/outline"
-import { UseSidebarStateKey, IUseSidebarState } from "./use-sidebar-state"
+import { UseSidebarStateKey, IUseSidebarState } from "./sidebar-state"
 
 const useSidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const router = useRouter()

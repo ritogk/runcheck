@@ -10,7 +10,7 @@ import { XMarkIcon } from "@heroicons/vue/20/solid"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page/use-main-state"
+} from "@/app/pages/main-page/main-state"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
