@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide } from "vue"
+import { provide, inject } from "vue"
 import { UseMainState, UseMainStateKey } from "./UseMainState"
 import PlayerOneArea from "./main-parts/PlayerOneArea.vue"
 import PlayerTwoArea from "./main-parts/PlayerTwoArea.vue"
@@ -9,15 +9,23 @@ import FileController from "./main-parts/FileController.vue"
 import SyncController from "./main-parts/SyncController.vue"
 import SyncOption from "./main-parts/SyncOption.vue"
 import MemoArea from "./main-parts/MemoArea.vue"
+import {
+  UseUserStateKey,
+  UseUserStateType,
+} from "@/app/dashboard-parts/UseUserState"
 
 const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)
+
+const userState = inject(UseUserStateKey) as UseUserStateType
 </script>
 
 <template>
   <div class="max-w-[600px]">
     <div class="px-1">
-      <FileController></FileController>
+      <FileController
+        v-show="userState.subscription.logined.value"
+      ></FileController>
       <MemoArea></MemoArea>
       <SyncOption class="my-2"></SyncOption>
     </div>
