@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { provide, inject } from "vue"
 import { UseMainState, UseMainStateKey } from "./UseMainState"
-import PlayerOneT from "./main-parts/player-one-t.vue"
-import PlayerTwoT from "./main-parts/player-two-t.vue"
-import YoutubeSelectorModalT from "./main-parts/youtube-selector-modal-t.vue"
-import AdjustSpeedModalT from "./main-parts/adjust-speed-modal-t.vue"
-import FileControllerT from "./main-parts/file-controller-t.vue"
-import SyncControllerT from "./main-parts/sync-controller-t.vue"
-import SyncOptionT from "./main-parts/sync-option-t.vue"
+import PlayerOneI from "./main-parts/player-one-i.vue"
+import PlayerTwoI from "./main-parts/player-two-i.vue"
+import YoutubeSelectorModalI from "./main-parts/youtube-selector-modal-i.vue"
+import AdjustSpeedModalI from "./main-parts/adjust-speed-modal-i.vue"
+import FileControllerI from "./main-parts/file-controller-i.vue"
+import SyncControllerI from "./main-parts/sync-controller-i.vue"
+import SyncOptionI from "./main-parts/sync-option-i.vue"
 import Memo from "./main-parts/memo.vue"
 import {
   UseUserStateKey,
@@ -23,9 +23,9 @@ const userState = inject(UseUserStateKey) as UseUserStateType
 <template>
   <div class="max-w-[600px]">
     <div class="px-1">
-      <FileControllerT
+      <FileControllerI
         v-show="userState.subscription.logined.value"
-      ></FileControllerT>
+      ></FileControllerI>
       <Memo
         :title="useMainState.memo.subscription.title.value"
         :memo="useMainState.memo.subscription.memo.value"
@@ -35,15 +35,15 @@ const userState = inject(UseUserStateKey) as UseUserStateType
           useMainState.memo.subscription.memo.value
         "
       ></Memo>
-      <SyncOptionT class="my-2"></SyncOptionT>
+      <SyncOptionI class="my-2"></SyncOptionI>
     </div>
 
-    <PlayerOneT></PlayerOneT>
-    <PlayerTwoT></PlayerTwoT>
-    <SyncControllerT
+    <PlayerOneI></PlayerOneI>
+    <PlayerTwoI></PlayerTwoI>
+    <SyncControllerI
       v-show="useMainState.syncPlayer.subscription.synced.value"
-    ></SyncControllerT>
+    ></SyncControllerI>
   </div>
-  <YoutubeSelectorModalT></YoutubeSelectorModalT>
-  <AdjustSpeedModalT></AdjustSpeedModalT>
+  <YoutubeSelectorModalI></YoutubeSelectorModalI>
+  <AdjustSpeedModalI></AdjustSpeedModalI>
 </template>

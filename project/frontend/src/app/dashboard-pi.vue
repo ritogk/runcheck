@@ -18,7 +18,7 @@ import {
   ArrowLeftOnRectangleIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/vue/24/outline"
-import AlretT from "@/app/dashboard-parts/alret-t.vue"
+import AlretI from "@/app/dashboard-parts/alret-i.vue"
 // 状態
 import {
   UseAlretState,
@@ -319,7 +319,7 @@ const sidebarOpen = ref(false)
     </div>
 
     <main class="lg:pl-72">
-      <AlretT></AlretT>
+      <AlretI></AlretI>
       <div class="bg-gray-100 sm:px-1 lg:px-8">
         <!-- Your content -->
         <router-view></router-view>

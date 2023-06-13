@@ -1,34 +1,34 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
-import MainT from "@/app/pages/main/main-t.vue"
-import RegisterT from "@/app/pages/register/register-t.vue"
-import LoginT from "@/app/pages/login/login-t.vue"
-import HomeT from "@/app/pages/home/home-t.vue"
+import MainPI from "@/app/pages/main/main-pi.vue"
+import RegisterI from "@/app/pages/register/register-i.vue"
+import LoginI from "@/app/pages/login/login-i.vue"
+import HomeI from "@/app/pages/home/home-i.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/index",
     name: "index",
-    component: MainT,
+    component: MainPI,
   },
   {
     path: "/main",
     name: "main",
-    component: MainT,
+    component: MainPI,
   },
   {
     path: "/register",
     name: "register",
-    component: RegisterT,
+    component: RegisterI,
   },
   {
     path: "/login",
     name: "login",
-    component: LoginT,
+    component: LoginI,
   },
   {
     path: "/home",
     name: "home",
-    component: HomeT,
+    component: HomeI,
   },
 ]
 
