@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IVideoPlayer } from "@/app/pages/main-page/main-parts/player-area-parts/i-video-player"
+import { IVideoPlayer } from "@/app/pages/main-page-parts/player-area-parts/i-video-player"
 import {
   ChevronDoubleRightIcon,
   ChevronDoubleLeftIcon,
