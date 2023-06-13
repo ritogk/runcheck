@@ -1,5 +1,5 @@
 import { computed, ref, ComputedRef } from "vue"
-import { localStorageKeys } from "@/core/localstorageKey"
+import { localStorageKeys } from "@/core/localstorage-key"
 
 export interface IYoutubeSelectorModalState {
   open(playerNo: PlayerNo): void

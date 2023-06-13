@@ -7,13 +7,13 @@ import {
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main/UseMainState"
+} from "@/app/pages/main/use-main-state"
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
-} from "@/app/loading-parts/LoadingState"
-import { YouTubePlayer } from "@/app/pages/main/main-parts/player-area-parts/YouTubePlayer"
-import { extractYoutubeId } from "@/core/extractYoutubeId"
+} from "@/app/loading-parts/loading-state"
+import { YouTubePlayer } from "@/app/pages/main/main-parts/player-area-parts/youtube-player"
+import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 
 export const handleComparisonOpen = async (comparisonId: number) => {

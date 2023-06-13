@@ -1,5 +1,5 @@
 import { InjectionKey, ref, computed, ComputedRef } from "vue"
-import { localStorageKeys } from "@/core/localstorageKey"
+import { localStorageKeys } from "@/core/localstorage-key"
 
 type UseLoadingStateType = {
   run(): number

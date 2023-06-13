@@ -3,13 +3,13 @@ import {
   IVideoPlayer,
   Status,
   VideoType,
-} from "@/app/pages/main/main-parts/player-area-parts/IVideoPlayer"
-import { DummyPlayer } from "@/app/pages/main/main-parts/player-area-parts/DummyPlayer"
+} from "@/app/pages/main/main-parts/player-area-parts/i-video-player"
+import { DummyPlayer } from "@/app/pages/main/main-parts/player-area-parts/dummy-player"
 import {
   ComparisonsApi,
   VideoType as ApiVideoType,
 } from "@/core/openapiClient/index"
-import { extractYoutubeId } from "@/core/extractYoutubeId"
+import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 
 export interface ISyncPlayerStateType {

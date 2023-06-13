@@ -8,7 +8,7 @@ import {
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main/UseMainState"
+} from "@/app/pages/main/use-main-state"
 import {
   UseUserStateKey,
   UseUserStateType,
@@ -16,7 +16,7 @@ import {
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
-} from "@/app/loading-parts/LoadingState"
+} from "@/app/loading-parts/loading-state"
 import { apiConfig } from "@/core/openapi"
 
 export const handleYoutubeOauthCallback = async (code: string) => {

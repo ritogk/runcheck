@@ -1,6 +1,6 @@
 import { computed, ref } from "vue"
 import YPlayer from "youtube-player"
-import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer"
+import { IVideoPlayer, VideoType, Status } from "./i-video-player"
 import { YouTubePlayer as YouTubePlayerType } from "youtube-player/dist/types"
 import PlayerStates from "youtube-player/dist/constants/PlayerStates"
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { provide, inject } from "vue"
-import { UseMainState, UseMainStateKey } from "./UseMainState"
+import { UseMainState, UseMainStateKey } from "./use-main-state"
 import PlayerOneI from "./main-parts/player-one-i.vue"
 import PlayerTwoI from "./main-parts/player-two-i.vue"
 import YoutubeSelectorModalI from "./main-parts/youtube-selector-modal-i.vue"

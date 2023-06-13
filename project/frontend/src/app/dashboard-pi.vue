@@ -31,7 +31,7 @@ import {
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
-} from "@/app/loading-parts/LoadingState"
+} from "@/app/loading-parts/loading-state"
 
 const useAlretState = UseAlretState()
 const useUserState = UseUserState()

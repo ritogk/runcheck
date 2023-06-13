@@ -12,7 +12,7 @@ import { useRouter } from "vue-router"
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
-} from "@/app/loading-parts/LoadingState"
+} from "@/app/loading-parts/loading-state"
 
 const router = useRouter()
 const userState = inject(UseUserStateKey) as UseUserStateType

@@ -1,5 +1,5 @@
 import { computed } from "vue"
-import { IVideoPlayer, VideoType, Status } from "./IVideoPlayer"
+import { IVideoPlayer, VideoType, Status } from "./i-video-player"
 
 export class DummyPlayer implements IVideoPlayer {
   load = async () => {

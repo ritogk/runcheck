@@ -6,7 +6,7 @@ import "./tailwind.css"
 import {
   UseLoading,
   UseLoadingStateKey,
-} from "@/app/loading-parts/LoadingState"
+} from "@/app/loading-parts/loading-state"
 
 const useLoading = UseLoading()
 provide(UseLoadingStateKey, useLoading)

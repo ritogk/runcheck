@@ -10,7 +10,7 @@ import { XMarkIcon } from "@heroicons/vue/20/solid"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main/UseMainState"
+} from "@/app/pages/main/use-main-state"
 import {
   UseUserStateKey,
   UseUserStateType,
@@ -18,12 +18,12 @@ import {
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
-} from "@/app/loading-parts/LoadingState"
+} from "@/app/loading-parts/loading-state"
 import { YoutubeApi } from "@/core/openapiClient"
-import { YoutubeListState } from "./youtube-selector-modal-parts/YoutubeListState"
-import { PlayerNo } from "@/app/pages/main/use-main-state-parts/YoutubeSelectorModalState"
-import { YouTubePlayer } from "./player-area-parts/YouTubePlayer"
-import { handleYoutubeOauthCallback } from "./youtube-selector-modal-parts/HandleYoutubeOauthCallback"
+import { YoutubeListState } from "./youtube-selector-modal-parts/youtube-list-state"
+import { PlayerNo } from "@/app/pages/main/use-main-state-parts/youtube-selector-modal-state"
+import { YouTubePlayer } from "./player-area-parts/youtube-player"
+import { handleYoutubeOauthCallback } from "./youtube-selector-modal-parts/handle-youtube-oauth-callback"
 import { apiConfig } from "@/core/openapi"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType

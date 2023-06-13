@@ -13,7 +13,7 @@ import { fetchComparisons, deleteComparison } from "@/core/comparisons"
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
-} from "@/app/loading-parts/LoadingState"
+} from "@/app/loading-parts/loading-state"
 
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 

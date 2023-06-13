@@ -12,7 +12,7 @@ import {
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
-} from "@/app/loading-parts/LoadingState"
+} from "@/app/loading-parts/loading-state"
 
 const router = useRouter()
 const useAlertState = inject(UseAlretStateKey) as UseAlretStateType

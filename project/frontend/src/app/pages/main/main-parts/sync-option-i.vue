@@ -3,13 +3,13 @@ import { inject, computed } from "vue"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main/UseMainState"
+} from "@/app/pages/main/use-main-state"
 import {
   UseLoadingStateKey,
   UseLoadingStateType,
-} from "@/app/loading-parts/LoadingState"
-import { handleComparisonOpen } from "./sync-option-parts/HandleComparisonOpen"
-import { VideoType } from "./player-area-parts/IVideoPlayer"
+} from "@/app/loading-parts/loading-state"
+import { handleComparisonOpen } from "./sync-option-parts/handle-comparison-open"
+import { VideoType } from "./player-area-parts/i-video-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType

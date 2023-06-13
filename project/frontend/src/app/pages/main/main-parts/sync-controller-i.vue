@@ -3,7 +3,7 @@ import { inject, ref, computed } from "vue"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main/UseMainState"
+} from "@/app/pages/main/use-main-state"
 import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
