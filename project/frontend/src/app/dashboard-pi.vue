@@ -52,6 +52,7 @@ const hundleHomeClick = () => {
 
 <template>
   <div>
+    <!-- mobile-sidebar -->
     <div class="flex justify-end">
       <TransitionRoot
         as="template"
@@ -112,7 +113,7 @@ const hundleHomeClick = () => {
                     </button>
                   </div>
                 </TransitionChild>
-                <!-- サイドバー -->
+                <!-- サイドバー(desktop?) -->
                 <div
                   class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10"
                 >
@@ -170,7 +171,33 @@ const hundleHomeClick = () => {
       </TransitionRoot>
     </div>
 
-    <!-- Static sidebar for desktop -->
+    <!-- mobile-header -->
+    <div
+      class="z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-3 shadow-sm sm:px-6 lg:hidden"
+    >
+      <div
+        class="flex-1 cursor-pointer text-sm font-semibold leading-6 text-slate-100"
+        @click="hundleHeaderClick()"
+      >
+        <div>
+          <div class="text-lg">RunCheck</div>
+          <div class="text-[9px] font-normal leading-3">
+            車載動画でサーキットを攻略！タイムアップのための比較アプリ
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="-m-2.5 p-2.5 text-gray-400 lg:hidden"
+        title="サイドバーを開く"
+        aria-label="サイドバーを開く"
+        @click="useSidebarState.open()"
+      >
+        <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+      </button>
+    </div>
+
+    <!-- desktop-sidebar -->
     <div
       class="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-72 lg:flex-col"
     >
@@ -232,31 +259,6 @@ const hundleHomeClick = () => {
           </ul>
         </nav>
       </div>
-    </div>
-
-    <div
-      class="z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-3 shadow-sm sm:px-6 lg:hidden"
-    >
-      <div
-        class="flex-1 cursor-pointer text-sm font-semibold leading-6 text-slate-100"
-        @click="hundleHeaderClick()"
-      >
-        <div>
-          <div class="text-lg">RunCheck</div>
-          <div class="text-[9px] font-normal leading-3">
-            車載動画でサーキットを攻略！タイムアップのための比較アプリ
-          </div>
-        </div>
-      </div>
-      <button
-        type="button"
-        class="-m-2.5 p-2.5 text-gray-400 lg:hidden"
-        title="サイドバーを開く"
-        aria-label="サイドバーを開く"
-        @click="useSidebarState.open()"
-      >
-        <Bars3Icon class="h-6 w-6" aria-hidden="true" />
-      </button>
     </div>
 
     <main class="lg:pl-72">
