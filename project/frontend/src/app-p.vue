@@ -1,25 +1,56 @@
 <script setup lang="ts">
 import { provide } from "vue"
-import DashboardPI from "@/app/dashboard-pi.vue"
+import DesktopSidebarI from "./app/desktop-sidebar-i.vue"
+import MobileHeaderI from "./app/mobile-header-i.vue"
+import MobileSidebarI from "./app/mobile-sidebar-i.vue"
+import AlretI from "@/app/dashboard-parts/alret-i.vue"
 import Loading from "@/app/loading.vue"
 import "./tailwind.css"
 import {
-  UseLoading,
+  UseLoadingState,
   UseLoadingStateKey,
 } from "@/app/loading-parts/loading-state"
 import {
   UseUserState,
   UseUserStateKey,
 } from "@/app/dashboard-parts/UseUserState"
+import {
+  UseAlretState,
+  UseAlretStateKey,
+} from "./app/dashboard-parts/UseAlretState"
+import { UseSidebarState, UseSidebarStateKey } from "./app/use-sidebar-state"
 
-const useLoading = UseLoading()
+const useLoadingState = UseLoadingState()
 const useUserState = UseUserState()
-provide(UseLoadingStateKey, useLoading)
+const useAlretState = UseAlretState()
+const useSidebarState = new UseSidebarState(useUserState, useLoadingState)
+provide(UseLoadingStateKey, useLoadingState)
 provide(UseUserStateKey, useUserState)
-useLoading.load()
+provide(UseAlretStateKey, useAlretState)
+provide(UseSidebarStateKey, useSidebarState)
+
+useLoadingState.load()
+const loadState = async () => {
+  // ユーザー情報が取得できるまでロードさせる
+  const loadingId = useLoadingState.run()
+  await useUserState.load()
+  useLoadingState.stop(loadingId)
+}
+loadState()
 </script>
 
 <template>
-  <DashboardPI class="touch-manipulation" />
-  <Loading v-if="useLoading.subscription.isLoading.value"></Loading>
+  <div class="touch-manipulation">
+    <MobileSidebarI></MobileSidebarI>
+    <MobileHeaderI></MobileHeaderI>
+    <DesktopSidebarI></DesktopSidebarI>
+    <main class="lg:pl-72">
+      <AlretI></AlretI>
+      <div class="bg-gray-100 sm:px-1 lg:px-8">
+        <!-- Your content -->
+        <router-view></router-view>
+      </div>
+    </main>
+  </div>
+  <Loading v-if="useLoadingState.subscription.isLoading.value"></Loading>
 </template>

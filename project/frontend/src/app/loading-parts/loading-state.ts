@@ -11,7 +11,7 @@ type UseLoadingStateType = {
   }
 }
 
-const UseLoading = (): UseLoadingStateType => {
+const UseLoadingState = (): UseLoadingStateType => {
   const _isLoading = ref(false)
   const _processing = ref<{ id: number }[]>([])
 
@@ -70,4 +70,4 @@ const UseLoading = (): UseLoadingStateType => {
 const UseLoadingStateKey: InjectionKey<UseLoadingStateType> =
   Symbol("UseLoadingState")
 
-export { UseLoading, UseLoadingStateKey, UseLoadingStateType }
+export { UseLoadingState, UseLoadingStateKey, UseLoadingStateType }

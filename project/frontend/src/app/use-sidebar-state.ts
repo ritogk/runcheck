@@ -2,7 +2,6 @@ import {
   computed,
   ref,
   shallowRef,
-  inject,
   ComputedRef,
   FunctionalComponent,
   HTMLAttributes,
@@ -10,17 +9,8 @@ import {
   InjectionKey,
 } from "vue"
 import { useRouter } from "vue-router"
-
-import {
-  UseUserStateType,
-  UseUserStateKey,
-} from "@/app/dashboard-parts/UseUserState"
-
-import {
-  UseLoadingStateKey,
-  UseLoadingStateType,
-} from "@/app/loading-parts/loading-state"
-
+import { UseUserStateType } from "@/app/dashboard-parts/UseUserState"
+import { UseLoadingStateType } from "@/app/loading-parts/loading-state"
 import {
   UserPlusIcon,
   ChatBubbleOvalLeftEllipsisIcon,
@@ -49,10 +39,15 @@ export interface IUseSidebarState {
 
 export class UseSidebarState implements IUseSidebarState {
   private readonly _router = useRouter()
-  private readonly _useUserState = inject(UseUserStateKey) as UseUserStateType
-  private readonly _useLoadingState = inject(
-    UseLoadingStateKey
-  ) as UseLoadingStateType
+  private readonly _useUserState
+  private readonly _useLoadingState
+  constructor(
+    useUserStateType: UseUserStateType,
+    useLoadingStateType: UseLoadingStateType
+  ) {
+    this._useUserState = useUserStateType
+    this._useLoadingState = useLoadingStateType
+  }
   private _opened = ref(false)
   private _items = shallowRef([
     {
