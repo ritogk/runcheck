@@ -17,7 +17,7 @@ const hundleInput = (event: any) => {
 <template>
   <div>
     <label
-      for="hundle-name"
+      :for="props.id"
       class="block text-sm font-medium leading-6 text-gray-900"
       :required="props.required"
       >{{ props.label
