@@ -74,6 +74,9 @@ const hundlePasswordCongirmValidate = (): boolean => {
 }
 
 const onSubmit = async () => {
+  // ごくまれにchangeイベントハンドラのバリデーションが走る前に送信されるのでここでもやる。
+  hundlePasswordCongirmValidate()
+
   const loadingId = useLoadingState.run()
   try {
     await userState.register(
