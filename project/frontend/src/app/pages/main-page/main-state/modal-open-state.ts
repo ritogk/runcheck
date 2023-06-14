@@ -1,13 +1,13 @@
 import { computed, ref, ComputedRef } from "vue"
 
-export interface IAdjustSpeedModalState {
+export interface IModalOpenState {
   open(): void
   close(): void
   subscription: {
     opened: ComputedRef<boolean>
   }
 }
-export class AdjustSpeedModalState implements IAdjustSpeedModalState {
+export class ModalOpenState implements IModalOpenState {
   private _opened = ref(false)
 
   open = (): void => {

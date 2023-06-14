@@ -1,5 +1,5 @@
 import { ShallowRef } from "vue"
-import { PlayerNo } from "@/app/pages/main-page/main-state/youtube-selector-modal-state"
+import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
 import { YouTubePlayer } from "./youtube-player"
 import { LocalVideoPlayer } from "./local-video-player"
 import { IVideoPlayer } from "./i-video-player"

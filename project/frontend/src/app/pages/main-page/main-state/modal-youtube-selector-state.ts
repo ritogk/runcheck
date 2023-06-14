@@ -1,7 +1,7 @@
 import { computed, ref, ComputedRef } from "vue"
 import { localStorageKeys } from "@/core/localstorage-key"
 
-export interface IYoutubeSelectorModalState {
+export interface IModalYoutubeSelectorState {
   open(playerNo: PlayerNo): void
   close(): void
   load(): void
@@ -12,7 +12,7 @@ export interface IYoutubeSelectorModalState {
   }
 }
 
-export class YoutubeSelectorModalState implements IYoutubeSelectorModalState {
+export class ModalYoutubeSelectorState implements IModalYoutubeSelectorState {
   private _opened = ref(false)
   private _currentPlayerNo = ref(PlayerNo.NONE)
 

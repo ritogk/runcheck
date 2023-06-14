@@ -14,9 +14,9 @@ import {
 import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { YoutubeApi } from "@/core/openapiClient"
-import { YoutubeListState } from "./youtube-selector-modal/youtube-list-state"
-import { PlayerNo } from "@/app/pages/main-page/main-state/youtube-selector-modal-state"
-import { handleYoutubeOauthCallback } from "./youtube-selector-modal/handle-youtube-oauth-callback-i"
+import { YoutubeListState } from "./modal-youtube-selector/youtube-list-state"
+import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
+import { handleYoutubeOauthCallback } from "./modal-youtube-selector/handle-youtube-oauth-callback-i"
 import { apiConfig } from "@/core/openapi"
 import { changeYoutube } from "./player/helpers-player"
 

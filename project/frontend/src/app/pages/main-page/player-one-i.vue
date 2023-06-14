@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, inject, watch } from "vue"
-import { PlayerNo } from "./main-state/youtube-selector-modal-state"
+import { PlayerNo } from "./main-state/modal-youtube-selector-state"
 import AdjustmentArea from "./player/adjustment-area.vue"
 import {
   UseMainStateKey,
