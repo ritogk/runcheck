@@ -16,7 +16,7 @@ import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal/youtube-list-state"
 import { PlayerNo } from "@/app/pages/main-page/main-state/youtube-selector-modal-state"
-import { YouTubePlayer } from "./player-area/youtube-player"
+import { YouTubePlayer } from "./player/youtube-player"
 import { handleYoutubeOauthCallback } from "./youtube-selector-modal/handle-youtube-oauth-callback-i"
 import { apiConfig } from "@/core/openapi"
 

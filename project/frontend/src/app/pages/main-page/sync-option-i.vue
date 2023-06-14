@@ -6,7 +6,7 @@ import {
 } from "@/app/pages/main-page/main-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { handleComparisonOpen } from "./sync-option/handle-comparison-open-i"
-import { VideoType } from "./player-area/i-video-player"
+import { VideoType } from "./player/i-video-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType

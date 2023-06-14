@@ -6,7 +6,7 @@ import {
 } from "@/app/pages/main-page/main-state"
 import SaveModalI from "./file-controller/save-modal-i.vue"
 import OpenModalI from "./file-controller/open-modal-i.vue"
-import { VideoType } from "@/app/pages/main-page/player-area/i-video-player"
+import { VideoType } from "@/app/pages/main-page/player/i-video-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 

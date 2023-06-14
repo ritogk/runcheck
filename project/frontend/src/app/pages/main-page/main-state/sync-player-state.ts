@@ -3,8 +3,8 @@ import {
   IVideoPlayer,
   Status,
   VideoType,
-} from "@/app/pages/main-page/player-area/i-video-player"
-import { DummyPlayer } from "@/app/pages/main-page/player-area/dummy-player"
+} from "@/app/pages/main-page/player/i-video-player"
+import { DummyPlayer } from "@/app/pages/main-page/player/dummy-player"
 import {
   ComparisonsApi,
   VideoType as ApiVideoType,
@@ -12,6 +12,9 @@ import {
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 
+/**
+ * プレイヤーを同期してコントロールするクラス
+ */
 export interface ISyncPlayerStateType {
   playerOne: ShallowRef<IVideoPlayer>
   playerTwo: ShallowRef<IVideoPlayer>
