@@ -15,7 +15,6 @@ export const changeYoutube = async (
   youtubeUrl: string,
   playerNo: PlayerNo
 ) => {
-  debugger
   const youtubeId = extractYoutubeId(youtubeUrl)
   player.value.destory()
   const elementId =
