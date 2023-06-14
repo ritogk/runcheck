@@ -1,18 +1,14 @@
 <script setup lang="ts">
 import { ref, inject, watch } from "vue"
 import { PlayerNo } from "./main-state/youtube-selector-modal-state"
-import { LocalVideoPlayer } from "./player/local-video-player"
 import AdjustmentArea from "./player/adjustment-area.vue"
 import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main-page/main-state"
-import {
-  VideoCameraIcon,
-  // SearchIcon,
-} from "@heroicons/vue/20/solid"
+import { VideoCameraIcon } from "@heroicons/vue/20/solid"
 import { VideoType } from "./player/i-video-player"
-import { changeYoutube } from "./player/helpers-player"
+import { changeLocalVideo, changeYoutube } from "./player/helpers-player"
 
 const playerNo = PlayerNo.ONE
 
@@ -41,15 +37,8 @@ const playerOne = useMainState.syncPlayer.playerOne
 
 const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0]
-  const objectURL = URL.createObjectURL(file)
-
-  playerOne.value.destory()
-  const localVideoPlayer = new LocalVideoPlayer(
-    elements.localVideo.video.value as HTMLVideoElement,
-    objectURL
-  )
-  localVideoPlayer.load()
-  playerOne.value = localVideoPlayer
+  if (!elements.localVideo.video.value) return
+  changeLocalVideo(playerOne, file, elements.localVideo.video.value)
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
