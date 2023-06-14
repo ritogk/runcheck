@@ -16,9 +16,9 @@ import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { YoutubeApi } from "@/core/openapiClient"
 import { YoutubeListState } from "./youtube-selector-modal/youtube-list-state"
 import { PlayerNo } from "@/app/pages/main-page/main-state/youtube-selector-modal-state"
-import { YouTubePlayer } from "./player/youtube-player"
 import { handleYoutubeOauthCallback } from "./youtube-selector-modal/handle-youtube-oauth-callback-i"
 import { apiConfig } from "@/core/openapi"
+import { changeYoutube } from "./player/helpers-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useUserState = inject(UseUserStateKey) as UseUserStateType
@@ -58,22 +58,9 @@ const playerTwo = useMainState.syncPlayer.playerTwo
 
 const selectVideo = async (url: string) => {
   const loadingId = useLoadingState.run()
-  const youtubeId = url.substring(url.length - 11)
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
-  switch (playerNo) {
-    case PlayerNo.ONE:
-      playerOne.value.destory()
-      const playerOneTemp = new YouTubePlayer("youtube-video-one", youtubeId)
-      await playerOneTemp.load()
-      playerOne.value = playerOneTemp
-      break
-    case PlayerNo.TWO:
-      playerTwo.value.destory()
-      const playerTwoTemp = new YouTubePlayer("youtube-video-two", youtubeId)
-      await playerTwoTemp.load()
-      playerTwo.value = playerTwoTemp
-      break
-  }
+  const player = playerNo === PlayerNo.ONE ? playerOne : playerTwo
+  changeYoutube(player, url, playerNo)
   useMainState.youtubeModal.close()
   useLoadingState.stop(loadingId)
 }

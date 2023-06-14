@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, inject, watch } from "vue"
 import { PlayerNo } from "@/app/pages/main-page/main-state/youtube-selector-modal-state"
-import { YouTubePlayer } from "./player/youtube-player"
 import { LocalVideoPlayer } from "./player/local-video-player"
 import {
   UseMainStateKey,
@@ -10,7 +9,7 @@ import {
 import { VideoCameraIcon } from "@heroicons/vue/20/solid"
 import AdjustmentArea from "./player/adjustment-area.vue"
 import { VideoType } from "./player/i-video-player"
-import { extractYoutubeId } from "@/core/extract-youtube-id"
+import { changeYoutube } from "./player/helpers-player"
 
 const playerNo = PlayerNo.TWO
 
@@ -51,11 +50,7 @@ const hundleLocalVideoChange = async (event: Event) => {
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
-  playerTwo.value.destory()
-  const youtubeId = extractYoutubeId(youtubeUrl)
-  const player = new YouTubePlayer("youtube-video-two", youtubeId)
-  player.load()
-  playerTwo.value = player
+  changeYoutube(playerTwo, youtubeUrl, playerNo)
 }
 
 const hundleYoutubeSearch = () => {
