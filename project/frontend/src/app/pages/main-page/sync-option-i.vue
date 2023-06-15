@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, computed } from "vue"
+import { inject } from "vue"
 import {
   UseMainStateKey,
   UseMainStateType,
@@ -11,7 +11,8 @@ import { VideoType } from "./player/i-video-player"
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
-const hundleVideoRunSyncClick = () => {
+const hundleVideoRunSyncClick = async () => {
+  if (!(await validateVideoSelect())) return
   useMainState.syncPlayer.runSync()
   window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
 }
@@ -21,13 +22,14 @@ const hundleVideoStopSyncClick = () => {
 }
 
 const hundleTweetClick = async () => {
+  if (!(await validateVideoSelect())) return
   if (
     useMainState.syncPlayer.playerOne.value.subscription.videoType.value !==
       VideoType.YOUTUBE ||
     useMainState.syncPlayer.playerTwo.value.subscription.videoType.value !=
       VideoType.YOUTUBE
   ) {
-    alert("共有はYouTube同士の組み合わせのみ行えます。")
+    alert("共有はYouTubeの動画に限定されています。")
     return
   }
   const loadingId = useLoadingState.run()
@@ -39,14 +41,18 @@ const hundleTweetClick = async () => {
   location.href = "https://twitter.com/intent/tweet?text=" + url
 }
 
-const isSyncButtonDisabled = computed(() => {
-  return (
+const validateVideoSelect = async (): Promise<boolean> => {
+  if (
     useMainState.syncPlayer.playerOne.value.subscription.videoType.value ===
       VideoType.NONE ||
     useMainState.syncPlayer.playerTwo.value.subscription.videoType.value ===
       VideoType.NONE
-  )
-})
+  ) {
+    alert("比較対象の動画を選択した後に実行して下さい。")
+    return false
+  }
+  return true
+}
 
 // ツイートしたURLから飛んできた時の処理
 const urlParams = new URLSearchParams(window.location.search)
@@ -59,9 +65,8 @@ if (comparisonId) handleComparisonOpen(Number(comparisonId))
   <div class="flex gap-2">
     <button
       type="button"
-      class="w-1/2 items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10 disabled:pointer-events-none disabled:opacity-50"
+      class="w-1/2 items-center gap-x-1.5 rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-slate-700 hover:bg-slate-500 focus:z-10"
       v-show="!useMainState.syncPlayer.subscription.synced.value"
-      :disabled="isSyncButtonDisabled"
       @click="hundleVideoRunSyncClick"
     >
       <div class="flex items-center justify-center gap-1">
@@ -113,8 +118,7 @@ if (comparisonId) handleComparisonOpen(Number(comparisonId))
 
     <button
       type="button"
-      class="w-1/2 items-center gap-x-1.5 rounded-md bg-[#16A2F3] px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-[#1697f3] hover:bg-[#45b7f7] focus:z-10 disabled:pointer-events-none disabled:opacity-50"
-      :disabled="!useMainState.syncPlayer.subscription.synced.value"
+      class="w-1/2 items-center gap-x-1.5 rounded-md bg-[#16A2F3] px-3 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-[#1697f3] hover:bg-[#45b7f7] focus:z-10"
       @click="hundleTweetClick()"
     >
       <div class="flex items-center justify-center gap-1">
