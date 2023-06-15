@@ -3,8 +3,12 @@ import { apiConfig } from "@/core/openapi"
 const comparisonsApi = new ComparisonsApi(apiConfig)
 
 export const fetchComparisons = async () => {
-  const response = await comparisonsApi.comparisonsGet()
-  return response
+  try {
+    const response = await comparisonsApi.comparisonsGet()
+    return response
+  } catch (e) {
+    throw new Error()
+  }
 }
 
 export const deleteComparison = async (id: number) => {

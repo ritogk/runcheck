@@ -21,8 +21,10 @@ import {
   UseMainStateType,
 } from "@/app/pages/main-page/main-state"
 import { fetchComparisons } from "@/core/comparisons"
+import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
+const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const onClose = () => {
   useMainState.openModal.close()
@@ -33,18 +35,27 @@ const comparisonOptions = reactive<{ id: number; name: string }[]>([
 ])
 watch(useMainState.openModal.subscription.opened, async (value) => {
   if (value) {
-    const response = await fetchComparisons()
-    comparisonOptions.splice(
-      0,
-      comparisonOptions.length,
-      ...response
-        .filter((x) => {
-          return !x.anonymous
-        })
-        .map((x) => {
-          return { id: x.id, name: x.title }
-        })
-    )
+    const loadingId = useLoadingState.run()
+    try {
+      const response = await fetchComparisons()
+      comparisonOptions.splice(
+        0,
+        comparisonOptions.length,
+        ...response
+          .filter((x) => {
+            return !x.anonymous
+          })
+          .map((x) => {
+            return { id: x.id, name: x.title }
+          })
+      )
+    } catch {
+      comparisonOptions.splice(0, comparisonOptions.length, {
+        id: 0,
+        name: "　",
+      })
+    }
+    useLoadingState.stop(loadingId)
   }
 })
 const selected = ref(comparisonOptions[0])
@@ -58,7 +69,7 @@ const hundleOpen = () => {
     as="template"
     :show="useMainState.openModal.subscription.opened.value"
   >
-    <Dialog as="div" class="relative z-40" @close="onClose()">
+    <Dialog as="div" class="relative z-30" @close="onClose()">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
