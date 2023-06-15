@@ -30,11 +30,7 @@ const hundleHomeClick = () => {
       as="template"
       :show="useSidebarState.subscription.opened.value"
     >
-      <Dialog
-        as="div"
-        class="relative z-40 lg:hidden"
-        @close="useSidebarState.close()"
-      >
+      <Dialog as="div" class="relative z-40" @close="useSidebarState.close()">
         <TransitionChild
           as="template"
           enter="transition-opacity ease-linear duration-300"

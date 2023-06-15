@@ -15,7 +15,7 @@ const hundleHeaderClick = () => {
 <template>
   <!-- mobile-header -->
   <div
-    class="z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-3 shadow-sm sm:px-6 lg:hidden"
+    class="z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-3 shadow-sm sm:px-6"
   >
     <div
       class="flex-1 cursor-pointer text-sm font-semibold leading-6 text-slate-100"
@@ -30,7 +30,7 @@ const hundleHeaderClick = () => {
     </div>
     <button
       type="button"
-      class="-m-2.5 p-2.5 text-gray-400 lg:hidden"
+      class="-m-2.5 p-2.5 text-gray-400"
       title="サイドバーを開く"
       aria-label="サイドバーを開く"
       @click="useSidebarState.open()"

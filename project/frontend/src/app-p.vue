@@ -32,9 +32,11 @@ loadState()
 
 <template>
   <div class="touch-manipulation">
-    <HeaderMobileI></HeaderMobileI>
-    <SidebarMobileI></SidebarMobileI>
-    <SidebarDesktopI></SidebarDesktopI>
+    <HeaderMobileI class="lg:hidden"></HeaderMobileI>
+    <SidebarMobileI class="lg:hidden"></SidebarMobileI>
+    <SidebarDesktopI
+      class="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-72 lg:flex-col"
+    ></SidebarDesktopI>
     <main class="lg:pl-72">
       <AlretI></AlretI>
       <div class="bg-gray-100 sm:px-1 lg:px-8">
