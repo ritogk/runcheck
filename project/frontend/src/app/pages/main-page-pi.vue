@@ -3,8 +3,10 @@ import { provide, inject } from "vue"
 import { UseMainState, UseMainStateKey } from "./main-page/main-state"
 import PlayerOneI from "./main-page/player-one-i.vue"
 import PlayerTwoI from "./main-page/player-two-i.vue"
-import YoutubeSelectorModalI from "./main-page/modal-youtube-selector-i.vue"
-import AdjustSpeedModalI from "./main-page/modal-adjust-speed-i.vue"
+import ModalSaveI from "./main-page/modal-save-i.vue"
+import ModalOpenI from "./main-page/modal-open-i.vue"
+import ModalYoutubeSelectorI from "./main-page/modal-youtube-selector-i.vue"
+import ModalAdjustSpeedI from "./main-page/modal-adjust-speed-i.vue"
 import FileControllerI from "./main-page/file-controller-i.vue"
 import SyncControllerI from "./main-page/sync-controller-i.vue"
 import SyncOptionI from "./main-page/sync-option-i.vue"
@@ -23,6 +25,8 @@ const userState = inject(UseUserStateKey) as UseUserStateType
       <FileControllerI
         v-show="userState.subscription.logined.value"
       ></FileControllerI>
+      <ModalSaveI></ModalSaveI>
+      <ModalOpenI></ModalOpenI>
       <Memo
         :title="useMainState.memo.subscription.title.value"
         :memo="useMainState.memo.subscription.memo.value"
@@ -41,6 +45,6 @@ const userState = inject(UseUserStateKey) as UseUserStateType
       v-show="useMainState.syncPlayer.subscription.synced.value"
     ></SyncControllerI>
   </div>
-  <YoutubeSelectorModalI></YoutubeSelectorModalI>
-  <AdjustSpeedModalI></AdjustSpeedModalI>
+  <ModalYoutubeSelectorI></ModalYoutubeSelectorI>
+  <ModalAdjustSpeedI></ModalAdjustSpeedI>
 </template>
