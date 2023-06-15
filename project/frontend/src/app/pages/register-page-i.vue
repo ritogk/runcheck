@@ -4,9 +4,9 @@ import { UseAlretStateKey, UseAlretStateType } from "@/app/alret-state"
 import { useRouter } from "vue-router"
 import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
-import FormInputText from "@/components/form-input-text.vue"
-import FormInputEmail from "@/components/form-input-email.vue"
 import InputPassword from "@/components/input-password.vue"
+import InputEmail from "@/components/input-email.vue"
+import FormLabel from "@/components/form-label.vue"
 
 const form = {
   hanndleName: {
@@ -111,43 +111,59 @@ const onSubmit = async () => {
       <div class="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <form @submit.prevent="onSubmit">
           <div class="space-y-4">
-            <FormInputText
+            <FormLabel
               :id="form.hanndleName.id"
-              :value="form.hanndleName.value.value"
               :required="form.hanndleName.required"
               :label="form.hanndleName.label"
-              :placeholder="form.hanndleName.placeholder"
-              @input="form.hanndleName.value.value = $event"
-            ></FormInputText>
+            >
+              <input
+                type="text"
+                class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"
+                :id="form.hanndleName.id"
+                :name="form.hanndleName.id"
+                :placeholder="form.hanndleName.placeholder"
+                :required="form.hanndleName.required"
+                v-model="form.hanndleName.value.value"
+              />
+            </FormLabel>
 
-            <FormInputText
+            <FormLabel
               :id="form.carType.id"
-              :value="form.carType.value.value"
               :required="form.carType.required"
               :label="form.carType.label"
-              :placeholder="form.carType.placeholder"
-              @input="form.carType.value.value = $event"
-            ></FormInputText>
+            >
+              <input
+                type="text"
+                class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"
+                :id="form.carType.id"
+                :name="form.carType.id"
+                :placeholder="form.carType.placeholder"
+                :required="form.carType.required"
+                v-model="form.carType.value.value"
+              />
+            </FormLabel>
 
-            <FormInputEmail
+            <FormLabel
               :id="form.email.id"
-              :value="form.email.value.value"
               :required="form.email.required"
               :label="form.email.label"
-              :placeholder="form.email.placeholder"
-              @input="form.email.value.value = $event"
-            ></FormInputEmail>
+            >
+              <InputEmail
+                class="mt-2"
+                :id="form.email.id"
+                :value="form.email.value.value"
+                :required="form.email.required"
+                :label="form.email.label"
+                :placeholder="form.email.placeholder"
+                @input="form.email.value.value = $event"
+              ></InputEmail>
+            </FormLabel>
 
-            <div>
-              <label
-                for="password"
-                class="block text-sm font-medium leading-6 text-gray-900"
-                >パスワード<span
-                  class="text-lg leading-none text-red-400"
-                  title="このフィールドは必須です"
-                  >*</span
-                ></label
-              >
+            <FormLabel
+              :id="form.password.id"
+              :required="form.password.required"
+              :label="form.password.label"
+            >
               <div class="mt-2">
                 <div class="flex gap-2">
                   <InputPassword
@@ -157,7 +173,6 @@ const onSubmit = async () => {
                     :placeholder="form.password.placeholder"
                     @input="form.password.value.value = $event"
                   ></InputPassword>
-
                   <InputPassword
                     class="w-1/2"
                     :id="form.passwordConfirm.id"
@@ -168,7 +183,7 @@ const onSubmit = async () => {
                   ></InputPassword>
                 </div>
               </div>
-            </div>
+            </FormLabel>
 
             <div>
               <button
