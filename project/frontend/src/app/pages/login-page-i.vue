@@ -4,6 +4,9 @@ import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
 import { UseAlretStateKey, UseAlretStateType } from "@/app/alret-state"
 import { useRouter } from "vue-router"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
+import InputPassword from "@/components/input-password.vue"
+import InputEmail from "@/components/input-email.vue"
+import FormLabel from "@/components/form-label.vue"
 
 const router = useRouter()
 const userState = inject(UseUserStateKey) as UseUserStateType
@@ -11,24 +14,35 @@ const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const form = {
-  email: ref<HTMLInputElement | null>(null),
-  password: ref<HTMLInputElement | null>(null),
-  remember: ref<HTMLInputElement | null>(null),
+  email: {
+    id: "email",
+    required: true,
+    label: "メールアドレス",
+    placeholder: "",
+    value: ref<string>(""),
+  },
+  password: {
+    id: "password",
+    required: true,
+    label: "パスワード",
+    placeholder: "パスワード",
+    value: ref<string>(""),
+  },
+  remember: {
+    id: "remember",
+    required: false,
+    label: "次回から入力を省略",
+    value: ref<boolean>(false),
+  },
 }
 
 const onSubmit = async () => {
-  if (
-    form.email.value === null ||
-    form.password.value === null ||
-    form.remember.value === null
-  )
-    return
   const loadingId = useLoadingState.run()
   try {
     const response = await userState.login(
       form.email.value.value,
       form.password.value.value,
-      form.remember.value.checked
+      form.remember.value.value
     )
     useLoadingState.stop(loadingId)
     useAlretState.clear()
@@ -55,56 +69,48 @@ const onSubmit = async () => {
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <form class="space-y-6" @submit.prevent="onSubmit()">
-          <div>
-            <label
-              for="email"
-              class="block text-sm font-medium leading-6 text-gray-900"
-              >メールアドレス</label
-            >
-            <div class="mt-2">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                :ref="form.email"
-                autocomplete="email"
-                required
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"
-                placeholder="example@example.com"
-              />
-            </div>
-          </div>
+          <FormLabel
+            :id="form.email.id"
+            :required="false"
+            :label="form.email.label"
+          >
+            <InputEmail
+              class="mt-2"
+              :id="form.email.id"
+              :value="form.email.value.value"
+              :required="form.email.required"
+              :label="form.email.label"
+              :placeholder="form.email.placeholder"
+              @input="form.email.value.value = $event"
+            ></InputEmail>
+          </FormLabel>
 
-          <div>
-            <label
-              for="password"
-              class="block text-sm font-medium leading-6 text-gray-900"
-              >パスワード</label
-            >
-            <div class="mt-2">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                :ref="form.password"
-                autocomplete="new-password"
-                required
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"
-                placeholder="パスワード"
-              />
-            </div>
-          </div>
+          <FormLabel
+            :id="form.password.id"
+            :required="false"
+            :label="form.password.label"
+          >
+            <InputPassword
+              class="mt-2"
+              :id="form.password.id"
+              :value="form.password.value.value"
+              :placeholder="form.password.placeholder"
+              @input="form.password.value.value = $event"
+            ></InputPassword>
+          </FormLabel>
 
           <div class="flex items-center justify-between">
             <div class="flex items-center">
               <input
-                id="remember-me"
-                name="remember-me"
+                :id="form.remember.id"
+                :name="form.remember.id"
+                v-model="form.remember.value.value"
                 type="checkbox"
-                :ref="form.remember"
                 class="h-4 w-4 rounded border-gray-300 text-slate-600 focus:ring-slate-600"
               />
-              <label for="remember-me" class="ml-2 block text-sm text-gray-900"
+              <label
+                :for="form.remember.id"
+                class="ml-2 block text-sm text-gray-900"
                 >次回から入力を省略</label
               >
             </div>
