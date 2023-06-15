@@ -50,7 +50,7 @@ const onSubmit = async () => {
     as="template"
     :show="useMainState.saveModal.subscription.opened.value"
   >
-    <Dialog as="div" class="relative z-40" @close="onClose">
+    <Dialog as="div" class="relative z-30" @close="onClose">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
