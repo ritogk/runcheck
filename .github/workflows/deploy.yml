@@ -19,7 +19,7 @@ jobs:
           script: |
             cd runcheck
             git pull
-            cd project
+            cd backend
             composer install
             php artisan migrate
             cd frontend

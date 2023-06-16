@@ -13,7 +13,7 @@ module.exports = defineConfig({
     },
   },
   productionSourceMap: false,
-  outputDir: "../public/spa",
+  outputDir: "../backend/public/spa",
   publicPath: "/spa",
   devServer: {
     port: 8080,
