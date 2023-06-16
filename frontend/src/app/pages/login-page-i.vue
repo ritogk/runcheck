@@ -25,7 +25,7 @@ const form = {
     id: "password",
     required: true,
     label: "パスワード",
-    placeholder: "パスワード",
+    placeholder: "",
     value: ref<string>(""),
   },
   remember: {
