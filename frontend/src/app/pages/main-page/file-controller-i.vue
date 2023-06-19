@@ -3,7 +3,7 @@ import { inject } from "vue"
 import {
   UseMainStateType,
   UseMainStateKey,
-} from "@/app/pages/main-page/main-state"
+} from "@/app/pages/main-page/use-main-state"
 import { VideoType } from "@/app/pages/main-page/player/i-video-player"
 
 const mainState = inject(UseMainStateKey) as UseMainStateType

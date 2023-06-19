@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, Ref, inject, watch } from "vue"
-import { UseAlretStateKey, UseAlretStateType } from "@/app/alret-state"
+import { UseAlretStateKey, UseAlretStateType } from "@/app/use-alret-state"
 import { useRouter } from "vue-router"
-import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
-import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
+import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/use-loading-state"
 import InputPassword from "@/components/input-password.vue"
 import InputEmail from "@/components/input-email.vue"
 import FormLabel from "@/components/form-label.vue"

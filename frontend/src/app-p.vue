@@ -6,9 +6,9 @@ import SidebarMobileI from "./app/sidebar-mobile-i.vue"
 import AlretI from "@/app/alret-i.vue"
 import Loading from "@/app/loading.vue"
 import "./tailwind.css"
-import { UseLoadingState, UseLoadingStateKey } from "@/app/loading-state"
-import { UseUserState, UseUserStateKey } from "@/app/user-state"
-import { UseAlretState, UseAlretStateKey } from "./app/alret-state"
+import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
+import { UseUserState, UseUserStateKey } from "@/app/use-user-state"
+import { UseAlretState, UseAlretStateKey } from "./app/use-alret-state"
 import { UseSidebarState, UseSidebarStateKey } from "./app/sidebar-state"
 
 const loadingState = UseLoadingState()

@@ -5,7 +5,7 @@ import AdjustmentArea from "./player/adjustment-area.vue"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page/main-state"
+} from "@/app/pages/main-page/use-main-state"
 import { VideoCameraIcon } from "@heroicons/vue/20/solid"
 import { VideoType } from "./player/i-video-player"
 import { changeLocalVideo, changeYoutube } from "./player/helpers-player"

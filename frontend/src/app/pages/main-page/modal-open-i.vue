@@ -19,9 +19,12 @@ import {
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page/main-state"
+} from "@/app/pages/main-page/use-main-state"
 import { fetchComparisons } from "@/core/comparisons"
-import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/use-loading-state"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType

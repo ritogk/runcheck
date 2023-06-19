@@ -1,8 +1,11 @@
 import { inject } from "vue"
 import { ComparisonsApi } from "@/core/openapiClient"
-import { UseAlretStateKey, UseAlretStateType } from "@/app/alret-state"
-import { UseMainStateType } from "@/app/pages/main-page/main-state"
-import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
+import { UseAlretStateKey, UseAlretStateType } from "@/app/use-alret-state"
+import { UseMainStateType } from "@/app/pages/main-page/use-main-state"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/use-loading-state"
 import { YouTubePlayer } from "@/app/pages/main-page/player/youtube-player"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"

@@ -4,7 +4,7 @@ import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selecto
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page/main-state"
+} from "@/app/pages/main-page/use-main-state"
 import { VideoCameraIcon } from "@heroicons/vue/20/solid"
 import AdjustmentArea from "./player/adjustment-area.vue"
 import { VideoType } from "./player/i-video-player"

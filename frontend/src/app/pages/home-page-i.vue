@@ -10,7 +10,10 @@ import {
 } from "@headlessui/vue"
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
 import { fetchComparisons, deleteComparison } from "@/core/comparisons"
-import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/use-loading-state"
 
 const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 

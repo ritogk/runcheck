@@ -3,8 +3,11 @@ import { inject } from "vue"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page/main-state"
-import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
+} from "@/app/pages/main-page/use-main-state"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/use-loading-state"
 import { VideoType } from "./player/i-video-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType

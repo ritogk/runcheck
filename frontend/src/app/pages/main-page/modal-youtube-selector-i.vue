@@ -10,9 +10,12 @@ import { XMarkIcon } from "@heroicons/vue/20/solid"
 import {
   UseMainStateKey,
   UseMainStateType,
-} from "@/app/pages/main-page/main-state"
-import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
-import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
+} from "@/app/pages/main-page/use-main-state"
+import {
+  UseLoadingStateKey,
+  UseLoadingStateType,
+} from "@/app/use-loading-state"
+import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
 import { YoutubeApi } from "@/core/openapiClient"
 import UseApiGetYoutubeVideo from "@/core/api-state/use-get-api-youtube-video"
 import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"

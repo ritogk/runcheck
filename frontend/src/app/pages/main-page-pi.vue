@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { provide, inject } from "vue"
-import { UseMainState, UseMainStateKey } from "./main-page/main-state"
+import { UseMainState, UseMainStateKey } from "./main-page/use-main-state"
 import PlayerOneI from "./main-page/player-one-i.vue"
 import PlayerTwoI from "./main-page/player-two-i.vue"
 import ModalSaveI from "./main-page/modal-save-i.vue"
@@ -11,7 +11,7 @@ import FileControllerI from "./main-page/file-controller-i.vue"
 import SyncControllerI from "./main-page/sync-controller-i.vue"
 import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
-import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
+import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
 import { handleComparisonOpen } from "./main-page/handle-comparison-open-i"
 
