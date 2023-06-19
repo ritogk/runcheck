@@ -20,9 +20,6 @@ provide(UseUserStateKey, useUserState)
 provide(UseAlretStateKey, useAlretState)
 provide(UseSidebarStateKey, useSidebarState)
 
-// 前回のローディング状態を読み込む
-useLoadingState.load()
-
 const loadState = async () => {
   // ユーザー情報が取得できるまでロードさせる
   const loadingId = useLoadingState.run()
