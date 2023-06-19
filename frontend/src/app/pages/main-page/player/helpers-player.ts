@@ -22,6 +22,7 @@ export const changeYoutube = async (
   const newPlayer = new YouTubePlayer(elementId, youtubeId)
   await newPlayer.load()
   player.value = newPlayer
+  return
 }
 
 export const changeLocalVideo = (

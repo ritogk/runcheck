@@ -15,6 +15,7 @@ import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
 
 const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)
+useMainState.youtubeModal.load()
 
 const userState = inject(UseUserStateKey) as UseUserStateType
 </script>
@@ -45,6 +46,8 @@ const userState = inject(UseUserStateKey) as UseUserStateType
       v-show="useMainState.syncPlayer.subscription.synced.value"
     ></SyncControllerI>
   </div>
-  <ModalYoutubeSelectorI></ModalYoutubeSelectorI>
+  <ModalYoutubeSelectorI
+    v-if="useMainState.youtubeModal.subscription.opened.value"
+  ></ModalYoutubeSelectorI>
   <ModalAdjustSpeedI></ModalAdjustSpeedI>
 </template>

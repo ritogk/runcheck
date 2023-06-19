@@ -40,7 +40,10 @@ export class ModalYoutubeSelectorState implements IModalYoutubeSelectorState {
   save = () => {
     localStorage.setItem(
       localStorageKeys.YOUTUBE_SELECT_MODAL_STATE,
-      JSON.stringify({ playerNo: this._currentPlayerNo.value, opened: true })
+      JSON.stringify({
+        playerNo: this._currentPlayerNo.value,
+        opened: this._opened.value,
+      })
     )
   }
 

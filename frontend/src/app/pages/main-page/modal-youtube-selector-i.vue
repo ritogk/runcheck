@@ -11,28 +11,24 @@ import {
   UseMainStateKey,
   UseMainStateType,
 } from "@/app/pages/main-page/main-state"
-import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { YoutubeApi } from "@/core/openapiClient"
-import { YoutubeListState } from "./modal-youtube-selector/youtube-list-state"
+import UseApiGetYoutubeVideo from "@/core/api-state/use-get-api-youtube-video"
 import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
 import { handleYoutubeOauthCallback } from "./modal-youtube-selector/handle-youtube-oauth-callback-i"
 import { apiConfig } from "@/core/openapi"
 import { changeYoutube } from "./player/helpers-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
-const useUserState = inject(UseUserStateKey) as UseUserStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
-
-const youtubeListState = YoutubeListState()
-watch(useMainState.youtubeModal.subscription.opened, (value) => {
-  if (value && useUserState.subscription.isYoutubeAuthroized.value)
-    youtubeListState.load()
-})
+const { data, isLoading, isSuccess, isError, refetch } =
+  UseApiGetYoutubeVideo(true)
 
 const filter = ref("")
 const filteredVideos = computed(() => {
-  return youtubeListState.subscription.videos.value.filter((video) => {
+  if (isSuccess.value != true) return []
+  if (!data.value) return []
+  return data.value.filter((video) => {
     return (
       video.title.includes(filter.value) ||
       video.description.includes(filter.value)
@@ -42,6 +38,7 @@ const filteredVideos = computed(() => {
 
 const onClose = () => {
   useMainState.youtubeModal.close()
+  useMainState.youtubeModal.save()
 }
 
 const youtubeApi = new YoutubeApi(apiConfig)
@@ -57,10 +54,11 @@ const playerOne = useMainState.syncPlayer.playerOne
 const playerTwo = useMainState.syncPlayer.playerTwo
 
 const selectVideo = async (url: string) => {
+  debugger
   const loadingId = useLoadingState.run()
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
   const player = playerNo === PlayerNo.ONE ? playerOne : playerTwo
-  changeYoutube(player, url, playerNo)
+  await changeYoutube(player, url, playerNo)
   useMainState.youtubeModal.close()
   useLoadingState.stop(loadingId)
 }
@@ -234,7 +232,7 @@ if (code) handleYoutubeOauthCallback(code)
                     </svg>
                     <input
                       type="text"
-                      class="h-12 border-0 bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
+                      class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
                       placeholder="動画を絞り込む..."
                       role="combobox"
                       aria-expanded="false"
@@ -250,7 +248,7 @@ if (code) handleYoutubeOauthCallback(code)
                   >
                     <div class="relative">
                       <!-- スケルトン -->
-                      <div v-if="!youtubeListState.subscription.read.value">
+                      <div v-if="isLoading">
                         <li
                           v-for="i in 5"
                           :key="i"
@@ -291,18 +289,12 @@ if (code) handleYoutubeOauthCallback(code)
                       <!-- ローディングの背景 -->
                       <div
                         class="absolute left-0 top-0 h-full w-full rounded-lg bg-gray-50 opacity-10 brightness-50 backdrop-blur-lg"
-                        v-if="
-                          youtubeListState.subscription.isReading.value &&
-                          filteredVideos.length === 0
-                        "
+                        v-if="isLoading && !isError"
                       ></div>
                       <!-- ローディングのスピナー -->
                       <div
                         class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                        v-if="
-                          youtubeListState.subscription.isReading.value &&
-                          filteredVideos.length === 0
-                        "
+                        v-if="isLoading && !isError"
                       >
                         <svg
                           aria-hidden="true"
@@ -325,12 +317,7 @@ if (code) handleYoutubeOauthCallback(code)
                     </div>
 
                     <!-- Active: "bg-gray-100" -->
-                    <div
-                      v-if="
-                        youtubeListState.subscription.read.value &&
-                        filteredVideos.length >= 1
-                      "
-                    >
+                    <div v-if="filteredVideos.length >= 1">
                       <li
                         v-for="video in filteredVideos"
                         :key="video.url"
@@ -369,11 +356,7 @@ if (code) handleYoutubeOauthCallback(code)
 
                   <!-- 空 -->
                   <div
-                    v-if="
-                      !youtubeListState.subscription.isReading.value &&
-                      youtubeListState.subscription.read.value &&
-                      filteredVideos.length === 0
-                    "
+                    v-if="!isLoading && !isError && filteredVideos.length === 0"
                   >
                     <div class="mb-2 px-3 py-3 text-center text-sm sm:px-14">
                       <svg
