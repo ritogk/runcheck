@@ -31,6 +31,9 @@ const UseUserState = (): UseUserStateType => {
   const _isYoutubeAuthroized = ref(false)
   const _user = ref({ id: 0, name: "" })
 
+  /**
+   * 新規登録
+   */
   const register = async (
     handleName: string,
     carType: string,
@@ -58,6 +61,9 @@ const UseUserState = (): UseUserStateType => {
     return
   }
 
+  /**
+   * ログイン
+   */
   const login = async (
     email: string,
     password: string,
@@ -78,6 +84,9 @@ const UseUserState = (): UseUserStateType => {
     }
   }
 
+  /**
+   * ログアウト
+   */
   const logout = async (): Promise<void> => {
     try {
       await _authenticationApi.authenticationLogoutPost()
@@ -88,6 +97,10 @@ const UseUserState = (): UseUserStateType => {
     }
   }
 
+  /**
+   * ユーザーの状態を読み込む
+   * @returns 
+   */
   const load = async (): Promise<void> => {
     try {
       const response = await _statusApi.statusGet()
