@@ -243,9 +243,15 @@ const hundlePrivacyClick = () => {
                     id="options"
                     role="listbox"
                   >
-                    <div class="relative">
+                    <div
+                      class="relative"
+                      v-if="
+                        !isSuccess &&
+                        useUserState.subscription.isYoutubeAuthroized.value
+                      "
+                    >
                       <!-- スケルトン -->
-                      <div v-if="isLoading">
+                      <div>
                         <li
                           v-for="i in 5"
                           :key="i"
@@ -286,12 +292,10 @@ const hundlePrivacyClick = () => {
                       <!-- ローディングの背景 -->
                       <div
                         class="absolute left-0 top-0 h-full w-full rounded-lg bg-gray-50 opacity-10 brightness-50 backdrop-blur-lg"
-                        v-if="isLoading && !isError"
                       ></div>
                       <!-- ローディングのスピナー -->
                       <div
                         class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                        v-if="isLoading && !isError"
                       >
                         <svg
                           aria-hidden="true"
@@ -353,7 +357,10 @@ const hundlePrivacyClick = () => {
 
                   <!-- 空 -->
                   <div
-                    v-if="!isLoading && !isError && filteredVideos.length === 0"
+                    v-if="
+                      (isSuccess && filteredVideos.length === 0) ||
+                      !useUserState.subscription.isYoutubeAuthroized.value
+                    "
                   >
                     <div class="mb-2 px-3 py-3 text-center text-sm sm:px-14">
                       <svg
