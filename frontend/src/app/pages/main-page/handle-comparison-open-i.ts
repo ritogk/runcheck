@@ -4,7 +4,7 @@ import { UseAlretStateKey, UseAlretStateType } from "@/app/alret-state"
 import { UseMainStateType } from "@/app/pages/main-page/main-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { YouTubePlayer } from "@/app/pages/main-page/player/youtube-player"
-import { extractYoutubeId } from "@/app/pages/main-page/extract-youtube-id"
+import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 
 // 比較動画を共有した場合の処理
