@@ -21,8 +21,13 @@ export const handleComparisonOpen = async (
     const response = await comparisonsApi.comparisonsComparisonIdGet({
       comparisonId: comparisonId,
     })
-    mainState.memo.changeTitle(response.title ?? "")
-    mainState.memo.changeMemo(response.memo ?? "")
+
+    // 匿名比較の場合はtitleとmemoが空になるので表示させない。
+    if (response.title || response.memo) {
+      mainState.memo.changeTitle(response.title ?? "")
+      mainState.memo.changeMemo(response.memo ?? "")
+      mainState.memo.show()
+    }
 
     const youtubeOneId = extractYoutubeId(response.video1Url)
     const youtubeTwoId = extractYoutubeId(response.video2Url)

@@ -41,11 +41,7 @@ const userState = inject(UseUserStateKey) as UseUserStateType
       <Memo
         :title="mainState.memo.subscription.title.value"
         :memo="mainState.memo.subscription.memo.value"
-        v-show="
-          userState.subscription.logined.value &&
-          mainState.memo.subscription.title.value &&
-          mainState.memo.subscription.memo.value
-        "
+        v-show="mainState.memo.subscription.isShowed.value"
       ></Memo>
       <SyncOptionI class="my-2"></SyncOptionI>
     </div>
