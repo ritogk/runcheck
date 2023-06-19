@@ -12,24 +12,24 @@ import { apiConfig } from "@/core/openapi"
  */
 export const handleYoutubeOauthCallback = async (
   code: string,
-  useMainState: UseMainStateType
+  mainState: UseMainStateType
 ) => {
   const router = useRouter()
-  const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
-  const useUserState = inject(UseUserStateKey) as UseUserStateType
-  const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+  const alretState = inject(UseAlretStateKey) as UseAlretStateType
+  const userState = inject(UseUserStateKey) as UseUserStateType
+  const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
-  const loadingId = useLoadingState.run()
+  const loadingId = loadingState.run()
   const youtubeApi = new YoutubeApi(apiConfig)
   try {
     await youtubeApi.youtubeOauthPost({ inlineObject2: { code: code } })
-    await useUserState.load()
-    useMainState.youtubeModal.load()
-    useLoadingState.stop(loadingId)
-    useAlretState.clear()
-    useLoadingState.save()
+    await userState.load()
+    mainState.youtubeModal.load()
+    loadingState.stop(loadingId)
+    alretState.clear()
+    loadingState.save()
   } catch {
-    useAlretState.add("Youtubeとの連携でエラーが発生しました。")
+    alretState.add("Youtubeとの連携でエラーが発生しました。")
   }
   router.push({ name: "index" })
 }

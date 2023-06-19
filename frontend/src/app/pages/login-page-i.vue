@@ -10,8 +10,8 @@ import FormLabel from "@/components/form-label.vue"
 
 const router = useRouter()
 const userState = inject(UseUserStateKey) as UseUserStateType
-const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
-const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+const alretState = inject(UseAlretStateKey) as UseAlretStateType
+const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const form = {
   email: {
@@ -37,22 +37,22 @@ const form = {
 }
 
 const onSubmit = async () => {
-  const loadingId = useLoadingState.run()
+  const loadingId = loadingState.run()
   try {
     const response = await userState.login(
       form.email.value.value,
       form.password.value.value,
       form.remember.value.value
     )
-    useLoadingState.stop(loadingId)
-    useAlretState.clear()
+    loadingState.stop(loadingId)
+    alretState.clear()
     router.push({ name: "index" })
   } catch {
-    useAlretState.add(
+    alretState.add(
       "認証に失敗しました。メールアドレスとパスワードを確認してください。"
     )
   }
-  useLoadingState.stop(loadingId)
+  loadingState.stop(loadingId)
 }
 </script>
 

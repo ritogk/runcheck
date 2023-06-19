@@ -9,19 +9,19 @@ import { apiConfig } from "@/core/openapi"
 
 export const handleComparisonOpen = async (
   comparisonId: number,
-  useMainState: UseMainStateType
+  mainState: UseMainStateType
 ) => {
-  const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
-  const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+  const alretState = inject(UseAlretStateKey) as UseAlretStateType
+  const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
-  const loadingId = useLoadingState.run()
+  const loadingId = loadingState.run()
   const comparisonsApi = new ComparisonsApi(apiConfig)
   try {
     const response = await comparisonsApi.comparisonsComparisonIdGet({
       comparisonId: comparisonId,
     })
-    useMainState.memo.changeTitle(response.title ?? "")
-    useMainState.memo.changeMemo(response.memo ?? "")
+    mainState.memo.changeTitle(response.title ?? "")
+    mainState.memo.changeMemo(response.memo ?? "")
 
     const youtubeOneId = extractYoutubeId(response.video1Url)
     const youtubeTwoId = extractYoutubeId(response.video2Url)
@@ -35,17 +35,17 @@ export const handleComparisonOpen = async (
       await playerTwo.stop()
       await playerOne.seekTo(response.video1TimeSt)
       await playerTwo.seekTo(response.video2TimeSt)
-      useMainState.syncPlayer.playerOne.value = playerOne
-      useMainState.syncPlayer.playerTwo.value = playerTwo
+      mainState.syncPlayer.playerOne.value = playerOne
+      mainState.syncPlayer.playerTwo.value = playerTwo
       // seekToをした後に数秒待機しないとcurrentTimeが古い値になる。
       setTimeout(async () => {
-        useMainState.syncPlayer.runSync()
-        useLoadingState.stop(loadingId)
-        useAlretState.clear()
+        mainState.syncPlayer.runSync()
+        loadingState.stop(loadingId)
+        alretState.clear()
         window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
       }, 3000)
     }, 2000)
   } catch {
-    useAlretState.add("動画の読み込みでエラーが発生しました。")
+    alretState.add("動画の読み込みでエラーが発生しました。")
   }
 }

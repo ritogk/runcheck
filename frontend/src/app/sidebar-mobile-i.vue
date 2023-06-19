@@ -12,13 +12,13 @@ import { UserIcon, XMarkIcon } from "@heroicons/vue/24/outline"
 import { UseUserStateType, UseUserStateKey } from "@/app/user-state"
 import { UseSidebarStateKey, IUseSidebarState } from "./sidebar-state"
 
-const useSidebarState = inject(UseSidebarStateKey) as IUseSidebarState
-const useUserState = inject(UseUserStateKey) as UseUserStateType
+const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
+const userState = inject(UseUserStateKey) as UseUserStateType
 
 const router = useRouter()
 
 const hundleHomeClick = () => {
-  useSidebarState.close()
+  sidebarState.close()
   router.push({ name: "home" })
 }
 </script>
@@ -28,9 +28,9 @@ const hundleHomeClick = () => {
   <div class="flex justify-end">
     <TransitionRoot
       as="template"
-      :show="useSidebarState.subscription.opened.value"
+      :show="sidebarState.subscription.opened.value"
     >
-      <Dialog as="div" class="relative z-40" @close="useSidebarState.close()">
+      <Dialog as="div" class="relative z-40" @close="sidebarState.close()">
         <TransitionChild
           as="template"
           enter="transition-opacity ease-linear duration-300"
@@ -66,7 +66,7 @@ const hundleHomeClick = () => {
               >
                 <div
                   class="flex w-16 items-start justify-center pt-5"
-                  @click="useSidebarState.close()"
+                  @click="sidebarState.close()"
                 >
                   <button
                     type="button"
@@ -86,7 +86,7 @@ const hundleHomeClick = () => {
                   <ul role="list" class="mt-7 flex flex-1 flex-col gap-y-7">
                     <li>
                       <ul role="list" class="-mx-2 space-y-1">
-                        <li v-if="useUserState.subscription.logined.value">
+                        <li v-if="userState.subscription.logined.value">
                           <a
                             class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                             @click="hundleHomeClick()"
@@ -96,13 +96,12 @@ const hundleHomeClick = () => {
                               class="h-6 w-6 shrink-0"
                               aria-hidden="true"
                             />
-                            {{ useUserState.subscription.user.value.name }}
+                            {{ userState.subscription.user.value.name }}
                           </a>
                         </li>
 
                         <li
-                          v-for="item in useSidebarState.subscription.items
-                            .value"
+                          v-for="item in sidebarState.subscription.items.value"
                           :key="item.name"
                         >
                           <a

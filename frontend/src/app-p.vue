@@ -11,20 +11,20 @@ import { UseUserState, UseUserStateKey } from "@/app/user-state"
 import { UseAlretState, UseAlretStateKey } from "./app/alret-state"
 import { UseSidebarState, UseSidebarStateKey } from "./app/sidebar-state"
 
-const useLoadingState = UseLoadingState()
-const useUserState = UseUserState()
-const useAlretState = UseAlretState()
-const useSidebarState = new UseSidebarState(useUserState, useLoadingState)
-provide(UseLoadingStateKey, useLoadingState)
-provide(UseUserStateKey, useUserState)
-provide(UseAlretStateKey, useAlretState)
-provide(UseSidebarStateKey, useSidebarState)
+const loadingState = UseLoadingState()
+const userState = UseUserState()
+const alretState = UseAlretState()
+const sidebarState = new UseSidebarState(userState, loadingState)
+provide(UseLoadingStateKey, loadingState)
+provide(UseUserStateKey, userState)
+provide(UseAlretStateKey, alretState)
+provide(UseSidebarStateKey, sidebarState)
 
 const loadState = async () => {
   // ユーザー情報が取得できるまでロードさせる
-  const loadingId = useLoadingState.run()
-  await useUserState.load()
-  useLoadingState.stop(loadingId)
+  const loadingId = loadingState.run()
+  await userState.load()
+  loadingState.stop(loadingId)
 }
 loadState()
 </script>
@@ -44,5 +44,5 @@ loadState()
       </div>
     </main>
   </div>
-  <Loading v-if="useLoadingState.subscription.isLoading.value"></Loading>
+  <Loading v-if="loadingState.subscription.isLoading.value"></Loading>
 </template>

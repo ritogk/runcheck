@@ -15,17 +15,17 @@ import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
 import { handleComparisonOpen } from "./main-page/handle-comparison-open-i"
 
-const useMainState = UseMainState()
-provide(UseMainStateKey, useMainState)
+const mainState = UseMainState()
+provide(UseMainStateKey, mainState)
 
 const urlParams = new URLSearchParams(window.location.search)
 // 比較情報を開いた場合の処理
 const comparisonId = urlParams.get("comparisonId")
-if (comparisonId) handleComparisonOpen(Number(comparisonId), useMainState)
+if (comparisonId) handleComparisonOpen(Number(comparisonId), mainState)
 
 // Oauthで認可された後の処理
 const code = urlParams.get("code")
-if (code) handleYoutubeOauthCallback(code, useMainState)
+if (code) handleYoutubeOauthCallback(code, mainState)
 
 const userState = inject(UseUserStateKey) as UseUserStateType
 </script>
@@ -39,12 +39,12 @@ const userState = inject(UseUserStateKey) as UseUserStateType
       <ModalSaveI></ModalSaveI>
       <ModalOpenI></ModalOpenI>
       <Memo
-        :title="useMainState.memo.subscription.title.value"
-        :memo="useMainState.memo.subscription.memo.value"
+        :title="mainState.memo.subscription.title.value"
+        :memo="mainState.memo.subscription.memo.value"
         v-show="
           userState.subscription.logined.value &&
-          useMainState.memo.subscription.title.value &&
-          useMainState.memo.subscription.memo.value
+          mainState.memo.subscription.title.value &&
+          mainState.memo.subscription.memo.value
         "
       ></Memo>
       <SyncOptionI class="my-2"></SyncOptionI>
@@ -53,11 +53,11 @@ const userState = inject(UseUserStateKey) as UseUserStateType
     <PlayerOneI></PlayerOneI>
     <PlayerTwoI></PlayerTwoI>
     <SyncControllerI
-      v-show="useMainState.syncPlayer.subscription.synced.value"
+      v-show="mainState.syncPlayer.subscription.synced.value"
     ></SyncControllerI>
   </div>
   <ModalYoutubeSelectorI
-    v-if="useMainState.youtubeModal.subscription.opened.value"
+    v-if="mainState.youtubeModal.subscription.opened.value"
   ></ModalYoutubeSelectorI>
   <ModalAdjustSpeedI></ModalAdjustSpeedI>
 </template>

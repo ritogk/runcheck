@@ -4,7 +4,7 @@ import { useRouter } from "vue-router"
 import { Bars3Icon } from "@heroicons/vue/24/outline"
 import { UseSidebarStateKey, IUseSidebarState } from "./sidebar-state"
 
-const useSidebarState = inject(UseSidebarStateKey) as IUseSidebarState
+const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const router = useRouter()
 
 const hundleHeaderClick = () => {
@@ -33,7 +33,7 @@ const hundleHeaderClick = () => {
       class="-m-2.5 p-2.5 text-gray-400"
       title="サイドバーを開く"
       aria-label="サイドバーを開く"
-      @click="useSidebarState.open()"
+      @click="sidebarState.open()"
     >
       <Bars3Icon class="h-6 w-6" aria-hidden="true" />
     </button>

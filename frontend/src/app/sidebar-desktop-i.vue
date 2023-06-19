@@ -5,8 +5,8 @@ import { UserIcon } from "@heroicons/vue/24/outline"
 import { UseUserStateType, UseUserStateKey } from "@/app/user-state"
 import { UseSidebarStateKey, IUseSidebarState } from "./sidebar-state"
 
-const useSidebarState = inject(UseSidebarStateKey) as IUseSidebarState
-const useUserState = inject(UseUserStateKey) as UseUserStateType
+const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
+const userState = inject(UseUserStateKey) as UseUserStateType
 
 const router = useRouter()
 
@@ -15,7 +15,7 @@ const hundleHeaderClick = () => {
 }
 
 const hundleHomeClick = () => {
-  useSidebarState.close()
+  sidebarState.close()
   router.push({ name: "home" })
 }
 </script>
@@ -40,7 +40,7 @@ const hundleHomeClick = () => {
         <ul role="list" class="flex flex-1 flex-col gap-y-7">
           <li>
             <ul role="list" class="-mx-2 space-y-1">
-              <li v-if="useUserState.subscription.logined.value">
+              <li v-if="userState.subscription.logined.value">
                 <a
                   class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                   @click="hundleHomeClick()"
@@ -50,11 +50,11 @@ const hundleHomeClick = () => {
                     class="h-6 w-6 shrink-0"
                     aria-hidden="true"
                   />
-                  {{ useUserState.subscription.user.value.name }}
+                  {{ userState.subscription.user.value.name }}
                 </a>
               </li>
               <li
-                v-for="item in useSidebarState.subscription.items.value"
+                v-for="item in sidebarState.subscription.items.value"
                 :key="item.name"
               >
                 <a

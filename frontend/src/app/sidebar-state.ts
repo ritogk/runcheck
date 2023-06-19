@@ -39,14 +39,11 @@ export interface IUseSidebarState {
 
 export class UseSidebarState implements IUseSidebarState {
   private readonly _router = useRouter()
-  private readonly _useUserState
-  private readonly _useLoadingState
-  constructor(
-    useUserStateType: UseUserStateType,
-    useLoadingStateType: UseLoadingStateType
-  ) {
-    this._useUserState = useUserStateType
-    this._useLoadingState = useLoadingStateType
+  private readonly _userState
+  private readonly _loadingState
+  constructor(userState: UseUserStateType, loadingState: UseLoadingStateType) {
+    this._userState = userState
+    this._loadingState = loadingState
   }
   private _opened = ref(false)
   private _items = shallowRef([
@@ -59,7 +56,7 @@ export class UseSidebarState implements IUseSidebarState {
         this._opened.value = false
         this._router.push({ name: "login" })
       },
-      show: computed(() => !this._useUserState.subscription.logined.value),
+      show: computed(() => !this._userState.subscription.logined.value),
     },
     {
       name: "ログアウト",
@@ -67,13 +64,13 @@ export class UseSidebarState implements IUseSidebarState {
       icon: ArrowLeftOnRectangleIcon,
       current: false,
       action: async () => {
-        const loadingId = this._useLoadingState.run()
+        const loadingId = this._loadingState.run()
         this._opened.value = false
-        await this._useUserState.logout()
-        this._useLoadingState.stop(loadingId)
+        await this._userState.logout()
+        this._loadingState.stop(loadingId)
         location.href = location.origin + this._router.resolve("index").href
       },
-      show: computed(() => this._useUserState.subscription.logined.value),
+      show: computed(() => this._userState.subscription.logined.value),
     },
     {
       name: "新規登録",
@@ -84,7 +81,7 @@ export class UseSidebarState implements IUseSidebarState {
         this._opened.value = false
         this._router.push({ name: "register" })
       },
-      show: computed(() => !this._useUserState.subscription.logined.value),
+      show: computed(() => !this._userState.subscription.logined.value),
     },
     {
       name: "このアプリについて",

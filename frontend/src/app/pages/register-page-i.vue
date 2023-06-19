@@ -47,8 +47,8 @@ const form = {
 }
 
 const router = useRouter()
-const useAlertState = inject(UseAlretStateKey) as UseAlretStateType
-const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+const alertState = inject(UseAlretStateKey) as UseAlretStateType
+const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 const userState = inject(UseUserStateKey) as UseUserStateType
 
 const unmatchedPasswordMessage = "パスワードが一致しません。"
@@ -77,7 +77,7 @@ const onSubmit = async () => {
   // ごくまれにchangeイベントハンドラのバリデーションが走る前に送信されるのでここでもやる。
   hundlePasswordCongirmValidate()
 
-  const loadingId = useLoadingState.run()
+  const loadingId = loadingState.run()
   try {
     await userState.register(
       form.hanndleName.value.value,
@@ -85,15 +85,15 @@ const onSubmit = async () => {
       form.email.value.value,
       form.password.value.value
     )
-    useLoadingState.stop(loadingId)
-    useAlertState.clear()
+    loadingState.stop(loadingId)
+    alertState.clear()
     router.push({ name: "index" })
   } catch {
-    useAlertState.add(
+    alertState.add(
       "エラーが発生しました。既に登録されているメールアドレスの可能性があります。"
     )
   }
-  useLoadingState.stop(loadingId)
+  loadingState.stop(loadingId)
 }
 </script>
 
