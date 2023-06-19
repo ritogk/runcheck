@@ -53,13 +53,13 @@ const redirectToAuthorize = async () => {
   location.href = response.redirectUrl
 }
 
-const playerOne = useMainState.syncPlayer.playerOne
-const playerTwo = useMainState.syncPlayer.playerTwo
-
 const selectVideo = async (url: string) => {
   const loadingId = useLoadingState.run()
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
-  const player = playerNo === PlayerNo.ONE ? playerOne : playerTwo
+  const player =
+    playerNo === PlayerNo.ONE
+      ? useMainState.syncPlayer.playerOne
+      : useMainState.syncPlayer.playerTwo
   await changeYoutube(player, url, playerNo)
   useMainState.youtubeModal.close()
   useLoadingState.stop(loadingId)
