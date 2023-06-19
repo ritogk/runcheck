@@ -1,5 +1,8 @@
 import { computed, ref, ComputedRef } from "vue"
 
+/**
+ * 保存モーダルの状態
+ */
 export interface IModalSaveState {
   open(): void
   close(): void
@@ -7,6 +10,7 @@ export interface IModalSaveState {
     opened: ComputedRef<boolean>
   }
 }
+
 export class ModalSaveState implements IModalSaveState {
   private _opened = ref(false)
 

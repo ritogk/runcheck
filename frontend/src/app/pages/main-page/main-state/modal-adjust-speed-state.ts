@@ -1,5 +1,8 @@
 import { computed, ref, ComputedRef } from "vue"
 
+/**
+ * 動画速度の調整用モーダルの状態
+ */
 export interface IModalAdjustSpeedState {
   open(): void
   close(): void
@@ -7,6 +10,7 @@ export interface IModalAdjustSpeedState {
     opened: ComputedRef<boolean>
   }
 }
+
 export class ModalAdjustSpeedState implements IModalAdjustSpeedState {
   private _opened = ref(false)
 

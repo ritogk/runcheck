@@ -13,7 +13,7 @@ import { extractYoutubeId } from "@/app/pages/main-page/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 
 /**
- * プレイヤーを同期してコントロールするクラス
+ * プレイヤーの同期を管理するクラス
  */
 export interface ISyncPlayerStateType {
   playerOne: ShallowRef<IVideoPlayer>

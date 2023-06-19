@@ -1,6 +1,9 @@
 import { computed, ref, ComputedRef } from "vue"
 import { localStorageKeys } from "@/core/localstorage-key"
 
+/**
+ * Youtube選択モーダルの状態
+ */
 export interface IModalYoutubeSelectorState {
   open(playerNo: PlayerNo): void
   close(): void
