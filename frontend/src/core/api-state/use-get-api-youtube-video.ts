@@ -3,7 +3,6 @@ import { apiConfig } from "@/core/openapi"
 import { useQuery } from "@tanstack/vue-query"
 import { GET_YOUTUBE_VIDEO } from "./query-key"
 
-// ログインしていない場合は呼び出せないようにしたい。その場合ってerrorとかloadingとかどうなるんだ？
 const UseApiGetYoutubeVideo = (isLogined: boolean) => {
   const youtubeApi = new YoutubeApi(apiConfig)
   return useQuery({
