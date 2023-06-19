@@ -7,6 +7,7 @@ import { YouTubePlayer } from "@/app/pages/main-page/player/youtube-player"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 
+// 比較動画を共有した場合の処理
 export const handleComparisonOpen = async (
   comparisonId: number,
   mainState: UseMainStateType
