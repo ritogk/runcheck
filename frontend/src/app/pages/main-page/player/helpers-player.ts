@@ -10,6 +10,13 @@ import { extractYoutubeId } from "@/app/pages/main-page/extract-youtube-id"
  * playerのヘルパー関数
  */
 
+/**
+ * 動画をYoutubeに変更する
+ * @param player
+ * @param youtubeUrl
+ * @param playerNo
+ * @returns
+ */
 export const changeYoutube = async (
   player: ShallowRef<IVideoPlayer>,
   youtubeUrl: string,
@@ -25,6 +32,13 @@ export const changeYoutube = async (
   return
 }
 
+/**
+ * 動画をLocalVideoに変更する
+ * @param player
+ * @param youtubeUrl
+ * @param playerNo
+ * @returns
+ */
 export const changeLocalVideo = (
   player: ShallowRef<IVideoPlayer>,
   file: File,
@@ -37,6 +51,10 @@ export const changeLocalVideo = (
   player.value = newPlayer
 }
 
+/**
+ * 動画をDummyに変更する
+ * @param player
+ */
 export const changeDummy = (player: ShallowRef<IVideoPlayer>) => {
   player.value = new DummyPlayer()
 }
