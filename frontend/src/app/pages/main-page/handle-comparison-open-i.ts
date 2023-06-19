@@ -1,18 +1,17 @@
 import { inject } from "vue"
 import { ComparisonsApi } from "@/core/openapiClient"
 import { UseAlretStateKey, UseAlretStateType } from "@/app/alret-state"
-import {
-  UseMainStateKey,
-  UseMainStateType,
-} from "@/app/pages/main-page/main-state"
+import { UseMainStateType } from "@/app/pages/main-page/main-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 import { YouTubePlayer } from "@/app/pages/main-page/player/youtube-player"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 
-export const handleComparisonOpen = async (comparisonId: number) => {
+export const handleComparisonOpen = async (
+  comparisonId: number,
+  useMainState: UseMainStateType
+) => {
   const useAlretState = inject(UseAlretStateKey) as UseAlretStateType
-  const useMainState = inject(UseMainStateKey) as UseMainStateType
   const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
   const loadingId = useLoadingState.run()

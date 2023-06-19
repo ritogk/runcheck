@@ -13,11 +13,17 @@ import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
 import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
+import { handleComparisonOpen } from "./main-page/handle-comparison-open-i"
 
 const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)
-// Oauthで認可された後の処理
+
 const urlParams = new URLSearchParams(window.location.search)
+// 比較情報を開いた場合の処理
+const comparisonId = urlParams.get("comparisonId")
+if (comparisonId) handleComparisonOpen(Number(comparisonId), useMainState)
+
+// Oauthで認可された後の処理
 const code = urlParams.get("code")
 if (code) handleYoutubeOauthCallback(code, useMainState)
 

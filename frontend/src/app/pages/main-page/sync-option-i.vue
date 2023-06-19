@@ -5,7 +5,6 @@ import {
   UseMainStateType,
 } from "@/app/pages/main-page/main-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
-import { handleComparisonOpen } from "./sync-option/handle-comparison-open-i"
 import { VideoType } from "./player/i-video-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
@@ -53,11 +52,6 @@ const validateVideoSelect = async (): Promise<boolean> => {
   }
   return true
 }
-
-// ツイートしたURLから飛んできた時の処理
-const urlParams = new URLSearchParams(window.location.search)
-const comparisonId = urlParams.get("comparisonId")
-if (comparisonId) handleComparisonOpen(Number(comparisonId))
 </script>
 
 <template>
