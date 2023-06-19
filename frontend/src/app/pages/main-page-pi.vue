@@ -12,10 +12,14 @@ import SyncControllerI from "./main-page/sync-controller-i.vue"
 import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
 import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
+import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
 
 const useMainState = UseMainState()
 provide(UseMainStateKey, useMainState)
-useMainState.youtubeModal.load()
+// Oauthで認可された後の処理
+const urlParams = new URLSearchParams(window.location.search)
+const code = urlParams.get("code")
+if (code) handleYoutubeOauthCallback(code, useMainState)
 
 const userState = inject(UseUserStateKey) as UseUserStateType
 </script>

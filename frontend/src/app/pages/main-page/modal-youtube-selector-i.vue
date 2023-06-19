@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref, computed, watch } from "vue"
+import { inject, ref, computed } from "vue"
 import {
   Dialog,
   DialogPanel,
@@ -12,17 +12,20 @@ import {
   UseMainStateType,
 } from "@/app/pages/main-page/main-state"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
+import { UseUserStateKey, UseUserStateType } from "@/app/user-state"
 import { YoutubeApi } from "@/core/openapiClient"
 import UseApiGetYoutubeVideo from "@/core/api-state/use-get-api-youtube-video"
 import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
-import { handleYoutubeOauthCallback } from "./modal-youtube-selector/handle-youtube-oauth-callback-i"
+
 import { apiConfig } from "@/core/openapi"
 import { changeYoutube } from "./player/helpers-player"
 
+const useUserState = inject(UseUserStateKey) as UseUserStateType
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
-const { data, isLoading, isSuccess, isError, refetch } =
-  UseApiGetYoutubeVideo(true)
+const { data, isLoading, isSuccess, isError, refetch } = UseApiGetYoutubeVideo(
+  useUserState.subscription.isYoutubeAuthroized.value
+)
 
 const filter = ref("")
 const filteredVideos = computed(() => {
@@ -54,7 +57,6 @@ const playerOne = useMainState.syncPlayer.playerOne
 const playerTwo = useMainState.syncPlayer.playerTwo
 
 const selectVideo = async (url: string) => {
-  debugger
   const loadingId = useLoadingState.run()
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
   const player = playerNo === PlayerNo.ONE ? playerOne : playerTwo
@@ -70,11 +72,6 @@ const hundleTermsClick = () => {
 const hundlePrivacyClick = () => {
   location.href = "/privacy"
 }
-
-// Oauthで認可された後の処理
-const urlParams = new URLSearchParams(window.location.search)
-const code = urlParams.get("code")
-if (code) handleYoutubeOauthCallback(code)
 </script>
 
 <template>

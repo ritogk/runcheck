@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide } from "vue"
+import { provide, ref } from "vue"
 import SidebarDesktopI from "./app/sidebar-desktop-i.vue"
 import HeaderMobileI from "./app/header-mobile-i.vue"
 import SidebarMobileI from "./app/sidebar-mobile-i.vue"
