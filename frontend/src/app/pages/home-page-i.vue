@@ -12,14 +12,14 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
 import { fetchComparisons, deleteComparison } from "@/core/comparisons"
 import { UseLoadingStateKey, UseLoadingStateType } from "@/app/loading-state"
 
-const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const comparisons = reactive<
   { id: number; title: string; memo: string; tag: string }[]
 >([])
 
 const fetch = async () => {
-  const loadingId = useLoadingState.run()
+  const loadingId = loadingState.run()
   const response = await fetchComparisons()
   comparisons.splice(
     0,
@@ -32,7 +32,7 @@ const fetch = async () => {
         return { id: x.id, title: x.title, memo: x.memo, tag: x.category }
       })
   )
-  useLoadingState.stop(loadingId)
+  loadingState.stop(loadingId)
 }
 fetch()
 
