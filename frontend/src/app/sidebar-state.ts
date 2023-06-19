@@ -71,7 +71,7 @@ export class UseSidebarState implements IUseSidebarState {
         this._opened.value = false
         await this._useUserState.logout()
         this._useLoadingState.stop(loadingId)
-        this._router.push({ name: "index" })
+        location.href = location.origin + this._router.resolve("index").href
       },
       show: computed(() => this._useUserState.subscription.logined.value),
     },
