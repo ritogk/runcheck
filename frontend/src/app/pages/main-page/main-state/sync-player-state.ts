@@ -9,7 +9,7 @@ import {
   ComparisonsApi,
   VideoType as ApiVideoType,
 } from "@/core/openapiClient/index"
-import { extractYoutubeId } from "@/core/extract-youtube-id"
+import { extractYoutubeId } from "@/app/pages/main-page/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 
 /**

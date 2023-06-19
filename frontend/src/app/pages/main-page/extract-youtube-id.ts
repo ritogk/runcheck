@@ -1,3 +1,6 @@
+/**
+ * youtubeUrlからidを抽出する
+ */
 export const extractYoutubeId = (youtubeUrl: string): string => {
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
   var match = youtubeUrl.match(regExp)

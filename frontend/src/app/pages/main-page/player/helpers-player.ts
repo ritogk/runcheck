@@ -4,7 +4,7 @@ import { YouTubePlayer } from "./youtube-player"
 import { LocalVideoPlayer } from "./local-video-player"
 import { IVideoPlayer } from "./i-video-player"
 import { DummyPlayer } from "./dummy-player"
-import { extractYoutubeId } from "@/core/extract-youtube-id"
+import { extractYoutubeId } from "@/app/pages/main-page/extract-youtube-id"
 
 /**
  * playerのヘルパー関数
