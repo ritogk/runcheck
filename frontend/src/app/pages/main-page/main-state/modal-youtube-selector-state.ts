@@ -27,6 +27,7 @@ export class ModalYoutubeSelectorState implements IModalYoutubeSelectorState {
   }
 
   load = () => {
+    // モーダルの状態を復元
     const storage = localStorage.getItem(
       localStorageKeys.YOUTUBE_SELECT_MODAL_STATE
     )
@@ -38,6 +39,7 @@ export class ModalYoutubeSelectorState implements IModalYoutubeSelectorState {
   }
 
   save = () => {
+    // モーダルの状態を保存
     localStorage.setItem(
       localStorageKeys.YOUTUBE_SELECT_MODAL_STATE,
       JSON.stringify({
