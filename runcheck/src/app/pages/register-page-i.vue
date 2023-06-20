@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { ref, Ref, inject, watch } from "vue"
+import { ref, inject } from "vue"
 import { UseAlretStateKey, UseAlretStateType } from "@/app/use-alret-state"
 import { useRouter } from "vue-router"
 import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
-import {
-  UseLoadingStateKey,
-  UseLoadingStateType,
-} from "@/app/use-loading-state"
+import { UseLoadingStateKey, UseLoadingStateType } from "@/app/use-loading-state"
 import InputPassword from "@/components/input-password.vue"
 import InputEmail from "@/components/input-email.vue"
 import FormLabel from "@/components/form-label.vue"
@@ -17,36 +14,36 @@ const form = {
     required: true,
     label: "ハンドルネーム",
     placeholder: "",
-    value: ref<string>(""),
+    value: ref<string>("")
   },
   carType: {
     id: "car-type",
     required: true,
     label: "車種",
     placeholder: "",
-    value: ref<string>(""),
+    value: ref<string>("")
   },
   email: {
     id: "email",
     required: true,
     label: "メールアドレス",
     placeholder: "",
-    value: ref<string>(""),
+    value: ref<string>("")
   },
   password: {
     id: "password",
     required: true,
     label: "パスワード",
     placeholder: "パスワード",
-    value: ref<string>(""),
+    value: ref<string>("")
   },
   passwordConfirm: {
     id: "password-confirm",
     required: true,
     label: "パスワード(確認)",
     placeholder: "確認",
-    value: ref<string>(""),
-  },
+    value: ref<string>("")
+  }
 }
 
 const router = useRouter()
@@ -56,9 +53,9 @@ const userState = inject(UseUserStateKey) as UseUserStateType
 
 const unmatchedPasswordMessage = "パスワードが一致しません。"
 const hundlePasswordCongirmValidate = (): boolean => {
-  const passwordConfirmElement = <HTMLInputElement>(
-    document.getElementById(form.passwordConfirm.id)
-  )
+  const passwordConfirmElement = document.getElementById(
+    form.passwordConfirm.id
+  ) as HTMLInputElement
   // 「検証エラーなし」または「パスワード不一致でひっかかた後」
   if (
     passwordConfirmElement.validationMessage === "" ||
@@ -92,22 +89,19 @@ const onSubmit = async () => {
     alertState.clear()
     router.push({ name: "index" })
   } catch {
-    alertState.add(
-      "エラーが発生しました。既に登録されているメールアドレスの可能性があります。"
-    )
+    alertState.add("エラーが発生しました。既に登録されているメールアドレスの可能性があります。")
   }
   loadingState.stop(loadingId)
 }
 </script>
 
 <template>
+  <div>
+    {{ alertState.subscription.messages.value }}
+  </div>
   <div class="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <h2
-        class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
-      >
-        新規登録
-      </h2>
+      <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">新規登録</h2>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
