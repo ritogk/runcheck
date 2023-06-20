@@ -1,11 +1,10 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
-import App from './App.vue'
+import AppP from './app.vue'
 import router from './router'
+import { VueQueryPlugin } from '@tanstack/vue-query'
+import './tailwind.css'
 
-const app = createApp(App)
-
+const app = createApp(AppP)
 app.use(router)
-
+app.use(VueQueryPlugin)
 app.mount('#app')
