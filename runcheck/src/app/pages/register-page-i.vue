@@ -96,9 +96,6 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <div>
-    {{ alertState.subscription.messages.value }}
-  </div>
   <div class="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">新規登録</h2>
