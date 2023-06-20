@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import AppP from './app.vue'
+import AppP from './app-p.vue'
 import router from './router'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import './tailwind.css'

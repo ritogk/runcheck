@@ -12,7 +12,8 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "tailwind:build": "NODE_ENV=production npx tailwindcss build ./src/tailwind.css -o ./dist/output.css"
+    "tailwind:build": "NODE_ENV=production npx tailwindcss build ./src/tailwind.css -o ./dist/tailwind.css",
+    "tailwind:watch": "npx tailwindcss build ./src/tailwind.css -o ./dist/tailwind.css --watch"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.14",
