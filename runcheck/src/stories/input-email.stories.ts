@@ -39,7 +39,8 @@ export const Validation: Story = {
   args: {
     value: "",
     id: "password",
-    placeholder: "入力してENTER"
+    placeholder: "入力してENTER",
+    required: true
   }
 }
 
