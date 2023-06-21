@@ -48,8 +48,7 @@ const userState = inject(UseUserStateKey) as UseUserStateType
     <PlayerTwoI></PlayerTwoI>
     <SyncControllerI v-show="mainState.syncPlayer.subscription.synced.value"></SyncControllerI>
   </div>
-  <ModalYoutubeSelectorI
-    v-if="mainState.youtubeModal.subscription.opened.value"
-  ></ModalYoutubeSelectorI>
+  <ModalYoutubeSelectorI v-if="mainState.youtubeModal.subscription.opened.value"></ModalYoutubeSelectorI>
+  
   <ModalAdjustSpeedI></ModalAdjustSpeedI>
 </template>
