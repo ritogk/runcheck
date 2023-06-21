@@ -1,0 +1,34 @@
+import LoginPageI from "@/app/pages/login-page-i.vue"
+import { Meta, StoryObj, setup } from "@storybook/vue3"
+import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
+import { UseUserState, UseUserStateKey } from "@/app/use-user-state"
+import { UseAlretState, UseAlretStateKey } from "@/app/use-alret-state"
+import { userEvent, within } from "@storybook/testing-library"
+
+type Story = StoryObj<typeof LoginPageI>
+
+setup((app) => {
+  const loadingState = UseLoadingState()
+  const userState = UseUserState()
+  const alretState = UseAlretState()
+  app.provide(UseLoadingStateKey, loadingState)
+  app.provide(UseUserStateKey, userState)
+  app.provide(UseAlretStateKey, alretState)
+  return
+})
+
+const meta: Meta<typeof LoginPageI> = {
+  title: "pages/login-page-i",
+  component: LoginPageI,
+  render: (args) => ({
+    components: { LoginPageI },
+    setup() {
+      return { args }
+    },
+    template: "<LoginPageI/>"
+  })
+}
+
+export const Default: Story = {}
+
+export default meta
