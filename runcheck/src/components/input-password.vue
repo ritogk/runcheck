@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue"
 const props = defineProps<{
   value: string
   id: string
@@ -7,26 +7,26 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  (e: 'input', value: string): void
-  (e: 'change'): void
+  (e: "input", value: string): void
+  (e: "change"): void
 }>()
 
 const hundleInput = (event: any) => {
-  emits('input', event.target.value)
+  emits("input", event.target.value)
 }
 
 const hundleChange = () => {
-  emits('change')
+  emits("change")
 }
 
 const isPasswordVisible = ref(false)
 const switchPasswordVisibility = () => {
   if (!elements.password.value) return
-  if (elements.password.value.type === 'password') {
-    elements.password.value.type = 'text'
+  if (elements.password.value.type === "password") {
+    elements.password.value.type = "text"
     isPasswordVisible.value = true
   } else {
-    elements.password.value.type = 'password'
+    elements.password.value.type = "password"
     isPasswordVisible.value = false
   }
 }
