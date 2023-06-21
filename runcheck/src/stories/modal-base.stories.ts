@@ -1,7 +1,5 @@
 import ModalBase from "@/components/modal-base.vue"
 import type { Meta, StoryObj } from "@storybook/vue3"
-import { expect } from "@storybook/jest"
-import { userEvent, within } from "@storybook/testing-library"
 
 type Story = StoryObj<typeof ModalBase>
 
