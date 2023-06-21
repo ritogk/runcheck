@@ -10,6 +10,7 @@ import {
 import InputPassword from "@/components/input-password.vue"
 import InputEmail from "@/components/input-email.vue"
 import FormLabel from "@/components/form-label.vue"
+import Button from "@/components/button.vue"
 
 const router = useRouter()
 const userState = inject(UseUserStateKey) as UseUserStateType
@@ -120,12 +121,8 @@ const onSubmit = async () => {
           </div>
 
           <div>
-            <button
-              type="submit"
-              class="flex w-full justify-center rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
-            >
-              ログイン
-            </button>
+            <Button :label="'ログイン'" :type="'submit'"></Button>
+            
           </div>
         </form>
       </div>
