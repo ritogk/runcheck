@@ -1,5 +1,6 @@
 import Button from "@/components/button.vue"
 import type { Meta, StoryObj } from "@storybook/vue3"
+import Reload from "@/components/svg/reload.vue"
 
 type Story = StoryObj<typeof Button>
 
@@ -63,6 +64,38 @@ export const Secondary: Story = {
   }),
   args: {
     label: "編集する",
+    type: "button"
+  }
+}
+
+export const IconButton: Story = {
+  render: (args) => ({
+    components: { Button: Button, Reload: Reload },
+    setup() {
+      return { args }
+    },
+    template: `<Button v-bind='args'>
+                  <Reload/>
+              </Button>`
+  }),
+  args: {
+    label: "更新する",
+    type: "button"
+  }
+}
+
+export const IconOnlyButton: Story = {
+  render: (args) => ({
+    components: { Button: Button, Reload: Reload },
+    setup() {
+      return { args }
+    },
+    template: `<Button v-bind='args'>
+                  <Reload/>
+              </Button>`
+  }),
+  args: {
+    label: "",
     type: "button"
   }
 }

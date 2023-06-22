@@ -3,6 +3,7 @@ const props = defineProps<{
   label: string
   variant: "primary" | "danger"
   type: "submit" | "button" | "reset"
+  accessibilityTitle?: string
 }>()
 </script>
 
@@ -18,7 +19,14 @@ const props = defineProps<{
         props.variant === undefined
     }"
     class="rounded-md px-4 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset focus:z-10"
+    :title="props.accessibilityTitle"
+    :aria-label="props.accessibilityTitle"
   >
-    {{ props.label }}
+    <div class="flex justify-center gap-1">
+      <div class="h-5 w-5" aria-hidden="true" v-if="$slots.default">
+        <slot></slot>
+      </div>
+      {{ props.label }}
+    </div>
   </button>
 </template>
