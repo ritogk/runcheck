@@ -21,7 +21,12 @@ provide(UseMainStateKey, mainState)
 const urlParams = new URLSearchParams(window.location.search)
 // 比較情報を開いた場合の処理
 const comparisonId = urlParams.get("comparisonId")
-if (comparisonId) handleComparisonOpen(Number(comparisonId), mainState)
+if (comparisonId) {
+  ;async () => {
+    await handleComparisonOpen(Number(comparisonId), mainState)
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+  }
+}
 
 // Oauthで認可された後の処理
 const code = urlParams.get("code")
