@@ -36,6 +36,12 @@ export const Default: Story = {
         type: "inline-radio"
       },
       options: ["button", "submit", "reset"]
+    },
+    size: {
+      control: {
+        type: "inline-radio"
+      },
+      options: ["sm", "md", "lg", undefined]
     }
   }
 }
@@ -115,6 +121,15 @@ export const CustomButton: Story = {
     variant: "custom",
     type: "button"
   }
+}
+
+export const SizeButton: Story = {
+  render: () => ({
+    components: { Button: Button, TwitterIcon: TwitterIcon },
+    template: `<Button :label="'smボタン'" :size="'sm'"/>
+              <Button :label="'mdボタン'" :size="'md'"/>
+              <Button :label="'lgボタン'" :size="'lg'"/>`
+  })
 }
 
 export default meta
