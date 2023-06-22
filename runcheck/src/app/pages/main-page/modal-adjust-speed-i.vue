@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { inject } from "vue"
 import Modal from "@/components/modal.vue"
-import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from "@headlessui/vue"
-import { XMarkIcon } from "@heroicons/vue/20/solid"
 import { UseMainStateKey, UseMainStateType } from "@/app/pages/main-page/use-main-state"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
