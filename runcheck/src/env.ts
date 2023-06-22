@@ -1,2 +1,2 @@
-const baseUrl = "https://tunneling8000.homisoftware.net/api/v1"
+const baseUrl = "http://localhost:5173/api/v1"
 export { baseUrl }
