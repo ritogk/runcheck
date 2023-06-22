@@ -27,8 +27,6 @@ const loadState = async () => {
   loadingState.stop(loadingId)
 }
 loadState()
-const a = 1
-console.log(aaaaaa)
 </script>
 
 <template>
