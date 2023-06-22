@@ -181,7 +181,12 @@ const onSubmit = async () => {
             </FormLabel>
 
             <div>
-              <Button :label="'新規登録'" :type="'submit'" class="mt-7"></Button>
+              <Button
+                :variant="'primary'"
+                :label="'新規登録'"
+                :type="'submit'"
+                class="mt-7 w-full"
+              ></Button>
             </div>
           </div>
         </form>
