@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { inject, ref, computed } from "vue"
-
 import ModalBase from "@/components/modal-base.vue"
-import {
-  UseMainStateKey,
-  UseMainStateType,
-} from "@/app/pages/main-page/use-main-state"
-import {
-  UseLoadingStateKey,
-  UseLoadingStateType,
-} from "@/app/use-loading-state"
+import YoutubeIcon from "@/components/svg/youtube.vue"
+import Button from "@/components/button.vue"
+import { UseMainStateKey, UseMainStateType } from "@/app/pages/main-page/use-main-state"
+import { UseLoadingStateKey, UseLoadingStateType } from "@/app/use-loading-state"
 import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
 import { YoutubeApi } from "@/core/openapiClient"
 import UseApiGetYoutubeVideo from "@/core/api-state/use-get-api-youtube-video"
@@ -17,7 +12,6 @@ import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selecto
 
 import { apiConfig } from "@/core/openapi"
 import { changeYoutube } from "./player/helpers-player"
-
 
 const useUserState = inject(UseUserStateKey) as UseUserStateType
 const useMainState = inject(UseMainStateKey) as UseMainStateType
@@ -31,10 +25,7 @@ const filteredVideos = computed(() => {
   if (isSuccess.value != true) return []
   if (!data.value) return []
   return data.value.filter((video) => {
-    return (
-      video.title.includes(filter.value) ||
-      video.description.includes(filter.value)
-    )
+    return video.title.includes(filter.value) || video.description.includes(filter.value)
   })
 })
 
@@ -74,7 +65,10 @@ const hundlePrivacyClick = () => {
 </script>
 
 <template>
-  <ModalBase :is-showed="useMainState.youtubeModal.subscription.opened.value" @hudnle-close="onClose">
+  <ModalBase
+    :is-showed="useMainState.youtubeModal.subscription.opened.value"
+    @hudnle-close="onClose"
+  >
     <div class="mt-3">
       <!-- Youtube Oauth-->
       <div class="text-center">
@@ -83,82 +77,20 @@ const hundlePrivacyClick = () => {
           <p class="text-gray-500">
             このボタンをクリックすると、あなたのYouTube動画一覧が表示されます。
           </p>
-          <div class="text-center">
-            <button
-              class="group mt-2 w-64 rounded bg-red-500 px-2 py-2 text-sm font-bold text-gray-100 shadow hover:bg-red-400"
-              @click="redirectToAuthorize"
-            >
-              <div class="flex justify-start">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  version="1.1"
-                  id="YouTube_Icon"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 1024 721"
-                  enable-background="new 0 0 1024 721"
-                  xml:space="preserve"
-                  style="width: 24px; height: 24px"
-                >
-                  <path
-                    id="Triangle"
-                    fill="#FFFFFF"
-                    d="M407,493l276-143L407,206V493z"
-                  />
-                  <path
-                    id="The_Sharpness"
-                    opacity="0.12"
-                    fill="#420000"
-                    d="M407,206l242,161.6l34-17.6L407,206z"
-                  />
-                  <g id="Lozenge">
-                    <g>
-                      <linearGradient
-                        id="SVGID_1_"
-                        gradientUnits="userSpaceOnUse"
-                        x1="512.5"
-                        y1="719.7"
-                        x2="512.5"
-                        y2="1.2"
-                        gradientTransform="matrix(1 0 0 -1 0 721)"
-                      >
-                        <stop
-                          offset="0"
-                          style="stop-color: #e52d27"
-                        />
-                        <stop
-                          offset="1"
-                          style="stop-color: #bf171d"
-                        />
-                      </linearGradient>
-                      <path
-                        fill="url(#SVGID_1_)"
-                        d="M1013,156.3c0,0-10-70.4-40.6-101.4C933.6,14.2,890,14,870.1,11.6C727.1,1.3,512.7,1.3,512.7,1.3    h-0.4c0,0-214.4,0-357.4,10.3C135,14,91.4,14.2,52.6,54.9C22,85.9,12,156.3,12,156.3S1.8,238.9,1.8,321.6v77.5    C1.8,481.8,12,564.4,12,564.4s10,70.4,40.6,101.4c38.9,40.7,89.9,39.4,112.6,43.7c81.7,7.8,347.3,10.3,347.3,10.3    s214.6-0.3,357.6-10.7c20-2.4,63.5-2.6,102.3-43.3c30.6-31,40.6-101.4,40.6-101.4s10.2-82.7,10.2-165.3v-77.5    C1023.2,238.9,1013,156.3,1013,156.3z M407,493V206l276,144L407,493z"
-                      />
-                    </g>
-                  </g>
-                </svg>
-                <span
-                  class="ml-2 mr-1 block h-6 w-1 border-l border-red-700 group-hover:border-red-600"
-                ></span>
-                <span class="pl-3">YouTube 動画一覧を取得</span>
-              </div>
-            </button>
-          </div>
-          <p
-            class="mt-2 text-center text-[12px] text-gray-500"
-            hidden
+
+          <Button
+            :label="'YouTube動画を取得'"
+            :variant="'custom'"
+            :size="'lg'"
+            @click="redirectToAuthorize"
+            class="mt-3 w-4/6 bg-red-500 text-gray-100 ring-red-500 hover:bg-red-400 focus-visible:outline-red-600"
           >
-            <a
-              class="underline"
-              @click="hundleTermsClick()"
-              href="javascript: void(0);"
-              >利用規約</a
-            >、<a
-              class="underline"
-              @click="hundlePrivacyClick()"
-              href="javascript: void(0);"
+            <YoutubeIcon></YoutubeIcon>
+            <div class="flex justify-start"></div>
+          </Button>
+          <p class="mt-2 text-center text-[12px] text-gray-500" hidden>
+            <a class="underline" @click="hundleTermsClick()" href="javascript: void(0);">利用規約</a
+            >、<a class="underline" @click="hundlePrivacyClick()" href="javascript: void(0);"
               >プライバシーポリシー</a
             >に同意したうえで取得してください。
           </p>
@@ -199,10 +131,7 @@ const hundlePrivacyClick = () => {
         >
           <div
             class="relative"
-            v-if="
-              !isSuccess &&
-              useUserState.subscription.isYoutubeAuthroized.value
-            "
+            v-if="!isSuccess && useUserState.subscription.isYoutubeAuthroized.value"
           >
             <!-- スケルトン -->
             <div>
@@ -233,13 +162,9 @@ const hundlePrivacyClick = () => {
                 </div>
                 <div class="ml-4 flex-auto">
                   <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
-                  <div
-                    class="rounded-fullw-4/5 mb-4 h-2.5 bg-gray-200"
-                  ></div>
+                  <div class="rounded-fullw-4/5 mb-4 h-2.5 bg-gray-200"></div>
                   <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
-                  <div
-                    class="h-2.5 w-3/5 rounded-full bg-gray-200"
-                  ></div>
+                  <div class="h-2.5 w-3/5 rounded-full bg-gray-200"></div>
                 </div>
               </li>
             </div>
@@ -248,9 +173,7 @@ const hundlePrivacyClick = () => {
               class="absolute left-0 top-0 h-full w-full rounded-lg bg-gray-50 opacity-10 brightness-50 backdrop-blur-lg"
             ></div>
             <!-- ローディングのスピナー -->
-            <div
-              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            >
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <svg
                 aria-hidden="true"
                 class="mr-2 h-12 w-12 animate-spin fill-slate-500 text-slate-300"
@@ -282,18 +205,14 @@ const hundlePrivacyClick = () => {
               tabindex="-1"
               @click="selectVideo(video.url)"
             >
-              <div
-                class="h-[40px]flex-shrink-0 flex w-[40px] items-center justify-center"
-              >
+              <div class="h-[40px]flex-shrink-0 flex w-[40px] items-center justify-center">
                 <img
                   :src="video.thumbnailUrl"
                   alt="サムネイル"
                   class="h-[40px] w-[40px] rounded-lg"
                 />
               </div>
-              <div
-                class="ml-4 flex w-[calc(100%_-_40px_-_1rem)] flex-1 flex-col"
-              >
+              <div class="ml-4 flex w-[calc(100%_-_40px_-_1rem)] flex-1 flex-col">
                 <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
                 <p class="truncate text-sm font-medium text-gray-700">
                   {{ video.title }}
@@ -331,9 +250,7 @@ const hundlePrivacyClick = () => {
                 d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
               />
             </svg>
-            <p class="mt-4 font-semibold text-gray-900">
-              結果が見つかりませんでした
-            </p>
+            <p class="mt-4 font-semibold text-gray-900">結果が見つかりませんでした</p>
           </div>
         </div>
       </div>
