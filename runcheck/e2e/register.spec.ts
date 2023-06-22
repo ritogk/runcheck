@@ -4,7 +4,7 @@ import { InlineResponse2004, User } from "../src/core/openapiClient"
 import getOrigin from "./core/get-origin"
 import { baseUrl } from "@/env"
 
-test("新規登録後に比較ページに遷移する事", async ({ page }) => {
+test("新規登録後に比較画面に遷移する事", async ({ page }) => {
   // 未ログイン状態のステータス取得APIをモック
   await setupGetMock<InlineResponse2004>(
     page,
@@ -21,6 +21,7 @@ test("新規登録後に比較ページに遷移する事", async ({ page }) => 
   // 新規登録のラベルが表示されている事
   const isTextVisible = await page.isVisible(`text="新規登録"`)
   await expect(isTextVisible).toBe(true)
+
   // 新規登録に必要な項目を入力
   await page.getByLabel("ハンドルネーム").fill("testユーザー")
   await page.getByLabel("車種").fill("GK5")
