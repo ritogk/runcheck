@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject, ref, computed } from "vue"
-import ModalBase from "@/components/modal-base.vue"
+import Modal from "@/components/modal.vue"
 import YoutubeIcon from "@/components/svg/youtube.vue"
 import Button from "@/components/button.vue"
 import { UseMainStateKey, UseMainStateType } from "@/app/pages/main-page/use-main-state"
@@ -65,10 +65,7 @@ const hundlePrivacyClick = () => {
 </script>
 
 <template>
-  <ModalBase
-    :is-showed="useMainState.youtubeModal.subscription.opened.value"
-    @hudnle-close="onClose"
-  >
+  <Modal :is-showed="useMainState.youtubeModal.subscription.opened.value" @hudnle-close="onClose">
     <div class="mt-3">
       <!-- Youtube Oauth-->
       <div class="text-center">
@@ -255,5 +252,5 @@ const hundlePrivacyClick = () => {
         </div>
       </div>
     </div>
-  </ModalBase>
+  </Modal>
 </template>

@@ -1,32 +1,32 @@
-import ModalBase from "@/components/modal-base.vue"
+import Modal from "@/components/modal.vue"
 import type { Meta, StoryObj } from "@storybook/vue3"
 
-type Story = StoryObj<typeof ModalBase>
+type Story = StoryObj<typeof Modal>
 
-const meta: Meta<typeof ModalBase> = {
-  title: "components/modal-base",
-  component: ModalBase,
+const meta: Meta<typeof Modal> = {
+  title: "components/modal",
+  component: Modal,
   tags: ["autodocs"]
 }
 
 export const Default: Story = {
   render: (args) => ({
-    components: { ModalBase: ModalBase },
+    components: { Modal: Modal },
     setup() {
       return { args }
     },
     template: `<p>props.isShowed = trueで表示</p>
-                <ModalBase v-bind='args' @hudnle-close="args.isShowed=false">
+                <Modal v-bind='args' @hudnle-close="args.isShowed=false">
                   <div class="mt-3">
                     <p>モーダルサンプル</p>
                     <p>モーダルサンプル</p>
                     <p>モーダルサンプル</p>
                     <p>モーダルサンプル</p>
                   </div>
-                </ModalBase>`
+                </Modal>`
   }),
   args: {
-    isShowed: false,
+    isShowed: false
   }
 }
 
