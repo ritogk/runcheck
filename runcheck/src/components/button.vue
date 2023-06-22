@@ -1,17 +1,17 @@
 <script setup lang="ts">
 const props = defineProps<{
   label: string
-  variant: "primary" | "danger"
-  type: "submit" | "button" | "reset"
+  variant?: "primary" | "danger"
+  type?: "submit" | "button" | "reset"
   accessibilityTitle?: string
 }>()
 </script>
 
 <template>
   <button
-    :type="props.type"
+    :type="props.type ?? 'button'"
     :class="{
-      'bg-slate-500 text-white hover:bg-slate-400 focus-visible:outline-slate-600':
+      'bg-slate-600 text-white hover:bg-slate-500 focus-visible:outline-slate-700':
         props.variant === 'primary',
       'bg-red-500 text-white hover:bg-red-400 focus-visible:outline-red-600':
         props.variant === 'danger',
