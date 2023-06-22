@@ -3,6 +3,7 @@ import { ref, inject, watch } from "vue"
 import AdjustmentArea from "./player/adjustment-area.vue"
 import Button from "@/components/button.vue"
 import PlusVideoIcon from "@/components/svg/plus-video.vue"
+import SearchIcon from "@/components/svg/search.vue"
 import { PlayerNo } from "./main-state/modal-youtube-selector-state"
 import { UseMainStateKey, UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { VideoCameraIcon } from "@heroicons/vue/20/solid"
@@ -107,21 +108,7 @@ const hundleYoutubeSearch = () => {
                   aria-label="YouTube動画選択"
                   @click="hundleYoutubeSearch()"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    width="20px"
-                    height="20px"
-                    class="mx-auto stroke-gray-500"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                  </svg>
+                  <SearchIcon class="mx-auto stroke-gray-500"></SearchIcon>
                 </button>
               </div>
               <!-- 端末動画選択 -->
