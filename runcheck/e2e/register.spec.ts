@@ -18,9 +18,8 @@ test("新規登録後に比較画面に遷移する事", async ({ page }) => {
   )
   await page.goto("/register")
 
-  // 新規登録のラベルが表示されている事
-  const isTextVisible = await page.isVisible(`text="新規登録"`)
-  await expect(isTextVisible).toBe(true)
+  // タイトル(新規登録)が表示されている事
+  await expect(page.locator("body")).toContainText("新規登録")
 
   // 新規登録に必要な項目を入力
   await page.getByLabel("ハンドルネーム").fill("testユーザー")

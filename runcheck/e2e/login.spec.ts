@@ -18,8 +18,8 @@ test("ログイン後に比較画面に遷移する事", async ({ page }) => {
   )
   await page.goto("/login")
 
-  // ログインのラベルが表示されている事
-  await expect(await page.isVisible(`text="ログイン"`)).toBe(true)
+  // タイトル(ログイン)が表示されている事
+  await expect(page.locator("body")).toContainText("ログイン")
 
   // ログインに必要な項目を入力
   await page.getByLabel("メールアドレス").fill("test@test.example")
