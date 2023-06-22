@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { IVideoPlayer } from "@/app/pages/main-page/player/i-video-player"
-import {
-  ChevronDoubleRightIcon,
-  ChevronDoubleLeftIcon,
-} from "@heroicons/vue/20/solid"
+import Button from "@/components/button.vue"
+import { ChevronDoubleRightIcon, ChevronDoubleLeftIcon } from "@heroicons/vue/20/solid"
 
 const props = defineProps<{
   player: IVideoPlayer
@@ -19,121 +17,71 @@ const hundleVideoSeek = async (seconds: number) => {
   <div>
     <!-- 進む -->
     <div class="flex justify-between gap-2">
-      <button
-        class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-        title="1秒進む"
-        aria-label="1秒進む"
+      <Button
+        class="w-1/4"
+        :label="'1s'"
+        :accessibility-title="'1秒進む'"
         @click="hundleVideoSeek(1)"
-      >
-        <div class="flex items-center justify-center">
-          <ChevronDoubleRightIcon
-            class="h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          1s
-        </div>
-      </button>
-      <button
-        class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-        title="0.5秒進む"
-        aria-label="0.5秒進む"
+        ><ChevronDoubleRightIcon
+      /></Button>
+
+      <Button
+        class="w-1/4"
+        :label="'0.5s'"
+        :accessibility-title="'0.5秒進む'"
         @click="hundleVideoSeek(0.5)"
-      >
-        <div class="flex items-center justify-center">
-          <ChevronDoubleRightIcon
-            class="h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          0.5s
-        </div>
-      </button>
-      <button
-        class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-        title="0.1秒進む"
-        aria-label="0.1秒進む"
+        ><ChevronDoubleRightIcon
+      /></Button>
+
+      <Button
+        class="w-1/4"
+        :label="'0.1s'"
+        :accessibility-title="'0.1秒進む'"
         @click="hundleVideoSeek(0.1)"
-      >
-        <div class="flex items-center justify-center">
-          <ChevronDoubleRightIcon
-            class="h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          0.1s
-        </div>
-      </button>
-      <button
-        class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-        title="0.05秒進む"
-        aria-label="0.05秒進む"
+        ><ChevronDoubleRightIcon
+      /></Button>
+
+      <Button
+        class="w-1/4"
+        :label="'0.05s'"
+        :accessibility-title="'0.05秒進む'"
         @click="hundleVideoSeek(0.05)"
-      >
-        <div class="flex items-center justify-center">
-          <ChevronDoubleRightIcon
-            class="h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          0.05s
-        </div>
-      </button>
+        ><ChevronDoubleRightIcon
+      /></Button>
     </div>
     <!-- 戻る -->
     <div class="mt-2 flex justify-between gap-2">
-      <button
-        class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-        title="1秒戻る"
-        aria-label="1秒戻る"
+      <Button
+        class="w-1/4"
+        :label="'1s'"
+        :accessibility-title="'1秒戻る'"
         @click="hundleVideoSeek(-1)"
-      >
-        <div class="flex items-center justify-center">
-          <ChevronDoubleLeftIcon
-            class="h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          1s
-        </div>
-      </button>
-      <button
-        class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-        title="0.5秒戻る"
-        aria-label="0.5秒戻る"
+        ><ChevronDoubleLeftIcon
+      /></Button>
+
+      <Button
+        class="w-1/4"
+        :label="'0.5s'"
+        :accessibility-title="'0.5秒戻る'"
         @click="hundleVideoSeek(-0.5)"
-      >
-        <div class="flex items-center justify-center">
-          <ChevronDoubleLeftIcon
-            class="h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          0.5s
-        </div>
-      </button>
-      <button
-        class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-        title="0.1秒戻る"
-        aria-label="0.1秒戻る"
+        ><ChevronDoubleLeftIcon
+      /></Button>
+
+      <Button
+        class="w-1/4"
+        :label="'0.1s'"
+        :accessibility-title="'0.1秒戻る'"
         @click="hundleVideoSeek(-0.1)"
-      >
-        <div class="flex items-center justify-center">
-          <ChevronDoubleLeftIcon
-            class="h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          0.1s
-        </div>
-      </button>
-      <button
-        class="w-1/4 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-        title="0.05秒戻る"
-        aria-label="0.05秒戻る"
+        ><ChevronDoubleLeftIcon
+      /></Button>
+
+      <Button
+        class="w-1/4"
+        :label="'0.05s'"
+        :accessibility-title="'0.05秒戻る'"
         @click="hundleVideoSeek(-0.05)"
-      >
-        <div class="flex items-center justify-center">
-          <ChevronDoubleLeftIcon
-            class="h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          0.05s
-        </div>
-      </button>
+        ><ChevronDoubleLeftIcon
+      /></Button>
     </div>
   </div>
 </template>

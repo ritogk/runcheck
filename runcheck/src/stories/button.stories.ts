@@ -96,7 +96,6 @@ export const IconOnlyButton: Story = {
               </Button>`
   }),
   args: {
-    label: "",
     type: "button"
   }
 }

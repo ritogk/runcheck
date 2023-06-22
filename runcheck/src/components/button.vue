@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  label: string
+  label?: string
   variant?: "primary" | "danger" | "secondary" | "custom"
   type?: "submit" | "button" | "reset"
   accessibilityTitle?: string
@@ -27,7 +27,12 @@ const props = defineProps<{
         class="h-5 w-5"
         :class="{
           'text-white': props.variant === 'primary' || props.variant === 'danger',
-          'text-gray-400': props.variant === 'secondary' || props.variant === undefined
+          'fill-gray-400 text-gray-400':
+            props.label !== undefined &&
+            (props.variant === 'secondary' || props.variant === undefined),
+          'fill-gray-500  text-gray-500':
+            props.label === undefined &&
+            (props.variant === 'secondary' || props.variant === undefined)
         }"
         aria-hidden="true"
         v-if="$slots.default"
