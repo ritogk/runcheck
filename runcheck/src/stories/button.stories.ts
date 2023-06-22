@@ -1,6 +1,7 @@
 import Button from "@/components/button.vue"
 import type { Meta, StoryObj } from "@storybook/vue3"
 import Reload from "@/components/svg/reload.vue"
+import TwitterIcon from "@/components/svg/twitter.vue"
 
 type Story = StoryObj<typeof Button>
 
@@ -28,7 +29,7 @@ export const Default: Story = {
       control: {
         type: "inline-radio"
       },
-      options: ["primary", "danger", undefined]
+      options: ["primary", "danger", "secondary", "custom", undefined]
     },
     type: {
       control: {
@@ -96,6 +97,23 @@ export const IconOnlyButton: Story = {
   }),
   args: {
     label: "",
+    type: "button"
+  }
+}
+
+export const CustomButton: Story = {
+  render: (args) => ({
+    components: { Button: Button, TwitterIcon: TwitterIcon },
+    setup() {
+      return { args }
+    },
+    template: `<Button v-bind='args' class="bg-[#16A2F3] text-white ring-[#1697f3] hover:bg-[#45b7f7] focus-visible:outline-[#0f73bb]">
+                <TwitterIcon></TwitterIcon>
+              </Button>`
+  }),
+  args: {
+    label: "ツイートする",
+    variant: "custom",
     type: "button"
   }
 }
