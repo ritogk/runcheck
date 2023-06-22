@@ -23,7 +23,15 @@ const props = defineProps<{
     :aria-label="props.accessibilityTitle"
   >
     <div class="flex justify-center gap-1">
-      <div class="h-5 w-5" aria-hidden="true" v-if="$slots.default">
+      <div
+        class="h-5 w-5"
+        :class="{
+          'text-white': props.variant === 'primary' || props.variant === 'danger',
+          'text-gray-400': props.variant === 'secondary' || props.variant === undefined
+        }"
+        aria-hidden="true"
+        v-if="$slots.default"
+      >
         <slot></slot>
       </div>
       {{ props.label }}
