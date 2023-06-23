@@ -44,7 +44,6 @@ test("未ログイン状態で、モーダルからYouTube動画を選択した�
   const playerOneLocator = await page.locator("#player-one")
   // 「YouTube動画検索」を押下
   await playerOneLocator.getByTitle("YouTube動画選択").click()
-  await page.screenshot({ path: "2-mihama.png", fullPage: true })
   // 「美浜サーキット」を含むボタンを押下
   await page.getByRole("button", { name: "美浜サーキット" }).click()
 
