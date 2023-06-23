@@ -7,9 +7,8 @@
 ## リンク
 
 http://runcheck.homisoftware.net/lp/ja <br>
-動作サンプル(画面幅をスマホサイズにして下さい)<br>
+↓ 動作サンプル(画面幅をスマホサイズにして下さい)<br>
 https://runcheck.homisoftware.net/app/index?comparisonId=13<br>
-https://twitter.com/homing_fd2/status/1516361339748319235?s=20&t=m7lv_Mh4W78hdyT9CsLSYQ<br>
 <br>
 
 ## 画面
@@ -30,13 +29,33 @@ git clone git@github.com:ritogk/vidcomp.git
 docekr-compose up -d
 ```
 
-### php container
-
+### backend setup
+run in php-container
 ```sh
 chmod +x ./setup.sh
+cp .env.base .env
 ./setup.sh
 php artisan migrate:refresh --seed
 php artisan serve --host 0.0.0.0
+```
+
+### frontend setup
+```sh
+cd frontend
+cp src/env.base.ts src/env.ts
+yarn install
+```
+
+## frotnend storybook
+```sh
+cd frontend
+yarn storybook
+```
+
+## frotnend e2e
+```sh
+cd frontend
+yarn e2e
 ```
 
 <br>
