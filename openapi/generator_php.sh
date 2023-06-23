@@ -6,7 +6,7 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate -i 
 # grep -l 'NUMBER_' .${WORK_PATH}/lib/Model/* | xargs sed -i 's/NUMBER_//g'
 
 
-OUTPUT_PATH='../app/OpenAPI'
+OUTPUT_PATH='../backend/app/OpenAPI'
 # laravel側にコピー
 rm -rf ${OUTPUT_PATH}
 mkdir -p ${OUTPUT_PATH}
