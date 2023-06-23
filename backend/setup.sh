@@ -1,4 +1,4 @@
-cp .env.base .env
+# cp .env.base .env
 composer install
 php artisan key:generate
 chmod -R 777 storage
