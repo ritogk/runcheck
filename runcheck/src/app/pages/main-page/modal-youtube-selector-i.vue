@@ -196,29 +196,31 @@ const hundlePrivacyClick = () => {
             <li
               v-for="video in filteredVideos"
               :key="video.url"
-              class="group flex cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
+              class="cursor-default select-none rounded-xl border-b border-b-gray-100 p-3 focus:bg-gray-100"
               id="option-1"
               role="option"
               tabindex="-1"
               @click="selectVideo(video.url)"
             >
-              <div class="h-[40px]flex-shrink-0 flex w-[40px] items-center justify-center">
-                <img
-                  :src="video.thumbnailUrl"
-                  alt="サムネイル"
-                  class="h-[40px] w-[40px] rounded-lg"
-                />
-              </div>
-              <div class="ml-4 flex w-[calc(100%_-_40px_-_1rem)] flex-1 flex-col">
-                <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
-                <p class="truncate text-sm font-medium text-gray-700">
-                  {{ video.title }}
-                </p>
-                <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
-                <p class="truncate text-sm text-gray-500">
-                  {{ video.description }}
-                </p>
-              </div>
+              <button class="group flex w-full">
+                <div class="h-[40px]flex-shrink-0 flex w-[40px] items-center justify-center">
+                  <img
+                    :src="video.thumbnailUrl"
+                    alt="サムネイル"
+                    class="h-[40px] w-[40px] rounded-lg"
+                  />
+                </div>
+                <div class="ml-4 flex w-[calc(100%_-_40px_-_1rem)] flex-1 flex-col text-left">
+                  <!-- Active: "text-gray-900", Not Active: "text-gray-700" -->
+                  <p class="truncate text-sm font-medium text-gray-700">
+                    {{ video.title }}
+                  </p>
+                  <!-- Active: "text-gray-700", Not Active: "text-gray-500" -->
+                  <p class="truncate text-sm text-gray-500">
+                    {{ video.description }}
+                  </p>
+                </div>
+              </button>
             </li>
           </div>
 
