@@ -49,9 +49,10 @@ test("新規登録後に比較画面に遷移する事", async ({ page }) => {
   // 「新規登録」押下
   await page.getByRole("button", { name: "新規登録" }).click()
 
-  // 待機させないとコケる・・・
-  await page.waitForTimeout(300)
+  // 比較ページに遷移するまで待機
+  await page.waitForURL(`${await getOrigin(page)}/index`),
 
   // 比較ページに遷移されている事
-  await expect(page.url()).toBe(`${await getOrigin(page)}/index`)
+  await expect(page.locator("body")).toContainText("動画を同期")
+  await expect(page.locator("body")).toContainText("比較結果を共有")
 })
