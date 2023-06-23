@@ -45,6 +45,7 @@ export const handleComparisonOpen = async (comparisonId: number, mainState: UseM
         mainState.syncPlayer.runSync()
         loadingState.stop(loadingId)
         alretState.clear()
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
       }, 3000)
     }, 2000)
   } catch {
