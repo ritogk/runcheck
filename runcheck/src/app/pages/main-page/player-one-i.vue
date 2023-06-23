@@ -73,7 +73,7 @@ const hundleYoutubeSearch = () => {
 </style>
 
 <template>
-  <div>
+  <div id="player-one">
     <Transition name="adjustment">
       <div v-show="!useMainState.syncPlayer.subscription.synced.value" class="overflow-hidden">
         <AdjustmentArea :player="playerOne" class="px-1"></AdjustmentArea>
@@ -92,7 +92,7 @@ const hundleYoutubeSearch = () => {
                 >
                 <!-- Youtube url -->
                 <input
-                  type="email"
+                  type="text"
                   name="youtube-url-one"
                   id="youtube-url-one"
                   class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"

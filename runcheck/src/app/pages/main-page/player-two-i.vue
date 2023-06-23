@@ -74,7 +74,7 @@ const hundleYoutubeSearch = () => {
 </style>
 
 <template>
-  <div>
+  <div id="player-two">
     <!-- Video -->
     <div :ref="elements.videoArea">
       <div v-show="playerTwo.subscription.videoType.value === VideoType.NONE">
@@ -117,7 +117,7 @@ const hundleYoutubeSearch = () => {
                 >
                 <!-- Youtube url -->
                 <input
-                  type="email"
+                  type="text"
                   name="youtube-url-two"
                   id="youtube-url-two"
                   class="block w-9/12 rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-slate-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"
