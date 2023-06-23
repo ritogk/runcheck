@@ -1,7 +1,7 @@
-import { InjectionKey, ref, computed, ComputedRef } from "vue"
-import { localStorageKeys } from "@/core/localstorage-key"
+import { InjectionKey, ref, computed, ComputedRef } from 'vue'
+import { localStorageKeys } from '@/core/localstorage-key'
 
-type UseLoadingStateType = {
+export type UseLoadingStateType = {
   run(): number
   stop(id: number): void
   save(): void
@@ -18,9 +18,7 @@ const UseLoadingState = (): UseLoadingStateType => {
   const run = (): number => {
     _isLoading.value = true
     const id =
-      _processing.value.length === 0
-        ? 1
-        : Math.max(..._processing.value.map((x) => x.id)) + 1
+      _processing.value.length === 0 ? 1 : Math.max(..._processing.value.map((x) => x.id)) + 1
     _processing.value.push({ id: id })
     // エラー時に何もできなくならないように10秒後に強制OFF
     setTimeout(() => {
@@ -39,10 +37,7 @@ const UseLoadingState = (): UseLoadingStateType => {
   }
 
   const save = () => {
-    localStorage.setItem(
-      localStorageKeys.LOADING,
-      JSON.stringify(_isLoading.value)
-    )
+    localStorage.setItem(localStorageKeys.LOADING, JSON.stringify(_isLoading.value))
   }
 
   const load = () => {
@@ -62,12 +57,11 @@ const UseLoadingState = (): UseLoadingStateType => {
     subscription: {
       isLoading: computed(() => {
         return _isLoading.value
-      }),
-    },
+      })
+    }
   }
 }
 
-const UseLoadingStateKey: InjectionKey<UseLoadingStateType> =
-  Symbol("UseLoadingState")
+const UseLoadingStateKey: InjectionKey<UseLoadingStateType> = Symbol('UseLoadingState')
 
-export { UseLoadingState, UseLoadingStateKey, UseLoadingStateType }
+export { UseLoadingState, UseLoadingStateKey }

@@ -3,13 +3,11 @@ import { ref, inject } from "vue"
 import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
 import { UseAlretStateKey, UseAlretStateType } from "@/app/use-alret-state"
 import { useRouter } from "vue-router"
-import {
-  UseLoadingStateKey,
-  UseLoadingStateType,
-} from "@/app/use-loading-state"
+import { UseLoadingStateKey, UseLoadingStateType } from "@/app/use-loading-state"
 import InputPassword from "@/components/input-password.vue"
 import InputEmail from "@/components/input-email.vue"
 import FormLabel from "@/components/form-label.vue"
+import Button from "@/components/button.vue"
 
 const router = useRouter()
 const userState = inject(UseUserStateKey) as UseUserStateType
@@ -22,21 +20,21 @@ const form = {
     required: true,
     label: "メールアドレス",
     placeholder: "",
-    value: ref<string>(""),
+    value: ref<string>("")
   },
   password: {
     id: "password",
     required: true,
     label: "パスワード",
     placeholder: "",
-    value: ref<string>(""),
+    value: ref<string>("")
   },
   remember: {
     id: "remember",
     required: false,
     label: "次回から入力を省略",
-    value: ref<boolean>(false),
-  },
+    value: ref<boolean>(false)
+  }
 }
 
 const onSubmit = async () => {
@@ -51,9 +49,7 @@ const onSubmit = async () => {
     alretState.clear()
     router.push({ name: "index" })
   } catch {
-    alretState.add(
-      "認証に失敗しました。メールアドレスとパスワードを確認してください。"
-    )
+    alretState.add("認証に失敗しました。メールアドレスとパスワードを確認してください。")
   }
   loadingState.stop(loadingId)
 }
@@ -62,21 +58,13 @@ const onSubmit = async () => {
 <template>
   <div class="flex min-h-full flex-col justify-center py-6 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <h2
-        class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900"
-      >
-        ログイン
-      </h2>
+      <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">ログイン</h2>
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <form class="space-y-6" @submit.prevent="onSubmit()">
-          <FormLabel
-            :id="form.email.id"
-            :required="false"
-            :label="form.email.label"
-          >
+          <FormLabel :id="form.email.id" :required="false" :label="form.email.label">
             <InputEmail
               class="mt-2"
               :id="form.email.id"
@@ -88,11 +76,7 @@ const onSubmit = async () => {
             ></InputEmail>
           </FormLabel>
 
-          <FormLabel
-            :id="form.password.id"
-            :required="false"
-            :label="form.password.label"
-          >
+          <FormLabel :id="form.password.id" :required="false" :label="form.password.label">
             <InputPassword
               class="mt-2"
               :id="form.password.id"
@@ -111,21 +95,19 @@ const onSubmit = async () => {
                 type="checkbox"
                 class="h-4 w-4 rounded border-gray-300 text-slate-600 focus:ring-slate-600"
               />
-              <label
-                :for="form.remember.id"
-                class="ml-2 block text-sm text-gray-900"
+              <label :for="form.remember.id" class="ml-2 block text-sm text-gray-900"
                 >次回から入力を省略</label
               >
             </div>
           </div>
 
           <div>
-            <button
-              type="submit"
-              class="flex w-full justify-center rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
-            >
-              ログイン
-            </button>
+            <Button
+              class="w-full"
+              :label="'ログイン'"
+              :type="'submit'"
+              :variant="'primary'"
+            ></Button>
           </div>
         </form>
       </div>

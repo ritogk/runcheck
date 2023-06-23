@@ -2,19 +2,13 @@ import { inject } from "vue"
 import { ComparisonsApi } from "@/core/openapiClient"
 import { UseAlretStateKey, UseAlretStateType } from "@/app/use-alret-state"
 import { UseMainStateType } from "@/app/pages/main-page/use-main-state"
-import {
-  UseLoadingStateKey,
-  UseLoadingStateType,
-} from "@/app/use-loading-state"
+import { UseLoadingStateKey, UseLoadingStateType } from "@/app/use-loading-state"
 import { YouTubePlayer } from "@/app/pages/main-page/player/youtube-player"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { apiConfig } from "@/core/openapi"
 
 // 比較動画を共有した場合の処理
-export const handleComparisonOpen = async (
-  comparisonId: number,
-  mainState: UseMainStateType
-) => {
+export const handleComparisonOpen = async (comparisonId: number, mainState: UseMainStateType) => {
   const alretState = inject(UseAlretStateKey) as UseAlretStateType
   const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
@@ -22,7 +16,7 @@ export const handleComparisonOpen = async (
   const comparisonsApi = new ComparisonsApi(apiConfig)
   try {
     const response = await comparisonsApi.comparisonsComparisonIdGet({
-      comparisonId: comparisonId,
+      comparisonId: comparisonId
     })
 
     // 匿名比較の場合はtitleとmemoが空になるので表示させない。

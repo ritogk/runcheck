@@ -15,26 +15,31 @@ const hundleInput = (event: any) => {
   emits("input", event.target.value)
 }
 
-const hundleChange = (event: any) => {
+const hundleChange = () => {
   emits("change")
 }
 
 const isPasswordVisible = ref(false)
 const switchPasswordVisibility = () => {
-  const element = <HTMLInputElement>document.getElementById(props.id)
-  if (element.type === "password") {
-    element.type = "text"
+  if (!elements.password.value) return
+  if (elements.password.value.type === "password") {
+    elements.password.value.type = "text"
     isPasswordVisible.value = true
   } else {
-    element.type = "password"
+    elements.password.value.type = "password"
     isPasswordVisible.value = false
   }
+}
+
+const elements = {
+  password: ref<HTMLInputElement | null>(null)
 }
 </script>
 
 <template>
   <div class="relative mt-2 rounded-md shadow-sm">
     <input
+      :ref="elements.password"
       :id="props.id"
       :name="props.id"
       :placeholder="props.placeholder"
@@ -52,9 +57,7 @@ const switchPasswordVisibility = () => {
       type="button"
       @click="switchPasswordVisibility"
       :title="isPasswordVisible ? 'パスワードを非表示' : 'パスワードを表示'"
-      :aria-label="
-        isPasswordVisible ? 'パスワードを非表示' : 'パスワードを表示'
-      "
+      :aria-label="isPasswordVisible ? 'パスワードを非表示' : 'パスワードを表示'"
       class="absolute inset-y-0 right-0 flex items-center px-2"
     >
       <svg

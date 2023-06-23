@@ -21,7 +21,11 @@ provide(UseMainStateKey, mainState)
 const urlParams = new URLSearchParams(window.location.search)
 // 比較情報を開いた場合の処理
 const comparisonId = urlParams.get("comparisonId")
-if (comparisonId) handleComparisonOpen(Number(comparisonId), mainState)
+if (comparisonId) {
+  ;(async () => {
+    await handleComparisonOpen(Number(comparisonId), mainState)
+  })()
+}
 
 // Oauthで認可された後の処理
 const code = urlParams.get("code")
@@ -33,9 +37,7 @@ const userState = inject(UseUserStateKey) as UseUserStateType
 <template>
   <div class="max-w-[600px]">
     <div class="px-1">
-      <FileControllerI
-        v-show="userState.subscription.logined.value"
-      ></FileControllerI>
+      <FileControllerI v-show="userState.subscription.logined.value"></FileControllerI>
       <ModalSaveI></ModalSaveI>
       <ModalOpenI></ModalOpenI>
       <Memo
@@ -48,12 +50,11 @@ const userState = inject(UseUserStateKey) as UseUserStateType
 
     <PlayerOneI></PlayerOneI>
     <PlayerTwoI></PlayerTwoI>
-    <SyncControllerI
-      v-show="mainState.syncPlayer.subscription.synced.value"
-    ></SyncControllerI>
+    <SyncControllerI v-show="mainState.syncPlayer.subscription.synced.value"></SyncControllerI>
   </div>
   <ModalYoutubeSelectorI
     v-if="mainState.youtubeModal.subscription.opened.value"
   ></ModalYoutubeSelectorI>
+
   <ModalAdjustSpeedI></ModalAdjustSpeedI>
 </template>

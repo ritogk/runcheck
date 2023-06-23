@@ -1,16 +1,9 @@
-import { ref, shallowRef, ShallowRef, computed, ComputedRef, watch } from "vue"
-import {
-  IVideoPlayer,
-  Status,
-  VideoType,
-} from "@/app/pages/main-page/player/i-video-player"
-import { DummyPlayer } from "@/app/pages/main-page/player/dummy-player"
-import {
-  ComparisonsApi,
-  VideoType as ApiVideoType,
-} from "@/core/openapiClient/index"
-import { extractYoutubeId } from "@/core/extract-youtube-id"
-import { apiConfig } from "@/core/openapi"
+import { ref, shallowRef, ShallowRef, computed, ComputedRef, watch } from 'vue'
+import { IVideoPlayer, Status, VideoType } from '@/app/pages/main-page/player/i-video-player'
+import { DummyPlayer } from '@/app/pages/main-page/player/dummy-player'
+import { ComparisonsApi, VideoType as ApiVideoType } from '@/core/openapiClient/index'
+import { extractYoutubeId } from '@/core/extract-youtube-id'
+import { apiConfig } from '@/core/openapi'
 
 /**
  * プレイヤーの同期状態を管理するクラス
@@ -140,12 +133,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._repeated.value = true
     const [playerOneStartPosition, playerTwoStartPosition] = await Promise.all([
       this._playerOne.value.getCurrentTime(),
-      this._playerTwo.value.getCurrentTime(),
+      this._playerTwo.value.getCurrentTime()
     ])
-    this._playerOneStartPosition =
-      Math.floor(playerOneStartPosition * 100) / 100
-    this._playerTwoStartPosition =
-      Math.floor(playerTwoStartPosition * 100) / 100
+    this._playerOneStartPosition = Math.floor(playerOneStartPosition * 100) / 100
+    this._playerTwoStartPosition = Math.floor(playerTwoStartPosition * 100) / 100
 
     // 動画1と動画2で同期した時間の範囲を算出
     const playerOneDuration = await this._playerOne.value.getDuration()
@@ -162,29 +153,24 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._synced.value = true
 
     // 同期ぐるぐる
-    this._syncIntervalId = setInterval(async () => {
+    this._syncIntervalId = window.setInterval(async () => {
       if (this.syncProcessing) return
       this.syncProcessing = true
 
       const st = new Date().getTime()
-      let [playerOneCurrentPosition, playerTwoCurrentPosition] =
-        await Promise.all([
-          this._playerOne.value.getCurrentTime(),
-          this._playerTwo.value.getCurrentTime(),
-        ])
-      playerOneCurrentPosition =
-        Math.floor(playerOneCurrentPosition * 100) / 100
-      playerTwoCurrentPosition =
-        Math.floor(playerTwoCurrentPosition * 100) / 100
+      let [playerOneCurrentPosition, playerTwoCurrentPosition] = await Promise.all([
+        this._playerOne.value.getCurrentTime(),
+        this._playerTwo.value.getCurrentTime()
+      ])
+      playerOneCurrentPosition = Math.floor(playerOneCurrentPosition * 100) / 100
+      playerTwoCurrentPosition = Math.floor(playerTwoCurrentPosition * 100) / 100
       // 動画が再生しきっていてリピートフラグが立っている場合はリロード
       if (
         (this._playerOne.value.subscription.status.value === Status.ENDED ||
           this._playerTwo.value.subscription.status.value === Status.ENDED) &&
         this._repeated.value
       ) {
-        console.log(
-          "動画が再生しきっていてリピートフラグが立っている場合はリロード"
-        )
+        console.log('動画が再生しきっていてリピートフラグが立っている場合はリロード')
         this.reload()
         this.syncProcessing = false
         return
@@ -195,7 +181,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         playerTwoCurrentPosition < this._playerTwoStartPosition
       ) {
         // 開始ポジションより手前の場合は開始ポジションに戻す
-        console.log("開始ポジションより手前の場合は開始ポジションに戻す")
+        console.log('開始ポジションより手前の場合は開始ポジションに戻す')
         // console.log(
         //   `playerOneCurrentPosition:${playerOneCurrentPosition} playerOneStartPosition:${this._playerOneStartPosition}`
         // )
@@ -207,14 +193,12 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         return
       }
 
-      const videoOnePosition =
-        playerOneCurrentPosition - this._playerOneStartPosition
-      const videoTwoPosition =
-        playerTwoCurrentPosition - this._playerTwoStartPosition
+      const videoOnePosition = playerOneCurrentPosition - this._playerOneStartPosition
+      const videoTwoPosition = playerTwoCurrentPosition - this._playerTwoStartPosition
       // 0.1秒以上ずれていたら同期させる
       const diff = Math.abs(videoOnePosition - videoTwoPosition)
       if (diff >= 0.1) {
-        console.log("0.1秒以上ずれていたら同期させる")
+        console.log('0.1秒以上ずれていたら同期させる')
         if (videoOnePosition > videoTwoPosition) {
           this._playerOne.value.seekTo(playerOneCurrentPosition + diff * -1)
           // 片方の動画のみをシークすると「シークのタイムラグ」と「再生され続けている時間」をあわせて0.4秒くらいずれてしまうので意味のないシークを挟む
@@ -286,15 +270,15 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         video1VideoType: video1VideoType,
         video2Url: video2EmbedUrl,
         video2TimeSt: video2TimeSt,
-        video2VideoType: video2VideoType,
-      },
+        video2VideoType: video2VideoType
+      }
     })
     return { id: response.comparisonId }
   }
 
   publishSync(id: number): Promise<void> {
     return this._comparisonsApi.comparisonsComparisonIdPublishPut({
-      comparisonId: id,
+      comparisonId: id
     })
   }
 
@@ -331,6 +315,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     }),
     duration: computed(() => {
       return this._syncDuration.value
-    }),
+    })
   }
 }
