@@ -51,12 +51,19 @@ const config: PlaywrightTestConfig = {
         ...devices["Desktop Chrome"]
       }
     },
+    /* Test against mobile viewports. */
     {
-      name: "Mobile Safari",
+      name: "Mobile Chrome",
       use: {
-        ...devices["iPhone 12"]
+        ...devices["Pixel 5"]
       }
     }
+    // {
+    //   name: "Mobile Safari",
+    //   use: {
+    //     ...devices["iPhone 12"]
+    //   }
+    // }
     // {
     //   name: 'firefox',
     //   use: {
@@ -69,15 +76,6 @@ const config: PlaywrightTestConfig = {
     //     ...devices['Desktop Safari']
     //   }
     // }
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
-
     /* Test against branded browsers. */
     // {
     //   name: 'Microsoft Edge',
