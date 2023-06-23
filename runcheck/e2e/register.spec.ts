@@ -16,7 +16,7 @@ test("新規登録後に比較画面に遷移する事", async ({ page }) => {
     },
     200
   )
-  await page.goto("/register")
+  await page.goto("/app/register")
 
   // タイトル(新規登録)が表示されている事
   await expect(page.locator("body")).toContainText("新規登録")
@@ -50,7 +50,7 @@ test("新規登録後に比較画面に遷移する事", async ({ page }) => {
   await page.getByRole("button", { name: "新規登録" }).click()
 
   // 比較ページに遷移するまで待機
-  await page.waitForURL(`${await getOrigin(page)}/index`),
+  await page.waitForURL(`${await getOrigin(page)}/app/index`),
 
   // 比較ページに遷移されている事
   await expect(page.locator("body")).toContainText("動画を同期")

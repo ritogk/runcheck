@@ -16,7 +16,7 @@ test("ログイン後に比較画面に遷移する事", async ({ page }) => {
     },
     200
   )
-  await page.goto("/login")
+  await page.goto("/app/login")
 
   // タイトル(ログイン)が表示されている事
   await expect(page.locator("body")).toContainText("ログイン")
@@ -47,9 +47,8 @@ test("ログイン後に比較画面に遷移する事", async ({ page }) => {
   await page.getByRole("button", { name: "ログイン" }).click()
 
   // 比較ページに遷移するまで待機
-  await page.waitForURL(`${await getOrigin(page)}/index`),
-
-  // 比較ページに遷移されている事
-  await expect(page.locator("body")).toContainText("動画を同期")
+  await page.waitForURL(`${await getOrigin(page)}/app/index`),
+    // 比較ページに遷移されている事
+    await expect(page.locator("body")).toContainText("動画を同期")
   await expect(page.locator("body")).toContainText("比較結果を共有")
 })

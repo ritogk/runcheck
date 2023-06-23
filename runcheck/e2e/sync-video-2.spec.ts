@@ -39,7 +39,7 @@ test("未ログイン状態で、モーダルからYouTube動画を選択した�
     ],
     200
   )
-  await page.goto("/index")
+  await page.goto("/app/index")
 
   const playerOneLocator = await page.locator("#player-one")
   // 「YouTube動画検索」を押下
@@ -54,7 +54,7 @@ test("未ログイン状態で、モーダルからYouTube動画を選択した�
   await page.getByRole("button", { name: "YZサーキット" }).click()
 
   // 待機させないと同期が失敗する
-  await page.waitForTimeout(1500)
+  await page.waitForTimeout(5000)
 
   // 「動画を同期」を押下
   await page.getByRole("button", { name: "動画を同期" }).click()

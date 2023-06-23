@@ -5,7 +5,7 @@ import LoginPageI from "@/app/pages/login-page-i.vue"
 import HomePageI from "@/app/pages/home-page-i.vue"
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory("/app/"),
   routes: [
     {
       path: "/index",

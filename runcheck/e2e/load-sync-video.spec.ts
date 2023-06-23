@@ -34,6 +34,6 @@ test("共有した同期結果が表示できる事", async ({ page }) => {
     },
     200
   )
-  await page.goto("/index?comparisonId=1")
+  await page.goto("/app/index?comparisonId=1")
   await expect(page.getByRole("button", { name: "同期を解除" })).toBeVisible()
 })

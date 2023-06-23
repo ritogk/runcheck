@@ -17,7 +17,7 @@ test("未ログイン状態で、player1をYoutubeをURL直入力し、player2�
     },
     200
   )
-  await page.goto("/index")
+  await page.goto("/app/index")
 
   const playerOneLocator = await page.locator("#player-one")
   // YotTubeのURLを入力してENTER押下
@@ -36,7 +36,7 @@ test("未ログイン状態で、player1をYoutubeをURL直入力し、player2�
     .setInputFiles(`${__dirname}/files/hiroyuki.webm`)
 
   // 待機させないと同期が失敗する
-  await page.waitForTimeout(1500)
+  await page.waitForTimeout(5000)
 
   // 「動画を同期」を押下
   await page.getByRole("button", { name: "動画を同期" }).click()
