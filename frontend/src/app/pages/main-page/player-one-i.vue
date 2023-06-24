@@ -76,6 +76,7 @@ const hundleYoutubeSearch = () => {
   <div id="player-one">
     <Transition name="adjustment">
       <div v-show="!useMainState.syncPlayer.subscription.synced.value" class="overflow-hidden">
+        <div class="mx-1 pt-2 border-t border-gray-300"></div>
         <AdjustmentArea :player="playerOne" class="px-1"></AdjustmentArea>
         <!-- selector -->
         <div class="px-1">

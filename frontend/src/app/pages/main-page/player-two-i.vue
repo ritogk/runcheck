@@ -156,6 +156,7 @@ const hundleYoutubeSearch = () => {
 
         <!-- adjustment-->
         <AdjustmentArea :player="playerTwo" class="mt-2 px-1"></AdjustmentArea>
+        <div class="mx-1 pb-2 border-b border-gray-300"></div>
       </div>
     </Transition>
   </div>
