@@ -8,7 +8,7 @@
 
 http://runcheck.homisoftware.net/lp/ja <br>
 ↓ 動作サンプル(画面幅をスマホサイズにして下さい)<br>
-https://runcheck.homisoftware.net/app/index?comparisonId=13<br>
+https://runcheck.homisoftware.net/app/index?comparisonId=67<br>
 <br>
 
 ## 画面
