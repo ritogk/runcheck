@@ -38,6 +38,7 @@ const hundleSaveClick = () => {
             <SaveIcon></SaveIcon>
           </Button>
         </div>
+        <div class="pb-2 border-b border-gray-300"></div>
       </div>
     </div>
   </div>
