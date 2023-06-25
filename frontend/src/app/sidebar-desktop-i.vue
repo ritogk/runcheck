@@ -32,7 +32,7 @@ const hundleHomeClick = () => {
         <div>
           <div class="text-[20px]">RunCheck</div>
           <div class="text-[10px] font-normal leading-5">
-            車載動画でサーキットを攻略！タイムアップのための比較アプリ
+            a車載動画でサーキットを攻略！タイムアップのための比較アプリ
           </div>
         </div>
       </div>
