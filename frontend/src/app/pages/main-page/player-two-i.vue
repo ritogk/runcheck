@@ -5,7 +5,7 @@ import Button from "@/components/button.vue"
 import PlusVideoIcon from "@/components/svg/plus-video.vue"
 import SearchIcon from "@/components/svg/search.vue"
 import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
-import { UseMainStateKey, UseMainStateType } from "@/app/pages/main-page/use-main-state"
+import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { VideoCameraIcon } from "@heroicons/vue/20/solid"
 import { VideoType } from "./player/i-video-player"
 import { changeYoutube } from "./player/helpers-player"
@@ -156,7 +156,7 @@ const hundleYoutubeSearch = () => {
 
         <!-- adjustment-->
         <AdjustmentArea :player="playerTwo" class="mt-2 px-1"></AdjustmentArea>
-        <div class="mx-1 pb-2 border-b border-gray-300"></div>
+        <div class="mx-1 border-b border-gray-300 pb-2"></div>
       </div>
     </Transition>
   </div>

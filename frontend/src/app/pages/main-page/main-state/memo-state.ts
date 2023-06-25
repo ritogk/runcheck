@@ -1,4 +1,4 @@
-import { computed, ref, ComputedRef, Ref } from "vue"
+import { computed, ref, type ComputedRef } from "vue"
 
 /**
  * 同期メモの状態に関するクラス
@@ -43,6 +43,6 @@ export class MemoState implements IMemoState {
     }),
     isShowed: computed(() => {
       return this._isShowed.value
-    }),
+    })
   }
 }

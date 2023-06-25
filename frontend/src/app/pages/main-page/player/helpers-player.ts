@@ -1,8 +1,8 @@
-import { ShallowRef } from "vue"
+import { type ShallowRef } from "vue"
 import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
 import { YouTubePlayer } from "./youtube-player"
 import { LocalVideoPlayer } from "./local-video-player"
-import { IVideoPlayer } from "./i-video-player"
+import { type IVideoPlayer } from "./i-video-player"
 import { DummyPlayer } from "./dummy-player"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 
@@ -24,8 +24,7 @@ export const changeYoutube = async (
 ) => {
   const youtubeId = extractYoutubeId(youtubeUrl)
   player.value.destory()
-  const elementId =
-    playerNo === PlayerNo.ONE ? "youtube-video-one" : "youtube-video-two"
+  const elementId = playerNo === PlayerNo.ONE ? "youtube-video-one" : "youtube-video-two"
   const newPlayer = new YouTubePlayer(elementId, youtubeId)
   await newPlayer.load()
   player.value = newPlayer

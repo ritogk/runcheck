@@ -1,9 +1,9 @@
-import { ref, shallowRef, ShallowRef, computed, ComputedRef, watch } from 'vue'
-import { IVideoPlayer, Status, VideoType } from '@/app/pages/main-page/player/i-video-player'
-import { DummyPlayer } from '@/app/pages/main-page/player/dummy-player'
-import { ComparisonsApi, VideoType as ApiVideoType } from '@/core/openapiClient/index'
-import { extractYoutubeId } from '@/core/extract-youtube-id'
-import { apiConfig } from '@/core/openapi'
+import { ref, shallowRef, type ShallowRef, computed, type ComputedRef, watch } from "vue"
+import { type IVideoPlayer, Status, VideoType } from "@/app/pages/main-page/player/i-video-player"
+import { DummyPlayer } from "@/app/pages/main-page/player/dummy-player"
+import { ComparisonsApi, VideoType as ApiVideoType } from "@/core/openapiClient/index"
+import { extractYoutubeId } from "@/core/extract-youtube-id"
+import { apiConfig } from "@/core/openapi"
 
 /**
  * プレイヤーの同期状態を管理するクラス
@@ -170,7 +170,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
           this._playerTwo.value.subscription.status.value === Status.ENDED) &&
         this._repeated.value
       ) {
-        console.log('動画が再生しきっていてリピートフラグが立っている場合はリロード')
+        console.log("動画が再生しきっていてリピートフラグが立っている場合はリロード")
         this.reload()
         this.syncProcessing = false
         return
@@ -181,7 +181,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         playerTwoCurrentPosition < this._playerTwoStartPosition
       ) {
         // 開始ポジションより手前の場合は開始ポジションに戻す
-        console.log('開始ポジションより手前の場合は開始ポジションに戻す')
+        console.log("開始ポジションより手前の場合は開始ポジションに戻す")
         // console.log(
         //   `playerOneCurrentPosition:${playerOneCurrentPosition} playerOneStartPosition:${this._playerOneStartPosition}`
         // )
@@ -198,7 +198,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
       // 0.1秒以上ずれていたら同期させる
       const diff = Math.abs(videoOnePosition - videoTwoPosition)
       if (diff >= 0.1) {
-        console.log('0.1秒以上ずれていたら同期させる')
+        console.log("0.1秒以上ずれていたら同期させる")
         if (videoOnePosition > videoTwoPosition) {
           this._playerOne.value.seekTo(playerOneCurrentPosition + diff * -1)
           // 片方の動画のみをシークすると「シークのタイムラグ」と「再生され続けている時間」をあわせて0.4秒くらいずれてしまうので意味のないシークを挟む

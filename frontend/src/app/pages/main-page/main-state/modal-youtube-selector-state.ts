@@ -1,4 +1,4 @@
-import { computed, ref, ComputedRef } from "vue"
+import { computed, ref, type ComputedRef } from "vue"
 import { localStorageKeys } from "@/core/localstorage-key"
 
 /**
@@ -31,9 +31,7 @@ export class ModalYoutubeSelectorState implements IModalYoutubeSelectorState {
 
   load = () => {
     // モーダルの状態を復元
-    const storage = localStorage.getItem(
-      localStorageKeys.YOUTUBE_SELECT_MODAL_STATE
-    )
+    const storage = localStorage.getItem(localStorageKeys.YOUTUBE_SELECT_MODAL_STATE)
     if (storage) {
       const item = <{ playerNo: PlayerNo; opened: boolean }>JSON.parse(storage)
       this._opened.value = item.opened
@@ -47,7 +45,7 @@ export class ModalYoutubeSelectorState implements IModalYoutubeSelectorState {
       localStorageKeys.YOUTUBE_SELECT_MODAL_STATE,
       JSON.stringify({
         playerNo: this._currentPlayerNo.value,
-        opened: this._opened.value,
+        opened: this._opened.value
       })
     )
   }
@@ -58,12 +56,12 @@ export class ModalYoutubeSelectorState implements IModalYoutubeSelectorState {
     }),
     currentPlayerNo: computed(() => {
       return this._currentPlayerNo.value
-    }),
+    })
   }
 }
 
 export enum PlayerNo {
   ONE = 1,
   TWO = 2,
-  NONE = 3,
+  NONE = 3
 }

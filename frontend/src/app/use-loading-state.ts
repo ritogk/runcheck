@@ -1,5 +1,5 @@
-import { InjectionKey, ref, computed, ComputedRef } from 'vue'
-import { localStorageKeys } from '@/core/localstorage-key'
+import { type InjectionKey, ref, computed, type ComputedRef } from "vue"
+import { localStorageKeys } from "@/core/localstorage-key"
 
 export type UseLoadingStateType = {
   run(): number
@@ -62,6 +62,6 @@ const UseLoadingState = (): UseLoadingStateType => {
   }
 }
 
-const UseLoadingStateKey: InjectionKey<UseLoadingStateType> = Symbol('UseLoadingState')
+const UseLoadingStateKey: InjectionKey<UseLoadingStateType> = Symbol("UseLoadingState")
 
 export { UseLoadingState, UseLoadingStateKey }

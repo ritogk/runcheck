@@ -2,15 +2,10 @@
 import { inject } from "vue"
 import { useRouter } from "vue-router"
 // component
-import {
-  Dialog,
-  DialogPanel,
-  TransitionChild,
-  TransitionRoot,
-} from "@headlessui/vue"
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from "@headlessui/vue"
 import { UserIcon, XMarkIcon } from "@heroicons/vue/24/outline"
-import { UseUserStateType, UseUserStateKey } from "@/app/use-user-state"
-import { UseSidebarStateKey, IUseSidebarState } from "./sidebar-state"
+import { type UseUserStateType, UseUserStateKey } from "@/app/use-user-state"
+import { UseSidebarStateKey, type IUseSidebarState } from "./sidebar-state"
 
 const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const userState = inject(UseUserStateKey) as UseUserStateType
@@ -26,10 +21,7 @@ const hundleHomeClick = () => {
 <template>
   <!-- mobile-sidebar -->
   <div class="flex justify-end">
-    <TransitionRoot
-      as="template"
-      :show="sidebarState.subscription.opened.value"
-    >
+    <TransitionRoot as="template" :show="sidebarState.subscription.opened.value">
       <Dialog as="div" class="relative z-40" @close="sidebarState.close()">
         <TransitionChild
           as="template"
@@ -91,19 +83,12 @@ const hundleHomeClick = () => {
                             class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                             @click="hundleHomeClick()"
                           >
-                            <component
-                              :is="UserIcon"
-                              class="h-6 w-6 shrink-0"
-                              aria-hidden="true"
-                            />
+                            <component :is="UserIcon" class="h-6 w-6 shrink-0" aria-hidden="true" />
                             {{ userState.subscription.user.value.name }}
                           </a>
                         </li>
 
-                        <li
-                          v-for="item in sidebarState.subscription.items.value"
-                          :key="item.name"
-                        >
+                        <li v-for="item in sidebarState.subscription.items.value" :key="item.name">
                           <a
                             v-if="item.show.value"
                             :href="item.href"
@@ -111,7 +96,7 @@ const hundleHomeClick = () => {
                               item.current
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                              'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
+                              'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
                             ]"
                             @click="item.action"
                           >

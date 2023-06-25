@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref, inject, reactive, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, inject, reactive, computed } from "vue"
+import { useRouter } from "vue-router"
 import {
   Listbox,
   ListboxButton,
   ListboxLabel,
   ListboxOption,
   ListboxOptions
-} from '@headlessui/vue'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
-import { fetchComparisons, deleteComparison } from '@/core/comparisons'
-import { UseLoadingStateKey, UseLoadingStateType } from '@/app/use-loading-state'
+} from "@headlessui/vue"
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
+import { fetchComparisons, deleteComparison } from "@/core/comparisons"
+import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 
 const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
@@ -36,7 +36,7 @@ fetch()
 
 const tagOptions = computed(() => {
   const tmp = [
-    { id: 0, name: '　' },
+    { id: 0, name: "　" },
     ...comparisons.map((x) => {
       return { id: x.id, name: x.tag }
     })
@@ -52,12 +52,12 @@ const tagOptions = computed(() => {
   }, [])
   return groupedArray
 })
-const selected = ref({ id: 0, name: '　' })
+const selected = ref({ id: 0, name: "　" })
 
 const syncs = computed(() => {
   return comparisons
     .filter((x) => {
-      return selected.value.name === '　' || x.tag === selected.value.name
+      return selected.value.name === "　" || x.tag === selected.value.name
     })
     .map((x) => {
       return { id: x.id, title: x.title, memo: x.memo, tag: x.tag }
@@ -66,7 +66,7 @@ const syncs = computed(() => {
 
 const router = useRouter()
 const hundleTitleClick = (comparisonId: number) => {
-  router.push({ name: 'index', query: { comparisonId: comparisonId } })
+  router.push({ name: "index", query: { comparisonId: comparisonId } })
 }
 
 const hundleDelete = async (comparisonId: number, title: string) => {

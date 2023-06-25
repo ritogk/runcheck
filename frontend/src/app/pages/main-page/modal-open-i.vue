@@ -10,9 +10,9 @@ import {
   ListboxOptions
 } from "@headlessui/vue"
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
-import { UseMainStateKey, UseMainStateType } from "@/app/pages/main-page/use-main-state"
+import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { fetchComparisons } from "@/core/comparisons"
-import { UseLoadingStateKey, UseLoadingStateType } from "@/app/use-loading-state"
+import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType

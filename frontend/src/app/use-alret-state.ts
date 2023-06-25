@@ -1,4 +1,4 @@
-import { InjectionKey, ref, computed, ComputedRef } from "vue"
+import { type InjectionKey, ref, computed, type ComputedRef } from "vue"
 
 type UseAlretStateType = {
   subscription: {
@@ -30,15 +30,14 @@ const UseAlretState = (): UseAlretStateType => {
     subscription: {
       messages: computed(() => {
         return _messages.value
-      }),
+      })
     },
     add: add,
     remove: remove,
-    clear: clear,
+    clear: clear
   }
 }
 
-const UseAlretStateKey: InjectionKey<UseAlretStateType> =
-  Symbol("UseAlretState")
+const UseAlretStateKey: InjectionKey<UseAlretStateType> = Symbol("UseAlretState")
 
-export { UseAlretState, UseAlretStateKey, UseAlretStateType }
+export { UseAlretState, UseAlretStateKey, type UseAlretStateType }

@@ -1,9 +1,5 @@
-import { InjectionKey, ref, computed, ComputedRef } from "vue"
-import {
-  AuthenticationApi,
-  UsersApi,
-  StatusApi,
-} from "@/core/openapiClient/apis"
+import { type InjectionKey, ref, computed, type ComputedRef } from "vue"
+import { AuthenticationApi, UsersApi, StatusApi } from "@/core/openapiClient/apis"
 import { apiConfig } from "@/core/openapi"
 
 type UseUserStateType = {
@@ -12,12 +8,7 @@ type UseUserStateType = {
     isYoutubeAuthroized: ComputedRef<boolean>
     user: ComputedRef<{ id: number; name: string }>
   }
-  register(
-    handleName: string,
-    carType: string,
-    email: string,
-    password: string
-  ): Promise<void>
+  register(handleName: string, carType: string, email: string, password: string): Promise<void>
   login(email: string, password: string, remember: boolean): Promise<void>
   logout(): Promise<void>
   load(): Promise<void>
@@ -46,8 +37,8 @@ const UseUserState = (): UseUserStateType => {
           handleName: handleName,
           carType: carType,
           email: email,
-          password: password,
-        },
+          password: password
+        }
       })
 
       try {
@@ -64,18 +55,14 @@ const UseUserState = (): UseUserStateType => {
   /**
    * ログイン
    */
-  const login = async (
-    email: string,
-    password: string,
-    remember: boolean
-  ): Promise<void> => {
+  const login = async (email: string, password: string, remember: boolean): Promise<void> => {
     try {
       const response = await _authenticationApi.authenticationLoginPost({
         inlineObject1: {
           email: email,
           password: password,
-          remember: remember,
-        },
+          remember: remember
+        }
       })
       await load()
       return
@@ -99,14 +86,14 @@ const UseUserState = (): UseUserStateType => {
 
   /**
    * ユーザーの状態を読み込む
-   * @returns 
+   * @returns
    */
   const load = async (): Promise<void> => {
     try {
       const response = await _statusApi.statusGet()
       _user.value = {
         id: response.user?.id ?? 0,
-        name: response.user?.name ?? "",
+        name: response.user?.name ?? ""
       }
       _logined.value = response.isLogined
       _isYoutubeAuthroized.value = response.isYoutubeAuthroized
@@ -126,15 +113,15 @@ const UseUserState = (): UseUserStateType => {
       }),
       user: computed(() => {
         return _user.value
-      }),
+      })
     },
     register: register,
     login: login,
     logout: logout,
-    load: load,
+    load: load
   }
 }
 
 const UseUserStateKey: InjectionKey<UseUserStateType> = Symbol("useUserState")
 
-export { UseUserState, UseUserStateKey, UseUserStateType }
+export { UseUserState, UseUserStateKey, type UseUserStateType }

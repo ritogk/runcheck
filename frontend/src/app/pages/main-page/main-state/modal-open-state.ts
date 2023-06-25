@@ -1,4 +1,4 @@
-import { computed, ref, ComputedRef } from "vue"
+import { computed, ref, type ComputedRef } from "vue"
 
 /**
  * 開くモーダルの状態
@@ -25,6 +25,6 @@ export class ModalOpenState implements IModalOpenState {
   subscription = {
     opened: computed(() => {
       return this._opened.value
-    }),
+    })
   }
 }

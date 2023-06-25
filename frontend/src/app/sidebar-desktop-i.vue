@@ -2,8 +2,8 @@
 import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { UserIcon } from "@heroicons/vue/24/outline"
-import { UseUserStateType, UseUserStateKey } from "@/app/use-user-state"
-import { UseSidebarStateKey, IUseSidebarState } from "./sidebar-state"
+import { type UseUserStateType, UseUserStateKey } from "@/app/use-user-state"
+import { UseSidebarStateKey, type IUseSidebarState } from "./sidebar-state"
 
 const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const userState = inject(UseUserStateKey) as UseUserStateType
@@ -45,18 +45,11 @@ const hundleHomeClick = () => {
                   class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                   @click="hundleHomeClick()"
                 >
-                  <component
-                    :is="UserIcon"
-                    class="h-6 w-6 shrink-0"
-                    aria-hidden="true"
-                  />
+                  <component :is="UserIcon" class="h-6 w-6 shrink-0" aria-hidden="true" />
                   {{ userState.subscription.user.value.name }}
                 </a>
               </li>
-              <li
-                v-for="item in sidebarState.subscription.items.value"
-                :key="item.name"
-              >
+              <li v-for="item in sidebarState.subscription.items.value" :key="item.name">
                 <a
                   v-if="item.show.value"
                   :href="item.href"
@@ -64,15 +57,11 @@ const hundleHomeClick = () => {
                     item.current
                       ? 'bg-gray-800 text-white'
                       : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                    'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
+                    'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
                   ]"
                   @click="item.action"
                 >
-                  <component
-                    :is="item.icon"
-                    class="h-6 w-6 shrink-0"
-                    aria-hidden="true"
-                  />
+                  <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
                   {{ item.name }}
                 </a>
               </li>

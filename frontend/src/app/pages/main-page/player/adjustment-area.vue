@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IVideoPlayer } from "@/app/pages/main-page/player/i-video-player"
+import { type IVideoPlayer } from "@/app/pages/main-page/player/i-video-player"
 import Button from "@/components/button.vue"
 import { ChevronDoubleRightIcon, ChevronDoubleLeftIcon } from "@heroicons/vue/20/solid"
 

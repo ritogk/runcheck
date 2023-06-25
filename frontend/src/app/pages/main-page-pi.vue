@@ -11,7 +11,7 @@ import FileControllerI from "./main-page/file-controller-i.vue"
 import SyncControllerI from "./main-page/sync-controller-i.vue"
 import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
-import { UseUserStateKey, UseUserStateType } from "@/app/use-user-state"
+import { UseUserStateKey, type UseUserStateType } from "@/app/use-user-state"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
 import { handleComparisonOpen } from "./main-page/handle-comparison-open-i"
 

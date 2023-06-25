@@ -1,5 +1,5 @@
 import MainPageI from "@/app/pages/main-page-pi.vue"
-import { Meta, StoryObj, setup } from "@storybook/vue3"
+import { type Meta, type StoryObj, setup } from "@storybook/vue3"
 import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
 import { UseUserState, UseUserStateKey } from "@/app/use-user-state"
 import { UseAlretState, UseAlretStateKey } from "@/app/use-alret-state"

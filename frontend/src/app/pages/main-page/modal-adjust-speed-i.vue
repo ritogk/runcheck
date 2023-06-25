@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject } from "vue"
 import Modal from "@/components/modal.vue"
-import { UseMainStateKey, UseMainStateType } from "@/app/pages/main-page/use-main-state"
+import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 

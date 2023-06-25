@@ -1,4 +1,4 @@
-import { computed, ref, ComputedRef } from "vue"
+import { computed, ref, type ComputedRef } from "vue"
 
 /**
  * 動画速度の調整用モーダルの状態
@@ -25,6 +25,6 @@ export class ModalAdjustSpeedState implements IModalAdjustSpeedState {
   subscription = {
     opened: computed(() => {
       return this._opened.value
-    }),
+    })
   }
 }

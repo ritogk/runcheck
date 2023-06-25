@@ -3,8 +3,8 @@ import { inject } from "vue"
 import Button from "@/components/button.vue"
 import ReloadIcon from "@/components/svg/reload.vue"
 import TwitterIcon from "@/components/svg/twitter.vue"
-import { UseMainStateKey, UseMainStateType } from "@/app/pages/main-page/use-main-state"
-import { UseLoadingStateKey, UseLoadingStateType } from "@/app/use-loading-state"
+import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
+import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import { VideoType } from "./player/i-video-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType

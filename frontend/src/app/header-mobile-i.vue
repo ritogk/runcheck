@@ -2,7 +2,7 @@
 import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { Bars3Icon } from "@heroicons/vue/24/outline"
-import { UseSidebarStateKey, IUseSidebarState } from "./sidebar-state"
+import { UseSidebarStateKey, type IUseSidebarState } from "./sidebar-state"
 
 const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const router = useRouter()
@@ -14,9 +14,7 @@ const hundleHeaderClick = () => {
 
 <template>
   <!-- mobile-header -->
-  <div
-    class="z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-3 shadow-sm sm:px-6"
-  >
+  <div class="z-40 flex items-center gap-x-6 bg-gray-900 px-4 py-3 shadow-sm sm:px-6">
     <div
       class="flex-1 cursor-pointer text-sm font-semibold leading-6 text-slate-100"
       @click="hundleHeaderClick()"

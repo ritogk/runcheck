@@ -3,7 +3,7 @@ import { inject } from "vue"
 import Button from "@/components/button.vue"
 import OpenIcon from "@/components/svg/open.vue"
 import SaveIcon from "@/components/svg/save.vue"
-import { UseMainStateType, UseMainStateKey } from "@/app/pages/main-page/use-main-state"
+import { type UseMainStateType, UseMainStateKey } from "@/app/pages/main-page/use-main-state"
 import { VideoType } from "@/app/pages/main-page/player/i-video-player"
 
 const mainState = inject(UseMainStateKey) as UseMainStateType
@@ -38,7 +38,7 @@ const hundleSaveClick = () => {
             <SaveIcon></SaveIcon>
           </Button>
         </div>
-        <div class="pb-2 border-b border-gray-300"></div>
+        <div class="border-b border-gray-300 pb-2"></div>
       </div>
     </div>
   </div>

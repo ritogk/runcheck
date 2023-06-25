@@ -1,7 +1,7 @@
 import { computed, ref } from "vue"
 import YPlayer from "youtube-player"
-import { IVideoPlayer, VideoType, Status } from "./i-video-player"
-import { YouTubePlayer as YouTubePlayerType } from "youtube-player/dist/types"
+import { type IVideoPlayer, VideoType, Status } from "./i-video-player"
+import { type YouTubePlayer as YouTubePlayerType } from "youtube-player/dist/types"
 import PlayerStates from "youtube-player/dist/constants/PlayerStates"
 
 export class YouTubePlayer implements IVideoPlayer {
@@ -92,6 +92,6 @@ export class YouTubePlayer implements IVideoPlayer {
     }),
     videoType: computed(() => {
       return VideoType.YOUTUBE
-    }),
+    })
   }
 }

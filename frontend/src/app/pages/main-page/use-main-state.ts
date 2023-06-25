@@ -1,19 +1,16 @@
-import { InjectionKey } from "vue"
-import { ModalOpenState, IModalOpenState } from "./main-state/modal-open-state"
-import { ModalSaveState, IModalSaveState } from "./main-state/modal-save-state"
+import { type InjectionKey } from "vue"
+import { ModalOpenState, type IModalOpenState } from "./main-state/modal-open-state"
+import { ModalSaveState, type IModalSaveState } from "./main-state/modal-save-state"
 import { MemoState } from "./main-state/memo-state"
 import {
   ModalYoutubeSelectorState,
-  IModalYoutubeSelectorState,
+  type IModalYoutubeSelectorState
 } from "./main-state/modal-youtube-selector-state"
 import {
   ModalAdjustSpeedState,
-  IModalAdjustSpeedState,
+  type IModalAdjustSpeedState
 } from "./main-state/modal-adjust-speed-state"
-import {
-  SyncPlayerState,
-  ISyncPlayerStateType,
-} from "./main-state/sync-player-state"
+import { SyncPlayerState, type ISyncPlayerStateType } from "./main-state/sync-player-state"
 
 type UseMainStateType = {
   openModal: IModalOpenState
@@ -31,10 +28,9 @@ const UseMainState = (): UseMainStateType => {
     memo: new MemoState(),
     youtubeModal: new ModalYoutubeSelectorState(),
     adjustSpeedModal: new ModalAdjustSpeedState(),
-    syncPlayer: new SyncPlayerState(),
+    syncPlayer: new SyncPlayerState()
   }
 }
 
-const UseMainStateKey: InjectionKey<UseMainStateType> =
-  Symbol("UseMainStateType")
-export { UseMainState, UseMainStateKey, UseMainStateType }
+const UseMainStateKey: InjectionKey<UseMainStateType> = Symbol("UseMainStateType")
+export { UseMainState, UseMainStateKey, type UseMainStateType }

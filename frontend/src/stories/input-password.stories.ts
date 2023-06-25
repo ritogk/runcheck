@@ -1,7 +1,5 @@
 import InputPassword from "@/components/input-password.vue"
 import type { Meta, StoryObj } from "@storybook/vue3"
-import { expect } from "@storybook/jest"
-import { userEvent, within } from "@storybook/testing-library"
 
 type Story = StoryObj<typeof InputPassword>
 
@@ -44,7 +42,7 @@ export const Validation: Story = {
     value: "",
     id: "password",
     placeholder: "入力してENTER"
-  },
+  }
 }
 
 export default meta

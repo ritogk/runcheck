@@ -1,4 +1,4 @@
-import { ComputedRef } from "vue"
+import { type ComputedRef } from "vue"
 export interface IVideoPlayer {
   load(): Promise<void>
   play(): Promise<void>
@@ -22,7 +22,7 @@ export interface IVideoPlayer {
 export enum VideoType {
   YOUTUBE,
   LOCAL,
-  NONE,
+  NONE
 }
 
 export enum Status {
@@ -30,5 +30,5 @@ export enum Status {
   CAN_PLAY, // 再生可能な状態
   PLAYING, // 再生中
   PAUSE, // ポーズ
-  ENDED, // 終了
+  ENDED // 終了
 }

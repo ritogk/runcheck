@@ -2,21 +2,21 @@ import {
   computed,
   ref,
   shallowRef,
-  ComputedRef,
-  FunctionalComponent,
-  HTMLAttributes,
-  VNodeProps,
-  InjectionKey,
+  type ComputedRef,
+  type FunctionalComponent,
+  type HTMLAttributes,
+  type VNodeProps,
+  type InjectionKey
 } from "vue"
 import { useRouter } from "vue-router"
-import { UseUserStateType } from "@/app/use-user-state"
-import { UseLoadingStateType } from "@/app/use-loading-state"
+import { type UseUserStateType } from "@/app/use-user-state"
+import { type UseLoadingStateType } from "@/app/use-loading-state"
 import {
   UserPlusIcon,
   ChatBubbleOvalLeftEllipsisIcon,
   ArrowRightOnRectangleIcon,
   ArrowLeftOnRectangleIcon,
-  QuestionMarkCircleIcon,
+  QuestionMarkCircleIcon
 } from "@heroicons/vue/24/outline"
 
 export interface IUseSidebarState {
@@ -56,7 +56,7 @@ export class UseSidebarState implements IUseSidebarState {
         this._opened.value = false
         this._router.push({ name: "login" })
       },
-      show: computed(() => !this._userState.subscription.logined.value),
+      show: computed(() => !this._userState.subscription.logined.value)
     },
     {
       name: "ログアウト",
@@ -70,7 +70,7 @@ export class UseSidebarState implements IUseSidebarState {
         location.href = location.origin + this._router.resolve("index").href
         // this._loadingState.stop(loadingId)
       },
-      show: computed(() => this._userState.subscription.logined.value),
+      show: computed(() => this._userState.subscription.logined.value)
     },
     {
       name: "新規登録",
@@ -81,7 +81,7 @@ export class UseSidebarState implements IUseSidebarState {
         this._opened.value = false
         this._router.push({ name: "register" })
       },
-      show: computed(() => !this._userState.subscription.logined.value),
+      show: computed(() => !this._userState.subscription.logined.value)
     },
     {
       name: "このアプリについて",
@@ -91,7 +91,7 @@ export class UseSidebarState implements IUseSidebarState {
       action: () => {
         location.href = "/lp/ja"
       },
-      show: computed(() => true),
+      show: computed(() => true)
     },
     {
       name: "問い合わせ",
@@ -101,8 +101,8 @@ export class UseSidebarState implements IUseSidebarState {
       action: () => {
         location.href = "https://twitter.com/homing_fd2"
       },
-      show: computed(() => true),
-    },
+      show: computed(() => true)
+    }
   ])
 
   open = (): void => {
@@ -119,10 +119,8 @@ export class UseSidebarState implements IUseSidebarState {
     }),
     items: computed(() => {
       return this._items.value
-    }),
+    })
   }
 }
 
-export const UseSidebarStateKey: InjectionKey<IUseSidebarState> = Symbol(
-  "UseSidebarStateType"
-)
+export const UseSidebarStateKey: InjectionKey<IUseSidebarState> = Symbol("UseSidebarStateType")
