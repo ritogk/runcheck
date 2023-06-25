@@ -4,7 +4,6 @@ import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
 import { UseUserState, UseUserStateKey } from "@/app/use-user-state"
 import { UseAlretState, UseAlretStateKey } from "@/app/use-alret-state"
 import { VueQueryPlugin } from "@tanstack/vue-query"
-
 import { setupGetMocks } from "@/stories/core/setup-mock"
 import { InlineResponse2004, InlineResponse2003 } from "@/core/openapiClient"
 import { baseUrl } from "@/env"
@@ -39,8 +38,6 @@ const mocks = [
 ]
 setupGetMocks(mocks)
 
-type Story = StoryObj<typeof MainPageI>
-
 setup((app) => {
   app.use(VueQueryPlugin)
   const loadingState = UseLoadingState()
@@ -54,17 +51,17 @@ setup((app) => {
 })
 
 const meta: Meta<typeof MainPageI> = {
-  title: "pages/main-page-pi",
+  title: "pages/main-page-pi(ログイン済, Youtube連携済)",
   component: MainPageI,
-  tags: ["autodocs"],
+  tags: ["autodocs"]
+}
+export default meta
+
+type Story = StoryObj<typeof MainPageI>
+export const Default: Story = {
   render: () => ({
     components: { MainPageI: MainPageI },
-    template: "<MainPageI/>"
+    template: "<MainPageI/>",
+    setup: () => {}
   })
 }
-
-// 同期後の画
-
-export const Default: Story = {}
-
-export default meta
