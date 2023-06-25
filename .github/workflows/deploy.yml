@@ -18,3 +18,5 @@ jobs:
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
           script: |
             ls
+            ls ~
+            ls
