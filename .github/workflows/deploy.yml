@@ -17,4 +17,6 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
           script: |
+            source .bashrc
             echo $SHELL
+            node -v
