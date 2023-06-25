@@ -17,11 +17,4 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
           script: |
-            cd runcheck
-            git pull
-            cd backend
-            composer install
-            yes | php artisan migrate
-            cd ../frontend
-            yarn install
-            yarn build
+          　node -v
