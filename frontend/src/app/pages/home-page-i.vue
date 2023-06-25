@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, inject, reactive, computed } from "vue"
+import Memo from "@/components/svg/memo.vue"
+import PIN from "@/components/svg/pin.vue"
 import { useRouter } from "vue-router"
 import {
   Listbox,
@@ -156,34 +158,11 @@ const hundleDelete = async (comparisonId: number, title: string) => {
                 <div class="mt-2 sm:flex sm:justify-between">
                   <div class="sm:flex" @click="hundleTitleClick(sync.id)">
                     <p class="flex items-center text-sm text-gray-500">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        fill="currentColor"
-                        class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                        viewBox="0 0 162.465 200"
-                      >
-                        <path
-                          d="M61.031,263.266a7.417,7.417,0,0,0-7.3,7.522v13.7H27.817c-5.779,0-11.567,4.487-11.567,11.047V452.223c0,6.56,5.789,11.043,11.567,11.043H167.153c5.779,0,11.562-4.483,11.562-11.043V295.534c0-6.56-5.783-11.047-11.562-11.047H141.238v-13.7a7.416,7.416,0,1,0-14.831,0v13.7H104.9v-13.7a7.415,7.415,0,1,0-14.829,0v13.7H68.559v-13.7a7.417,7.417,0,0,0-7.528-7.522ZM31.086,299.322H53.728v10.041a7.416,7.416,0,1,0,14.832,0V299.322H90.068v10.041a7.417,7.417,0,1,0,14.829,0V299.322h21.51v10.041a7.416,7.416,0,1,0,14.832,0V299.322h22.648V448.435H31.086Zm29.364,37.1a7.046,7.046,0,0,0,0,14.092h74.064a7.046,7.046,0,1,0,0-14.092Zm0,34.112a7.046,7.046,0,1,0,0,14.091h74.064a7.046,7.046,0,1,0,0-14.091Zm0,34.117a7.046,7.046,0,1,0,0,14.091h74.064a7.046,7.046,0,1,0,0-14.091Z"
-                          transform="translate(-16.249 -263.266)"
-                        />
-                      </svg>
+                      <Memo></Memo>
                       {{ sync.memo }}
                     </p>
                     <p class="mt-2 flex items-center text-sm text-gray-500 sm:ml-6 sm:mt-0">
-                      <svg
-                        class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
+                      <PIN></PIN>
                       {{ sync.tag }}
                     </p>
                   </div>
