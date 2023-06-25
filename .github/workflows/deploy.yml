@@ -22,6 +22,6 @@ jobs:
             cd backend
             composer install
             php artisan migrate
-            cd frontend
+            cd ../frontend
             yarn install
             yarn build
