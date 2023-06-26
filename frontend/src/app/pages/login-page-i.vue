@@ -41,7 +41,7 @@ const form = {
 const onSubmit = async () => {
   const loadingId = loadingState.run()
   try {
-    postApiAuthenticationLogin.mutate({
+    await postApiAuthenticationLogin.mutateAsync({
       email: form.email.value.value,
       password: form.password.value.value,
       remember: form.remember.value.value
