@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, ref } from "vue"
+import { provide } from "vue"
 import SidebarDesktopI from "./app/sidebar-desktop-i.vue"
 import HeaderMobileI from "./app/header-mobile-i.vue"
 import SidebarMobileI from "./app/sidebar-mobile-i.vue"
@@ -13,7 +13,7 @@ import { UseSidebarState, UseSidebarStateKey } from "./app/use-sidebar-state"
 const loadingState = UseLoadingState()
 const userState = UseUserState()
 const alretState = UseAlretState()
-const sidebarState = new UseSidebarState(userState, loadingState)
+const sidebarState = new UseSidebarState(loadingState)
 provide(UseLoadingStateKey, loadingState)
 provide(UseUserStateKey, userState)
 provide(UseAlretStateKey, alretState)

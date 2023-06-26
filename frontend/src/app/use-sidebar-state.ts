@@ -9,7 +9,6 @@ import {
   type InjectionKey
 } from "vue"
 import { useRouter } from "vue-router"
-import { type UseUserStateType } from "@/app/use-user-state"
 import { type UseLoadingStateType } from "@/app/use-loading-state"
 import {
   UserPlusIcon,
@@ -18,6 +17,8 @@ import {
   ArrowLeftOnRectangleIcon,
   QuestionMarkCircleIcon
 } from "@heroicons/vue/24/outline"
+import useGetApiStatus from "@/core/api-state/use-get-api-status"
+import { usePostApiAuthenticationLogout } from "@/core/api-state/use-post-api-authentication-logout"
 
 export interface IUseSidebarState {
   open(): void
@@ -39,10 +40,10 @@ export interface IUseSidebarState {
 
 export class UseSidebarState implements IUseSidebarState {
   private readonly _router = useRouter()
-  private readonly _userState
   private readonly _loadingState
-  constructor(userState: UseUserStateType, loadingState: UseLoadingStateType) {
-    this._userState = userState
+  private readonly _getApiStatus = useGetApiStatus()
+  private readonly _postApiAuthenticationLogout = usePostApiAuthenticationLogout()
+  constructor(loadingState: UseLoadingStateType) {
     this._loadingState = loadingState
   }
   private _opened = ref(false)
@@ -56,7 +57,7 @@ export class UseSidebarState implements IUseSidebarState {
         this._opened.value = false
         this._router.push({ name: "login" })
       },
-      show: computed(() => !this._userState.subscription.logined.value)
+      show: computed(() => !this._getApiStatus.data.value?.isLogined ?? false)
     },
     {
       name: "ログアウト",
@@ -66,11 +67,11 @@ export class UseSidebarState implements IUseSidebarState {
       action: async () => {
         const loadingId = this._loadingState.run()
         this._opened.value = false
-        await this._userState.logout()
+        await this._postApiAuthenticationLogout.mutateAsync()
         location.href = location.origin + this._router.resolve("index").href
         // this._loadingState.stop(loadingId)
       },
-      show: computed(() => this._userState.subscription.logined.value)
+      show: computed(() => this._getApiStatus.data.value?.isLogined ?? false)
     },
     {
       name: "新規登録",
@@ -81,7 +82,7 @@ export class UseSidebarState implements IUseSidebarState {
         this._opened.value = false
         this._router.push({ name: "register" })
       },
-      show: computed(() => !this._userState.subscription.logined.value)
+      show: computed(() => !this._getApiStatus.data.value?.isLogined ?? false)
     },
     {
       name: "このアプリについて",
