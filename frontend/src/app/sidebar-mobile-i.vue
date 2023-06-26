@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { inject } from "vue"
 import { useRouter } from "vue-router"
-// component
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from "@headlessui/vue"
 import { UserIcon, XMarkIcon } from "@heroicons/vue/24/outline"
-import { type UseUserStateType, UseUserStateKey } from "@/app/use-user-state"
 import { UseSidebarStateKey, type IUseSidebarState } from "./use-sidebar-state"
+import UseApiGetStatus from "@/core/api-state/use-get-api-status"
 
 const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
-const userState = inject(UseUserStateKey) as UseUserStateType
-
+const apiGetStatus = UseApiGetStatus()
 const router = useRouter()
 
 const hundleHomeClick = () => {
@@ -78,13 +76,13 @@ const hundleHomeClick = () => {
                   <ul role="list" class="mt-7 flex flex-1 flex-col gap-y-7">
                     <li>
                       <ul role="list" class="-mx-2 space-y-1">
-                        <li v-if="userState.subscription.logined.value">
+                        <li v-if="apiGetStatus.data.value?.isLogined">
                           <a
                             class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                             @click="hundleHomeClick()"
                           >
                             <component :is="UserIcon" class="h-6 w-6 shrink-0" aria-hidden="true" />
-                            {{ userState.subscription.user.value.name }}
+                            {{ apiGetStatus.data.value?.user.name }}
                           </a>
                         </li>
 

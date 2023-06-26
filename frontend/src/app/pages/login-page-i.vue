@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, inject } from "vue"
+import { ref, inject, watch } from "vue"
 import { UseUserStateKey, type UseUserStateType } from "@/app/use-user-state"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 import { useRouter } from "vue-router"
@@ -8,10 +8,13 @@ import InputPassword from "@/components/input-password.vue"
 import FormLabel from "@/components/form-label.vue"
 import Button from "@/components/button.vue"
 
+import { usePostApiAuthenticationLogin } from "@/core/api-state/use-post-api-authentication-login"
+
 const router = useRouter()
-const userState = inject(UseUserStateKey) as UseUserStateType
 const alretState = inject(UseAlretStateKey) as UseAlretStateType
 const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+
+const postApiAuthenticationLogin = usePostApiAuthenticationLogin()
 
 const form = {
   email: {
@@ -39,15 +42,17 @@ const form = {
 const onSubmit = async () => {
   const loadingId = loadingState.run()
   try {
-    const response = await userState.login(
-      form.email.value.value,
-      form.password.value.value,
-      form.remember.value.value
-    )
+    postApiAuthenticationLogin.mutate({
+      email: form.email.value.value,
+      password: form.password.value.value,
+      remember: form.remember.value.value
+    })
+
     loadingState.stop(loadingId)
     alretState.clear()
     router.push({ name: "index" })
-  } catch {
+  } catch (e) {
+    console.log(e)
     alretState.add("認証に失敗しました。メールアドレスとパスワードを確認してください。")
   }
   loadingState.stop(loadingId)
