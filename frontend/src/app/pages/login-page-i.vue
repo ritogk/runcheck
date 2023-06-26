@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, inject, watch } from "vue"
-import { UseUserStateKey, type UseUserStateType } from "@/app/use-user-state"
+import { ref, inject } from "vue"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 import { useRouter } from "vue-router"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
