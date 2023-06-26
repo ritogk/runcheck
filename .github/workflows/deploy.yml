@@ -17,11 +17,12 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
           script: |
-            source .bashrc
-            echo $SHELL
-            node -v
             cd runcheck
-            cd frontend
-            nvm use
-            node -v
+            git pull
+            cd backend
+            composer install
+            yes | php artisan migrate
+            cd ../frontend
+            yarn install
+            yarn build
 
