@@ -1,1 +1,2 @@
+export const GET_STATUS = "GET_STATUS"
 export const GET_YOUTUBE_VIDEO = "GET_YOUTUBE_VIDEO"
