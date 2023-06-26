@@ -4,6 +4,8 @@ import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 import { useRouter } from "vue-router"
 import { UseUserStateKey, type UseUserStateType } from "@/app/use-user-state"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
+import { usePostApiUsers } from "@/core/api-state/use-post-api-users"
+import { usePostApiAuthenticationLogin } from "@/core/api-state/use-post-api-authentication-login"
 import InputPassword from "@/components/input-password.vue"
 import FormLabel from "@/components/form-label.vue"
 import Button from "@/components/button.vue"
@@ -73,18 +75,25 @@ const hundlePasswordCongirmValidate = (): boolean => {
   return true
 }
 
+const postApiUsers = usePostApiUsers()
+const postApiAuthenticationLogin = usePostApiAuthenticationLogin()
 const onSubmit = async () => {
   // ごくまれにchangeイベントハンドラのバリデーションが走る前に送信されるのでここでもやる。
   hundlePasswordCongirmValidate()
-
   const loadingId = loadingState.run()
   try {
-    await userState.register(
-      form.hanndleName.value.value,
-      form.carType.value.value,
-      form.email.value.value,
-      form.password.value.value
-    )
+    await postApiUsers.mutateAsync({
+      handleName: form.hanndleName.value.value,
+      carType: form.carType.value.value,
+      email: form.email.value.value,
+      password: form.password.value.value
+    })
+    await postApiAuthenticationLogin.mutateAsync({
+      email: form.email.value.value,
+      password: form.password.value.value,
+      remember: true
+    })
+
     loadingState.stop(loadingId)
     alertState.clear()
     router.push({ name: "index" })
