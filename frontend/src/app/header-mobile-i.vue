@@ -2,7 +2,7 @@
 import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { Bars3Icon } from "@heroicons/vue/24/outline"
-import { UseSidebarStateKey, type IUseSidebarState } from "./sidebar-state"
+import { UseSidebarStateKey, type IUseSidebarState } from "./use-sidebar-state"
 
 const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const router = useRouter()
@@ -37,3 +37,4 @@ const hundleHeaderClick = () => {
     </button>
   </div>
 </template>
+./use-sidebar-state

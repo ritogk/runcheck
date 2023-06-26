@@ -8,7 +8,7 @@ import Loading from "@/app/loading.vue"
 import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
 import { UseUserState, UseUserStateKey } from "@/app/use-user-state"
 import { UseAlretState, UseAlretStateKey } from "./app/use-alret-state"
-import { UseSidebarState, UseSidebarStateKey } from "./app/sidebar-state"
+import { UseSidebarState, UseSidebarStateKey } from "./app/use-sidebar-state"
 
 const loadingState = UseLoadingState()
 const userState = UseUserState()
@@ -45,3 +45,4 @@ loadState()
   </div>
   <Loading v-if="loadingState.subscription.isLoading.value"></Loading>
 </template>
+./app/use-sidebar-state

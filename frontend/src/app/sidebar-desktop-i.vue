@@ -3,7 +3,7 @@ import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { UserIcon } from "@heroicons/vue/24/outline"
 import { type UseUserStateType, UseUserStateKey } from "@/app/use-user-state"
-import { UseSidebarStateKey, type IUseSidebarState } from "./sidebar-state"
+import { UseSidebarStateKey, type IUseSidebarState } from "./use-sidebar-state"
 
 const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const userState = inject(UseUserStateKey) as UseUserStateType
@@ -72,3 +72,4 @@ const hundleHomeClick = () => {
     </div>
   </div>
 </template>
+./use-sidebar-state
