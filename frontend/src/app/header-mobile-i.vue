@@ -22,7 +22,7 @@ const hundleHeaderClick = () => {
       <div>
         <div class="text-lg">RunCheck</div>
         <div class="text-[9px] font-normal leading-3">
-          a車載動画でサーキットを攻略！タイムアップのための比較アプリ
+          車載動画でサーキットを攻略！タイムアップのための比較アプリ
         </div>
       </div>
     </div>
