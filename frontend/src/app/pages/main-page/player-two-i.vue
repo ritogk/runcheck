@@ -8,8 +8,7 @@ import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selecto
 import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { VideoCameraIcon } from "@heroicons/vue/20/solid"
 import { VideoType } from "./player/i-video-player"
-import { changeYoutube } from "./player/helpers-player"
-import { changeLocalVideo } from "./player/helpers-player"
+import { mountYoutube, mountLocalVideo } from "./player/helpers-player"
 
 const playerNo = PlayerNo.TWO
 
@@ -34,16 +33,18 @@ const hundleLocalVideoSelect = () => {
   elements.localVideo.file.value?.click()
 }
 
-const playerTwo = useMainState.syncPlayer.playerTwo
+const playerTwo = useMainState.syncPlayer.subscription.playerTwo
 
 const hundleLocalVideoChange = async (event: Event) => {
   const file = (event as any).currentTarget.files[0]
   if (!elements.localVideo.video.value) return
-  changeLocalVideo(playerTwo, file, elements.localVideo.video.value)
+  const player = await mountLocalVideo(playerTwo.value, file, elements.localVideo.video.value)
+  useMainState.syncPlayer.changePlayerTwo(player)
 }
 
 const hundleYoutubeUrlEnter = async (youtubeUrl: string) => {
-  changeYoutube(playerTwo, youtubeUrl, playerNo)
+  const player = await mountYoutube(playerTwo.value, youtubeUrl, playerNo)
+  useMainState.syncPlayer.changePlayerTwo(player)
 }
 
 const hundleYoutubeSearch = () => {

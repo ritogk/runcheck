@@ -9,8 +9,8 @@ import { apiConfig } from "@/core/openapi"
  * プレイヤーの同期状態を管理するクラス
  */
 export interface ISyncPlayerStateType {
-  playerOne: ShallowRef<IVideoPlayer>
-  playerTwo: ShallowRef<IVideoPlayer>
+  changePlayerOne(player: IVideoPlayer): void
+  changePlayerTwo(player: IVideoPlayer): void
   switchPlay(): void
   switchMute(): void
   switchRepeat(): void
@@ -31,6 +31,8 @@ export interface ISyncPlayerStateType {
   publishSync(id: number): Promise<void>
   seekTo(progressRate: number): Promise<void>
   subscription: {
+    playerOne: ComputedRef<IVideoPlayer>
+    playerTwo: ComputedRef<IVideoPlayer>
     playing: ComputedRef<boolean>
     muted: ComputedRef<boolean>
     repeated: ComputedRef<boolean>
@@ -85,12 +87,12 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     })
   }
 
-  get playerOne() {
-    return this._playerOne
+  changePlayerOne = (player: IVideoPlayer): void => {
+    this._playerOne.value = player
   }
 
-  get playerTwo() {
-    return this._playerTwo
+  changePlayerTwo = (player: IVideoPlayer): void => {
+    this._playerTwo.value = player
   }
 
   switchPlay = async () => {
@@ -238,10 +240,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     category?: string
   ): Promise<{ id: number }> => {
     const video1VideoType =
-      this.playerOne.value.subscription.videoType.value === VideoType.YOUTUBE
+      this._playerOne.value.subscription.videoType.value === VideoType.YOUTUBE
         ? ApiVideoType.YOUTUBE
         : ApiVideoType.LOCAL
-    const video1Url = await this.playerOne.value.getPath()
+    const video1Url = await this._playerOne.value.getPath()
     const video1EmbedUrl =
       video1VideoType === ApiVideoType.YOUTUBE
         ? `https://www.youtube.com/embed/${extractYoutubeId(video1Url)}`
@@ -249,10 +251,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     const video1TimeSt = this._playerOneStartPosition
 
     const video2VideoType =
-      this.playerTwo.value.subscription.videoType.value === VideoType.YOUTUBE
+      this._playerOne.value.subscription.videoType.value === VideoType.YOUTUBE
         ? ApiVideoType.YOUTUBE
         : ApiVideoType.LOCAL
-    const video2Url = await this.playerTwo.value.getPath()
+    const video2Url = await this._playerOne.value.getPath()
     const video2EmbedUrl =
       video2VideoType === ApiVideoType.YOUTUBE
         ? `https://www.youtube.com/embed/${extractYoutubeId(video2Url)}`
@@ -295,6 +297,12 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   }
 
   subscription = {
+    playerOne: computed(() => {
+      return this._playerOne.value
+    }),
+    playerTwo: computed(() => {
+      return this._playerTwo.value
+    }),
     playing: computed(() => {
       return this._playing.value
     }),

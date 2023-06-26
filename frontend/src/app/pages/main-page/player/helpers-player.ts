@@ -11,49 +11,46 @@ import { extractYoutubeId } from "@/core/extract-youtube-id"
  */
 
 /**
- * 動画をYoutubeに変更する
+ * youtubeをマウントする
  * @param player
  * @param youtubeUrl
  * @param playerNo
  * @returns
  */
-export const changeYoutube = async (
-  player: ShallowRef<IVideoPlayer>,
+export const mountYoutube = async (
+  player: IVideoPlayer,
   youtubeUrl: string,
   playerNo: PlayerNo
-) => {
+): Promise<IVideoPlayer> => {
   const youtubeId = extractYoutubeId(youtubeUrl)
-  player.value.destory()
-  const elementId = playerNo === PlayerNo.ONE ? "youtube-video-one" : "youtube-video-two"
-  const newPlayer = new YouTubePlayer(elementId, youtubeId)
-  await newPlayer.load()
-  player.value = newPlayer
-  return
+  if (playerNo === PlayerNo.ONE) {
+    await player.destory()
+    const newPlayerOne = new YouTubePlayer("youtube-video-one", youtubeId)
+    await newPlayerOne.load()
+    return newPlayerOne
+  } else {
+    await player.destory()
+    const newPlayerTwo = new YouTubePlayer("youtube-video-two", youtubeId)
+    await newPlayerTwo.load()
+    return newPlayerTwo
+  }
 }
 
 /**
- * 動画をLocalVideoに変更する
+ * Local動画をマウントする
  * @param player
- * @param youtubeUrl
- * @param playerNo
+ * @param file
+ * @param localVideoElement
  * @returns
  */
-export const changeLocalVideo = (
-  player: ShallowRef<IVideoPlayer>,
+export const mountLocalVideo = async (
+  player: IVideoPlayer,
   file: File,
   localVideoElement: HTMLVideoElement
-) => {
+): Promise<IVideoPlayer> => {
   const objectURL = URL.createObjectURL(file)
-  player.value.destory()
+  await player.destory()
   const newPlayer = new LocalVideoPlayer(localVideoElement, objectURL)
-  newPlayer.load()
-  player.value = newPlayer
-}
-
-/**
- * 動画をDummyに変更する
- * @param player
- */
-export const changeDummy = (player: ShallowRef<IVideoPlayer>) => {
-  player.value = new DummyPlayer()
+  await newPlayer.load()
+  return newPlayer
 }

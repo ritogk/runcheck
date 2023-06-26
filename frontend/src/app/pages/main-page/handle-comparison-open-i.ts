@@ -38,8 +38,8 @@ export const handleComparisonOpen = async (comparisonId: number, mainState: UseM
       await playerTwo.stop()
       await playerOne.seekTo(response.video1TimeSt)
       await playerTwo.seekTo(response.video2TimeSt)
-      mainState.syncPlayer.playerOne.value = playerOne
-      mainState.syncPlayer.playerTwo.value = playerTwo
+      mainState.syncPlayer.changePlayerOne(playerOne)
+      mainState.syncPlayer.changePlayerTwo(playerTwo)
       // seekToをした後に数秒待機しないとcurrentTimeが古い値になる。
       setTimeout(async () => {
         mainState.syncPlayer.runSync()

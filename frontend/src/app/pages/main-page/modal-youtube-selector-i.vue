@@ -11,7 +11,7 @@ import UseApiGetYoutubeVideo from "@/core/api-state/use-get-api-youtube-video"
 import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
 
 import { apiConfig } from "@/core/openapi"
-import { changeYoutube } from "./player/helpers-player"
+import { mountYoutube } from "./player/helpers-player"
 
 const useUserState = inject(UseUserStateKey) as UseUserStateType
 const useMainState = inject(UseMainStateKey) as UseMainStateType
@@ -46,11 +46,21 @@ const redirectToAuthorize = async () => {
 const selectVideo = async (url: string) => {
   const loadingId = useLoadingState.run()
   const playerNo = useMainState.youtubeModal.subscription.currentPlayerNo.value
-  const player =
-    playerNo === PlayerNo.ONE
-      ? useMainState.syncPlayer.playerOne
-      : useMainState.syncPlayer.playerTwo
-  await changeYoutube(player, url, playerNo)
+  if (playerNo === PlayerNo.ONE) {
+    const player = await mountYoutube(
+      useMainState.syncPlayer.subscription.playerOne.value,
+      url,
+      playerNo
+    )
+    useMainState.syncPlayer.changePlayerOne(player)
+  } else {
+    const player = await mountYoutube(
+      useMainState.syncPlayer.subscription.playerTwo.value,
+      url,
+      playerNo
+    )
+    useMainState.syncPlayer.changePlayerTwo(player)
+  }
   useMainState.youtubeModal.close()
   useLoadingState.stop(loadingId)
 }

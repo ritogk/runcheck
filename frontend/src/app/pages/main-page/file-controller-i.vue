@@ -14,8 +14,10 @@ const hundleOpenClick = () => {
 
 const hundleSaveClick = () => {
   if (
-    mainState.syncPlayer.playerOne.value.subscription.videoType.value !== VideoType.YOUTUBE ||
-    mainState.syncPlayer.playerTwo.value.subscription.videoType.value != VideoType.YOUTUBE
+    mainState.syncPlayer.subscription.playerOne.value.subscription.videoType.value !==
+      VideoType.YOUTUBE ||
+    mainState.syncPlayer.subscription.playerTwo.value.subscription.videoType.value !=
+      VideoType.YOUTUBE
   ) {
     alert("保存はYouTube同士の組み合わせのみ行えます。")
     return

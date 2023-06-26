@@ -23,8 +23,10 @@ const hundleVideoStopSyncClick = () => {
 const hundleTweetClick = async () => {
   if (!(await validateVideoSelect())) return
   if (
-    useMainState.syncPlayer.playerOne.value.subscription.videoType.value !== VideoType.YOUTUBE ||
-    useMainState.syncPlayer.playerTwo.value.subscription.videoType.value != VideoType.YOUTUBE
+    useMainState.syncPlayer.subscription.playerOne.value.subscription.videoType.value !==
+      VideoType.YOUTUBE ||
+    useMainState.syncPlayer.subscription.playerTwo.value.subscription.videoType.value !=
+      VideoType.YOUTUBE
   ) {
     alert("共有はYouTubeの動画に限定されています。")
     return
@@ -40,8 +42,10 @@ const hundleTweetClick = async () => {
 
 const validateVideoSelect = async (): Promise<boolean> => {
   if (
-    useMainState.syncPlayer.playerOne.value.subscription.videoType.value === VideoType.NONE ||
-    useMainState.syncPlayer.playerTwo.value.subscription.videoType.value === VideoType.NONE
+    useMainState.syncPlayer.subscription.playerOne.value.subscription.videoType.value ===
+      VideoType.NONE ||
+    useMainState.syncPlayer.subscription.playerTwo.value.subscription.videoType.value ===
+      VideoType.NONE
   ) {
     alert("比較対象の動画を選択した後に実行して下さい。")
     return false
