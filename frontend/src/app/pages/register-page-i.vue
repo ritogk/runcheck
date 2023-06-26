@@ -5,7 +5,6 @@ import { useRouter } from "vue-router"
 import { UseUserStateKey, type UseUserStateType } from "@/app/use-user-state"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import InputPassword from "@/components/input-password.vue"
-import InputEmail from "@/components/input-email.vue"
 import FormLabel from "@/components/form-label.vue"
 import Button from "@/components/button.vue"
 
@@ -143,15 +142,16 @@ const onSubmit = async () => {
               :required="form.email.required"
               :label="form.email.label"
             >
-              <InputEmail
-                class="mt-2"
+              <input
+                type="email"
+                autocomplete="email"
                 :id="form.email.id"
-                :value="form.email.value.value"
-                :required="form.email.required"
-                :label="form.email.label"
+                :name="form.email.id"
                 :placeholder="form.email.placeholder"
-                @input="form.email.value.value = $event"
-              ></InputEmail>
+                :required="form.email.required"
+                v-model="form.email.value.value"
+                class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-slate-600 sm:text-sm sm:leading-6"
+              />
             </FormLabel>
 
             <FormLabel
