@@ -86,7 +86,7 @@ const hundlePrivacyClick = () => {
             :variant="'custom'"
             :size="'lg'"
             @click="redirectToAuthorize"
-            class="mt-3 w-4/6 bg-red-500 text-gray-100 ring-red-500 hover:bg-red-400 focus-visible:outline-red-600"
+            class="mt-3 w-4/6 bg-red-500 text-gray-100 ring-red-500 hover:bg-red-400 focus-visible:outline-red-700"
           >
             <YoutubeIcon></YoutubeIcon>
             <div class="flex justify-start"></div>

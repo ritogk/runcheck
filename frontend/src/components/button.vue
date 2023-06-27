@@ -13,9 +13,9 @@ const props = defineProps<{
     :type="props.type ?? 'button'"
     :class="{
       // variant
-      'bg-slate-600 text-white hover:bg-slate-500 focus-visible:outline-slate-700':
+      'bg-slate-600 text-white hover:bg-slate-500 focus-visible:outline-slate-800':
         props.variant === 'primary',
-      'bg-red-500 text-white hover:bg-red-400 focus-visible:outline-red-600':
+      'bg-red-500 text-white hover:bg-red-400 focus-visible:outline-red-700':
         props.variant === 'danger',
       'bg-white text-gray-800 ring-gray-300 hover:bg-gray-50 focus-visible:outline-gray-400':
         props.variant === 'secondary' || props.variant === undefined,
