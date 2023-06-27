@@ -157,18 +157,18 @@ const hundleDelete = async (comparisonId: number, title: string) => {
         </ul>
         <ul role="list" class="divide-y divide-gray-200" v-show="!isFetching">
           <li v-for="comparison in filteredComparisons" :key="comparison.id">
-            <a href="#" class="block hover:bg-gray-50">
+            <div class="hover:bg-gray-50">
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
-                  <p
-                    class="truncate text-sm font-medium text-slate-600"
+                  <button
+                    class="w-full text-left truncate text-sm font-medium text-slate-600"
                     @click="hundleTitleClick(comparison.id)"
                   >
                     {{ comparison.title }}
-                  </p>
+                  </button>
                 </div>
                 <div class="mt-2 sm:flex sm:justify-between">
-                  <div class="sm:flex" @click="hundleTitleClick(comparison.id)">
+                  <button class="w-full sm:flex" @click="hundleTitleClick(comparison.id)">
                     <p class="flex items-center text-sm text-gray-500">
                       <Memo></Memo>
                       {{ comparison.memo }}
@@ -177,18 +177,18 @@ const hundleDelete = async (comparisonId: number, title: string) => {
                       <PIN></PIN>
                       {{ comparison.tag }}
                     </p>
-                  </div>
+                  </button>
                   <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                    <p
+                    <button
                       class="truncate text-sm font-medium text-red-400"
                       @click="hundleDelete(comparison.id, comparison.title)"
                     >
                       削除する
-                    </p>
+                    </button>
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           </li>
         </ul>
       </div>
