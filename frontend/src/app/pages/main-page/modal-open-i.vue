@@ -26,7 +26,6 @@ const onClose = () => {
 const comparisonOptions = reactive<{ id: number; name: string }[]>([{ id: 0, name: "　" }])
 watch(mainState.openModal.subscription.opened, async (value) => {
   if (value) {
-    const loadingId = loadingState.run()
     try {
       const response = await fetchComparisons()
       comparisonOptions.splice(
@@ -46,7 +45,6 @@ watch(mainState.openModal.subscription.opened, async (value) => {
         name: "　"
       })
     }
-    loadingState.stop(loadingId)
   }
 })
 const selected = ref(comparisonOptions[0])
