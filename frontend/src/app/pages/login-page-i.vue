@@ -50,9 +50,9 @@ const onSubmit = async () => {
     isLogging.value = false
     alretState.clear()
     router.push({ name: "index" })
-  } catch (e) {
-    console.log(e)
+  } catch {
     alretState.add("認証に失敗しました。メールアドレスとパスワードを確認してください。")
+    isLogging.value = false
   }
 }
 </script>
