@@ -5,6 +5,7 @@ import { useRouter } from "vue-router"
 import InputPassword from "@/components/input-password.vue"
 import FormLabel from "@/components/form-label.vue"
 import Button from "@/components/button.vue"
+import Spiner from "@/components/svg/spiner.vue"
 
 import { usePostAuthenticationLogin } from "@/core/api-state/use-post-authentication-login"
 
@@ -36,14 +37,17 @@ const form = {
   }
 }
 
+const isLogging = ref(false)
+
 const onSubmit = async () => {
   try {
+    isLogging.value = true
     await postAuthenticationLogin.mutateAsync({
       email: form.email.value.value,
       password: form.password.value.value,
       remember: form.remember.value.value
     })
-
+    isLogging.value = false
     alretState.clear()
     router.push({ name: "index" })
   } catch (e) {
@@ -101,11 +105,11 @@ const onSubmit = async () => {
           </div>
 
           <div>
-            <Button
-              class="w-full"
-              :label="'ログイン'"
-              :type="'submit'"
-              :variant="'primary'"
+            <Button class="w-full" :label="'ログイン'" :type="'submit'" :variant="'primary'"
+              ><Spiner
+                v-show="isLogging"
+                class="h-5 w-5 animate-spin fill-slate-500 text-slate-300"
+              ></Spiner
             ></Button>
           </div>
         </form>
