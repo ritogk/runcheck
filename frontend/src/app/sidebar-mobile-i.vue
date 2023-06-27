@@ -4,7 +4,7 @@ import { useRouter } from "vue-router"
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from "@headlessui/vue"
 import { UserIcon, XMarkIcon } from "@heroicons/vue/24/outline"
 import { UseSidebarStateKey, type IUseSidebarState } from "./use-sidebar-state"
-import UseApiGetStatus from "@/core/api-state/use-get-api-status"
+import UseApiGetStatus from "@/core/api-state/use-get-status"
 
 const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const apiGetStatus = UseApiGetStatus()
@@ -149,3 +149,4 @@ const hundleHomeClick = () => {
     </TransitionRoot>
   </div>
 </template>
+@/core/api-state/use-get-status

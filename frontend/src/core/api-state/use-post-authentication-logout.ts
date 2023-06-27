@@ -3,7 +3,7 @@ import { apiConfig } from "@/core/openapi"
 import { useQueryClient, useMutation } from "@tanstack/vue-query"
 import { GET_STATUS, GET_YOUTUBE_VIDEO } from "./query-key"
 
-export const usePostApiAuthenticationLogout = () => {
+export const usePostAuthenticationLogout = () => {
   const queryClient = useQueryClient()
   const authenticationApi = new AuthenticationApi(apiConfig)
 

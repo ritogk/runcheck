@@ -2,7 +2,7 @@ import { UsersApi, InlineObject } from "@/core/openapiClient"
 import { apiConfig } from "@/core/openapi"
 import { useMutation } from "@tanstack/vue-query"
 
-export const usePostApiUsers = () => {
+export const usePostUsers = () => {
   const usersApi = new UsersApi(apiConfig)
 
   const mutation = useMutation({

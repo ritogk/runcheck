@@ -3,11 +3,11 @@ import { inject } from "vue"
 import { useRouter } from "vue-router"
 import { UserIcon } from "@heroicons/vue/24/outline"
 import { UseSidebarStateKey, type IUseSidebarState } from "./use-sidebar-state"
-import UseApiGetStatus from "@/core/api-state/use-get-api-status"
+import UseGetStatus from "@/core/api-state/use-get-status"
 
 const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const router = useRouter()
-const apiGetStatus = UseApiGetStatus()
+const apiGetStatus = UseGetStatus()
 
 const hundleHeaderClick = () => {
   location.href = location.origin + router.resolve("index").href
@@ -99,3 +99,4 @@ const hundleHomeClick = () => {
     </div>
   </div>
 </template>
+@/core/api-state/use-get-status

@@ -13,12 +13,12 @@ import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
 import { handleComparisonOpen } from "./main-page/handle-comparison-open-i"
-import UseGetApiStatus from "@/core/api-state/use-get-api-status"
+import UseGetStatus from "@/core/api-state/use-get-status"
 
 const mainState = UseMainState()
 provide(UseMainStateKey, mainState)
 
-const getApiStatus = UseGetApiStatus()
+const getStatus = UseGetStatus()
 
 const urlParams = new URLSearchParams(window.location.search)
 // 比較情報を開いた場合の処理
@@ -37,7 +37,7 @@ if (code) handleYoutubeOauthCallback(code, mainState)
 <template>
   <div class="max-w-[600px]">
     <div class="px-1">
-      <FileControllerI v-show="getApiStatus.data.value?.isLogined"></FileControllerI>
+      <FileControllerI v-show="getStatus.data.value?.isLogined"></FileControllerI>
       <ModalSaveI></ModalSaveI>
       <ModalOpenI></ModalOpenI>
       <Memo
@@ -58,3 +58,4 @@ if (code) handleYoutubeOauthCallback(code, mainState)
 
   <ModalAdjustSpeedI></ModalAdjustSpeedI>
 </template>
+@/core/api-state/use-get-status

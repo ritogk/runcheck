@@ -3,7 +3,7 @@ import { apiConfig } from "@/core/openapi"
 import { useQueryClient, useMutation } from "@tanstack/vue-query"
 import { GET_STATUS } from "./query-key"
 
-export const usePostApiAuthenticationLogin = () => {
+export const usePostAuthenticationLogin = () => {
   const queryClient = useQueryClient()
   const authenticationApi = new AuthenticationApi(apiConfig)
 

@@ -2,18 +2,16 @@
 import { ref, inject } from "vue"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 import { useRouter } from "vue-router"
-import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import InputPassword from "@/components/input-password.vue"
 import FormLabel from "@/components/form-label.vue"
 import Button from "@/components/button.vue"
 
-import { usePostApiAuthenticationLogin } from "@/core/api-state/use-post-api-authentication-login"
+import { usePostAuthenticationLogin } from "@/core/api-state/use-post-authentication-login"
 
 const router = useRouter()
 const alretState = inject(UseAlretStateKey) as UseAlretStateType
-const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
-const postApiAuthenticationLogin = usePostApiAuthenticationLogin()
+const postAuthenticationLogin = usePostAuthenticationLogin()
 
 const form = {
   email: {
@@ -40,7 +38,7 @@ const form = {
 
 const onSubmit = async () => {
   try {
-    await postApiAuthenticationLogin.mutateAsync({
+    await postAuthenticationLogin.mutateAsync({
       email: form.email.value.value,
       password: form.password.value.value,
       remember: form.remember.value.value
@@ -117,3 +115,4 @@ const onSubmit = async () => {
 </template>
 
 <script setup></script>
+@/core/api-state/use-post-authentication-login
