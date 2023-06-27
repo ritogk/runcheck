@@ -75,7 +75,23 @@ const hundleHomeClick = () => {
                 <nav class="flex flex-1 flex-col">
                   <ul role="list" class="mt-7 flex flex-1 flex-col gap-y-7">
                     <li>
-                      <ul role="list" class="-mx-2 space-y-1">
+                      <!-- スケルトン -->
+                      <ul
+                        v-show="apiGetStatus.isLoading.value"
+                        role="list"
+                        class="-mx-2 animate-pulse space-y-1"
+                      >
+                        <li v-for="index in 4" :key="index" class="h-10 px-2 py-3">
+                          <div class="h-full rounded-full bg-gray-700"></div>
+                        </li>
+                      </ul>
+
+                      <ul
+                        role="list"
+                        class="-mx-2 space-y-1"
+                        v-show="!apiGetStatus.isLoading.value"
+                      >
+                        <!-- ホーム -->
                         <li v-if="apiGetStatus.data.value?.isLogined">
                           <a
                             class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
@@ -86,6 +102,7 @@ const hundleHomeClick = () => {
                           </a>
                         </li>
 
+                        <!-- その他 -->
                         <li v-for="item in sidebarState.subscription.items.value" :key="item.name">
                           <a
                             v-if="item.show.value"

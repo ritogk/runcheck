@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide } from "vue"
+import { provide, watch } from "vue"
 import SidebarDesktopI from "./app/sidebar-desktop-i.vue"
 import HeaderMobileI from "./app/header-mobile-i.vue"
 import SidebarMobileI from "./app/sidebar-mobile-i.vue"
@@ -19,13 +19,6 @@ provide(UseUserStateKey, userState)
 provide(UseAlretStateKey, alretState)
 provide(UseSidebarStateKey, sidebarState)
 
-const loadState = async () => {
-  // ユーザー情報が取得できるまでロードさせる
-  const loadingId = loadingState.run()
-  await userState.load()
-  loadingState.stop(loadingId)
-}
-loadState()
 </script>
 
 <template>
@@ -45,4 +38,3 @@ loadState()
   </div>
   <Loading v-if="loadingState.subscription.isLoading.value"></Loading>
 </template>
-./app/use-sidebar-state
