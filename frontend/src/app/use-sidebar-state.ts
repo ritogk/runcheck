@@ -9,6 +9,7 @@ import {
   type InjectionKey
 } from "vue"
 import { useRouter } from "vue-router"
+import { type UseLoadingStateType } from "@/app/use-loading-state"
 import {
   UserPlusIcon,
   ChatBubbleOvalLeftEllipsisIcon,
@@ -39,6 +40,7 @@ export interface IUseSidebarState {
 
 export class UseSidebarState implements IUseSidebarState {
   private readonly _router = useRouter()
+  private readonly _loadingState
   private readonly _getApiStatus = useGetApiStatus()
   private readonly _postApiAuthenticationLogout = usePostAuthenticationLogout()
   private _opened = ref(false)
@@ -61,7 +63,9 @@ export class UseSidebarState implements IUseSidebarState {
       current: false,
       action: async () => {
         this._opened.value = false
+        const loadingId = this._loadingState.run()
         await this._postApiAuthenticationLogout.mutateAsync()
+        this._loadingState.stop(loadingId)
       },
       show: computed(() => this._getApiStatus.data.value?.isLogined ?? false)
     },
@@ -97,6 +101,10 @@ export class UseSidebarState implements IUseSidebarState {
       show: computed(() => true)
     }
   ])
+
+  constructor(loadingState: UseLoadingStateType) {
+    this._loadingState = loadingState
+  }
 
   open = (): void => {
     this._opened.value = true

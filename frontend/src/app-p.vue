@@ -11,7 +11,7 @@ import { UseSidebarState, UseSidebarStateKey } from "./app/use-sidebar-state"
 
 const loadingState = UseLoadingState()
 const alretState = UseAlretState()
-const sidebarState = new UseSidebarState()
+const sidebarState = new UseSidebarState(loadingState)
 provide(UseLoadingStateKey, loadingState)
 provide(UseAlretStateKey, alretState)
 provide(UseSidebarStateKey, sidebarState)
