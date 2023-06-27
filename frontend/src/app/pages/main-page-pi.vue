@@ -57,7 +57,7 @@ if (code) handleYoutubeOauthCallback(code, mainState)
     <div class="px-1">
       <FileControllerI v-show="getStatus.data.value?.isLogined"></FileControllerI>
       <ModalSaveI></ModalSaveI>
-      <ModalOpenI></ModalOpenI>
+      <ModalOpenI v-if="mainState.openModal.subscription.opened.value"></ModalOpenI>
       <Memo
         :title="mainState.memo.subscription.title.value"
         :memo="mainState.memo.subscription.memo.value"

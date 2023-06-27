@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, inject, watch, reactive } from "vue"
+import { ref, inject, ComputedRef, computed } from "vue"
 import Modal from "@/components/modal.vue"
 import Button from "@/components/button.vue"
+import Spiner from "@/components/svg/spiner.vue"
 import {
   Listbox,
   ListboxButton,
@@ -11,45 +12,40 @@ import {
 } from "@headlessui/vue"
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
 import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
-import { fetchComparisons } from "@/core/comparisons"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
+import UseGetComparisons from "@/core/api-state/use-get-comparisons"
 
 const mainState = inject(UseMainStateKey) as UseMainStateType
 const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 const alretState = inject(UseAlretStateKey) as UseAlretStateType
 
+const { data, isFetching } = UseGetComparisons()
+
 const onClose = () => {
   mainState.openModal.close()
 }
 
-const comparisonOptions = reactive<{ id: number; name: string }[]>([{ id: 0, name: "　" }])
-watch(mainState.openModal.subscription.opened, async (value) => {
-  if (value) {
-    try {
-      const response = await fetchComparisons()
-      comparisonOptions.splice(
-        0,
-        comparisonOptions.length,
-        ...response
-          .filter((x) => {
-            return !x.anonymous
-          })
-          .map((x) => {
-            return { id: x.id, name: x.title }
-          })
-      )
-    } catch {
-      comparisonOptions.splice(0, comparisonOptions.length, {
-        id: 0,
-        name: "　"
-      })
-    }
+const comparisonOptions: ComputedRef<{ id: number; name: string }[]> = computed(() => {
+  if (!data.value || data.value.length == 0) {
+    return [{ id: 0, name: "" }]
   }
+  return data.value
+    .filter((x) => {
+      return !x.anonymous
+    })
+    .map((x) => {
+      return { id: x.id, name: x.title }
+    })
 })
-const selected = ref(comparisonOptions[0])
+
+const selected = ref(comparisonOptions.value[0])
 
 const hundleOpen = async () => {
+  if (selected.value.name === "") {
+    alert("選択してから押下して下さい。")
+    return
+  }
   mainState.openModal.close()
   const loadingId = loadingState.run()
   if (await mainState.syncPlayer.loadSync(selected.value.id)) {
@@ -76,7 +72,7 @@ const hundleOpen = async () => {
               >
               <div class="relative mt-2">
                 <ListboxButton
-                  class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-600 sm:text-sm sm:leading-6"
+                  class="relative h-9 w-full rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-600 sm:text-sm sm:leading-6"
                 >
                   <span class="block truncate">{{ selected.name }}</span>
                   <span
@@ -85,6 +81,14 @@ const hundleOpen = async () => {
                     <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
                   </span>
                 </ListboxButton>
+                <div
+                  class="absolute left-0 top-0 h-9 w-full cursor-default rounded-md bg-gray-200 py-1.5 pl-3 pr-10 text-left opacity-30 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-600 sm:text-sm sm:leading-6"
+                  v-show="isFetching"
+                >
+                  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <Spiner class="h-5 w-5 animate-spin fill-slate-500 text-gray-700"></Spiner>
+                  </div>
+                </div>
 
                 <transition
                   leave-active-class="transition ease-in duration-100"
