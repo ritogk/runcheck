@@ -11,8 +11,8 @@ import {
   ListboxOptions
 } from "@headlessui/vue"
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
-import { deleteComparison } from "@/core/comparisons"
 import UseGetComparisons from "@/core/api-state/use-get-comparisons"
+import { useDeleteComparison } from "@/core/api-state/use-delete-comparison"
 
 const { data, isFetching } = UseGetComparisons()
 
@@ -65,10 +65,10 @@ const hundleTitleClick = (comparisonId: number) => {
   router.push({ name: "index", query: { comparisonId: comparisonId } })
 }
 
+const deleteComparison = useDeleteComparison()
 const hundleDelete = async (comparisonId: number, title: string) => {
   if (confirm(`${title}を削除します。\nよろしいですか？`)) {
-    await deleteComparison(comparisonId)
-    window.location.reload()
+    deleteComparison.mutate(comparisonId)
   }
 }
 </script>
@@ -195,3 +195,4 @@ const hundleDelete = async (comparisonId: number, title: string) => {
     </div>
   </div>
 </template>
+@/core/api-state/use-delete-comparison
