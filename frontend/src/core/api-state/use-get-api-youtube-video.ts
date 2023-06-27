@@ -10,7 +10,7 @@ const UseApiGetYoutubeVideo = (isLogined: boolean) => {
     queryFn: () => youtubeApi.youtubeVideosGet(),
     enabled: isLogined,
     staleTime: Infinity, // キャッシュ時間無制限 ※一旦画面更新するまでキャッシュを有効化させる
-    retry: 3
+    retry: false
   })
 }
 export default UseApiGetYoutubeVideo
