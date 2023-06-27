@@ -1,6 +1,6 @@
 import { StatusApi } from "@/core/openapiClient"
 import { apiConfig } from "@/core/openapi"
-import { useQuery, useQueryClient } from "@tanstack/vue-query"
+import { useQuery } from "@tanstack/vue-query"
 import { GET_STATUS } from "./query-key"
 
 const UseApiGetStatus = () => {
@@ -13,8 +13,3 @@ const UseApiGetStatus = () => {
   })
 }
 export default UseApiGetStatus
-
-// export const refreshCache = () => {
-//   const queryClient = useQueryClient() // こいつはsetup内でしか呼び出せないらしい。って事は呼び出し元
-//   queryClient.invalidateQueries({ queryKey: [GET_YOUTUBE_VIDEO] })
-// }

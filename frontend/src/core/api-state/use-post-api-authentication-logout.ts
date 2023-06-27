@@ -1,4 +1,4 @@
-import { AuthenticationApi, InlineObject1 } from "@/core/openapiClient"
+import { AuthenticationApi } from "@/core/openapiClient"
 import { apiConfig } from "@/core/openapi"
 import { useQueryClient, useMutation } from "@tanstack/vue-query"
 import { GET_STATUS, GET_YOUTUBE_VIDEO } from "./query-key"
