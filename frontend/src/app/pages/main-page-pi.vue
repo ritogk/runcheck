@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { provide, inject } from "vue"
 import { UseMainState, UseMainStateKey } from "./main-page/use-main-state"
+import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
+import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import PlayerOneI from "./main-page/player-one-i.vue"
 import PlayerTwoI from "./main-page/player-two-i.vue"
 import ModalSaveI from "./main-page/modal-save-i.vue"
@@ -12,11 +14,13 @@ import SyncControllerI from "./main-page/sync-controller-i.vue"
 import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
-import { handleComparisonOpen } from "./main-page/handle-comparison-open-i"
 import UseGetStatus from "@/core/api-state/use-get-status"
 
 const mainState = UseMainState()
 provide(UseMainStateKey, mainState)
+
+const alretState = inject(UseAlretStateKey) as UseAlretStateType
+const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const getStatus = UseGetStatus()
 
@@ -25,7 +29,14 @@ const urlParams = new URLSearchParams(window.location.search)
 const comparisonId = urlParams.get("comparisonId")
 if (comparisonId) {
   ;(async () => {
-    await handleComparisonOpen(Number(comparisonId), mainState)
+    const loadingId = loadingState.run()
+    if (await mainState.syncPlayer.loadSync(Number(comparisonId))) {
+      alretState.clear()
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+    } else {
+      alretState.add("動画の読み込みでエラーが発生しました。")
+    }
+    loadingState.stop(loadingId)
   })()
 }
 

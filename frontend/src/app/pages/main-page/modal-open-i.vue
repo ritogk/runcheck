@@ -13,18 +13,20 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
 import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { fetchComparisons } from "@/core/comparisons"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
+import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 
-const useMainState = inject(UseMainStateKey) as UseMainStateType
-const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+const mainState = inject(UseMainStateKey) as UseMainStateType
+const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+const alretState = inject(UseAlretStateKey) as UseAlretStateType
 
 const onClose = () => {
-  useMainState.openModal.close()
+  mainState.openModal.close()
 }
 
 const comparisonOptions = reactive<{ id: number; name: string }[]>([{ id: 0, name: "　" }])
-watch(useMainState.openModal.subscription.opened, async (value) => {
+watch(mainState.openModal.subscription.opened, async (value) => {
   if (value) {
-    const loadingId = useLoadingState.run()
+    const loadingId = loadingState.run()
     try {
       const response = await fetchComparisons()
       comparisonOptions.splice(
@@ -44,17 +46,25 @@ watch(useMainState.openModal.subscription.opened, async (value) => {
         name: "　"
       })
     }
-    useLoadingState.stop(loadingId)
+    loadingState.stop(loadingId)
   }
 })
 const selected = ref(comparisonOptions[0])
 
-const hundleOpen = () => {
-  location.href = `${window.location.origin}${window.location.pathname}?comparisonId=${selected.value.id}`
+const hundleOpen = async () => {
+  mainState.openModal.close()
+  const loadingId = loadingState.run()
+  if (await mainState.syncPlayer.loadSync(selected.value.id)) {
+    alretState.clear()
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+  } else {
+    alretState.add("動画の読み込みでエラーが発生しました。")
+  }
+  loadingState.stop(loadingId)
 }
 </script>
 <template>
-  <Modal :is-showed="useMainState.openModal.subscription.opened.value" @hudnle-close="onClose">
+  <Modal :is-showed="mainState.openModal.subscription.opened.value" @hudnle-close="onClose">
     <div class="">
       <div class="flex min-h-full flex-col justify-center px-2 py-2">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">

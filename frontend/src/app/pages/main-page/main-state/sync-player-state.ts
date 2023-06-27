@@ -1,8 +1,9 @@
-import { ref, shallowRef, type ShallowRef, computed, type ComputedRef, watch } from "vue"
+import { ref, shallowRef, computed, type ComputedRef, watch } from "vue"
 import { type IVideoPlayer, Status, VideoType } from "@/app/pages/main-page/player/i-video-player"
 import { DummyPlayer } from "@/app/pages/main-page/player/dummy-player"
 import { ComparisonsApi, VideoType as ApiVideoType } from "@/core/openapiClient/index"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
+import { YouTubePlayer } from "@/app/pages/main-page/player/youtube-player"
 import { apiConfig } from "@/core/openapi"
 
 /**
@@ -18,6 +19,8 @@ export interface ISyncPlayerStateType {
   mute(): void
   unmute(): void
   reload(): void
+  seekTo(progressRate: number): Promise<void>
+  loadSync(comparisonId: number): Promise<boolean>
   runSync(): Promise<void>
   stopSync(): void
   enableSync(): void
@@ -29,7 +32,6 @@ export interface ISyncPlayerStateType {
     category?: string
   ): Promise<{ id: number }>
   publishSync(id: number): Promise<void>
-  seekTo(progressRate: number): Promise<void>
   subscription: {
     playerOne: ComputedRef<IVideoPlayer>
     playerTwo: ComputedRef<IVideoPlayer>
@@ -126,6 +128,57 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   reload = async () => {
     this._muted.value = true
     this._playing.value = false
+  }
+
+  seekTo = async (progressRate: number) => {
+    this._syncProgressRate.value = progressRate
+    this._muted.value = true
+    // シーク
+    this._playerOne.value.seekTo(
+      this._playerOneStartPosition + this._syncDuration.value * progressRate
+    )
+    this._playerTwo.value.seekTo(
+      this._playerTwoStartPosition + this._syncDuration.value * progressRate
+    )
+  }
+
+  loadSync = async (comparisonId: number): Promise<boolean> => {
+    const comparisonsApi = new ComparisonsApi(apiConfig)
+
+    const response = await comparisonsApi.comparisonsComparisonIdGet({
+      comparisonId: comparisonId
+    })
+
+    try {
+      this.stopSync()
+      await this.subscription.playerOne.value.destory()
+      await this.subscription.playerTwo.value.destory()
+      const youtubeOneId = extractYoutubeId(response.video1Url)
+      const youtubeTwoId = extractYoutubeId(response.video2Url)
+      const playerOne = new YouTubePlayer("youtube-video-one", youtubeOneId)
+      const playerTwo = new YouTubePlayer("youtube-video-two", youtubeTwoId)
+      await playerOne.load()
+      await playerTwo.load()
+      const promise = await new Promise<boolean>((resolve: (value: boolean) => void) => {
+        // iframe生成後に数秒待機しないとなぜかiframeの制御が効かない。
+        setTimeout(async () => {
+          await playerOne.stop()
+          await playerTwo.stop()
+          await playerOne.seekTo(response.video1TimeSt)
+          await playerTwo.seekTo(response.video2TimeSt)
+          this.changePlayerOne(playerOne)
+          this.changePlayerTwo(playerTwo)
+          // seekToをした後に数秒待機しないとcurrentTimeが古い値になる。
+          setTimeout(async () => {
+            this.runSync()
+            resolve(true)
+          }, 3000)
+        }, 2000)
+      })
+      return promise
+    } catch {
+      return false
+    }
   }
 
   private syncProcessing = false // 処理中フラグ
@@ -282,18 +335,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     return this._comparisonsApi.comparisonsComparisonIdPublishPut({
       comparisonId: id
     })
-  }
-
-  seekTo = async (progressRate: number) => {
-    this._syncProgressRate.value = progressRate
-    this._muted.value = true
-    // シーク
-    this._playerOne.value.seekTo(
-      this._playerOneStartPosition + this._syncDuration.value * progressRate
-    )
-    this._playerTwo.value.seekTo(
-      this._playerTwoStartPosition + this._syncDuration.value * progressRate
-    )
   }
 
   subscription = {
