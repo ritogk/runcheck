@@ -2,12 +2,12 @@
 import { ref, inject } from "vue"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 import { useRouter } from "vue-router"
-import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import { usePostUsers } from "@/core/api-state/use-post-users"
 import { usePostAuthenticationLogin } from "@/core/api-state/use-post-authentication-login"
 import InputPassword from "@/components/input-password.vue"
 import FormLabel from "@/components/form-label.vue"
 import Button from "@/components/button.vue"
+import Spiner from "@/components/svg/spiner.vue"
 
 const form = {
   hanndleName: {
@@ -49,7 +49,6 @@ const form = {
 
 const router = useRouter()
 const alertState = inject(UseAlretStateKey) as UseAlretStateType
-const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const unmatchedPasswordMessage = "パスワードが一致しません。"
 const hundlePasswordCongirmValidate = (): boolean => {
@@ -73,12 +72,13 @@ const hundlePasswordCongirmValidate = (): boolean => {
   return true
 }
 
+const isLogging = ref(false)
 const postUsers = usePostUsers()
 const postAuthenticationLogin = usePostAuthenticationLogin()
 const onSubmit = async () => {
   // ごくまれにchangeイベントハンドラのバリデーションが走る前に送信されるのでここでもやる。
   hundlePasswordCongirmValidate()
-  const loadingId = loadingState.run()
+  isLogging.value = true
   try {
     await postUsers.mutateAsync({
       handleName: form.hanndleName.value.value,
@@ -92,13 +92,12 @@ const onSubmit = async () => {
       remember: true
     })
 
-    loadingState.stop(loadingId)
     alertState.clear()
     router.push({ name: "index" })
   } catch {
     alertState.add("エラーが発生しました。既に登録されているメールアドレスの可能性があります。")
   }
-  loadingState.stop(loadingId)
+  isLogging.value = false
 }
 </script>
 
@@ -188,11 +187,11 @@ const onSubmit = async () => {
             </FormLabel>
 
             <div>
-              <Button
-                :variant="'primary'"
-                :label="'新規登録'"
-                :type="'submit'"
-                class="mt-7 w-full"
+              <Button :variant="'primary'" :label="'新規登録'" :type="'submit'" class="mt-7 w-full"
+                ><Spiner
+                  v-show="isLogging"
+                  class="h-5 w-5 animate-spin fill-slate-500 text-slate-300"
+                ></Spiner
               ></Button>
             </div>
           </div>
