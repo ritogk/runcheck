@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, inject, reactive, computed } from "vue"
+import { ref, computed, ComputedRef } from "vue"
 import Memo from "@/components/svg/memo.vue"
 import PIN from "@/components/svg/pin.vue"
 import { useRouter } from "vue-router"
@@ -11,35 +11,29 @@ import {
   ListboxOptions
 } from "@headlessui/vue"
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
-import { fetchComparisons, deleteComparison } from "@/core/comparisons"
-import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
+import { deleteComparison } from "@/core/comparisons"
+import UseGetComparisons from "@/core/api-state/use-get-comparisons"
 
-const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
+const { data, isFetching } = UseGetComparisons()
 
-const comparisons = reactive<{ id: number; title: string; memo: string; tag: string }[]>([])
-
-const fetch = async () => {
-  const loadingId = loadingState.run()
-  const response = await fetchComparisons()
-  comparisons.splice(
-    0,
-    comparisons.length,
-    ...response
+const comparisons: ComputedRef<{ id: number; title: string; memo: string; tag: string }[]> =
+  computed(() => {
+    if (!data.value || data.value.length == 0) {
+      return []
+    }
+    return data.value
       .filter((x) => {
         return !x.anonymous
       })
       .map((x) => {
         return { id: x.id, title: x.title, memo: x.memo, tag: x.category }
       })
-  )
-  loadingState.stop(loadingId)
-}
-fetch()
+  })
 
 const tagOptions = computed(() => {
   const tmp = [
     { id: 0, name: "　" },
-    ...comparisons.map((x) => {
+    ...comparisons.value.map((x) => {
       return { id: x.id, name: x.tag }
     })
   ]
@@ -56,8 +50,8 @@ const tagOptions = computed(() => {
 })
 const selected = ref({ id: 0, name: "　" })
 
-const syncs = computed(() => {
-  return comparisons
+const filteredComparisons = computed(() => {
+  return comparisons.value
     .filter((x) => {
       return selected.value.name === "　" || x.tag === selected.value.name
     })
@@ -143,33 +137,51 @@ const hundleDelete = async (comparisonId: number, title: string) => {
       </Listbox>
 
       <div class="overflow-hidden bg-white shadow sm:rounded-md">
-        <ul role="list" class="divide-y divide-gray-200">
-          <li v-for="sync in syncs" :key="sync.id">
+        <ul role="list" class="divide-y divide-gray-200" v-show="isFetching">
+          <!-- スケルトン -->
+          <li v-for="index in 4" :key="index">
+            <div class="hover:bg-gray-50">
+              <div class="px-4 py-4 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <div class="my-1 h-3 w-1/4 animate-pulse rounded-full bg-gray-300"></div>
+                </div>
+                <div class="mt-2 sm:flex sm:justify-between">
+                  <div class="sm:flex">
+                    <div class="my-1 h-3 w-16 animate-pulse rounded-full bg-gray-300"></div>
+                    <div class="my-1 ml-2 h-3 w-16 animate-pulse rounded-full bg-gray-300"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul role="list" class="divide-y divide-gray-200" v-show="!isFetching">
+          <li v-for="comparison in filteredComparisons" :key="comparison.id">
             <a href="#" class="block hover:bg-gray-50">
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
                   <p
                     class="truncate text-sm font-medium text-slate-600"
-                    @click="hundleTitleClick(sync.id)"
+                    @click="hundleTitleClick(comparison.id)"
                   >
-                    {{ sync.title }}
+                    {{ comparison.title }}
                   </p>
                 </div>
                 <div class="mt-2 sm:flex sm:justify-between">
-                  <div class="sm:flex" @click="hundleTitleClick(sync.id)">
+                  <div class="sm:flex" @click="hundleTitleClick(comparison.id)">
                     <p class="flex items-center text-sm text-gray-500">
                       <Memo></Memo>
-                      {{ sync.memo }}
+                      {{ comparison.memo }}
                     </p>
                     <p class="mt-2 flex items-center text-sm text-gray-500 sm:ml-6 sm:mt-0">
                       <PIN></PIN>
-                      {{ sync.tag }}
+                      {{ comparison.tag }}
                     </p>
                   </div>
                   <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                     <p
                       class="truncate text-sm font-medium text-red-400"
-                      @click="hundleDelete(sync.id, sync.title)"
+                      @click="hundleDelete(comparison.id, comparison.title)"
                     >
                       削除する
                     </p>
