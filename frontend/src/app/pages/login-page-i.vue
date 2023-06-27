@@ -39,7 +39,6 @@ const form = {
 }
 
 const onSubmit = async () => {
-  const loadingId = loadingState.run()
   try {
     await postApiAuthenticationLogin.mutateAsync({
       email: form.email.value.value,
@@ -47,14 +46,12 @@ const onSubmit = async () => {
       remember: form.remember.value.value
     })
 
-    loadingState.stop(loadingId)
     alretState.clear()
     router.push({ name: "index" })
   } catch (e) {
     console.log(e)
     alretState.add("認証に失敗しました。メールアドレスとパスワードを確認してください。")
   }
-  loadingState.stop(loadingId)
 }
 </script>
 

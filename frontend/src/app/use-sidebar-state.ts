@@ -65,10 +65,8 @@ export class UseSidebarState implements IUseSidebarState {
       icon: ArrowLeftOnRectangleIcon,
       current: false,
       action: async () => {
-        const loadingId = this._loadingState.run()
         this._opened.value = false
         await this._postApiAuthenticationLogout.mutateAsync()
-        this._loadingState.stop(loadingId)
       },
       show: computed(() => this._getApiStatus.data.value?.isLogined ?? false)
     },
