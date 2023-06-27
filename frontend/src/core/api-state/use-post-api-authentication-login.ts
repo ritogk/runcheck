@@ -11,7 +11,7 @@ export const usePostApiAuthenticationLogin = () => {
     mutationFn: (request: InlineObject1) =>
       authenticationApi.authenticationLoginPost({ inlineObject1: request }),
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [GET_STATUS] })
+      queryClient.refetchQueries({ queryKey: [GET_STATUS] })
     }
   })
   return mutation

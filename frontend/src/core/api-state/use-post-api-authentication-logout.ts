@@ -1,7 +1,7 @@
 import { AuthenticationApi, InlineObject1 } from "@/core/openapiClient"
 import { apiConfig } from "@/core/openapi"
 import { useQueryClient, useMutation } from "@tanstack/vue-query"
-import { GET_STATUS } from "./query-key"
+import { GET_STATUS, GET_YOUTUBE_VIDEO } from "./query-key"
 
 export const usePostApiAuthenticationLogout = () => {
   const queryClient = useQueryClient()
@@ -10,7 +10,8 @@ export const usePostApiAuthenticationLogout = () => {
   const mutation = useMutation({
     mutationFn: () => authenticationApi.authenticationLogoutPost(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [GET_STATUS] })
+      queryClient.refetchQueries({ queryKey: [GET_STATUS] })
+      queryClient.removeQueries({ queryKey: [GET_YOUTUBE_VIDEO] })
     }
   })
   return mutation
