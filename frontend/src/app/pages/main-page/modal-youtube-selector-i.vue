@@ -5,20 +5,18 @@ import YoutubeIcon from "@/components/svg/youtube.vue"
 import Button from "@/components/button.vue"
 import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
-import { UseUserStateKey, type UseUserStateType } from "@/app/use-user-state"
 import { YoutubeApi } from "@/core/openapiClient"
 import UseApiGetYoutubeVideo from "@/core/api-state/use-get-api-youtube-video"
+import UseGetApiStatus from "@/core/api-state/use-get-api-status"
 import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
-
 import { apiConfig } from "@/core/openapi"
 import { mountYoutube } from "./player/helpers-player"
 
-const useUserState = inject(UseUserStateKey) as UseUserStateType
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
-const { data, isLoading, isSuccess, isError, refetch } = UseApiGetYoutubeVideo(
-  useUserState.subscription.isYoutubeAuthroized.value
-)
+const { data, isLoading, isSuccess, isFetching, isError, refetch } = UseApiGetYoutubeVideo(true)
+
+const getApiStatus = UseGetApiStatus()
 
 const filter = ref("")
 const filteredVideos = computed(() => {
@@ -136,10 +134,7 @@ const hundlePrivacyClick = () => {
           id="options"
           role="listbox"
         >
-          <div
-            class="relative"
-            v-if="!isSuccess && useUserState.subscription.isYoutubeAuthroized.value"
-          >
+          <div class="relative" v-if="isFetching">
             <!-- スケルトン -->
             <div>
               <li
@@ -238,12 +233,7 @@ const hundlePrivacyClick = () => {
         </ul>
 
         <!-- 空 -->
-        <div
-          v-if="
-            (isSuccess && filteredVideos.length === 0) ||
-            !useUserState.subscription.isYoutubeAuthroized.value
-          "
-        >
+        <div v-if="!isFetching && filteredVideos.length === 0">
           <div class="mb-2 px-3 py-3 text-center text-sm sm:px-14">
             <svg
               class="mx-auto h-6 w-6 text-gray-400"

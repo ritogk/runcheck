@@ -2,7 +2,6 @@
 import { ref, inject } from "vue"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 import { useRouter } from "vue-router"
-import { UseUserStateKey, type UseUserStateType } from "@/app/use-user-state"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import { usePostApiUsers } from "@/core/api-state/use-post-api-users"
 import { usePostApiAuthenticationLogin } from "@/core/api-state/use-post-api-authentication-login"
@@ -51,7 +50,6 @@ const form = {
 const router = useRouter()
 const alertState = inject(UseAlretStateKey) as UseAlretStateType
 const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
-const userState = inject(UseUserStateKey) as UseUserStateType
 
 const unmatchedPasswordMessage = "パスワードが一致しません。"
 const hundlePasswordCongirmValidate = (): boolean => {

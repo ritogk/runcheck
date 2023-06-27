@@ -1,17 +1,14 @@
 import LoginPageI from "@/app/pages/login-page-i.vue"
 import { type Meta, type StoryObj, setup } from "@storybook/vue3"
 import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
-import { UseUserState, UseUserStateKey } from "@/app/use-user-state"
 import { UseAlretState, UseAlretStateKey } from "@/app/use-alret-state"
 
 type Story = StoryObj<typeof LoginPageI>
 
 setup((app) => {
   const loadingState = UseLoadingState()
-  const userState = UseUserState()
   const alretState = UseAlretState()
   app.provide(UseLoadingStateKey, loadingState)
-  app.provide(UseUserStateKey, userState)
   app.provide(UseAlretStateKey, alretState)
   return
 })

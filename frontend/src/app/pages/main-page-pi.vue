@@ -11,12 +11,14 @@ import FileControllerI from "./main-page/file-controller-i.vue"
 import SyncControllerI from "./main-page/sync-controller-i.vue"
 import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
-import { UseUserStateKey, type UseUserStateType } from "@/app/use-user-state"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
 import { handleComparisonOpen } from "./main-page/handle-comparison-open-i"
+import UseGetApiStatus from "@/core/api-state/use-get-api-status"
 
 const mainState = UseMainState()
 provide(UseMainStateKey, mainState)
+
+const getApiStatus = UseGetApiStatus()
 
 const urlParams = new URLSearchParams(window.location.search)
 // 比較情報を開いた場合の処理
@@ -30,14 +32,12 @@ if (comparisonId) {
 // Oauthで認可された後の処理
 const code = urlParams.get("code")
 if (code) handleYoutubeOauthCallback(code, mainState)
-
-const userState = inject(UseUserStateKey) as UseUserStateType
 </script>
 
 <template>
   <div class="max-w-[600px]">
     <div class="px-1">
-      <FileControllerI v-show="userState.subscription.logined.value"></FileControllerI>
+      <FileControllerI v-show="getApiStatus.data.value?.isLogined"></FileControllerI>
       <ModalSaveI></ModalSaveI>
       <ModalOpenI></ModalOpenI>
       <Memo

@@ -6,19 +6,15 @@ import SidebarMobileI from "./app/sidebar-mobile-i.vue"
 import AlretI from "@/app/alret-i.vue"
 import Loading from "@/app/loading.vue"
 import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
-import { UseUserState, UseUserStateKey } from "@/app/use-user-state"
 import { UseAlretState, UseAlretStateKey } from "./app/use-alret-state"
 import { UseSidebarState, UseSidebarStateKey } from "./app/use-sidebar-state"
 
 const loadingState = UseLoadingState()
-const userState = UseUserState()
 const alretState = UseAlretState()
 const sidebarState = new UseSidebarState(loadingState)
 provide(UseLoadingStateKey, loadingState)
-provide(UseUserStateKey, userState)
 provide(UseAlretStateKey, alretState)
 provide(UseSidebarStateKey, sidebarState)
-
 </script>
 
 <template>

@@ -1,7 +1,6 @@
 import MainPageI from "@/app/pages/main-page-pi.vue"
 import { type Meta, type StoryObj, setup } from "@storybook/vue3"
 import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
-import { UseUserState, UseUserStateKey } from "@/app/use-user-state"
 import { UseAlretState, UseAlretStateKey } from "@/app/use-alret-state"
 import { VueQueryPlugin } from "@tanstack/vue-query"
 import { setupGetMocks } from "@/stories/core/setup-mock"
@@ -41,12 +40,9 @@ setupGetMocks(mocks)
 setup((app) => {
   app.use(VueQueryPlugin)
   const loadingState = UseLoadingState()
-  const userState = UseUserState()
   const alretState = UseAlretState()
   app.provide(UseLoadingStateKey, loadingState)
-  app.provide(UseUserStateKey, userState)
   app.provide(UseAlretStateKey, alretState)
-  userState.load()
   return
 })
 
