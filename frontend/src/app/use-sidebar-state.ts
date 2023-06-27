@@ -9,7 +9,6 @@ import {
   type InjectionKey
 } from "vue"
 import { useRouter } from "vue-router"
-import { type UseLoadingStateType } from "@/app/use-loading-state"
 import {
   UserPlusIcon,
   ChatBubbleOvalLeftEllipsisIcon,
@@ -40,12 +39,8 @@ export interface IUseSidebarState {
 
 export class UseSidebarState implements IUseSidebarState {
   private readonly _router = useRouter()
-  private readonly _loadingState
   private readonly _getApiStatus = useGetApiStatus()
   private readonly _postApiAuthenticationLogout = usePostAuthenticationLogout()
-  constructor(loadingState: UseLoadingStateType) {
-    this._loadingState = loadingState
-  }
   private _opened = ref(false)
   private _items = shallowRef([
     {
