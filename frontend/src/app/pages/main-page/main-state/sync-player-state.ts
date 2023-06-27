@@ -309,10 +309,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     const video1TimeSt = this._playerOneStartPosition
 
     const video2VideoType =
-      this._playerOne.value.subscription.videoType.value === VideoType.YOUTUBE
+      this._playerTwo.value.subscription.videoType.value === VideoType.YOUTUBE
         ? ApiVideoType.YOUTUBE
         : ApiVideoType.LOCAL
-    const video2Url = await this._playerOne.value.getPath()
+    const video2Url = await this._playerTwo.value.getPath()
     const video2EmbedUrl =
       video2VideoType === ApiVideoType.YOUTUBE
         ? `https://www.youtube.com/embed/${extractYoutubeId(video2Url)}`
