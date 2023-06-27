@@ -1,4 +1,4 @@
-import { ref, shallowRef, computed, type ComputedRef, watch } from "vue"
+import { ref, shallowRef, type ShallowRef, computed, type ComputedRef, watch } from "vue"
 import { type IVideoPlayer, Status, VideoType } from "@/app/pages/main-page/player/i-video-player"
 import { DummyPlayer } from "@/app/pages/main-page/player/dummy-player"
 import { ComparisonsApi, VideoType as ApiVideoType } from "@/core/openapiClient/index"
@@ -32,6 +32,7 @@ export interface ISyncPlayerStateType {
     category?: string
   ): Promise<{ id: number }>
   publishSync(id: number): Promise<void>
+  resetSync(): Promise<void>
   subscription: {
     playerOne: ComputedRef<IVideoPlayer>
     playerTwo: ComputedRef<IVideoPlayer>
@@ -276,6 +277,10 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     this._muted.value = false
     clearInterval(this._syncIntervalId)
     this._syncIntervalId = 0
+    this._playerOneStartPosition = 0
+    this._playerTwoStartPosition = 0
+    this._syncDuration.value = 0
+    this._syncProgressRate.value = 0
   }
 
   enableSync = () => {
@@ -331,10 +336,19 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     return { id: response.comparisonId }
   }
 
-  publishSync(id: number): Promise<void> {
+  publishSync = (id: number): Promise<void> => {
     return this._comparisonsApi.comparisonsComparisonIdPublishPut({
       comparisonId: id
     })
+  }
+
+  resetSync = async (): Promise<void> => {
+    this.stopSync()
+    await this.subscription.playerOne.value.destory()
+    await this.subscription.playerTwo.value.destory()
+    this.changePlayerOne(new DummyPlayer())
+    this.changePlayerTwo(new DummyPlayer())
+    return
   }
 
   subscription = {

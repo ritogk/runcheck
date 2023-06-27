@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, inject } from "vue"
+import { provide, inject, watch } from "vue"
 import { UseMainState, UseMainStateKey } from "./main-page/use-main-state"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
@@ -23,6 +23,13 @@ const alretState = inject(UseAlretStateKey) as UseAlretStateType
 const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
 
 const getStatus = UseGetStatus()
+
+// ログアウト後に同期状態をリセット
+watch(getStatus.data, (value) => {
+  if (value?.isLogined === false) {
+    mainState.syncPlayer.resetSync()
+  }
+})
 
 const urlParams = new URLSearchParams(window.location.search)
 // 比較情報を開いた場合の処理
