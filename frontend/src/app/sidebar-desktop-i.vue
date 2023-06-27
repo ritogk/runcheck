@@ -19,6 +19,20 @@ const hundleHomeClick = () => {
 }
 </script>
 
+<style>
+.item-enter-from {
+  opacity: 0;
+}
+
+.item-enter-to {
+  opacity: 1;
+}
+
+.item-enter-active {
+  transition: opacity 0.7s ease;
+}
+</style>
+
 <template>
   <!-- desktop-sidebar -->
   <div>
@@ -40,7 +54,7 @@ const hundleHomeClick = () => {
           <li>
             <!-- スケルトン -->
             <ul
-              v-show="apiGetStatus.isLoading.value"
+              v-show="apiGetStatus.isFetching.value"
               role="list"
               class="-mx-2 animate-pulse space-y-1"
             >
@@ -48,36 +62,37 @@ const hundleHomeClick = () => {
                 <div class="h-full rounded-full bg-gray-700"></div>
               </li>
             </ul>
-
-            <ul role="list" class="-mx-2 space-y-1" v-show="!apiGetStatus.isLoading.value">
-              <!-- ホーム -->
-              <li v-show="apiGetStatus.data.value?.isLogined">
-                <a
-                  class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
-                  @click="hundleHomeClick()"
-                >
-                  <component :is="UserIcon" class="h-6 w-6 shrink-0" aria-hidden="true" />
-                  {{ apiGetStatus.data.value?.user.name }}
-                </a>
-              </li>
-              <!-- その他 -->
-              <li v-for="item in sidebarState.subscription.items.value" :key="item.name">
-                <a
-                  v-if="item.show.value"
-                  :href="item.href"
-                  :class="[
-                    item.current
-                      ? 'bg-gray-800 text-white'
-                      : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                    'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
-                  ]"
-                  @click="item.action"
-                >
-                  <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
-                  {{ item.name }}
-                </a>
-              </li>
-            </ul>
+            <Transition name="item">
+              <ul role="list" class="-mx-2 space-y-1" v-show="!apiGetStatus.isFetching.value">
+                <!-- ホーム -->
+                <li v-show="apiGetStatus.data.value?.isLogined">
+                  <a
+                    class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+                    @click="hundleHomeClick()"
+                  >
+                    <component :is="UserIcon" class="h-6 w-6 shrink-0" aria-hidden="true" />
+                    {{ apiGetStatus.data.value?.user.name }}
+                  </a>
+                </li>
+                <!-- その他 -->
+                <li v-for="item in sidebarState.subscription.items.value" :key="item.name">
+                  <a
+                    v-if="item.show.value"
+                    :href="item.href"
+                    :class="[
+                      item.current
+                        ? 'bg-gray-800 text-white'
+                        : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                      'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
+                    ]"
+                    @click="item.action"
+                  >
+                    <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
+                    {{ item.name }}
+                  </a>
+                </li>
+              </ul>
+            </Transition>
           </li>
         </ul>
       </nav>

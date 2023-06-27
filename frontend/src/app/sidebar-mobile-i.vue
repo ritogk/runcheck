@@ -16,6 +16,20 @@ const hundleHomeClick = () => {
 }
 </script>
 
+<style>
+.item-enter-from {
+  opacity: 0;
+}
+
+.item-enter-to {
+  opacity: 1;
+}
+
+.item-enter-active {
+  transition: opacity 0.7s ease;
+}
+</style>
+
 <template>
   <!-- mobile-sidebar -->
   <div class="flex justify-end">
@@ -77,7 +91,7 @@ const hundleHomeClick = () => {
                     <li>
                       <!-- スケルトン -->
                       <ul
-                        v-show="apiGetStatus.isLoading.value"
+                        v-show="apiGetStatus.isFetching.value"
                         role="list"
                         class="-mx-2 animate-pulse space-y-1"
                       >
@@ -89,7 +103,7 @@ const hundleHomeClick = () => {
                       <ul
                         role="list"
                         class="-mx-2 space-y-1"
-                        v-show="!apiGetStatus.isLoading.value"
+                        v-show="!apiGetStatus.isFetching.value"
                       >
                         <!-- ホーム -->
                         <li v-if="apiGetStatus.data.value?.isLogined">
