@@ -32,7 +32,7 @@ watch(getStatus.data, (value) => {
 })
 
 const urlParams = new URLSearchParams(window.location.search)
-// 比較情報を開いた場合の処理
+// 共有した比較結果を開いた時の処理
 const comparisonId = urlParams.get("comparisonId")
 if (comparisonId) {
   ;(async () => {
