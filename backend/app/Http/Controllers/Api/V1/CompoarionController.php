@@ -35,7 +35,7 @@ class CompoarionController extends Controller
         }
         return response()->json(
             [],
-            Response::HTTP_NO_CONTENT
+            Response::HTTP_OK
         );
     }
 
@@ -55,7 +55,7 @@ class CompoarionController extends Controller
         }
         return response()->json(
             [],
-            Response::HTTP_NO_CONTENT
+            Response::HTTP_OK
         );
     }
 
@@ -89,7 +89,7 @@ class CompoarionController extends Controller
         } else {
             return response()->json(
                 [],
-                Response::HTTP_NO_CONTENT
+                Response::HTTP_OK
             );
         }
     }
