@@ -14,10 +14,9 @@ import SyncControllerI from "./main-page/sync-controller-i.vue"
 import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
+import { getComparisonById } from "@/core/get-comparison-by-id"
 import { UseGetStatus } from "@/core/api-state/use-get-status"
 import { usePostYoutubeOauth } from "@/core/api-state/use-post-youtube-oauth"
-import { ComparisonsApi, VideoType } from "@/core/openapiClient/index"
-import { apiConfig } from "@/core/openapi"
 
 const mainState = UseMainState()
 provide(UseMainStateKey, mainState)
@@ -39,17 +38,14 @@ const urlParams = new URLSearchParams(window.location.search)
 const comparisonId = urlParams.get("comparisonId")
 if (comparisonId) {
   ;(async () => {
-    const comparisonsApi = new ComparisonsApi(apiConfig)
-    const res = await comparisonsApi.comparisonsComparisonIdGet({
-      comparisonId: Number(comparisonId)
-    })
+    const comparion = await getComparisonById(Number(comparisonId))
     const loadingId = loadingState.run()
     if (
       await mainState.syncPlayer.loadSync(
-        res.video1Url,
-        res.video1TimeSt,
-        res.video2Url,
-        res.video2TimeSt
+        comparion.video1Url,
+        comparion.video1TimeSt,
+        comparion.video2Url,
+        comparion.video2TimeSt
       )
     ) {
       alretState.clear()
