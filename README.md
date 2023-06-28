@@ -3,11 +3,15 @@
 <br>
 
 ## リンク
-
 http://runcheck.homisoftware.net/lp/ja <br>
 ↓ 動作サンプル(画面幅をスマホサイズにしてから開いて下さい。)<br>
 https://runcheck.homisoftware.net/app/index?comparisonId=67<br>
 <br>
+
+## テストユーザー
+email: homing0321r4cfw@yahoo.co.jp  
+password: P@ssw0rd  
+https://runcheck.homisoftware.net/app/login  
 
 ## 画面
 
@@ -29,7 +33,8 @@ https://runcheck.homisoftware.net/app/index?comparisonId=67<br>
 ### host
 
 ```
-git clone git@github.com:ritogk/vidcomp.git
+git clone git@github.com:ritogk/runcheck.git
+cd runcheck
 docekr-compose up -d
 ```
 
@@ -48,7 +53,7 @@ php artisan serve --host 0.0.0.0
 cd frontend
 cp src/env.base.ts src/env.ts
 yarn install
-yanr watch
+yarn watch
 ```
 
 ## frotnend storybook
