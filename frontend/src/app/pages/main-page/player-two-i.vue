@@ -149,6 +149,7 @@ const hundleYoutubeSearch = () => {
           </div>
           <input
             type="file"
+            accept="video/*"
             :ref="elements.localVideo.file"
             @change="hundleLocalVideoChange"
             hidden
