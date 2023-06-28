@@ -57,7 +57,8 @@ type Story = StoryObj<typeof MainPageI>
 export const Default: Story = {
   render: () => ({
     components: { MainPageI: MainPageI },
-    template: "<MainPageI/>",
+    template: `<p class="text-sm">モックの関係でF5更新してから開き直して下さい。</p>
+              <MainPageI/>`,
     setup: () => {}
   })
 }

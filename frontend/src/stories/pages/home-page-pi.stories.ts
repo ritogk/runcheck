@@ -2,6 +2,7 @@ import HomePageI from "@/app/pages/home-page-i.vue"
 import { type Meta, type StoryObj, setup } from "@storybook/vue3"
 import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
 import { setupGetMocks } from "@/stories/core/setup-mock"
+import { VueQueryPlugin } from "@tanstack/vue-query"
 import { InlineResponse200, VideoType } from "@/core/openapiClient"
 import { baseUrl } from "@/env"
 
@@ -42,6 +43,7 @@ const mocks = [
 setupGetMocks(mocks)
 
 setup((app) => {
+  app.use(VueQueryPlugin)
   const loadingState = UseLoadingState()
   app.provide(UseLoadingStateKey, loadingState)
   return
@@ -58,7 +60,8 @@ type Story = StoryObj<typeof HomePageI>
 export const Default: Story = {
   render: () => ({
     components: { HomePageI: HomePageI },
-    template: "<HomePageI/>",
+    template: `<p class="text-sm">モックの関係でF5更新してから開き直して下さい。</p>
+              <HomePageI/>`,
     setup: () => {}
   })
 }
