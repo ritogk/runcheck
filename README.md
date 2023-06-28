@@ -51,18 +51,19 @@ php artisan serve --host 0.0.0.0
 ### frontend setup
 ```sh
 cd frontend
+nvm use
 cp src/env.base.ts src/env.ts
 yarn install
 yarn watch
 ```
 
-## frotnend storybook
+## frontend run storybook
 ```sh
 cd frontend
 yarn storybook
 ```
 
-## frotnend e2e
+## frotnend test
 ```sh
 cd frontend
 yarn e2e
