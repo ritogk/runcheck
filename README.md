@@ -57,7 +57,7 @@ yarn install
 yarn watch
 ```
 
-## frontend run storybook
+## storybook
 ```sh
 cd frontend
 yarn storybook
