@@ -11,7 +11,7 @@ const meta: Meta<typeof Button> = {
   tags: ["autodocs"]
 }
 
-export const Default: Story = {
+export const Primary: Story = {
   render: (args) => ({
     components: { Button: Button },
     setup() {

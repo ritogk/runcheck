@@ -9,7 +9,7 @@ const meta: Meta<typeof FormLabel> = {
   tags: ["autodocs"]
 }
 
-export const Default: Story = {
+export const Required: Story = {
   render: (args) => ({
     components: { FormLabel: FormLabel },
     setup() {
@@ -26,13 +26,13 @@ export const Default: Story = {
                 </FormLabel>`
   }),
   args: {
-    required:true,
-    id:"full-name",
-    label:"氏名"
+    required: true,
+    id: "full-name",
+    label: "氏名"
   }
 }
 
-export const Optional : Story = {
+export const Optional: Story = {
   render: (args) => ({
     components: { FormLabel: FormLabel },
     setup() {
@@ -48,9 +48,9 @@ export const Optional : Story = {
                 </FormLabel>`
   }),
   args: {
-    required:false,
-    id:"full-name",
-    label:"氏名"
+    required: false,
+    id: "full-name",
+    label: "氏名"
   }
 }
 
