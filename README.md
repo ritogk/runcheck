@@ -13,11 +13,14 @@ https://runcheck.homisoftware.net/app/index?comparisonId=67<br>
 
 
 
-| 動画を同期する画面 | 動画を比較する画面 | YouTubeからデータを拾う画面 | ホーム |
-| :-: | :-: | :-: | :-: |
-| <img src="https://github.com/ritogk/runcheck/assets/72111956/385a9f76-f9c1-4771-82c9-cb9d13463790"> | <img src="https://github.com/ritogk/runcheck/assets/72111956/e5da37f9-6702-4cd9-889d-dbfceccbc116"> | <img src="https://github.com/ritogk/runcheck/assets/72111956/87748827-2d3c-4ab7-9f16-0b38dfcf765a"> | <img src="https://github.com/ritogk/runcheck/assets/72111956/358c16e9-21e2-43f8-9a0b-bed9ac946846"> |
+| 動画を同期する画面 | 動画を比較する画面 | YouTubeからデータを拾う画面 |
+| :-: | :-: | :-: |
+| <img src="https://github.com/ritogk/runcheck/assets/72111956/385a9f76-f9c1-4771-82c9-cb9d13463790"> | <img src="https://github.com/ritogk/runcheck/assets/72111956/e5da37f9-6702-4cd9-889d-dbfceccbc116"> | <img src="https://github.com/ritogk/runcheck/assets/72111956/87748827-2d3c-4ab7-9f16-0b38dfcf765a"> |
 
 
+| ホーム | 新規登録 | ログイン |
+| :-: | :-: | :-: |
+| <img src="https://github.com/ritogk/runcheck/assets/72111956/358c16e9-21e2-43f8-9a0b-bed9ac946846"> | <img src="https://github.com/ritogk/runcheck/assets/72111956/8bb15596-ada8-4d62-bb10-c3ded5129141"> | <img src="https://github.com/ritogk/runcheck/assets/72111956/5704f020-2779-4d99-916d-48af0e28a63a"> |
 <br>
 <br>
 
