@@ -50,6 +50,9 @@ const hundleOpen = async () => {
   mainState.openModal.close()
   const loadingId = loadingState.run()
   const comparison = await getComparisonById(selected.value.id)
+  mainState.memo.changeTitle(comparison.title ?? "")
+  mainState.memo.changeMemo(comparison.memo ?? "")
+  mainState.memo.show()
   if (
     await mainState.syncPlayer.loadSync(
       comparison.video1Url,
