@@ -15,6 +15,7 @@ import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
 import UseGetStatus from "@/core/api-state/use-get-status"
+import { usePostYoutubeOauth } from "@/core/api-state/use-post-youtube-oauth"
 
 const mainState = UseMainState()
 provide(UseMainStateKey, mainState)
@@ -49,7 +50,8 @@ if (comparisonId) {
 
 // Oauthで認可された後の処理
 const code = urlParams.get("code")
-if (code) handleYoutubeOauthCallback(code, mainState)
+const postYoutubeOauth = usePostYoutubeOauth()
+if (code) handleYoutubeOauthCallback(code, mainState, postYoutubeOauth)
 </script>
 
 <template>
