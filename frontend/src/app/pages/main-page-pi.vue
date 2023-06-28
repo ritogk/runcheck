@@ -16,6 +16,8 @@ import Memo from "./main-page/memo.vue"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
 import { UseGetStatus } from "@/core/api-state/use-get-status"
 import { usePostYoutubeOauth } from "@/core/api-state/use-post-youtube-oauth"
+import { ComparisonsApi, VideoType } from "@/core/openapiClient/index"
+import { apiConfig } from "@/core/openapi"
 
 const mainState = UseMainState()
 provide(UseMainStateKey, mainState)
@@ -37,8 +39,19 @@ const urlParams = new URLSearchParams(window.location.search)
 const comparisonId = urlParams.get("comparisonId")
 if (comparisonId) {
   ;(async () => {
+    const comparisonsApi = new ComparisonsApi(apiConfig)
+    const res = await comparisonsApi.comparisonsComparisonIdGet({
+      comparisonId: Number(comparisonId)
+    })
     const loadingId = loadingState.run()
-    if (await mainState.syncPlayer.loadSync(Number(comparisonId))) {
+    if (
+      await mainState.syncPlayer.loadSync(
+        res.video1Url,
+        res.video1TimeSt,
+        res.video2Url,
+        res.video2TimeSt
+      )
+    ) {
       alretState.clear()
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
     } else {

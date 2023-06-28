@@ -15,6 +15,8 @@ import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/us
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 import { UseGetComparisons } from "@/core/api-state/use-get-comparisons"
+import { ComparisonsApi } from "@/core/openapiClient/index"
+import { apiConfig } from "@/core/openapi"
 
 const mainState = inject(UseMainStateKey) as UseMainStateType
 const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType
@@ -48,7 +50,18 @@ const hundleOpen = async () => {
   }
   mainState.openModal.close()
   const loadingId = loadingState.run()
-  if (await mainState.syncPlayer.loadSync(selected.value.id)) {
+  const comparisonsApi = new ComparisonsApi(apiConfig)
+  const res = await comparisonsApi.comparisonsComparisonIdGet({
+    comparisonId: Number(selected.value.id)
+  })
+  if (
+    await mainState.syncPlayer.loadSync(
+      res.video1Url,
+      res.video1TimeSt,
+      res.video2Url,
+      res.video2TimeSt
+    )
+  ) {
     alretState.clear()
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
   } else {
