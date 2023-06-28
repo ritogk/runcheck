@@ -48,6 +48,7 @@ php artisan serve --host 0.0.0.0
 cd frontend
 cp src/env.base.ts src/env.ts
 yarn install
+yanr watch
 ```
 
 ## frotnend storybook
