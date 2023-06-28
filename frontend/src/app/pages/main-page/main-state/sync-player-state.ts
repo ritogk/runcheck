@@ -1,10 +1,11 @@
 import { ref, shallowRef, computed, type ComputedRef, watch } from "vue"
 import { type IVideoPlayer, Status, VideoType } from "@/app/pages/main-page/player/i-video-player"
 import { DummyPlayer } from "@/app/pages/main-page/player/dummy-player"
-import { ComparisonsApi, VideoType as ApiVideoType } from "@/core/openapiClient/index"
+import { VideoType as ApiVideoType } from "@/core/openapiClient/index"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { YouTubePlayer } from "@/app/pages/main-page/player/youtube-player"
-import { apiConfig } from "@/core/openapi"
+import { postComparisons } from "@/core/post-comparisons"
+import { putComparisonsIdPublish } from "@/core/put-comparisons-id-publish"
 
 /**
  * プレイヤーの同期状態を管理するクラス
@@ -64,7 +65,6 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   private _speed = ref(1)
   private _synced = ref(false)
   private _syncIntervalId = 0
-  private _comparisonsApi = new ComparisonsApi(apiConfig)
 
   constructor() {
     watch(this._playing, (value) => {
@@ -331,27 +331,23 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         : video2Url
     const video2TimeSt = this._playerTwoStartPosition
     // 同期情報の登録
-    const response = await this._comparisonsApi.comparisonsPost({
-      videoComparison: {
-        title: title,
-        category: category,
-        memo: memo,
-        anonymous: anonymous,
-        video1Url: video1EmbedUrl,
-        video1TimeSt: video1TimeSt,
-        video1VideoType: video1VideoType,
-        video2Url: video2EmbedUrl,
-        video2TimeSt: video2TimeSt,
-        video2VideoType: video2VideoType
-      }
+    const response = await postComparisons({
+      title: title ?? "",
+      category: category ?? "",
+      memo: memo ?? "",
+      anonymous: anonymous,
+      video1EmbedUrl: video1EmbedUrl,
+      video1TimeSt: video1TimeSt,
+      video1VideoType: video1VideoType,
+      video2EmbedUrl: video2EmbedUrl,
+      video2TimeSt: video2TimeSt,
+      video2VideoType: video2VideoType
     })
     return { id: response.comparisonId }
   }
 
   publishSync = (id: number): Promise<void> => {
-    return this._comparisonsApi.comparisonsComparisonIdPublishPut({
-      comparisonId: id
-    })
+    return putComparisonsIdPublish(id)
   }
 
   resetSync = async (): Promise<void> => {
