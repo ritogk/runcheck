@@ -4,10 +4,10 @@ import { useRouter } from "vue-router"
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from "@headlessui/vue"
 import { UserIcon, XMarkIcon } from "@heroicons/vue/24/outline"
 import { UseSidebarStateKey, type IUseSidebarState } from "./use-sidebar-state"
-import UseApiGetStatus from "@/core/api-state/use-get-status"
+import { UseGetStatus } from "@/core/api-state/use-get-status"
 
 const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
-const apiGetStatus = UseApiGetStatus()
+const getStatus = UseGetStatus()
 const router = useRouter()
 
 const hundleHomeClick = () => {
@@ -91,7 +91,7 @@ const hundleHomeClick = () => {
                     <li>
                       <!-- スケルトン -->
                       <ul
-                        v-show="apiGetStatus.isFetching.value"
+                        v-show="getStatus.isFetching.value"
                         role="list"
                         class="-mx-2 animate-pulse space-y-1"
                       >
@@ -100,19 +100,15 @@ const hundleHomeClick = () => {
                         </li>
                       </ul>
 
-                      <ul
-                        role="list"
-                        class="-mx-2 space-y-1"
-                        v-show="!apiGetStatus.isFetching.value"
-                      >
+                      <ul role="list" class="-mx-2 space-y-1" v-show="!getStatus.isFetching.value">
                         <!-- ホーム -->
-                        <li v-if="apiGetStatus.data.value?.isLogined">
+                        <li v-if="getStatus.data.value?.isLogined">
                           <a
                             class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                             @click="hundleHomeClick()"
                           >
                             <component :is="UserIcon" class="h-6 w-6 shrink-0" aria-hidden="true" />
-                            {{ apiGetStatus.data.value?.user.name }}
+                            {{ getStatus.data.value?.user.name }}
                           </a>
                         </li>
 
@@ -149,4 +145,3 @@ const hundleHomeClick = () => {
     </TransitionRoot>
   </div>
 </template>
-@/core/api-state/use-get-status

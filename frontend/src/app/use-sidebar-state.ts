@@ -17,7 +17,7 @@ import {
   ArrowLeftOnRectangleIcon,
   QuestionMarkCircleIcon
 } from "@heroicons/vue/24/outline"
-import useGetApiStatus from "@/core/api-state/use-get-status"
+import { UseGetStatus } from "@/core/api-state/use-get-status"
 import { usePostAuthenticationLogout } from "@/core/api-state/use-post-authentication-logout"
 
 export interface IUseSidebarState {
@@ -41,7 +41,7 @@ export interface IUseSidebarState {
 export class UseSidebarState implements IUseSidebarState {
   private readonly _router = useRouter()
   private readonly _loadingState
-  private readonly _getApiStatus = useGetApiStatus()
+  private readonly _getApiStatus = UseGetStatus()
   private readonly _postApiAuthenticationLogout = usePostAuthenticationLogout()
   private _opened = ref(false)
   private _items = shallowRef([

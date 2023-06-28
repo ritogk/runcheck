@@ -11,7 +11,7 @@ import {
   ListboxOptions
 } from "@headlessui/vue"
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
-import UseGetComparisons from "@/core/api-state/use-get-comparisons"
+import { UseGetComparisons } from "@/core/api-state/use-get-comparisons"
 import { useDeleteComparison } from "@/core/api-state/use-delete-comparison"
 
 const { data, isFetching } = UseGetComparisons()
@@ -161,7 +161,7 @@ const hundleDelete = async (comparisonId: number, title: string) => {
               <div class="px-4 py-4 sm:px-6">
                 <div class="flex items-center justify-between">
                   <button
-                    class="w-full text-left truncate text-sm font-medium text-slate-600"
+                    class="w-full truncate text-left text-sm font-medium text-slate-600"
                     @click="hundleTitleClick(comparison.id)"
                   >
                     {{ comparison.title }}

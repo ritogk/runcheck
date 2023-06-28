@@ -3,7 +3,7 @@ import { apiConfig } from "@/core/openapi"
 import { useQuery } from "@tanstack/vue-query"
 import { GET_STATUS } from "./query-key"
 
-const UseGetStatus = () => {
+export const UseGetStatus = () => {
   const statusApi = new StatusApi(apiConfig)
   return useQuery({
     queryKey: [GET_STATUS],
@@ -12,4 +12,3 @@ const UseGetStatus = () => {
     retry: 3
   })
 }
-export default UseGetStatus

@@ -14,7 +14,7 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid"
 import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
-import UseGetComparisons from "@/core/api-state/use-get-comparisons"
+import { UseGetComparisons } from "@/core/api-state/use-get-comparisons"
 
 const mainState = inject(UseMainStateKey) as UseMainStateType
 const loadingState = inject(UseLoadingStateKey) as UseLoadingStateType

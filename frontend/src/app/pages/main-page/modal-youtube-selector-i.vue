@@ -7,14 +7,14 @@ import Spiner from "@/components/svg/spiner.vue"
 import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
 import { YoutubeApi } from "@/core/openapiClient"
-import UseGetYoutubeVideo from "@/core/api-state/use-get-youtube-video"
+import { UseGetYoutubeVideo } from "@/core/api-state/use-get-youtube-video"
 import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
 import { apiConfig } from "@/core/openapi"
 import { mountYoutube } from "./player/helpers-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 const useLoadingState = inject(UseLoadingStateKey) as UseLoadingStateType
-const { data, isLoading, isSuccess, isFetching, isError, refetch } = UseGetYoutubeVideo(true)
+const { data, isSuccess, isFetching } = UseGetYoutubeVideo(true)
 
 const filter = ref("")
 const filteredVideos = computed(() => {
@@ -239,4 +239,3 @@ const hundlePrivacyClick = () => {
     </div>
   </Modal>
 </template>
-@/core/api-state/use-get-status @/core/api-state/use-get-youtube-video

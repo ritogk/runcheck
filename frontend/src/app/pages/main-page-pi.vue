@@ -14,7 +14,7 @@ import SyncControllerI from "./main-page/sync-controller-i.vue"
 import SyncOptionI from "./main-page/sync-option-i.vue"
 import Memo from "./main-page/memo.vue"
 import { handleYoutubeOauthCallback } from "./main-page/handle-youtube-oauth-callback-i"
-import UseGetStatus from "@/core/api-state/use-get-status"
+import { UseGetStatus } from "@/core/api-state/use-get-status"
 import { usePostYoutubeOauth } from "@/core/api-state/use-post-youtube-oauth"
 
 const mainState = UseMainState()
