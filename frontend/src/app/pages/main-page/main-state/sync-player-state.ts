@@ -127,6 +127,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   }
 
   reload = async () => {
+    // 固まった時用の救済処置
     this._muted.value = true
     this._playing.value = false
   }
@@ -140,6 +141,17 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     )
     this._playerTwo.value.seekTo(
       this._playerTwoStartPosition + this._syncDuration.value * progressRate
+    )
+  }
+
+  private resetPosition = async (): Promise<void> => {
+    this._muted.value = true
+    this._playing.value = false
+    await this._playerOne.value.seekTo(
+      this._playerOneStartPosition
+    )
+    await this._playerTwo.value.seekTo(
+      this._playerTwoStartPosition
     )
   }
 
@@ -227,7 +239,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
         this._repeated.value
       ) {
         console.log("動画が再生しきっていてリピートフラグが立っている場合はリロード")
-        this.reload()
+        this.resetPosition()
         this.syncProcessing = false
         return
       }
