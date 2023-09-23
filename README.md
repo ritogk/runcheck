@@ -7,7 +7,7 @@ Youtube動画とも比較できるので、全世界のライバルと自分を�
 
 ## リンク
 http://runcheck.homisoftware.net/lp/ja <br>
-↓ 動作サンプル(レスポンシブ対応)<br>
+↓ 動作サンプル(スマホに最適化してます)<br>
 https://runcheck.homisoftware.net/app/index?comparisonId=67<br>
 <br>
 
