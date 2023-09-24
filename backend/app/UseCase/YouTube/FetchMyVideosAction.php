@@ -2,22 +2,16 @@
 
 namespace App\UseCase\YouTube;
 
-use App\Exceptions\OAuthException;
 // core
+use App\Core\SessionKey;
 use App\Core\YouTube\OAuthYoutubeClient;
-// usecase
-use App\UseCase\Authentication\MeAction;
-use App\UseCase\SessionStorageAction;
-use App\UseCase\YouTube\GenerateAccessTokenAction;
 
 class FetchMyVideosAction
 {
   private OAuthYoutubeClient $client;
-  private SessionStorageAction $session_action;
-  public function __construct(OAuthYoutubeClient $client, SessionStorageAction $session_action)
+  public function __construct(OAuthYoutubeClient $client)
   {
     $this->client = $client;
-    $this->session_action = $session_action;
   }
 
   /**
@@ -27,7 +21,7 @@ class FetchMyVideosAction
    */
   public function fetch(): array
   {
-    $token = $this->session_action->get(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN);
+    $token = session()->get(SessionKey::$YOUTUBE_ACCESS_TOKEN);
     $this->client->set_access_token($token);
 
     $youtube = $this->client->generate_youtube_service();
@@ -48,7 +42,7 @@ class FetchMyVideosAction
 
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
           // 削除された動画は無視。レスポンスがおかしいのでこの先に流すとエラーになる。
-          if($playlistItem['snippet']['title'] == "Deleted video"){
+          if ($playlistItem['snippet']['title'] == "Deleted video") {
             continue;
           }
           $videos[] = array(

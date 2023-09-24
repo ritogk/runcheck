@@ -2,18 +2,17 @@
 
 namespace App\UseCase;
 
+// core
+use App\Core\SessionKey;
 // usecase
 use App\UseCase\Authentication\MeAction;
-use App\UseCase\SessionStorageAction;
 
 class GetStatusAction
 {
   private MeAction $me_action;
-  private SessionStorageAction $session_storage_action;
-  public function __construct(MeAction $action, SessionStorageAction $session_storage_action)
+  public function __construct(MeAction $action)
   {
     $this->me_action = $action;
-    $this->session_storage_action = $session_storage_action;
   }
 
   /**
@@ -26,10 +25,10 @@ class GetStatusAction
     $user = $this->me_action->me();
     $isLogined = $user !== null;
     $access_token = false;
-    if($isLogined){
+    if ($isLogined) {
       $isYoutubeAuthroized = !empty($user->youtube_token);
-    }else{
-      $access_token = $this->session_storage_action->get(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN);
+    } else {
+      session()->get(SessionKey::$YOUTUBE_ACCESS_TOKEN);
       $isYoutubeAuthroized = !empty($access_token);
     }
     return ['is_logined' => $isLogined, 'is_youtube_authroized' => $isYoutubeAuthroized, 'user' => $user];

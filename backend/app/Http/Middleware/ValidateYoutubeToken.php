@@ -6,9 +6,9 @@ use Closure;
 use App\Exceptions\OAuthException;
 // core
 use App\Core\YouTube\OAuthYoutubeClient;
+use App\Core\SessionKey;
 // usecase
 use App\UseCase\Authentication\MeAction;
-use App\UseCase\SessionStorageAction;
 use App\UseCase\YouTube\GenerateAccessTokenAction;
 
 /**
@@ -17,13 +17,11 @@ use App\UseCase\YouTube\GenerateAccessTokenAction;
 class ValidateYoutubeToken
 {
     private OAuthYoutubeClient $client;
-    private SessionStorageAction $session_action;
     private MeAction $me_action;
     private GenerateAccessTokenAction $generate_access_token_action;
-    public function __construct(OAuthYoutubeClient $client, SessionStorageAction $session_action, MeAction $me_action, GenerateAccessTokenAction $generate_access_token_action)
+    public function __construct(OAuthYoutubeClient $client, MeAction $me_action, GenerateAccessTokenAction $generate_access_token_action)
     {
         $this->client = $client;
-        $this->session_action = $session_action;
         $this->me_action = $me_action;
         $this->generate_access_token_action = $generate_access_token_action;
     }
@@ -38,16 +36,16 @@ class ValidateYoutubeToken
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $session_token = $this->session_action->get(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN);
+        $session_token = session()->get(SessionKey::$YOUTUBE_ACCESS_TOKEN);
         $user = $this->me_action->me();
         if ($user) {
             if ($session_token) {
                 $this->client->set_access_token($session_token);
                 if ($this->client->is_access_token_expired()) {
                     // トークンの有効期限が切れていたらリフレッシュトークンからアクセストークンを生成
-                    $new_token = $this->generate_access_token_action->generate();   
+                    $new_token = $this->generate_access_token_action->generate();
                     if ($new_token) {
-                        $this->session_action->put(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN, $new_token);
+                        session()->put(SessionKey::$YOUTUBE_ACCESS_TOKEN, $new_token);
                     } else {
                         throw new OAuthException();
                     }
@@ -56,7 +54,7 @@ class ValidateYoutubeToken
                 // リフレッシュトークンからアクセストークンを生成
                 $new_token = $this->generate_access_token_action->generate();
                 if ($new_token) {
-                    $this->session_action->put(SessionStorageAction::KEY_YOUTUBE_ACCESS_TOKEN, $new_token);
+                    session()->put(SessionKey::$YOUTUBE_ACCESS_TOKEN, $new_token);
                 } else {
                     throw new OAuthException();
                 }
