@@ -2,6 +2,7 @@
 
 namespace App\UseCase\Comparison;
 
+use \Illuminate\Auth\Access\AuthorizationException;
 use App\Model\Comparison;
 // usecase
 use App\UseCase\Authentication\GetMeAction;
@@ -27,6 +28,8 @@ class PublishComparisonAction
     if (($user && $user->id == $comparison->user_id) || $comparison->anonymous) {
       $comparison->release_kbn = true;
       $comparison->save();
+      return;
     }
+    throw new AuthorizationException();
   }
 }
