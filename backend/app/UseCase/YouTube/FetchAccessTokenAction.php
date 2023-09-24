@@ -3,17 +3,17 @@
 namespace App\UseCase\YouTube;
 
 // core
-use App\Core\YouTube\OAuthYoutubeClient;
+use App\Core\YouTube\IOAuthYoutubeClient;
 // usecase
 use App\UseCase\Authentication\GetMeAction;
 use App\UseCase\YouTube\SaveRefreshTokenAction;
 
 class FetchAccessTokenAction
 {
-  private OAuthYoutubeClient $client;
+  private IOAuthYoutubeClient $client;
   private GetMeAction $me_action;
   private SaveRefreshTokenAction $save_token_action;
-  public function __construct(OAuthYoutubeClient $client, GetMeAction $me_action, SaveRefreshTokenAction $save_token_action)
+  public function __construct(IOAuthYoutubeClient $client, GetMeAction $me_action, SaveRefreshTokenAction $save_token_action)
   {
     $this->client = $client;
     $this->me_action = $me_action;

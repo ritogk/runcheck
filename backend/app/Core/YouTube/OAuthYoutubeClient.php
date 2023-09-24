@@ -4,27 +4,34 @@ namespace App\Core\YouTube;
 
 use Google_Client;
 use Google_Service_YouTube;
-use Google_Service_Exception;
-use Google_Exception;
 
 use App\Exceptions\OAuthException;
 
-class OAuthYoutubeClient
+interface IOAuthYoutubeClient
+{
+  public function get_authorize_url(): string;
+  public function set_access_token(array $token): void;
+  public function fetch_token(string $code): array;
+  public function generate_token(string $refresh_token): array;
+  public function generate_youtube_service(): Google_Service_YouTube;
+  public function is_access_token_expired(): bool;
+}
+
+class OAuthYoutubeClient implements IOAuthYoutubeClient
 {
   private string $client_id;
   private string $client_secret;
   private string $redirect_url;
   private Google_Client $client;
-  public function __construct()
+  public function __construct(Google_Client $client, string $client_id, string $client_secret, string $redirect_url)
   {
-    $this->client_id = config('oauth.youtube.client_id');
-    $this->client_secret = config('oauth.youtube.client_secret');
-    $this->redirect_url = config('oauth.youtube.redirect_url');
-    $client = new Google_Client();
-    $client->getCache()->clear();         // トークンがメモリ？にキャッシュされてしまうのでリセットする
+    $this->client_id = $client_id;
+    $this->client_secret = $client_secret;
+    $this->redirect_url = $redirect_url;
+    $client->getCache()->clear();         // トークンがメモリにキャッシュされるので必ずリセットする
     $client->setClientId($this->client_id);
     $client->setClientSecret($this->client_secret);
-    $client->setScopes(config('oauth.youtube.scope_one'));
+    $client->setScopes('https://www.googleapis.com/auth/youtube.readonly');
     $client->setRedirectUri($this->redirect_url);
     $client->setAccessType('offline');    // リフレッシュトークンからアクセストークンを生成するために必要なオプション
     $client->setApprovalPrompt('force');  // リフッシュトークンを取得するために必要

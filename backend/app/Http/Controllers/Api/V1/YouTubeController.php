@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Exceptions\OAuthException;
 // core
-use App\Core\YouTube\OAuthYoutubeClient;
+use App\Core\YouTube\IOAuthYoutubeClient;
 //usecase
 use App\UseCase\YouTube\FetchAccessTokenAction;
 use App\UseCase\YouTube\FetchMyVideosAction;
@@ -24,9 +24,8 @@ class YouTubeController extends Controller
      *
      * @return JsonResponse
      */
-    public function authorize_url(): JsonResponse
+    public function authorize_url(IOAuthYoutubeClient $client): JsonResponse
     {
-        $client = new OAuthYoutubeClient();
         $url = $client->get_authorize_url();
         return response()->json(
             OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\YoutubeOauthAuthorizeGet200Response::class, ['redirect_url' => $url]),

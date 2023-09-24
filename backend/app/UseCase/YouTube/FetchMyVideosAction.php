@@ -4,12 +4,12 @@ namespace App\UseCase\YouTube;
 
 // core
 use App\Core\SessionKey;
-use App\Core\YouTube\OAuthYoutubeClient;
+use App\Core\YouTube\IOAuthYoutubeClient;
 
 class FetchMyVideosAction
 {
-  private OAuthYoutubeClient $client;
-  public function __construct(OAuthYoutubeClient $client)
+  private IOAuthYoutubeClient $client;
+  public function __construct(IOAuthYoutubeClient $client)
   {
     $this->client = $client;
   }
