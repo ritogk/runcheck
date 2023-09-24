@@ -51,6 +51,11 @@ php artisan migrate:refresh --seed
 php artisan serve --host 0.0.0.0
 ```
 
+### backend test
+```sh
+./vendor/bin/phpunit
+```
+
 ### frontend setup
 ```sh
 cd frontend
