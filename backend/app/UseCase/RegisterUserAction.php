@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 class RegisterUserAction
 {
   /**
-   * Undocumented function
+   * ユーザーの新規登録
    *
    * @return User|null
    */

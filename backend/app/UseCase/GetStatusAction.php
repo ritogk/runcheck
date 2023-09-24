@@ -5,12 +5,12 @@ namespace App\UseCase;
 // core
 use App\Core\SessionKey;
 // usecase
-use App\UseCase\Authentication\MeAction;
+use App\UseCase\Authentication\GetMeAction;
 
 class GetStatusAction
 {
-  private MeAction $me_action;
-  public function __construct(MeAction $action)
+  private GetMeAction $me_action;
+  public function __construct(GetMeAction $action)
   {
     $this->me_action = $action;
   }

@@ -6,13 +6,13 @@ use App\Exceptions\OAuthException;
 // core
 use App\Core\YouTube\OAuthYoutubeClient;
 // usecase
-use App\UseCase\Authentication\MeAction;
+use App\UseCase\Authentication\GetMeAction;
 
 class GenerateAccessTokenAction
 {
   private OAuthYoutubeClient $client;
-  private MeAction $me_action;
-  public function __construct(OAuthYoutubeClient $client, MeAction $me_action)
+  private GetMeAction $me_action;
+  public function __construct(OAuthYoutubeClient $client, GetMeAction $me_action)
   {
     $this->client = $client;
     $this->me_action = $me_action;

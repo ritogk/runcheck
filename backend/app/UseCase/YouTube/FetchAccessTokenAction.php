@@ -6,15 +6,15 @@ namespace App\UseCase\YouTube;
 use App\Core\YouTube\OAuthYoutubeClient;
 use App\Core\SessionKey;
 // usecase
-use App\UseCase\Authentication\MeAction;
+use App\UseCase\Authentication\GetMeAction;
 use App\UseCase\YouTube\SaveRefreshTokenAction;
 
 class FetchAccessTokenAction
 {
   private OAuthYoutubeClient $client;
-  private MeAction $me_action;
+  private GetMeAction $me_action;
   private SaveRefreshTokenAction $save_token_action;
-  public function __construct(OAuthYoutubeClient $client, MeAction $me_action, SaveRefreshTokenAction $save_token_action)
+  public function __construct(OAuthYoutubeClient $client, GetMeAction $me_action, SaveRefreshTokenAction $save_token_action)
   {
     $this->client = $client;
     $this->me_action = $me_action;

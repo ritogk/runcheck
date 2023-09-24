@@ -5,7 +5,7 @@ namespace App\UseCase\Authentication;
 use Illuminate\Support\Facades\Auth;
 use App\Model\User;
 
-class MeAction
+class GetMeAction
 {
   /**
    * Undocumented function

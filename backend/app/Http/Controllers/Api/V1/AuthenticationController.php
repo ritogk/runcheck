@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 // usecases
 use App\UseCase\Authentication\LoginAction;
 use App\UseCase\Authentication\LogoutAction;
-use App\UseCase\Authentication\MeAction;
+use App\UseCase\Authentication\GetMeAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -54,7 +54,7 @@ class AuthenticationController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function me(Request $request, MeAction $acion): JsonResponse
+    public function me(Request $request, GetMeAction $acion): JsonResponse
     {
         $user = $acion->me();
         return response()->json(

@@ -4,12 +4,12 @@ namespace App\UseCase\Comparison;
 
 use App\Model\Comparison;
 // usecase
-use App\UseCase\Authentication\MeAction;
+use App\UseCase\Authentication\GetMeAction;
 
 class PublishComparisonAction
 {
-  private MeAction $action;
-  public function __construct(MeAction $action)
+  private GetMeAction $action;
+  public function __construct(GetMeAction $action)
   {
     $this->action = $action;
   }

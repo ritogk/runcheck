@@ -8,7 +8,7 @@ use App\Exceptions\OAuthException;
 use App\Core\YouTube\OAuthYoutubeClient;
 use App\Core\SessionKey;
 // usecase
-use App\UseCase\Authentication\MeAction;
+use App\UseCase\Authentication\GetMeAction;
 use App\UseCase\YouTube\GenerateAccessTokenAction;
 
 /**
@@ -17,9 +17,9 @@ use App\UseCase\YouTube\GenerateAccessTokenAction;
 class ValidateYoutubeToken
 {
     private OAuthYoutubeClient $client;
-    private MeAction $me_action;
+    private GetMeAction $me_action;
     private GenerateAccessTokenAction $generate_access_token_action;
-    public function __construct(OAuthYoutubeClient $client, MeAction $me_action, GenerateAccessTokenAction $generate_access_token_action)
+    public function __construct(OAuthYoutubeClient $client, GetMeAction $me_action, GenerateAccessTokenAction $generate_access_token_action)
     {
         $this->client = $client;
         $this->me_action = $me_action;
