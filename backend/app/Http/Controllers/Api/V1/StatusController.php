@@ -13,6 +13,7 @@ class StatusController extends Controller
     /**
      * クライアントの状態を取得
      *
+     * @param GetClientStatusAction $action
      * @return JsonResponse
      */
     public function status(GetClientStatusAction $action): JsonResponse

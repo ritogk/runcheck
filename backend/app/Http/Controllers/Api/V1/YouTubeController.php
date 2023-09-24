@@ -12,6 +12,7 @@ use App\Core\YouTube\OAuthYoutubeClient;
 //usecase
 use App\UseCase\YouTube\FetchAccessTokenAction;
 use App\UseCase\YouTube\FetchMyVideosAction;
+use App\UseCase\YouTube\SetSessionAccessTokenAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;
@@ -36,12 +37,16 @@ class YouTubeController extends Controller
     /**
      * アクセストークンを取得
      *
+     * @param Request $request
+     * @param FetchAccessTokenAction $action
+     * @param SetSessionAccessTokenAction $set_session_action
      * @return JsonResponse
      */
-    public function access_token(Request $request, FetchAccessTokenAction $action): JsonResponse
+    public function access_token(Request $request, FetchAccessTokenAction $action, SetSessionAccessTokenAction $set_session_action): JsonResponse
     {
         $requestBody = new OpenAPI\Model\YoutubeOauthPostRequest($request->all());
         $token = $action->fetch($requestBody->getCode());
+        $set_session_action->set($token);
         return response()->json(
             [],
             Response::HTTP_OK
@@ -51,6 +56,7 @@ class YouTubeController extends Controller
     /**
      * 動画一覧を取得
      *
+     * @param FetchMyVideosAction $action
      * @return JsonResponse
      */
     public function videos(FetchMyVideosAction $action): JsonResponse

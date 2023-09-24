@@ -3,7 +3,6 @@
 namespace App\UseCase\YouTube;
 
 use App\Model\YoutubeToken;
-use Google\Service\YouTube\Resource\Youtube;
 
 class SaveRefreshTokenAction
 {

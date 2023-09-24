@@ -27,12 +27,14 @@ class GenerateAccessTokenAction
   public function generate(): ?array
   {
     $user = $this->me_action->me();
-    if (!$user) return null;
-    $youtube_token = $user->youtube_token;
-    if (!$youtube_token) return null;
-    // リフレッシュトークンからアクセストークンを生成
-    $token = $this->client->generate_token($youtube_token->refresh_token);
-    unset($token['refresh_token']);
-    return $token;
+    if ($user) {
+      $youtube_token = $user->youtube_token;
+      if (!$youtube_token) return null;
+      // リフレッシュトークンからアクセストークンを生成
+      $token = $this->client->generate_token($youtube_token->refresh_token);
+      unset($token['refresh_token']);
+      return $token;
+    }
+    return null;
   }
 }

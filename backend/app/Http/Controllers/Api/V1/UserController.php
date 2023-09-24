@@ -17,7 +17,8 @@ class UserController extends Controller
     /**
      * 登録
      *
-     * @param  Request $request
+     * @param Request $request
+     * @param RegisterUserAction $action
      * @return JsonResponse
      */
     public function create(Request $request, RegisterUserAction $action): JsonResponse

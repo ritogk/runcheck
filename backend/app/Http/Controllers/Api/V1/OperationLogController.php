@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 use App\UseCase\OperationLog\UpdateOperationLogAction;
 // openapi
 use App\OpenAPI;
-use App\Libs\OpenAPIUtility;
 
 class OperationLogController extends Controller
 {
     /**
      * 登録
      *
-     * @param  Request $request
+     * @param Request $request
+     * @param UpdateOperationLogAction $action
      * @return JsonResponse
      */
     public function create(Request $request, UpdateOperationLogAction $action): JsonResponse

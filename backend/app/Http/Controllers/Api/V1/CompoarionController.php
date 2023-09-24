@@ -21,7 +21,8 @@ class CompoarionController extends Controller
     /**
      * 1件取得
      *
-     * @param  int $id
+     * @param integer $id
+     * @param FindComparisonAction $action
      * @return JsonResponse
      */
     public function find(int $id, FindComparisonAction $action): JsonResponse
@@ -42,6 +43,7 @@ class CompoarionController extends Controller
     /**
      * 一覧取得
      *
+     * @param ListComparisonAction $action
      * @return JsonResponse
      */
     public function list(ListComparisonAction $action): JsonResponse
@@ -62,7 +64,8 @@ class CompoarionController extends Controller
     /**
      * 登録
      *
-     * @param  Request $request
+     * @param Request $request
+     * @param RegisterComparisonAction $action
      * @return JsonResponse
      */
     public function create(Request $request, RegisterComparisonAction $action): JsonResponse
@@ -83,7 +86,7 @@ class CompoarionController extends Controller
 
         if ($comparison) {
             return response()->json(
-                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\ComparisonsPost200Response::class, ['comparisonId'=>$comparison->id]),
+                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\ComparisonsPost200Response::class, ['comparisonId' => $comparison->id]),
                 Response::HTTP_CREATED
             );
         } else {
@@ -97,7 +100,8 @@ class CompoarionController extends Controller
     /**
      * 公開状態にする
      *
-     * @param  int $id
+     * @param integer $id
+     * @param PublishComparisonAction $action
      * @return JsonResponse
      */
     public function publish(int $id, PublishComparisonAction $action): JsonResponse
@@ -112,7 +116,8 @@ class CompoarionController extends Controller
     /**
      * 削除
      *
-     * @param  int $id
+     * @param integer $id
+     * @param DeleteComparisonAction $action
      * @return JsonResponse
      */
     public function delete(int $id, DeleteComparisonAction $action): JsonResponse

@@ -41,7 +41,7 @@ class FetchMyVideosAction
         ));
 
         foreach ($playlistItemsResponse['items'] as $playlistItem) {
-          // 削除された動画は無視。レスポンスがおかしいのでこの先に流すとエラーになる。
+          // 削除された動画はレスポンスが特殊なのでスキップ。
           if ($playlistItem['snippet']['title'] == "Deleted video") {
             continue;
           }

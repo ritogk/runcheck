@@ -19,6 +19,7 @@ class DeleteComparisonAction
    * Undocumented function
    *
    * @param integer $comparison_id
+   * @throws AuthorizationException
    * @return void
    */
   public function delete(int $comparison_id): void
@@ -26,10 +27,10 @@ class DeleteComparisonAction
     $comparison = Comparison::find($comparison_id);
     $user = $this->action->me();
     if ($user && $user->id == $comparison->user_id) {
+      // 本人のみ削除可能
       $comparison->delete();
       return;
     }
-    // 他人の比較情報を削除した
     throw new AuthorizationException();
   }
 }

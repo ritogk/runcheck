@@ -2,6 +2,7 @@
 
 namespace App\UseCase\Comparison;
 
+use \Illuminate\Auth\Access\AuthorizationException;
 use App\Model\Comparison;
 // usecase
 use App\UseCase\Authentication\GetMeAction;
@@ -18,20 +19,20 @@ class FindComparisonAction
    * find
    *
    * @param integer $comparison_id
-   * @return Comparison|null
+   * @throws AuthorizationException
+   * @return Comparison
    */
   public function find(int $comparison_id): ?Comparison
   {
     $comparison = Comparison::find($comparison_id);
     $user = $this->action->me();
-    // 非公開情報は本人のみ閲覧可能
-    if ($user && $user->id == $comparison->user_id) {
+    if ($comparison->release_kbn) {
       return $comparison;
+    } else {
+      if ($user && $user->id == $comparison->user_id) {
+        return $comparison;
+      }
     }
-    // 公開情報の場合は本人に関わらず返す
-    if ($comparison->release_kbn && $comparison->anonymous) {
-      return $comparison;
-    }
-    return null;
+    throw new AuthorizationException();
   }
 }

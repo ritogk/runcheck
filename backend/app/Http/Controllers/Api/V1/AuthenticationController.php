@@ -20,7 +20,8 @@ class AuthenticationController extends Controller
     /**
      * ログイン
      *
-     * @param  Request $request
+     * @param Request $request
+     * @param LoginAction $acion
      * @return JsonResponse
      */
     public function login(Request $request, LoginAction $acion): JsonResponse
@@ -39,7 +40,7 @@ class AuthenticationController extends Controller
      * @param  Request $request
      * @return JsonResponse
      */
-    public function logout(Request $request, LogoutAction $action): JsonResponse
+    public function logout(LogoutAction $action): JsonResponse
     {
         $action->logout();
         return response()->json(
@@ -51,10 +52,11 @@ class AuthenticationController extends Controller
     /**
      * ログイン中のユーザー情報を返す
      *
-     * @param  Request $request
+     * @param Request $request
+     * @param GetMeAction $acion
      * @return JsonResponse
      */
-    public function me(Request $request, GetMeAction $acion): JsonResponse
+    public function me(GetMeAction $acion): JsonResponse
     {
         $user = $acion->me();
         return response()->json(
