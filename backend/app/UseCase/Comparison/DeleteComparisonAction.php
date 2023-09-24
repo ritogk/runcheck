@@ -2,6 +2,7 @@
 
 namespace App\UseCase\Comparison;
 
+use \Illuminate\Auth\Access\AuthorizationException;
 use App\Model\Comparison;
 // usecase
 use App\UseCase\Authentication\GetMeAction;
@@ -15,7 +16,7 @@ class DeleteComparisonAction
   }
 
   /**
-   * delete
+   * Undocumented function
    *
    * @param integer $comparison_id
    * @return void
@@ -26,6 +27,9 @@ class DeleteComparisonAction
     $user = $this->action->me();
     if ($user && $user->id == $comparison->user_id) {
       $comparison->delete();
+      return;
     }
+    // 他人の比較情報を削除した
+    throw new AuthorizationException();
   }
 }

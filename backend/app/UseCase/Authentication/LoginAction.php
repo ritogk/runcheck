@@ -20,7 +20,9 @@ class LoginAction
   public function login(string $email, string $password, bool $remeber): ?User
   {
     $credentials = ['email' => $email, 'password' => $password];
-    if (!Auth::guard()->attempt($credentials, $remeber)) throw new AuthenticationException();
+    if (!Auth::guard()->attempt($credentials, $remeber)) {
+      throw new AuthenticationException();
+    }
     $user = Auth::guard()->user();
     session()->regenerate(true);
     return $user;
