@@ -1,11 +1,11 @@
 <?php
 
-namespace App\UseCase;
+namespace App\Domain;
 
 // core
 use App\Core\SessionKey;
-// usecase
-use App\UseCase\Authentication\GetMeAction;
+// Domain
+use App\Domain\Authentication\GetMeAction;
 
 class GetClientStatusAction
 {

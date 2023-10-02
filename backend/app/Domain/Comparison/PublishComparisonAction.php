@@ -1,13 +1,13 @@
 <?php
 
-namespace App\UseCase\Comparison;
+namespace App\Domain\Comparison;
 
 use \Illuminate\Auth\Access\AuthorizationException;
 use App\Model\Comparison;
-// usecase
-use App\UseCase\Authentication\GetMeAction;
+// Domain
+use App\Domain\Authentication\GetMeAction;
 
-class DeleteComparisonAction
+class PublishComparisonAction
 {
   private GetMeAction $action;
   public function __construct(GetMeAction $action)
@@ -16,19 +16,18 @@ class DeleteComparisonAction
   }
 
   /**
-   * Undocumented function
+   * publish
    *
    * @param integer $comparison_id
-   * @throws AuthorizationException
    * @return void
    */
-  public function delete(int $comparison_id): void
+  public function publish(int $comparison_id): void
   {
     $comparison = Comparison::find($comparison_id);
     $user = $this->action->me();
-    if ($user && $user->id == $comparison->user_id) {
-      // 本人のみ削除可能
-      $comparison->delete();
+    if (($user && $user->id == $comparison->user_id) || $comparison->anonymous) {
+      $comparison->release_kbn = true;
+      $comparison->save();
       return;
     }
     throw new AuthorizationException();

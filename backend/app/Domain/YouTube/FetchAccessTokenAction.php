@@ -1,12 +1,12 @@
 <?php
 
-namespace App\UseCase\YouTube;
+namespace App\Domain\YouTube;
 
 // core
 use App\Core\YouTube\IOAuthYoutubeClient;
-// usecase
-use App\UseCase\Authentication\GetMeAction;
-use App\UseCase\YouTube\SaveRefreshTokenAction;
+// Domain
+use App\Domain\Authentication\GetMeAction;
+use App\Domain\YouTube\SaveRefreshTokenAction;
 
 class FetchAccessTokenAction
 {

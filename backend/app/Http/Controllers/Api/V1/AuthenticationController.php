@@ -7,10 +7,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
-// usecases
-use App\UseCase\Authentication\LoginAction;
-use App\UseCase\Authentication\LogoutAction;
-use App\UseCase\Authentication\GetMeAction;
+// Domain
+use App\Domain\Authentication\LoginAction;
+use App\Domain\Authentication\LogoutAction;
+use App\Domain\Authentication\GetMeAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;

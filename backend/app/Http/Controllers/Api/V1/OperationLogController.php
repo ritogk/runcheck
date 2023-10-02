@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-// usecase
-use App\UseCase\OperationLog\UpdateOperationLogAction;
+// Domain
+use App\Domain\OperationLog\UpdateOperationLogAction;
 // openapi
 use App\OpenAPI;
 

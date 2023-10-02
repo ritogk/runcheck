@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 use App\Exceptions\OAuthException;
 // core
 use App\Core\YouTube\IOAuthYoutubeClient;
-//usecase
-use App\UseCase\YouTube\FetchAccessTokenAction;
-use App\UseCase\YouTube\FetchMyVideosAction;
-use App\UseCase\YouTube\SetSessionAccessTokenAction;
+//Domain
+use App\Domain\YouTube\FetchAccessTokenAction;
+use App\Domain\YouTube\FetchMyVideosAction;
+use App\Domain\YouTube\SetSessionAccessTokenAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;

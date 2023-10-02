@@ -1,12 +1,12 @@
 <?php
 
-namespace App\UseCase\YouTube;
+namespace App\Domain\YouTube;
 
 use App\Exceptions\OAuthException;
 // core
 use App\Core\YouTube\IOAuthYoutubeClient;
-// usecase
-use App\UseCase\Authentication\GetMeAction;
+// Domain
+use App\Domain\Authentication\GetMeAction;
 
 class GenerateAccessTokenAction
 {

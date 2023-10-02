@@ -1,10 +1,10 @@
 <?php
 
-namespace App\UseCase\Comparison;
+namespace App\Domain\Comparison;
 
 use App\Model\Comparison;
-// usecase
-use App\UseCase\Authentication\GetMeAction;
+// Domain
+use App\Domain\Authentication\GetMeAction;
 
 class RegisterComparisonAction
 {
