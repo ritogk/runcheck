@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain;
+namespace App\Domain\User;
 
 use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterUserAction
+class RegisterAction
 {
   /**
    * ユーザーの新規登録
