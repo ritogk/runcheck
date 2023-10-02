@@ -3,16 +3,21 @@
 namespace App\Domain\Comparison;
 
 use \Illuminate\Auth\Access\AuthorizationException;
-use App\Model\Comparison;
+use App\Exceptions\DataNotFoundException;
 // Domain
 use App\Domain\Authentication\GetMeAction;
+use App\Domain\Comparison\ComparisonRepository;
 
 class DeleteComparisonAction
 {
   private GetMeAction $action;
-  public function __construct(GetMeAction $action)
-  {
+  private ComparisonRepository $comparisonRepository;
+  public function __construct(
+    GetMeAction $action,
+    ComparisonRepository $comparisonRepository
+  ) {
     $this->action = $action;
+    $this->comparisonRepository = $comparisonRepository;
   }
 
   /**
@@ -24,11 +29,14 @@ class DeleteComparisonAction
    */
   public function delete(int $comparison_id): void
   {
-    $comparison = Comparison::find($comparison_id);
+    $comparison = $this->comparisonRepository->findById($comparison_id);
+    if (!$comparison) {
+      throw new DataNotFoundException();
+    }
     $user = $this->action->me();
     if ($user && $user->id == $comparison->user_id) {
       // 本人のみ削除可能
-      $comparison->delete();
+      $this->comparisonRepository->deleteById($comparison->id);
       return;
     }
     throw new AuthorizationException();

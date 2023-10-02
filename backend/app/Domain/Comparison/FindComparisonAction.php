@@ -6,13 +6,18 @@ use \Illuminate\Auth\Access\AuthorizationException;
 use App\Model\Comparison;
 // Domain
 use App\Domain\Authentication\GetMeAction;
+use App\Domain\Comparison\ComparisonEntity;
+use App\Domain\Comparison\ComparisonRepository;
+use App\Exceptions\DataNotFoundException;
 
 class FindComparisonAction
 {
   private GetMeAction $action;
-  public function __construct(GetMeAction $action)
+  private ComparisonRepository $comparisonRepository;
+  public function __construct(GetMeAction $action, ComparisonRepository $comparisonRepository)
   {
     $this->action = $action;
+    $this->comparisonRepository = $comparisonRepository;
   }
 
   /**
@@ -20,18 +25,23 @@ class FindComparisonAction
    *
    * @param integer $comparison_id
    * @throws AuthorizationException
-   * @return Comparison
+   * @return ComparisonEntity
    */
-  public function find(int $comparison_id): ?Comparison
+  public function find(int $comparison_id): ComparisonEntity
   {
-    $comparison = Comparison::find($comparison_id);
-    $user = $this->action->me();
+    $comparison = $this->comparisonRepository->findById($comparison_id);
+    if (!$comparison) {
+      throw new DataNotFoundException();
+    }
     if ($comparison->release_kbn) {
+      // 公開済の比較データなので他のユーザーでも返す。
       return $comparison;
-    } else {
-      if ($user && $user->id == $comparison->user_id) {
-        return $comparison;
-      }
+    }
+
+    // 未公開の比較データは他人に見せない。
+    $user = $this->action->me();
+    if ($user && $user->id == $comparison->user_id) {
+      return $comparison;
     }
     throw new AuthorizationException();
   }

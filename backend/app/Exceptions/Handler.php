@@ -7,6 +7,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Response;
 use App\Exceptions\OAuthException;
+use App\Exceptions\DataNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -57,6 +58,12 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'errMsg'   => 'OAuthでエラーが発生しました。'
             ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        if ($exception instanceof DataNotFoundException) {
+            return response()->json([
+                'errMsg'   => 'データが存在しませんでした。'
+            ], Response::HTTP_NOT_FOUND);
         }
         return parent::render($request, $exception);
     }

@@ -3,16 +3,21 @@
 namespace App\Domain\Comparison;
 
 use \Illuminate\Auth\Access\AuthorizationException;
-use App\Model\Comparison;
+use App\Domain\Comparison\ComparisonRepository;
+use App\Exceptions\DataNotFoundException;
 // Domain
 use App\Domain\Authentication\GetMeAction;
 
 class PublishComparisonAction
 {
   private GetMeAction $action;
-  public function __construct(GetMeAction $action)
-  {
+  private ComparisonRepository $comparisonRepository;
+  public function __construct(
+    GetMeAction $action,
+    ComparisonRepository $comparisonRepository
+  ) {
     $this->action = $action;
+    $this->comparisonRepository = $comparisonRepository;
   }
 
   /**
@@ -23,11 +28,14 @@ class PublishComparisonAction
    */
   public function publish(int $comparison_id): void
   {
-    $comparison = Comparison::find($comparison_id);
+    $comparison = $this->comparisonRepository->findById($comparison_id);
+    if (!$comparison) {
+      throw new DataNotFoundException();
+    }
+    // 公開上にできるのは本人か、匿名公開の場合のみ
     $user = $this->action->me();
     if (($user && $user->id == $comparison->user_id) || $comparison->anonymous) {
-      $comparison->release_kbn = true;
-      $comparison->save();
+      $this->comparisonRepository->publishById($comparison->id);
       return;
     }
     throw new AuthorizationException();

@@ -28,14 +28,19 @@ class CompoarionController extends Controller
     public function find(int $id, FindComparisonAction $action): JsonResponse
     {
         $comparison = $action->find($id);
-        if ($comparison) {
-            return response()->json(
-                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\VideoComparison::class, $comparison->toArray()),
-                Response::HTTP_OK
-            );
-        }
         return response()->json(
-            [],
+            [
+                "category" => $comparison->category,
+                "memo" => $comparison->memo,
+                "title" => $comparison->title,
+                "video1Url" => $comparison->video1_url,
+                "video1TimeSt" => $comparison->video1_time_st,
+                "video1VideoType" => $comparison->video1_type,
+                "video2Url" => $comparison->video2_url,
+                "video2TimeSt" => $comparison->video2_time_st,
+                "video2VideoType" => $comparison->video2_type,
+                "anonymous" => $comparison->anonymous
+            ],
             Response::HTTP_OK
         );
     }
@@ -49,14 +54,24 @@ class CompoarionController extends Controller
     public function list(ListComparisonAction $action): JsonResponse
     {
         $comparisons = $action->list();
-        if ($comparisons) {
-            return response()->json(
-                $comparisons,
-                Response::HTTP_OK
-            );
+        $data = [];
+        foreach ($comparisons as $comparison) {
+            $data[] = [
+                "id" => $comparison->id,
+                "category" => $comparison->category,
+                "memo" => $comparison->memo,
+                "title" => $comparison->title,
+                "video1Url" => $comparison->video1_url,
+                "video1TimeSt" => $comparison->video1_time_st,
+                "video1VideoType" => $comparison->video1_type,
+                "video2Url" => $comparison->video2_url,
+                "video2TimeSt" => $comparison->video2_time_st,
+                "video2VideoType" => $comparison->video2_type,
+                "anonymous" => $comparison->anonymous
+            ];
         }
         return response()->json(
-            [],
+            $data,
             Response::HTTP_OK
         );
     }
@@ -84,17 +99,10 @@ class CompoarionController extends Controller
             (int)$requestBody->getVideo2VideoType()
         );
 
-        if ($comparison) {
-            return response()->json(
-                OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\ComparisonsPost200Response::class, ['comparisonId' => $comparison->id]),
-                Response::HTTP_CREATED
-            );
-        } else {
-            return response()->json(
-                [],
-                Response::HTTP_OK
-            );
-        }
+        return response()->json(
+            ['comparisonId' => $comparison->id],
+            Response::HTTP_CREATED
+        );
     }
 
     /**

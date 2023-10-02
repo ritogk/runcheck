@@ -2,27 +2,29 @@
 
 namespace App\Domain\Comparison;
 
-use App\Model\Comparison;
 // Domain
 use App\Domain\Authentication\GetMeAction;
+use App\Domain\Comparison\ComparisonRepository;
 
 class ListComparisonAction
 {
   private GetMeAction $action;
-  public function __construct(GetMeAction $action)
+  private ComparisonRepository $comparisonRepository;
+  public function __construct(GetMeAction $action, ComparisonRepository $comparisonRepository)
   {
     $this->action = $action;
+    $this->comparisonRepository = $comparisonRepository;
   }
 
   /**
    * list
    *
-   * @return array
+   * @return ComparisonEntity[]
    */
   public function list(): array
   {
     $user = $this->action->me();
-    $comparisons = Comparison::where("user_id", $user->id)->where("video_type", Comparison::VIDEO_TYPE_KIND["YOUTUBE_YOUTUBE"])->orderBy("id")->get();
-    return $comparisons->toArray();
+    $comparisons = $this->comparisonRepository->findByUserId($user->id);
+    return $comparisons;
   }
 }
