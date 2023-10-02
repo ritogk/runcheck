@@ -31,7 +31,7 @@ class UserController extends Controller
             $requestBody->getPassword()
         );
         return response()->json(
-            OpenAPIUtility::dicstionaryToModelContainer(OpenAPI\Model\User::class, $user->toArray()),
+            $user,
             Response::HTTP_CREATED
         );
     }
