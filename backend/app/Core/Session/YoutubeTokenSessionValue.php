@@ -6,12 +6,12 @@ class YoutubeTokenSessionValue
 {
   public static $session_key = 'YOUTUBE_ACCESS_TOKEN';
 
-  public string $access_token;
-  public string $refresh_token;
-  public int $expires_in;
-  public string $scope;
-  public string $token_type;
-  public int $created;
+  public readonly string $access_token;
+  public readonly int $expires_in;
+  public readonly string $scope;
+  public readonly string $token_type;
+  public readonly int $created;
+
   public function __construct(array $token)
   {
     $this->access_token = $token['access_token'];
@@ -25,7 +25,6 @@ class YoutubeTokenSessionValue
   {
     return [
       'access_token' => $this->access_token,
-      'refresh_token' => '',
       'expires_in' => $this->expires_in,
       'scope' => $this->scope,
       'token_type' => $this->token_type,

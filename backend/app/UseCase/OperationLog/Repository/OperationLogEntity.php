@@ -6,10 +6,11 @@ use App\Model\OperationLog;
 
 class OperationLogEntity implements \JsonSerializable
 {
-  public int $id;
-  public int $operation_cd;
-  public string $operation_nm;
-  public string $execution_cnt;
+  public readonly int $id;
+  public readonly int $operation_cd;
+  public readonly string $operation_nm;
+  public readonly string $execution_cnt;
+
   public function __construct(OperationLog $operationLog)
   {
     $this->id = $operationLog->id;

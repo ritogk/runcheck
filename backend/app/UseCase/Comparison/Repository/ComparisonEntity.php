@@ -7,20 +7,20 @@ use App\Model\Comparison;
 
 class ComparisonEntity implements \JsonSerializable
 {
-  public int $id;
-  public int $user_id;
-  public string $title;
-  public ?string $memo;
-  public string $category;
-  public string $video1_url;
-  public float $video1_time_st;
-  public string $video2_url;
-  public float $video2_time_st;
-  public int $release_kbn;
-  public int $video_type;
-  public string $video1_type;
-  public string $video2_type;
-  public bool $anonymous;
+  public readonly int $id;
+  public readonly int $user_id;
+  public readonly string $title;
+  public readonly ?string $memo;
+  public readonly string $category;
+  public readonly string $video1_url;
+  public readonly float $video1_time_st;
+  public readonly string $video2_url;
+  public readonly float $video2_time_st;
+  public readonly int $release_kbn;
+  public readonly int $video_type;
+  public readonly string $video1_type;
+  public readonly string $video2_type;
+  public readonly bool $anonymous;
 
   public function __construct(Comparison $comparison)
   {

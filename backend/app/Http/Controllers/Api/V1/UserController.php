@@ -30,7 +30,7 @@ class UserController extends Controller
             $requestBody->getPassword()
         );
         return response()->json(
-            ['id' => $user->getId(), 'name' => $user->getName()],
+            ['id' => $user->id, 'name' => $user->name],
             Response::HTTP_CREATED
         );
     }
