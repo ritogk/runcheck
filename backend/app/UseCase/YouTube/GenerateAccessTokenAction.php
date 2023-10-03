@@ -6,8 +6,9 @@ use App\Exceptions\OAuthException;
 // core
 use App\Core\YouTube\IOAuthYoutubeClient;
 use App\Core\YouTube\TokenValue;
+use App\Core\Session\YoutubeTokenSessionValue;
 // UseCase
-use App\UseCase\Authentication\GetMeAction;
+use App\UseCase\Authentication\GetMeAction;;
 
 class GenerateAccessTokenAction
 {
@@ -30,9 +31,15 @@ class GenerateAccessTokenAction
     $user = $this->me_action->me();
     if ($user) {
       $youtube_token = $user->youtube_token;
-      if (!$youtube_token) return null;
-      // リフレッシュトークンからアクセストークンを生成
+      if (!$youtube_token) {
+        return null;
+      }
+
       $token = $this->client->generate_token($youtube_token->refresh_token);
+      session()->put(
+        YoutubeTokenSessionValue::$session_key,
+        (new YoutubeTokenSessionValue($token->toArray()))->toArray()
+      );
       return $token;
     }
     return null;

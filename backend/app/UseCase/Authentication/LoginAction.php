@@ -31,6 +31,7 @@ class LoginAction
     }
     $user = $this->auth::guard()->user();
     session()->regenerate(true);
+
     return $user;
   }
 }

@@ -19,6 +19,7 @@ interface IOAuthYoutubeClient
 
 class OAuthYoutubeClient implements IOAuthYoutubeClient
 {
+  const expires_in = 3600;
   private string $client_id;
   private string $client_secret;
   private string $redirect_url;
@@ -59,6 +60,7 @@ class OAuthYoutubeClient implements IOAuthYoutubeClient
   public function set_access_token(array $token): void
   {
     try {
+      $token['expires_in'] = self::expires_in;
       $this->client->setAccessToken($token);
     } catch (\Exception $th) {
       throw new OAuthException();
