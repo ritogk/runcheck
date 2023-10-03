@@ -3,7 +3,7 @@
 namespace App\Core\YouTube;
 
 use Google_Client;
-use Google_Service_YouTube;
+use Google\Service\YouTube;
 use App\Core\YouTube\TokenValue;
 use App\Exceptions\OAuthException;
 
@@ -13,7 +13,7 @@ interface IOAuthYoutubeClient
   public function set_access_token(array $token): void;
   public function fetch_token(string $code): TokenValue;
   public function generate_token(string $refresh_token): TokenValue;
-  public function generate_youtube_service(): Google_Service_YouTube;
+  public function generate_youtube_service(): YouTube;
   public function is_access_token_expired(): bool;
 }
 
@@ -102,11 +102,11 @@ class OAuthYoutubeClient implements IOAuthYoutubeClient
   /**
    * Youtubeサービス作成
    *
-   * @return Google_Service_YouTube
+   * @return YouTube
    */
-  public function generate_youtube_service(): Google_Service_YouTube
+  public function generate_youtube_service(): YouTube
   {
-    return new Google_Service_YouTube($this->client);
+    return new YouTube($this->client);
   }
 
   /**

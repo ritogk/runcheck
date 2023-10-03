@@ -7,6 +7,7 @@ class YoutubeTokenSessionValue
   public static $session_key = 'YOUTUBE_ACCESS_TOKEN';
 
   public string $access_token;
+  public string $refresh_token;
   public int $expires_in;
   public string $scope;
   public string $token_type;
@@ -24,6 +25,7 @@ class YoutubeTokenSessionValue
   {
     return [
       'access_token' => $this->access_token,
+      'refresh_token' => '',
       'expires_in' => $this->expires_in,
       'scope' => $this->scope,
       'token_type' => $this->token_type,
