@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Auth;
 
 class LogoutAction
 {
+  private Auth $auth;
+  public function __construct(Auth $auth)
+  {
+    $this->auth = $auth;
+  }
+
   /**
    * Undocumented function
    *
@@ -13,7 +19,7 @@ class LogoutAction
    */
   public function logout(): void
   {
-    Auth::guard()->logout();
+    $this->auth::guard()->logout();
     session()->flush();
   }
 }

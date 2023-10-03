@@ -2,10 +2,16 @@
 
 namespace App\Domain\OperationLog;
 
-use App\Model\OperationLog;
+use App\Exceptions\DataNotFoundException;
+use App\Domain\OperationLog\OperationLogRepository;
 
 class UpdateOperationLogAction
 {
+  private OperationLogRepository $operationLogRepository;
+  public function __construct(OperationLogRepository $operationLogRepository)
+  {
+    $this->operationLogRepository = $operationLogRepository;
+  }
   /**
    * update
    *
@@ -13,8 +19,10 @@ class UpdateOperationLogAction
    */
   public function update(int $operation_cd): void
   {
-    $operation_log = OperationLog::where('operation_cd', $operation_cd)->first();
-    $operation_log->execution_cnt = $operation_log->execution_cnt + 1;
-    $operation_log->save();
+    $operation_log = $this->operationLogRepository->findByOperationCd($operation_cd);
+    if (!$operation_log) {
+      throw new DataNotFoundException();
+    }
+    $this->operationLogRepository->upgradeExecutionCnt($operation_cd);
   }
 }
