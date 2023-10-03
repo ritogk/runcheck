@@ -2,26 +2,25 @@
 
 namespace App\Domain\YouTube;
 
-use App\Model\YoutubeToken;
+use App\Domain\YouTube\YoutubeTokenRepository;
 
 class SaveRefreshTokenAction
 {
+  private YoutubeTokenRepository $youtubeTokenRepository;
+  public function __construct(YoutubeTokenRepository $youtubeTokenRepository)
+  {
+    $this->youtubeTokenRepository = $youtubeTokenRepository;
+  }
+
   /**
-   * save
+   * Undocumented function
    *
-   * @return User|null
+   * @param integer $user_id
+   * @param string $refresh_token
+   * @return void
    */
   public function save(int $user_id, string $refresh_token): void
   {
-    $token = YoutubeToken::where('user_id', $user_id)->first();
-    if (!$token) {
-      $youtube_token = new YoutubeToken();
-      $youtube_token->user_id = $user_id;
-      $youtube_token->refresh_token = $refresh_token;
-      $youtube_token->save();
-    } else {
-      $token->refresh_token = $refresh_token;
-      $token->save();
-    }
+    $this->youtubeTokenRepository->saveToken($user_id, $refresh_token);
   }
 }

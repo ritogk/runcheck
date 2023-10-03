@@ -6,7 +6,6 @@ namespace App\Domain\YouTube;
 use App\Core\Session\YoutubeTokenSessionValue;
 use App\Core\YouTube\TokenValue;
 
-
 class SetSessionAccessTokenAction
 {
   /**
