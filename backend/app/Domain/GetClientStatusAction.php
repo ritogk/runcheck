@@ -3,7 +3,7 @@
 namespace App\Domain;
 
 // core
-use App\Core\SessionKey;
+use App\Core\Session\YoutubeTokenSessionValue;
 // Domain
 use App\Domain\Authentication\GetMeAction;
 
@@ -44,7 +44,7 @@ class GetClientStatusAction
    */
   private function get_anonymous_status(): array
   {
-    $accessToken = session()->get(SessionKey::$YOUTUBE_ACCESS_TOKEN);
+    $accessToken = session()->get(YoutubeTokenSessionValue::$session_key);
     $isYoutubeAuthroized = !empty($accessToken);
     return ['is_logined' => false, 'is_youtube_authroized' => $isYoutubeAuthroized, 'user' => null];
   }

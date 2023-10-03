@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use \Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
-use App\Core\SessionKey;
+use App\Core\Session\YoutubeTokenSessionValue;
 use App\Model\User;
 use App\Model\YoutubeToken;
 use Auth;
@@ -56,7 +56,7 @@ class StatusGetTest extends TestCase
             'user_id' => $user->id,
             'refresh_token' => 'xxxxxxxxxxxx',
         ]);
-        session()->put(SessionKey::$YOUTUBE_ACCESS_TOKEN, 'yyyyyyyyyyyyyy');
+        session()->put(YoutubeTokenSessionValue::$session_key, 'yyyyyyyyyyyyyy');
 
         // 検証
         Auth::login($user);
@@ -90,7 +90,7 @@ class StatusGetTest extends TestCase
     public function test未ログインでYoutube認可済の時に正しいレスポンスが返ってくる事()
     {
         // 準備
-        session()->put(SessionKey::$YOUTUBE_ACCESS_TOKEN, 'yyyyyyyyyyyyyy');
+        session()->put(YoutubeTokenSessionValue::$session_key, 'yyyyyyyyyyyyyy');
 
         // 検証
         $response = $this->get("/api/v1/status");

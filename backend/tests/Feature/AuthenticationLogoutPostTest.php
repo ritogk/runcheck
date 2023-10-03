@@ -7,7 +7,7 @@ use \Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 use App\Model\User;
-use App\Core\SessionKey;
+use App\Core\Session\YoutubeTokenSessionValue;
 
 class AuthenticationLogoutPostTest extends TestCase
 {
@@ -28,13 +28,13 @@ class AuthenticationLogoutPostTest extends TestCase
             'password' => Hash::make('P@ssword'),
         ]);
         Auth::login($user);
-        session()->put(SessionKey::$YOUTUBE_ACCESS_TOKEN, 'value');
+        session()->put(YoutubeTokenSessionValue::$session_key, 'value');
 
         // 検証
         $response = $this->actingAs($user)->post('/api/v1/authentication/logout');
         $response->assertStatus(200);
 
         $this->assertTrue(!Auth::guard()->check());
-        $this->assertTrue(!session()->has(SessionKey::$YOUTUBE_ACCESS_TOKEN));
+        $this->assertTrue(!session()->has(YoutubeTokenSessionValue::$session_key));
     }
 }

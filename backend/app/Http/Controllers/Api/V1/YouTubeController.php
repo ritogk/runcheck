@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use App\Exceptions\OAuthException;
 // core
 use App\Core\YouTube\IOAuthYoutubeClient;
 //Domain

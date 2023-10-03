@@ -4,15 +4,15 @@ namespace App\Core\YouTube;
 
 use Google_Client;
 use Google_Service_YouTube;
-
+use App\Core\YouTube\TokenValue;
 use App\Exceptions\OAuthException;
 
 interface IOAuthYoutubeClient
 {
   public function get_authorize_url(): string;
   public function set_access_token(array $token): void;
-  public function fetch_token(string $code): array;
-  public function generate_token(string $refresh_token): array;
+  public function fetch_token(string $code): TokenValue;
+  public function generate_token(string $refresh_token): TokenValue;
   public function generate_youtube_service(): Google_Service_YouTube;
   public function is_access_token_expired(): bool;
 }
@@ -69,11 +69,16 @@ class OAuthYoutubeClient implements IOAuthYoutubeClient
    * アクセストークンを取得
    *
    * @param string $code
-   * @return array{access_token: string, expires_in: int, refresh_token: string, scope: string}
+   * @return TokenValue
+   * @throws OAuthException
    */
-  public function fetch_token(string $code): array
+  public function fetch_token(string $code): TokenValue
   {
-    $token = $this->client->fetchAccessTokenWithAuthCode($code);
+    try {
+      $token = new TokenValue($this->client->fetchAccessTokenWithAuthCode($code));
+    } catch (\Exception $th) {
+      throw new OAuthException();
+    }
     return $token;
   }
 
@@ -81,13 +86,13 @@ class OAuthYoutubeClient implements IOAuthYoutubeClient
    * アクセストークンの更新
    *
    * @param string $refresh_token
-   * @return array{access_token: string, expires_in: int, refresh_token: string, scope: string}
+   * @return TokenValue
    * @throws OAuthException
    */
-  public function generate_token(string $refresh_token): array
+  public function generate_token(string $refresh_token): TokenValue
   {
     try {
-      $token = $this->client->fetchAccessTokenWithRefreshToken($refresh_token);
+      $token = new TokenValue($this->client->fetchAccessTokenWithRefreshToken($refresh_token));
     } catch (\Exception $th) {
       throw new OAuthException();
     }

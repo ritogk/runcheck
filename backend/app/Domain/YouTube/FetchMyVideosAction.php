@@ -3,7 +3,7 @@
 namespace App\Domain\YouTube;
 
 // core
-use App\Core\SessionKey;
+use App\Core\Session\YoutubeTokenSessionValue;
 use App\Core\YouTube\IOAuthYoutubeClient;
 
 class FetchMyVideosAction
@@ -21,7 +21,7 @@ class FetchMyVideosAction
    */
   public function fetch(): array
   {
-    $token = session()->get(SessionKey::$YOUTUBE_ACCESS_TOKEN);
+    $token = session()->get(YoutubeTokenSessionValue::$session_key);
     $this->client->set_access_token($token);
 
     $youtube = $this->client->generate_youtube_service();

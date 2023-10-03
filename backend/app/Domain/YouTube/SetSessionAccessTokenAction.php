@@ -3,21 +3,22 @@
 namespace App\Domain\YouTube;
 
 // core
-use App\Core\SessionKey;
+use App\Core\Session\YoutubeTokenSessionValue;
+use App\Core\YouTube\TokenValue;
+
 
 class SetSessionAccessTokenAction
 {
   /**
    * fetch
    *
-   * @param array $token
-   * @return array
+   * @param TokenValue $youtube_token
+   * @return void
    */
-  public function set(array $token): array
+  public function set(TokenValue $youtube_token): void
   {
     // リフレッシュトークンは危険なのでセッションに保存しない
-    unset($token['refresh_token']);
-    session()->put(SessionKey::$YOUTUBE_ACCESS_TOKEN, $token);
-    return $token;
+    $token = new YoutubeTokenSessionValue($youtube_token->toArray());
+    session()->put(YoutubeTokenSessionValue::$session_key, $token->toArray());
   }
 }

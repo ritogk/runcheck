@@ -6,10 +6,10 @@ use Closure;
 use App\Exceptions\OAuthException;
 // core
 use App\Core\YouTube\IOAuthYoutubeClient;
-use App\Core\SessionKey;
+use App\Core\Session\YoutubeTokenSessionValue;
 // usecase
-use App\UseCase\Authentication\GetMeAction;
-use App\UseCase\YouTube\GenerateAccessTokenAction;
+use App\Domain\Authentication\GetMeAction;
+use App\Domain\YouTube\GenerateAccessTokenAction;
 
 /**
  * 役割:Youtube用のトークンの有効性チェック or トークンの更新
@@ -36,7 +36,7 @@ class ValidateYoutubeToken
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $session_token = session()->get(SessionKey::$YOUTUBE_ACCESS_TOKEN);
+        $session_token = session()->get(YoutubeTokenSessionValue::$session_key);
         $user = $this->me_action->me();
         if ($user) {
             if ($session_token) {
@@ -45,7 +45,10 @@ class ValidateYoutubeToken
                     // トークンの有効期限が切れていたらリフレッシュトークンからアクセストークンを生成
                     $new_token = $this->generate_access_token_action->generate();
                     if ($new_token) {
-                        session()->put(SessionKey::$YOUTUBE_ACCESS_TOKEN, $new_token);
+                        session()->put(
+                            YoutubeTokenSessionValue::$session_key,
+                            new YoutubeTokenSessionValue($new_token->toArray())
+                        );
                     } else {
                         throw new OAuthException();
                     }
@@ -54,7 +57,10 @@ class ValidateYoutubeToken
                 // リフレッシュトークンからアクセストークンを生成
                 $new_token = $this->generate_access_token_action->generate();
                 if ($new_token) {
-                    session()->put(SessionKey::$YOUTUBE_ACCESS_TOKEN, $new_token);
+                    session()->put(
+                        YoutubeTokenSessionValue::$session_key,
+                        new YoutubeTokenSessionValue($new_token->toArray())
+                    );
                 } else {
                     throw new OAuthException();
                 }

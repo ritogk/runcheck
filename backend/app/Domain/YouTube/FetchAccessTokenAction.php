@@ -2,8 +2,8 @@
 
 namespace App\Domain\YouTube;
 
-// core
 use App\Core\YouTube\IOAuthYoutubeClient;
+use App\Core\YouTube\TokenValue;
 // Domain
 use App\Domain\Authentication\GetMeAction;
 use App\Domain\YouTube\SaveRefreshTokenAction;
@@ -24,14 +24,14 @@ class FetchAccessTokenAction
    * fetch
    *
    * @param string $code
-   * @return array
+   * @return TokenValue
    */
-  public function fetch(string $code): array
+  public function fetch(string $code): TokenValue
   {
     $token = $this->client->fetch_token($code);
     $user = $this->me_action->me();
     if ($user) {
-      $this->save_token_action->save($user->id, $token['refresh_token']);
+      $this->save_token_action->save($user->id, $token->refresh_token);
     }
     return $token;
   }
