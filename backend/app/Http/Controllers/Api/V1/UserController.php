@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-// Domain
-use App\Domain\User\RegisterAction;
+// UseCase
+use App\UseCase\User\RegisterAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;

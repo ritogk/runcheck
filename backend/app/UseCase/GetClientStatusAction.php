@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain;
+namespace App\UseCase;
 
 // core
 use App\Core\Session\YoutubeTokenSessionValue;
-// Domain
-use App\Domain\Authentication\GetMeAction;
+// UseCase
+use App\UseCase\Authentication\GetMeAction;
 
 class GetClientStatusAction
 {

@@ -7,9 +7,9 @@ use App\Exceptions\OAuthException;
 // core
 use App\Core\YouTube\IOAuthYoutubeClient;
 use App\Core\Session\YoutubeTokenSessionValue;
-// usecase
-use App\Domain\Authentication\GetMeAction;
-use App\Domain\YouTube\GenerateAccessTokenAction;
+// UseCase
+use App\UseCase\Authentication\GetMeAction;
+use App\UseCase\YouTube\GenerateAccessTokenAction;
 
 /**
  * 役割:Youtube用のトークンの有効性チェック or トークンの更新

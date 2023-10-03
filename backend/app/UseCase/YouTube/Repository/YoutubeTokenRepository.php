@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\YouTube;
+namespace App\UseCase\YouTube\Repository;
 
 use App\Model\YoutubeToken;
 

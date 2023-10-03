@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domain\Comparison;
+namespace App\UseCase\Comparison;
 
 use \Illuminate\Auth\Access\AuthorizationException;
 use App\Exceptions\DataNotFoundException;
-// Domain
-use App\Domain\Authentication\GetMeAction;
-use App\Domain\Comparison\ComparisonRepository;
+// UseCase
+use App\UseCase\Authentication\GetMeAction;
+use App\UseCase\Comparison\Repository\ComparisonRepository;
 
 class DeleteComparisonAction
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\OperationLog;
+namespace App\UseCase\OperationLog\Repository;
 
 use App\Model\OperationLog;
 

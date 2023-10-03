@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\YouTube;
+namespace App\UseCase\YouTube;
 
 // core
 use App\Core\Session\YoutubeTokenSessionValue;

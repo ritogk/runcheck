@@ -8,10 +8,10 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 // core
 use App\Core\YouTube\IOAuthYoutubeClient;
-//Domain
-use App\Domain\YouTube\FetchAccessTokenAction;
-use App\Domain\YouTube\FetchMyVideosAction;
-use App\Domain\YouTube\SetSessionAccessTokenAction;
+//UseCase
+use App\UseCase\YouTube\FetchAccessTokenAction;
+use App\UseCase\YouTube\FetchMyVideosAction;
+use App\UseCase\YouTube\SetSessionAccessTokenAction;
 // openapi
 use App\OpenAPI;
 use App\Libs\OpenAPIUtility;

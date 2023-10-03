@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\YouTube;
+namespace App\UseCase\YouTube;
 
-use App\Domain\YouTube\YoutubeTokenRepository;
+use App\UseCase\YouTube\Repository\YoutubeTokenRepository;
 
 class SaveRefreshTokenAction
 {

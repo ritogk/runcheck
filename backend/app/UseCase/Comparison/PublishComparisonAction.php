@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domain\Comparison;
+namespace App\UseCase\Comparison;
 
 use \Illuminate\Auth\Access\AuthorizationException;
-use App\Domain\Comparison\ComparisonRepository;
+use App\UseCase\Comparison\Repository\ComparisonRepository;
 use App\Exceptions\DataNotFoundException;
-// Domain
-use App\Domain\Authentication\GetMeAction;
+// UseCase
+use App\UseCase\Authentication\GetMeAction;
 
 class PublishComparisonAction
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\OperationLog;
+namespace App\UseCase\OperationLog;
 
 use App\Exceptions\DataNotFoundException;
-use App\Domain\OperationLog\OperationLogRepository;
+use App\UseCase\OperationLog\Repository\OperationLogRepository;
 
 class UpdateOperationLogAction
 {

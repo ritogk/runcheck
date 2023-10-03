@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\OperationLog;
+namespace App\UseCase\OperationLog\Repository;
 
-use App\Domain\OperationLog\OperationLogEntity;
+use App\UseCase\OperationLog\Repository\OperationLogEntity;
 use App\Model\OperationLog;
 
 class OperationLogRepository

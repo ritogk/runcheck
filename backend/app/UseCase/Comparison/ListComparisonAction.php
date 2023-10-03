@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Comparison;
+namespace App\UseCase\Comparison;
 
-// Domain
-use App\Domain\Authentication\GetMeAction;
-use App\Domain\Comparison\ComparisonRepository;
+// UseCase
+use App\UseCase\Authentication\GetMeAction;
+use App\UseCase\Comparison\Repository\ComparisonRepository;
 
 class ListComparisonAction
 {

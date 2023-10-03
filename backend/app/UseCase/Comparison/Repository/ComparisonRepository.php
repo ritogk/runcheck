@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Comparison;
+namespace App\UseCase\Comparison\Repository;
 
-use App\Domain\Comparison\ComparisonEntity;
+use App\UseCase\Comparison\Repository\ComparisonEntity;
 use App\Model\Comparison;
 
 class ComparisonRepository

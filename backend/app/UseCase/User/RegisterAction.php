@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\User;
+namespace App\UseCase\User;
 
 use Illuminate\Support\Facades\Hash;
-use App\Domain\User\UserRepository;
-use App\Domain\User\UserEntity;
+use App\UseCase\User\Repository\UserRepository;
+use App\UseCase\User\Repository\UserEntity;
 
 class RegisterAction
 {

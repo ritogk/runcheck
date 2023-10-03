@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\User;
+namespace App\UseCase\User\Repository;
 
 use App\Model\User;
-use App\Domain\User\UserEntity;
+use App\UseCase\User\Repository\UserEntity;
 
 class UserRepository
 {

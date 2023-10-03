@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-//Domain
-use App\Domain\GetClientStatusAction;
+//UseCase
+use App\UseCase\GetClientStatusAction;
 
 class StatusController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Comparison;
+namespace App\UseCase\Comparison\Repository;
 
 
 use App\Model\Comparison;
