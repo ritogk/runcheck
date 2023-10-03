@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 // UseCase
 use App\UseCase\Comparison\RegisterComparisonAction;
 use App\UseCase\Comparison\FindComparisonAction;
-use App\UseCase\Comparison\ListComparisonAction;
+use App\UseCase\Comparison\GetComparisonsAction;
 use App\UseCase\Comparison\DeleteComparisonAction;
 use App\UseCase\Comparison\PublishComparisonAction;
 // openapi
@@ -48,10 +48,10 @@ class CompoarionController extends Controller
     /**
      * 一覧取得
      *
-     * @param ListComparisonAction $action
+     * @param GetComparisonsAction $action
      * @return JsonResponse
      */
-    public function list(ListComparisonAction $action): JsonResponse
+    public function list(GetComparisonsAction $action): JsonResponse
     {
         $comparisons = $action->list();
         $data = [];

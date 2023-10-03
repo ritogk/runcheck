@@ -6,7 +6,7 @@ namespace App\UseCase\Comparison;
 use App\UseCase\Authentication\GetMeAction;
 use App\UseCase\Comparison\Repository\ComparisonRepository;
 
-class ListComparisonAction
+class GetComparisonsAction
 {
   private GetMeAction $action;
   private ComparisonRepository $comparisonRepository;
