@@ -49,6 +49,7 @@ class ComparisonsIdPublishTest extends TestCase
         Auth::login($user);
         $response = $this->put(sprintf("/api/v1/comparisons/%s/publish", $comparison->id));
         $response->assertStatus(200);
+        // 公開フラグが更新される事
         $this->assertTrue(Comparison::where('id', $comparison->id)->first()->release_kbn == 1);
     }
 
@@ -66,21 +67,6 @@ class ComparisonsIdPublishTest extends TestCase
             'car_type' => 'CIVIC FD2',
             'email' => 'mikan@example.com',
             'password' => Hash::make('P@ssword'),
-        ]);
-        $comparison = Comparison::create([
-            "user_id" => $user->id,
-            "category" => '美浜サーキット',
-            "title" => '美浜 気温違い',
-            "memo" => '10℃違い',
-            "video1_time_st" => 10,
-            "video1_url" => 'https://www.youtube.com/watch?v=1',
-            "video1_type" => VideoType::NUMBER_YOUTUBE,
-            "video2_time_st" => 30,
-            "video2_url" => 'https://www.youtube.com/watch?v=1',
-            "video2_type" => VideoType::NUMBER_YOUTUBE,
-            "video_type" => Comparison::VIDEO_TYPE_KIND['YOUTUBE_YOUTUBE'],
-            "release_kbn" => false,
-            "anonymous" => false
         ]);
         $compariso_darekasan = Comparison::create([
             "user_id" => $user_darekasan->id,

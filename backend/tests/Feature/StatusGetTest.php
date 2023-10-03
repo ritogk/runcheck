@@ -32,6 +32,7 @@ class StatusGetTest extends TestCase
         // 検証
         Auth::login($user);
         $response = $this->get("/api/v1/status");
+        $response->assertStatus(200);
         $response->assertJson([
             "isLogined" => true,
             "isYoutubeAuthroized" => false,
@@ -40,7 +41,6 @@ class StatusGetTest extends TestCase
                 'name' => $user->name
             ],
         ]);
-        $response->assertStatus(200);
     }
 
     public function testログイン済かつYoutube認可済の場合に正しいレスポンスが返ってくる事()
@@ -61,6 +61,7 @@ class StatusGetTest extends TestCase
         // 検証
         Auth::login($user);
         $response = $this->get("/api/v1/status");
+        $response->assertStatus(200);
         $response->assertJson([
             "isLogined" => true,
             "isYoutubeAuthroized" => true,
@@ -69,13 +70,13 @@ class StatusGetTest extends TestCase
                 'name' => $user->name
             ],
         ]);
-        $response->assertStatus(200);
     }
 
     public function test未ログインの時に正しいレスポンスが返ってくる事()
     {
         // 検証
         $response = $this->get("/api/v1/status");
+        $response->assertStatus(200);
         $response->assertJson([
             "isLogined" => false,
             "isYoutubeAuthroized" => false,
@@ -84,7 +85,6 @@ class StatusGetTest extends TestCase
                 'name' => ''
             ],
         ]);
-        $response->assertStatus(200);
     }
 
     public function test未ログインでYoutube認可済の時に正しいレスポンスが返ってくる事()
@@ -94,6 +94,7 @@ class StatusGetTest extends TestCase
 
         // 検証
         $response = $this->get("/api/v1/status");
+        $response->assertStatus(200);
         $response->assertJson([
             "isLogined" => false,
             "isYoutubeAuthroized" => true,
@@ -102,6 +103,5 @@ class StatusGetTest extends TestCase
                 'name' => ''
             ],
         ]);
-        $response->assertStatus(200);
     }
 }

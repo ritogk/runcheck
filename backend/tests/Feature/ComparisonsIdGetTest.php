@@ -47,9 +47,21 @@ class ComparisonsIdGetTest extends TestCase
         // 検証
         $response = $this->get(sprintf("/api/v1/comparisons/%s", $comparison->id));
         $response->assertStatus(403);
+
         Auth::login($user);
         $response = $this->get(sprintf("/api/v1/comparisons/%s", $comparison->id));
         $response->assertStatus(200);
+        $response->assertJson([
+            "category" => $comparison->category,
+            "memo" => $comparison->memo,
+            "title" => $comparison->title,
+            "video1Url" => $comparison->video1_url,
+            "video1TimeSt" => $comparison->video1_time_st,
+            "video1VideoType" => $comparison->video1_type,
+            "video2Url" => $comparison->video2_url,
+            "video2VideoType" => $comparison->video2_type,
+            "anonymous" => $comparison->anonymous
+        ]);
     }
 
     public function test公開情報は誰でも取得できる事()
@@ -77,11 +89,35 @@ class ComparisonsIdGetTest extends TestCase
             "anonymous" => false
         ]);
 
-        // 検証
+        // 未ログインユーザーで取得できる。
         $response = $this->get(sprintf("/api/v1/comparisons/%s", $comparison->id));
         $response->assertStatus(200);
+        $response->assertJson([
+            "category" => $comparison->category,
+            "memo" => $comparison->memo,
+            "title" => $comparison->title,
+            "video1Url" => $comparison->video1_url,
+            "video1TimeSt" => $comparison->video1_time_st,
+            "video1VideoType" => $comparison->video1_type,
+            "video2Url" => $comparison->video2_url,
+            "video2VideoType" => $comparison->video2_type,
+            "anonymous" => $comparison->anonymous
+        ]);
+
+        // ログイン済のユーザーでも取得できる。
         Auth::login($user);
         $response = $this->get(sprintf("/api/v1/comparisons/%s", $comparison->id));
         $response->assertStatus(200);
+        $response->assertJson([
+            "category" => $comparison->category,
+            "memo" => $comparison->memo,
+            "title" => $comparison->title,
+            "video1Url" => $comparison->video1_url,
+            "video1TimeSt" => $comparison->video1_time_st,
+            "video1VideoType" => $comparison->video1_type,
+            "video2Url" => $comparison->video2_url,
+            "video2VideoType" => $comparison->video2_type,
+            "anonymous" => $comparison->anonymous
+        ]);
     }
 }

@@ -19,7 +19,7 @@ class AuthenticationLoginPostTest extends TestCase
     public function test存在するユーザーの場合は成功する事()
     {
         // 準備
-        User::create([
+        $user = User::create([
             'name' => 'ほみ',
             'car_type' => 'FIT GK5',
             'email' => 'test@example.com',
@@ -33,6 +33,12 @@ class AuthenticationLoginPostTest extends TestCase
             "remember" => true
         ]);
         $response->assertStatus(200);
+
+        // 正しいレスポンスが返ってくる事
+        $response->assertJson([
+            "id" => $user->id,
+            "name" => $user->name
+        ]);
     }
 
     public function test存在しないユーザーは失敗する事()
