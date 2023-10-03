@@ -8,10 +8,10 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^8.0",
+    "php": "^8.2",
     "barryvdh/laravel-debugbar": "^3.2",
     "barryvdh/laravel-ide-helper": "^2.1",
-    "doctrine/dbal": "^2.6",
+    "doctrine/dbal":  "^2.6",
     "fideloper/proxy": "^4.0",
     "google/apiclient": "^2.12.1",
     "guzzlehttp/guzzle": "^7.0.1",
