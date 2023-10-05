@@ -67,12 +67,12 @@ class ValidateYoutubeToken
         $session_token = session()->get(YoutubeTokenSessionValue::$session_key);
         // Oauth連携されていない場合はエラー。
         if (!$session_token || !is_array($session_token)) {
-            throw new OAuthException();
+            throw new OAuthException('OAuth未連携');
         }
         $this->client->set_access_token($session_token);
         // アクセストークンの有効期限切れの場合はエラー
         if ($this->client->is_access_token_expired()) {
-            throw new OAuthException();
+            throw new OAuthException('アクセストークンの有効期限切れ');
         }
     }
 }
