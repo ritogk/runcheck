@@ -5,9 +5,14 @@ namespace App\UseCase\Authentication;
 use Illuminate\Support\Facades\Auth;
 use App\Model\User;
 use Illuminate\Auth\AuthenticationException;
+use App\UseCase\YouTube\GenerateAccessTokenAction;
 
 class LoginAction
 {
+  public function __construct(public readonly GenerateAccessTokenAction $generate_access_token_action)
+  {
+  }
+
   /**
    * Undocumented function
    *
@@ -25,6 +30,8 @@ class LoginAction
     }
     $user = Auth::guard()->user();
     session()->regenerate(true);
+
+    $this->generate_access_token_action->generate();
 
     return $user;
   }
