@@ -5,6 +5,7 @@ namespace App\UseCase\Comparison;
 // UseCase
 use App\UseCase\Authentication\GetMeAction;
 use App\UseCase\Comparison\Repository\IComparisonRepository;
+use App\UseCase\Comparison\Repository\ComparisonEntity;
 
 class RegisterComparisonAction
 {
