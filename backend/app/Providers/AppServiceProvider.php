@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\UrlGenerator;
 
-use App\Core\YouTube\IOAuthYoutubeClient;
+use App\Core\YouTube\OAuthYoutubeClientInterface;
 use App\Core\YouTube\OAuthYoutubeClient;
 use Google_Client;
 
@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         // 外部リソースに依存しそうなものはここでbindする。
-        $this->app->singleton(IOAuthYoutubeClient::class, function ($app) {
+        $this->app->singleton(OAuthYoutubeClientInterface::class, function ($app) {
             $clinet = new Google_Client();
             $client_id = config('oauth.youtube.client_id');
             $client_secret = config('oauth.youtube.client_secret');

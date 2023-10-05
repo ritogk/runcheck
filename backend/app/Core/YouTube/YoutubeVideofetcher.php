@@ -2,12 +2,12 @@
 
 namespace App\Core\YouTube;
 
-use App\Core\YouTube\IOAuthYoutubeClient;
+use App\Core\YouTube\OAuthYoutubeClientInterface;
 use App\Core\YouTube\YoutubeVideofetcherInterface;
 
 class YoutubeVideofetcher implements YoutubeVideofetcherInterface
 {
-  public function __construct(private readonly IOAuthYoutubeClient $client)
+  public function __construct(private readonly OAuthYoutubeClientInterface $client)
   {
   }
 

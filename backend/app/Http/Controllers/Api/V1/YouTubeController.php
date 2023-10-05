@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 // core
-use App\Core\YouTube\IOAuthYoutubeClient;
+use App\Core\YouTube\OAuthYoutubeClientInterface;
 //UseCase
 use App\UseCase\YouTube\FetchAccessTokenAction;
 use App\UseCase\YouTube\FetchMyVideosAction;
@@ -23,7 +23,7 @@ class YouTubeController extends Controller
      *
      * @return JsonResponse
      */
-    public function authorize_url(IOAuthYoutubeClient $client): JsonResponse
+    public function authorize_url(OAuthYoutubeClientInterface $client): JsonResponse
     {
         $url = $client->get_authorize_url();
         return response()->json(

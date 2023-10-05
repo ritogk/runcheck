@@ -4,7 +4,7 @@ namespace App\UseCase\YouTube;
 
 use App\Exceptions\OAuthException;
 // core
-use App\Core\YouTube\IOAuthYoutubeClient;
+use App\Core\YouTube\OAuthYoutubeClientInterface;
 use App\Core\YouTube\TokenValue;
 use App\Core\Session\YoutubeTokenSessionValue;
 // UseCase
@@ -12,9 +12,9 @@ use App\UseCase\Authentication\GetMeAction;;
 
 class GenerateAccessTokenAction
 {
-  private IOAuthYoutubeClient $client;
+  private OAuthYoutubeClientInterface $client;
   private GetMeAction $me_action;
-  public function __construct(IOAuthYoutubeClient $client, GetMeAction $me_action)
+  public function __construct(OAuthYoutubeClientInterface $client, GetMeAction $me_action)
   {
     $this->client = $client;
     $this->me_action = $me_action;

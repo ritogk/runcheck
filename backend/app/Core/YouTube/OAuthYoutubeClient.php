@@ -6,18 +6,9 @@ use Google_Client;
 use Google\Service\YouTube;
 use App\Core\YouTube\TokenValue;
 use App\Exceptions\OAuthException;
+use App\Core\YouTube\OAuthYoutubeClientInterface;
 
-interface IOAuthYoutubeClient
-{
-  public function get_authorize_url(): string;
-  public function set_access_token(array $token): void;
-  public function fetch_token(string $code): TokenValue;
-  public function generate_token(string $refresh_token): TokenValue;
-  public function generate_youtube_service(): YouTube;
-  public function is_access_token_expired(): bool;
-}
-
-class OAuthYoutubeClient implements IOAuthYoutubeClient
+class OAuthYoutubeClient implements OAuthYoutubeClientInterface
 {
   const expires_in = 3600;
   private string $client_id;

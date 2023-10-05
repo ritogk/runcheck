@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Exceptions\OAuthException;
 // core
-use App\Core\YouTube\IOAuthYoutubeClient;
+use App\Core\YouTube\OAuthYoutubeClientInterface;
 use App\Core\Session\YoutubeTokenSessionValue;
 // UseCase
 use App\UseCase\Authentication\GetMeAction;
@@ -16,10 +16,10 @@ use App\UseCase\YouTube\GenerateAccessTokenAction;
  */
 class ValidateYoutubeToken
 {
-    private IOAuthYoutubeClient $client;
+    private OAuthYoutubeClientInterface $client;
     private GetMeAction $me_action;
     private GenerateAccessTokenAction $generate_access_token_action;
-    public function __construct(IOAuthYoutubeClient $client, GetMeAction $me_action, GenerateAccessTokenAction $generate_access_token_action)
+    public function __construct(OAuthYoutubeClientInterface $client, GetMeAction $me_action, GenerateAccessTokenAction $generate_access_token_action)
     {
         $this->client = $client;
         $this->me_action = $me_action;

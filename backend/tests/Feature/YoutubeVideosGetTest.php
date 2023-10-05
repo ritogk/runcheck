@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Core\YouTube\TokenValue;
-use App\Core\YouTube\IOAuthYoutubeClient;
+use App\Core\YouTube\OAuthYoutubeClientInterface;
 use Google\Service\YouTube;
 use App\Core\Session\YoutubeTokenSessionValue;
 
@@ -33,8 +33,8 @@ class YoutubeVideosGetTest extends TestCase
     public function test匿名ユーザーでアクセストークンの有効期限が切れた場合にエラーがでる事()
     {
         // 有効期限切れのダミークラスを作成
-        $this->app->singleton(IOAuthYoutubeClient::class, function ($app) {
-            return new class implements IOAuthYoutubeClient
+        $this->app->singleton(OAuthYoutubeClientInterface::class, function ($app) {
+            return new class implements OAuthYoutubeClientInterface
             {
                 public function get_authorize_url(): string
                 {
@@ -79,8 +79,8 @@ class YoutubeVideosGetTest extends TestCase
 
     public function test匿名ユーザーでアクセストークンの有効な場合に動画が取得できる事()
     {
-        $this->app->singleton(IOAuthYoutubeClient::class, function ($app) {
-            return new class implements IOAuthYoutubeClient
+        $this->app->singleton(OAuthYoutubeClientInterface::class, function ($app) {
+            return new class implements OAuthYoutubeClientInterface
             {
                 public function get_authorize_url(): string
                 {
@@ -159,8 +159,8 @@ class YoutubeVideosGetTest extends TestCase
         ]);
         Auth::login($user);
         // Youtube認可済のClientを作成
-        $this->app->singleton(IOAuthYoutubeClient::class, function ($app) {
-            return new class implements IOAuthYoutubeClient
+        $this->app->singleton(OAuthYoutubeClientInterface::class, function ($app) {
+            return new class implements OAuthYoutubeClientInterface
             {
                 public function get_authorize_url(): string
                 {
