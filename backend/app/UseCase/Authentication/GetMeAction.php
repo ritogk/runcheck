@@ -7,12 +7,6 @@ use App\Model\User;
 
 class GetMeAction
 {
-  private Auth $auth;
-  public function __construct(Auth $auth)
-  {
-    $this->auth = $auth;
-  }
-
   /**
    * Undocumented function
    *
@@ -20,6 +14,6 @@ class GetMeAction
    */
   public function me(): ?User
   {
-    return $this->auth::guard()->user();
+    return Auth::guard()->user();
   }
 }
