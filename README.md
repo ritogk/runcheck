@@ -53,7 +53,7 @@ php artisan serve --host 0.0.0.0
 
 ### backend test
 ```sh
-./vendor/bin/phpunit
+php artisan test
 ```
 
 ### frontend setup
