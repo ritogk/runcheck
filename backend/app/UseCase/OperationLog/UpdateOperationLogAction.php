@@ -3,12 +3,12 @@
 namespace App\UseCase\OperationLog;
 
 use App\Exceptions\DataNotFoundException;
-use App\UseCase\OperationLog\Repository\OperationLogRepository;
+use App\UseCase\OperationLog\Repository\IOperationLogRepository;
 
 class UpdateOperationLogAction
 {
-  private OperationLogRepository $operationLogRepository;
-  public function __construct(OperationLogRepository $operationLogRepository)
+  private IOperationLogRepository $operationLogRepository;
+  public function __construct(IOperationLogRepository $operationLogRepository)
   {
     $this->operationLogRepository = $operationLogRepository;
   }

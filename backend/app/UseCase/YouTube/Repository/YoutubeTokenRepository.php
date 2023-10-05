@@ -4,7 +4,12 @@ namespace App\UseCase\YouTube\Repository;
 
 use App\Model\YoutubeToken;
 
-class YoutubeTokenRepository
+interface IYoutubeTokenRepository
+{
+  public function saveToken(int $user_id, string $refresh_token): void;
+}
+
+class YoutubeTokenRepository implements IYoutubeTokenRepository
 {
   /**
    * Undocumented function

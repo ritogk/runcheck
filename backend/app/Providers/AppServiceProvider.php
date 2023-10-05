@@ -9,6 +9,16 @@ use App\Core\YouTube\IOAuthYoutubeClient;
 use App\Core\YouTube\OAuthYoutubeClient;
 use Google_Client;
 
+use App\UseCase\Comparison\Repository\ComparisonRepository;
+use App\UseCase\Comparison\Repository\IComparisonRepository;
+use App\UseCase\OperationLog\Repository\IOperationLogRepository;
+use App\UseCase\OperationLog\Repository\OperationLogRepository;
+use App\UseCase\User\Repository\IUserRepository;
+use App\UseCase\User\Repository\UserRepository;
+use App\UseCase\Comparison\Repository\ComparisonEntity;
+use App\UseCase\YouTube\Repository\IYoutubeTokenRepository;
+use App\UseCase\YouTube\Repository\YoutubeTokenRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +35,13 @@ class AppServiceProvider extends ServiceProvider
             $redirect_url = config('oauth.youtube.redirect_url');
             return new OAuthYoutubeClient($clinet, $client_id, $client_secret, $redirect_url);
         });
+
+        // repository
+        $this->app->bind(IComparisonRepository::class, ComparisonRepository::class);
+        $this->app->bind(IOperationLogRepository::class, OperationLogRepository::class);
+        $this->app->bind(IUserRepository::class, UserRepository::class);
+        $this->app->bind(IComparisonEntity::class, ComparisonEntity::class);
+        $this->app->bind(IYoutubeTokenRepository::class, YoutubeTokenRepository::class);
     }
 
     /**

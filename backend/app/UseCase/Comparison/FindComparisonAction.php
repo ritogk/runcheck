@@ -6,14 +6,14 @@ use \Illuminate\Auth\Access\AuthorizationException;
 // UseCase
 use App\UseCase\Authentication\GetMeAction;
 use App\UseCase\Comparison\Repository\ComparisonEntity;
-use App\UseCase\Comparison\Repository\ComparisonRepository;
+use App\UseCase\Comparison\Repository\IComparisonRepository;
 use App\Exceptions\DataNotFoundException;
 
 class FindComparisonAction
 {
   private GetMeAction $action;
-  private ComparisonRepository $comparisonRepository;
-  public function __construct(GetMeAction $action, ComparisonRepository $comparisonRepository)
+  private IComparisonRepository $comparisonRepository;
+  public function __construct(GetMeAction $action, IComparisonRepository $comparisonRepository)
   {
     $this->action = $action;
     $this->comparisonRepository = $comparisonRepository;

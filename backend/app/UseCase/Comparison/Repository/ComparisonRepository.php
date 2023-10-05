@@ -5,7 +5,28 @@ namespace App\UseCase\Comparison\Repository;
 use App\UseCase\Comparison\Repository\ComparisonEntity;
 use App\Model\Comparison;
 
-class ComparisonRepository
+interface IComparisonRepository
+{
+  public function findById(int $id): ?ComparisonEntity;
+  public function deleteById(int $id): void;
+  public function findByUserId(int $id): array;
+  public function publishById(int $id): void;
+  public function create(
+    ?int $user_id,
+    ?string $category,
+    ?string $title,
+    ?string $memo,
+    float $video1_time_st,
+    string $video1_url,
+    int $video1_type,
+    float $video2_time_st,
+    string $video2_url,
+    int $video2_type,
+    bool $anonymous
+  ): ComparisonEntity;
+}
+
+class ComparisonRepository implements IComparisonRepository
 {
   /**
    * Undocumented function

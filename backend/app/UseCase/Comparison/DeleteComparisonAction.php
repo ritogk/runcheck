@@ -6,15 +6,15 @@ use \Illuminate\Auth\Access\AuthorizationException;
 use App\Exceptions\DataNotFoundException;
 // UseCase
 use App\UseCase\Authentication\GetMeAction;
-use App\UseCase\Comparison\Repository\ComparisonRepository;
+use App\UseCase\Comparison\Repository\IComparisonRepository;
 
 class DeleteComparisonAction
 {
   private GetMeAction $action;
-  private ComparisonRepository $comparisonRepository;
+  private IComparisonRepository $comparisonRepository;
   public function __construct(
     GetMeAction $action,
-    ComparisonRepository $comparisonRepository
+    IComparisonRepository $comparisonRepository
   ) {
     $this->action = $action;
     $this->comparisonRepository = $comparisonRepository;

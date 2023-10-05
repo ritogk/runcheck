@@ -3,13 +3,13 @@
 namespace App\UseCase\User;
 
 use Illuminate\Support\Facades\Hash;
-use App\UseCase\User\Repository\UserRepository;
+use App\UseCase\User\Repository\IUserRepository;
 use App\UseCase\User\Repository\UserEntity;
 
 class RegisterUserAction
 {
-  private UserRepository $userRepository;
-  public function __construct(UserRepository $userRepository)
+  private IUserRepository $userRepository;
+  public function __construct(IUserRepository $userRepository)
   {
     $this->userRepository = $userRepository;
   }

@@ -5,7 +5,14 @@ namespace App\UseCase\OperationLog\Repository;
 use App\UseCase\OperationLog\Repository\OperationLogEntity;
 use App\Model\OperationLog;
 
-class OperationLogRepository
+interface IOperationLogRepository
+{
+  public function findByOperationCd(int $operation_cd): ?OperationLogEntity;
+  public function upgradeExecutionCnt(int $operation_cd): void;
+}
+
+
+class OperationLogRepository implements IOperationLogRepository
 {
   /**
    * Undocumented function

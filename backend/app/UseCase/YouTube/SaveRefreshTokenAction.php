@@ -2,12 +2,12 @@
 
 namespace App\UseCase\YouTube;
 
-use App\UseCase\YouTube\Repository\YoutubeTokenRepository;
+use App\UseCase\YouTube\Repository\IYoutubeTokenRepository;
 
 class SaveRefreshTokenAction
 {
-  private YoutubeTokenRepository $youtubeTokenRepository;
-  public function __construct(YoutubeTokenRepository $youtubeTokenRepository)
+  private IYoutubeTokenRepository $youtubeTokenRepository;
+  public function __construct(IYoutubeTokenRepository $youtubeTokenRepository)
   {
     $this->youtubeTokenRepository = $youtubeTokenRepository;
   }
