@@ -9,6 +9,9 @@ use App\Core\YouTube\IOAuthYoutubeClient;
 use App\Core\YouTube\OAuthYoutubeClient;
 use Google_Client;
 
+use App\Core\YouTube\YoutubeVideofetcherInterface;
+use App\Core\YouTube\YoutubeVideofetcher;
+
 use App\UseCase\Comparison\Repository\ComparisonRepository;
 use App\UseCase\Comparison\Repository\IComparisonRepository;
 use App\UseCase\OperationLog\Repository\IOperationLogRepository;
@@ -28,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // 外部リソースに依存しそうなものはここでbindする。
         $this->app->singleton(IOAuthYoutubeClient::class, function ($app) {
             $clinet = new Google_Client();
             $client_id = config('oauth.youtube.client_id');
@@ -35,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
             $redirect_url = config('oauth.youtube.redirect_url');
             return new OAuthYoutubeClient($clinet, $client_id, $client_secret, $redirect_url);
         });
+        $this->app->bind(YoutubeVideofetcherInterface::class, YoutubeVideofetcher::class);
 
         // repository
         $this->app->bind(IComparisonRepository::class, ComparisonRepository::class);
