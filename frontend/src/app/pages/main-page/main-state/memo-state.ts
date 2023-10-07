@@ -3,7 +3,7 @@ import { computed, ref, type ComputedRef } from "vue"
 /**
  * 同期メモの状態に関するクラス
  */
-export interface IMemoState {
+type IMemoState = {
   changeTitle(value: string): void
   changeMemo(value: string): void
   show(): void

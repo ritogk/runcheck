@@ -4,7 +4,7 @@ import { localStorageKeys } from "@/core/localstorage-key"
 /**
  * Youtube選択モーダルの状態
  */
-export interface IModalYoutubeSelectorState {
+export type IModalYoutubeSelectorState = {
   open(playerNo: PlayerNo): void
   close(): void
   load(): void

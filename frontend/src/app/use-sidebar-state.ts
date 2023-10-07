@@ -20,7 +20,7 @@ import {
 import { UseGetStatus } from "@/core/api-state/use-get-status"
 import { usePostAuthenticationLogout } from "@/core/api-state/use-post-authentication-logout"
 
-export interface IUseSidebarState {
+export type IUseSidebarState = {
   open(): void
   close(): void
   subscription: {

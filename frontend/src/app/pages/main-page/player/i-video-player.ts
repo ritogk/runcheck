@@ -1,5 +1,5 @@
 import { type ComputedRef } from "vue"
-export interface IVideoPlayer {
+export type IVideoPlayer = {
   load(): Promise<void>
   play(): Promise<void>
   stop(): Promise<void>

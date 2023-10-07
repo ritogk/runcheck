@@ -3,7 +3,7 @@ import { computed, ref, type ComputedRef } from "vue"
 /**
  * 動画速度の調整用モーダルの状態
  */
-export interface IModalAdjustSpeedState {
+export type IModalAdjustSpeedState = {
   open(): void
   close(): void
   subscription: {
