@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import { inject, ref, computed } from "vue"
-import {
-  UseMainStateKey,
-  UseMainStateType,
-} from "@/app/pages/main-page/use-main-state"
+import { UseMainStateKey, UseMainStateType } from "@/app/pages/main-page/use-main-state"
+import { getDevice } from "@/core/device"
 import {
   SpeakerWaveIcon,
-  SpeakerXMarkIcon,
+  SpeakerXMarkIcon
   // SearchIcon,
 } from "@heroicons/vue/20/solid"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
 
+const device = getDevice()
 const hundlePlaySwitch = () => {
   useMainState.syncPlayer.mute()
   useMainState.syncPlayer.switchPlay()
@@ -30,7 +29,7 @@ const hundleRepeatSwitch = () => {
 }
 
 const elements = {
-  slider: ref<HTMLDivElement | null>(null),
+  slider: ref<HTMLDivElement | null>(null)
 }
 // touch
 const hundleSliderTouchStart = (e: TouchEvent) => {
@@ -98,16 +97,13 @@ const currentMMSS = computed(() => {
   )
 })
 const endMMSS = computed(() => {
-  return convertSecondsToMMSS(
-    useMainState.syncPlayer.subscription.duration.value
-  )
+  return convertSecondsToMMSS(useMainState.syncPlayer.subscription.duration.value)
 })
 function convertSecondsToMMSS(seconds: number) {
   var minutes = Math.floor(seconds / 60)
   var remainingSeconds = Math.floor(seconds % 60)
   var formattedMinutes = minutes < 10 ? "0" + minutes : minutes
-  var formattedSeconds =
-    remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds
+  var formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds
   return formattedMinutes + ":" + formattedSeconds
 }
 
@@ -130,9 +126,7 @@ const hundleAdjustSpeedClick = () => {
 <template>
   <Transition name="controller">
     <div class="max-h-[240px]">
-      <div
-        class="space-y-6 border-0 border-gray-100 bg-gray-100 px-8 pb-4 pt-6"
-      >
+      <div class="space-y-6 border-0 border-gray-100 bg-gray-100 px-8 pb-4 pt-6">
         <div
           class="space-y-2"
           :ref="elements.slider"
@@ -143,11 +137,7 @@ const hundleAdjustSpeedClick = () => {
           @mousemove="hundleSliderMouseMove"
           @mouseup="hundleSliderMouseUp"
         >
-          <div
-            class="relative"
-            title="移動スライダー"
-            aria-label="移動スライダー"
-          >
+          <div class="relative" title="移動スライダー" aria-label="移動スライダー">
             <!-- スライダーの軸 -->
             <div class="overflow-hidden rounded-full bg-gray-200">
               <div
@@ -170,9 +160,7 @@ const hundleAdjustSpeedClick = () => {
               ></div>
             </div>
           </div>
-          <div
-            class="flex justify-between text-sm font-medium tabular-nums leading-6"
-          >
+          <div class="flex justify-between text-sm font-medium tabular-nums leading-6">
             <div class="text-slate-500">
               {{ currentMMSS }}
             </div>
@@ -180,9 +168,7 @@ const hundleAdjustSpeedClick = () => {
           </div>
         </div>
       </div>
-      <div
-        class="flex items-center rounded-t-lg bg-gray-200 pb-3 text-gray-500"
-      >
+      <div class="flex items-center rounded-t-lg bg-gray-200 pb-3 text-gray-500">
         <div class="flex flex-auto items-center justify-evenly">
           <!-- リピート ボタン -->
           <button
@@ -222,12 +208,7 @@ const hundleAdjustSpeedClick = () => {
             </svg>
           </button>
           <!-- 倍速 ボタン -->
-          <button
-            type="button"
-            title="倍速"
-            aria-label="倍速"
-            @click="hundleAdjustSpeedClick()"
-          >
+          <button type="button" title="倍速" aria-label="倍速" @click="hundleAdjustSpeedClick()">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -249,13 +230,10 @@ const hundleAdjustSpeedClick = () => {
         <button
           type="button"
           class="-my-2 mx-auto flex h-20 w-20 flex-none items-center justify-center rounded-full bg-white text-gray-900 shadow-sm ring-1 ring-gray-300"
-          :title="
-            useMainState.syncPlayer.subscription.playing.value ? `停止` : `再生`
-          "
-          :aria-label="
-            useMainState.syncPlayer.subscription.playing.value ? `停止` : `再生`
-          "
-          @click="hundlePlaySwitch()"
+          :title="useMainState.syncPlayer.subscription.playing.value ? `停止` : `再生`"
+          :aria-label="useMainState.syncPlayer.subscription.playing.value ? `停止` : `再生`"
+          @touchstart="device === 'IOS' ? hundlePlaySwitch() : () => {}"
+          @click="device !== 'IOS' ? hundlePlaySwitch() : () => {}"
         >
           <svg
             width="30"
@@ -277,18 +255,8 @@ const hundleAdjustSpeedClick = () => {
         </button>
         <div class="flex flex-auto items-center justify-evenly">
           <!-- 再読み込み ボタン -->
-          <button
-            type="button"
-            title="再読み込み"
-            aria-label="再読み込み"
-            @click="hundleReload()"
-          >
-            <svg
-              width="24"
-              height="24"
-              fill="none"
-              class="text-gray-500 hover:text-gray-400"
-            >
+          <button type="button" title="再読み込み" aria-label="再読み込み" @click="hundleReload()">
+            <svg width="24" height="24" fill="none" class="text-gray-500 hover:text-gray-400">
               <path
                 d="M17.509 16.95c-2.862 2.733-7.501 2.733-10.363 0-2.861-2.734-2.861-7.166 0-9.9 2.862-2.733 7.501-2.733 10.363 0 .38.365.711.759.991 1.176"
                 stroke="currentColor"
