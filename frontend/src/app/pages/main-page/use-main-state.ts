@@ -1,6 +1,6 @@
 import { type InjectionKey } from "vue"
-import { ModalOpenState, type IModalOpenState } from "./main-state/modal-open-state"
-import { ModalSaveState, type IModalSaveState } from "./main-state/modal-save-state"
+import { ModalOpenState, IModalOpenState } from "./main-state/modal-open-state"
+import { ModalSaveState, IModalSaveState } from "./main-state/modal-save-state"
 import { MemoState } from "./main-state/memo-state"
 import {
   ModalYoutubeSelectorState,
@@ -10,7 +10,7 @@ import {
   ModalAdjustSpeedState,
   type IModalAdjustSpeedState
 } from "./main-state/modal-adjust-speed-state"
-import { SyncPlayerState, type ISyncPlayerStateType } from "./main-state/sync-player-state"
+import { SyncPlayerState, ISyncPlayerStateType } from "./main-state/sync-player-state"
 
 type UseMainStateType = {
   openModal: IModalOpenState

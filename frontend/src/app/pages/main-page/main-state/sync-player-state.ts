@@ -10,7 +10,7 @@ import { putComparisonsIdPublish } from "@/core/put-comparisons-id-publish"
 /**
  * プレイヤーの同期状態を管理するクラス
  */
-type ISyncPlayerStateType = {
+export type ISyncPlayerStateType = {
   changePlayerOne(player: IVideoPlayer): void
   changePlayerTwo(player: IVideoPlayer): void
   switchPlay(): void

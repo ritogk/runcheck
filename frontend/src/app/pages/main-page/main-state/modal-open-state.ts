@@ -3,7 +3,7 @@ import { computed, ref, type ComputedRef } from "vue"
 /**
  * 開くモーダルの状態
  */
-type IModalOpenState = {
+export type IModalOpenState = {
   open(): void
   close(): void
   subscription: {

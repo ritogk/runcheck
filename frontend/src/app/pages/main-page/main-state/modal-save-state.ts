@@ -3,7 +3,7 @@ import { computed, ref, type ComputedRef } from "vue"
 /**
  * 保存モーダルの状態
  */
-type IModalSaveState = {
+export type IModalSaveState = {
   open(): void
   close(): void
   subscription: {
