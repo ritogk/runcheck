@@ -65,6 +65,10 @@ class Handler extends ExceptionHandler
                 'errMsg'   => 'データが存在しませんでした。'
             ], Response::HTTP_NOT_FOUND);
         }
+
+        if ($exception instanceof \Exception) {
+            return response()->json(['error' => 'error'], 500);
+        }
         return parent::render($request, $exception);
     }
 
