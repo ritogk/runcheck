@@ -12,7 +12,11 @@ export const usePostAuthenticationLogout = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [GET_STATUS], exact: true })
       await queryClient.resetQueries({
-        queryKey: [GET_COMPARISONS, GET_YOUTUBE_VIDEO],
+        queryKey: [GET_YOUTUBE_VIDEO],
+        exact: true
+      })
+      await queryClient.resetQueries({
+        queryKey: [GET_COMPARISONS],
         exact: true
       })
     }

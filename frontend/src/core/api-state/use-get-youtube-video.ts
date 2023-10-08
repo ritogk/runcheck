@@ -9,7 +9,7 @@ export const UseGetYoutubeVideo = (isLogined: boolean) => {
     queryKey: [GET_YOUTUBE_VIDEO],
     queryFn: () => youtubeApi.youtubeVideosGet(),
     retry: false,
-    enabled: isLogined,
+    // enabled: isLogined,
     staleTime: Infinity
   })
 }

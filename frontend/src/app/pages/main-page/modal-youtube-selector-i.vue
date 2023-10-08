@@ -18,11 +18,15 @@ const { data, isSuccess, isFetching } = UseGetYoutubeVideo(true)
 
 const filter = ref("")
 const filteredVideos = computed(() => {
+  console.log(1)
   if (isSuccess.value != true) return []
   if (!data.value) return []
-  return data.value.filter((video) => {
+
+  const a = data.value.filter((video) => {
     return video.title.includes(filter.value) || video.description.includes(filter.value)
   })
+  console.log(a)
+  return a
 })
 
 const onClose = () => {
