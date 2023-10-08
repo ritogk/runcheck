@@ -10,7 +10,7 @@ export const usePostYoutubeOauth = () => {
   const mutation = useMutation({
     mutationFn: (code: string) => youtubeApi.youtubeOauthPost({ inlineObject2: { code: code } }),
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: [GET_YOUTUBE_VIDEO] })
+      queryClient.invalidateQueries({ queryKey: [GET_YOUTUBE_VIDEO], exact: true })
     }
   })
   return mutation

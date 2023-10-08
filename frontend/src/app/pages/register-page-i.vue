@@ -72,13 +72,11 @@ const hundlePasswordCongirmValidate = (): boolean => {
   return true
 }
 
-const isLogging = ref(false)
 const postUsers = usePostUsers()
-const postAuthenticationLogin = usePostAuthenticationLogin()
+const { mutateAsync, isLoading } = usePostAuthenticationLogin()
 const onSubmit = async () => {
   // ごくまれにchangeイベントハンドラのバリデーションが走る前に送信されるのでここでもやる。
   hundlePasswordCongirmValidate()
-  isLogging.value = true
   try {
     await postUsers.mutateAsync({
       handleName: form.hanndleName.value.value,
@@ -86,7 +84,7 @@ const onSubmit = async () => {
       email: form.email.value.value,
       password: form.password.value.value
     })
-    await postAuthenticationLogin.mutateAsync({
+    await mutateAsync({
       email: form.email.value.value,
       password: form.password.value.value,
       remember: true
@@ -97,7 +95,6 @@ const onSubmit = async () => {
   } catch {
     alertState.add("エラーが発生しました。既に登録されているメールアドレスの可能性があります。")
   }
-  isLogging.value = false
 }
 </script>
 
@@ -189,7 +186,7 @@ const onSubmit = async () => {
             <div>
               <Button :variant="'primary'" :label="'新規登録'" :type="'submit'" class="mt-7 w-full"
                 ><Spiner
-                  v-show="isLogging"
+                  v-show="isLoading"
                   class="h-5 w-5 animate-spin fill-slate-500 text-slate-300"
                 ></Spiner
               ></Button>

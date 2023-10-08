@@ -12,7 +12,7 @@ import { usePostAuthenticationLogin } from "@/core/api-state/use-post-authentica
 const router = useRouter()
 const alretState = inject(UseAlretStateKey) as UseAlretStateType
 
-const postAuthenticationLogin = usePostAuthenticationLogin()
+const { isLoading, mutateAsync } = usePostAuthenticationLogin()
 
 const form = {
   email: {
@@ -36,23 +36,17 @@ const form = {
     value: ref<boolean>(false)
   }
 }
-
-const isLogging = ref(false)
-
 const onSubmit = async () => {
   try {
-    isLogging.value = true
-    await postAuthenticationLogin.mutateAsync({
+    await mutateAsync({
       email: form.email.value.value,
       password: form.password.value.value,
       remember: form.remember.value.value
     })
-    isLogging.value = false
     alretState.clear()
     router.push({ name: "index" })
   } catch {
     alretState.add("認証に失敗しました。メールアドレスとパスワードを確認してください。")
-    isLogging.value = false
   }
 }
 </script>
@@ -107,7 +101,7 @@ const onSubmit = async () => {
           <div>
             <Button class="w-full" :label="'ログイン'" :type="'submit'" :variant="'primary'"
               ><Spiner
-                v-show="isLogging"
+                v-show="isLoading"
                 class="h-5 w-5 animate-spin fill-slate-500 text-slate-300"
               ></Spiner
             ></Button>
