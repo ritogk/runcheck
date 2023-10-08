@@ -66,6 +66,7 @@ export class UseSidebarState implements IUseSidebarState {
         const loadingId = this._loadingState.run()
         await this._postApiAuthenticationLogout.mutateAsync()
         this._loadingState.stop(loadingId)
+        this._router.push({ name: "index" })
       },
       show: computed(() => this._getApiStatus.data.value?.isLogined ?? false)
     },
