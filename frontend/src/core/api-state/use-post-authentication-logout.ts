@@ -9,10 +9,12 @@ export const usePostAuthenticationLogout = () => {
 
   const mutation = useMutation({
     mutationFn: () => authenticationApi.authenticationLogoutPost(),
-    onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: [GET_STATUS] })
-      queryClient.removeQueries({ queryKey: [GET_YOUTUBE_VIDEO] })
-      queryClient.removeQueries({ queryKey: [GET_COMPARISONS] })
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: [GET_STATUS], exact: true })
+      await queryClient.resetQueries({
+        queryKey: [GET_COMPARISONS, GET_YOUTUBE_VIDEO],
+        exact: true
+      })
     }
   })
   return mutation
