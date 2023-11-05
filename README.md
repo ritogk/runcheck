@@ -77,5 +77,25 @@ cd frontend
 yarn e2e
 ```
 
+## インフラ
+### awsセットアップ
+```sh
+cd infra/cdk
+cp .env.base
+vim .env
+cdk deploy --all
+```
+1. GUIでIAMユーザーのアクセスキーとシークレットキーを作成  
+
+### VPSセットアップ
+```sh
+cd infra/cron
+cp backup-db.base.sh backup-db.sh
+sudo vim backup-db.sh #アクセスキーとシークレットキーを書き込む
+chmod +x backup-db.sh
+crontab -e
+  0 0 1 * * /home/ubuntu/runcheck/infra/cron/backup-db.sh
+```
+
 <br>
 <br>
