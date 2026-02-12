@@ -27,9 +27,9 @@ const onClose = () => {
   mainState.openModal.close()
 }
 
-const comparisonOptions: ComputedRef<{ id: number; name: string }[]> = computed(() => {
+const comparisonOptions: ComputedRef<{ id: string; name: string }[]> = computed(() => {
   if (!data.value || data.value.length == 0) {
-    return [{ id: 0, name: "" }]
+    return [{ id: "", name: "" }]
   }
   return data.value
     .filter((x) => {
@@ -40,7 +40,7 @@ const comparisonOptions: ComputedRef<{ id: number; name: string }[]> = computed(
     })
 })
 
-const selected = ref(comparisonOptions.value[0])
+const selected = ref<{ id: string; name: string }>(comparisonOptions.value[0])
 
 const hundleOpen = async () => {
   if (selected.value.name === "") {

@@ -27,15 +27,15 @@ import {
 } from '../models';
 
 export interface ComparisonsComparisonIdDeleteRequest {
-    comparisonId: number;
+    comparisonId: string;
 }
 
 export interface ComparisonsComparisonIdGetRequest {
-    comparisonId: number;
+    comparisonId: string;
 }
 
 export interface ComparisonsComparisonIdPublishPutRequest {
-    comparisonId: number;
+    comparisonId: string;
 }
 
 export interface ComparisonsPostRequest {

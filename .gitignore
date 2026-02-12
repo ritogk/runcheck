@@ -1,3 +1,25 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE / Editor
+.history/
+.idea/
+*.sw?
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Legacy Laravel
 project/.env
 project/Homestead.yaml
 project/Homestead.json
@@ -9,7 +31,7 @@ project/public/docs
 project/node_modules
 project/vendor
 
-#docker
+# Docker
 docker/db/data
 docker/db/sql
 docker/test_db/data

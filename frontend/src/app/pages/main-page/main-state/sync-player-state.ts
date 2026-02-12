@@ -36,8 +36,8 @@ export type ISyncPlayerStateType = {
     title?: string,
     memo?: string,
     category?: string
-  ): Promise<{ id: number }>
-  publishSync(id: number): Promise<void>
+  ): Promise<{ id: string }>
+  publishSync(id: string): Promise<void>
   resetSync(): Promise<void>
   subscription: {
     playerOne: ComputedRef<IVideoPlayer>
@@ -308,7 +308,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     title?: string,
     memo?: string,
     category?: string
-  ): Promise<{ id: number }> => {
+  ): Promise<{ id: string }> => {
     const video1VideoType =
       this._playerOne.value.subscription.videoType.value === VideoType.YOUTUBE
         ? ApiVideoType.YOUTUBE
@@ -346,7 +346,7 @@ export class SyncPlayerState implements ISyncPlayerStateType {
     return { id: response.comparisonId }
   }
 
-  publishSync = (id: number): Promise<void> => {
+  publishSync = (id: string): Promise<void> => {
     return putComparisonsIdPublish(id)
   }
 

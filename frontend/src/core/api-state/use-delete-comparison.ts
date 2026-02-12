@@ -8,7 +8,7 @@ export const useDeleteComparison = () => {
   const comparisonsApi = new ComparisonsApi(apiConfig)
 
   const mutation = useMutation({
-    mutationFn: (id: number) => comparisonsApi.comparisonsComparisonIdDelete({ comparisonId: id }),
+    mutationFn: (id: string) => comparisonsApi.comparisonsComparisonIdDelete({ comparisonId: id }),
     onSuccess: () => {
       queryClient.refetchQueries({ queryKey: [GET_COMPARISONS] })
     }

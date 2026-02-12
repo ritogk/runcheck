@@ -38,7 +38,7 @@ const urlParams = new URLSearchParams(window.location.search)
 const comparisonId = urlParams.get("comparisonId")
 if (comparisonId) {
   ;(async () => {
-    const comparion = await getComparisonById(Number(comparisonId))
+    const comparion = await getComparisonById(comparisonId)
     const loadingId = loadingState.run()
     if (
       await mainState.syncPlayer.loadSync(

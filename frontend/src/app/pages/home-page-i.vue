@@ -16,7 +16,7 @@ import { useDeleteComparison } from "@/core/api-state/use-delete-comparison"
 
 const { data, isFetching } = UseGetComparisons()
 
-const comparisons: ComputedRef<{ id: number; title: string; memo: string; tag: string }[]> =
+const comparisons: ComputedRef<{ id: string; title: string; memo: string; tag: string }[]> =
   computed(() => {
     if (!data.value || data.value.length == 0) {
       return []
@@ -61,12 +61,12 @@ const filteredComparisons = computed(() => {
 })
 
 const router = useRouter()
-const hundleTitleClick = (comparisonId: number) => {
+const hundleTitleClick = (comparisonId: string) => {
   router.push({ name: "index", query: { comparisonId: comparisonId } })
 }
 
 const deleteComparison = useDeleteComparison()
-const hundleDelete = async (comparisonId: number, title: string) => {
+const hundleDelete = async (comparisonId: string, title: string) => {
   if (confirm(`${title}を削除します。\nよろしいですか？`)) {
     deleteComparison.mutate(comparisonId)
   }

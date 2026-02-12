@@ -5,16 +5,11 @@ import LoginPageI from "@/app/pages/login-page-i.vue"
 import HomePageI from "@/app/pages/home-page-i.vue"
 
 const router = createRouter({
-  history: createWebHistory("/app/"),
+  history: createWebHistory("/"),
   routes: [
     {
-      path: "/index",
+      path: "/",
       name: "index",
-      component: MainPagePI
-    },
-    {
-      path: "/main",
-      name: "main",
       component: MainPagePI
     },
     {

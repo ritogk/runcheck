@@ -21,10 +21,10 @@ import { exists, mapValues } from '../runtime';
 export interface InlineResponse2001 {
     /**
      * 比較ID
-     * @type {number}
+     * @type {string}
      * @memberof InlineResponse2001
      */
-    comparisonId: number;
+    comparisonId: string;
 }
 
 export function InlineResponse2001FromJSON(json: any): InlineResponse2001 {

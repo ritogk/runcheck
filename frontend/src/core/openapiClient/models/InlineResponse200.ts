@@ -27,11 +27,11 @@ import {
  */
 export interface InlineResponse200 {
     /**
-     * 
-     * @type {number}
+     *
+     * @type {string}
      * @memberof InlineResponse200
      */
-    id: number;
+    id: string;
     /**
      * 
      * @type {string}

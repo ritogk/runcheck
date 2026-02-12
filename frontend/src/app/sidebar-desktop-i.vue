@@ -65,13 +65,13 @@ const hundleHomeClick = () => {
             <Transition name="item">
               <ul role="list" class="-mx-2 space-y-1" v-show="!apiGetStatus.isFetching.value">
                 <!-- ホーム -->
-                <li v-show="apiGetStatus.data.value?.isLogined">
+                <li v-if="apiGetStatus.data.value?.isLogined">
                   <a
                     class="group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                     @click="hundleHomeClick()"
                   >
                     <component :is="UserIcon" class="h-6 w-6 shrink-0" aria-hidden="true" />
-                    {{ apiGetStatus.data.value?.user.name }}
+                    {{ apiGetStatus.data.value?.user?.name }}
                   </a>
                 </li>
                 <!-- その他 -->
