@@ -12,6 +12,8 @@ import {
   QueryCommand,
   DeleteCommand,
   UpdateCommand,
+  BatchWriteCommand,
+  BatchGetCommand,
   PutCommandInput,
   GetCommandInput,
   QueryCommandInput,
@@ -110,22 +112,170 @@ export class DynamoDBService implements OnModuleInit {
   }
 
   async put(params: PutCommandInput) {
-    return this.docClient.send(new PutCommand(params));
+    return this.executeWithRetry('put', () =>
+      this.docClient.send(new PutCommand(params)),
+    );
   }
 
   async get(params: GetCommandInput) {
-    return this.docClient.send(new GetCommand(params));
+    return this.executeWithRetry('get', () =>
+      this.docClient.send(new GetCommand(params)),
+    );
   }
 
   async query(params: QueryCommandInput) {
-    return this.docClient.send(new QueryCommand(params));
+    return this.executeWithRetry('query', () =>
+      this.docClient.send(new QueryCommand(params)),
+    );
   }
 
   async delete(params: DeleteCommandInput) {
-    return this.docClient.send(new DeleteCommand(params));
+    return this.executeWithRetry('delete', () =>
+      this.docClient.send(new DeleteCommand(params)),
+    );
   }
 
   async update(params: UpdateCommandInput) {
-    return this.docClient.send(new UpdateCommand(params));
+    return this.executeWithRetry('update', () =>
+      this.docClient.send(new UpdateCommand(params)),
+    );
+  }
+
+  async batchWrite(
+    tableName: string,
+    writeRequests: Record<string, unknown>[],
+  ) {
+    const chunks: Record<string, unknown>[][] = [];
+    for (let i = 0; i < writeRequests.length; i += 25) {
+      chunks.push(writeRequests.slice(i, i + 25));
+    }
+
+    for (const chunk of chunks) {
+      let unprocessed: Record<string, unknown>[] | undefined = chunk;
+
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const result = await this.executeWithRetry('batchWrite', () =>
+          this.docClient.send(
+            new BatchWriteCommand({
+              RequestItems: { [tableName]: unprocessed as any },
+            }),
+          ),
+        );
+
+        const remaining = result.UnprocessedItems?.[tableName];
+        if (!remaining || remaining.length === 0) {
+          unprocessed = undefined;
+          break;
+        }
+
+        unprocessed = remaining as Record<string, unknown>[];
+        this.logger.warn(
+          `batchWrite: ${remaining.length} unprocessed items, retry ${attempt + 1}/3`,
+        );
+        await this.sleep(100 * Math.pow(2, attempt));
+      }
+
+      if (unprocessed && unprocessed.length > 0) {
+        throw new Error(
+          `batchWrite failed: ${unprocessed.length} items remain unprocessed in table ${tableName}`,
+        );
+      }
+    }
+  }
+
+  async batchGet(
+    tableName: string,
+    keys: Record<string, unknown>[],
+  ): Promise<Record<string, unknown>[]> {
+    const chunks: Record<string, unknown>[][] = [];
+    for (let i = 0; i < keys.length; i += 100) {
+      chunks.push(keys.slice(i, i + 100));
+    }
+
+    const allResults: Record<string, unknown>[] = [];
+
+    for (const chunk of chunks) {
+      let unprocessedKeys: Record<string, unknown>[] | undefined = chunk;
+
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const result = await this.executeWithRetry('batchGet', () =>
+          this.docClient.send(
+            new BatchGetCommand({
+              RequestItems: {
+                [tableName]: { Keys: unprocessedKeys as any },
+              },
+            }),
+          ),
+        );
+
+        const items = result.Responses?.[tableName] ?? [];
+        allResults.push(...(items as Record<string, unknown>[]));
+
+        const remaining = result.UnprocessedKeys?.[tableName]?.Keys;
+        if (!remaining || remaining.length === 0) {
+          unprocessedKeys = undefined;
+          break;
+        }
+
+        unprocessedKeys = remaining as Record<string, unknown>[];
+        this.logger.warn(
+          `batchGet: ${remaining.length} unprocessed keys, retry ${attempt + 1}/3`,
+        );
+        await this.sleep(100 * Math.pow(2, attempt));
+      }
+
+      if (unprocessedKeys && unprocessedKeys.length > 0) {
+        this.logger.error(
+          `batchGet: ${unprocessedKeys.length} keys remain unprocessed in table ${tableName}`,
+        );
+      }
+    }
+
+    return allResults;
+  }
+
+  private async executeWithRetry<T>(
+    operationName: string,
+    operation: () => Promise<T>,
+    maxRetries = 2,
+  ): Promise<T> {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        return await operation();
+      } catch (error) {
+        if (attempt < maxRetries && this.isRetryableError(error)) {
+          const delayMs = 100 * Math.pow(2, attempt);
+          this.logger.warn(
+            `${operationName} failed (attempt ${attempt + 1}/${maxRetries + 1}), retrying in ${delayMs}ms: ${error instanceof Error ? error.message : error}`,
+          );
+          await this.sleep(delayMs);
+          continue;
+        }
+
+        this.logger.error(
+          `${operationName} failed after ${attempt + 1} attempt(s): ${error instanceof Error ? error.message : error}`,
+          error instanceof Error ? error.stack : undefined,
+        );
+        throw error;
+      }
+    }
+
+    throw new Error(`${operationName}: unreachable`);
+  }
+
+  private isRetryableError(error: unknown): boolean {
+    if (!(error instanceof Error)) return false;
+    const name = (error as any).name ?? '';
+    const retryable = [
+      'ProvisionedThroughputExceededException',
+      'ThrottlingException',
+      'InternalServerError',
+      'ServiceUnavailable',
+    ];
+    return retryable.includes(name);
+  }
+
+  private sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
