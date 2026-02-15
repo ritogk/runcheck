@@ -1,33 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { DynamoDBService } from '../../common/dynamodb/dynamodb.service';
+import type { User } from '../../common/entities/base';
+import type { UserItem } from '../../common/entities/dynamodb';
 
-const TABLE_NAME = process.env.DYNAMODB_TABLE_USERS || 'RunCheckUsers';
+const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME || 'RunCheck';
 
-export interface UserRecord {
-  userId: string;
-  email: string;
-  name: string;
-  password: string;
-  carType: string;
-  createdAt: string;
-  updatedAt: string;
-}
+export type UserRecord = UserItem;
 
 @Injectable()
 export class UserRepository {
   constructor(private readonly dynamodb: DynamoDBService) {}
 
-  async create(user: UserRecord): Promise<void> {
+  async create(user: User): Promise<void> {
     await this.dynamodb.put({
       TableName: TABLE_NAME,
-      Item: user,
+      Item: { ...user, userId: user.id, kind: `USER@${user.id}` },
     });
   }
 
   async findById(userId: string): Promise<UserRecord | null> {
     const result = await this.dynamodb.get({
       TableName: TABLE_NAME,
-      Key: { userId },
+      Key: { userId, kind: `USER@${userId}` },
     });
     return (result.Item as UserRecord) || null;
   }

@@ -60,50 +60,24 @@ export class CdkStack extends cdk.Stack {
     )
 
     // =============================================
-    // DynamoDB テーブル
+    // DynamoDB テーブル (シングルテーブル)
     // =============================================
-    const usersTable = new dynamodb.Table(this, "UsersTable", {
-      tableName: "RunCheckUsers",
+    const table = new dynamodb.Table(this, "RunCheckTable", {
+      tableName: "RunCheck",
       partitionKey: { name: "userId", type: dynamodb.AttributeType.STRING },
+      sortKey: { name: "kind", type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
     })
-    usersTable.addGlobalSecondaryIndex({
+    table.addGlobalSecondaryIndex({
       indexName: "EmailIndex",
       partitionKey: { name: "email", type: dynamodb.AttributeType.STRING },
       projectionType: dynamodb.ProjectionType.ALL,
     })
-
-    const comparisonsTable = new dynamodb.Table(this, "ComparisonsTable", {
-      tableName: "RunCheckComparisons",
-      partitionKey: {
-        name: "comparisonId",
-        type: dynamodb.AttributeType.STRING,
-      },
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      removalPolicy: cdk.RemovalPolicy.RETAIN,
-    })
-    comparisonsTable.addGlobalSecondaryIndex({
-      indexName: "UserIdIndex",
-      partitionKey: { name: "userId", type: dynamodb.AttributeType.STRING },
+    table.addGlobalSecondaryIndex({
+      indexName: "KindIndex",
+      partitionKey: { name: "kind", type: dynamodb.AttributeType.STRING },
       projectionType: dynamodb.ProjectionType.ALL,
-    })
-
-    const youtubeTokensTable = new dynamodb.Table(this, "YoutubeTokensTable", {
-      tableName: "RunCheckYoutubeTokens",
-      partitionKey: { name: "userId", type: dynamodb.AttributeType.STRING },
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      removalPolicy: cdk.RemovalPolicy.RETAIN,
-    })
-
-    const operationLogsTable = new dynamodb.Table(this, "OperationLogsTable", {
-      tableName: "RunCheckOperationLogs",
-      partitionKey: {
-        name: "operationCd",
-        type: dynamodb.AttributeType.NUMBER,
-      },
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      removalPolicy: cdk.RemovalPolicy.RETAIN,
     })
 
     // =============================================
@@ -123,10 +97,7 @@ export class CdkStack extends cdk.Stack {
       timeout: cdk.Duration.seconds(30),
       environment: {
         NODE_ENV: "production",
-        DYNAMODB_TABLE_USERS: usersTable.tableName,
-        DYNAMODB_TABLE_COMPARISONS: comparisonsTable.tableName,
-        DYNAMODB_TABLE_YOUTUBE_TOKENS: youtubeTokensTable.tableName,
-        DYNAMODB_TABLE_OPERATION_LOGS: operationLogsTable.tableName,
+        DYNAMODB_TABLE_NAME: table.tableName,
         JWT_SECRET: process.env.JWT_SECRET ?? "change-me-in-production",
         YOUTUBE_CLIENT_ID: process.env.YOUTUBE_CLIENT_ID ?? "",
         YOUTUBE_CLIENT_SECRET: process.env.YOUTUBE_CLIENT_SECRET ?? "",
@@ -135,10 +106,7 @@ export class CdkStack extends cdk.Stack {
     })
 
     // Lambda に DynamoDB アクセス権限を付与
-    usersTable.grantReadWriteData(backendFunction)
-    comparisonsTable.grantReadWriteData(backendFunction)
-    youtubeTokensTable.grantReadWriteData(backendFunction)
-    operationLogsTable.grantReadWriteData(backendFunction)
+    table.grantReadWriteData(backendFunction)
 
     // =============================================
     // API Gateway (HTTP API)

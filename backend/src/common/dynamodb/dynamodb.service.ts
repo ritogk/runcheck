@@ -23,10 +23,14 @@ import {
 
 const TABLE_DEFINITIONS: CreateTableCommandInput[] = [
   {
-    TableName: process.env.DYNAMODB_TABLE_USERS || 'RunCheckUsers',
-    KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }],
+    TableName: process.env.DYNAMODB_TABLE_NAME || 'RunCheck',
+    KeySchema: [
+      { AttributeName: 'userId', KeyType: 'HASH' },
+      { AttributeName: 'kind', KeyType: 'RANGE' },
+    ],
     AttributeDefinitions: [
       { AttributeName: 'userId', AttributeType: 'S' },
+      { AttributeName: 'kind', AttributeType: 'S' },
       { AttributeName: 'email', AttributeType: 'S' },
     ],
     GlobalSecondaryIndexes: [
@@ -35,41 +39,11 @@ const TABLE_DEFINITIONS: CreateTableCommandInput[] = [
         KeySchema: [{ AttributeName: 'email', KeyType: 'HASH' }],
         Projection: { ProjectionType: 'ALL' },
       },
-    ],
-    BillingMode: 'PAY_PER_REQUEST',
-  },
-  {
-    TableName:
-      process.env.DYNAMODB_TABLE_COMPARISONS || 'RunCheckComparisons',
-    KeySchema: [{ AttributeName: 'comparisonId', KeyType: 'HASH' }],
-    AttributeDefinitions: [
-      { AttributeName: 'comparisonId', AttributeType: 'S' },
-      { AttributeName: 'userId', AttributeType: 'S' },
-    ],
-    GlobalSecondaryIndexes: [
       {
-        IndexName: 'UserIdIndex',
-        KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }],
+        IndexName: 'KindIndex',
+        KeySchema: [{ AttributeName: 'kind', KeyType: 'HASH' }],
         Projection: { ProjectionType: 'ALL' },
       },
-    ],
-    BillingMode: 'PAY_PER_REQUEST',
-  },
-  {
-    TableName:
-      process.env.DYNAMODB_TABLE_YOUTUBE_TOKENS || 'RunCheckYoutubeTokens',
-    KeySchema: [{ AttributeName: 'userId', KeyType: 'HASH' }],
-    AttributeDefinitions: [
-      { AttributeName: 'userId', AttributeType: 'S' },
-    ],
-    BillingMode: 'PAY_PER_REQUEST',
-  },
-  {
-    TableName:
-      process.env.DYNAMODB_TABLE_OPERATION_LOGS || 'RunCheckOperationLogs',
-    KeySchema: [{ AttributeName: 'operationCd', KeyType: 'HASH' }],
-    AttributeDefinitions: [
-      { AttributeName: 'operationCd', AttributeType: 'N' },
     ],
     BillingMode: 'PAY_PER_REQUEST',
   },

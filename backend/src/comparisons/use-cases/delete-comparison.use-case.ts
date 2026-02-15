@@ -16,6 +16,6 @@ export class DeleteComparisonUseCase {
       throw new ForbiddenException('この比較情報を削除する権限がありません');
     }
 
-    await this.comparisonRepository.deleteById(comparisonId);
+    await this.comparisonRepository.deleteById(comparisonId, record.userId ?? '');
   }
 }

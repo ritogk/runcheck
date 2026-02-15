@@ -11,7 +11,7 @@ export class GetComparisonsUseCase {
     const records = await this.comparisonRepository.findByUserId(user.sub);
 
     return records.map((record) => ({
-      id: record.comparisonId,
+      id: record.id,
       category: record.category,
       memo: record.memo,
       title: record.title,

@@ -22,12 +22,12 @@ export class LoginUseCase {
       throw new UnauthorizedException('メールアドレスまたはパスワードが正しくありません');
     }
 
-    const payload = { sub: user.userId, name: user.name };
+    const payload = { sub: user.id, name: user.name };
     const expiresIn = dto.remember ? '7d' : '24h';
     const accessToken = this.jwtService.sign(payload, { expiresIn });
 
     return {
-      id: user.userId,
+      id: user.id,
       name: user.name,
       accessToken,
     };

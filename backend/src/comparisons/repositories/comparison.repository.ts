@@ -1,66 +1,61 @@
 import { Injectable } from '@nestjs/common';
 import { DynamoDBService } from '../../common/dynamodb/dynamodb.service';
+import type { Comparison } from '../../common/entities/base';
+import type { ComparisonItem } from '../../common/entities/dynamodb';
 
-const TABLE_NAME = process.env.DYNAMODB_TABLE_COMPARISONS || 'RunCheckComparisons';
+const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME || 'RunCheck';
 
-export interface ComparisonRecord {
-  comparisonId: string;
-  userId?: string;
-  title?: string;
-  memo?: string;
-  category?: string;
-  video1Url: string;
-  video1TimeSt: number;
-  video1VideoType: number;
-  video2Url: string;
-  video2TimeSt: number;
-  video2VideoType: number;
-  releaseKbn: number;
-  anonymous: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+export type ComparisonRecord = ComparisonItem;
 
 @Injectable()
 export class ComparisonRepository {
   constructor(private readonly dynamodb: DynamoDBService) {}
 
-  async create(record: ComparisonRecord): Promise<void> {
+  async create(record: Comparison): Promise<void> {
     await this.dynamodb.put({
       TableName: TABLE_NAME,
-      Item: record,
+      Item: {
+        ...record,
+        userId: record.userId || '',
+        kind: `COMPARISON@${record.id}`,
+      },
     });
   }
 
   async findById(comparisonId: string): Promise<ComparisonRecord | null> {
-    const result = await this.dynamodb.get({
+    const result = await this.dynamodb.query({
       TableName: TABLE_NAME,
-      Key: { comparisonId },
+      IndexName: 'KindIndex',
+      KeyConditionExpression: 'kind = :kind',
+      ExpressionAttributeValues: { ':kind': `COMPARISON@${comparisonId}` },
     });
-    return (result.Item as ComparisonRecord) || null;
+    return (result.Items?.[0] as ComparisonRecord) || null;
   }
 
   async findByUserId(userId: string): Promise<ComparisonRecord[]> {
     const result = await this.dynamodb.query({
       TableName: TABLE_NAME,
-      IndexName: 'UserIdIndex',
-      KeyConditionExpression: 'userId = :userId',
-      ExpressionAttributeValues: { ':userId': userId },
+      KeyConditionExpression:
+        'userId = :userId AND begins_with(kind, :prefix)',
+      ExpressionAttributeValues: {
+        ':userId': userId,
+        ':prefix': 'COMPARISON@',
+      },
     });
     return (result.Items as ComparisonRecord[]) || [];
   }
 
-  async deleteById(comparisonId: string): Promise<void> {
+  async deleteById(comparisonId: string, userId: string): Promise<void> {
     await this.dynamodb.delete({
       TableName: TABLE_NAME,
-      Key: { comparisonId },
+      Key: { userId, kind: `COMPARISON@${comparisonId}` },
     });
   }
 
-  async publishById(comparisonId: string): Promise<void> {
+  async publishById(comparisonId: string, userId: string): Promise<void> {
     await this.dynamodb.update({
       TableName: TABLE_NAME,
-      Key: { comparisonId },
+      Key: { userId, kind: `COMPARISON@${comparisonId}` },
       UpdateExpression: 'SET releaseKbn = :val, updatedAt = :now',
       ExpressionAttributeValues: {
         ':val': 1,

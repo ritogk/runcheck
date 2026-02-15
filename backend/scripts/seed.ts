@@ -15,6 +15,8 @@ const docClient = DynamoDBDocumentClient.from(client, {
   marshallOptions: { removeUndefinedValues: true },
 });
 
+const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME || 'RunCheck';
+
 const OPERATION_NAMES: Record<number, string> = {
   1: 'OPEN_MODAL_CLICK',
   2: 'OPEN_CLICK',
@@ -56,9 +58,11 @@ async function seed() {
   const password = await bcrypt.hash('password123', 10);
   await docClient.send(
     new PutCommand({
-      TableName: 'RunCheckUsers',
+      TableName: TABLE_NAME,
       Item: {
         userId,
+        kind: `USER@${userId}`,
+        id: userId,
         email: 'test@example.com',
         name: 'テストユーザー',
         password,
@@ -74,8 +78,10 @@ async function seed() {
   for (const [cd, nm] of Object.entries(OPERATION_NAMES)) {
     await docClient.send(
       new PutCommand({
-        TableName: 'RunCheckOperationLogs',
+        TableName: TABLE_NAME,
         Item: {
+          userId: '',
+          kind: `OPERATION_LOG@${cd}`,
           operationCd: Number(cd),
           operationNm: nm,
           executionCnt: 0,

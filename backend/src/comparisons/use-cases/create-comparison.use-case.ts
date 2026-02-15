@@ -16,8 +16,8 @@ export class CreateComparisonUseCase {
     const comparisonId = ulid();
 
     await this.comparisonRepository.create({
-      comparisonId,
-      userId: user ? user.sub : undefined,
+      id: comparisonId,
+      userId: user ? user.sub : '',
       title: dto.title,
       memo: dto.memo,
       category: dto.category,

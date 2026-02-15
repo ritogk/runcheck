@@ -24,7 +24,7 @@ export class FindComparisonUseCase {
     }
 
     return {
-      id: record.comparisonId,
+      id: record.id,
       category: record.category,
       memo: record.memo,
       title: record.title,

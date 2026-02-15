@@ -19,6 +19,6 @@ export class PublishComparisonUseCase {
       throw new ForbiddenException('この比較情報を公開する権限がありません');
     }
 
-    await this.comparisonRepository.publishById(comparisonId);
+    await this.comparisonRepository.publishById(comparisonId, record.userId ?? '');
   }
 }
