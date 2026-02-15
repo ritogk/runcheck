@@ -1,14 +1,4 @@
 import { VideoType, ReleaseKbn } from './enums';
-
-/**
- * Comparison (1:N per user)
- *   PK = {userId}          SK = "COMPARISON@{id}"
- *   KindIndex PK = "COMPARISON@{id}"
- *
- * findByUserId(userId)      → Query PK={userId}, SK begins_with "COMPARISON@"
- * findById(id)              → Query KindIndex PK="COMPARISON@{id}"
- * delete/patch(id, userId)  → PK={userId}, SK="COMPARISON@{id}"
- */
 export interface Comparison {
   id: string;          // ULID (SK の一部: COMPARISON@{id})
   userId: string;      // FK → User.id (= PK)

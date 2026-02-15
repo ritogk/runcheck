@@ -1,6 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { google } from 'googleapis';
-import { ulid } from 'ulid';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
 import { YoutubeTokenRepository } from '../repositories/youtube-token.repository';
 import { ExchangeTokenResponseDto } from '../dto/exchange-token-response.dto';
@@ -25,7 +24,6 @@ export class ExchangeTokenUseCase {
       if (user && tokens.refresh_token) {
         const now = new Date().toISOString();
         await this.youtubeTokenRepository.save({
-          id: ulid(),
           userId: user.sub,
           refreshToken: tokens.refresh_token,
           createdAt: now,

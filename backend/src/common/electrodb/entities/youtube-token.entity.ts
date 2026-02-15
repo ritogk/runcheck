@@ -7,7 +7,6 @@ export const YoutubeTokenSchema: Schema<string, string, string> = {
     service: 'runcheck',
   },
   attributes: {
-    id: { type: 'string', required: true },
     userId: { type: 'string', required: true },
     refreshToken: { type: 'string', required: true },
     createdAt: { type: 'string', required: true },
