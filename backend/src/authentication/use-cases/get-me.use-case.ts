@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
-import { UserResponseDto } from '../../users/dto/create-user.dto';
+import { UserResponseDto } from '../../users/dto/user-response.dto';
 
 @Injectable()
 export class GetMeUseCase {

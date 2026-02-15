@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
 import { ComparisonRepository } from '../repositories/comparison.repository';
-import { ComparisonResponseDto } from '../dto/create-comparison.dto';
+import { ComparisonResponseDto } from '../dto/comparison-response.dto';
 
 @Injectable()
 export class GetComparisonsUseCase {

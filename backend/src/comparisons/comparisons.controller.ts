@@ -19,11 +19,9 @@ import {
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { OptionalJwtAuthGuard } from '../common/guards/optional-jwt-auth.guard';
 import { CurrentUser, JwtPayload } from '../common/decorators/current-user.decorator';
-import {
-  CreateComparisonDto,
-  ComparisonResponseDto,
-  CreateComparisonResponseDto,
-} from './dto/create-comparison.dto';
+import { CreateComparisonDto } from './dto/create-comparison.dto';
+import { ComparisonResponseDto } from './dto/comparison-response.dto';
+import { CreateComparisonResponseDto } from './dto/create-comparison-response.dto';
 import { CreateComparisonUseCase } from './use-cases/create-comparison.use-case';
 import { FindComparisonUseCase } from './use-cases/find-comparison.use-case';
 import { GetComparisonsUseCase } from './use-cases/get-comparisons.use-case';

@@ -3,7 +3,7 @@ import { google } from 'googleapis';
 import { ulid } from 'ulid';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
 import { YoutubeTokenRepository } from '../repositories/youtube-token.repository';
-import { ExchangeTokenResponseDto } from '../dto/youtube-oauth.dto';
+import { ExchangeTokenResponseDto } from '../dto/exchange-token-response.dto';
 
 @Injectable()
 export class ExchangeTokenUseCase {

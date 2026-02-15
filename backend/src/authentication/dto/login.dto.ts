@@ -16,14 +16,3 @@ export class LoginDto {
   @IsBoolean()
   remember: boolean;
 }
-
-export class LoginResponseDto {
-  @ApiProperty({ description: 'ユーザーID' })
-  id: string;
-
-  @ApiProperty({ description: 'ネーム' })
-  name: string;
-
-  @ApiProperty({ description: 'アクセストークン' })
-  accessToken: string;
-}

@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/commo
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
 import { ReleaseKbn } from '../../common/entities';
 import { ComparisonRepository } from '../repositories/comparison.repository';
-import { ComparisonResponseDto } from '../dto/create-comparison.dto';
+import { ComparisonResponseDto } from '../dto/comparison-response.dto';
 
 @Injectable()
 export class FindComparisonUseCase {

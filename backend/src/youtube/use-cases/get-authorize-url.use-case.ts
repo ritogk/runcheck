@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { google } from 'googleapis';
-import { AuthorizeUrlResponseDto } from '../dto/youtube-oauth.dto';
+import { AuthorizeUrlResponseDto } from '../dto/authorize-url-response.dto';
 
 @Injectable()
 export class GetAuthorizeUrlUseCase {

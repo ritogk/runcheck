@@ -22,11 +22,3 @@ export class CreateUserDto {
   @MinLength(6)
   password: string;
 }
-
-export class UserResponseDto {
-  @ApiProperty({ description: 'ユーザーID' })
-  id: string;
-
-  @ApiProperty({ description: 'ネーム' })
-  name: string;
-}

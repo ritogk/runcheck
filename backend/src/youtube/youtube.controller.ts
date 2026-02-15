@@ -17,12 +17,10 @@ import {
 } from '@nestjs/swagger';
 import { OptionalJwtAuthGuard } from '../common/guards/optional-jwt-auth.guard';
 import { CurrentUser, JwtPayload } from '../common/decorators/current-user.decorator';
-import {
-  YoutubeOauthDto,
-  AuthorizeUrlResponseDto,
-  ExchangeTokenResponseDto,
-  YoutubeVideoDto,
-} from './dto/youtube-oauth.dto';
+import { YoutubeOauthDto } from './dto/youtube-oauth.dto';
+import { AuthorizeUrlResponseDto } from './dto/authorize-url-response.dto';
+import { ExchangeTokenResponseDto } from './dto/exchange-token-response.dto';
+import { YoutubeVideoDto } from './dto/youtube-video.dto';
 import { GetAuthorizeUrlUseCase } from './use-cases/get-authorize-url.use-case';
 import { ExchangeTokenUseCase } from './use-cases/exchange-token.use-case';
 import { FetchVideosUseCase } from './use-cases/fetch-videos.use-case';

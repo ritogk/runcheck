@@ -2,7 +2,8 @@ import { Injectable, ConflictException } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import { ulid } from 'ulid';
 import { UserRepository } from '../repositories/user.repository';
-import { CreateUserDto, UserResponseDto } from '../dto/create-user.dto';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UserResponseDto } from '../dto/user-response.dto';
 
 @Injectable()
 export class RegisterUserUseCase {

@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { google } from 'googleapis';
-import { YoutubeVideoDto } from '../dto/youtube-oauth.dto';
+import { YoutubeVideoDto } from '../dto/youtube-video.dto';
 
 @Injectable()
 export class FetchVideosUseCase {

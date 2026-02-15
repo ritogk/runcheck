@@ -3,7 +3,8 @@ import { ulid } from 'ulid';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
 import { ReleaseKbn } from '../../common/entities';
 import { ComparisonRepository } from '../repositories/comparison.repository';
-import { CreateComparisonDto, CreateComparisonResponseDto } from '../dto/create-comparison.dto';
+import { CreateComparisonDto } from '../dto/create-comparison.dto';
+import { CreateComparisonResponseDto } from '../dto/create-comparison-response.dto';
 
 @Injectable()
 export class CreateComparisonUseCase {

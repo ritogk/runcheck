@@ -15,8 +15,9 @@ import {
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { CurrentUser, JwtPayload } from '../common/decorators/current-user.decorator';
-import { LoginDto, LoginResponseDto } from './dto/login.dto';
-import { UserResponseDto } from '../users/dto/create-user.dto';
+import { LoginDto } from './dto/login.dto';
+import { LoginResponseDto } from './dto/login-response.dto';
+import { UserResponseDto } from '../users/dto/user-response.dto';
 import { LoginUseCase } from './use-cases/login.use-case';
 import { LogoutUseCase } from './use-cases/logout.use-case';
 import { GetMeUseCase } from './use-cases/get-me.use-case';
