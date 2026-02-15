@@ -1,68 +1,38 @@
 import { Injectable } from '@nestjs/common';
-import { DynamoDBService } from '../../common/dynamodb/dynamodb.service';
-import type { Comparison } from '../../common/entities/base';
-import type { ComparisonItem } from '../../common/entities/dynamodb';
-import { toComparisonKey } from '../../common/entities/dynamodb';
-
-const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME || 'RunCheck';
-
-export type ComparisonRecord = ComparisonItem;
+import { ElectroDBService } from '../../common/electrodb/electrodb.service';
+import { ReleaseKbn, type Comparison } from '../../common/entities';
 
 @Injectable()
 export class ComparisonRepository {
-  constructor(private readonly dynamodb: DynamoDBService) {}
+  constructor(private readonly electrodb: ElectroDBService) {}
 
   async create(record: Comparison): Promise<void> {
-    await this.dynamodb.put({
-      TableName: TABLE_NAME,
-      Item: {
-        ...record,
-        ...toComparisonKey({ id: record.id, userId: record.userId || '' }),
-      },
-    });
+    await this.electrodb.comparison.create(record).go();
   }
 
-  async findById(comparisonId: string): Promise<ComparisonRecord | null> {
-    const result = await this.dynamodb.query({
-      TableName: TABLE_NAME,
-      IndexName: 'KindIndex',
-      KeyConditionExpression: 'kind = :kind',
-      ExpressionAttributeValues: {
-        ':kind': toComparisonKey({ id: comparisonId, userId: '' }).kind,
-      },
-    });
-    return (result.Items?.[0] as ComparisonRecord) || null;
+  async findById(comparisonId: string): Promise<Comparison | null> {
+    const { data } = await this.electrodb.comparison.query
+      .byKind({ id: comparisonId })
+      .go();
+    return (data[0] as Comparison) ?? null;
   }
 
-  async findByUserId(userId: string): Promise<ComparisonRecord[]> {
-    const result = await this.dynamodb.query({
-      TableName: TABLE_NAME,
-      KeyConditionExpression:
-        'userId = :userId AND begins_with(kind, :prefix)',
-      ExpressionAttributeValues: {
-        ':userId': userId,
-        ':prefix': 'COMPARISON@',
-      },
-    });
-    return (result.Items as ComparisonRecord[]) || [];
+  async findByUserId(userId: string): Promise<Comparison[]> {
+    const { data } = await this.electrodb.comparison.query
+      .primary({ userId })
+      .go();
+    console.log(data)
+    return data as Comparison[];
   }
 
   async deleteById(comparisonId: string, userId: string): Promise<void> {
-    await this.dynamodb.delete({
-      TableName: TABLE_NAME,
-      Key: toComparisonKey({ id: comparisonId, userId }),
-    });
+    await this.electrodb.comparison.delete({ id: comparisonId, userId }).go();
   }
 
   async publishById(comparisonId: string, userId: string): Promise<void> {
-    await this.dynamodb.update({
-      TableName: TABLE_NAME,
-      Key: toComparisonKey({ id: comparisonId, userId }),
-      UpdateExpression: 'SET releaseKbn = :val, updatedAt = :now',
-      ExpressionAttributeValues: {
-        ':val': 1,
-        ':now': new Date().toISOString(),
-      },
-    });
+    await this.electrodb.comparison
+      .patch({ id: comparisonId, userId })
+      .set({ releaseKbn: ReleaseKbn.PUBLIC, updatedAt: new Date().toISOString() })
+      .go();
   }
 }

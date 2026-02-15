@@ -1,39 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { DynamoDBService } from '../../common/dynamodb/dynamodb.service';
-import type { User } from '../../common/entities/base';
-import type { UserItem } from '../../common/entities/dynamodb';
-import { toUserKey } from '../../common/entities/dynamodb';
-
-const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME || 'RunCheck';
-
-export type UserRecord = UserItem;
+import { ElectroDBService } from '../../common/electrodb/electrodb.service';
+import type { User } from '../../common/entities';
 
 @Injectable()
 export class UserRepository {
-  constructor(private readonly dynamodb: DynamoDBService) {}
+  constructor(private readonly electrodb: ElectroDBService) {}
 
   async create(user: User): Promise<void> {
-    await this.dynamodb.put({
-      TableName: TABLE_NAME,
-      Item: { ...user, ...toUserKey({ id: user.id }) },
-    });
+    await this.electrodb.user.create(user).go();
   }
 
-  async findById(userId: string): Promise<UserRecord | null> {
-    const result = await this.dynamodb.get({
-      TableName: TABLE_NAME,
-      Key: toUserKey({ id: userId }),
-    });
-    return (result.Item as UserRecord) || null;
+  async findById(userId: string): Promise<User | null> {
+    const { data } = await this.electrodb.user.get({ id: userId }).go();
+    return (data as User) ?? null;
   }
 
-  async findByEmail(email: string): Promise<UserRecord | null> {
-    const result = await this.dynamodb.query({
-      TableName: TABLE_NAME,
-      IndexName: 'EmailIndex',
-      KeyConditionExpression: 'email = :email',
-      ExpressionAttributeValues: { ':email': email },
-    });
-    return (result.Items?.[0] as UserRecord) || null;
+  async findByEmail(email: string): Promise<User | null> {
+    const { data } = await this.electrodb.user.query.byEmail({ email }).go();
+    return (data[0] as User) ?? null;
   }
 }

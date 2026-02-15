@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
+import { ReleaseKbn } from '../../common/entities';
 import { ComparisonRepository } from '../repositories/comparison.repository';
 import { ComparisonResponseDto } from '../dto/create-comparison.dto';
 
@@ -16,7 +17,7 @@ export class FindComparisonUseCase {
       throw new NotFoundException('比較情報が見つかりません');
     }
 
-    const isPublished = record.releaseKbn === 1;
+    const isPublished = record.releaseKbn === ReleaseKbn.PUBLIC;
     const isOwner = user && record.userId === user.sub;
 
     if (!isPublished && !isOwner) {

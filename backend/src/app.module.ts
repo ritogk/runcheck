@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DynamoDBModule } from './common/dynamodb/dynamodb.module';
+import { ElectroDBModule } from './common/electrodb/electrodb.module';
 import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { ComparisonsModule } from './comparisons/comparisons.module';
@@ -9,7 +9,7 @@ import { StatusModule } from './status/status.module';
 
 @Module({
   imports: [
-    DynamoDBModule,
+    ElectroDBModule,
     UsersModule,
     AuthenticationModule,
     ComparisonsModule,

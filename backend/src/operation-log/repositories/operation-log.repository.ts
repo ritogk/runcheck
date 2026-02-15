@@ -1,24 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { DynamoDBService } from '../../common/dynamodb/dynamodb.service';
-import { toOperationLogKey } from '../../common/entities/dynamodb';
-
-const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME || 'RunCheck';
+import { ElectroDBService } from '../../common/electrodb/electrodb.service';
 
 @Injectable()
 export class OperationLogRepository {
-  constructor(private readonly dynamodb: DynamoDBService) {}
+  constructor(private readonly electrodb: ElectroDBService) {}
 
   async incrementCount(operationCd: number): Promise<void> {
-    await this.dynamodb.update({
-      TableName: TABLE_NAME,
-      Key: toOperationLogKey({ id: String(operationCd) }),
-      UpdateExpression:
-        'SET executionCnt = if_not_exists(executionCnt, :zero) + :inc, updatedAt = :now',
-      ExpressionAttributeValues: {
-        ':inc': 1,
-        ':zero': 0,
-        ':now': new Date().toISOString(),
-      },
-    });
+    await this.electrodb.operationLog
+      .update({ id: String(operationCd) })
+      .add({ executionCnt: 1 })
+      .set({ updatedAt: new Date().toISOString() })
+      .go();
   }
 }

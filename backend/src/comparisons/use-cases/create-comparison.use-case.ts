@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ulid } from 'ulid';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
+import { ReleaseKbn } from '../../common/entities';
 import { ComparisonRepository } from '../repositories/comparison.repository';
 import { CreateComparisonDto, CreateComparisonResponseDto } from '../dto/create-comparison.dto';
 
@@ -27,7 +28,7 @@ export class CreateComparisonUseCase {
       video2Url: dto.video2Url,
       video2TimeSt: dto.video2TimeSt,
       video2VideoType: dto.video2VideoType,
-      releaseKbn: 0,
+      releaseKbn: ReleaseKbn.PRIVATE,
       anonymous: dto.anonymous,
       createdAt: now,
       updatedAt: now,

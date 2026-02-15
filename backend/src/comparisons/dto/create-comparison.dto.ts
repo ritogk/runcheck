@@ -7,11 +7,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-
-export enum VideoType {
-  YOUTUBE = 1,
-  LOCAL = 2,
-}
+import { VideoType } from '../../common/entities';
 
 export class CreateComparisonDto {
   @ApiPropertyOptional({ description: 'カテゴリ' })

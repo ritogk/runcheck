@@ -1,10 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, Min, Max } from 'class-validator';
+import { IsEnum } from 'class-validator';
+import { OperationCd } from '../../common/entities';
 
 export class OperationLogDto {
-  @ApiProperty({ description: '操作コード (1-30)', minimum: 1, maximum: 30 })
-  @IsInt()
-  @Min(1)
-  @Max(30)
-  operationCd: number;
+  @ApiProperty({ description: '操作コード', enum: OperationCd })
+  @IsEnum(OperationCd)
+  operationCd: OperationCd;
 }

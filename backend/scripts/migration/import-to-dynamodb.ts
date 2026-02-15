@@ -19,12 +19,23 @@ import {
 import { ulid } from 'ulid';
 import * as fs from 'fs';
 import * as path from 'path';
-import {
-  toUserKey,
-  toComparisonKey,
-  toYoutubeTokenKey,
-  toOperationLogKey,
-} from '../../src/common/entities/dynamodb';
+// Key helpers inlined (previously from entities/dynamodb.ts, now deleted)
+const toUserKey = (pk: { id: string }) => ({
+  userId: pk.id,
+  kind: `USER`,
+});
+const toComparisonKey = (pk: { id: string; userId: string }) => ({
+  userId: pk.userId,
+  kind: `COMPARISON@${pk.id}`,
+});
+const toYoutubeTokenKey = (pk: { id: string; userId: string }) => ({
+  userId: pk.userId,
+  kind: `YOUTUBE_TOKEN`,
+});
+const toOperationLogKey = (pk: { id: string }) => ({
+  userId: '',
+  kind: `OPERATION_LOG@${pk.id}`,
+});
 
 // =============================================
 // 設定
