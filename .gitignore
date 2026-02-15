@@ -19,20 +19,8 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-# Legacy Laravel
-project/.env
-project/Homestead.yaml
-project/Homestead.json
-project/.vagrant
-project/.phpunit.result.cache
-project/.scribe
-project/resources/docs
-project/public/docs
-project/node_modules
-project/vendor
+# Build outputs
+dist/
 
 # Docker
-docker/db/data
-docker/db/sql
-docker/test_db/data
-docker/test_db/sql
+docker/data/

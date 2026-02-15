@@ -1,0 +1,23 @@
+{
+  "name": "runcheck",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "run-p dev:frontend dev:backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "dev:backend": "npm run start:dev -w backend",
+    "build:frontend": "npm run build -w frontend",
+    "build:backend": "npm run build -w backend",
+    "lint:frontend": "npm run lint -w frontend",
+    "lint:backend": "npm run lint -w backend",
+    "test:frontend": "npm run test:unit -w frontend",
+    "test:backend": "npm run test -w backend",
+    "deploy:infra": "cd legacy/infra/cdk && npx cdk deploy",
+    "diff:infra": "cd legacy/infra/cdk && npx cdk diff",
+    "synth:infra": "cd legacy/infra/cdk && npx cdk synth"
+  }
+}
