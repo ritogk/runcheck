@@ -1,6 +1,7 @@
-import { Schema } from 'electrodb';
+import { Schema, EntityItem, Entity } from 'electrodb';
+import { entityConfig } from '../client';
 
-export const UserSchema: Schema<string, string, string> = {
+export const UserEntity = new Entity({
   model: {
     entity: 'User',
     version: '1',
@@ -25,4 +26,5 @@ export const UserSchema: Schema<string, string, string> = {
       pk: { field: 'email', composite: ['email'] },
     },
   },
-};
+}, entityConfig);
+export type UserAttributes = EntityItem<typeof UserEntity>;

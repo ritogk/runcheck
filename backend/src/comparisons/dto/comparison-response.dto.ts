@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { VideoType } from '../../common/entities';
+import { VideoType } from '../../common/electrodb/entities/comparison.entity';
 
 export class ComparisonResponseDto {
   @ApiProperty({ description: '比較ID' })
@@ -21,7 +21,7 @@ export class ComparisonResponseDto {
   video1TimeSt: number;
 
   @ApiProperty({ description: '動画1 動画タイプ', enum: VideoType })
-  video1VideoType: VideoType;
+  video1VideoType: string;
 
   @ApiProperty({ description: '動画2 URL' })
   video2Url: string;
@@ -30,7 +30,7 @@ export class ComparisonResponseDto {
   video2TimeSt: number;
 
   @ApiProperty({ description: '動画2 動画タイプ', enum: VideoType })
-  video2VideoType: VideoType;
+  video2VideoType: string;
 
   @ApiProperty({ description: '匿名投稿' })
   anonymous: boolean;

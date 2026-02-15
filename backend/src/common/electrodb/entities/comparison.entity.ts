@@ -1,6 +1,19 @@
-import { Schema } from 'electrodb';
+import { Schema, EntityItem, Entity } from 'electrodb';
+import { entityConfig } from '../client';
 
-export const ComparisonSchema: Schema<string, string, string> = {
+export enum VideoType {
+  YOUTUBE = "1",
+  LOCAL = "2",
+}
+const videoTypes = Object.values(VideoType) as [VideoType, ...VideoType[]];
+
+export enum ReleaseKbn {
+  PRIVATE = "0",
+  PUBLIC = "1",
+}
+const releaseKbns = Object.values(ReleaseKbn) as [ReleaseKbn, ...ReleaseKbn[]];
+
+export const ComparisonEntity = new Entity({
   model: {
     entity: 'Comparison',
     version: '1',
@@ -14,11 +27,20 @@ export const ComparisonSchema: Schema<string, string, string> = {
     category: { type: 'string' },
     video1Url: { type: 'string', required: true },
     video1TimeSt: { type: 'number', required: true },
-    video1VideoType: { type: 'number', required: true },
+    video1VideoType: {
+      type: videoTypes,
+      required: true,
+    },
     video2Url: { type: 'string', required: true },
     video2TimeSt: { type: 'number', required: true },
-    video2VideoType: { type: 'number', required: true },
-    releaseKbn: { type: 'number', required: true },
+    video2VideoType: {
+      type: videoTypes,
+      required: true,
+    },
+    releaseKbn: {
+      type: releaseKbns,
+      required: true,
+    },
     anonymous: { type: 'boolean', required: true },
     createdAt: { type: 'string', required: true },
     updatedAt: { type: 'string', required: true },
@@ -33,4 +55,5 @@ export const ComparisonSchema: Schema<string, string, string> = {
       pk: { field: 'kind', composite: ['id'], template: 'COMPARISON@${id}' },
     },
   },
-};
+}, entityConfig);
+export type ComparisonAttributes = EntityItem<typeof ComparisonEntity>;

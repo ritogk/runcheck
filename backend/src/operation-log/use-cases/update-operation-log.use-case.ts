@@ -5,7 +5,7 @@ import { OperationLogRepository } from '../repositories/operation-log.repository
 export class UpdateOperationLogUseCase {
   constructor(private readonly operationLogRepository: OperationLogRepository) {}
 
-  async execute(operationCd: number): Promise<void> {
+  async execute(operationCd: string): Promise<void> {
     await this.operationLogRepository.incrementCount(operationCd);
   }
 }

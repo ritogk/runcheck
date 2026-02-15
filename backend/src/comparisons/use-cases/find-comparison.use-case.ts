@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
-import { ReleaseKbn } from '../../common/entities';
+import { ReleaseKbn } from '../../common/electrodb/entities/comparison.entity';
 import { ComparisonRepository } from '../repositories/comparison.repository';
 import { ComparisonResponseDto } from '../dto/comparison-response.dto';
 

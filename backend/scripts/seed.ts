@@ -1,19 +1,11 @@
-import { Entity } from 'electrodb';
 import * as bcrypt from 'bcryptjs';
 import { ulid } from 'ulid';
-import { createDynamoDBClient, TABLE_NAME } from '../src/common/electrodb/client';
-import { UserSchema } from '../src/common/electrodb/entities/user.entity';
-import { OperationLogSchema } from '../src/common/electrodb/entities/operation-log.entity';
-import { OperationCd } from '../src/common/entities';
+import { UserEntity } from '../src/common/electrodb/entities/user.entity';
+import { OperationLogEntity, OperationCd } from '../src/common/electrodb/entities/operation-log.entity';
 
-const client = createDynamoDBClient();
 if (!process.env.DYNAMODB_ENDPOINT) {
   process.env.DYNAMODB_ENDPOINT = 'http://localhost:8000';
 }
-
-const config = { table: TABLE_NAME, client } as const;
-const UserEntity = new Entity(UserSchema, config);
-const OperationLogEntity = new Entity(OperationLogSchema, config);
 
 async function seed() {
   const now = new Date().toISOString();
@@ -33,17 +25,16 @@ async function seed() {
   console.log(`Created test user: test@example.com / password123 (userId: ${userId})`);
 
   // Seed operation logs
-  for (const value of Object.values(OperationCd).filter(v => typeof v === 'number')) {
-    const cd = value as OperationCd;
+  for (const [name, cd] of Object.entries(OperationCd)) {
     await OperationLogEntity.create({
-      id: String(cd),
+      id: cd,
       operationCd: cd,
-      operationNm: OperationCd[cd],
+      operationNm: name,
       executionCnt: 0,
       updatedAt: now,
     }).go();
   }
-  console.log(`Seeded ${Object.keys(OperationCd).length / 2} operation log entries.`);
+  console.log(`Seeded ${Object.values(OperationCd).length} operation log entries.`);
 }
 
 seed().then(() => console.log('Seed completed.'));

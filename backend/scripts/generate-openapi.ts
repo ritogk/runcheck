@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { writeFileSync } from 'fs';
+import { writeFileSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
 import { AppModule } from '../src/app.module';
 
@@ -16,10 +16,9 @@ async function generateOpenApi() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  const outputPath = resolve(__dirname, '../../openapi/api.yaml');
 
-  // Convert to YAML-like JSON (the generator accepts JSON too)
   const jsonPath = resolve(__dirname, '../../openapi/api.json');
+  mkdirSync(resolve(__dirname, '../../openapi'), { recursive: true });
   writeFileSync(jsonPath, JSON.stringify(document, null, 2));
   console.log(`OpenAPI spec generated at: ${jsonPath}`);
 

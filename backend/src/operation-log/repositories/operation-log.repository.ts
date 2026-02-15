@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { ElectroDBService } from '../../common/electrodb/electrodb.service';
+import { OperationLogEntity } from '../../common/electrodb/entities/operation-log.entity';
 
 @Injectable()
 export class OperationLogRepository {
-  constructor(private readonly electrodb: ElectroDBService) {}
-
-  async incrementCount(operationCd: number): Promise<void> {
-    await this.electrodb.operationLog
-      .update({ id: String(operationCd) })
+  async incrementCount(operationCd: string): Promise<void> {
+    await OperationLogEntity
+      .update({ id: operationCd })
       .add({ executionCnt: 1 })
       .set({ updatedAt: new Date().toISOString() })
       .go();

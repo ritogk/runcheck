@@ -1,6 +1,41 @@
-import { Schema } from 'electrodb';
+import { Schema, EntityItem, Entity } from 'electrodb';
+import { entityConfig } from '../client';
 
-export const OperationLogSchema: Schema<string, string, string> = {
+export enum OperationCd {
+  OPEN_MODAL_CLICK = "1",
+  OPEN_CLICK = "2",
+  SAVE_MODAL_CLICK = "3",
+  SAVE_CLICK = "4",
+  SYNC_RUN_CLICK = "5",
+  SYNC_STOP_CLICK = "6",
+  SYNC_SHARE_CLICK = "7",
+  PLAYER_ONE_URL_ENTER = "8",
+  PLAYER_ONE_YOUTUBE_SEARCH_CLICK = "9",
+  PLAYER_ONE_LOCAL_SELECT = "10",
+  PLAYER_TWO_URL_ENTER = "11",
+  PLAYER_TWO_YOUTUBE_SEARCH_CLICK = "12",
+  PLAYER_TWO_LOCAL_SELECT = "13",
+  YOUTUBE_OAUTH_CLICK = "14",
+  YOUTUBE_SELECT = "15",
+  NAV_HOME_CLICK = "16",
+  NAV_LOGIN_CLICK = "17",
+  NAV_LOGOUT_CLICK = "18",
+  NAV_REGISTER_CLICK = "19",
+  NAV_ABOUT_APP_CLICK = "20",
+  NAV_INQUIRY = "21",
+  HOME_OPEN_CLICK = "22",
+  HOME_DELETE_CLICK = "23",
+  REGISTER_CLICK = "24",
+  LOGIN_CLICK = "25",
+  SYNC_CONTROLLER_SWITCH_PLAY_CLICK = "26",
+  SYNC_CONTROLLER_SWITCH_REPEAT_CLICK = "27",
+  SYNC_CONTROLLER_SPEED_CLICK = "28",
+  SYNC_CONTROLLER_RELOAD_CLICK = "29",
+  SYNC_CONTROLLER_SWITCH_MUTE_CLICK = "30",
+}
+const operationCdValues = Object.values(OperationCd) as [OperationCd, ...OperationCd[]];
+
+export const OperationLogEntity = new Entity({
   model: {
     entity: 'OperationLog',
     version: '1',
@@ -8,7 +43,10 @@ export const OperationLogSchema: Schema<string, string, string> = {
   },
   attributes: {
     id: { type: 'string', required: true },
-    operationCd: { type: 'number', required: true },
+    operationCd: {
+      type: operationCdValues,
+      required: true,
+    },
     operationNm: { type: 'string', required: true },
     executionCnt: { type: 'number', required: true },
     updatedAt: { type: 'string', required: true },
@@ -23,4 +61,5 @@ export const OperationLogSchema: Schema<string, string, string> = {
       },
     },
   },
-};
+}, entityConfig);
+export type OperationLogAttributes = EntityItem<typeof OperationLogEntity>;

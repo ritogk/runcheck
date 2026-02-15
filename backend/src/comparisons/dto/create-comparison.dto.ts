@@ -7,7 +7,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { VideoType } from '../../common/entities';
+import { VideoType } from '../../common/electrodb/entities/comparison.entity';
 
 export class CreateComparisonDto {
   @ApiPropertyOptional({ description: 'カテゴリ' })

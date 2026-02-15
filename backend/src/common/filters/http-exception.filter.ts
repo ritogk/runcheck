@@ -36,6 +36,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
         `HTTP ${status}: ${exception.message}`,
         exception.stack,
       );
+    } else {
+      this.logger.warn(`HTTP ${status}: ${exception.message}`);
     }
 
     response.status(status).json(

@@ -1,6 +1,7 @@
-import { Schema } from 'electrodb';
+import { Schema, EntityItem, Entity } from 'electrodb';
+import { entityConfig } from '../client';
 
-export const YoutubeTokenSchema: Schema<string, string, string> = {
+export const YoutubeTokenEntity = new Entity({
   model: {
     entity: 'YoutubeToken',
     version: '1',
@@ -18,4 +19,5 @@ export const YoutubeTokenSchema: Schema<string, string, string> = {
       sk: { field: 'kind', composite: [], template: 'YOUTUBE_TOKEN' },
     },
   },
-};
+}, entityConfig);
+export type YoutubeTokenAttributes = EntityItem<typeof YoutubeTokenEntity>;

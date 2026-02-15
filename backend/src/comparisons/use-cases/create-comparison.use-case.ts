@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ulid } from 'ulid';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
-import { ReleaseKbn } from '../../common/entities';
+import { ReleaseKbn } from '../../common/electrodb/entities/comparison.entity';
 import { ComparisonRepository } from '../repositories/comparison.repository';
 import { CreateComparisonDto } from '../dto/create-comparison.dto';
 import { CreateComparisonResponseDto } from '../dto/create-comparison-response.dto';
