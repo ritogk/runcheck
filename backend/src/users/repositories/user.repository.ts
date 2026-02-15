@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DynamoDBService } from '../../common/dynamodb/dynamodb.service';
 import type { User } from '../../common/entities/base';
 import type { UserItem } from '../../common/entities/dynamodb';
+import { toUserKey } from '../../common/entities/dynamodb';
 
 const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME || 'RunCheck';
 
@@ -14,14 +15,14 @@ export class UserRepository {
   async create(user: User): Promise<void> {
     await this.dynamodb.put({
       TableName: TABLE_NAME,
-      Item: { ...user, userId: user.id, kind: `USER@${user.id}` },
+      Item: { ...user, ...toUserKey({ id: user.id }) },
     });
   }
 
   async findById(userId: string): Promise<UserRecord | null> {
     const result = await this.dynamodb.get({
       TableName: TABLE_NAME,
-      Key: { userId, kind: `USER@${userId}` },
+      Key: toUserKey({ id: userId }),
     });
     return (result.Item as UserRecord) || null;
   }

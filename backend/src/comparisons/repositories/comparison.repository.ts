@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DynamoDBService } from '../../common/dynamodb/dynamodb.service';
 import type { Comparison } from '../../common/entities/base';
 import type { ComparisonItem } from '../../common/entities/dynamodb';
+import { toComparisonKey } from '../../common/entities/dynamodb';
 
 const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME || 'RunCheck';
 
@@ -16,8 +17,7 @@ export class ComparisonRepository {
       TableName: TABLE_NAME,
       Item: {
         ...record,
-        userId: record.userId || '',
-        kind: `COMPARISON@${record.id}`,
+        ...toComparisonKey({ id: record.id, userId: record.userId || '' }),
       },
     });
   }
@@ -27,7 +27,9 @@ export class ComparisonRepository {
       TableName: TABLE_NAME,
       IndexName: 'KindIndex',
       KeyConditionExpression: 'kind = :kind',
-      ExpressionAttributeValues: { ':kind': `COMPARISON@${comparisonId}` },
+      ExpressionAttributeValues: {
+        ':kind': toComparisonKey({ id: comparisonId, userId: '' }).kind,
+      },
     });
     return (result.Items?.[0] as ComparisonRecord) || null;
   }
@@ -48,14 +50,14 @@ export class ComparisonRepository {
   async deleteById(comparisonId: string, userId: string): Promise<void> {
     await this.dynamodb.delete({
       TableName: TABLE_NAME,
-      Key: { userId, kind: `COMPARISON@${comparisonId}` },
+      Key: toComparisonKey({ id: comparisonId, userId }),
     });
   }
 
   async publishById(comparisonId: string, userId: string): Promise<void> {
     await this.dynamodb.update({
       TableName: TABLE_NAME,
-      Key: { userId, kind: `COMPARISON@${comparisonId}` },
+      Key: toComparisonKey({ id: comparisonId, userId }),
       UpdateExpression: 'SET releaseKbn = :val, updatedAt = :now',
       ExpressionAttributeValues: {
         ':val': 1,

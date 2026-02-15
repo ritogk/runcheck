@@ -3,22 +3,41 @@
  * ベースのRDSライク型を拡張し、PK(userId) + SK(kind) を付与
  */
 
-import { User, Comparison, YoutubeToken, OperationLog } from './base';
+import {
+  User,
+  UserPrimaryKey,
+  Comparison,
+  ComparisonPrimaryKey,
+  YoutubeToken,
+  YoutubePrimaryKey,
+  OperationLog,
+  OperationLogPrimaryKey,
+} from './base';
 
 /** DynamoDB共通キー: PK=userId, SK=kind */
-interface DynamoDBKey {
+export interface DynamoDBKey {
   userId: string;
   kind: string;
 }
 
-/** USER@{id} */
 export type UserItem = User & DynamoDBKey;
-
-/** COMPARISON@{id} — userId は PK として必須（匿名なら空文字列） */
 export type ComparisonItem = Comparison & DynamoDBKey;
-
-/** YOUTUBE_TOKEN@{userId} */
 export type YoutubeTokenItem = YoutubeToken & DynamoDBKey;
-
-/** OPERATION_LOG@{operationCd} — userId は常に空文字列 */
 export type OperationLogItem = OperationLog & DynamoDBKey;
+
+/** PrimaryKey → DynamoDB Key 変換 */
+export function toUserKey(pk: UserPrimaryKey): DynamoDBKey {
+  return { userId: pk.id, kind: `USER@${pk.id}` };
+}
+
+export function toComparisonKey(pk: ComparisonPrimaryKey): DynamoDBKey {
+  return { userId: pk.userId, kind: `COMPARISON@${pk.id}` };
+}
+
+export function toYoutubeTokenKey(pk: YoutubePrimaryKey): DynamoDBKey {
+  return { userId: pk.userId, kind: `YOUTUBE_TOKEN@${pk.id}` };
+}
+
+export function toOperationLogKey(pk: OperationLogPrimaryKey): DynamoDBKey {
+  return { userId: '', kind: `OPERATION_LOG@${pk.id}` };
+}

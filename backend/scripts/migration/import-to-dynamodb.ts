@@ -19,6 +19,12 @@ import {
 import { ulid } from 'ulid';
 import * as fs from 'fs';
 import * as path from 'path';
+import {
+  toUserKey,
+  toComparisonKey,
+  toYoutubeTokenKey,
+  toOperationLogKey,
+} from '../../src/common/entities/dynamodb';
 
 // =============================================
 // 設定
@@ -176,8 +182,7 @@ async function main() {
     const newUserId = ulid();
     userIdMap.set(u.id, newUserId);
     return {
-      userId: newUserId,
-      kind: `USER@${newUserId}`,
+      ...toUserKey({ id: newUserId }),
       id: newUserId,
       email: u.email,
       name: u.name,
@@ -215,8 +220,7 @@ async function main() {
     const comparisonId = ulid();
     const userId = c.user_id ? userIdMap.get(c.user_id) || '' : '';
     return {
-      userId,
-      kind: `COMPARISON@${comparisonId}`,
+      ...toComparisonKey({ id: comparisonId, userId }),
       id: comparisonId,
       title: c.title || '',
       memo: c.memo || '',
@@ -252,10 +256,10 @@ async function main() {
 
   const dynamoTokens = mysqlTokens.map((t) => {
     const userId = userIdMap.get(t.user_id) || '';
+    const tokenId = ulid();
     return {
-      userId,
-      kind: `YOUTUBE_TOKEN@${userId}`,
-      id: ulid(),
+      ...toYoutubeTokenKey({ id: tokenId, userId }),
+      id: tokenId,
       refreshToken: t.refresh_token,
       createdAt: t.created_at,
       updatedAt: t.updated_at,
@@ -278,14 +282,17 @@ async function main() {
     `  Read ${mysqlLogs.length} records from operation_logs.jsonl`,
   );
 
-  const dynamoLogs = mysqlLogs.map((l) => ({
-    userId: '',
-    kind: `OPERATION_LOG@${l.operation_cd}`,
-    operationCd: l.operation_cd,
-    operationNm: l.operation_nm,
-    executionCnt: l.execution_cnt || 0,
-    updatedAt: l.updated_at,
-  }));
+  const dynamoLogs = mysqlLogs.map((l) => {
+    const logId = String(l.operation_cd);
+    return {
+      ...toOperationLogKey({ id: logId }),
+      id: logId,
+      operationCd: l.operation_cd,
+      operationNm: l.operation_nm,
+      executionCnt: l.execution_cnt || 0,
+      updatedAt: l.updated_at,
+    };
+  });
 
   if (DRY_RUN && dynamoLogs.length > 0) {
     console.log('  Sample:', JSON.stringify(dynamoLogs[0], null, 2));

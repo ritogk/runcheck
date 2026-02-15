@@ -2,6 +2,7 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import * as bcrypt from 'bcryptjs';
 import { ulid } from 'ulid';
+import { toUserKey, toOperationLogKey } from '../src/common/entities/dynamodb';
 
 const endpoint = process.env.DYNAMODB_ENDPOINT || 'http://localhost:8000';
 
@@ -60,8 +61,7 @@ async function seed() {
     new PutCommand({
       TableName: TABLE_NAME,
       Item: {
-        userId,
-        kind: `USER@${userId}`,
+        ...toUserKey({ id: userId }),
         id: userId,
         email: 'test@example.com',
         name: 'テストユーザー',
@@ -80,8 +80,8 @@ async function seed() {
       new PutCommand({
         TableName: TABLE_NAME,
         Item: {
-          userId: '',
-          kind: `OPERATION_LOG@${cd}`,
+          ...toOperationLogKey({ id: cd }),
+          id: cd,
           operationCd: Number(cd),
           operationNm: nm,
           executionCnt: 0,

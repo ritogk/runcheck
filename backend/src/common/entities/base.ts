@@ -12,6 +12,9 @@ export interface User {
   createdAt: string;
   updatedAt: string;
 }
+export interface UserPrimaryKey {
+  id: string
+}
 
 export interface Comparison {
   id: string;
@@ -30,6 +33,10 @@ export interface Comparison {
   createdAt: string;
   updatedAt: string;
 }
+export interface ComparisonPrimaryKey {
+  id: string
+  userId: string
+}
 
 export interface YoutubeToken {
   id: string;
@@ -38,10 +45,18 @@ export interface YoutubeToken {
   createdAt: string;
   updatedAt: string;
 }
+export interface YoutubePrimaryKey {
+  id: string
+  userId: string
+}
 
 export interface OperationLog {
+  id: string;
   operationCd: number;
   operationNm: string;
   executionCnt: number;
   updatedAt: string;
+}
+export interface OperationLogPrimaryKey {
+  id: string
 }
