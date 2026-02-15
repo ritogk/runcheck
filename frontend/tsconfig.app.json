@@ -5,9 +5,11 @@
   "compilerOptions": {
     "verbatimModuleSyntax": false,
     "composite": true,
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@openapi/*": ["../openapi/*"]
     }
   }
 }

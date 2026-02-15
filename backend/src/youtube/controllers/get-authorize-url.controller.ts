@@ -9,7 +9,7 @@ export class GetAuthorizeUrlController {
   constructor(private readonly getAuthorizeUrl: GetAuthorizeUrlUseCase) {}
 
   @Get('oauth/authorize')
-  @ApiOperation({ summary: '認可画面のURLを取得' })
+  @ApiOperation({ summary: '認可画面のURLを取得', operationId: 'getAuthorizeUrl' })
   @ApiResponse({ status: 200, type: AuthorizeUrlResponseDto })
   handle(): AuthorizeUrlResponseDto {
     return this.getAuthorizeUrl.execute();

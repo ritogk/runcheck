@@ -12,7 +12,7 @@ export class LogoutController {
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'ログアウト' })
+  @ApiOperation({ summary: 'ログアウト', operationId: 'logout' })
   @ApiResponse({ status: 200 })
   handle(): Record<string, never> {
     this.logoutUseCase.execute();

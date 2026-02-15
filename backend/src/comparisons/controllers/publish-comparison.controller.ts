@@ -13,7 +13,7 @@ export class PublishComparisonController {
   @UseGuards(OptionalJwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '比較情報を公開状態にする' })
+  @ApiOperation({ summary: '比較情報を公開状態にする', operationId: 'publishComparison' })
   @ApiResponse({ status: 200 })
   async handle(
     @Param('id') id: string,

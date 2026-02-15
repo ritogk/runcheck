@@ -1,10 +1,7 @@
-import { ComparisonsApi } from "@/core/openapiClient/index"
-import { apiConfig } from "@/core/openapi"
+import { getApiClient } from "@/core/api-client"
 
 export const getComparisonById = async (id: string) => {
-  const comparisonsApi = new ComparisonsApi(apiConfig)
-  const res = await comparisonsApi.comparisonsComparisonIdGet({
-    comparisonId: id
-  })
-  return res
+  const client = await getApiClient()
+  const response = await client.findComparison({ id })
+  return response.data
 }

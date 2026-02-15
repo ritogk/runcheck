@@ -13,7 +13,7 @@ export class GetMeController {
   @Get('me')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'ログイン済のユーザー情報を取得' })
+  @ApiOperation({ summary: 'ログイン済のユーザー情報を取得', operationId: 'getMe' })
   @ApiResponse({ status: 200, type: UserResponseDto })
   handle(@CurrentUser() user: JwtPayload): UserResponseDto {
     return this.getMeUseCase.execute(user);

@@ -15,7 +15,7 @@ export class CreateComparisonController {
   @UseGuards(OptionalJwtAuthGuard)
   @HttpCode(HttpStatus.CREATED)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '比較情報を登録' })
+  @ApiOperation({ summary: '比較情報を登録', operationId: 'createComparison' })
   @ApiResponse({ status: 201, type: CreateComparisonResponseDto })
   async handle(
     @Body() dto: CreateComparisonDto,

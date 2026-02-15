@@ -26,7 +26,7 @@ const comparisons: ComputedRef<{ id: string; title: string; memo: string; tag: s
         return !x.anonymous
       })
       .map((x) => {
-        return { id: x.id, title: x.title, memo: x.memo, tag: x.category }
+        return { id: x.id, title: x.title ?? "", memo: x.memo ?? "", tag: x.category ?? "" }
       })
   })
 

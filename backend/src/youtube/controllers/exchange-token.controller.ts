@@ -15,7 +15,7 @@ export class ExchangeTokenController {
   @UseGuards(OptionalJwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'アクセストークンを取得' })
+  @ApiOperation({ summary: 'アクセストークンを取得', operationId: 'exchangeToken' })
   @ApiResponse({ status: 200, type: ExchangeTokenResponseDto })
   async handle(
     @Body() dto: YoutubeOauthDto,

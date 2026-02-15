@@ -6,10 +6,9 @@ import Button from "@/components/button.vue"
 import Spiner from "@/components/svg/spiner.vue"
 import { UseMainStateKey, type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
-import { YoutubeApi } from "@/core/openapiClient"
+import { getApiClient } from "@/core/api-client"
 import { UseGetYoutubeVideo } from "@/core/api-state/use-get-youtube-video"
 import { PlayerNo } from "@/app/pages/main-page/main-state/modal-youtube-selector-state"
-import { apiConfig } from "@/core/openapi"
 import { mountYoutube } from "./player/helpers-player"
 
 const useMainState = inject(UseMainStateKey) as UseMainStateType
@@ -34,13 +33,13 @@ const onClose = () => {
   useMainState.youtubeModal.save()
 }
 
-const youtubeApi = new YoutubeApi(apiConfig)
 const redirectToAuthorize = async () => {
-  const response = await youtubeApi.youtubeOauthAuthorizeGet()
+  const client = await getApiClient()
+  const response = await client.getAuthorizeUrl()
   useMainState.youtubeModal.save()
   useLoadingState.run()
   useLoadingState.save()
-  location.href = response.redirectUrl
+  location.href = response.data.redirectUrl
 }
 
 const selectVideo = async (url: string) => {

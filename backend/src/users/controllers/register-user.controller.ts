@@ -11,7 +11,7 @@ export class RegisterUserController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({ summary: '新規登録' })
+  @ApiOperation({ summary: '新規登録', operationId: 'registerUser' })
   @ApiResponse({ status: 201, type: UserResponseDto })
   async handle(@Body() dto: CreateUserDto): Promise<UserResponseDto> {
     return this.registerUser.execute(dto);

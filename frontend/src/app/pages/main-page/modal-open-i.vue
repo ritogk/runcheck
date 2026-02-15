@@ -36,7 +36,7 @@ const comparisonOptions: ComputedRef<{ id: string; name: string }[]> = computed(
       return !x.anonymous
     })
     .map((x) => {
-      return { id: x.id, name: x.title }
+      return { id: x.id, name: x.title ?? "" }
     })
 })
 

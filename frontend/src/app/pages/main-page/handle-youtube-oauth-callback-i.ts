@@ -1,10 +1,8 @@
 import { inject } from "vue"
 import { useRouter } from "vue-router"
-import { YoutubeApi } from "@/core/openapiClient"
 import { UseAlretStateKey, type UseAlretStateType } from "@/app/use-alret-state"
 import { type UseMainStateType } from "@/app/pages/main-page/use-main-state"
 import { UseLoadingStateKey, type UseLoadingStateType } from "@/app/use-loading-state"
-import { apiConfig } from "@/core/openapi"
 import { usePostYoutubeOauth } from "@/core/api-state/use-post-youtube-oauth"
 
 /**

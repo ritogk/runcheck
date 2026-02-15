@@ -12,7 +12,7 @@ export class DeleteComparisonController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '比較情報を削除' })
+  @ApiOperation({ summary: '比較情報を削除', operationId: 'deleteComparison' })
   @ApiResponse({ status: 200 })
   async handle(
     @Param('id') id: string,

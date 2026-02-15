@@ -11,7 +11,7 @@ export class LoginController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'ログイン' })
+  @ApiOperation({ summary: 'ログイン', operationId: 'login' })
   @ApiResponse({ status: 200, type: LoginResponseDto })
   async handle(@Body() dto: LoginDto): Promise<LoginResponseDto> {
     return this.loginUseCase.execute(dto);

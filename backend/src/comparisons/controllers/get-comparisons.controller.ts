@@ -13,7 +13,7 @@ export class GetComparisonsController {
   @Get()
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '比較情報一覧を取得' })
+  @ApiOperation({ summary: '比較情報一覧を取得', operationId: 'getComparisons' })
   @ApiResponse({ status: 200, type: [ComparisonResponseDto] })
   async handle(
     @CurrentUser() user: JwtPayload,

@@ -3,7 +3,7 @@
   "paths": {
     "/api/v1/users": {
       "post": {
-        "operationId": "RegisterUserController_handle",
+        "operationId": "registerUser",
         "summary": "新規登録",
         "parameters": [],
         "requestBody": {
@@ -35,7 +35,7 @@
     },
     "/api/v1/authentication/login": {
       "post": {
-        "operationId": "LoginController_handle",
+        "operationId": "login",
         "summary": "ログイン",
         "parameters": [],
         "requestBody": {
@@ -67,7 +67,7 @@
     },
     "/api/v1/authentication/logout": {
       "post": {
-        "operationId": "LogoutController_handle",
+        "operationId": "logout",
         "summary": "ログアウト",
         "parameters": [],
         "responses": {
@@ -87,7 +87,7 @@
     },
     "/api/v1/authentication/me": {
       "get": {
-        "operationId": "GetMeController_handle",
+        "operationId": "getMe",
         "summary": "ログイン済のユーザー情報を取得",
         "parameters": [],
         "responses": {
@@ -114,7 +114,7 @@
     },
     "/api/v1/comparisons": {
       "post": {
-        "operationId": "CreateComparisonController_handle",
+        "operationId": "createComparison",
         "summary": "比較情報を登録",
         "parameters": [],
         "requestBody": {
@@ -149,7 +149,7 @@
         ]
       },
       "get": {
-        "operationId": "GetComparisonsController_handle",
+        "operationId": "getComparisons",
         "summary": "比較情報一覧を取得",
         "parameters": [],
         "responses": {
@@ -179,7 +179,7 @@
     },
     "/api/v1/comparisons/{id}": {
       "get": {
-        "operationId": "FindComparisonController_handle",
+        "operationId": "findComparison",
         "summary": "比較情報を取得",
         "parameters": [
           {
@@ -213,7 +213,7 @@
         ]
       },
       "delete": {
-        "operationId": "DeleteComparisonController_handle",
+        "operationId": "deleteComparison",
         "summary": "比較情報を削除",
         "parameters": [
           {
@@ -242,7 +242,7 @@
     },
     "/api/v1/comparisons/{id}/publish": {
       "put": {
-        "operationId": "PublishComparisonController_handle",
+        "operationId": "publishComparison",
         "summary": "比較情報を公開状態にする",
         "parameters": [
           {
@@ -271,7 +271,7 @@
     },
     "/api/v1/youtube/oauth/authorize": {
       "get": {
-        "operationId": "GetAuthorizeUrlController_handle",
+        "operationId": "getAuthorizeUrl",
         "summary": "認可画面のURLを取得",
         "parameters": [],
         "responses": {
@@ -293,7 +293,7 @@
     },
     "/api/v1/youtube/oauth": {
       "post": {
-        "operationId": "ExchangeTokenController_handle",
+        "operationId": "exchangeToken",
         "summary": "アクセストークンを取得",
         "parameters": [],
         "requestBody": {
@@ -330,7 +330,7 @@
     },
     "/api/v1/youtube/videos": {
       "get": {
-        "operationId": "FetchVideosController_handle",
+        "operationId": "fetchVideos",
         "summary": "本人がアップロードした動画一覧を取得",
         "parameters": [
           {
@@ -365,7 +365,7 @@
     },
     "/api/v1/operation-log": {
       "put": {
-        "operationId": "UpdateOperationLogController_handle",
+        "operationId": "updateOperationLog",
         "summary": "操作ログを送信",
         "parameters": [],
         "requestBody": {
@@ -390,12 +390,19 @@
     },
     "/api/v1/status": {
       "get": {
-        "operationId": "GetStatusController_handle",
+        "operationId": "getStatus",
         "summary": "未ログインユーザーも含めたユーザーの状態を取得",
         "parameters": [],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusResponseDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -760,6 +767,49 @@
         },
         "required": [
           "operationCd"
+        ]
+      },
+      "StatusUserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ユーザーID"
+          },
+          "name": {
+            "type": "string",
+            "description": "ネーム"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "StatusResponseDto": {
+        "type": "object",
+        "properties": {
+          "isLogined": {
+            "type": "boolean",
+            "description": "ログイン済みかどうか"
+          },
+          "isYoutubeAuthroized": {
+            "type": "boolean",
+            "description": "YouTube認証済みかどうか"
+          },
+          "user": {
+            "description": "ユーザー情報",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusUserDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "isLogined",
+          "isYoutubeAuthroized"
         ]
       }
     }

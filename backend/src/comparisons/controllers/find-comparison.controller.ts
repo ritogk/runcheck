@@ -13,7 +13,7 @@ export class FindComparisonController {
   @Get(':id')
   @UseGuards(OptionalJwtAuthGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '比較情報を取得' })
+  @ApiOperation({ summary: '比較情報を取得', operationId: 'findComparison' })
   @ApiResponse({ status: 200, type: ComparisonResponseDto })
   async handle(
     @Param('id') id: string,

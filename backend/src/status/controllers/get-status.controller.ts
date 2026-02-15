@@ -13,8 +13,8 @@ export class GetStatusController {
   @Get()
   @UseGuards(OptionalJwtAuthGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: '未ログインユーザーも含めたユーザーの状態を取得' })
-  @ApiResponse({ status: 200 })
+  @ApiOperation({ summary: '未ログインユーザーも含めたユーザーの状態を取得', operationId: 'getStatus' })
+  @ApiResponse({ status: 200, type: StatusResponseDto })
   async handle(@CurrentUser() user: JwtPayload | null): Promise<StatusResponseDto> {
     return this.getStatus.execute(user);
   }

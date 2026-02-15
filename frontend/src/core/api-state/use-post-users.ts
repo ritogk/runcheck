@@ -1,12 +1,14 @@
-import { UsersApi, InlineObject } from "@/core/openapiClient"
-import { apiConfig } from "@/core/openapi"
+import { getApiClient } from "@/core/api-client"
+import type { CreateUserDto } from "@/core/api-types"
 import { useMutation } from "@tanstack/vue-query"
 
 export const usePostUsers = () => {
-  const usersApi = new UsersApi(apiConfig)
-
   const mutation = useMutation({
-    mutationFn: (request: InlineObject) => usersApi.usersPost({ inlineObject: request })
+    mutationFn: async (request: CreateUserDto) => {
+      const client = await getApiClient()
+      const response = await client.registerUser(null, request)
+      return response.data
+    }
   })
   return mutation
 }

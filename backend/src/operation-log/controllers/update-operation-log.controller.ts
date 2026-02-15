@@ -10,7 +10,7 @@ export class UpdateOperationLogController {
 
   @Put()
   @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({ summary: '操作ログを送信' })
+  @ApiOperation({ summary: '操作ログを送信', operationId: 'updateOperationLog' })
   @ApiResponse({ status: 201 })
   async handle(@Body() dto: OperationLogDto): Promise<Record<string, never>> {
     await this.updateOperationLog.execute(dto.operationCd);

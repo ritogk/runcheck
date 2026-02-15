@@ -1,14 +1,15 @@
-import { ComparisonsApi } from "@/core/openapiClient"
-import { apiConfig } from "@/core/openapi"
+import { getApiClient } from "@/core/api-client"
 import { useMutation, useQueryClient } from "@tanstack/vue-query"
 import { GET_COMPARISONS } from "@/core/api-state/query-key"
 
 export const useDeleteComparison = () => {
   const queryClient = useQueryClient()
-  const comparisonsApi = new ComparisonsApi(apiConfig)
 
   const mutation = useMutation({
-    mutationFn: (id: string) => comparisonsApi.comparisonsComparisonIdDelete({ comparisonId: id }),
+    mutationFn: async (id: string) => {
+      const client = await getApiClient()
+      await client.deleteComparison({ id })
+    },
     onSuccess: () => {
       queryClient.refetchQueries({ queryKey: [GET_COMPARISONS] })
     }

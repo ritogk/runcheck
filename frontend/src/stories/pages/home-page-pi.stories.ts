@@ -3,7 +3,7 @@ import { type Meta, type StoryObj, setup } from "@storybook/vue3"
 import { UseLoadingState, UseLoadingStateKey } from "@/app/use-loading-state"
 import { setupGetMocks } from "@/stories/core/setup-mock"
 import { VueQueryPlugin } from "@tanstack/vue-query"
-import { InlineResponse200, VideoType } from "@/core/openapiClient"
+import type { ComparisonResponseDto } from "@/core/api-types"
 
 setup((app) => {
   app.use(VueQueryPlugin)
@@ -11,31 +11,31 @@ setup((app) => {
   app.provide(UseLoadingStateKey, loadingState)
 
   const worker = window.msw.worker
-  const comparisonsResponse: InlineResponse200[] = [
+  const comparisonsResponse: ComparisonResponseDto[] = [
     {
-      id: 12,
+      id: "12",
       title: "\u3051\u3093\u307d\u30fc\u3055\u3093\u6bd4\u8f03(\u7f8e\u6d5c)",
       memo: "\u7f8e\u6d5c",
       category: "\u30d5\u30a3\u30c3\u30c8",
       video1Url: "https://youtu.be/nLKSSdMWZ8g",
       video1TimeSt: 15.3,
-      video1VideoType: VideoType.YOUTUBE,
+      video1VideoType: "1",
       video2Url: "https://youtu.be/m7JMzHjsrss",
       video2TimeSt: 23.83570244,
-      video2VideoType: VideoType.YOUTUBE,
+      video2VideoType: "1",
       anonymous: false
     },
     {
-      id: 13,
+      id: "13",
       title: "\u4f5c\u624b z3 vs atr-k",
       memo: "Z3\u306e\u65b9\u304c\u524d\u306b\u8ee2\u304c\u3063\u3066\u308b\u6c17\u304c\u3002",
       category: "\u30d5\u30a3\u30c3\u30c8",
       video1Url: "https://youtu.be/n5MCkGGHikk",
       video1TimeSt: 8.66324373,
-      video1VideoType: VideoType.YOUTUBE,
+      video1VideoType: "1",
       video2Url: "https://youtu.be/bYKqVGb8VNg",
       video2TimeSt: 12.99734313,
-      video2VideoType: VideoType.YOUTUBE,
+      video2VideoType: "1",
       anonymous: false
     }
   ]

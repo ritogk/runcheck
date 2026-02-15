@@ -9,7 +9,7 @@ export class FetchVideosController {
   constructor(private readonly fetchVideos: FetchVideosUseCase) {}
 
   @Get('videos')
-  @ApiOperation({ summary: '本人がアップロードした動画一覧を取得' })
+  @ApiOperation({ summary: '本人がアップロードした動画一覧を取得', operationId: 'fetchVideos' })
   @ApiHeader({ name: 'x-youtube-access-token', description: 'YouTubeアクセストークン' })
   @ApiResponse({ status: 200, type: [YoutubeVideoDto] })
   async handle(

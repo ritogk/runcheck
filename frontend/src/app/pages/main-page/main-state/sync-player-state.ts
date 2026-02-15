@@ -1,7 +1,6 @@
 import { ref, shallowRef, computed, type ComputedRef, watch } from "vue"
 import { type IVideoPlayer, Status, VideoType } from "@/app/pages/main-page/player/i-video-player"
 import { DummyPlayer } from "@/app/pages/main-page/player/dummy-player"
-import { VideoType as ApiVideoType } from "@/core/openapiClient/index"
 import { extractYoutubeId } from "@/core/extract-youtube-id"
 import { YouTubePlayer } from "@/app/pages/main-page/player/youtube-player"
 import { postComparisons } from "@/core/post-comparisons"
@@ -311,22 +310,22 @@ export class SyncPlayerState implements ISyncPlayerStateType {
   ): Promise<{ id: string }> => {
     const video1VideoType =
       this._playerOne.value.subscription.videoType.value === VideoType.YOUTUBE
-        ? ApiVideoType.YOUTUBE
-        : ApiVideoType.LOCAL
+        ? ("1" as const)
+        : ("2" as const)
     const video1Url = await this._playerOne.value.getPath()
     const video1EmbedUrl =
-      video1VideoType === ApiVideoType.YOUTUBE
+      video1VideoType === "1"
         ? `https://www.youtube.com/embed/${extractYoutubeId(video1Url)}`
         : video1Url
     const video1TimeSt = this._playerOneStartPosition
 
     const video2VideoType =
       this._playerTwo.value.subscription.videoType.value === VideoType.YOUTUBE
-        ? ApiVideoType.YOUTUBE
-        : ApiVideoType.LOCAL
+        ? ("1" as const)
+        : ("2" as const)
     const video2Url = await this._playerTwo.value.getPath()
     const video2EmbedUrl =
-      video2VideoType === ApiVideoType.YOUTUBE
+      video2VideoType === "1"
         ? `https://www.youtube.com/embed/${extractYoutubeId(video2Url)}`
         : video2Url
     const video2TimeSt = this._playerTwoStartPosition

@@ -1,15 +1,16 @@
-import { AuthenticationApi } from "@/core/openapiClient"
-import { apiConfig } from "@/core/openapi"
+import { getApiClient } from "@/core/api-client"
 import { authToken, youtubeToken } from "@/core/auth-token"
 import { useQueryClient, useMutation } from "@tanstack/vue-query"
 import { GET_STATUS, GET_YOUTUBE_VIDEO, GET_COMPARISONS } from "./query-key"
 
 export const usePostAuthenticationLogout = () => {
   const queryClient = useQueryClient()
-  const authenticationApi = new AuthenticationApi(apiConfig)
 
   const mutation = useMutation({
-    mutationFn: () => authenticationApi.authenticationLogoutPost(),
+    mutationFn: async () => {
+      const client = await getApiClient()
+      await client.logout()
+    },
     onSuccess: async () => {
       authToken.clear()
       youtubeToken.clear()

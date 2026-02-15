@@ -108,7 +108,7 @@ const hundleHomeClick = () => {
                             @click="hundleHomeClick()"
                           >
                             <component :is="UserIcon" class="h-6 w-6 shrink-0" aria-hidden="true" />
-                            {{ getStatus.data.value?.user.name }}
+                            {{ getStatus.data.value?.user?.name }}
                           </a>
                         </li>
 
