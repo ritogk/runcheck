@@ -17,8 +17,7 @@ export class DeleteComparisonController {
   async handle(
     @Param('id') id: string,
     @CurrentUser() user: JwtPayload,
-  ): Promise<Record<string, never>> {
+  ): Promise<void> {
     await this.deleteComparison.execute(id, user);
-    return {};
   }
 }
