@@ -53,11 +53,12 @@ export const OperationLogEntity = new Entity({
   },
   indexes: {
     primary: {
-      pk: { field: 'userId', composite: [], template: '' },
+      pk: { field: 'userId', composite: [], template: 'GLOBAL', casing: 'none' },
       sk: {
         field: 'kind',
         composite: ['id'],
-        template: 'OPERATION_LOG@${id}',
+        template: 'operation_log@${id}',
+        casing: 'none',
       },
     },
   },

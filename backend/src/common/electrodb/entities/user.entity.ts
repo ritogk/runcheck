@@ -18,12 +18,12 @@ export const UserEntity = new Entity({
   },
   indexes: {
     primary: {
-      pk: { field: 'userId', composite: ['id'] },
-      sk: { field: 'kind', composite: [], template: 'USER' },
+      pk: { field: 'userId', composite: ['id'], template: '${id}', casing: 'none' },
+      sk: { field: 'kind', composite: [], template: 'user', casing: 'none' },
     },
     byEmail: {
       index: 'EmailIndex',
-      pk: { field: 'email', composite: ['email'] },
+      pk: { field: 'email', composite: ['email'], template: '${email}', casing: 'none' },
     },
   },
 }, entityConfig);

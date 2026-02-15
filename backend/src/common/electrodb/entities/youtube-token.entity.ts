@@ -15,8 +15,8 @@ export const YoutubeTokenEntity = new Entity({
   },
   indexes: {
     primary: {
-      pk: { field: 'userId', composite: ['userId'] },
-      sk: { field: 'kind', composite: [], template: 'YOUTUBE_TOKEN' },
+      pk: { field: 'userId', composite: ['userId'], template: '${userId}', casing: 'none' },
+      sk: { field: 'kind', composite: [], template: 'youtube_token', casing: 'none' },
     },
   },
 }, entityConfig);

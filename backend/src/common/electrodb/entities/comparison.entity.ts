@@ -47,12 +47,12 @@ export const ComparisonEntity = new Entity({
   },
   indexes: {
     primary: {
-      pk: { field: 'userId', composite: ['userId'] },
-      sk: { field: 'kind', composite: ['id'], template: 'COMPARISON@${id}' },
+      pk: { field: 'userId', composite: ['userId'], template: '${userId}', casing: 'none' },
+      sk: { field: 'kind', composite: ['id'], template: 'comparison@${id}', casing: 'none' },
     },
     byKind: {
       index: 'KindIndex',
-      pk: { field: 'kind', composite: ['id'], template: 'COMPARISON@${id}' },
+      pk: { field: 'kind', composite: ['id'], template: 'comparison@${id}', casing: 'none' },
     },
   },
 }, entityConfig);
