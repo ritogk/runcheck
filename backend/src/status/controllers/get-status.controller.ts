@@ -1,12 +1,13 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { OptionalJwtAuthGuard } from '../common/guards/optional-jwt-auth.guard';
-import { CurrentUser, JwtPayload } from '../common/decorators/current-user.decorator';
-import { GetStatusUseCase, StatusResponseDto } from './use-cases/get-status.use-case';
+import { OptionalJwtAuthGuard } from '../../common/guards/optional-jwt-auth.guard';
+import { CurrentUser, JwtPayload } from '../../common/decorators/current-user.decorator';
+import { StatusResponseDto } from '../dto/status-response.dto';
+import { GetStatusUseCase } from '../use-cases/get-status.use-case';
 
 @ApiTags('status')
 @Controller('status')
-export class StatusController {
+export class GetStatusController {
   constructor(private readonly getStatus: GetStatusUseCase) {}
 
   @Get()
@@ -14,7 +15,7 @@ export class StatusController {
   @ApiBearerAuth()
   @ApiOperation({ summary: '未ログインユーザーも含めたユーザーの状態を取得' })
   @ApiResponse({ status: 200 })
-  async status(@CurrentUser() user: JwtPayload | null): Promise<StatusResponseDto> {
+  async handle(@CurrentUser() user: JwtPayload | null): Promise<StatusResponseDto> {
     return this.getStatus.execute(user);
   }
 }

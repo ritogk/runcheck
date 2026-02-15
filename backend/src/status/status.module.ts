@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { StatusController } from './status.controller';
+import { GetStatusController } from './controllers/get-status.controller';
 import { GetStatusUseCase } from './use-cases/get-status.use-case';
 import { YoutubeModule } from '../youtube/youtube.module';
 
 @Module({
   imports: [YoutubeModule],
-  controllers: [StatusController],
+  controllers: [GetStatusController],
   providers: [GetStatusUseCase],
 })
 export class StatusModule {}

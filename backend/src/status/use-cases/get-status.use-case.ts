@@ -1,12 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtPayload } from '../../common/decorators/current-user.decorator';
 import { YoutubeTokenRepository } from '../../youtube/repositories/youtube-token.repository';
-
-export interface StatusResponseDto {
-  isLogined: boolean;
-  isYoutubeAuthroized: boolean;
-  user: { id: string; name: string } | null;
-}
+import { StatusResponseDto } from '../dto/status-response.dto';
 
 @Injectable()
 export class GetStatusUseCase {

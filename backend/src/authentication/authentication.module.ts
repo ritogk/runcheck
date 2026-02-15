@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { AuthenticationController } from './authentication.controller';
+import { LoginController } from './controllers/login.controller';
+import { LogoutController } from './controllers/logout.controller';
+import { GetMeController } from './controllers/get-me.controller';
 import { LoginUseCase } from './use-cases/login.use-case';
 import { LogoutUseCase } from './use-cases/logout.use-case';
 import { GetMeUseCase } from './use-cases/get-me.use-case';
@@ -17,7 +19,7 @@ import { UsersModule } from '../users/users.module';
       signOptions: { expiresIn: '24h' },
     }),
   ],
-  controllers: [AuthenticationController],
+  controllers: [LoginController, LogoutController, GetMeController],
   providers: [LoginUseCase, LogoutUseCase, GetMeUseCase, JwtStrategy],
 })
 export class AuthenticationModule {}

@@ -1,5 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ComparisonsController } from './comparisons.controller';
+import { CreateComparisonController } from './controllers/create-comparison.controller';
+import { GetComparisonsController } from './controllers/get-comparisons.controller';
+import { FindComparisonController } from './controllers/find-comparison.controller';
+import { PublishComparisonController } from './controllers/publish-comparison.controller';
+import { DeleteComparisonController } from './controllers/delete-comparison.controller';
 import { CreateComparisonUseCase } from './use-cases/create-comparison.use-case';
 import { FindComparisonUseCase } from './use-cases/find-comparison.use-case';
 import { GetComparisonsUseCase } from './use-cases/get-comparisons.use-case';
@@ -8,7 +12,13 @@ import { DeleteComparisonUseCase } from './use-cases/delete-comparison.use-case'
 import { ComparisonRepository } from './repositories/comparison.repository';
 
 @Module({
-  controllers: [ComparisonsController],
+  controllers: [
+    CreateComparisonController,
+    GetComparisonsController,
+    FindComparisonController,
+    PublishComparisonController,
+    DeleteComparisonController,
+  ],
   providers: [
     CreateComparisonUseCase,
     FindComparisonUseCase,

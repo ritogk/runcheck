@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { OperationLogController } from './operation-log.controller';
+import { UpdateOperationLogController } from './controllers/update-operation-log.controller';
 import { UpdateOperationLogUseCase } from './use-cases/update-operation-log.use-case';
 import { OperationLogRepository } from './repositories/operation-log.repository';
 
 @Module({
-  controllers: [OperationLogController],
+  controllers: [UpdateOperationLogController],
   providers: [UpdateOperationLogUseCase, OperationLogRepository],
 })
 export class OperationLogModule {}
