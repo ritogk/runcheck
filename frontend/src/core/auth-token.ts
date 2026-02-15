@@ -1,26 +1,34 @@
-let accessToken: string | null = null;
-let youtubeAccessToken: string | null = null;
+const ACCESS_TOKEN_KEY = "accessToken";
+const YOUTUBE_TOKEN_KEY = "youtubeAccessToken";
 
 export const authToken = {
   get(): string | null {
-    return accessToken;
+    return localStorage.getItem(ACCESS_TOKEN_KEY);
   },
   set(token: string | null): void {
-    accessToken = token;
+    if (token) {
+      localStorage.setItem(ACCESS_TOKEN_KEY, token);
+    } else {
+      localStorage.removeItem(ACCESS_TOKEN_KEY);
+    }
   },
   clear(): void {
-    accessToken = null;
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
   },
 };
 
 export const youtubeToken = {
   get(): string | null {
-    return youtubeAccessToken;
+    return localStorage.getItem(YOUTUBE_TOKEN_KEY);
   },
   set(token: string | null): void {
-    youtubeAccessToken = token;
+    if (token) {
+      localStorage.setItem(YOUTUBE_TOKEN_KEY, token);
+    } else {
+      localStorage.removeItem(YOUTUBE_TOKEN_KEY);
+    }
   },
   clear(): void {
-    youtubeAccessToken = null;
+    localStorage.removeItem(YOUTUBE_TOKEN_KEY);
   },
 };

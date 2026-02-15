@@ -8,7 +8,7 @@ const sidebarState = inject(UseSidebarStateKey) as IUseSidebarState
 const router = useRouter()
 
 const hundleHeaderClick = () => {
-  location.href = location.origin
+  location.href = location.origin + router.resolve("index").href
 }
 </script>
 

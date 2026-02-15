@@ -10,7 +10,7 @@ const router = useRouter()
 const apiGetStatus = UseGetStatus()
 
 const hundleHeaderClick = () => {
-  location.href = location.origin + router.resolve("index").href
+  location.href = location.origin + router.resolve({ name: "index" }).href
 }
 
 const hundleHomeClick = () => {

@@ -87,8 +87,7 @@ export class UseSidebarState implements IUseSidebarState {
       icon: QuestionMarkCircleIcon,
       current: false,
       action: () => {
-        this._opened.value = false
-        this._router.push({ name: "lp" })
+        location.href = "/lp/ja"
       },
       show: computed(() => true)
     },
