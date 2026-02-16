@@ -150,12 +150,17 @@ export class CdkStack extends cdk.Stack {
     })
 
     // =============================================
-    // ACM 証明書 (CloudFront用 - us-east-1)
+    // ACM 証明書 (CloudFront用 - us-east-1 に自動作成)
     // =============================================
-    // Note: CloudFront用証明書はus-east-1に作成する必要がある
-    // クロスリージョン参照を避けるため、事前に作成した証明書のARNを環境変数で渡す
-    // または、同一リージョン(us-east-1)にスタックをデプロイする場合はここで作成可能
-    const certificateArn = process.env.CERTIFICATE_ARN ?? ""
+    const certificate = new acm.DnsValidatedCertificate(
+      this,
+      "SiteCertificate",
+      {
+        domainName: subDomain,
+        hostedZone: hostedZone,
+        region: "us-east-1",
+      }
+    )
 
     // =============================================
     // CloudFront ディストリビューション
@@ -167,59 +172,46 @@ export class CdkStack extends cdk.Stack {
       }
     )
 
-    const distributionProps: cloudfront.DistributionProps = {
-      defaultBehavior: {
-        origin: new cloudfrontOrigins.S3Origin(frontendBucket),
-        viewerProtocolPolicy:
-          cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
-      },
-      additionalBehaviors: {
-        "/api/*": {
-          origin: apiGatewayOrigin,
-          viewerProtocolPolicy:
-            cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-          cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
-          originRequestPolicy:
-            cloudfront.OriginRequestPolicy
-              .ALL_VIEWER_EXCEPT_HOST_HEADER,
-          allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
-        },
-      },
-      defaultRootObject: "index.html",
-      errorResponses: [
-        {
-          httpStatus: 403,
-          responseHttpStatus: 200,
-          responsePagePath: "/index.html",
-          ttl: cdk.Duration.minutes(5),
-        },
-        {
-          httpStatus: 404,
-          responseHttpStatus: 200,
-          responsePagePath: "/index.html",
-          ttl: cdk.Duration.minutes(5),
-        },
-      ],
-    }
-
-    // 証明書が指定されている場合はカスタムドメインを設定
-    if (certificateArn) {
-      const certificate = acm.Certificate.fromCertificateArn(
-        this,
-        "Certificate",
-        certificateArn
-      )
-      Object.assign(distributionProps, {
-        domainNames: [subDomain],
-        certificate,
-      })
-    }
-
     const distribution = new cloudfront.Distribution(
       this,
       "Distribution",
-      distributionProps
+      {
+        defaultBehavior: {
+          origin: new cloudfrontOrigins.S3Origin(frontendBucket),
+          viewerProtocolPolicy:
+            cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+          cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
+        },
+        additionalBehaviors: {
+          "/api/*": {
+            origin: apiGatewayOrigin,
+            viewerProtocolPolicy:
+              cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+            cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
+            originRequestPolicy:
+              cloudfront.OriginRequestPolicy
+                .ALL_VIEWER_EXCEPT_HOST_HEADER,
+            allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+          },
+        },
+        domainNames: [subDomain],
+        certificate,
+        defaultRootObject: "index.html",
+        errorResponses: [
+          {
+            httpStatus: 403,
+            responseHttpStatus: 200,
+            responsePagePath: "/index.html",
+            ttl: cdk.Duration.minutes(5),
+          },
+          {
+            httpStatus: 404,
+            responseHttpStatus: 200,
+            responsePagePath: "/index.html",
+            ttl: cdk.Duration.minutes(5),
+          },
+        ],
+      }
     )
 
     // =============================================
