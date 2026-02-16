@@ -7,6 +7,7 @@ import * as route53Targets from "aws-cdk-lib/aws-route53-targets"
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront"
 import * as cloudfrontOrigins from "aws-cdk-lib/aws-cloudfront-origins"
 import * as lambda from "aws-cdk-lib/aws-lambda"
+import * as lambdaNodejs from "aws-cdk-lib/aws-lambda-nodejs"
 import * as apigatewayv2 from "aws-cdk-lib/aws-apigatewayv2"
 import * as apigatewayv2Integrations from "aws-cdk-lib/aws-apigatewayv2-integrations"
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb"
@@ -81,29 +82,39 @@ export class CdkStack extends cdk.Stack {
     })
 
     // =============================================
-    // Lambda 関数 (NestJS バックエンド)
+    // Lambda 関数 (NestJS バックエンド - esbuild バンドル)
     // =============================================
-    const backendFunction = new lambda.Function(this, "BackendFunction", {
-      functionName: "runcheck-backend",
-      runtime: lambda.Runtime.NODEJS_20_X,
-      handler: "dist/lambda.handler",
-      code: lambda.Code.fromAsset(
-        path.join(__dirname, "../../../backend_new"),
-        {
-          exclude: ["/src", "/test", "/scripts", ".env", ".env.base", "node_modules/.cache", "node_modules/.bin"],
-        }
-      ),
-      memorySize: 512,
-      timeout: cdk.Duration.seconds(30),
-      environment: {
-        NODE_ENV: "production",
-        DYNAMODB_TABLE_NAME: table.tableName,
-        JWT_SECRET: process.env.JWT_SECRET ?? "change-me-in-production",
-        YOUTUBE_CLIENT_ID: process.env.YOUTUBE_CLIENT_ID ?? "",
-        YOUTUBE_CLIENT_SECRET: process.env.YOUTUBE_CLIENT_SECRET ?? "",
-        YOUTUBE_REDIRECT_URL: process.env.YOUTUBE_REDIRECT_URL ?? "",
-      },
-    })
+    const backendFunction = new lambdaNodejs.NodejsFunction(
+      this,
+      "BackendFunction",
+      {
+        functionName: "runcheck-backend",
+        runtime: lambda.Runtime.NODEJS_20_X,
+        entry: path.join(__dirname, "../../backend/dist/lambda.js"),
+        handler: "handler",
+        bundling: {
+          minify: true,
+          sourceMap: true,
+          target: "node20",
+          externalModules: [
+            "@aws-sdk/*",
+            "@nestjs/microservices",
+            "@nestjs/websockets",
+            "class-transformer/storage",
+          ],
+        },
+        memorySize: 512,
+        timeout: cdk.Duration.seconds(30),
+        environment: {
+          NODE_ENV: "production",
+          DYNAMODB_TABLE_NAME: table.tableName,
+          JWT_SECRET: process.env.JWT_SECRET ?? "change-me-in-production",
+          YOUTUBE_CLIENT_ID: process.env.YOUTUBE_CLIENT_ID ?? "",
+          YOUTUBE_CLIENT_SECRET: process.env.YOUTUBE_CLIENT_SECRET ?? "",
+          YOUTUBE_REDIRECT_URL: process.env.YOUTUBE_REDIRECT_URL ?? "",
+        },
+      }
+    )
 
     // Lambda に DynamoDB アクセス権限を付与
     table.grantReadWriteData(backendFunction)
@@ -217,7 +228,7 @@ export class CdkStack extends cdk.Stack {
     new s3deploy.BucketDeployment(this, "DeployFrontend", {
       sources: [
         s3deploy.Source.asset(
-          path.join(__dirname, "../../../frontend_new/dist")
+          path.join(__dirname, "../../frontend/dist")
         ),
       ],
       destinationBucket: frontendBucket,

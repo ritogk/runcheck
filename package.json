@@ -4,7 +4,8 @@
   "private": true,
   "workspaces": [
     "frontend",
-    "backend"
+    "backend",
+    "infra"
   ],
   "scripts": {
     "dev": "run-p dev:frontend dev:backend",
@@ -16,8 +17,8 @@
     "lint:backend": "npm run lint -w backend",
     "test:frontend": "npm run test:unit -w frontend",
     "test:backend": "npm run test -w backend",
-    "deploy:infra": "cd legacy/infra/cdk && npx cdk deploy",
-    "diff:infra": "cd legacy/infra/cdk && npx cdk diff",
-    "synth:infra": "cd legacy/infra/cdk && npx cdk synth"
+    "deploy:infra": "npm run -w infra cdk -- deploy --all",
+    "diff:infra": "npm run -w infra cdk -- diff --all",
+    "synth:infra": "npm run -w infra cdk -- synth --all"
   }
 }
