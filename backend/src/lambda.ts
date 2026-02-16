@@ -2,15 +2,17 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import serverlessExpress from '@codegenie/serverless-express';
-import { Handler } from 'aws-lambda';
+import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
 import express from 'express';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './common/filters/http-exception.filter';
 
-let cachedHandler: Handler;
+type AsyncHandler = (event: APIGatewayProxyEvent, context: Context) => Promise<APIGatewayProxyResult>;
 
-async function bootstrap(): Promise<Handler> {
-  if (cachedHandler) return cachedHandler;
+let cachedServer: AsyncHandler;
+
+async function bootstrap(): Promise<AsyncHandler> {
+  if (cachedServer) return cachedServer;
 
   const expressApp = express();
   const adapter = new ExpressAdapter(expressApp);
@@ -26,11 +28,11 @@ async function bootstrap(): Promise<Handler> {
   );
 
   await app.init();
-  cachedHandler = serverlessExpress({ app: expressApp });
-  return cachedHandler;
+  cachedServer = serverlessExpress({ app: expressApp }) as unknown as AsyncHandler;
+  return cachedServer;
 }
 
-export const handler: Handler = async (event, context, callback) => {
+export const handler = async (event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> => {
   const server = await bootstrap();
-  return server(event, context, callback);
+  return server(event, context);
 };
