@@ -11,6 +11,6 @@ export const UseGetStatus = () => {
       return response.data
     },
     staleTime: Infinity,
-    retry: 3
+    retry: 1
   })
 }
