@@ -89,13 +89,13 @@ export class CdkStack extends cdk.Stack {
       "BackendFunction",
       {
         functionName: "runcheck-backend",
-        runtime: lambda.Runtime.NODEJS_20_X,
+        runtime: lambda.Runtime.NODEJS_24_X,
         entry: path.join(__dirname, "../../backend/dist/lambda.js"),
         handler: "handler",
         bundling: {
           minify: true,
           sourceMap: true,
-          target: "node20",
+          target: "node24",
           externalModules: [
             "@aws-sdk/*",
             "@nestjs/microservices",
