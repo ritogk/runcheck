@@ -17,8 +17,11 @@
     "lint:backend": "npm run lint -w backend",
     "test:frontend": "npm run test:unit -w frontend",
     "test:backend": "npm run test -w backend",
-    "deploy:infra": "npm run -w infra cdk -- deploy --all",
-    "diff:infra": "npm run -w infra cdk -- diff --all",
-    "synth:infra": "npm run -w infra cdk -- synth --all"
+    "deploy:dev": "npm run -w infra cdk -- deploy -c env=dev",
+    "deploy:prod": "npm run -w infra cdk -- deploy -c env=prod",
+    "diff:dev": "npm run -w infra cdk -- diff -c env=dev",
+    "diff:prod": "npm run -w infra cdk -- diff -c env=prod",
+    "synth:dev": "npm run -w infra cdk -- synth -c env=dev",
+    "synth:prod": "npm run -w infra cdk -- synth -c env=prod"
   }
 }

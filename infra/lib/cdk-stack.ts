@@ -1,7 +1,6 @@
 import * as cdk from "aws-cdk-lib"
 import { Construct } from "constructs"
 import * as s3 from "aws-cdk-lib/aws-s3"
-import * as iam from "aws-cdk-lib/aws-iam"
 import * as route53 from "aws-cdk-lib/aws-route53"
 import * as route53Targets from "aws-cdk-lib/aws-route53-targets"
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront"
@@ -15,38 +14,21 @@ import * as acm from "aws-cdk-lib/aws-certificatemanager"
 import * as s3deploy from "aws-cdk-lib/aws-s3-deployment"
 import * as path from "path"
 
-import * as dotenv from "dotenv"
-dotenv.config()
+export interface RunCheckStackProps extends cdk.StackProps {
+  envName: "dev" | "prod"
+}
 
 export class CdkStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: RunCheckStackProps) {
     super(scope, id, props)
+
+    const { envName } = props
+    const prefix = envName === "prod" ? "runcheck" : `runcheck-${envName}`
 
     const hosteZoneId = process.env.HOST_ZONE_ID ?? ""
     const subDomain = process.env.SUB_DOMAIN ?? ""
     const domain = process.env.DOMAIN ?? ""
-
-    // =============================================
-    // 既存リソース: DBバックアップ用S3バケット + IAMユーザー
-    // =============================================
-    const backupBucket = new s3.Bucket(this, "MyFirstBucket", {
-      bucketName: "runcheck-db-backup",
-      lifecycleRules: [
-        {
-          expiration: cdk.Duration.days(91),
-        },
-      ],
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-    })
-
-    const backupUser = new iam.User(this, "IAMUser", {
-      userName: "runcheck-user",
-    })
-    const s3Policy = new iam.PolicyStatement({
-      actions: ["s3:PutObject"],
-      resources: [backupBucket.bucketArn + "/*"],
-    })
-    backupUser.addToPolicy(s3Policy)
+    const tableName = `RunCheck-${envName}`
 
     // =============================================
     // Route53 ホストゾーン
@@ -64,7 +46,7 @@ export class CdkStack extends cdk.Stack {
     // DynamoDB テーブル (シングルテーブル)
     // =============================================
     const table = new dynamodb.Table(this, "RunCheckTable", {
-      tableName: "RunCheck",
+      tableName,
       partitionKey: { name: "userId", type: dynamodb.AttributeType.STRING },
       sortKey: { name: "kind", type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
@@ -88,7 +70,7 @@ export class CdkStack extends cdk.Stack {
       this,
       "BackendFunction",
       {
-        functionName: "runcheck-backend",
+        functionName: `${prefix}-backend`,
         runtime: lambda.Runtime.NODEJS_24_X,
         entry: path.join(__dirname, "../../backend/dist/lambda.js"),
         handler: "handler",
@@ -123,7 +105,7 @@ export class CdkStack extends cdk.Stack {
     // API Gateway (HTTP API)
     // =============================================
     const httpApi = new apigatewayv2.HttpApi(this, "BackendApi", {
-      apiName: "runcheck-api",
+      apiName: `${prefix}-api`,
       description: "RunCheck Backend API",
     })
 
@@ -143,7 +125,7 @@ export class CdkStack extends cdk.Stack {
     // S3 バケット (フロントエンド静的ファイル)
     // =============================================
     const frontendBucket = new s3.Bucket(this, "FrontendBucket", {
-      bucketName: `runcheck-frontend-${this.account}`,
+      bucketName: `${prefix}-frontend-${this.account}`,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
