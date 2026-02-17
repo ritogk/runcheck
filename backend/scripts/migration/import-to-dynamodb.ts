@@ -1,6 +1,9 @@
 /**
  * MySQL エクスポートデータ → DynamoDB インポートスクリプト
  *
+ * ElectroDB エンティティを使用してデータを書き込むため、
+ * PK/SK の自動生成、型検証、内部メタデータ (__edb_e__, __edb_v__) の付与が行われる。
+ *
  * 使い方:
  *   1. export-mysql.sh で生成した exported_data/ をこのスクリプトと同じ階層に配置
  *   2. AWS認証情報を設定 (AWS_PROFILE, AWS_REGION など)
@@ -9,60 +12,37 @@
  * オプション:
  *   --dry-run   実際には書き込まず、変換結果を表示
  *   --data-dir  エクスポートデータのディレクトリ (デフォルト: scripts/migration/exported_data)
+ *
+ * 環境変数:
+ *   DYNAMODB_ENDPOINT     ローカルDynamoDB用 (例: http://localhost:8000)
+ *   DYNAMODB_TABLE_NAME   テーブル名 (デフォルト: RunCheck)
+ *   AWS_REGION            AWSリージョン (デフォルト: ap-northeast-1)
  */
 
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import {
-  DynamoDBDocumentClient,
-  BatchWriteCommand,
-} from '@aws-sdk/lib-dynamodb';
 import { ulid } from 'ulid';
 import * as fs from 'fs';
 import * as path from 'path';
-// Key helpers inlined (previously from entities/dynamodb.ts, now deleted)
-const toUserKey = (pk: { id: string }) => ({
-  userId: pk.id,
-  kind: `USER`,
-});
-const toComparisonKey = (pk: { id: string; userId: string }) => ({
-  userId: pk.userId,
-  kind: `COMPARISON@${pk.id}`,
-});
-const toYoutubeTokenKey = (pk: { id: string; userId: string }) => ({
-  userId: pk.userId,
-  kind: `YOUTUBE_TOKEN`,
-});
-const toOperationLogKey = (pk: { id: string }) => ({
-  userId: '',
-  kind: `OPERATION_LOG@${pk.id}`,
-});
+import { UserEntity } from '../../src/common/electrodb/entities/user.entity';
+import {
+  ComparisonEntity,
+  VideoType,
+  ReleaseKbn,
+} from '../../src/common/electrodb/entities/comparison.entity';
+import { YoutubeTokenEntity } from '../../src/common/electrodb/entities/youtube-token.entity';
+import {
+  OperationLogEntity,
+  OperationCd,
+} from '../../src/common/electrodb/entities/operation-log.entity';
 
 // =============================================
 // 設定
 // =============================================
-const REGION = process.env.AWS_REGION || 'ap-northeast-1';
 const DRY_RUN = process.argv.includes('--dry-run');
 const DATA_DIR =
   process.argv.find((a) => a.startsWith('--data-dir='))?.split('=')[1] ||
   path.join(__dirname, 'exported_data');
 
-const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME || 'RunCheck';
-
-// =============================================
-// DynamoDB クライアント
-// =============================================
-const DYNAMODB_ENDPOINT = process.env.DYNAMODB_ENDPOINT;
-const clientConfig: ConstructorParameters<typeof DynamoDBClient>[0] = {
-  region: REGION,
-};
-if (DYNAMODB_ENDPOINT) {
-  clientConfig.endpoint = DYNAMODB_ENDPOINT;
-  clientConfig.credentials = { accessKeyId: 'local', secretAccessKey: 'local' };
-}
-const client = new DynamoDBClient(clientConfig);
-const docClient = DynamoDBDocumentClient.from(client, {
-  marshallOptions: { removeUndefinedValues: true },
-});
+const CONCURRENCY = 10;
 
 // =============================================
 // ユーティリティ
@@ -82,46 +62,44 @@ function readJsonl<T>(filePath: string): T[] {
     .map((line) => JSON.parse(line));
 }
 
-/** video_type 文字列 → 数値変換 */
-function videoTypeToNumber(type: string): number {
+/** video_type 文字列 → ElectroDB enum 文字列変換 */
+function videoTypeToString(type: string): VideoType {
   switch (type) {
     case 'youtube':
-      return 1;
+      return VideoType.YOUTUBE;
     case 'local':
-      return 2;
+      return VideoType.LOCAL;
     default:
-      return 1;
+      return VideoType.YOUTUBE;
   }
 }
 
-/** DynamoDB BatchWrite (25件ずつ) */
-async function batchWrite(
-  items: Record<string, unknown>[],
-): Promise<void> {
-  const BATCH_SIZE = 25;
-  for (let i = 0; i < items.length; i += BATCH_SIZE) {
-    const batch = items.slice(i, i + BATCH_SIZE);
-    const putRequests = batch.map((item) => ({
-      PutRequest: { Item: item },
-    }));
+/** 同時実行数を制限しながら非同期タスクを実行 */
+async function runWithConcurrency(
+  tasks: (() => Promise<unknown>)[],
+  concurrency: number,
+  label: string,
+): Promise<{ successes: number; failures: number }> {
+  let successes = 0;
+  let failures = 0;
+  let completed = 0;
 
-    if (DRY_RUN) {
-      console.log(
-        `  [DRY RUN] Would write ${batch.length} items to ${TABLE_NAME}`,
-      );
-      continue;
+  for (let i = 0; i < tasks.length; i += concurrency) {
+    const batch = tasks.slice(i, i + concurrency);
+    const results = await Promise.allSettled(batch.map((t) => t()));
+    for (const result of results) {
+      completed++;
+      if (result.status === 'fulfilled') {
+        successes++;
+      } else {
+        failures++;
+        console.error(`\n  Error: ${result.reason}`);
+      }
     }
-
-    await docClient.send(
-      new BatchWriteCommand({
-        RequestItems: { [TABLE_NAME]: putRequests },
-      }),
-    );
-    process.stdout.write(
-      `\r  Writing to ${TABLE_NAME}: ${Math.min(i + BATCH_SIZE, items.length)}/${items.length}`,
-    );
+    process.stdout.write(`\r  ${label}: ${completed}/${tasks.length}`);
   }
-  if (!DRY_RUN) console.log('');
+  if (tasks.length > 0) console.log('');
+  return { successes, failures };
 }
 
 // =============================================
@@ -173,11 +151,8 @@ interface MysqlOperationLog {
 // メイン処理
 // =============================================
 async function main() {
-  console.log('=== MySQL → DynamoDB Import (Single Table) ===');
+  console.log('=== MySQL → DynamoDB Import (ElectroDB) ===');
   console.log(`Data directory: ${DATA_DIR}`);
-  console.log(`Table: ${TABLE_NAME}`);
-  console.log(`Region: ${REGION}`);
-  console.log(`Endpoint: ${DYNAMODB_ENDPOINT || 'AWS (default)'}`);
   console.log(`Mode: ${DRY_RUN ? 'DRY RUN' : 'LIVE'}`);
   console.log('');
 
@@ -189,26 +164,30 @@ async function main() {
   const mysqlUsers = readJsonl<MysqlUser>(path.join(DATA_DIR, 'users.jsonl'));
   console.log(`  Read ${mysqlUsers.length} records from users.jsonl`);
 
-  const dynamoUsers = mysqlUsers.map((u) => {
+  const userData = mysqlUsers.map((u) => {
     const newUserId = ulid();
     userIdMap.set(u.id, newUserId);
     return {
-      ...toUserKey({ id: newUserId }),
       id: newUserId,
       email: u.email,
       name: u.name,
       password: u.password,
       carType: u.car_type || '',
-      createdAt: u.created_at,
-      updatedAt: u.updated_at,
+      createdAt: u.created_at || u.updated_at || new Date().toISOString(),
+      updatedAt: u.updated_at || new Date().toISOString(),
     };
   });
 
-  if (DRY_RUN && dynamoUsers.length > 0) {
-    console.log('  Sample:', JSON.stringify(dynamoUsers[0], null, 2));
+  if (DRY_RUN) {
+    if (userData.length > 0) {
+      console.log('  Sample:', JSON.stringify(userData[0], null, 2));
+    }
+    console.log(`  [DRY RUN] Would write ${userData.length} users`);
+  } else {
+    const tasks = userData.map((data) => () => UserEntity.put(data).go());
+    const result = await runWithConcurrency(tasks, CONCURRENCY, 'Users');
+    console.log(`  Users: ${result.successes} succeeded, ${result.failures} failed`);
   }
-  await batchWrite(dynamoUsers);
-  console.log(`  Users: ${dynamoUsers.length} records imported`);
 
   // IDマッピングをファイルに保存 (デバッグ・参照用)
   const mappingPath = path.join(DATA_DIR, 'user_id_mapping.json');
@@ -227,33 +206,39 @@ async function main() {
   );
   console.log(`  Read ${mysqlComps.length} records from comparisons.jsonl`);
 
-  const dynamoComps = mysqlComps.map((c) => {
+  const compData = mysqlComps.map((c) => {
     const comparisonId = ulid();
-    const userId = c.user_id ? userIdMap.get(c.user_id) || '' : '';
+    const userId = c.user_id ? userIdMap.get(c.user_id) || 'ANONYMOUS' : 'ANONYMOUS';
+    const releaseKbnVal = c.release_kbn ?? 0;
     return {
-      ...toComparisonKey({ id: comparisonId, userId }),
       id: comparisonId,
+      userId,
       title: c.title || '',
       memo: c.memo || '',
       category: c.category || '',
       video1Url: c.video1_url || '',
       video1TimeSt: c.video1_time_st || 0,
-      video1VideoType: videoTypeToNumber(c.video1_type),
+      video1VideoType: videoTypeToString(c.video1_type),
       video2Url: c.video2_url || '',
       video2TimeSt: c.video2_time_st || 0,
-      video2VideoType: videoTypeToNumber(c.video2_type),
-      releaseKbn: c.release_kbn || 0,
+      video2VideoType: videoTypeToString(c.video2_type),
+      releaseKbn: (releaseKbnVal === 0 ? '0' : '1') as ReleaseKbn,
       anonymous: c.anonymous === 1,
       createdAt: c.created_at,
       updatedAt: c.updated_at,
     };
   });
 
-  if (DRY_RUN && dynamoComps.length > 0) {
-    console.log('  Sample:', JSON.stringify(dynamoComps[0], null, 2));
+  if (DRY_RUN) {
+    if (compData.length > 0) {
+      console.log('  Sample:', JSON.stringify(compData[0], null, 2));
+    }
+    console.log(`  [DRY RUN] Would write ${compData.length} comparisons`);
+  } else {
+    const tasks = compData.map((data) => () => ComparisonEntity.put(data).go());
+    const result = await runWithConcurrency(tasks, CONCURRENCY, 'Comparisons');
+    console.log(`  Comparisons: ${result.successes} succeeded, ${result.failures} failed`);
   }
-  await batchWrite(dynamoComps);
-  console.log(`  Comparisons: ${dynamoComps.length} records imported`);
   console.log('');
 
   // ----- 3. YouTube Tokens -----
@@ -265,23 +250,29 @@ async function main() {
     `  Read ${mysqlTokens.length} records from youtube_tokens.jsonl`,
   );
 
-  const dynamoTokens = mysqlTokens.map((t) => {
-    const userId = userIdMap.get(t.user_id) || '';
-    const tokenId = ulid();
+  const tokenData = mysqlTokens.map((t) => {
+    const userId = userIdMap.get(t.user_id);
+    if (!userId) {
+      console.warn(`  Warning: Unknown user_id ${t.user_id} for youtube_token, skipping.`);
+    }
     return {
-      ...toYoutubeTokenKey({ id: tokenId, userId }),
-      id: tokenId,
+      userId: userId || 'UNKNOWN',
       refreshToken: t.refresh_token,
       createdAt: t.created_at,
       updatedAt: t.updated_at,
     };
   });
 
-  if (DRY_RUN && dynamoTokens.length > 0) {
-    console.log('  Sample:', JSON.stringify(dynamoTokens[0], null, 2));
+  if (DRY_RUN) {
+    if (tokenData.length > 0) {
+      console.log('  Sample:', JSON.stringify(tokenData[0], null, 2));
+    }
+    console.log(`  [DRY RUN] Would write ${tokenData.length} youtube tokens`);
+  } else {
+    const tasks = tokenData.map((data) => () => YoutubeTokenEntity.put(data).go());
+    const result = await runWithConcurrency(tasks, CONCURRENCY, 'YouTube Tokens');
+    console.log(`  YouTube Tokens: ${result.successes} succeeded, ${result.failures} failed`);
   }
-  await batchWrite(dynamoTokens);
-  console.log(`  YouTube Tokens: ${dynamoTokens.length} records imported`);
   console.log('');
 
   // ----- 4. Operation Logs -----
@@ -293,31 +284,35 @@ async function main() {
     `  Read ${mysqlLogs.length} records from operation_logs.jsonl`,
   );
 
-  const dynamoLogs = mysqlLogs.map((l) => {
+  const logData = mysqlLogs.map((l) => {
     const logId = String(l.operation_cd);
     return {
-      ...toOperationLogKey({ id: logId }),
       id: logId,
-      operationCd: l.operation_cd,
+      operationCd: String(l.operation_cd) as OperationCd,
       operationNm: l.operation_nm,
       executionCnt: l.execution_cnt || 0,
       updatedAt: l.updated_at,
     };
   });
 
-  if (DRY_RUN && dynamoLogs.length > 0) {
-    console.log('  Sample:', JSON.stringify(dynamoLogs[0], null, 2));
+  if (DRY_RUN) {
+    if (logData.length > 0) {
+      console.log('  Sample:', JSON.stringify(logData[0], null, 2));
+    }
+    console.log(`  [DRY RUN] Would write ${logData.length} operation logs`);
+  } else {
+    const tasks = logData.map((data) => () => OperationLogEntity.put(data).go());
+    const result = await runWithConcurrency(tasks, CONCURRENCY, 'Operation Logs');
+    console.log(`  Operation Logs: ${result.successes} succeeded, ${result.failures} failed`);
   }
-  await batchWrite(dynamoLogs);
-  console.log(`  Operation Logs: ${dynamoLogs.length} records imported`);
   console.log('');
 
   // ----- Summary -----
   console.log('=== Import complete ===');
-  console.log(`  Users:          ${dynamoUsers.length}`);
-  console.log(`  Comparisons:    ${dynamoComps.length}`);
-  console.log(`  YouTube Tokens: ${dynamoTokens.length}`);
-  console.log(`  Operation Logs: ${dynamoLogs.length}`);
+  console.log(`  Users:          ${mysqlUsers.length}`);
+  console.log(`  Comparisons:    ${mysqlComps.length}`);
+  console.log(`  YouTube Tokens: ${mysqlTokens.length}`);
+  console.log(`  Operation Logs: ${mysqlLogs.length}`);
 
   if (DRY_RUN) {
     console.log('');

@@ -20,7 +20,7 @@ OUTPUT_DIR="${OUTPUT_DIR:-./exported_data}"
 
 mkdir -p "$OUTPUT_DIR"
 
-MYSQL_CMD="mysql -h $MYSQL_HOST -P $MYSQL_PORT -u $MYSQL_USER"
+MYSQL_CMD="mysql -h $MYSQL_HOST -P $MYSQL_PORT -u $MYSQL_USER -N"
 if [ -n "$MYSQL_PASS" ]; then
   MYSQL_CMD="$MYSQL_CMD -p$MYSQL_PASS"
 fi
@@ -45,7 +45,7 @@ SELECT JSON_OBJECT(
 )
 FROM users
 WHERE deleted_at IS NULL;
-" | tail -n +2 | sed 's/^//' > "$OUTPUT_DIR/users.jsonl"
+" > "$OUTPUT_DIR/users.jsonl"
 USER_COUNT=$(wc -l < "$OUTPUT_DIR/users.jsonl")
 echo "  -> $USER_COUNT records"
 
@@ -71,7 +71,7 @@ SELECT JSON_OBJECT(
 )
 FROM comparisons
 WHERE deleted_at IS NULL;
-" | tail -n +2 > "$OUTPUT_DIR/comparisons.jsonl"
+" > "$OUTPUT_DIR/comparisons.jsonl"
 COMP_COUNT=$(wc -l < "$OUTPUT_DIR/comparisons.jsonl")
 echo "  -> $COMP_COUNT records"
 
@@ -86,7 +86,7 @@ SELECT JSON_OBJECT(
 )
 FROM youtube_tokens
 WHERE deleted_at IS NULL;
-" | tail -n +2 > "$OUTPUT_DIR/youtube_tokens.jsonl"
+" > "$OUTPUT_DIR/youtube_tokens.jsonl"
 TOKEN_COUNT=$(wc -l < "$OUTPUT_DIR/youtube_tokens.jsonl")
 echo "  -> $TOKEN_COUNT records"
 
@@ -101,7 +101,7 @@ SELECT JSON_OBJECT(
 )
 FROM operation_logs
 WHERE deleted_at IS NULL;
-" | tail -n +2 > "$OUTPUT_DIR/operation_logs.jsonl"
+" > "$OUTPUT_DIR/operation_logs.jsonl"
 LOG_COUNT=$(wc -l < "$OUTPUT_DIR/operation_logs.jsonl")
 echo "  -> $LOG_COUNT records"
 
